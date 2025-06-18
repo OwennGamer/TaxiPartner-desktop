@@ -254,11 +254,6 @@ public class ApiClient {
         return list;
     }
 
-
-
-
-
-
     // 🔎 GET helper
     public static String sendGetRequest(String endpoint) {
         try {
@@ -308,7 +303,17 @@ public class ApiClient {
                             o.getInt("przebieg"),
                             o.getString("ubezpieczenie_do"),
                             o.getString("przeglad_do"),
-                            o.getInt("aktywny") == 1
+                            o.getInt("aktywny") == 1,
+                            o.optInt("inpost", 0) == 1,
+                            o.optInt("taxi", 0) == 1,
+                            o.optInt("taksometr", 0) == 1,
+                            o.optString("legalizacja_taksometru_do", null),
+                            o.optInt("gaz", 0) == 1,
+                            o.optString("homologacja_lpg_do", null),
+                            o.optString("firma", null),
+                            o.optString("firma_inna", null),
+                            o.optString("forma_wlasnosci", null),
+                            o.optString("numer_polisy", null)
                     ));
                 }
             }

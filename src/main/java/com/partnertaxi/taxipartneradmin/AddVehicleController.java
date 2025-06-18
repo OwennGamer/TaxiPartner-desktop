@@ -67,7 +67,15 @@ public class AddVehicleController {
                     + "&przebieg=" + przebieg
                     + "&ubezpieczenie_do=" + URLEncoder.encode(ubezpieczenie, "UTF-8")
                     + "&przeglad_do=" + URLEncoder.encode(przeglad, "UTF-8")
-                    + "&aktywny=" + aktywny;
+                    + "&aktywny=" + aktywny
+                    + "&inpost=0&taxi=0&taksometr=0"
+                    + "&legalizacja_taksometru_do="
+                    + "&gaz=0"
+                    + "&homologacja_lpg_do="
+                    + "&firma="
+                    + "&firma_inna="
+                    + "&forma_wlasnosci="
+                    + "&numer_polisy=";
 
             URL url = new URL("http://164.126.143.20:8444/api/add_vehicle.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
