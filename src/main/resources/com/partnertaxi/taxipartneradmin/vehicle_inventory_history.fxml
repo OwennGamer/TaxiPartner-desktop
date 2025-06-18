@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.VehicleInventoryHistoryController"
+            prefWidth="600" prefHeight="400">
+
+    <top>
+        <Label text="Historia inwentaryzacji pojazdu"
+               style="-fx-font-size: 16px; -fx-padding: 10;" />
+    </top>
+
+    <center>
+        <TableView fx:id="histTable">
+            <columns>
+                <TableColumn fx:id="colHistId"       text="ID"           prefWidth="50"/>
+                <TableColumn fx:id="colHistDateTime" text="Data i czas" prefWidth="150"/>
+                <TableColumn fx:id="colHistDriver"   text="Kierowca"     prefWidth="150"/>
+                <TableColumn fx:id="colHistPrzebieg" text="Przebieg"     prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <ToolBar>
+            <Button fx:id="btnOpenRecord"
+                    text="Pokaż szczegóły"
+                    onAction="#onOpenInventoryRecord"
+                    disable="true" />
+        </ToolBar>
+    </bottom>
+
+</BorderPane>

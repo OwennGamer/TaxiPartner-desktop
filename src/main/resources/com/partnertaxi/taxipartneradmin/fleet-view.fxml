@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.FleetController"
+            prefWidth="800" prefHeight="600">
+
+    <!-- GÓRA: Pasek narzędzi z przyciskiem -->
+    <top>
+        <ToolBar>
+            <Button text="Dodaj pojazd" onAction="#onAddVehicle"/>
+            <Button fx:id="btnHistory"
+                    text="Historia pojazdu"
+                    onAction="#onShowHistory"
+                    disable="true"/>
+
+        </ToolBar>
+    </top>
+
+    <!-- CENTRUM: Tabela pojazdów -->
+    <center>
+        <TableView fx:id="vehicleTable">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colRejestracja" text="Rejestracja" prefWidth="100"/>
+                <TableColumn fx:id="colMarka" text="Marka" prefWidth="100"/>
+                <TableColumn fx:id="colModel" text="Model" prefWidth="100"/>
+                <TableColumn fx:id="colPrzebieg" text="Przebieg" prefWidth="100"/>
+                <TableColumn fx:id="colUbezpieczenie" text="Ubezpieczenie do" prefWidth="120"/>
+                <TableColumn fx:id="colPrzeglad" text="Przegląd do" prefWidth="120"/>
+                <TableColumn fx:id="colAktywny" text="Aktywny" prefWidth="80"/>
+            </columns>
+        </TableView>
+    </center>
+
+</BorderPane>
