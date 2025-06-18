@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+import com.partnertaxi.taxipartneradmin.TableUtils;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -67,6 +69,8 @@ public class HistoryController {
                 return new SimpleStringProperty(raw);
             }
         });
+
+        TableUtils.enableCopyOnCtrlC(historyTable);
     }
 
     private void loadHistory() {

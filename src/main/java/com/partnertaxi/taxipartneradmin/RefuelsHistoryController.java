@@ -10,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.stage.Stage;
 
+import com.partnertaxi.taxipartneradmin.TableUtils;
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
@@ -68,6 +70,8 @@ public class RefuelsHistoryController implements Initializable {
                 setText((empty || val == null) ? null : nf.format(val));
             }
         });
+
+        TableUtils.enableCopyOnCtrlC(refuelsTable);
     }
 
     /** Odświeża listę tankowań */

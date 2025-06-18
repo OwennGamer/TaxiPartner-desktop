@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 
+import com.partnertaxi.taxipartneradmin.TableUtils;
 
 
 
@@ -62,6 +63,8 @@ public class FleetController {
         vehicleTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> btnHistory.setDisable(newSelection == null)
         );
+
+        TableUtils.enableCopyOnCtrlC(vehicleTable);
 
     }
 
@@ -112,7 +115,6 @@ public class FleetController {
             new Alert(Alert.AlertType.ERROR, "Nie można otworzyć historii pojazdu.").showAndWait();
         }
     }
-
 
 
 

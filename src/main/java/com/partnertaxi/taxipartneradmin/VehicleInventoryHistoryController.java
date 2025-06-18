@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import com.partnertaxi.taxipartneradmin.TableUtils;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class VehicleInventoryHistoryController {
         histTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             btnOpenRecord.setDisable(newSel == null);
         });
+
+        TableUtils.enableCopyOnCtrlC(histTable);
     }
 
     /**
