@@ -443,6 +443,16 @@ CREATE TABLE `pojazdy` (
   `przeglad_do` date DEFAULT NULL,
   `aktywny` tinyint(1) DEFAULT 1,
   `ostatni_kierowca_id` varchar(50) DEFAULT NULL,
+  `inpost` tinyint(1) DEFAULT 0,
+  `taxi` tinyint(1) DEFAULT 0,
+  `taksometr` tinyint(1) DEFAULT 0,
+  `legalizacja_taksometru_do` date DEFAULT NULL,
+  `gaz` tinyint(1) DEFAULT 0,
+  `homologacja_lpg_do` date DEFAULT NULL,
+  `firma` varchar(50) DEFAULT NULL,
+  `firma_inna` varchar(50) DEFAULT NULL,
+  `forma_wlasnosci` varchar(50) DEFAULT NULL,
+  `numer_polisy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `rejestracja` (`rejestracja`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -455,17 +465,17 @@ CREATE TABLE `pojazdy` (
 LOCK TABLES `pojazdy` WRITE;
 /*!40000 ALTER TABLE `pojazdy` DISABLE KEYS */;
 INSERT INTO `pojazdy` VALUES
-(1,'WB12345','Toyota','Yaris',251000,'2025-09-01','2025-04-15',1,'T14'),
-(2,'asdasd','sadas','asdasd',3000000,'2025-08-01','2025-06-09',1,'T14'),
-(4,'wqeqwe','qweq','wqeqw',12345,'2025-04-24','2025-05-06',1,NULL),
-(5,'aweaw','asdasd','asdasd',777777,'2025-05-03','2026-04-16',1,'T14'),
-(6,'sdfsdf','asdfsad','sadfasdf',91000,'2025-04-23','2025-05-10',1,'T14'),
-(7,'KR1234X','Toyota','Corolla',155009,'2025-12-31','2025-12-31',1,'T14'),
-(8,'DW1234X','Toyota','Corolla',1000001,'2025-07-23','2025-08-29',1,'T14'),
-(9,'DKL82535','Mercedes-Benz','V-klasse',1,'2026-04-15','2026-04-18',1,NULL),
-(10,'DW9YF48','Toyota','Corolla',180000,'2026-06-27','2026-07-02',1,NULL),
-(11,'DX23YB','Toyo','Coro',172888,'2025-06-14','2025-06-20',1,NULL),
-(12,'DW9999','FIAT','125P',300000,'2026-06-24','2026-04-14',1,NULL);
+(1,'WB12345','Toyota','Yaris',251000,'2025-09-01','2025-04-15',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(2,'asdasd','sadas','asdasd',3000000,'2025-08-01','2025-06-09',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(4,'wqeqwe','qweq','wqeqw',12345,'2025-04-24','2025-05-06',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(5,'aweaw','asdasd','asdasd',777777,'2025-05-03','2026-04-16',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(6,'sdfsdf','asdfsad','sadfasdf',91000,'2025-04-23','2025-05-10',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(7,'KR1234X','Toyota','Corolla',155009,'2025-12-31','2025-12-31',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(8,'DW1234X','Toyota','Corolla',1000001,'2025-07-23','2025-08-29',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(9,'DKL82535','Mercedes-Benz','V-klasse',1,'2026-04-15','2026-04-18',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(10,'DW9YF48','Toyota','Corolla',180000,'2026-06-27','2026-07-02',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(11,'DX23YB','Toyo','Coro',172888,'2025-06-14','2025-06-20',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL),
+(12,'DW9999','FIAT','125P',300000,'2026-06-24','2026-04-14',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,4 +583,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-27  9:39:17
+-- Dump completed on 2025-06-27 14:51:51
