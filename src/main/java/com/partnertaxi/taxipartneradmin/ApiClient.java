@@ -311,7 +311,6 @@ public class ApiClient {
                             o.optInt("gaz", 0) == 1,
                             o.optString("homologacja_lpg_do", null),
                             o.optString("firma", null),
-                            o.optString("firma_inna", null),
                             o.optString("forma_wlasnosci", null),
                             o.optString("numer_polisy", null)
                     ));

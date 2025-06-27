@@ -6,7 +6,7 @@ $required_fields = [
     'rejestracja', 'marka', 'model', 'przebieg', 'ubezpieczenie_do',
     'przeglad_do', 'aktywny', 'inpost', 'taxi', 'taksometr',
     'legalizacja_taksometru_do', 'gaz', 'homologacja_lpg_do',
-    'firma', 'firma_inna', 'forma_wlasnosci', 'numer_polisy'
+    'firma', 'forma_wlasnosci', 'numer_polisy'
 ];
 
 foreach ($required_fields as $field) {
@@ -30,17 +30,16 @@ $legalizacja = $_POST['legalizacja_taksometru_do'] !== '' ? $_POST['legalizacja_
 $gaz = intval($_POST['gaz']);
 $homologacja = $_POST['homologacja_lpg_do'] !== '' ? $_POST['homologacja_lpg_do'] : null;
 $firma = $_POST['firma'] !== '' ? $_POST['firma'] : null;
-$firma_inna = $_POST['firma_inna'] !== '' ? $_POST['firma_inna'] : null;
 $forma_wlasnosci = $_POST['forma_wlasnosci'] !== '' ? $_POST['forma_wlasnosci'] : null;
 $numer_polisy = $_POST['numer_polisy'] !== '' ? $_POST['numer_polisy'] : null;
 
 try {
-    $stmt = $pdo->prepare("INSERT INTO pojazdy (rejestracja, marka, model, przebieg, ubezpieczenie_do, przeglad_do, aktywny, inpost, taxi, taksometr, legalizacja_taksometru_do, gaz, homologacja_lpg_do, firma, firma_inna, forma_wlasnosci, numer_polisy)
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO pojazdy (rejestracja, marka, model, przebieg, ubezpieczenie_do, przeglad_do, aktywny, inpost, taxi, taksometr, legalizacja_taksometru_do, gaz, homologacja_lpg_do, firma, forma_wlasnosci, numer_polisy)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $rejestracja, $marka, $model, $przebieg, $ubezpieczenie, $przeglad, $aktywny,
         $inpost, $taxi, $taksometr, $legalizacja, $gaz, $homologacja, $firma,
-        $firma_inna, $forma_wlasnosci, $numer_polisy
+        $forma_wlasnosci, $numer_polisy
     ]);
 
     echo json_encode(["status" => "success", "message" => "Pojazd dodany pomyślnie"]);
@@ -48,4 +47,3 @@ try {
     echo json_encode(["status" => "error", "message" => "Błąd bazy danych: " . $e->getMessage()]);
 }
 ?>
-

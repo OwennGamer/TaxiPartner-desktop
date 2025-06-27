@@ -18,14 +18,13 @@ public class Vehicle {
     private final BooleanProperty gaz;
     private final StringProperty homologacjaLpgDo;
     private final StringProperty firma;
-    private final StringProperty firmaInna;
     private final StringProperty formaWlasnosci;
     private final StringProperty numerPolisy;
 
     public Vehicle(int id, String rejestracja, String marka, String model,
                    int przebieg, String ubezpieczenieDo, String przegladDo, boolean aktywny,
                    boolean inpost, boolean taxi, boolean taksometr, String legalizacjaTaksometruDo,
-                   boolean gaz, String homologacjaLpgDo, String firma, String firmaInna,
+                   boolean gaz, String homologacjaLpgDo, String firma,
                    String formaWlasnosci, String numerPolisy) {
         this.id = new SimpleIntegerProperty(id);
         this.rejestracja = new SimpleStringProperty(rejestracja);
@@ -42,7 +41,6 @@ public class Vehicle {
         this.gaz = new SimpleBooleanProperty(gaz);
         this.homologacjaLpgDo = new SimpleStringProperty(homologacjaLpgDo);
         this.firma = new SimpleStringProperty(firma);
-        this.firmaInna = new SimpleStringProperty(firmaInna);
         this.formaWlasnosci = new SimpleStringProperty(formaWlasnosci);
         this.numerPolisy = new SimpleStringProperty(numerPolisy);
     }
@@ -165,14 +163,6 @@ public class Vehicle {
 
     public StringProperty firmaProperty() {
         return firma;
-    }
-
-    public String getFirmaInna() {
-        return firmaInna.get();
-    }
-
-    public StringProperty firmaInnaProperty() {
-        return firmaInna;
     }
 
     public String getFormaWlasnosci() {

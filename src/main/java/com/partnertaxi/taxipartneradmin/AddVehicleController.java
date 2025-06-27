@@ -115,10 +115,9 @@ public class AddVehicleController {
                 showError("Wybierz firmę.");
                 return;
             }
-            String firmaInna = "";
             if ("INNA".equals(firma)) {
-                firmaInna = firmaOtherField.getText().trim();
-                if (firmaInna.isEmpty()) {
+                firma = firmaOtherField.getText().trim();
+                if (firma.isEmpty()) {
                     showError("Podaj nazwę firmy.");
                     return;
                 }
@@ -145,7 +144,6 @@ public class AddVehicleController {
                     + "&legalizacja_taksometru_do=" + URLEncoder.encode(legalizacja, "UTF-8")
                     + "&homologacja_lpg_do=" + URLEncoder.encode(homologacja, "UTF-8")
                     + "&firma=" + URLEncoder.encode(firma, "UTF-8")
-                    + "&firma_inna=" + URLEncoder.encode(firmaInna, "UTF-8")
                     + "&forma_wlasnosci=" + URLEncoder.encode(formaWlasnosci, "UTF-8")
                     + "&numer_polisy=" + URLEncoder.encode(numerPolisy, "UTF-8");
 

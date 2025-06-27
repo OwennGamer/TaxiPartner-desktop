@@ -58,8 +58,6 @@ public class FleetController {
     @FXML
     private TableColumn<Vehicle, String> colFirma;
     @FXML
-    private TableColumn<Vehicle, String> colFirmaInna;
-    @FXML
     private TableColumn<Vehicle, String> colFormaWlasnosci;
     @FXML
     private TableColumn<Vehicle, String> colNumerPolisy;
@@ -83,7 +81,6 @@ public class FleetController {
         setupCheckBoxColumn(colGaz, Vehicle::gazProperty);
         colHomologacjaLpgDo.setCellValueFactory(new PropertyValueFactory<>("homologacjaLpgDo"));
         colFirma.setCellValueFactory(new PropertyValueFactory<>("firma"));
-        colFirmaInna.setCellValueFactory(new PropertyValueFactory<>("firmaInna"));
         colFormaWlasnosci.setCellValueFactory(new PropertyValueFactory<>("formaWlasnosci"));
         colNumerPolisy.setCellValueFactory(new PropertyValueFactory<>("numerPolisy"));
 

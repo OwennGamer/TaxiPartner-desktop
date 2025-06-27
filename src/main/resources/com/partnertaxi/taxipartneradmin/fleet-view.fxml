@@ -41,7 +41,6 @@
                 <TableColumn fx:id="colGaz" text="Gaz" prefWidth="60"/>
                 <TableColumn fx:id="colHomologacjaLpgDo" text="Homologacja LPG do" prefWidth="150"/>
                 <TableColumn fx:id="colFirma" text="Firma" prefWidth="100"/>
-                <TableColumn fx:id="colFirmaInna" text="Firma inna" prefWidth="100"/>
                 <TableColumn fx:id="colFormaWlasnosci" text="Forma własności" prefWidth="120"/>
                 <TableColumn fx:id="colNumerPolisy" text="Numer polisy" prefWidth="120"/>
             </columns>
