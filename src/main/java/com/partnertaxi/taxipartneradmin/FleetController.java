@@ -17,8 +17,6 @@ import javafx.scene.input.MouseEvent;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
-
-
 import java.util.List;
 
 public class FleetController {
@@ -42,8 +40,27 @@ public class FleetController {
     @FXML
     private TableColumn<Vehicle, Boolean> colAktywny;
     @FXML
+    private TableColumn<Vehicle, Boolean> colInpost;
+    @FXML
+    private TableColumn<Vehicle, Boolean> colTaxi;
+    @FXML
+    private TableColumn<Vehicle, Boolean> colTaksometr;
+    @FXML
+    private TableColumn<Vehicle, String> colLegalizacjaTaksometruDo;
+    @FXML
+    private TableColumn<Vehicle, Boolean> colGaz;
+    @FXML
+    private TableColumn<Vehicle, String> colHomologacjaLpgDo;
+    @FXML
+    private TableColumn<Vehicle, String> colFirma;
+    @FXML
+    private TableColumn<Vehicle, String> colFirmaInna;
+    @FXML
+    private TableColumn<Vehicle, String> colFormaWlasnosci;
+    @FXML
+    private TableColumn<Vehicle, String> colNumerPolisy;
+    @FXML
     private Button btnHistory;
-
 
     @FXML
     public void initialize() {
@@ -55,17 +72,25 @@ public class FleetController {
         colUbezpieczenie.setCellValueFactory(new PropertyValueFactory<>("ubezpieczenieDo"));
         colPrzeglad.setCellValueFactory(new PropertyValueFactory<>("przegladDo"));
         colAktywny.setCellValueFactory(new PropertyValueFactory<>("aktywny"));
+        colInpost.setCellValueFactory(new PropertyValueFactory<>("inpost"));
+        colTaxi.setCellValueFactory(new PropertyValueFactory<>("taxi"));
+        colTaksometr.setCellValueFactory(new PropertyValueFactory<>("taksometr"));
+        colLegalizacjaTaksometruDo.setCellValueFactory(new PropertyValueFactory<>("legalizacjaTaksometruDo"));
+        colGaz.setCellValueFactory(new PropertyValueFactory<>("gaz"));
+        colHomologacjaLpgDo.setCellValueFactory(new PropertyValueFactory<>("homologacjaLpgDo"));
+        colFirma.setCellValueFactory(new PropertyValueFactory<>("firma"));
+        colFirmaInna.setCellValueFactory(new PropertyValueFactory<>("firmaInna"));
+        colFormaWlasnosci.setCellValueFactory(new PropertyValueFactory<>("formaWlasnosci"));
+        colNumerPolisy.setCellValueFactory(new PropertyValueFactory<>("numerPolisy"));
 
         List<Vehicle> vehicles = ApiClient.getVehicles();
         ObservableList<Vehicle> observableVehicles = FXCollections.observableArrayList(vehicles);
         vehicleTable.setItems(observableVehicles);
-        // Włącz przycisk "Historia pojazdu" tylko gdy wybrano wiersz
         vehicleTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> btnHistory.setDisable(newSelection == null)
         );
 
         TableUtils.enableCopyOnCtrlC(vehicleTable);
-
     }
 
     @FXML
@@ -76,9 +101,8 @@ public class FleetController {
             Stage stage = new Stage();
             stage.setTitle("Dodaj pojazd");
             stage.setScene(new Scene(root));
-            stage.showAndWait(); // ⏳ Czeka aż użytkownik zamknie okno
+            stage.showAndWait();
 
-            // 🔄 Po zamknięciu: odśwież listę pojazdów
             List<Vehicle> updatedList = ApiClient.getVehicles();
             vehicleTable.setItems(FXCollections.observableArrayList(updatedList));
 
@@ -101,10 +125,9 @@ public class FleetController {
                     .getResource("/com/partnertaxi/taxipartneradmin/vehicle_inventory_history.fxml"));
             Parent root = loader.load();
 
-            // Przekaż rejestrację do kontrolera historii
             VehicleInventoryHistoryController ctrl = loader.getController();
             ctrl.setRejestracja(selected.getRejestracja());
-            ctrl.loadHistory();  // <— TU dociągamy dane i ustawiamy w tabeli
+            ctrl.loadHistory();
 
             Stage stage = new Stage();
             stage.setTitle("Historia inwentaryzacji: " + selected.getRejestracja());
@@ -115,7 +138,4 @@ public class FleetController {
             new Alert(Alert.AlertType.ERROR, "Nie można otworzyć historii pojazdu.").showAndWait();
         }
     }
-
-
-
 }

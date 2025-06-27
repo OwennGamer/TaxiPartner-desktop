@@ -5,7 +5,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.partnertaxi.taxipartneradmin.FleetController"
@@ -35,6 +34,16 @@
                 <TableColumn fx:id="colUbezpieczenie" text="Ubezpieczenie do" prefWidth="120"/>
                 <TableColumn fx:id="colPrzeglad" text="Przegląd do" prefWidth="120"/>
                 <TableColumn fx:id="colAktywny" text="Aktywny" prefWidth="80"/>
+                <TableColumn fx:id="colInpost" text="Inpost" prefWidth="80"/>
+                <TableColumn fx:id="colTaxi" text="Taxi" prefWidth="60"/>
+                <TableColumn fx:id="colTaksometr" text="Taksometr" prefWidth="80"/>
+                <TableColumn fx:id="colLegalizacjaTaksometruDo" text="Legalizacja taksometru do" prefWidth="160"/>
+                <TableColumn fx:id="colGaz" text="Gaz" prefWidth="60"/>
+                <TableColumn fx:id="colHomologacjaLpgDo" text="Homologacja LPG do" prefWidth="150"/>
+                <TableColumn fx:id="colFirma" text="Firma" prefWidth="100"/>
+                <TableColumn fx:id="colFirmaInna" text="Firma inna" prefWidth="100"/>
+                <TableColumn fx:id="colFormaWlasnosci" text="Forma własności" prefWidth="120"/>
+                <TableColumn fx:id="colNumerPolisy" text="Numer polisy" prefWidth="120"/>
             </columns>
         </TableView>
     </center>
