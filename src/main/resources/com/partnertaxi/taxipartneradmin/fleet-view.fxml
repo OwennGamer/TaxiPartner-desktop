@@ -14,6 +14,8 @@
     <top>
         <ToolBar>
             <Button text="Dodaj pojazd" onAction="#onAddVehicle"/>
+            <Button text="Edytuj pojazd" onAction="#onEditVehicle" fx:id="btnEdit" disable="true"/>
+            <Button text="Usuń pojazd"   onAction="#onDeleteVehicle" fx:id="btnDelete" disable="true"/>
             <Button fx:id="btnHistory"
                     text="Historia pojazdu"
                     onAction="#onShowHistory"
