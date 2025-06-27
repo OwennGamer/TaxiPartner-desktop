@@ -14,6 +14,10 @@ import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
+import javafx.beans.property.BooleanProperty;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.CheckBox;
+import java.util.function.Function;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
@@ -71,12 +75,12 @@ public class FleetController {
         colPrzebieg.setCellValueFactory(new PropertyValueFactory<>("przebieg"));
         colUbezpieczenie.setCellValueFactory(new PropertyValueFactory<>("ubezpieczenieDo"));
         colPrzeglad.setCellValueFactory(new PropertyValueFactory<>("przegladDo"));
-        colAktywny.setCellValueFactory(new PropertyValueFactory<>("aktywny"));
-        colInpost.setCellValueFactory(new PropertyValueFactory<>("inpost"));
-        colTaxi.setCellValueFactory(new PropertyValueFactory<>("taxi"));
-        colTaksometr.setCellValueFactory(new PropertyValueFactory<>("taksometr"));
+        setupCheckBoxColumn(colAktywny, Vehicle::aktywnyProperty);
+        setupCheckBoxColumn(colInpost, Vehicle::inpostProperty);
+        setupCheckBoxColumn(colTaxi, Vehicle::taxiProperty);
+        setupCheckBoxColumn(colTaksometr, Vehicle::taksometrProperty);
         colLegalizacjaTaksometruDo.setCellValueFactory(new PropertyValueFactory<>("legalizacjaTaksometruDo"));
-        colGaz.setCellValueFactory(new PropertyValueFactory<>("gaz"));
+        setupCheckBoxColumn(colGaz, Vehicle::gazProperty);
         colHomologacjaLpgDo.setCellValueFactory(new PropertyValueFactory<>("homologacjaLpgDo"));
         colFirma.setCellValueFactory(new PropertyValueFactory<>("firma"));
         colFirmaInna.setCellValueFactory(new PropertyValueFactory<>("firmaInna"));
@@ -137,5 +141,27 @@ public class FleetController {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Nie można otworzyć historii pojazdu.").showAndWait();
         }
+    }
+
+    private void setupCheckBoxColumn(TableColumn<Vehicle, Boolean> column,
+                                     Function<Vehicle, BooleanProperty> extractor) {
+        column.setCellValueFactory(cellData -> extractor.apply(cellData.getValue()));
+        column.setCellFactory(col -> new TableCell<>() {
+            private final CheckBox box = new CheckBox();
+            {
+                box.setDisable(true);
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            }
+            @Override
+            protected void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    box.setSelected(Boolean.TRUE.equals(item));
+                    setGraphic(box);
+                }
+            }
+        });
     }
 }
