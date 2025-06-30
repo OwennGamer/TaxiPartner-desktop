@@ -21,6 +21,7 @@ import javafx.scene.control.CheckBox;
 import java.util.function.Function;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
+import com.partnertaxi.taxipartneradmin.EditVehicleController;
 
 import java.util.List;
 
@@ -148,6 +149,52 @@ public class FleetController {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Nie można otworzyć historii pojazdu.").showAndWait();
         }
+    }
+
+    @FXML
+    public void onEditVehicle(ActionEvent event) {
+        Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pojazd z listy.").showAndWait();
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/partnertaxi/taxipartneradmin/edit-vehicle-view.fxml"));
+            Parent root = loader.load();
+            EditVehicleController ctrl = loader.getController();
+            ctrl.setVehicle(selected);
+            Stage stage = new Stage();
+            stage.setTitle("Edytuj pojazd");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            List<Vehicle> updatedList = ApiClient.getVehicles();
+            allVehicles.setAll(updatedList);
+            applyFilter();
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Nie można otworzyć formularza edycji.").showAndWait();
+        }
+    }
+
+    @FXML
+    public void onDeleteVehicle(ActionEvent event) {
+        Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pojazd z listy.").showAndWait();
+            return;
+        }
+        Alert conf = new Alert(Alert.AlertType.CONFIRMATION,
+                "Usunąć pojazd " + selected.getRejestracja() + "?", ButtonType.OK, ButtonType.CANCEL);
+        conf.setHeaderText(null);
+        conf.showAndWait().ifPresent(b -> {
+            if (b == ButtonType.OK) {
+                ApiClient.deleteVehicle(selected.getId());
+                List<Vehicle> updatedList = ApiClient.getVehicles();
+                allVehicles.setAll(updatedList);
+                applyFilter();
+            }
+        });
     }
 
     @FXML
