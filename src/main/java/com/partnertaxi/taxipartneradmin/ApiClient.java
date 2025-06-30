@@ -388,4 +388,69 @@ public class ApiClient {
         }
         return null;
     }
+
+    // ✏️ Aktualizacja pojazdu
+    public static void updateVehicle(int id, String rejestracja, String marka, String model,
+                                     int przebieg, String ubezpieczenie, String przeglad,
+                                     boolean aktywny, boolean inpost, boolean taxi, boolean taksometr,
+                                     String legalizacja, boolean gaz, String homologacja,
+                                     String firma, String formaWlasnosci, String numerPolisy) {
+        try {
+            URL url = new URL(BASE_URL + "update_vehicle.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("id", id);
+            json.put("rejestracja", rejestracja);
+            json.put("marka", marka);
+            json.put("model", model);
+            json.put("przebieg", przebieg);
+            json.put("ubezpieczenie_do", ubezpieczenie);
+            json.put("przeglad_do", przeglad);
+            json.put("aktywny", aktywny ? 1 : 0);
+            json.put("inpost", inpost ? 1 : 0);
+            json.put("taxi", taxi ? 1 : 0);
+            json.put("taksometr", taksometr ? 1 : 0);
+            json.put("legalizacja_taksometru_do", legalizacja == null ? "" : legalizacja);
+            json.put("gaz", gaz ? 1 : 0);
+            json.put("homologacja_lpg_do", homologacja == null ? "" : homologacja);
+            json.put("firma", firma == null ? "" : firma);
+            json.put("forma_wlasnosci", formaWlasnosci == null ? "" : formaWlasnosci);
+            json.put("numer_polisy", numerPolisy == null ? "" : numerPolisy);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.toString().getBytes("utf-8"));
+            }
+
+            conn.getResponseCode();
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ❌ Usuwanie pojazdu
+    public static void deleteVehicle(int id) {
+        try {
+            URL url = new URL(BASE_URL + "delete_vehicle.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("id", id);
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.toString().getBytes("utf-8"));
+            }
+
+            conn.getResponseCode();
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
