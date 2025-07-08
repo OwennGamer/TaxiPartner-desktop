@@ -453,4 +453,168 @@ public class ApiClient {
             e.printStackTrace();
         }
     }
+
+
+    // 📄 Pobieranie listy pracowników
+    public static List<Employee> getEmployees() {
+        List<Employee> list = new ArrayList<>();
+        try {
+            String json = sendGetRequest("get_employees.php");
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONArray arr = resp.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        list.add(new Employee(
+                                o.getString("id"),
+                                o.getString("name"),
+                                o.optString("firma", ""),
+                                o.optString("rodzaj_umowy", ""),
+                                o.optString("data_umowy", ""),
+                                o.optInt("dowod", 0) == 1,
+                                o.optInt("prawo_jazdy", 0) == 1,
+                                o.optInt("niekaralnosc", 0) == 1,
+                                o.optInt("orzeczenie_psychologiczne", 0) == 1,
+                                o.optString("data_badania_psychologicznego", ""),
+                                o.optInt("orzeczenie_lekarskie", 0) == 1,
+                                o.optString("data_badan_lekarskich", ""),
+                                o.optInt("informacja_ppk", 0) == 1,
+                                o.optInt("rezygnacja_ppk", 0) == 1,
+                                o.optString("forma_wyplaty", ""),
+                                o.optInt("wynagrodzenie_do_rak_wlasnych", 0) == 1,
+                                o.optInt("zgoda_na_przelew", 0) == 1,
+                                o.optInt("ryzyko_zawodowe", 0) == 1,
+                                o.optInt("oswiadczenie_zus", 0) == 1,
+                                o.optInt("bhp", 0) == 1,
+                                o.optInt("regulamin_pracy", 0) == 1,
+                                o.optInt("zasady_ewidencji_kasa", 0) == 1,
+                                o.optInt("pit2", 0) == 1,
+                                o.optInt("oswiadczenie_art188_kp", 0) == 1,
+                                o.optInt("rodo", 0) == 1,
+                                o.optInt("pora_nocna", 0) == 1,
+                                o.optString("pit_email", ""),
+                                o.optString("osoba_kontaktowa", ""),
+                                o.optString("numer_prywatny", ""),
+                                o.optString("numer_sluzbowy", ""),
+                                o.optString("model_telefonu_sluzbowego", ""),
+                                o.optString("operator", ""),
+                                o.optString("waznosc_wizy", "")
+                        ));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // ➕ Dodawanie pracownika
+    public static void addEmployee(Employee e) {
+        try {
+            URL url = new URL(BASE_URL + "add_employee.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+            conn.setDoOutput(true);
+
+            JSONObject json = employeeToJson(e);
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.toString().getBytes("utf-8"));
+            }
+
+            conn.getResponseCode();
+            conn.disconnect();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // ✏️ Aktualizacja pracownika
+    public static void updateEmployee(Employee e) {
+        try {
+            URL url = new URL(BASE_URL + "update_employee.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+            conn.setDoOutput(true);
+
+            JSONObject json = employeeToJson(e);
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.toString().getBytes("utf-8"));
+            }
+
+            conn.getResponseCode();
+            conn.disconnect();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // ❌ Usuwanie pracownika
+    public static void deleteEmployee(String id) {
+        try {
+            URL url = new URL(BASE_URL + "delete_employee.php");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+            conn.setDoOutput(true);
+
+            JSONObject json = new JSONObject();
+            json.put("id", id);
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.toString().getBytes("utf-8"));
+            }
+
+            conn.getResponseCode();
+            conn.disconnect();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private static JSONObject employeeToJson(Employee e) {
+        JSONObject json = new JSONObject();
+        json.put("id", e.getId());
+        json.put("name", e.getName());
+        json.put("firma", e.getFirma());
+        json.put("rodzaj_umowy", e.getRodzajUmowy());
+        json.put("data_umowy", e.getDataUmowy());
+        json.put("dowod", e.isDowod() ? 1 : 0);
+        json.put("prawo_jazdy", e.isPrawoJazdy() ? 1 : 0);
+        json.put("niekaralnosc", e.isNiekaralnosc() ? 1 : 0);
+        json.put("orzeczenie_psychologiczne", e.isOrzeczeniePsychologiczne() ? 1 : 0);
+        json.put("data_badania_psychologicznego", e.getDataBadaniaPsychologicznego());
+        json.put("orzeczenie_lekarskie", e.isOrzeczenieLekarskie() ? 1 : 0);
+        json.put("data_badan_lekarskich", e.getDataBadanLekarskich());
+        json.put("informacja_ppk", e.isInformacjaPpk() ? 1 : 0);
+        json.put("rezygnacja_ppk", e.isRezygnacjaPpk() ? 1 : 0);
+        json.put("forma_wyplaty", e.getFormaWyplaty());
+        json.put("wynagrodzenie_do_rak_wlasnych", e.isWynagrodzenieDoRakWlasnych() ? 1 : 0);
+        json.put("zgoda_na_przelew", e.isZgodaNaPrzelew() ? 1 : 0);
+        json.put("ryzyko_zawodowe", e.isRyzykoZawodowe() ? 1 : 0);
+        json.put("oswiadczenie_zus", e.isOswiadczenieZUS() ? 1 : 0);
+        json.put("bhp", e.isBhp() ? 1 : 0);
+        json.put("regulamin_pracy", e.isRegulaminPracy() ? 1 : 0);
+        json.put("zasady_ewidencji_kasa", e.isZasadyEwidencjiKasa() ? 1 : 0);
+        json.put("pit2", e.isPit2() ? 1 : 0);
+        json.put("oswiadczenie_art188_kp", e.isOswiadczenieArt188KP() ? 1 : 0);
+        json.put("rodo", e.isRodo() ? 1 : 0);
+        json.put("pora_nocna", e.isPoraNocna() ? 1 : 0);
+        json.put("pit_email", e.getPitEmail());
+        json.put("osoba_kontaktowa", e.getOsobaKontaktowa());
+        json.put("numer_prywatny", e.getNumerPrywatny());
+        json.put("numer_sluzbowy", e.getNumerSluzbowy());
+        json.put("model_telefonu_sluzbowego", e.getModelTelefonuSluzbowego());
+        json.put("operator", e.getOperator());
+        json.put("waznosc_wizy", e.getWaznoscWizy());
+        return json;
+    }
 }

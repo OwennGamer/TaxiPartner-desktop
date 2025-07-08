@@ -87,6 +87,8 @@ public class EmployeesController {
         if (colModelTelefonuSluzbowego != null) colModelTelefonuSluzbowego.setCellValueFactory(new PropertyValueFactory<>("modelTelefonuSluzbowego"));
         if (colOperator != null)        colOperator.setCellValueFactory(new PropertyValueFactory<>("operator"));
         if (colWaznoscWizy != null)     colWaznoscWizy.setCellValueFactory(new PropertyValueFactory<>("waznoscWizy"));
+
+        employeesTable.getItems().setAll(ApiClient.getEmployees());
     }
 
     @FXML
