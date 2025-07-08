@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.partnertaxi.taxipartneradmin.AddEmployeeController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Dodaj pracownika" style="-fx-font-size: 20px;"/>
+
+    <TextField fx:id="idField" promptText="ID pracownika"/>
+    <TextField fx:id="nameField" promptText="Imię i nazwisko"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="saveButton" text="Dodaj" onAction="#handleSave"/>
+        <Button fx:id="cancelButton" text="Anuluj" onAction="#handleCancel"/>
+    </HBox>
+</VBox>

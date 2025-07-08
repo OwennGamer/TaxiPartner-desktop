@@ -2,8 +2,12 @@ package com.partnertaxi.taxipartneradmin;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.beans.property.BooleanProperty;
 import java.util.function.Function;
 
@@ -93,17 +97,57 @@ public class EmployeesController {
 
     @FXML
     public void handleAddEmployee(ActionEvent event) {
-        System.out.println("Add employee clicked");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-employee-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Dodaj pracownika");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            employeesTable.getItems().setAll(ApiClient.getEmployees());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void handleEditEmployee(ActionEvent event) {
-        System.out.println("Edit employee clicked");
+        Employee sel = employeesTable.getSelectionModel().getSelectedItem();
+        if (sel == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pracownika", ButtonType.OK).showAndWait();
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("edit-employee-view.fxml"));
+            Parent root = loader.load();
+            EditEmployeeController ctrl = loader.getController();
+            ctrl.setEmployee(sel);
+            Stage stage = new Stage();
+            stage.setTitle("Edytuj pracownika");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            employeesTable.getItems().setAll(ApiClient.getEmployees());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void handleDeleteEmployee(ActionEvent event) {
-        System.out.println("Delete employee clicked");
+        Employee sel = employeesTable.getSelectionModel().getSelectedItem();
+        if (sel == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pracownika", ButtonType.OK).showAndWait();
+            return;
+        }
+        Alert conf = new Alert(Alert.AlertType.CONFIRMATION,
+                "Usunąć pracownika " + sel.getName() + "?", ButtonType.OK, ButtonType.CANCEL);
+        conf.setHeaderText(null);
+        conf.showAndWait().ifPresent(b -> {
+            if (b == ButtonType.OK) {
+                ApiClient.deleteEmployee(sel.getId());
+                employeesTable.getItems().setAll(ApiClient.getEmployees());
+            }
+        });
     }
 
     private void setupCheckBoxColumn(TableColumn<Employee, Boolean> column,
