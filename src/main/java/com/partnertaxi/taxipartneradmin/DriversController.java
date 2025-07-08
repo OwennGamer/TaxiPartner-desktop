@@ -400,8 +400,18 @@ public class DriversController {
 
     @FXML
     public void openEmployeesView(ActionEvent event) {
-        System.out.println("Pracownicy button clicked");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("employees-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Pracownicy");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     private void showError(String title, String msg) {
         Alert a = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);

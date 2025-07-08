@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.EmployeesController"
+            prefWidth="600" prefHeight="400">
+
+    <top>
+        <ToolBar>
+            <Button text="Dodaj pracownika" onAction="#handleAddEmployee" />
+            <Button text="Edytuj pracownika" onAction="#handleEditEmployee" />
+            <Button text="Usuń pracownika" onAction="#handleDeleteEmployee" />
+        </ToolBar>
+    </top>
+
+    <center>
+        <TableView fx:id="employeesTable" prefWidth="580" prefHeight="350">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="100" />
+                <TableColumn fx:id="colName" text="Imię i nazwisko" prefWidth="200" />
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
