@@ -112,6 +112,7 @@ public class FleetController {
             Stage stage = new Stage();
             stage.setTitle("Dodaj pojazd");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.showAndWait();
 
             List<Vehicle> updatedList = ApiClient.getVehicles();
@@ -144,6 +145,7 @@ public class FleetController {
             Stage stage = new Stage();
             stage.setTitle("Historia inwentaryzacji: " + selected.getRejestracja());
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -166,6 +168,7 @@ public class FleetController {
             Stage stage = new Stage();
             stage.setTitle("Edytuj pojazd");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.showAndWait();
 
             List<Vehicle> updatedList = ApiClient.getVehicles();

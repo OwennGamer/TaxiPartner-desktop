@@ -268,6 +268,7 @@ public class DriversController {
             Stage st = new Stage();
             st.setTitle("Dodaj kierowcę");
             st.setScene(new Scene(root));
+            st.setMaximized(true);
             st.showAndWait();
             loadDrivers();
         } catch (IOException e) {
@@ -290,6 +291,7 @@ public class DriversController {
             Stage st = new Stage();
             st.setTitle("Edytuj kierowcę");
             st.setScene(new Scene(root));
+            st.setMaximized(true);
             st.showAndWait();
             loadDrivers();
         } catch (IOException e) {
@@ -331,6 +333,7 @@ public class DriversController {
             Stage st = new Stage();
             st.setTitle("Zmień saldo");
             st.setScene(new Scene(root));
+            st.setMaximized(true);
             st.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -352,6 +355,7 @@ public class DriversController {
             Stage st = new Stage();
             st.setTitle("Historia: " + sel.getName());
             st.setScene(new Scene(root));
+            st.setMaximized(true);
             st.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -373,6 +377,7 @@ public class DriversController {
             Stage st = new Stage();
             st.setTitle("Tankowania: " + sel.getName());
             st.setScene(new Scene(root));
+            st.setMaximized(true);
             st.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -392,6 +397,7 @@ public class DriversController {
             Stage st = new Stage();
             st.setTitle("Flota pojazdów");
             st.setScene(new Scene(root));
+            st.setMaximized(true);
             st.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -406,6 +412,7 @@ public class DriversController {
             Stage stage = new Stage();
             stage.setTitle("Pracownicy");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

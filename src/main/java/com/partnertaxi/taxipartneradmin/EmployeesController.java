@@ -103,6 +103,7 @@ public class EmployeesController {
             Stage stage = new Stage();
             stage.setTitle("Dodaj pracownika");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.showAndWait();
             employeesTable.getItems().setAll(ApiClient.getEmployees());
         } catch (Exception e) {
@@ -125,6 +126,7 @@ public class EmployeesController {
             Stage stage = new Stage();
             stage.setTitle("Edytuj pracownika");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.showAndWait();
             employeesTable.getItems().setAll(ApiClient.getEmployees());
         } catch (Exception e) {

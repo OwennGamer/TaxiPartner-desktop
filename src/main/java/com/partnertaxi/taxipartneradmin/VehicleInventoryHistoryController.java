@@ -75,6 +75,7 @@ public class VehicleInventoryHistoryController {
             Stage stage = new Stage();
             stage.setTitle("Szczegóły inwentaryzacji");
             stage.setScene(new Scene(root));
+            stage.setMaximized(true);
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

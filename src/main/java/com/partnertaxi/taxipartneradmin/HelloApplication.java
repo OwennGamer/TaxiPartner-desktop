@@ -25,6 +25,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
         changeScene("login-view.fxml", "Logowanie administratora");
+        stage.setMaximized(true);
         stage.show();
     }
 
@@ -40,6 +41,7 @@ public class HelloApplication extends Application {
             Scene scene = new Scene(fxmlLoader.load());
             primaryStage.setTitle(title);
             primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
         } catch (Exception e) {
             e.printStackTrace();
         }

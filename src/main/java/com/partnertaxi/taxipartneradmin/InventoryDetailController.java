@@ -99,6 +99,7 @@ public class InventoryDetailController {
         Stage stage = new Stage();
         stage.setTitle("Podgląd zdjęcia");
         stage.setScene(new Scene(scrollPane, 800, 600));
+        stage.setMaximized(true);
         stage.show();
     }
 }
