@@ -18,6 +18,7 @@
             <Button text="Historia" onAction="#handleShowHistory"/>
             <Button text="Tankowania" fx:id="refuelsButton" onAction="#handleShowRefuels"/>
             <Button text="Flota" onAction="#openFleetView"/>
+            <Button text="Pracownicy" onAction="#openEmployeesView"/>
         </ToolBar>
     </top>
 

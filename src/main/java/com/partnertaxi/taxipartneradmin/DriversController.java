@@ -398,6 +398,11 @@ public class DriversController {
         }
     }
 
+    @FXML
+    public void openEmployeesView(ActionEvent event) {
+        System.out.println("Pracownicy button clicked");
+    }
+
     private void showError(String title, String msg) {
         Alert a = new Alert(Alert.AlertType.ERROR, msg, ButtonType.OK);
         a.setTitle(title);
