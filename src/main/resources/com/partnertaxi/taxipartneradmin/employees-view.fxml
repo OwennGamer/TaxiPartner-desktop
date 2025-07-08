@@ -17,10 +17,42 @@
     </top>
 
     <center>
-        <TableView fx:id="employeesTable" prefWidth="580" prefHeight="350">
+        <TableView fx:id="employeesTable" prefWidth="1200" prefHeight="350">
             <columns>
-                <TableColumn fx:id="colId" text="ID" prefWidth="100" />
-                <TableColumn fx:id="colName" text="Imię i nazwisko" prefWidth="200" />
+                <TableColumn fx:id="colId" text="Lp." prefWidth="50" />
+                <TableColumn fx:id="colName" text="Imię i nazwisko" prefWidth="150" />
+                <TableColumn fx:id="colFirma" text="Firma" prefWidth="100" />
+                <TableColumn fx:id="colRodzajUmowy" text="Rodzaj umowy" prefWidth="100" />
+                <TableColumn fx:id="colDataUmowy" text="Data umowy" prefWidth="100" />
+
+                <TableColumn fx:id="colDowod" text="Dowód" prefWidth="70" />
+                <TableColumn fx:id="colPrawoJazdy" text="Prawo jazdy" prefWidth="90" />
+                <TableColumn fx:id="colNiekaralnosc" text="Niekaralność" prefWidth="90" />
+                <TableColumn fx:id="colOrzeczeniePsychologiczne" text="Orzeczenie psych." prefWidth="110" />
+                <TableColumn fx:id="colDataBadaniaPsych" text="Data nast. bad. psych." prefWidth="130" />
+                <TableColumn fx:id="colOrzeczenieLekarskie" text="Orzeczenie lek." prefWidth="110" />
+                <TableColumn fx:id="colDataBadanLekarskich" text="Data nast. badań" prefWidth="110" />
+                <TableColumn fx:id="colInformacjaPpk" text="Informacja PPK" prefWidth="100" />
+                <TableColumn fx:id="colRezygnacjaPpk" text="Rezygnacja PPK" prefWidth="100" />
+                <TableColumn fx:id="colFormaWyplaty" text="Forma wypłaty" prefWidth="100" />
+                <TableColumn fx:id="colWynagrodzenieDoRakWlasnych" text="Wyn. do rąk wł." prefWidth="110" />
+                <TableColumn fx:id="colZgodaNaPrzelew" text="Zgoda na przelew" prefWidth="110" />
+                <TableColumn fx:id="colRyzykoZawodowe" text="Ryzyko zawodowe" prefWidth="110" />
+                <TableColumn fx:id="colOswiadczenieZUS" text="Oświadczenie ZUS" prefWidth="110" />
+                <TableColumn fx:id="colBhp" text="BHP" prefWidth="60" />
+                <TableColumn fx:id="colRegulaminPracy" text="Regulamin pracy" prefWidth="110" />
+                <TableColumn fx:id="colZasadyEwidencjiKasa" text="Zasady ewidencji kasa" prefWidth="150" />
+                <TableColumn fx:id="colPit2" text="PIT-2" prefWidth="70" />
+                <TableColumn fx:id="colOswiadczenieArt188KP" text="Art.188 KP" prefWidth="90" />
+                <TableColumn fx:id="colRodo" text="RODO" prefWidth="70" />
+                <TableColumn fx:id="colPoraNocna" text="Pora nocna" prefWidth="90" />
+                <TableColumn fx:id="colPitEmail" text="PIT @" prefWidth="150" />
+                <TableColumn fx:id="colOsobaKontaktowa" text="Osoba kontaktowa" prefWidth="150" />
+                <TableColumn fx:id="colNumerPrywatny" text="Numer prywatny" prefWidth="120" />
+                <TableColumn fx:id="colNumerSluzbowy" text="Numer służbowy" prefWidth="120" />
+                <TableColumn fx:id="colModelTelefonuSluzbowego" text="Model tel. sł." prefWidth="120" />
+                <TableColumn fx:id="colOperator" text="Operator" prefWidth="100" />
+                <TableColumn fx:id="colWaznoscWizy" text="Ważność wizy" prefWidth="100" />
             </columns>
         </TableView>
     </center>
