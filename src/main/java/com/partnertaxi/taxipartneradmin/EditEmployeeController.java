@@ -96,17 +96,17 @@ public class EditEmployeeController {
         nameField.setText(e.getName());
         firmaField.setText(e.getFirma());
         rodzajUmowyField.setText(e.getRodzajUmowy());
-        if (!e.getDataUmowy().isEmpty())
+        if (e.getDataUmowy() != null && !e.getDataUmowy().isEmpty())
             dataUmowyPicker.setValue(java.time.LocalDate.parse(e.getDataUmowy()));
 
         dowodCheck.setSelected(e.isDowod());
         prawoJazdyCheck.setSelected(e.isPrawoJazdy());
         niekaralnoscCheck.setSelected(e.isNiekaralnosc());
         orzPsychCheck.setSelected(e.isOrzeczeniePsychologiczne());
-        if (!e.getDataBadaniaPsychologicznego().isEmpty())
+        if (e.getDataBadaniaPsychologicznego() != null && !e.getDataBadaniaPsychologicznego().isEmpty())
             dataBadaniaPsychPicker.setValue(java.time.LocalDate.parse(e.getDataBadaniaPsychologicznego()));
         orzLekCheck.setSelected(e.isOrzeczenieLekarskie());
-        if (!e.getDataBadanLekarskich().isEmpty())
+        if (e.getDataBadanLekarskich() != null && !e.getDataBadanLekarskich().isEmpty())
             dataBadanLekPicker.setValue(java.time.LocalDate.parse(e.getDataBadanLekarskich()));
         informacjaPpkCheck.setSelected(e.isInformacjaPpk());
         rezygnacjaPpkCheck.setSelected(e.isRezygnacjaPpk());
@@ -130,7 +130,7 @@ public class EditEmployeeController {
         numerSluzbowyField.setText(e.getNumerSluzbowy());
         modelTelefonuField.setText(e.getModelTelefonuSluzbowego());
         operatorField.setText(e.getOperator());
-        if (!e.getWaznoscWizy().isEmpty())
+        if (e.getWaznoscWizy() != null && !e.getWaznoscWizy().isEmpty())
             waznoscWizyPicker.setValue(java.time.LocalDate.parse(e.getWaznoscWizy()));
     }
 
@@ -149,15 +149,24 @@ public class EditEmployeeController {
 
             String firma = firmaField.getText().trim();
             String rodzajUmowy = rodzajUmowyField.getText().trim();
-            String dataUmowy = dataUmowyPicker.getValue() != null ? dataUmowyPicker.getValue().toString() : "";
+            if (dataUmowyPicker.getEditor().getText().trim().isEmpty()) {
+                dataUmowyPicker.setValue(null);
+            }
+            String dataUmowy = dataUmowyPicker.getValue() != null ? dataUmowyPicker.getValue().toString() : null;
 
             boolean dowod = dowodCheck.isSelected();
             boolean prawoJazdy = prawoJazdyCheck.isSelected();
             boolean niekaralnosc = niekaralnoscCheck.isSelected();
             boolean orzPsych = orzPsychCheck.isSelected();
-            String dataBadaniaPsych = dataBadaniaPsychPicker.getValue() != null ? dataBadaniaPsychPicker.getValue().toString() : "";
+            if (dataBadaniaPsychPicker.getEditor().getText().trim().isEmpty()) {
+                dataBadaniaPsychPicker.setValue(null);
+            }
+            String dataBadaniaPsych = dataBadaniaPsychPicker.getValue() != null ? dataBadaniaPsychPicker.getValue().toString() : null;
             boolean orzLek = orzLekCheck.isSelected();
-            String dataBadanLek = dataBadanLekPicker.getValue() != null ? dataBadanLekPicker.getValue().toString() : "";
+            if (dataBadanLekPicker.getEditor().getText().trim().isEmpty()) {
+                dataBadanLekPicker.setValue(null);
+            }
+            String dataBadanLek = dataBadanLekPicker.getValue() != null ? dataBadanLekPicker.getValue().toString() : null;
             boolean informacjaPpk = informacjaPpkCheck.isSelected();
             boolean rezygnacjaPpk = rezygnacjaPpkCheck.isSelected();
 
@@ -180,7 +189,10 @@ public class EditEmployeeController {
             String numerSluzbowy = numerSluzbowyField.getText().trim();
             String modelTelefonu = modelTelefonuField.getText().trim();
             String operator = operatorField.getText().trim();
-            String waznoscWizy = waznoscWizyPicker.getValue() != null ? waznoscWizyPicker.getValue().toString() : "";
+            if (waznoscWizyPicker.getEditor().getText().trim().isEmpty()) {
+                waznoscWizyPicker.setValue(null);
+            }
+            String waznoscWizy = waznoscWizyPicker.getValue() != null ? waznoscWizyPicker.getValue().toString() : null;
 
             employee = new Employee(employee.getId(), name, firma, rodzajUmowy, dataUmowy,
                     dowod, prawoJazdy, niekaralnosc, orzPsych, dataBadaniaPsych,

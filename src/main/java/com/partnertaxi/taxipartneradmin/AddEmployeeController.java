@@ -102,15 +102,24 @@ public class AddEmployeeController {
 
             String firma = firmaField.getText().trim();
             String rodzajUmowy = rodzajUmowyField.getText().trim();
-            String dataUmowy = dataUmowyPicker.getValue() != null ? dataUmowyPicker.getValue().toString() : "";
+            if (dataUmowyPicker.getEditor().getText().trim().isEmpty()) {
+                dataUmowyPicker.setValue(null);
+            }
+            String dataUmowy = dataUmowyPicker.getValue() != null ? dataUmowyPicker.getValue().toString() : null;
 
             boolean dowod = dowodCheck.isSelected();
             boolean prawoJazdy = prawoJazdyCheck.isSelected();
             boolean niekaralnosc = niekaralnoscCheck.isSelected();
             boolean orzPsych = orzPsychCheck.isSelected();
-            String dataBadaniaPsych = dataBadaniaPsychPicker.getValue() != null ? dataBadaniaPsychPicker.getValue().toString() : "";
+            if (dataBadaniaPsychPicker.getEditor().getText().trim().isEmpty()) {
+                dataBadaniaPsychPicker.setValue(null);
+            }
+            String dataBadaniaPsych = dataBadaniaPsychPicker.getValue() != null ? dataBadaniaPsychPicker.getValue().toString() : null;
             boolean orzLek = orzLekCheck.isSelected();
-            String dataBadanLek = dataBadanLekPicker.getValue() != null ? dataBadanLekPicker.getValue().toString() : "";
+            if (dataBadanLekPicker.getEditor().getText().trim().isEmpty()) {
+                dataBadanLekPicker.setValue(null);
+            }
+            String dataBadanLek = dataBadanLekPicker.getValue() != null ? dataBadanLekPicker.getValue().toString() : null;
             boolean informacjaPpk = informacjaPpkCheck.isSelected();
             boolean rezygnacjaPpk = rezygnacjaPpkCheck.isSelected();
 
@@ -133,7 +142,10 @@ public class AddEmployeeController {
             String numerSluzbowy = numerSluzbowyField.getText().trim();
             String modelTelefonu = modelTelefonuField.getText().trim();
             String operator = operatorField.getText().trim();
-            String waznoscWizy = waznoscWizyPicker.getValue() != null ? waznoscWizyPicker.getValue().toString() : "";
+            if (waznoscWizyPicker.getEditor().getText().trim().isEmpty()) {
+                waznoscWizyPicker.setValue(null);
+            }
+            String waznoscWizy = waznoscWizyPicker.getValue() != null ? waznoscWizyPicker.getValue().toString() : null;
 
             Employee e = new Employee(id, name, firma, rodzajUmowy, dataUmowy,
                     dowod, prawoJazdy, niekaralnosc, orzPsych, dataBadaniaPsych,

@@ -103,7 +103,7 @@
             <DatePicker fx:id="waznoscWizyPicker" promptText="Ważność wizy"/>
 
             <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="saveButton" text="Zapisz" onAction="#handleSave" />
+                <Button fx:id="saveButton" text="Zapisz" onAction="#handleSave"/>
                 <Button fx:id="cancelButton" text="Anuluj" onAction="#handleCancel" />
             </HBox>
         </VBox>
