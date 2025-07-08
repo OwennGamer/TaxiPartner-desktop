@@ -464,8 +464,6 @@ CREATE TABLE `pojazdy` (
 LOCK TABLES `pojazdy` WRITE;
 /*!40000 ALTER TABLE `pojazdy` DISABLE KEYS */;
 INSERT INTO `pojazdy` VALUES
-(1,'WB12345','Toyota','Yaris',251000,'2025-09-01','2025-04-15',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(2,'asdasd','sadas','asdasd',3000000,'2025-08-01','2025-06-09',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (4,'wqeqwe','qweq','wqeqw',12345,'2025-04-24','2025-05-06',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (5,'aweaw','asdasd','asdasd',777777,'2025-05-03','2026-04-16',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (6,'sdfsdf','asdfsad','sadfasdf',91000,'2025-04-23','2025-05-10',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
@@ -474,12 +472,63 @@ INSERT INTO `pojazdy` VALUES
 (9,'DKL82535','Mercedes-Benz','V-klasse',1,'2026-04-15','2026-04-18',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (10,'DW9YF48','Toyota','Corolla',180000,'2026-06-27','2026-07-02',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (11,'DX23YB','Toyo','Coro',172888,'2025-06-14','2025-06-20',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(12,'DW9999','FIAT','125P',300000,'2026-06-24','2026-04-14',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',1,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000'),
-(14,'DWDWDW','jaja','jdajda',7671,'2025-06-11','2025-06-17',0,NULL,1,0,0,NULL,0,NULL,'LINKPOST','obce','123124'),
-(15,'adasdas','sadasd','asdasd',999000,'2025-06-12','2025-06-20',0,NULL,1,0,0,NULL,0,NULL,'INNA','własny','898989'),
-(16,'adsadas','asdasd','asdasda',1234,'2025-06-11','2025-06-21',1,NULL,1,0,0,NULL,0,NULL,'OCTO','własny','90909');
+(12,'DW9999','FIAT','125P',300000,'2026-06-24','2026-04-14',1,NULL,0,0,0,NULL,0,NULL,'OCTO','własna','909090'),
+(13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',0,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000');
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pracownicy`
+--
+
+DROP TABLE IF EXISTS `pracownicy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pracownicy` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `firma` varchar(100) DEFAULT NULL,
+  `rodzaj_umowy` varchar(100) DEFAULT NULL,
+  `data_umowy` date DEFAULT NULL,
+  `dowod` tinyint(1) NOT NULL DEFAULT 0,
+  `prawo_jazdy` tinyint(1) NOT NULL DEFAULT 0,
+  `niekaralnosc` tinyint(1) NOT NULL DEFAULT 0,
+  `orzeczenie_psychologiczne` tinyint(1) NOT NULL DEFAULT 0,
+  `data_badania_psychologicznego` date DEFAULT NULL,
+  `orzeczenie_lekarskie` tinyint(1) NOT NULL DEFAULT 0,
+  `data_badan_lekarskich` date DEFAULT NULL,
+  `informacja_ppk` tinyint(1) NOT NULL DEFAULT 0,
+  `rezygnacja_ppk` tinyint(1) NOT NULL DEFAULT 0,
+  `forma_wyplaty` varchar(50) DEFAULT NULL,
+  `wynagrodzenie_do_rak_wlasnych` tinyint(1) NOT NULL DEFAULT 0,
+  `zgoda_na_przelew` tinyint(1) NOT NULL DEFAULT 0,
+  `ryzyko_zawodowe` tinyint(1) NOT NULL DEFAULT 0,
+  `oswiadczenie_zus` tinyint(1) NOT NULL DEFAULT 0,
+  `bhp` tinyint(1) NOT NULL DEFAULT 0,
+  `regulamin_pracy` tinyint(1) NOT NULL DEFAULT 0,
+  `zasady_ewidencji_kasa` tinyint(1) NOT NULL DEFAULT 0,
+  `pit2` tinyint(1) NOT NULL DEFAULT 0,
+  `oswiadczenie_art188_kp` tinyint(1) NOT NULL DEFAULT 0,
+  `rodo` tinyint(1) NOT NULL DEFAULT 0,
+  `pora_nocna` tinyint(1) NOT NULL DEFAULT 0,
+  `pit_email` varchar(100) DEFAULT NULL,
+  `osoba_kontaktowa` varchar(100) DEFAULT NULL,
+  `numer_prywatny` varchar(50) DEFAULT NULL,
+  `numer_sluzbowy` varchar(50) DEFAULT NULL,
+  `model_telefonu_sluzbowego` varchar(100) DEFAULT NULL,
+  `operator` varchar(100) DEFAULT NULL,
+  `waznosc_wizy` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pracownicy`
+--
+
+LOCK TABLES `pracownicy` WRITE;
+/*!40000 ALTER TABLE `pracownicy` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pracownicy` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -586,4 +635,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-27 16:49:38
+-- Dump completed on 2025-07-08 14:01:52
