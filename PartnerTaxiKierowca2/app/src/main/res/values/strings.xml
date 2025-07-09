@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PartnerTaxiKierowca</string>
+
+    <!-- Ekran dodawania kursu -->
+    <string name="source_prompt">Wybierz źródło</string>
+    <string name="payment_prompt">Wybierz rodzaj płatności</string>
+
+    <string-array name="source_array">
+        <item>Postój</item>
+        <item>Dyspozytornia</item>
+        <item>Bolt</item>
+    </string-array>
+
+    <string-array name="payment_array">
+        <item>Karta</item>
+        <item>Gotówka</item>
+        <item>Voucher</item>
+    </string-array>
+</resources>

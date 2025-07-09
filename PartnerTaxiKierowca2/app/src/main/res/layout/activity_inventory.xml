@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Auto czyste wewnątrz -->
+            <TextView
+                android:text="Auto czyste wewnątrz?"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupClean"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radioCleanYes"
+                    android:text="Tak" />
+
+                <RadioButton
+                    android:id="@+id/radioCleanNo"
+                    android:text="Nie"
+                    android:layout_marginStart="24dp" />
+            </RadioGroup>
+
+            <!-- Zdjęcia zabrudzeń (pod pytaniem) -->
+            <LinearLayout
+                android:id="@+id/dirtPhotoSection"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Zdjęcia zabrudzeń:"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnPhotoDirt1"
+                    android:text="Zabrudzenie 1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/imgPhotoDirt1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    android:scaleType="centerCrop" />
+
+                <Button
+                    android:id="@+id/btnPhotoDirt2"
+                    android:text="Zabrudzenie 2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/imgPhotoDirt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    android:scaleType="centerCrop" />
+
+                <Button
+                    android:id="@+id/btnPhotoDirt3"
+                    android:text="Zabrudzenie 3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/imgPhotoDirt3"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    android:scaleType="centerCrop" />
+
+                <Button
+                    android:id="@+id/btnPhotoDirt4"
+                    android:text="Zabrudzenie 4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/imgPhotoDirt4"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+
+            <!-- Zdjęcia pojazdu -->
+            <TextView
+                android:text="Zdjęcia pojazdu:"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnPhotoFront"
+                android:text="Przód"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/imgFrontPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnPhotoBack"
+                android:text="Tył"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/imgBackPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnPhotoLeft"
+                android:text="Lewa strona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/imgLeftPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnPhotoRight"
+                android:text="Prawa strona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/imgRightPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop" />
+
+            <!-- Wyposażenie -->
+            <TextView
+                android:text="Wyposażenie pojazdu:"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxLicencja"
+                android:text="Licencja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxLegalizacja"
+                android:text="Legalizacja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxDowod"
+                android:text="Kopia dowodu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxUbezpieczenie"
+                android:text="Kopia ubezpieczenia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxKartaLotniskowa"
+                android:text="Karta lotniskowa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxGasnica"
+                android:text="Gaśnica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxLewarek"
+                android:text="Lewarek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxTrojkat"
+                android:text="Trójkąt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxKamizelka"
+                android:text="Kamizelka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edittextVestCount"
+                android:hint="Ilość kamizelek"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <!-- Uwagi -->
+            <TextView
+                android:text="Czy masz dodatkowe uwagi?"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioGroup
+                android:id="@+id/radioGroupNotes"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radioNotesYes"
+                    android:text="Tak" />
+                <RadioButton
+                    android:id="@+id/radioNotesNo"
+                    android:text="Nie"
+                    android:layout_marginStart="24dp" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editTextNotes"
+                android:hint="Wpisz swoje uwagi"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:minHeight="100dp"
+                android:gravity="top"
+                android:inputType="textMultiLine" />
+
+            <!-- Zapis -->
+            <Button
+                android:id="@+id/btnSubmitInventory"
+                android:text="Zapisz inwentaryzację"
+                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminate="true"/>
+
+</FrameLayout>
