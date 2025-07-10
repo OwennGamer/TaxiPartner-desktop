@@ -22,12 +22,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.prefs.Preferences;
+
 
 public class DriversController {
 
     private static final String PREF_KEY_COLUMNS_ORDER = "driversTable.columnsOrder";
-    private final Preferences prefs = Preferences.userNodeForPackage(DriversController.class);
 
     @FXML private TableView<Driver> driversTable;
     @FXML private TableColumn<Driver, String>  idColumn;
@@ -135,7 +134,7 @@ public class DriversController {
         });
 
         // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
-        TableUtils.enableColumnsOrderPersistence(driversTable, prefs, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
     }
 
     // Helper dla tekstowych kolumn
