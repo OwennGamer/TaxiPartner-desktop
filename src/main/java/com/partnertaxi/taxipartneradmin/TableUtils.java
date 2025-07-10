@@ -68,7 +68,7 @@ public class TableUtils {
         for (TableColumn<?, ?> col : current) {
             if (!newOrder.contains(col)) newOrder.add(col);
         }
-        table.getColumns().setAll(newOrder);
+        current.setAll(newOrder);
     }
 
     public static void enableColumnsOrderPersistence(TableView<?> table, Class<?> prefClass, String key) {
