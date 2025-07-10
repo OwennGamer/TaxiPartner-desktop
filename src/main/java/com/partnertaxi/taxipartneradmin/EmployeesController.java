@@ -11,7 +11,12 @@ import javafx.stage.Stage;
 import javafx.beans.property.BooleanProperty;
 import java.util.function.Function;
 
+import com.partnertaxi.taxipartneradmin.TableUtils;
+
 public class EmployeesController {
+
+    private static final String PREF_KEY_COLUMNS_ORDER = "employeesTable.columnsOrder";
+
 
     @FXML private TableView<Employee> employeesTable;
     @FXML private TableColumn<Employee, String>  colId;
@@ -93,6 +98,9 @@ public class EmployeesController {
         if (colWaznoscWizy != null)     colWaznoscWizy.setCellValueFactory(new PropertyValueFactory<>("waznoscWizy"));
 
         employeesTable.getItems().setAll(ApiClient.getEmployees());
+
+
+        TableUtils.enableColumnsOrderPersistence(employeesTable, EmployeesController.class, PREF_KEY_COLUMNS_ORDER);
     }
 
     @FXML

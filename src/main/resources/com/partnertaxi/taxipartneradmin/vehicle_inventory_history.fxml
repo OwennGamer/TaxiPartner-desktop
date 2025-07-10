@@ -14,19 +14,19 @@
     </top>
 
     <center>
-        <TableView fx:id="histTable">
+        <TableView fx:id="histTable" id="histTable">
             <columns>
-                <TableColumn fx:id="colHistId"       text="ID"           prefWidth="50"/>
-                <TableColumn fx:id="colHistDateTime" text="Data i czas" prefWidth="150"/>
-                <TableColumn fx:id="colHistDriver"   text="Kierowca"     prefWidth="150"/>
-                <TableColumn fx:id="colHistPrzebieg" text="Przebieg"     prefWidth="100"/>
+                <TableColumn fx:id="colHistId" id="colHistId"       text="ID"         prefWidth="50"/>
+                <TableColumn fx:id="colHistDateTime" id="colHistDateTime" text="Data i czas" prefWidth="150"/>
+                <TableColumn fx:id="colHistDriver" id="colHistDriver"   text="Kierowca"     prefWidth="150"/>
+                <TableColumn fx:id="colHistPrzebieg" id="colHistPrzebieg" text="Przebieg"     prefWidth="100"/>
             </columns>
         </TableView>
     </center>
 
     <bottom>
         <ToolBar>
-            <Button fx:id="btnOpenRecord"
+            <Button fx:id="btnOpenRecord" id="btnOpenRecord"
                     text="Pokaż szczegóły"
                     onAction="#onOpenInventoryRecord"
                     disable="true" />

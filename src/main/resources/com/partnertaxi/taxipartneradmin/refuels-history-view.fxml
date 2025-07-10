@@ -11,8 +11,8 @@
     <!-- GÓRA: przyciski Usuń i Odśwież -->
     <top>
         <ToolBar>
-            <Button text="Usuń wpis" fx:id="deleteButton" onAction="#handleDeleteRefuel"/>
-            <Button text="Odśwież"   fx:id="refreshButton" onAction="#handleRefresh"/>
+            <Button text="Usuń wpis" fx:id="deleteButton" id="deleteButton" onAction="#handleDeleteRefuel"/>
+            <Button text="Odśwież"   fx:id="refreshButton" id="refreshButton" onAction="#handleRefresh"/>
         </ToolBar>
     </top>
 
@@ -22,16 +22,16 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Label fx:id="titleLabel"
+            <Label fx:id="titleLabel" id="titleLabel"
                    text="Historia tankowań"
                    style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-            <TableView fx:id="refuelsTable" prefWidth="580" prefHeight="330">
+            <TableView fx:id="refuelsTable" id="refuelsTable" prefWidth="580" prefHeight="330">
                 <columns>
-                    <TableColumn fx:id="idColumn"         text="ID"       prefWidth="50"/>
-                    <TableColumn fx:id="dateColumn"       text="Data"     prefWidth="150"/>
-                    <TableColumn fx:id="fuelAmountColumn" text="Litry"    prefWidth="80"/>
-                    <TableColumn fx:id="costColumn"       text="Koszt"    prefWidth="80"/>
-                    <TableColumn fx:id="odometerColumn"   text="Przebieg" prefWidth="100"/>
+                    <TableColumn fx:id="idColumn" id="idColumn"         text="ID"       prefWidth="50"/>
+                    <TableColumn fx:id="dateColumn" id="dateColumn"       text="Data"     prefWidth="150"/>
+                    <TableColumn fx:id="fuelAmountColumn" id="fuelAmountColumn" text="Litry"    prefWidth="80"/>
+                    <TableColumn fx:id="costColumn" id="costColumn"       text="Koszt"    prefWidth="80"/>
+                    <TableColumn fx:id="odometerColumn" id="odometerColumn"   text="Przebieg" prefWidth="100"/>
                 </columns>
             </TableView>
         </VBox>

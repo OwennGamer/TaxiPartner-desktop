@@ -25,6 +25,8 @@ public class VehicleInventoryHistoryController {
     @FXML private TableColumn<InventoryHistoryRecord, Integer> colHistPrzebieg;
     @FXML private Button btnOpenRecord;
 
+    private static final String PREF_KEY_COLUMNS_ORDER = "vehicleInventoryHistoryTable.columnsOrder";
+
     // Ustawiane przez FleetController przed wczytaniem okna
     private String rejestracja;
 
@@ -46,6 +48,7 @@ public class VehicleInventoryHistoryController {
         });
 
         TableUtils.enableCopyOnCtrlC(histTable);
+        TableUtils.enableColumnsOrderPersistence(histTable, VehicleInventoryHistoryController.class, PREF_KEY_COLUMNS_ORDER);
     }
 
     /**

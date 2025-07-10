@@ -15,13 +15,13 @@
 
         <Label text="Historia kursów i zmian salda" style="-fx-font-size: 18px;" />
 
-        <TableView fx:id="historyTable" prefHeight="500">
+        <TableView fx:id="historyTable" id="historyTable" prefHeight="500">
             <columns>
-                <TableColumn fx:id="dateTimeColumn" text="Data i godzina" prefWidth="160"/>
-                <TableColumn fx:id="typeColumn" text="Typ" prefWidth="120"/>
-                <TableColumn fx:id="descriptionColumn" text="Opis" prefWidth="300"/>
-                <TableColumn fx:id="changeValueColumn" text="Wartość zmiany" prefWidth="120"/>
-                <TableColumn fx:id="saldoAfterColumn" text="Saldo po" prefWidth="100"/>
+                <TableColumn fx:id="dateTimeColumn" id="dateTimeColumn" text="Data i godzina" prefWidth="160"/>
+                <TableColumn fx:id="typeColumn" id="typeColumn" text="Typ" prefWidth="120"/>
+                <TableColumn fx:id="descriptionColumn" id="descriptionColumn" text="Opis" prefWidth="300"/>
+                <TableColumn fx:id="changeValueColumn" id="changeValueColumn" text="Wartość zmiany" prefWidth="120"/>
+                <TableColumn fx:id="saldoAfterColumn" id="saldoAfterColumn" text="Saldo po" prefWidth="100"/>
             </columns>
         </TableView>
 

@@ -27,6 +27,8 @@ import java.util.List;
 
 public class FleetController {
 
+    private static final String PREF_KEY_COLUMNS_ORDER = "fleetTable.columnsOrder";
+
     @FXML
     private TableView<Vehicle> vehicleTable;
     @FXML
@@ -102,6 +104,7 @@ public class FleetController {
         chkShowInactive.selectedProperty().addListener((obs, o, n) -> applyFilter());
 
         TableUtils.enableCopyOnCtrlC(vehicleTable);
+        TableUtils.enableColumnsOrderPersistence(vehicleTable, FleetController.class, PREF_KEY_COLUMNS_ORDER);
     }
 
     @FXML

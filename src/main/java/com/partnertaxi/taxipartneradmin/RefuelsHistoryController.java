@@ -29,6 +29,8 @@ public class RefuelsHistoryController implements Initializable {
     @FXML private Button deleteButton;
     @FXML private Button refreshButton;
 
+    private static final String PREF_KEY_COLUMNS_ORDER = "refuelsHistoryTable.columnsOrder";
+
     private String driverId;
 
     /** Ustawia ID kierowcy i odświeża tabelę */
@@ -72,6 +74,7 @@ public class RefuelsHistoryController implements Initializable {
         });
 
         TableUtils.enableCopyOnCtrlC(refuelsTable);
+        TableUtils.enableColumnsOrderPersistence(refuelsTable, RefuelsHistoryController.class, PREF_KEY_COLUMNS_ORDER);
     }
 
     /** Odświeża listę tankowań */

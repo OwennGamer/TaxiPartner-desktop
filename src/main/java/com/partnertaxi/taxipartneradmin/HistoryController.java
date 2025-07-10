@@ -21,6 +21,7 @@ public class HistoryController {
     @FXML private TableColumn<HistoryEntry, String> changeValueColumn;
     @FXML private TableColumn<HistoryEntry, String> saldoAfterColumn;
 
+    private static final String PREF_KEY_COLUMNS_ORDER = "historyTable.columnsOrder";
     private String driverId;
 
     public void setDriverId(String driverId) {
@@ -71,6 +72,7 @@ public class HistoryController {
         });
 
         TableUtils.enableCopyOnCtrlC(historyTable);
+        TableUtils.enableColumnsOrderPersistence(historyTable, HistoryController.class, PREF_KEY_COLUMNS_ORDER);
     }
 
     private void loadHistory() {
