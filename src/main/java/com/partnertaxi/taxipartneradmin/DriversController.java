@@ -4,8 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import com.partnertaxi.taxipartneradmin.TableUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +21,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.prefs.Preferences;
 
@@ -107,9 +104,8 @@ public class DriversController {
         setupFloatColumn(boltCommissionColumn,   nf);
         setupFloatColumn(settlementLimitColumn,  nf);
 
-        // 6) Wczytanie danych i przywrócenie układu kolumn
+        // 6) Wczytanie danych
         loadDrivers();
-        restoreColumnsOrder();
 
         // 7) Przywracamy zaznaczanie całych wierszy
         driversTable.getSelectionModel().setCellSelectionEnabled(false);
@@ -138,14 +134,8 @@ public class DriversController {
             }
         });
 
-        // 9) Słuchamy permutacji/replacement kolumn, by zapisać układ
-        driversTable.getColumns().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> {
-            while (change.next()) {
-                if (change.wasPermutated() || change.wasReplaced()) {
-                    saveColumnsOrder();
-                }
-            }
-        });
+        // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
+        TableUtils.enableColumnsOrderPersistence(driversTable, prefs, PREF_KEY_COLUMNS_ORDER);
     }
 
     // Helper dla tekstowych kolumn
@@ -189,35 +179,6 @@ public class DriversController {
         });
     }
 
-    private void saveColumnsOrder() {
-        StringBuilder sb = new StringBuilder();
-        for (TableColumn<Driver, ?> col : driversTable.getColumns()) {
-            String id = col.getId();
-            if (id != null) {
-                if (sb.length() > 0) sb.append(",");
-                sb.append(id);
-            }
-        }
-        prefs.put(PREF_KEY_COLUMNS_ORDER, sb.toString());
-    }
-
-    private void restoreColumnsOrder() {
-        String order = prefs.get(PREF_KEY_COLUMNS_ORDER, null);
-        if (order == null) return;
-        String[] ids = order.split(",");
-        ObservableList<TableColumn<Driver, ?>> current = driversTable.getColumns();
-        List<TableColumn<Driver, ?>> newOrder = new ArrayList<>();
-        for (String id : ids) {
-            current.stream()
-                    .filter(c -> id.equals(c.getId()))
-                    .findFirst()
-                    .ifPresent(newOrder::add);
-        }
-        for (TableColumn<Driver, ?> col : current) {
-            if (!newOrder.contains(col)) newOrder.add(col);
-        }
-        driversTable.getColumns().setAll(newOrder);
-    }
 
     private void loadDrivers() {
         try {
