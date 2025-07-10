@@ -16,11 +16,11 @@
             <Button text="Dodaj pojazd" onAction="#onAddVehicle"/>
             <Button text="Edytuj pojazd" onAction="#onEditVehicle"/>
             <Button text="Usuń pojazd" onAction="#onDeleteVehicle"/>
-            <Button fx:id="btnHistory" id="btnHistory"
+            <Button fx:id="btnHistory"
                     text="Historia pojazdu"
                     onAction="#onShowHistory"
                     disable="true"/>
-            <CheckBox fx:id="chkShowInactive" id="chkShowInactive"
+            <CheckBox fx:id="chkShowInactive"
                       text="Pokaż nieaktywne"
                       onAction="#onToggleShowInactive"/>
 
@@ -29,7 +29,7 @@
 
     <!-- CENTRUM: Tabela pojazdów -->
     <center>
-        <TableView fx:id="vehicleTable" id="vehicleTable">
+        <TableView fx:id="vehicleTable">
             <columns>
                 <TableColumn fx:id="colId" id="colId" text="ID" prefWidth="50"/>
                 <TableColumn fx:id="colRejestracja" id="colRejestracja" text="Rejestracja" prefWidth="100"/>

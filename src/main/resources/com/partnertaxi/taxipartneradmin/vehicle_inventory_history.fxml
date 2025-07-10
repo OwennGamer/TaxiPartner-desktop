@@ -14,7 +14,7 @@
     </top>
 
     <center>
-        <TableView fx:id="histTable" id="histTable">
+        <TableView fx:id="histTable">
             <columns>
                 <TableColumn fx:id="colHistId" id="colHistId"       text="ID"         prefWidth="50"/>
                 <TableColumn fx:id="colHistDateTime" id="colHistDateTime" text="Data i czas" prefWidth="150"/>
@@ -26,7 +26,7 @@
 
     <bottom>
         <ToolBar>
-            <Button fx:id="btnOpenRecord" id="btnOpenRecord"
+            <Button fx:id="btnOpenRecord"
                     text="Pokaż szczegóły"
                     onAction="#onOpenInventoryRecord"
                     disable="true" />

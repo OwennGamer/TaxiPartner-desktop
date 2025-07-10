@@ -17,7 +17,7 @@
     </top>
 
     <center>
-        <TableView fx:id="employeesTable" id="employeesTable" prefWidth="1200" prefHeight="350">
+        <TableView fx:id="employeesTable" prefWidth="1200" prefHeight="350">
             <columns>
                 <TableColumn fx:id="colId" id="colId" text="Lp." prefWidth="50"/>
                 <TableColumn fx:id="colName" id="colName" text="Imię i nazwisko" prefWidth="150" />
