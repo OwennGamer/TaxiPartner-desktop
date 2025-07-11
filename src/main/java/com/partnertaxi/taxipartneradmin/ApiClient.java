@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -438,13 +439,12 @@ public class ApiClient {
             URL url = new URL(BASE_URL + "delete_vehicle.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
             conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-            JSONObject json = new JSONObject();
-            json.put("id", id);
+            String postData = "id=" + id;
             try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
+                os.write(postData.getBytes(StandardCharsets.UTF_8));
             }
 
             conn.getResponseCode();
