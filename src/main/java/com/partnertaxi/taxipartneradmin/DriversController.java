@@ -12,10 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
 
@@ -110,28 +106,8 @@ public class DriversController {
         driversTable.getSelectionModel().setCellSelectionEnabled(false);
         driversTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        // 8) Ctrl+C: kopiujemy wartość focusowanej komórki, w formacie z przecinkiem
-        driversTable.setOnKeyPressed(evt -> {
-            if (evt.isControlDown() && evt.getCode() == KeyCode.C) {
-                TablePosition<Driver, ?> pos = driversTable.getFocusModel().getFocusedCell();
-                if (pos != null && pos.getRow() >= 0) {
-                    Object cellValue = driversTable
-                            .getColumns()
-                            .get(pos.getColumn())
-                            .getCellData(pos.getRow());
-                    String str;
-                    if (cellValue instanceof Number) {
-                        str = nf.format(((Number) cellValue).doubleValue());
-                    } else {
-                        str = cellValue == null ? "" : cellValue.toString();
-                    }
-                    Clipboard clipboard = Clipboard.getSystemClipboard();
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString(str);
-                    clipboard.setContent(content);
-                }
-            }
-        });
+// 8) Ctrl+C: kopiujemy wartość focusowanej komórki
+        TableUtils.enableCopyOnCtrlC(driversTable);
 
         // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
