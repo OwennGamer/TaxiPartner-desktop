@@ -15,6 +15,15 @@ public class Driver {
     private float boltCommission;
     private float settlementLimit;
 
+    private float voucher;
+    private float card;
+    private float cash;
+    private float lot;
+    private float turnover;
+    private float zlPerKm;
+    private float fuelPerTurnover;
+
+
     private String fuelCostText;
     private String createdAt;
     private String vehiclePlate;
@@ -35,7 +44,14 @@ public class Driver {
             float settlementLimit,
             String createdAt,
             String vehiclePlate,
-            float fuelCostSum            // nowy parametr
+            float fuelCostSum,           // nowy parametr
+            float voucher,
+            float card,
+            float cash,
+            float lot,
+            float turnover,
+            float zlPerKm,
+            float fuelPerTurnover
     ) {
         this.id = id;
         this.name = name;
@@ -52,6 +68,13 @@ public class Driver {
         this.fuelCostText = (fuelCost == 0f) ? "firma" : "kierowca";
         this.vehiclePlate = vehiclePlate;
         this.fuelCostSum = fuelCostSum;   // przypisanie
+        this.voucher = voucher;
+        this.card = card;
+        this.cash = cash;
+        this.lot = lot;
+        this.turnover = turnover;
+        this.zlPerKm = zlPerKm;
+        this.fuelPerTurnover = fuelPerTurnover;
     }
 
     public String getId() { return id; }
@@ -66,6 +89,13 @@ public class Driver {
     public float getPartnerCommission() { return partnerCommission; }
     public float getBoltCommission() { return boltCommission; }
     public float getSettlementLimit() { return settlementLimit; }
+    public float getVoucher() { return voucher; }
+    public float getCard() { return card; }
+    public float getCash() { return cash; }
+    public float getLot() { return lot; }
+    public float getTurnover() { return turnover; }
+    public float getZlPerKm() { return zlPerKm; }
+    public float getFuelPerTurnover() { return fuelPerTurnover; }
 
     public String getFuelCostText() { return fuelCostText; }
     public String getCreatedAt() { return createdAt; }

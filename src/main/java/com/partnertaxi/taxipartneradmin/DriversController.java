@@ -38,6 +38,13 @@ public class DriversController {
     @FXML private TableColumn<Driver, Float>   boltCommissionColumn;
     @FXML private TableColumn<Driver, Float>   settlementLimitColumn;
     @FXML private TableColumn<Driver, String>  vehiclePlateColumn;
+    @FXML private TableColumn<Driver, Float>   voucherColumn;
+    @FXML private TableColumn<Driver, Float>   cardColumn;
+    @FXML private TableColumn<Driver, Float>   cashColumn;
+    @FXML private TableColumn<Driver, Float>   lotColumn;
+    @FXML private TableColumn<Driver, Float>   turnoverColumn;
+    @FXML private TableColumn<Driver, Float>   zlPerKmColumn;
+    @FXML private TableColumn<Driver, Float>   fuelPerTurnoverColumn;
 
     @FXML
     public void initialize() {
@@ -55,6 +62,13 @@ public class DriversController {
         boltCommissionColumn.setId("boltCommissionColumn");
         settlementLimitColumn.setId("settlementLimitColumn");
         createdAtColumn.setId("createdAtColumn");
+        voucherColumn.setId("voucherColumn");
+        cardColumn.setId("cardColumn");
+        cashColumn.setId("cashColumn");
+        lotColumn.setId("lotColumn");
+        turnoverColumn.setId("turnoverColumn");
+        zlPerKmColumn.setId("zlPerKmColumn");
+        fuelPerTurnoverColumn.setId("fuelPerTurnoverColumn");
 
         // 2) Formatter liczb z przecinkiem
         final NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -98,6 +112,13 @@ public class DriversController {
         setupFloatColumn(partnerCommissionColumn, nf);
         setupFloatColumn(boltCommissionColumn,   nf);
         setupFloatColumn(settlementLimitColumn,  nf);
+        setupFloatColumn(voucherColumn,          nf);
+        setupFloatColumn(cardColumn,             nf);
+        setupFloatColumn(cashColumn,             nf);
+        setupFloatColumn(lotColumn,              nf);
+        setupFloatColumn(turnoverColumn,         nf);
+        setupFloatColumn(zlPerKmColumn,          nf);
+        setupFloatColumn(fuelPerTurnoverColumn,  nf);
 
         // 6) Wczytanie danych
         loadDrivers();
@@ -183,11 +204,19 @@ public class DriversController {
                 float partComm        = o.has("partnerCommission") ? o.get("partnerCommission").getAsFloat() : 0f;
                 float boltComm        = o.has("boltCommission")    ? o.get("boltCommission").getAsFloat()    : 0f;
                 float settLimit       = o.has("settlementLimit")   ? o.get("settlementLimit").getAsFloat()   : 0f;
+                float voucher         = o.has("voucher")           ? o.get("voucher").getAsFloat()           : 0f;
+                float card            = o.has("card")              ? o.get("card").getAsFloat()              : 0f;
+                float cash            = o.has("cash")              ? o.get("cash").getAsFloat()              : 0f;
+                float lot             = o.has("lot")               ? o.get("lot").getAsFloat()               : 0f;
+                float turnover        = o.has("turnover")          ? o.get("turnover").getAsFloat()          : 0f;
+                float zlPerKm         = o.has("zlPerKm")           ? o.get("zlPerKm").getAsFloat()           : 0f;
+                float fuelPerTurnover = o.has("fuelPerTurnover")   ? o.get("fuelPerTurnover").getAsFloat()   : 0f;
 
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, "",
                         percentTurnover, fuelCost, cardComm, partComm,
-                        boltComm, settLimit, createdAt, plate, fuelCostSum
+                        boltComm, settLimit, createdAt, plate, fuelCostSum,
+                        voucher, card, cash, lot, turnover, zlPerKm, fuelPerTurnover
                 ));
             }
         } catch (Exception ex) {

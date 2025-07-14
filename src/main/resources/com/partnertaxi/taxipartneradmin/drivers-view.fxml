@@ -42,6 +42,13 @@
                     <TableColumn fx:id="partnerCommissionColumn" id="partnerCommissionColumn" text="Prowizja partner" prefWidth="100"/>
                     <TableColumn fx:id="boltCommissionColumn"    id="boltCommissionColumn"    text="Prowizja Bolt"     prefWidth="100"/>
                     <TableColumn fx:id="settlementLimitColumn"   id="settlementLimitColumn"   text="Graniczna kwota"   prefWidth="120"/>
+                    <TableColumn fx:id="voucherColumn"           id="voucherColumn"           text="Voucher"           prefWidth="100"/>
+                    <TableColumn fx:id="cardColumn"              id="cardColumn"              text="Karta"             prefWidth="100"/>
+                    <TableColumn fx:id="cashColumn"              id="cashColumn"              text="Gotówka"           prefWidth="100"/>
+                    <TableColumn fx:id="lotColumn"               id="lotColumn"               text="LOT"               prefWidth="100"/>
+                    <TableColumn fx:id="turnoverColumn"          id="turnoverColumn"          text="Obrót"            prefWidth="100"/>
+                    <TableColumn fx:id="zlPerKmColumn"          id="zlPerKmColumn"          text="ZŁ / KM"          prefWidth="100"/>
+                    <TableColumn fx:id="fuelPerTurnoverColumn"  id="fuelPerTurnoverColumn"  text="PALIWO / OBRÓT"   prefWidth="120"/>
                     <TableColumn fx:id="createdAtColumn"         id="createdAtColumn"         text="Dodano"           prefWidth="150"/>
                 </columns>
             </TableView>
