@@ -390,6 +390,39 @@ public class ApiClient {
         return null;
     }
 
+    /**
+     * Pobiera statystyki kierowcy z API.
+     */
+    public static DriverStats getDriverStats(String driverId, String startDate, String endDate) {
+        try {
+            String endpoint = String.format(
+                    "get_driver_stats.php?driver_id=%s&start_date=%s&end_date=%s",
+                    URLEncoder.encode(driverId, "UTF-8"),
+                    URLEncoder.encode(startDate, "UTF-8"),
+                    URLEncoder.encode(endDate, "UTF-8")
+            );
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONObject d = resp.getJSONObject("data");
+                    return new DriverStats(
+                            (float) d.optDouble("voucher", 0.0),
+                            (float) d.optDouble("card", 0.0),
+                            (float) d.optDouble("cash", 0.0),
+                            (float) d.optDouble("lot", 0.0),
+                            (float) d.optDouble("turnover", 0.0),
+                            (float) d.optDouble("kilometers", 0.0),
+                            (float) d.optDouble("fuel_sum", 0.0)
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     // ✏️ Aktualizacja pojazdu
     public static void updateVehicle(int id, String rejestracja, String marka, String model,
                                      int przebieg, String ubezpieczenie, String przeglad,
