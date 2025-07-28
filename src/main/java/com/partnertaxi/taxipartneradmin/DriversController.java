@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 
@@ -186,6 +188,14 @@ public class DriversController {
             }
             JsonArray arr = json.getAsJsonArray("drivers");
             driversTable.getItems().clear();
+
+            // default stats range: first day of current month -> today
+            LocalDate now = LocalDate.now();
+            LocalDate start = now.withDayOfMonth(1);
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String startDate = start.format(fmt);
+            String endDate = now.format(fmt);
+
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject o = arr.get(i).getAsJsonObject();
                 String id        = o.get("id").getAsString();
@@ -204,19 +214,37 @@ public class DriversController {
                 float partComm        = o.has("partnerCommission") ? o.get("partnerCommission").getAsFloat() : 0f;
                 float boltComm        = o.has("boltCommission")    ? o.get("boltCommission").getAsFloat()    : 0f;
                 float settLimit       = o.has("settlementLimit")   ? o.get("settlementLimit").getAsFloat()   : 0f;
-                float voucher         = o.has("voucher")           ? o.get("voucher").getAsFloat()           : 0f;
-                float card            = o.has("card")              ? o.get("card").getAsFloat()              : 0f;
-                float cash            = o.has("cash")              ? o.get("cash").getAsFloat()              : 0f;
-                float lot             = o.has("lot")               ? o.get("lot").getAsFloat()               : 0f;
-                float turnover        = o.has("turnover")          ? o.get("turnover").getAsFloat()          : 0f;
-                float zlPerKm         = o.has("zlPerKm")           ? o.get("zlPerKm").getAsFloat()           : 0f;
-                float fuelPerTurnover = o.has("fuelPerTurnover")   ? o.get("fuelPerTurnover").getAsFloat()   : 0f;
+
+                // fetch statistics for current month
+                DriverStats stats = ApiClient.getDriverStats(id, startDate, endDate);
+
+                float voucher = 0f;
+                float cardVal = 0f;
+                float cashVal = 0f;
+                float lotVal = 0f;
+                float turnover = 0f;
+                float zlPerKm = 0f;
+                float fuelPerTurnover = 0f;
+
+                if (stats != null) {
+                    voucher = stats.getVoucher();
+                    cardVal = stats.getCard();
+                    cashVal = stats.getCash();
+                    lotVal = stats.getLot();
+                    turnover = stats.getTurnover();
+                    if (stats.getKilometers() > 0) {
+                        zlPerKm = turnover / stats.getKilometers();
+                    }
+                    if (turnover > 0) {
+                        fuelPerTurnover = stats.getFuelSum() / turnover;
+                    }
+                }
 
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, "",
                         percentTurnover, fuelCost, cardComm, partComm,
                         boltComm, settLimit, createdAt, plate, fuelCostSum,
-                        voucher, card, cash, lot, turnover, zlPerKm, fuelPerTurnover
+                        voucher, cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
             }
         } catch (Exception ex) {
