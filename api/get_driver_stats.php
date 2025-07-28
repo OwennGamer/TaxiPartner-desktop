@@ -74,8 +74,13 @@ try {
     $stmt = $pdo->prepare("SELECT przebieg FROM inwentaryzacje WHERE kierowca_id = ? AND data_dodania >= ? AND data_dodania <= ? ORDER BY data_dodania DESC LIMIT 1");
     $stmt->execute([$driverId, $startDate, $endDate]);
     $endMileage = $stmt->fetchColumn();
+
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM inwentaryzacje WHERE kierowca_id = ? AND data_dodania >= ? AND data_dodania <= ?");
+    $stmt->execute([$driverId, $startDate, $endDate]);
+    $mileageCount = (int)$stmt->fetchColumn();
+    $missingMileage = $mileageCount < 2;
     $kilometers = 0.0;
-    if ($startMileage !== false && $endMileage !== false) {
+    if (!$missingMileage && $startMileage !== false && $endMileage !== false) {
         $kilometers = max(0, (int)$endMileage - (int)$startMileage);
     }
 
@@ -92,8 +97,9 @@ try {
             "cash"       => $cash,
             "lot"        => $lot,
             "turnover"   => $turnover,
-            "kilometers" => $kilometers,
-            "fuel_sum"   => $fuelSum
+            "kilometers"     => $kilometers,
+            "fuel_sum"       => $fuelSum,
+            "missing_mileage" => $missingMileage
         ]
     ]);
 

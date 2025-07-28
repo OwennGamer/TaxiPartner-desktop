@@ -8,9 +8,11 @@ public class DriverStats {
     private final float turnover;
     private final float kilometers;
     private final float fuelSum;
+    private final boolean missingMileage;
 
     public DriverStats(float voucher, float card, float cash,
-                       float lot, float turnover, float kilometers, float fuelSum) {
+                       float lot, float turnover, float kilometers, float fuelSum,
+                       boolean missingMileage) {
         this.voucher = voucher;
         this.card = card;
         this.cash = cash;
@@ -18,6 +20,7 @@ public class DriverStats {
         this.turnover = turnover;
         this.kilometers = kilometers;
         this.fuelSum = fuelSum;
+        this.missingMileage = missingMileage;
     }
 
     public float getVoucher() { return voucher; }
@@ -27,4 +30,5 @@ public class DriverStats {
     public float getTurnover() { return turnover; }
     public float getKilometers() { return kilometers; }
     public float getFuelSum() { return fuelSum; }
+    public boolean isMissingMileage() { return missingMileage; }
 }

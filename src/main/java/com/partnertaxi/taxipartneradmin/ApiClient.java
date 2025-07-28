@@ -413,7 +413,8 @@ public class ApiClient {
                             (float) d.optDouble("lot", 0.0),
                             (float) d.optDouble("turnover", 0.0),
                             (float) d.optDouble("kilometers", 0.0),
-                            (float) d.optDouble("fuel_sum", 0.0)
+                            (float) d.optDouble("fuel_sum", 0.0),
+                            d.optBoolean("missing_mileage", false)
                     );
                 }
             }
