@@ -23,12 +23,25 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
+// Oczekiwany format dat: YYYY-MM-DD
 $driverId  = $_GET['driver_id']  ?? '';
 $startDate = $_GET['start_date'] ?? '';
 $endDate   = $_GET['end_date']   ?? '';
 if (!$driverId || !$startDate || !$endDate) {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "Brak wymaganych parametrów"]);
+    exit;
+}
+
+$format = 'Y-m-d';
+$startObj = DateTime::createFromFormat($format, $startDate);
+$endObj = DateTime::createFromFormat($format, $endDate);
+// Walidacja formatu daty i kolejności (start <= end)
+if (!$startObj || $startObj->format($format) !== $startDate ||
+    !$endObj || $endObj->format($format) !== $endDate ||
+    $startObj > $endObj) {
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Nieprawidłowe daty"]);
     exit;
 }
 
