@@ -189,12 +189,12 @@ public class DriversController {
             JsonArray arr = json.getAsJsonArray("drivers");
             driversTable.getItems().clear();
 
-            // default stats range: all available data up to -> today
-            LocalDate now = LocalDate.now();
+            // default stats range: all available history up through today
             LocalDate start = LocalDate.of(1970, 1, 1); // include all rides
+            LocalDate end = LocalDate.now().plusDays(1); // include today's rides
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String startDate = start.format(fmt);
-            String endDate = now.format(fmt);
+            String endDate = end.format(fmt);
 
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject o = arr.get(i).getAsJsonObject();
