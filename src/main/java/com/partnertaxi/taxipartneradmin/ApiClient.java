@@ -423,6 +423,22 @@ public class ApiClient {
         return null;
     }
 
+    /**
+     * Pobiera statystyki dla wielu kierowców.
+     * Zwracana lista odpowiada kolejności przekazanych identyfikatorów.
+     */
+    public static List<DriverStats> getDriverStats(List<String> driverIds, String startDate, String endDate) {
+        List<DriverStats> result = new ArrayList<>();
+        if (driverIds == null) {
+            return result;
+        }
+        for (String id : driverIds) {
+            result.add(getDriverStats(id, startDate, endDate));
+        }
+        return result;
+    }
+
+
     // ✏️ Aktualizacja pojazdu
     public static void updateVehicle(int id, String rejestracja, String marka, String model,
                                      int przebieg, String ubezpieczenie, String przeglad,
