@@ -6,12 +6,12 @@ header('Content-Type: application/json');
 
 $token = getAuthorizationHeader();
 
-if (!$token || !verifyJWT($token)) {
+$decoded = $token ? verifyJWT($token) : false;
+if (!$decoded) {
     echo json_encode(["status" => "error", "message" => "Brak ważnego tokena"]);
     exit;
 }
 
-$decoded = verifyJWT($token);
 
 if ($decoded->role !== 'admin') {
     echo json_encode(["status" => "error", "message" => "Brak uprawnień"]);

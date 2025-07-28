@@ -7,12 +7,12 @@ require_once __DIR__ . '/db.php';
 
 // Autoryzacja
 $token = getAuthorizationHeader();
-if (!$token || !verifyJWT($token)) {
+$decoded = $token ? verifyJWT($token) : false;
+if (!$decoded) {
     http_response_code(401);
     echo json_encode(['status'=>'error','message'=>'Brak tokena']);
     exit;
 }
-$decoded = verifyJWT($token);
 if ($decoded->role !== 'admin' && $decoded->role !== 'flotowiec') {
     http_response_code(403);
     echo json_encode(['status'=>'error','message'=>'Brak uprawnień']);
