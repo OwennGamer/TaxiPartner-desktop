@@ -46,24 +46,26 @@ if (!$startObj || $startObj->format($format) !== $startDate ||
 }
 
 try {
-    // Suma kursów wg typu
-    $stmt = $pdo->prepare("SELECT type, SUM(amount) AS total FROM kursy WHERE driver_id = ? AND date BETWEEN ? AND ? GROUP BY type");
+        // Suma kursów wg typu (voucher tylko gdy via_km = 0)
+    $stmt = $pdo->prepare("
+        SELECT
+            SUM(CASE WHEN type = 'Voucher' AND via_km = 0 THEN amount ELSE 0 END) AS voucher,
+            SUM(CASE WHEN type = 'Karta' THEN amount ELSE 0 END) AS card,
+            SUM(CASE WHEN type = 'Gotówka' THEN amount ELSE 0 END) AS cash
+        FROM kursy
+        WHERE driver_id = ? AND date BETWEEN ? AND ?
+    ");
     $stmt->execute([$driverId, $startDate, $endDate]);
-    $voucher = $card = $cash = 0.0;
-    foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
-        $sum = (float)$row['total'];
-        if ($row['type'] === 'Voucher') {
-            $voucher = $sum;
-        } elseif ($row['type'] === 'Karta') {
-            $card = $sum;
-        } elseif ($row['type'] === 'Gotówka') {
-            $cash = $sum;
-        }
-    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $voucher = (float)$row['voucher'];
+    $card    = (float)$row['card'];
+    $cash    = (float)$row['cash'];
     $turnover = $voucher + $card + $cash;
 
-    // Kursy z lotniska (jeśli występują)
-    $stmt = $pdo->prepare("SELECT COALESCE(SUM(amount),0) FROM kursy WHERE driver_id = ? AND source = 'Lotnisko' AND date BETWEEN ? AND ?");
+        // Kursy z lotniska + vouchery rozliczane za km
+    $stmt = $pdo->prepare(
+        "SELECT COALESCE(SUM(amount),0) FROM kursy WHERE driver_id = ? AND ((source = 'Lotnisko') OR (type = 'Voucher' AND via_km = 1)) AND date BETWEEN ? AND ?"
+    );
     $stmt->execute([$driverId, $startDate, $endDate]);
     $lot = (float)$stmt->fetchColumn();
 
