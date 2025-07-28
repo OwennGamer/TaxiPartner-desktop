@@ -17,6 +17,7 @@ $driver_id = $_POST['driver_id'];
 $amount = (float)$_POST['amount'];
 $type = $_POST['type'];
 $source = $_POST['source'];
+$via_km = isset($_POST['via_km']) ? (int)$_POST['via_km'] : 0;
 
 try {
     $pdo->beginTransaction();
@@ -95,8 +96,8 @@ try {
     $newSaldo = round($currentSaldo + $final_amount, 2);
 
     // Zapisz kurs
-    $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, date) VALUES (?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source]);
+        $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km]);
 
     // Aktualizuj saldo kierowcy
     $stmt = $pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?");
