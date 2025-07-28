@@ -189,9 +189,9 @@ public class DriversController {
             JsonArray arr = json.getAsJsonArray("drivers");
             driversTable.getItems().clear();
 
-            // default stats range: first day of current month -> today
+            // default stats range: all available data up to -> today
             LocalDate now = LocalDate.now();
-            LocalDate start = now.withDayOfMonth(1);
+            LocalDate start = LocalDate.of(1970, 1, 1); // include all rides
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String startDate = start.format(fmt);
             String endDate = now.format(fmt);
