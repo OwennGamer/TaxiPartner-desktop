@@ -50,6 +50,7 @@ try {
     $stmt = $pdo->prepare("
         SELECT
             SUM(CASE WHEN type = 'Voucher' AND via_km = 0 THEN amount ELSE 0 END) AS voucher,
+            SUM(CASE WHEN type = 'Voucher' AND via_km = 1 THEN amount ELSE 0 END) AS voucher_km,
             SUM(CASE WHEN type = 'Karta' THEN amount ELSE 0 END) AS card,
             SUM(CASE WHEN type = 'Gotówka' THEN amount ELSE 0 END) AS cash
         FROM kursy
@@ -57,10 +58,11 @@ try {
     ");
     $stmt->execute([$driverId, $startDate, $endDate]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $voucher = (float)$row['voucher'];
-    $card    = (float)$row['card'];
-    $cash    = (float)$row['cash'];
-    $turnover = $voucher + $card + $cash;
+    $voucher    = (float)$row['voucher'];
+    $voucherKm  = (float)$row['voucher_km'];
+    $card       = (float)$row['card'];
+    $cash       = (float)$row['cash'];
+    $turnover   = $voucher + $voucherKm + $card + $cash;
 
         // Kursy z lotniska + vouchery rozliczane za km
     $stmt = $pdo->prepare(
