@@ -78,7 +78,8 @@ interface ApiService {
         @Field("driver_id") driverId: String,
         @Field("amount") amount: String,
         @Field("type") type: String,
-        @Field("source") source: String
+        @Field("source") source: String,
+        @Field("via_km") viaKm: Int
     ): Call<AddRideResponse>
 
     @GET("getRideHistory.php")

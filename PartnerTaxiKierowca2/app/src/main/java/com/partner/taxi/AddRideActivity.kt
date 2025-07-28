@@ -144,11 +144,13 @@ class AddRideActivity : AppCompatActivity() {
         }
 
         // 🔵 Wysyłka kursu do API
+        val viaKm = if (source == "Dyspozytornia" && paymentType == "Voucher" && radioKm.isChecked) 1 else 0
         val call = ApiClient.apiService.addRide(
             driverId,
             amountText,
             paymentType,
-            source
+            source,
+            viaKm
         )
 
         call.enqueue(object : Callback<AddRideResponse> {
