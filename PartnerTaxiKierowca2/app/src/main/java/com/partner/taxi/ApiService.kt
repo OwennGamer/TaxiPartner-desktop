@@ -94,4 +94,11 @@ interface ApiService {
         @Field("cost") cost: Float,
         @Field("odometer") odometer: Int
     ): Call<GenericResponse>
+
+    @FormUrlEncoded
+    @POST("end_shift.php")
+    fun endShift(
+        @Field("session_id") sessionId: String,
+        @Field("odometer") odometer: Int
+    ): Call<GenericResponse>
 }

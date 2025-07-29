@@ -4,12 +4,18 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlinx.coroutines.launch
 
 class DashboardActivity : AppCompatActivity() {
@@ -72,9 +78,31 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, FuelActivity::class.java))
         }
 
-        // Listener do zakończenia pracy (jeśli potrzeba)
+        // Listener do zakończenia pracy
         btnZakonczPrace.setOnClickListener {
-            // tu możesz dodać logikę wylogowania
+            val sessionId = SessionManager.getCurrentSessionId(this)
+            if (sessionId.isNullOrEmpty()) {
+                Toast.makeText(this, "Brak aktywnej sesji", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val input = EditText(this).apply {
+                inputType = InputType.TYPE_CLASS_NUMBER
+            }
+
+            AlertDialog.Builder(this)
+                .setTitle("Podaj przebieg")
+                .setView(input)
+                .setPositiveButton("OK") { _, _ ->
+                    val odo = input.text.toString().toIntOrNull()
+                    if (odo == null) {
+                        Toast.makeText(this, "Nieprawidłowa wartość", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+                    endShift(sessionId, odo)
+                }
+                .setNegativeButton("Anuluj", null)
+                .show()
         }
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -115,5 +143,36 @@ class DashboardActivity : AppCompatActivity() {
                 onComplete?.invoke()
             }
         }
+    }
+
+    private fun endShift(sessionId: String, odometer: Int) {
+        ApiClient.apiService.endShift(sessionId, odometer)
+            .enqueue(object : Callback<GenericResponse> {
+                override fun onResponse(
+                    call: Call<GenericResponse>,
+                    response: Response<GenericResponse>
+                ) {
+                    if (response.isSuccessful && response.body()?.status == "success") {
+                        SessionManager.clearCurrentSessionId(this@DashboardActivity)
+                        tvLicznik.text = odometer.toString()
+                        Toast.makeText(
+                            this@DashboardActivity,
+                            response.body()?.message ?: "Zakończono pracę",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        val msg = response.body()?.message ?: "Błąd zakończenia"
+                        Toast.makeText(this@DashboardActivity, msg, Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@DashboardActivity,
+                        "Błąd sieci: ${t.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
     }
 }
