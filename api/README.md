@@ -48,3 +48,22 @@ Closes the latest open session for the authenticated driver.
 ```
 { "status": "success", "session_id": int }
 ```
+## `get_driver_work.php`
+Returns daily working time and mileage for a driver.
+
+### Parameters
+- `driver_id` – ID of the driver.
+- `start_date` – start of the range in `YYYY-MM-DD` format.
+- `end_date` – end of the range in `YYYY-MM-DD` format.
+
+### Response
+```
+{
+  "status": "success",
+  "data": [
+    { "date": "YYYY-MM-DD", "hours": float, "kilometers": int },
+    ...
+  ]
+}
+```
+The entries are sorted by `date`.
