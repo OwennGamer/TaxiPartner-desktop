@@ -177,15 +177,24 @@ class ChooseVehicleActivity : AppCompatActivity() {
                             call: Call<GenericResponse>,
                             resp: Response<GenericResponse>
                         ) {
-                            proceedAfterUpdate(vehicle.ostatni_kierowca_id, rejestracja, przebieg)
+                            if (resp.isSuccessful && resp.body()?.status == "success") {
+                                startShiftAndContinue(vehicle.ostatni_kierowca_id, rejestracja, przebieg)
+                            } else {
+                                Toast.makeText(
+                                    this@ChooseVehicleActivity,
+                                    resp.body()?.message ?: "Błąd aktualizacji przebiegu",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
+
                         override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
                             Toast.makeText(
                                 this@ChooseVehicleActivity,
-                                "Nie udało się zaktualizować przebiegu",
-                                Toast.LENGTH_SHORT
+                                "Błąd sieci: ${t.localizedMessage}",
+                                Toast.LENGTH_LONG
                             ).show()
-                            proceedAfterUpdate(vehicle.ostatni_kierowca_id, rejestracja, przebieg)
+
                         }
                     })
             }
@@ -197,6 +206,40 @@ class ChooseVehicleActivity : AppCompatActivity() {
                 ).show()
             }
         })
+    }
+
+    private fun startShiftAndContinue(
+        lastDriverId: String?,
+        rejestracja: String,
+        przebieg: Int
+    ) {
+        api.startShift(rejestracja, przebieg)
+            .enqueue(object : Callback<StartShiftResponse> {
+                override fun onResponse(
+                    call: Call<StartShiftResponse>,
+                    response: Response<StartShiftResponse>
+                ) {
+                    val body = response.body()
+                    if (response.isSuccessful && body?.status == "success" && !body.sessionId.isNullOrBlank()) {
+                        SessionManager.saveCurrentSessionId(this@ChooseVehicleActivity, body.sessionId)
+                        proceedAfterUpdate(lastDriverId, rejestracja, przebieg)
+                    } else {
+                        Toast.makeText(
+                            this@ChooseVehicleActivity,
+                            body?.message ?: "Błąd rozpoczęcia zmiany",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<StartShiftResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@ChooseVehicleActivity,
+                        "Błąd sieci: ${t.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
     }
 
     private fun proceedAfterUpdate(
