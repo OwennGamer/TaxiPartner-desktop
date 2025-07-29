@@ -278,6 +278,37 @@ public class ApiClient {
         }
     }
 
+    // 🔄 POST helper (x-www-form-urlencoded)
+    public static String sendPostRequest(String endpoint, String body) {
+        try {
+            URL url = new URL(BASE_URL + endpoint);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(body.getBytes(StandardCharsets.UTF_8));
+            }
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line.trim());
+            }
+            conn.disconnect();
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     public static List<Vehicle> getVehicles() {
         List<Vehicle> list = new ArrayList<>();
         try {
@@ -470,6 +501,47 @@ public class ApiClient {
             e.printStackTrace();
         }
         return list;
+    }
+
+    /**
+     * Rozpoczyna sesję pracy kierowcy.
+     * @return ID utworzonej sesji lub null w razie błędu.
+     */
+    public static Integer startShift(String vehiclePlate, int startOdometer) {
+        try {
+            String body = String.format("vehicle_plate=%s&start_odometer=%d",
+                    URLEncoder.encode(vehiclePlate, "UTF-8"), startOdometer);
+            String resp = sendPostRequest("start_shift.php", body);
+            if (resp != null) {
+                JSONObject json = new JSONObject(resp);
+                if ("success".equals(json.optString("status"))) {
+                    return json.optInt("session_id");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Kończy najnowszą otwartą sesję pracy.
+     * @return ID zakończonej sesji lub null w razie błędu.
+     */
+    public static Integer endShift(int endOdometer) {
+        try {
+            String body = "end_odometer=" + endOdometer;
+            String resp = sendPostRequest("end_shift.php", body);
+            if (resp != null) {
+                JSONObject json = new JSONObject(resp);
+                if ("success".equals(json.optString("status"))) {
+                    return json.optInt("session_id");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // ✏️ Aktualizacja pojazdu
