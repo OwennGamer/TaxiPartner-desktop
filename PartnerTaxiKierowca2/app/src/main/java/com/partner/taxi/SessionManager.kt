@@ -9,6 +9,7 @@ object SessionManager {
     private const val DRIVER_ID_KEY = "driver_id"
     private const val TOKEN_KEY = "token"
     private const val CURRENT_SESSION_KEY = "current_session_id"
+    private const val SESSION_ID_KEY = "session_id"
 
     fun saveDriverId(context: Context, driverId: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -40,13 +41,29 @@ object SessionManager {
         prefs.edit().putString(CURRENT_SESSION_KEY, sessionId).apply()
     }
 
+    fun saveSessionId(context: Context, sessionId: String) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putString(SESSION_ID_KEY, sessionId).apply()
+    }
+
     fun getCurrentSessionId(context: Context): String? {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return prefs.getString(CURRENT_SESSION_KEY, null)
     }
 
+    fun getSessionId(context: Context): String? {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return prefs.getString(SESSION_ID_KEY, null)
+    }
+
     fun clearCurrentSessionId(context: Context) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().remove(CURRENT_SESSION_KEY).apply()
+    }
+
+
+    fun clearSessionId(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().remove(SESSION_ID_KEY).apply()
     }
 }

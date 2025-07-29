@@ -80,7 +80,7 @@ class DashboardActivity : AppCompatActivity() {
 
         // Listener do zakończenia pracy
         btnZakonczPrace.setOnClickListener {
-            val sessionId = SessionManager.getCurrentSessionId(this)
+            val sessionId = SessionManager.getSessionId(this)
             if (sessionId.isNullOrEmpty()) {
                 Toast.makeText(this, "Brak aktywnej sesji", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -153,7 +153,7 @@ class DashboardActivity : AppCompatActivity() {
                     response: Response<GenericResponse>
                 ) {
                     if (response.isSuccessful && response.body()?.status == "success") {
-                        SessionManager.clearCurrentSessionId(this@DashboardActivity)
+                        SessionManager.clearSessionId(this@DashboardActivity)
                         tvLicznik.text = odometer.toString()
                         Toast.makeText(
                             this@DashboardActivity,
