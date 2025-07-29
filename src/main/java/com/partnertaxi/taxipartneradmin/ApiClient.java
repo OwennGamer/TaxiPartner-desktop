@@ -439,6 +439,38 @@ public class ApiClient {
         return result;
     }
 
+    /**
+     * Pobiera zestawienie godzin pracy i przebiegu dla kierowcy.
+     */
+    public static List<DriverWorkEntry> getDriverWork(String driverId, String startDate, String endDate) {
+        List<DriverWorkEntry> list = new ArrayList<>();
+        try {
+            String endpoint = String.format(
+                    "get_driver_work.php?driver_id=%s&start_date=%s&end_date=%s",
+                    URLEncoder.encode(driverId, "UTF-8"),
+                    URLEncoder.encode(startDate, "UTF-8"),
+                    URLEncoder.encode(endDate, "UTF-8")
+            );
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONArray arr = resp.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        list.add(new DriverWorkEntry(
+                                o.getString("date"),
+                                (float) o.optDouble("hours", 0.0),
+                                o.optInt("kilometers", 0)
+                        ));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     // ✏️ Aktualizacja pojazdu
     public static void updateVehicle(int id, String rejestracja, String marka, String model,

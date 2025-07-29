@@ -378,6 +378,28 @@ public class DriversController {
     }
 
     @FXML
+    public void handleShowWork(ActionEvent event) {
+        Driver sel = driversTable.getSelectionModel().getSelectedItem();
+        if (sel == null) {
+            showError("Błąd", "Wybierz kierowcę");
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("driver-work-view.fxml"));
+            Parent root = loader.load();
+            DriverWorkController ctrl = loader.getController();
+            ctrl.setDriverId(sel.getId());
+            Stage st = new Stage();
+            st.setTitle("Praca: " + sel.getName());
+            st.setScene(new Scene(root));
+            st.setMaximized(true);
+            st.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void handleRefreshDrivers(ActionEvent event) {
         loadDrivers();
     }

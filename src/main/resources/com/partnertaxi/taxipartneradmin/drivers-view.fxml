@@ -17,6 +17,7 @@
             <Button text="Zmień saldo" onAction="#handleChangeSaldo"/>
             <Button text="Historia" onAction="#handleShowHistory"/>
             <Button text="Tankowania" fx:id="refuelsButton" onAction="#handleShowRefuels"/>
+            <Button text="Czas pracy" onAction="#handleShowWork"/>
             <Button text="Flota" onAction="#openFleetView"/>
             <Button text="Pracownicy" onAction="#openEmployeesView"/>
         </ToolBar>
