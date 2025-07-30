@@ -504,6 +504,53 @@ public class ApiClient {
     }
 
     /**
+     * Pobiera pojedyncze sesje pracy kierowcy.
+     */
+    public static List<DriverWorkEntry> getDriverSessions(String driverId, String startDate, String endDate) {
+        List<DriverWorkEntry> list = new ArrayList<>();
+        try {
+            String endpoint = String.format(
+                    "get_driver_sessions.php?driver_id=%s&start_date=%s&end_date=%s",
+                    URLEncoder.encode(driverId, "UTF-8"),
+                    URLEncoder.encode(startDate, "UTF-8"),
+                    URLEncoder.encode(endDate, "UTF-8")
+            );
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONArray arr = resp.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        String startTime = o.optString("start_time", null);
+                        String endTime   = o.optString("end_time", null);
+                        int startOdometer = o.optInt("start_odometer", 0);
+                        int endOdometer   = o.optInt("end_odometer", 0);
+
+                        float hours = 0f;
+                        int kilometers = 0;
+                        try {
+                            if (startTime != null && endTime != null) {
+                                java.time.LocalDateTime start = java.time.LocalDateTime.parse(startTime.replace(" ", "T"));
+                                java.time.LocalDateTime end = java.time.LocalDateTime.parse(endTime.replace(" ", "T"));
+                                hours = java.time.Duration.between(start, end).toMinutes() / 60f;
+                            }
+                            kilometers = endOdometer - startOdometer;
+                        } catch (Exception ignore) {}
+
+                        String date = startTime != null ? startTime.substring(0, 10) : "";
+                        list.add(new DriverWorkEntry(date, hours, kilometers, startTime, endTime));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+    /**
      * Rozpoczyna sesję pracy kierowcy.
      * @return ID utworzonej sesji lub null w razie błędu.
      */

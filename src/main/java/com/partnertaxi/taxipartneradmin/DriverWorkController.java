@@ -16,6 +16,8 @@ public class DriverWorkController {
 
     @FXML private TableView<DriverWorkEntry> workTable;
     @FXML private TableColumn<DriverWorkEntry, String>  dateColumn;
+    @FXML private TableColumn<DriverWorkEntry, String>  startTimeColumn;
+    @FXML private TableColumn<DriverWorkEntry, String>  endTimeColumn;
     @FXML private TableColumn<DriverWorkEntry, Float>  hoursColumn;
     @FXML private TableColumn<DriverWorkEntry, Integer> kilometersColumn;
 
@@ -31,6 +33,8 @@ public class DriverWorkController {
     @FXML
     private void initialize() {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
         kilometersColumn.setCellValueFactory(new PropertyValueFactory<>("kilometers"));
 
@@ -63,7 +67,7 @@ public class DriverWorkController {
         LocalDate end = LocalDate.now();
         LocalDate start = end.minusDays(30);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        List<DriverWorkEntry> data = ApiClient.getDriverWork(driverId, start.format(fmt), end.format(fmt));
+        List<DriverWorkEntry> data = ApiClient.getDriverSessions(driverId, start.format(fmt), end.format(fmt));
         workTable.getItems().setAll(data);
     }
 }
