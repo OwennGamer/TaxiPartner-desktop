@@ -163,7 +163,6 @@ class DashboardActivity : AppCompatActivity() {
                     if (response.isSuccessful && response.body()?.status == "success") {
                         SessionManager.clearSessionId(this@DashboardActivity)
                         SessionManager.clearVehiclePlate(this@DashboardActivity)
-                        tvLicznik.text = odometer.toString()
                         Toast.makeText(
                             this@DashboardActivity,
                             response.body()?.message ?: "Zakończono pracę",
@@ -178,6 +177,8 @@ class DashboardActivity : AppCompatActivity() {
 
                                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) { }
                             })
+                        startActivity(Intent(this@DashboardActivity, ChooseVehicleActivity::class.java))
+                        finish()
                     } else {
                         val msg = response.body()?.message ?: "Błąd zakończenia"
                         Toast.makeText(this@DashboardActivity, msg, Toast.LENGTH_LONG).show()
