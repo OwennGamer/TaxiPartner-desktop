@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
+import com.partner.taxi.VehicleResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,10 +32,17 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnPusty2: MaterialButton
     private lateinit var btnPusty3: MaterialButton
     private lateinit var btnZakonczPrace: MaterialButton
+    private var vehiclePlate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        vehiclePlate = intent.getStringExtra("rejestracja")
+            ?: SessionManager.getVehiclePlate(this)
+        if (intent.hasExtra("rejestracja")) {
+            vehiclePlate?.let { SessionManager.saveVehiclePlate(this, it) }
+        }
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         tvLabelLicznik     = findViewById(R.id.tvLabelLicznik)
@@ -99,7 +107,7 @@ class DashboardActivity : AppCompatActivity() {
                         Toast.makeText(this, "Nieprawidłowa wartość", Toast.LENGTH_SHORT).show()
                         return@setPositiveButton
                     }
-                    endShift(sessionId, odo)
+                    validateAndEndShift(sessionId, odo)
                 }
                 .setNegativeButton("Anuluj", null)
                 .show()
@@ -145,7 +153,7 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun endShift(sessionId: String, odometer: Int) {
+    private fun endShiftAndUpdate(sessionId: String, odometer: Int, plate: String) {
         ApiClient.apiService.endShift(sessionId, odometer)
             .enqueue(object : Callback<GenericResponse> {
                 override fun onResponse(
@@ -154,12 +162,22 @@ class DashboardActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful && response.body()?.status == "success") {
                         SessionManager.clearSessionId(this@DashboardActivity)
+                        SessionManager.clearVehiclePlate(this@DashboardActivity)
                         tvLicznik.text = odometer.toString()
                         Toast.makeText(
                             this@DashboardActivity,
                             response.body()?.message ?: "Zakończono pracę",
                             Toast.LENGTH_SHORT
                         ).show()
+                        ApiClient.apiService.updateVehicleMileage(plate, odometer)
+                            .enqueue(object : Callback<GenericResponse> {
+                                override fun onResponse(
+                                    call: Call<GenericResponse>,
+                                    resp: Response<GenericResponse>
+                                ) { /* brak akcji */ }
+
+                                override fun onFailure(call: Call<GenericResponse>, t: Throwable) { }
+                            })
                     } else {
                         val msg = response.body()?.message ?: "Błąd zakończenia"
                         Toast.makeText(this@DashboardActivity, msg, Toast.LENGTH_LONG).show()
@@ -167,6 +185,45 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@DashboardActivity,
+                        "Błąd sieci: ${t.localizedMessage}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+    }
+
+
+    private fun validateAndEndShift(sessionId: String, odometer: Int) {
+        val plate = vehiclePlate
+        if (plate.isNullOrEmpty()) {
+            Toast.makeText(this, "Brak informacji o pojeździe", Toast.LENGTH_SHORT).show()
+            return
+        }
+        ApiClient.apiService.getVehicleInfo(plate)
+            .enqueue(object : Callback<VehicleResponse> {
+                override fun onResponse(
+                    call: Call<VehicleResponse>,
+                    response: Response<VehicleResponse>
+                ) {
+                    val current = response.body()?.data?.przebieg
+                    if (!response.isSuccessful || current == null) {
+                        Toast.makeText(this@DashboardActivity, "Błąd danych pojazdu", Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                    if (odometer < current) {
+                        Toast.makeText(
+                            this@DashboardActivity,
+                            "Przebieg nie może być mniejszy niż $current",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
+                    endShiftAndUpdate(sessionId, odometer, plate)
+                }
+
+                override fun onFailure(call: Call<VehicleResponse>, t: Throwable) {
                     Toast.makeText(
                         this@DashboardActivity,
                         "Błąd sieci: ${t.localizedMessage}",

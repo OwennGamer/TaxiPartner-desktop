@@ -10,6 +10,7 @@ object SessionManager {
     private const val TOKEN_KEY = "token"
     private const val CURRENT_SESSION_KEY = "current_session_id"
     private const val SESSION_ID_KEY = "session_id"
+    private const val VEHICLE_PLATE_KEY = "vehicle_plate"
 
     fun saveDriverId(context: Context, driverId: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -65,5 +66,21 @@ object SessionManager {
     fun clearSessionId(context: Context) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().remove(SESSION_ID_KEY).apply()
+    }
+
+
+    fun saveVehiclePlate(context: Context, plate: String) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putString(VEHICLE_PLATE_KEY, plate).apply()
+    }
+
+    fun getVehiclePlate(context: Context): String? {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return prefs.getString(VEHICLE_PLATE_KEY, null)
+    }
+
+    fun clearVehiclePlate(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().remove(VEHICLE_PLATE_KEY).apply()
     }
 }

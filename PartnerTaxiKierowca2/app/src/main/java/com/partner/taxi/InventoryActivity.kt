@@ -387,7 +387,9 @@ class InventoryActivity : AppCompatActivity() {
                     startActivity(Intent(
                         this@InventoryActivity,
                         DashboardActivity::class.java
-                    ))
+                    ).apply {
+                        putExtra("rejestracja", intent.getStringExtra("rejestracja"))
+                    })
                     finish()
                 } else {
                     Toast.makeText(

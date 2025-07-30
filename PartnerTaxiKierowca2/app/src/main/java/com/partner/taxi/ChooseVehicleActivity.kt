@@ -222,6 +222,7 @@ class ChooseVehicleActivity : AppCompatActivity() {
                     val body = response.body()
                     if (response.isSuccessful && body?.status == "success" && !body.sessionId.isNullOrBlank()) {
                         SessionManager.saveSessionId(this@ChooseVehicleActivity, body.sessionId)
+                        SessionManager.saveVehiclePlate(this@ChooseVehicleActivity, rejestracja)
                         proceedAfterUpdate(lastDriverId, rejestracja, przebieg)
                     } else {
                         Toast.makeText(

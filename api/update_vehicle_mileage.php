@@ -27,7 +27,15 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
         if ($stmt->rowCount()>0) {
             echo json_encode(['status'=>'success','message'=>'Przebieg zaktualizowany']);
         } else {
-            echo json_encode(['status'=>'error','message'=>'Brak pojazdu lub brak zmian']);
+            $check = $pdo->prepare(
+                "SELECT id FROM pojazdy WHERE LOWER(rejestracja)=LOWER(?)"
+            );
+            $check->execute([$rejestracja]);
+            if ($check->fetch()) {
+                echo json_encode(['status'=>'success','message'=>'Przebieg bez zmian']);
+            } else {
+                echo json_encode(['status'=>'error','message'=>'Brak pojazdu']);
+            }
         }
     } catch (PDOException $e) {
         http_response_code(500);
