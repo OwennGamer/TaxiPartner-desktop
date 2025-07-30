@@ -107,7 +107,7 @@ class DashboardActivity : AppCompatActivity() {
                         Toast.makeText(this, "Nieprawidłowa wartość", Toast.LENGTH_SHORT).show()
                         return@setPositiveButton
                     }
-                    validateAndEndShift(sessionId, odo)
+                    validateAndEndShift(odo)
                 }
                 .setNegativeButton("Anuluj", null)
                 .show()
@@ -153,8 +153,8 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun endShiftAndUpdate(sessionId: String, odometer: Int, plate: String) {
-        ApiClient.apiService.endShift(sessionId, odometer)
+    private fun endShiftAndUpdate(odometer: Int, plate: String) {
+        ApiClient.apiService.endShift(odometer)
             .enqueue(object : Callback<GenericResponse> {
                 override fun onResponse(
                     call: Call<GenericResponse>,
@@ -195,7 +195,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
 
-    private fun validateAndEndShift(sessionId: String, odometer: Int) {
+    private fun validateAndEndShift(odometer: Int) {
         val plate = vehiclePlate
         if (plate.isNullOrEmpty()) {
             Toast.makeText(this, "Brak informacji o pojeździe", Toast.LENGTH_SHORT).show()
@@ -220,7 +220,7 @@ class DashboardActivity : AppCompatActivity() {
                         ).show()
                         return
                     }
-                    endShiftAndUpdate(sessionId, odometer, plate)
+                    endShiftAndUpdate(odometer, plate)
                 }
 
                 override fun onFailure(call: Call<VehicleResponse>, t: Throwable) {

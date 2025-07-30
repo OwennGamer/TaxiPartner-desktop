@@ -98,15 +98,14 @@ interface ApiService {
     @FormUrlEncoded
     @POST("start_shift.php")
     fun startShift(
-        @Field("rejestracja") rejestracja: String,
-        @Field("przebieg") przebieg: Int
+        @Field("vehicle_plate") rejestracja: String,
+        @Field("start_odometer") przebieg: Int
     ): Call<StartShiftResponse>
 
 
     @FormUrlEncoded
     @POST("end_shift.php")
     fun endShift(
-        @Field("session_id") sessionId: String,
-        @Field("odometer") odometer: Int
+        @Field("end_odometer") odometer: Int
     ): Call<GenericResponse>
 }
