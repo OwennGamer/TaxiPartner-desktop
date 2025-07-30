@@ -23,7 +23,9 @@ Returns aggregated statistics for a driver between two dates.
 ```
 
 If fewer than two mileage entries exist for the selected period,
-`kilometers` will be `0` and `missing_mileage` will be `true`.
+`kilometers` sums distances of finished work sessions. If no
+completed sessions exist in the range, `kilometers` will be `0`
+and `missing_mileage` will be `true`.
 
 
 ## `start_shift.php`

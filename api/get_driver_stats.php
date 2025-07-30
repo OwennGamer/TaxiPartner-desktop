@@ -71,22 +71,18 @@ try {
     $stmt->execute([$driverId, $startDate, $endDate]);
     $lot = (float)$stmt->fetchColumn();
 
-    // Kilometry z inwentaryzacji
-    $stmt = $pdo->prepare("SELECT przebieg FROM inwentaryzacje WHERE kierowca_id = ? AND data_dodania >= ? AND data_dodania <= ? ORDER BY data_dodania ASC LIMIT 1");
+        // Sumaryczny przebieg z zakończonych sesji pracy
+    $stmt = $pdo->prepare(
+        "SELECT COALESCE(SUM(end_odometer - start_odometer),0)\n" .
+        "  FROM work_sessions\n" .
+        " WHERE driver_id = ?\n" .
+        "   AND DATE(start_time) BETWEEN ? AND ?\n" .
+        "   AND end_time IS NOT NULL\n" .
+        "   AND end_odometer IS NOT NULL"
+    );
     $stmt->execute([$driverId, $startDate, $endDate]);
-    $startMileage = $stmt->fetchColumn();
-    $stmt = $pdo->prepare("SELECT przebieg FROM inwentaryzacje WHERE kierowca_id = ? AND data_dodania >= ? AND data_dodania <= ? ORDER BY data_dodania DESC LIMIT 1");
-    $stmt->execute([$driverId, $startDate, $endDate]);
-    $endMileage = $stmt->fetchColumn();
-
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM inwentaryzacje WHERE kierowca_id = ? AND data_dodania >= ? AND data_dodania <= ?");
-    $stmt->execute([$driverId, $startDate, $endDate]);
-    $mileageCount = (int)$stmt->fetchColumn();
-    $missingMileage = $mileageCount < 2;
-    $kilometers = 0.0;
-    if (!$missingMileage && $startMileage !== false && $endMileage !== false) {
-        $kilometers = max(0, (int)$endMileage - (int)$startMileage);
-    }
+    $kilometers = (float)$stmt->fetchColumn();
+    $missingMileage = $kilometers == 0.0;
 
     // Suma paliwa
     $stmt = $pdo->prepare("SELECT COALESCE(SUM(cost),0) FROM refuels WHERE driver_id = ? AND refuel_date BETWEEN ? AND ?");
