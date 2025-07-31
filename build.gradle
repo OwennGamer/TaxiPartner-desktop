@@ -32,6 +32,8 @@ dependencies {
   // JUnit for testing
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+  testImplementation("org.testfx:testfx-junit5:4.0.16-alpha")
+  testImplementation("org.testfx:openjfx-monocle:8u76-b04")
 
   implementation files("libs/mysql-connector-j-9.1.0.jar")
   implementation "com.squareup.okhttp3:okhttp:4.10.0"
