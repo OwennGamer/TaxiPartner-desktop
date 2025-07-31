@@ -16,6 +16,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -215,6 +216,13 @@ public class DriversController {
 
         // initial alignment after column order restoration
         Platform.runLater(this::reorderSummaryRow);
+
+        // Clip summary row so overflowing cells are hidden when scrolled
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(driversTable.widthProperty());
+        clip.heightProperty().bind(summaryRow.heightProperty());
+        summaryRow.setClip(clip);
+
         TableUtils.bindHorizontalScroll(driversTable, summaryRow);
 
     }
