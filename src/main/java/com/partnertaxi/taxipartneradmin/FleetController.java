@@ -19,6 +19,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.CheckBox;
 import java.util.function.Function;
+import java.util.Objects;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 import com.partnertaxi.taxipartneradmin.EditVehicleController;

@@ -15,6 +15,7 @@ import com.partnertaxi.taxipartneradmin.TableUtils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public class VehicleInventoryHistoryController {
 

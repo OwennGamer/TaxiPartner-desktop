@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+import java.util.Objects;
 
 public class InventoryDetailController {
 
