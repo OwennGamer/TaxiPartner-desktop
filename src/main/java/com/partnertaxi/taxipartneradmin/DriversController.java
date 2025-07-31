@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.Node;
@@ -84,6 +85,8 @@ public class DriversController {
 
     @FXML
     public void initialize() {
+        // allow horizontal scrolling for columns
+        driversTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         // 1) Nadajemy ID kolumnom
         idColumn.setId("idColumn");
         nameColumn.setId("nameColumn");
