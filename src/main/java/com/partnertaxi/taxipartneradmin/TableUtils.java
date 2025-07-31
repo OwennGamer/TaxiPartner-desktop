@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
-import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
 import javafx.geometry.Orientation;
@@ -93,7 +92,7 @@ public class TableUtils {
      * in sync with the table contents.
      */
     public static void bindHorizontalScroll(TableView<?> table, Node node) {
-        Platform.runLater(() -> {
+        Runnable attach = () -> {
             ScrollBar hBar = null;
             for (Node n : table.lookupAll(".scroll-bar")) {
                 if (n instanceof ScrollBar sb && sb.getOrientation() == Orientation.HORIZONTAL) {
@@ -103,6 +102,17 @@ public class TableUtils {
             }
             if (hBar != null) {
                 hBar.valueProperty().addListener((obs, oldV, newV) -> node.setTranslateX(-newV.doubleValue()));
+            }
+
+        };
+
+        if (table.getSkin() != null) {
+            attach.run();
+        }
+
+        table.skinProperty().addListener((obs, oldSkin, newSkin) -> {
+            if (newSkin != null) {
+                attach.run();
             }
         });
     }
