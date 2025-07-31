@@ -57,11 +57,33 @@
     </center>
 
     <bottom>
-        <HBox alignment="CENTER">
+        <VBox spacing="10">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Button text="Odśwież" fx:id="refreshButton" onAction="#handleRefreshDrivers"/>
-        </HBox>
+            <HBox spacing="15">
+                <Label text="Saldo:"/>
+                <Label fx:id="saldoSumLabel" text="0"/>
+                <Label text="Obrót:"/>
+                <Label fx:id="turnoverSumLabel" text="0"/>
+                <Label text="Voucher:"/>
+                <Label fx:id="voucherSumLabel" text="0"/>
+                <Label text="LOT:"/>
+                <Label fx:id="lotSumLabel" text="0"/>
+                <Label text="Gotówka:"/>
+                <Label fx:id="cashSumLabel" text="0"/>
+                <Label text="Karta:"/>
+                <Label fx:id="cardSumLabel" text="0"/>
+                <Label text="Suma paliwa:"/>
+                <Label fx:id="fuelSumLabel" text="0"/>
+                <Label text="ZŁ / KM:"/>
+                <Label fx:id="zlPerKmAvgLabel" text="0"/>
+                <Label text="PALIWO / OBRÓT:"/>
+                <Label fx:id="fuelPerTurnoverAvgLabel" text="0"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Button text="Odśwież" fx:id="refreshButton" onAction="#handleRefreshDrivers"/>
+            </HBox>
+        </VBox>
     </bottom>
 </BorderPane>

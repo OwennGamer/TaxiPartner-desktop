@@ -48,6 +48,18 @@ public class DriversController {
     @FXML private TableColumn<Driver, Float>   zlPerKmColumn;
     @FXML private TableColumn<Driver, Float>   fuelPerTurnoverColumn;
 
+    // Labels showing summary/average values
+    @FXML private Label saldoSumLabel;
+    @FXML private Label turnoverSumLabel;
+    @FXML private Label voucherSumLabel;
+    @FXML private Label lotSumLabel;
+    @FXML private Label cashSumLabel;
+    @FXML private Label cardSumLabel;
+    @FXML private Label fuelSumLabel;
+    @FXML private Label zlPerKmAvgLabel;
+    @FXML private Label fuelPerTurnoverAvgLabel;
+
+
     @FXML
     public void initialize() {
         // 1) Nadajemy ID kolumnom
@@ -189,6 +201,18 @@ public class DriversController {
             JsonArray arr = json.getAsJsonArray("drivers");
             driversTable.getItems().clear();
 
+            // Totals for summary row
+            float sumSaldo = 0f;
+            float sumTurnover = 0f;
+            float sumVoucher = 0f;
+            float sumLot = 0f;
+            float sumCash = 0f;
+            float sumCard = 0f;
+            float sumFuel = 0f;
+            float totalZlPerKm = 0f;
+            float totalFuelPerTurnover = 0f;
+            int driverCount = 0;
+
             // default stats range: all available history up through today
             LocalDate start = LocalDate.of(1970, 1, 1); // include all rides
             LocalDate end = LocalDate.now().plusDays(1); // include today's rides
@@ -246,7 +270,40 @@ public class DriversController {
                         boltComm, settLimit, createdAt, plate, fuelCostSum,
                         voucher, cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
+
+
+                driverCount++;
+                try {
+                    sumSaldo += Float.parseFloat(saldo.replace(',', '.'));
+                } catch (Exception ignore) {}
+                sumTurnover += turnover;
+                sumVoucher  += voucher;
+                sumLot      += lotVal;
+                sumCash     += cashVal;
+                sumCard     += cardVal;
+                sumFuel     += fuelCostSum;
+                totalZlPerKm += zlPerKm;
+                totalFuelPerTurnover += fuelPerTurnover;
             }
+
+            float avgZlPerKm = driverCount > 0 ? totalZlPerKm / driverCount : 0f;
+            float avgFuelPerTurnover = driverCount > 0 ? totalFuelPerTurnover / driverCount : 0f;
+
+            NumberFormat format = NumberFormat.getNumberInstance(Locale.getDefault());
+            format.setMinimumFractionDigits(2);
+            format.setMaximumFractionDigits(2);
+            format.setGroupingUsed(false);
+
+            saldoSumLabel.setText(format.format(sumSaldo));
+            turnoverSumLabel.setText(format.format(sumTurnover));
+            voucherSumLabel.setText(format.format(sumVoucher));
+            lotSumLabel.setText(format.format(sumLot));
+            cashSumLabel.setText(format.format(sumCash));
+            cardSumLabel.setText(format.format(sumCard));
+            fuelSumLabel.setText(format.format(sumFuel));
+            zlPerKmAvgLabel.setText(format.format(avgZlPerKm));
+            fuelPerTurnoverAvgLabel.setText(format.format(avgFuelPerTurnover));
+
         } catch (Exception ex) {
             ex.printStackTrace();
             showError("Błąd połączenia", "Nie można się połączyć z serwerem.");
