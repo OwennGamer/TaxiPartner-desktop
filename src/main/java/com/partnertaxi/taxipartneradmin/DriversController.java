@@ -23,8 +23,6 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.HashMap;
-import java.util.Map;
 import javafx.collections.ListChangeListener;
 import javafx.application.Platform;
 
@@ -80,7 +78,7 @@ public class DriversController {
     @FXML private Region createdAtPlaceholder;
     @FXML private HBox summaryRow;
 
-    private final Map<String, Node> summaryNodeMap = new HashMap<>();
+    private final java.util.List<SummaryCell> summaryCells = new java.util.ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -169,47 +167,39 @@ public class DriversController {
         // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
 
-        // 10) Bind summary row widths to corresponding table columns
-        idPlaceholder.prefWidthProperty().bind(idColumn.widthProperty());
-        idPlaceholder.minWidthProperty().bind(idColumn.widthProperty());
-        namePlaceholder.prefWidthProperty().bind(nameColumn.widthProperty());
-        namePlaceholder.minWidthProperty().bind(nameColumn.widthProperty());
-        saldoSumLabel.prefWidthProperty().bind(saldoColumn.widthProperty());
-        saldoSumLabel.minWidthProperty().bind(saldoColumn.widthProperty());
-        statusPlaceholder.prefWidthProperty().bind(statusColumn.widthProperty());
-        statusPlaceholder.minWidthProperty().bind(statusColumn.widthProperty());
-        vehiclePlatePlaceholder.prefWidthProperty().bind(vehiclePlateColumn.widthProperty());
-        vehiclePlatePlaceholder.minWidthProperty().bind(vehiclePlateColumn.widthProperty());
-        fuelCostPlaceholder.prefWidthProperty().bind(fuelCostColumn.widthProperty());
-        fuelCostPlaceholder.minWidthProperty().bind(fuelCostColumn.widthProperty());
-        fuelSumLabel.prefWidthProperty().bind(fuelCostSumColumn.widthProperty());
-        fuelSumLabel.minWidthProperty().bind(fuelCostSumColumn.widthProperty());
-        percentTurnoverPlaceholder.prefWidthProperty().bind(percentTurnoverColumn.widthProperty());
-        percentTurnoverPlaceholder.minWidthProperty().bind(percentTurnoverColumn.widthProperty());
-        cardCommissionPlaceholder.prefWidthProperty().bind(cardCommissionColumn.widthProperty());
-        cardCommissionPlaceholder.minWidthProperty().bind(cardCommissionColumn.widthProperty());
-        partnerCommissionPlaceholder.prefWidthProperty().bind(partnerCommissionColumn.widthProperty());
-        partnerCommissionPlaceholder.minWidthProperty().bind(partnerCommissionColumn.widthProperty());
-        boltCommissionPlaceholder.prefWidthProperty().bind(boltCommissionColumn.widthProperty());
-        boltCommissionPlaceholder.minWidthProperty().bind(boltCommissionColumn.widthProperty());
-        settlementLimitPlaceholder.prefWidthProperty().bind(settlementLimitColumn.widthProperty());
-        settlementLimitPlaceholder.minWidthProperty().bind(settlementLimitColumn.widthProperty());
-        voucherSumLabel.prefWidthProperty().bind(voucherColumn.widthProperty());
-        voucherSumLabel.minWidthProperty().bind(voucherColumn.widthProperty());
-        cardSumLabel.prefWidthProperty().bind(cardColumn.widthProperty());
-        cardSumLabel.minWidthProperty().bind(cardColumn.widthProperty());
-        cashSumLabel.prefWidthProperty().bind(cashColumn.widthProperty());
-        cashSumLabel.minWidthProperty().bind(cashColumn.widthProperty());
-        lotSumLabel.prefWidthProperty().bind(lotColumn.widthProperty());
-        lotSumLabel.minWidthProperty().bind(lotColumn.widthProperty());
-        turnoverSumLabel.prefWidthProperty().bind(turnoverColumn.widthProperty());
-        turnoverSumLabel.minWidthProperty().bind(turnoverColumn.widthProperty());
-        zlPerKmAvgLabel.prefWidthProperty().bind(zlPerKmColumn.widthProperty());
-        zlPerKmAvgLabel.minWidthProperty().bind(zlPerKmColumn.widthProperty());
-        fuelPerTurnoverAvgLabel.prefWidthProperty().bind(fuelPerTurnoverColumn.widthProperty());
-        fuelPerTurnoverAvgLabel.minWidthProperty().bind(fuelPerTurnoverColumn.widthProperty());
-        createdAtPlaceholder.prefWidthProperty().bind(createdAtColumn.widthProperty());
-        createdAtPlaceholder.minWidthProperty().bind(createdAtColumn.widthProperty());
+        // 10) Prepare summary cells and bind their widths to table columns
+        summaryCells.add(new SummaryCell(idColumn.getId(), idPlaceholder));
+        summaryCells.add(new SummaryCell(nameColumn.getId(), namePlaceholder));
+        summaryCells.add(new SummaryCell(saldoColumn.getId(), saldoSumLabel));
+        summaryCells.add(new SummaryCell(statusColumn.getId(), statusPlaceholder));
+        summaryCells.add(new SummaryCell(vehiclePlateColumn.getId(), vehiclePlatePlaceholder));
+        summaryCells.add(new SummaryCell(fuelCostColumn.getId(), fuelCostPlaceholder));
+        summaryCells.add(new SummaryCell(fuelCostSumColumn.getId(), fuelSumLabel));
+        summaryCells.add(new SummaryCell(percentTurnoverColumn.getId(), percentTurnoverPlaceholder));
+        summaryCells.add(new SummaryCell(cardCommissionColumn.getId(), cardCommissionPlaceholder));
+        summaryCells.add(new SummaryCell(partnerCommissionColumn.getId(), partnerCommissionPlaceholder));
+        summaryCells.add(new SummaryCell(boltCommissionColumn.getId(), boltCommissionPlaceholder));
+        summaryCells.add(new SummaryCell(settlementLimitColumn.getId(), settlementLimitPlaceholder));
+        summaryCells.add(new SummaryCell(voucherColumn.getId(), voucherSumLabel));
+        summaryCells.add(new SummaryCell(cardColumn.getId(), cardSumLabel));
+        summaryCells.add(new SummaryCell(cashColumn.getId(), cashSumLabel));
+        summaryCells.add(new SummaryCell(lotColumn.getId(), lotSumLabel));
+        summaryCells.add(new SummaryCell(turnoverColumn.getId(), turnoverSumLabel));
+        summaryCells.add(new SummaryCell(zlPerKmColumn.getId(), zlPerKmAvgLabel));
+        summaryCells.add(new SummaryCell(fuelPerTurnoverColumn.getId(), fuelPerTurnoverAvgLabel));
+        summaryCells.add(new SummaryCell(createdAtColumn.getId(), createdAtPlaceholder));
+
+        java.util.Map<String, TableColumn<?, ?>> columnMap = new java.util.HashMap<>();
+        for (TableColumn<?, ?> col : driversTable.getColumns()) {
+            columnMap.put(col.getId(), col);
+        }
+        for (SummaryCell sc : summaryCells) {
+            TableColumn<?, ?> tc = columnMap.get(sc.getColumnId());
+            if (tc != null && sc.getNode() instanceof Region r) {
+                r.prefWidthProperty().bind(tc.widthProperty());
+                r.minWidthProperty().bind(tc.widthProperty());
+            }
+        }
 
         // 11) Reorder summary row when columns are permuted
 
@@ -261,34 +251,16 @@ public class DriversController {
 
     /** Rebuilds the summary row so its nodes match the current column order. */
     private void reorderSummaryRow() {
-        summaryNodeMap.clear();
-        summaryNodeMap.put(idColumn.getId(), idPlaceholder);
-        summaryNodeMap.put(nameColumn.getId(), namePlaceholder);
-        summaryNodeMap.put(saldoColumn.getId(), saldoSumLabel);
-        summaryNodeMap.put(statusColumn.getId(), statusPlaceholder);
-        summaryNodeMap.put(vehiclePlateColumn.getId(), vehiclePlatePlaceholder);
-        summaryNodeMap.put(fuelCostColumn.getId(), fuelCostPlaceholder);
-        summaryNodeMap.put(fuelCostSumColumn.getId(), fuelSumLabel);
-        summaryNodeMap.put(percentTurnoverColumn.getId(), percentTurnoverPlaceholder);
-        summaryNodeMap.put(cardCommissionColumn.getId(), cardCommissionPlaceholder);
-        summaryNodeMap.put(partnerCommissionColumn.getId(), partnerCommissionPlaceholder);
-        summaryNodeMap.put(boltCommissionColumn.getId(), boltCommissionPlaceholder);
-        summaryNodeMap.put(settlementLimitColumn.getId(), settlementLimitPlaceholder);
-        summaryNodeMap.put(voucherColumn.getId(), voucherSumLabel);
-        summaryNodeMap.put(cardColumn.getId(), cardSumLabel);
-        summaryNodeMap.put(cashColumn.getId(), cashSumLabel);
-        summaryNodeMap.put(lotColumn.getId(), lotSumLabel);
-        summaryNodeMap.put(turnoverColumn.getId(), turnoverSumLabel);
-        summaryNodeMap.put(zlPerKmColumn.getId(), zlPerKmAvgLabel);
-        summaryNodeMap.put(fuelPerTurnoverColumn.getId(), fuelPerTurnoverAvgLabel);
-        summaryNodeMap.put(createdAtColumn.getId(), createdAtPlaceholder);
-
-        var reordered = new java.util.ArrayList<Node>();
+        java.util.List<Node> nodes = new java.util.ArrayList<>();
         for (TableColumn<?, ?> col : driversTable.getColumns()) {
-            Node n = summaryNodeMap.get(col.getId());
-            if (n != null) reordered.add(n);
+            for (SummaryCell sc : summaryCells) {
+                if (sc.getColumnId().equals(col.getId())) {
+                    nodes.add(sc.getNode());
+                    break;
+                }
+            }
         }
-        summaryRow.getChildren().setAll(reordered);
+        summaryRow.getChildren().setAll(nodes);
     }
 
     // Dodaje listener, który podświetli komórkę na żółto, gdy jest focusowana
