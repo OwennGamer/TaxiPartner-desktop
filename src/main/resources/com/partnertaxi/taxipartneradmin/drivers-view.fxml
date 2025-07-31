@@ -29,7 +29,7 @@
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
             <Label text="Lista kierowców" style="-fx-font-size: 24px;"/>
-            <TableView fx:id="driversTable" prefWidth="860" prefHeight="450">
+            <TableView fx:id="driversTable" prefWidth="860" prefHeight="450" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="idColumn"                id="idColumn"                text="ID"               prefWidth="100"/>
                     <TableColumn fx:id="nameColumn"              id="nameColumn"              text="Imię i nazwisko"  prefWidth="150"/>
@@ -61,25 +61,27 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <HBox spacing="15">
-                <Label text="Saldo:"/>
+            <HBox spacing="0">
+                <Region fx:id="idPlaceholder"/>
+                <Region fx:id="namePlaceholder"/>
                 <Label fx:id="saldoSumLabel" text="0"/>
-                <Label text="Obrót:"/>
-                <Label fx:id="turnoverSumLabel" text="0"/>
-                <Label text="Voucher:"/>
-                <Label fx:id="voucherSumLabel" text="0"/>
-                <Label text="LOT:"/>
-                <Label fx:id="lotSumLabel" text="0"/>
-                <Label text="Gotówka:"/>
-                <Label fx:id="cashSumLabel" text="0"/>
-                <Label text="Karta:"/>
-                <Label fx:id="cardSumLabel" text="0"/>
-                <Label text="Suma paliwa:"/>
+                <Region fx:id="statusPlaceholder"/>
+                <Region fx:id="vehiclePlatePlaceholder"/>
+                <Region fx:id="fuelCostPlaceholder"/>
                 <Label fx:id="fuelSumLabel" text="0"/>
-                <Label text="ZŁ / KM:"/>
+                <Region fx:id="percentTurnoverPlaceholder"/>
+                <Region fx:id="cardCommissionPlaceholder"/>
+                <Region fx:id="partnerCommissionPlaceholder"/>
+                <Region fx:id="boltCommissionPlaceholder"/>
+                <Region fx:id="settlementLimitPlaceholder"/>
+                <Label fx:id="voucherSumLabel" text="0"/>
+                <Label fx:id="cardSumLabel" text="0"/>
+                <Label fx:id="cashSumLabel" text="0"/>
+                <Label fx:id="lotSumLabel" text="0"/>
+                <Label fx:id="turnoverSumLabel" text="0"/>
                 <Label fx:id="zlPerKmAvgLabel" text="0"/>
-                <Label text="PALIWO / OBRÓT:"/>
                 <Label fx:id="fuelPerTurnoverAvgLabel" text="0"/>
+                <Region fx:id="createdAtPlaceholder"/>
             </HBox>
             <HBox alignment="CENTER">
                 <Button text="Odśwież" fx:id="refreshButton" onAction="#handleRefreshDrivers"/>

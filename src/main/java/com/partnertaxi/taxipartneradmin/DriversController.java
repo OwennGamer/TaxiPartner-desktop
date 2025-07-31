@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,6 +60,18 @@ public class DriversController {
     @FXML private Label zlPerKmAvgLabel;
     @FXML private Label fuelPerTurnoverAvgLabel;
 
+    // Placeholder regions aligning with columns without totals
+    @FXML private Region idPlaceholder;
+    @FXML private Region namePlaceholder;
+    @FXML private Region statusPlaceholder;
+    @FXML private Region vehiclePlatePlaceholder;
+    @FXML private Region fuelCostPlaceholder;
+    @FXML private Region percentTurnoverPlaceholder;
+    @FXML private Region cardCommissionPlaceholder;
+    @FXML private Region partnerCommissionPlaceholder;
+    @FXML private Region boltCommissionPlaceholder;
+    @FXML private Region settlementLimitPlaceholder;
+    @FXML private Region createdAtPlaceholder;
 
     @FXML
     public void initialize() {
@@ -146,7 +159,32 @@ public class DriversController {
 
         // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
+
+        // 10) Bind summary row widths to corresponding table columns
+        idPlaceholder.prefWidthProperty().bind(idColumn.widthProperty());
+        namePlaceholder.prefWidthProperty().bind(nameColumn.widthProperty());
+        saldoSumLabel.prefWidthProperty().bind(saldoColumn.widthProperty());
+        statusPlaceholder.prefWidthProperty().bind(statusColumn.widthProperty());
+        vehiclePlatePlaceholder.prefWidthProperty().bind(vehiclePlateColumn.widthProperty());
+        fuelCostPlaceholder.prefWidthProperty().bind(fuelCostColumn.widthProperty());
+        fuelSumLabel.prefWidthProperty().bind(fuelCostSumColumn.widthProperty());
+        percentTurnoverPlaceholder.prefWidthProperty().bind(percentTurnoverColumn.widthProperty());
+        cardCommissionPlaceholder.prefWidthProperty().bind(cardCommissionColumn.widthProperty());
+        partnerCommissionPlaceholder.prefWidthProperty().bind(partnerCommissionColumn.widthProperty());
+        boltCommissionPlaceholder.prefWidthProperty().bind(boltCommissionColumn.widthProperty());
+        settlementLimitPlaceholder.prefWidthProperty().bind(settlementLimitColumn.widthProperty());
+        voucherSumLabel.prefWidthProperty().bind(voucherColumn.widthProperty());
+        cardSumLabel.prefWidthProperty().bind(cardColumn.widthProperty());
+        cashSumLabel.prefWidthProperty().bind(cashColumn.widthProperty());
+        lotSumLabel.prefWidthProperty().bind(lotColumn.widthProperty());
+        turnoverSumLabel.prefWidthProperty().bind(turnoverColumn.widthProperty());
+        zlPerKmAvgLabel.prefWidthProperty().bind(zlPerKmColumn.widthProperty());
+        fuelPerTurnoverAvgLabel.prefWidthProperty().bind(fuelPerTurnoverColumn.widthProperty());
+        createdAtPlaceholder.prefWidthProperty().bind(createdAtColumn.widthProperty());
+
     }
+
+
 
     // Helper dla tekstowych kolumn
     private <T> void setupTextColumn(TableColumn<Driver, T> col, String propertyName) {
