@@ -61,7 +61,7 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <HBox spacing="0" style="-fx-background-color: lightblue; -fx-border-color: lightblue transparent lightblue lightblue; -fx-border-width: 1 0 1 0;">
+            <HBox fx:id="summaryRow" spacing="0" style="-fx-background-color: lightblue; -fx-border-color: lightblue transparent lightblue lightblue; -fx-border-width: 1 0 1 0;">
                 <Region fx:id="idPlaceholder"/>
                 <Region fx:id="namePlaceholder"/>
                 <Label fx:id="saldoSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>

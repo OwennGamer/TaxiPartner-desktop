@@ -78,6 +78,9 @@ public class DriversController {
     @FXML private Region boltCommissionPlaceholder;
     @FXML private Region settlementLimitPlaceholder;
     @FXML private Region createdAtPlaceholder;
+    @FXML private HBox summaryRow;
+
+    private final Map<String, Node> summaryNodeMap = new HashMap<>();
 
     @FXML
     public void initialize() {
@@ -209,48 +212,18 @@ public class DriversController {
         createdAtPlaceholder.minWidthProperty().bind(createdAtColumn.widthProperty());
 
         // 11) Reorder summary row when columns are permuted
-        HBox summaryRow = (HBox) idPlaceholder.getParent();
-        Map<String, Node> nodeMap = new HashMap<>();
-        nodeMap.put(idColumn.getId(), idPlaceholder);
-        nodeMap.put(nameColumn.getId(), namePlaceholder);
-        nodeMap.put(saldoColumn.getId(), saldoSumLabel);
-        nodeMap.put(statusColumn.getId(), statusPlaceholder);
-        nodeMap.put(vehiclePlateColumn.getId(), vehiclePlatePlaceholder);
-        nodeMap.put(fuelCostColumn.getId(), fuelCostPlaceholder);
-        nodeMap.put(fuelCostSumColumn.getId(), fuelSumLabel);
-        nodeMap.put(percentTurnoverColumn.getId(), percentTurnoverPlaceholder);
-        nodeMap.put(cardCommissionColumn.getId(), cardCommissionPlaceholder);
-        nodeMap.put(partnerCommissionColumn.getId(), partnerCommissionPlaceholder);
-        nodeMap.put(boltCommissionColumn.getId(), boltCommissionPlaceholder);
-        nodeMap.put(settlementLimitColumn.getId(), settlementLimitPlaceholder);
-        nodeMap.put(voucherColumn.getId(), voucherSumLabel);
-        nodeMap.put(cardColumn.getId(), cardSumLabel);
-        nodeMap.put(cashColumn.getId(), cashSumLabel);
-        nodeMap.put(lotColumn.getId(), lotSumLabel);
-        nodeMap.put(turnoverColumn.getId(), turnoverSumLabel);
-        nodeMap.put(zlPerKmColumn.getId(), zlPerKmAvgLabel);
-        nodeMap.put(fuelPerTurnoverColumn.getId(), fuelPerTurnoverAvgLabel);
-        nodeMap.put(createdAtColumn.getId(), createdAtPlaceholder);
 
-        Runnable reorderSummary = () -> {
-            var reordered = new java.util.ArrayList<Node>();
-            for (TableColumn<?, ?> col : driversTable.getColumns()) {
-                Node n = nodeMap.get(col.getId());
-                if (n != null) reordered.add(n);
-            }
-            summaryRow.getChildren().setAll(reordered);
-        };
-
+        reorderSummaryRow();
         driversTable.getColumns().addListener((ListChangeListener<TableColumn<?, ?>>) change -> {
             while (change.next()) {
-                if (change.wasPermutated()) {
-                    reorderSummary.run();
+                if (change.wasPermutated() || change.wasReplaced()) {
+                    reorderSummaryRow();
                 }
             }
         });
 
         // initial alignment after column order restoration
-        Platform.runLater(reorderSummary);
+        Platform.runLater(this::reorderSummaryRow);
 
     }
 
@@ -284,6 +257,38 @@ public class DriversController {
             addFocusHighlight(cell);
             return cell;
         });
+    }
+
+    /** Rebuilds the summary row so its nodes match the current column order. */
+    private void reorderSummaryRow() {
+        summaryNodeMap.clear();
+        summaryNodeMap.put(idColumn.getId(), idPlaceholder);
+        summaryNodeMap.put(nameColumn.getId(), namePlaceholder);
+        summaryNodeMap.put(saldoColumn.getId(), saldoSumLabel);
+        summaryNodeMap.put(statusColumn.getId(), statusPlaceholder);
+        summaryNodeMap.put(vehiclePlateColumn.getId(), vehiclePlatePlaceholder);
+        summaryNodeMap.put(fuelCostColumn.getId(), fuelCostPlaceholder);
+        summaryNodeMap.put(fuelCostSumColumn.getId(), fuelSumLabel);
+        summaryNodeMap.put(percentTurnoverColumn.getId(), percentTurnoverPlaceholder);
+        summaryNodeMap.put(cardCommissionColumn.getId(), cardCommissionPlaceholder);
+        summaryNodeMap.put(partnerCommissionColumn.getId(), partnerCommissionPlaceholder);
+        summaryNodeMap.put(boltCommissionColumn.getId(), boltCommissionPlaceholder);
+        summaryNodeMap.put(settlementLimitColumn.getId(), settlementLimitPlaceholder);
+        summaryNodeMap.put(voucherColumn.getId(), voucherSumLabel);
+        summaryNodeMap.put(cardColumn.getId(), cardSumLabel);
+        summaryNodeMap.put(cashColumn.getId(), cashSumLabel);
+        summaryNodeMap.put(lotColumn.getId(), lotSumLabel);
+        summaryNodeMap.put(turnoverColumn.getId(), turnoverSumLabel);
+        summaryNodeMap.put(zlPerKmColumn.getId(), zlPerKmAvgLabel);
+        summaryNodeMap.put(fuelPerTurnoverColumn.getId(), fuelPerTurnoverAvgLabel);
+        summaryNodeMap.put(createdAtColumn.getId(), createdAtPlaceholder);
+
+        var reordered = new java.util.ArrayList<Node>();
+        for (TableColumn<?, ?> col : driversTable.getColumns()) {
+            Node n = summaryNodeMap.get(col.getId());
+            if (n != null) reordered.add(n);
+        }
+        summaryRow.getChildren().setAll(reordered);
     }
 
     // Dodaje listener, który podświetli komórkę na żółto, gdy jest focusowana
