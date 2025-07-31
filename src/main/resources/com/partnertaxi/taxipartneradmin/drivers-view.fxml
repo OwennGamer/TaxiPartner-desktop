@@ -61,26 +61,26 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <HBox spacing="0">
+            <HBox spacing="0" style="-fx-background-color: lightblue; -fx-border-color: lightblue transparent lightblue lightblue; -fx-border-width: 1 0 1 0;">
                 <Region fx:id="idPlaceholder"/>
                 <Region fx:id="namePlaceholder"/>
-                <Label fx:id="saldoSumLabel" text="0"/>
+                <Label fx:id="saldoSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
                 <Region fx:id="statusPlaceholder"/>
                 <Region fx:id="vehiclePlatePlaceholder"/>
                 <Region fx:id="fuelCostPlaceholder"/>
-                <Label fx:id="fuelSumLabel" text="0"/>
+                <Label fx:id="fuelSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
                 <Region fx:id="percentTurnoverPlaceholder"/>
                 <Region fx:id="cardCommissionPlaceholder"/>
                 <Region fx:id="partnerCommissionPlaceholder"/>
                 <Region fx:id="boltCommissionPlaceholder"/>
                 <Region fx:id="settlementLimitPlaceholder"/>
-                <Label fx:id="voucherSumLabel" text="0"/>
-                <Label fx:id="cardSumLabel" text="0"/>
-                <Label fx:id="cashSumLabel" text="0"/>
-                <Label fx:id="lotSumLabel" text="0"/>
-                <Label fx:id="turnoverSumLabel" text="0"/>
-                <Label fx:id="zlPerKmAvgLabel" text="0"/>
-                <Label fx:id="fuelPerTurnoverAvgLabel" text="0"/>
+                <Label fx:id="voucherSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                <Label fx:id="cardSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                <Label fx:id="cashSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lotSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                <Label fx:id="turnoverSumLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                <Label fx:id="zlPerKmAvgLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                <Label fx:id="fuelPerTurnoverAvgLabel" text="0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
                 <Region fx:id="createdAtPlaceholder"/>
             </HBox>
             <HBox alignment="CENTER">
