@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
@@ -21,6 +23,10 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
+import javafx.collections.ListChangeListener;
+import javafx.application.Platform;
 
 
 public class DriversController {
@@ -181,6 +187,50 @@ public class DriversController {
         zlPerKmAvgLabel.prefWidthProperty().bind(zlPerKmColumn.widthProperty());
         fuelPerTurnoverAvgLabel.prefWidthProperty().bind(fuelPerTurnoverColumn.widthProperty());
         createdAtPlaceholder.prefWidthProperty().bind(createdAtColumn.widthProperty());
+
+        // 11) Reorder summary row when columns are permuted
+        HBox summaryRow = (HBox) idPlaceholder.getParent();
+        Map<String, Node> nodeMap = new HashMap<>();
+        nodeMap.put(idColumn.getId(), idPlaceholder);
+        nodeMap.put(nameColumn.getId(), namePlaceholder);
+        nodeMap.put(saldoColumn.getId(), saldoSumLabel);
+        nodeMap.put(statusColumn.getId(), statusPlaceholder);
+        nodeMap.put(vehiclePlateColumn.getId(), vehiclePlatePlaceholder);
+        nodeMap.put(fuelCostColumn.getId(), fuelCostPlaceholder);
+        nodeMap.put(fuelCostSumColumn.getId(), fuelSumLabel);
+        nodeMap.put(percentTurnoverColumn.getId(), percentTurnoverPlaceholder);
+        nodeMap.put(cardCommissionColumn.getId(), cardCommissionPlaceholder);
+        nodeMap.put(partnerCommissionColumn.getId(), partnerCommissionPlaceholder);
+        nodeMap.put(boltCommissionColumn.getId(), boltCommissionPlaceholder);
+        nodeMap.put(settlementLimitColumn.getId(), settlementLimitPlaceholder);
+        nodeMap.put(voucherColumn.getId(), voucherSumLabel);
+        nodeMap.put(cardColumn.getId(), cardSumLabel);
+        nodeMap.put(cashColumn.getId(), cashSumLabel);
+        nodeMap.put(lotColumn.getId(), lotSumLabel);
+        nodeMap.put(turnoverColumn.getId(), turnoverSumLabel);
+        nodeMap.put(zlPerKmColumn.getId(), zlPerKmAvgLabel);
+        nodeMap.put(fuelPerTurnoverColumn.getId(), fuelPerTurnoverAvgLabel);
+        nodeMap.put(createdAtColumn.getId(), createdAtPlaceholder);
+
+        Runnable reorderSummary = () -> {
+            var reordered = new java.util.ArrayList<Node>();
+            for (TableColumn<?, ?> col : driversTable.getColumns()) {
+                Node n = nodeMap.get(col.getId());
+                if (n != null) reordered.add(n);
+            }
+            summaryRow.getChildren().setAll(reordered);
+        };
+
+        driversTable.getColumns().addListener((ListChangeListener<TableColumn<?, ?>>) change -> {
+            while (change.next()) {
+                if (change.wasPermutated()) {
+                    reorderSummary.run();
+                }
+            }
+        });
+
+        // initial alignment after column order restoration
+        Platform.runLater(reorderSummary);
 
     }
 
