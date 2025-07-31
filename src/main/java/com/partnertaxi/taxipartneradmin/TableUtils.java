@@ -8,6 +8,10 @@ import javafx.scene.input.KeyCode;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.application.Platform;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollBar;
+import javafx.geometry.Orientation;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +83,26 @@ public class TableUtils {
                 if (change.wasPermutated() || change.wasReplaced()) {
                     saveColumnsOrder(table, prefs, key);
                 }
+            }
+        });
+    }
+
+    /**
+     * Keeps the given node aligned with the horizontal scroll of the table.
+     * The node's translateX is set to the negative scrollbar value so it moves
+     * in sync with the table contents.
+     */
+    public static void bindHorizontalScroll(TableView<?> table, Node node) {
+        Platform.runLater(() -> {
+            ScrollBar hBar = null;
+            for (Node n : table.lookupAll(".scroll-bar")) {
+                if (n instanceof ScrollBar sb && sb.getOrientation() == Orientation.HORIZONTAL) {
+                    hBar = sb;
+                    break;
+                }
+            }
+            if (hBar != null) {
+                hBar.valueProperty().addListener((obs, oldV, newV) -> node.setTranslateX(-newV.doubleValue()));
             }
         });
     }

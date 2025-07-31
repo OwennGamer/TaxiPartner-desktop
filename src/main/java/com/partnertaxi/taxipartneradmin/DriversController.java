@@ -215,6 +215,7 @@ public class DriversController {
 
         // initial alignment after column order restoration
         Platform.runLater(this::reorderSummaryRow);
+        TableUtils.bindHorizontalScroll(driversTable, summaryRow);
 
     }
 
