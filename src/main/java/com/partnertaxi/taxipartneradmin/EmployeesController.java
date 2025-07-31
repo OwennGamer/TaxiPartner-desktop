@@ -110,7 +110,9 @@ public class EmployeesController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Dodaj pracownika");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.showAndWait();
             employeesTable.getItems().setAll(ApiClient.getEmployees());
@@ -133,7 +135,9 @@ public class EmployeesController {
             ctrl.setEmployee(sel);
             Stage stage = new Stage();
             stage.setTitle("Edytuj pracownika");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.showAndWait();
             employeesTable.getItems().setAll(ApiClient.getEmployees());

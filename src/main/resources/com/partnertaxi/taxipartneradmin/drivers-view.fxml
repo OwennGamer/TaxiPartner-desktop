@@ -31,7 +31,7 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <Label text="Lista kierowców" style="-fx-font-size: 24px;"/>
+            <Label text="Lista kierowców" styleClass="font-24"/>
             <TableView fx:id="driversTable" prefWidth="860" prefHeight="450" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="idColumn"                id="idColumn"                text="ID"               prefWidth="100"/>
@@ -64,26 +64,26 @@
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-            <HBox fx:id="summaryRow" spacing="0" style="-fx-background-color: lightblue; -fx-border-color: lightblue transparent lightblue lightblue; -fx-border-width: 1 0 1 0;">
+            <HBox fx:id="summaryRow" spacing="0" styleClass="summary-row">
                 <Region fx:id="idPlaceholder" styleClass="summary-cell" />
                 <Region fx:id="namePlaceholder" styleClass="summary-cell" />
-                <Label fx:id="saldoSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
+                <Label fx:id="saldoSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
                 <Region fx:id="statusPlaceholder" styleClass="summary-cell" />
                 <Region fx:id="vehiclePlatePlaceholder" styleClass="summary-cell" />
                 <Region fx:id="fuelCostPlaceholder" styleClass="summary-cell" />
-                <Label fx:id="fuelSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
+                <Label fx:id="fuelSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
                 <Region fx:id="percentTurnoverPlaceholder" styleClass="summary-cell" />
                 <Region fx:id="cardCommissionPlaceholder" styleClass="summary-cell" />
                 <Region fx:id="partnerCommissionPlaceholder" styleClass="summary-cell" />
                 <Region fx:id="boltCommissionPlaceholder" styleClass="summary-cell" />
                 <Region fx:id="settlementLimitPlaceholder" styleClass="summary-cell" />
-                <Label fx:id="voucherSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
-                <Label fx:id="cardSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
-                <Label fx:id="cashSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
-                <Label fx:id="lotSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
-                <Label fx:id="turnoverSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
-                <Label fx:id="zlPerKmAvgLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
-                <Label fx:id="fuelPerTurnoverAvgLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell" style="-fx-font-weight: bold;" />
+                <Label fx:id="voucherSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
+                <Label fx:id="cardSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
+                <Label fx:id="cashSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
+                <Label fx:id="lotSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
+                <Label fx:id="turnoverSumLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
+                <Label fx:id="zlPerKmAvgLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
+                <Label fx:id="fuelPerTurnoverAvgLabel" text="0" alignment="CENTER_RIGHT" styleClass="summary-cell bold-text" />
                 <Region fx:id="createdAtPlaceholder" styleClass="summary-cell" />
             </HBox>
             <HBox alignment="CENTER">

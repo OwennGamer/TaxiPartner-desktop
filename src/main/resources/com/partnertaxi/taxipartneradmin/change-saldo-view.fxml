@@ -10,7 +10,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.partnertaxi.taxipartneradmin.ChangeSaldoController">
 
-    <Label text="Zmiana salda" style="-fx-font-size: 20px;" />
+    <Label text="Zmiana salda" styleClass="font-20" />
 
     <TextField fx:id="amountField" promptText="Kwota (np. -100 lub 200)" />
 

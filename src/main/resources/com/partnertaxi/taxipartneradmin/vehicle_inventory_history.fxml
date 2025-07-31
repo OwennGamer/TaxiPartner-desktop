@@ -10,7 +10,7 @@
 
     <top>
         <Label text="Historia inwentaryzacji pojazdu"
-               style="-fx-font-size: 16px; -fx-padding: 10;" />
+               style="-fx-padding: 10;" styleClass="font-16" />
     </top>
 
     <center>

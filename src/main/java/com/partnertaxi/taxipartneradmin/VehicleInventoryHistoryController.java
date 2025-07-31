@@ -77,7 +77,9 @@ public class VehicleInventoryHistoryController {
 
             Stage stage = new Stage();
             stage.setTitle("Szczegóły inwentaryzacji");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.showAndWait();
         } catch (IOException e) {

@@ -98,7 +98,9 @@ public class InventoryDetailController {
 
         Stage stage = new Stage();
         stage.setTitle("Podgląd zdjęcia");
-        stage.setScene(new Scene(scrollPane, 800, 600));
+        Scene scene = new Scene(scrollPane, 800, 600);
+        scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+        stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
     }

@@ -13,7 +13,7 @@
           AnchorPane.rightAnchor="10.0"
           AnchorPane.bottomAnchor="10.0">
 
-        <Label text="Historia kursów i zmian salda" style="-fx-font-size: 18px;" />
+        <Label text="Historia kursów i zmian salda" styleClass="font-18" />
 
         <TableView fx:id="historyTable" id="historyTable" prefHeight="500">
             <columns>

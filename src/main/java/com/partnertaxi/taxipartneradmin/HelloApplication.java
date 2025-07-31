@@ -39,6 +39,11 @@ public class HelloApplication extends Application {
                     Objects.requireNonNull(HelloApplication.class.getResource(fxmlFile))
             );
             Scene scene = new Scene(fxmlLoader.load());
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(
+                            HelloApplication.class.getResource("style.css")
+                    ).toExternalForm()
+            );
             primaryStage.setTitle(title);
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);

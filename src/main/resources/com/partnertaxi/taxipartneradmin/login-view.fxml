@@ -12,7 +12,7 @@
               AnchorPane.leftAnchor="20.0"
               AnchorPane.rightAnchor="20.0">
             <Label text="Logowanie do panelu Taxi Partner Admin"
-                   style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                   styleClass="font-16 bold-text" />
 
             <TextField fx:id="usernameField"
                        promptText="Login" />

@@ -114,7 +114,9 @@ public class FleetController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Dodaj pojazd");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.showAndWait();
 
@@ -147,7 +149,9 @@ public class FleetController {
 
             Stage stage = new Stage();
             stage.setTitle("Historia inwentaryzacji: " + selected.getRejestracja());
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {
@@ -170,7 +174,9 @@ public class FleetController {
             ctrl.setVehicle(selected);
             Stage stage = new Stage();
             stage.setTitle("Edytuj pojazd");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.showAndWait();
 

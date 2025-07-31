@@ -12,30 +12,30 @@
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <Label text="Dodaj pracownika" style="-fx-font-size: 20px;"/>
+            <Label text="Dodaj pracownika" styleClass="font-20"/>
 
             <StackPane>
                 <TextField fx:id="idField" />
                 <Label fx:id="idFieldPlaceholder" text="ID pracownika" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="nameField" />
                 <Label fx:id="nameFieldPlaceholder" text="Imię i nazwisko" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="firmaField" />
                 <Label fx:id="firmaFieldPlaceholder" text="Firma" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="rodzajUmowyField" />
                 <Label fx:id="rodzajUmowyPlaceholder" text="Rodzaj umowy" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <DatePicker fx:id="dataUmowyPicker" promptText="Data umowy"/>
@@ -53,7 +53,7 @@
             <StackPane>
                 <TextField fx:id="formaWyplatyField" />
                 <Label fx:id="formaWyplatyPlaceholder" text="Forma wypłaty" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <CheckBox fx:id="wynDoRakCheck" text="Wynagrodzenie do rąk własnych"/>
@@ -71,37 +71,37 @@
             <StackPane>
                 <TextField fx:id="pitEmailField" />
                 <Label fx:id="pitEmailPlaceholder" text="Email do PIT" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="osobaKontaktowaField" />
                 <Label fx:id="osobaKontaktowaPlaceholder" text="Osoba kontaktowa" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="numerPrywatnyField" />
                 <Label fx:id="numerPrywatnyPlaceholder" text="Numer prywatny" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="numerSluzbowyField" />
                 <Label fx:id="numerSluzbowyPlaceholder" text="Numer służbowy" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="modelTelefonuField" />
                 <Label fx:id="modelTelefonuPlaceholder" text="Model telefonu służbowego" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <StackPane>
                 <TextField fx:id="operatorField" />
                 <Label fx:id="operatorPlaceholder" text="Operator" mouseTransparent="true"
-                       style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;" StackPane.alignment="CENTER_LEFT"/>
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
 
             <DatePicker fx:id="waznoscWizyPicker" promptText="Ważność wizy"/>

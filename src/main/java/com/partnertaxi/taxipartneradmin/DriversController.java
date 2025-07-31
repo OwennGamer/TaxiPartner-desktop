@@ -402,7 +402,9 @@ public class DriversController {
             Parent root = loader.load();
             Stage st = new Stage();
             st.setTitle("Dodaj kierowcę");
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.showAndWait();
             loadDrivers();
@@ -425,7 +427,9 @@ public class DriversController {
             ctrl.setDriver(sel);
             Stage st = new Stage();
             st.setTitle("Edytuj kierowcę");
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.showAndWait();
             loadDrivers();
@@ -467,7 +471,9 @@ public class DriversController {
             ctrl.setOnSuccess(this::loadDrivers);
             Stage st = new Stage();
             st.setTitle("Zmień saldo");
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.showAndWait();
         } catch (IOException e) {
@@ -489,7 +495,9 @@ public class DriversController {
             ctrl.setDriverId(sel.getId());
             Stage st = new Stage();
             st.setTitle("Historia: " + sel.getName());
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.show();
         } catch (IOException e) {
@@ -511,7 +519,9 @@ public class DriversController {
             ctrl.setDriverId(sel.getId());
             Stage st = new Stage();
             st.setTitle("Tankowania: " + sel.getName());
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.show();
         } catch (IOException e) {
@@ -533,7 +543,9 @@ public class DriversController {
             ctrl.setDriverId(sel.getId());
             Stage st = new Stage();
             st.setTitle("Praca: " + sel.getName());
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.show();
         } catch (IOException e) {
@@ -553,7 +565,9 @@ public class DriversController {
             Parent root = loader.load();
             Stage st = new Stage();
             st.setTitle("Flota pojazdów");
-            st.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            st.setScene(scene);
             st.setMaximized(true);
             st.show();
         } catch (IOException e) {
@@ -568,7 +582,11 @@ public class DriversController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Pracownicy");
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(
+                    HelloApplication.class.getResource("style.css")
+            ).toExternalForm());
+            stage.setScene(scene);
             stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {

@@ -12,7 +12,7 @@
           AnchorPane.leftAnchor="10.0"
           AnchorPane.rightAnchor="10.0"
           AnchorPane.bottomAnchor="10.0">
-        <Label text="Czas pracy" style="-fx-font-size: 18px;" />
+        <Label text="Czas pracy" styleClass="font-18" />
         <TableView fx:id="workTable" prefHeight="500">
             <columns>
                 <TableColumn fx:id="dateColumn" id="dateColumn" text="Data" prefWidth="140"/>

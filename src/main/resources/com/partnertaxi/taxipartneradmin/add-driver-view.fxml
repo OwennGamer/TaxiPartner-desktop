@@ -12,7 +12,7 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Dodaj kierowcę" style="-fx-font-size: 20px;" />
+    <Label text="Dodaj kierowcę" styleClass="font-20" />
 
     <!-- ID -->
     <StackPane>
@@ -20,7 +20,7 @@
         <Label fx:id="idFieldPlaceholder"
                text="ID kierowcy (np. D001)"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -30,7 +30,7 @@
         <Label fx:id="nameFieldPlaceholder"
                text="Imię i nazwisko"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -40,7 +40,7 @@
         <Label fx:id="passwordFieldPlaceholder"
                text="Hasło"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -68,7 +68,7 @@
         <Label fx:id="percentTurnoverPlaceholder"
                text="Procent obrotu"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -78,7 +78,7 @@
         <Label fx:id="cardCommissionPlaceholder"
                text="Prowizja za kartę"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -88,7 +88,7 @@
         <Label fx:id="partnerCommissionPlaceholder"
                text="Prowizja partnera"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -98,7 +98,7 @@
         <Label fx:id="boltCommissionPlaceholder"
                text="Prowizja Bolt"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
@@ -108,7 +108,7 @@
         <Label fx:id="settlementLimitPlaceholder"
                text="Graniczna kwota rozliczenia"
                mouseTransparent="true"
-               style="-fx-opacity: 0.5; -fx-padding: 0 0 0 4;"
+               styleClass="placeholder-label"
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 

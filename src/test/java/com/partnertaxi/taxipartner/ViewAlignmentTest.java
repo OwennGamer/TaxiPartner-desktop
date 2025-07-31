@@ -1,3 +1,5 @@
+package com.partnertaxi.taxipartner;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +31,9 @@ public class DriversViewAlignmentTest extends ApplicationTest {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/partnertaxi/taxipartneradmin/drivers-view.fxml"));
         root = loader.load();
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+        stage.setScene(scene);
         stage.show();
         driversTable = lookup("#driversTable").query();
         summaryRow = lookup("#summaryRow").query();
