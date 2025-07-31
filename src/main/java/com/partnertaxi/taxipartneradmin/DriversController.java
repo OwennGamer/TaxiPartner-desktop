@@ -168,25 +168,45 @@ public class DriversController {
 
         // 10) Bind summary row widths to corresponding table columns
         idPlaceholder.prefWidthProperty().bind(idColumn.widthProperty());
+        idPlaceholder.minWidthProperty().bind(idColumn.widthProperty());
         namePlaceholder.prefWidthProperty().bind(nameColumn.widthProperty());
+        namePlaceholder.minWidthProperty().bind(nameColumn.widthProperty());
         saldoSumLabel.prefWidthProperty().bind(saldoColumn.widthProperty());
+        saldoSumLabel.minWidthProperty().bind(saldoColumn.widthProperty());
         statusPlaceholder.prefWidthProperty().bind(statusColumn.widthProperty());
+        statusPlaceholder.minWidthProperty().bind(statusColumn.widthProperty());
         vehiclePlatePlaceholder.prefWidthProperty().bind(vehiclePlateColumn.widthProperty());
+        vehiclePlatePlaceholder.minWidthProperty().bind(vehiclePlateColumn.widthProperty());
         fuelCostPlaceholder.prefWidthProperty().bind(fuelCostColumn.widthProperty());
+        fuelCostPlaceholder.minWidthProperty().bind(fuelCostColumn.widthProperty());
         fuelSumLabel.prefWidthProperty().bind(fuelCostSumColumn.widthProperty());
+        fuelSumLabel.minWidthProperty().bind(fuelCostSumColumn.widthProperty());
         percentTurnoverPlaceholder.prefWidthProperty().bind(percentTurnoverColumn.widthProperty());
+        percentTurnoverPlaceholder.minWidthProperty().bind(percentTurnoverColumn.widthProperty());
         cardCommissionPlaceholder.prefWidthProperty().bind(cardCommissionColumn.widthProperty());
+        cardCommissionPlaceholder.minWidthProperty().bind(cardCommissionColumn.widthProperty());
         partnerCommissionPlaceholder.prefWidthProperty().bind(partnerCommissionColumn.widthProperty());
+        partnerCommissionPlaceholder.minWidthProperty().bind(partnerCommissionColumn.widthProperty());
         boltCommissionPlaceholder.prefWidthProperty().bind(boltCommissionColumn.widthProperty());
+        boltCommissionPlaceholder.minWidthProperty().bind(boltCommissionColumn.widthProperty());
         settlementLimitPlaceholder.prefWidthProperty().bind(settlementLimitColumn.widthProperty());
+        settlementLimitPlaceholder.minWidthProperty().bind(settlementLimitColumn.widthProperty());
         voucherSumLabel.prefWidthProperty().bind(voucherColumn.widthProperty());
+        voucherSumLabel.minWidthProperty().bind(voucherColumn.widthProperty());
         cardSumLabel.prefWidthProperty().bind(cardColumn.widthProperty());
+        cardSumLabel.minWidthProperty().bind(cardColumn.widthProperty());
         cashSumLabel.prefWidthProperty().bind(cashColumn.widthProperty());
+        cashSumLabel.minWidthProperty().bind(cashColumn.widthProperty());
         lotSumLabel.prefWidthProperty().bind(lotColumn.widthProperty());
+        lotSumLabel.minWidthProperty().bind(lotColumn.widthProperty());
         turnoverSumLabel.prefWidthProperty().bind(turnoverColumn.widthProperty());
+        turnoverSumLabel.minWidthProperty().bind(turnoverColumn.widthProperty());
         zlPerKmAvgLabel.prefWidthProperty().bind(zlPerKmColumn.widthProperty());
+        zlPerKmAvgLabel.minWidthProperty().bind(zlPerKmColumn.widthProperty());
         fuelPerTurnoverAvgLabel.prefWidthProperty().bind(fuelPerTurnoverColumn.widthProperty());
+        fuelPerTurnoverAvgLabel.minWidthProperty().bind(fuelPerTurnoverColumn.widthProperty());
         createdAtPlaceholder.prefWidthProperty().bind(createdAtColumn.widthProperty());
+        createdAtPlaceholder.minWidthProperty().bind(createdAtColumn.widthProperty());
 
         // 11) Reorder summary row when columns are permuted
         HBox summaryRow = (HBox) idPlaceholder.getParent();
