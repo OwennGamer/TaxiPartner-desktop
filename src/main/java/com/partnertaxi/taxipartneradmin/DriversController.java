@@ -226,6 +226,10 @@ public class DriversController {
         clip.heightProperty().bind(summaryRow.heightProperty());
         summaryRow.setClip(clip);
 
+        summaryRow.prefWidthProperty().bind(driversTable.widthProperty());
+        summaryRow.minWidthProperty().bind(driversTable.widthProperty());
+        summaryRow.setMouseTransparent(true);
+
         TableUtils.bindHorizontalScroll(driversTable, summaryRow);
 
     }
