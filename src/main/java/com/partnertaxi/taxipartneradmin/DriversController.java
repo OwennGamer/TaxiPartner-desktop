@@ -3,6 +3,9 @@ package com.partnertaxi.taxipartneradmin;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import com.partnertaxi.taxipartneradmin.TableUtils;
 import javafx.event.ActionEvent;
@@ -226,8 +229,16 @@ public class DriversController {
         clip.heightProperty().bind(summaryRow.heightProperty());
         summaryRow.setClip(clip);
 
-        summaryRow.prefWidthProperty().bind(driversTable.widthProperty());
-        summaryRow.minWidthProperty().bind(driversTable.widthProperty());
+        DoubleBinding totalColumnsWidth = Bindings.createDoubleBinding(
+                () -> driversTable.getColumns().stream().mapToDouble(TableColumnBase::getWidth).sum(),
+                driversTable.getColumns().stream().map(TableColumnBase::widthProperty).toArray(Observable[]::new)
+        );
+        DoubleBinding maxWidth = Bindings.createDoubleBinding(
+                () -> Math.max(driversTable.getWidth(), totalColumnsWidth.get()),
+                driversTable.widthProperty(), totalColumnsWidth
+        );
+        summaryRow.prefWidthProperty().bind(maxWidth);
+        summaryRow.minWidthProperty().bind(maxWidth);
         summaryRow.setMouseTransparent(true);
 
         TableUtils.bindHorizontalScroll(driversTable, summaryRow);
