@@ -41,7 +41,7 @@ public class HistoryEntry {
     public StringProperty saldoAfterProperty() {
         return saldoAfter;
     }
-    }
+
 
     public String getPhotoUrl() {
         return photoUrl.get();
