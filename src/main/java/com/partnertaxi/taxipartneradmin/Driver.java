@@ -29,6 +29,7 @@ public class Driver {
     private String vehiclePlate;
 
     private float fuelCostSum;   // nowa właściwość
+    private boolean summary;
 
     public Driver(
             String id,
@@ -44,14 +45,15 @@ public class Driver {
             float settlementLimit,
             String createdAt,
             String vehiclePlate,
-            float fuelCostSum,           // nowy parametr
+            float fuelCostSum,
             float voucher,
             float card,
             float cash,
             float lot,
             float turnover,
             float zlPerKm,
-            float fuelPerTurnover
+            float fuelPerTurnover,
+            boolean summary
     ) {
         this.id = id;
         this.name = name;
@@ -67,7 +69,7 @@ public class Driver {
         this.createdAt = createdAt;
         this.fuelCostText = (fuelCost == 0f) ? "firma" : "kierowca";
         this.vehiclePlate = vehiclePlate;
-        this.fuelCostSum = fuelCostSum;   // przypisanie
+        this.fuelCostSum = fuelCostSum;
         this.voucher = voucher;
         this.card = card;
         this.cash = cash;
@@ -75,6 +77,35 @@ public class Driver {
         this.turnover = turnover;
         this.zlPerKm = zlPerKm;
         this.fuelPerTurnover = fuelPerTurnover;
+        this.summary = summary;
+    }
+
+    public Driver(
+            String id,
+            String name,
+            String saldo,
+            String status,
+            String rola,
+            float percentTurnover,
+            float fuelCost,
+            float cardCommission,
+            float partnerCommission,
+            float boltCommission,
+            float settlementLimit,
+            String createdAt,
+            String vehiclePlate,
+            float fuelCostSum,
+            float voucher,
+            float card,
+            float cash,
+            float lot,
+            float turnover,
+            float zlPerKm,
+            float fuelPerTurnover
+    ) {
+        this(id, name, saldo, status, rola, percentTurnover, fuelCost, cardCommission,
+                partnerCommission, boltCommission, settlementLimit, createdAt, vehiclePlate,
+                fuelCostSum, voucher, card, cash, lot, turnover, zlPerKm, fuelPerTurnover, false);
     }
 
     public String getId() { return id; }
@@ -103,5 +134,9 @@ public class Driver {
 
     public float getFuelCostSum() {      // nowy getter
         return fuelCostSum;
+    }
+
+    public boolean isSummary() {
+        return summary;
     }
 }

@@ -3,9 +3,6 @@ package com.partnertaxi.taxipartneradmin;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import com.partnertaxi.taxipartneradmin.TableUtils;
 import javafx.event.ActionEvent;
@@ -17,11 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,8 +21,6 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import javafx.collections.ListChangeListener;
-import javafx.application.Platform;
 import java.util.Objects;
 
 
@@ -60,33 +50,6 @@ public class DriversController {
     @FXML private TableColumn<Driver, Float>   zlPerKmColumn;
     @FXML private TableColumn<Driver, Float>   fuelPerTurnoverColumn;
 
-    // Labels showing summary/average values
-    @FXML private Label saldoSumLabel;
-    @FXML private Label turnoverSumLabel;
-    @FXML private Label voucherSumLabel;
-    @FXML private Label lotSumLabel;
-    @FXML private Label cashSumLabel;
-    @FXML private Label cardSumLabel;
-    @FXML private Label fuelSumLabel;
-    @FXML private Label zlPerKmAvgLabel;
-    @FXML private Label fuelPerTurnoverAvgLabel;
-
-    // Placeholder regions aligning with columns without totals
-    @FXML private Region idPlaceholder;
-    @FXML private Region namePlaceholder;
-    @FXML private Region statusPlaceholder;
-    @FXML private Region vehiclePlatePlaceholder;
-    @FXML private Region fuelCostPlaceholder;
-    @FXML private Region percentTurnoverPlaceholder;
-    @FXML private Region cardCommissionPlaceholder;
-    @FXML private Region partnerCommissionPlaceholder;
-    @FXML private Region boltCommissionPlaceholder;
-    @FXML private Region settlementLimitPlaceholder;
-    @FXML private Region createdAtPlaceholder;
-    @FXML private HBox summaryRow;
-    @FXML private StackPane summaryContainer;
-
-    private final java.util.List<SummaryCell> summaryCells = new java.util.ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -177,88 +140,22 @@ public class DriversController {
         // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
 
-        // 10) Prepare summary cells and bind their widths to table columns
-        summaryCells.add(new SummaryCell(idColumn.getId(), idPlaceholder));
-        summaryCells.add(new SummaryCell(nameColumn.getId(), namePlaceholder));
-        summaryCells.add(new SummaryCell(saldoColumn.getId(), saldoSumLabel));
-        summaryCells.add(new SummaryCell(statusColumn.getId(), statusPlaceholder));
-        summaryCells.add(new SummaryCell(vehiclePlateColumn.getId(), vehiclePlatePlaceholder));
-        summaryCells.add(new SummaryCell(fuelCostColumn.getId(), fuelCostPlaceholder));
-        summaryCells.add(new SummaryCell(fuelCostSumColumn.getId(), fuelSumLabel));
-        summaryCells.add(new SummaryCell(percentTurnoverColumn.getId(), percentTurnoverPlaceholder));
-        summaryCells.add(new SummaryCell(cardCommissionColumn.getId(), cardCommissionPlaceholder));
-        summaryCells.add(new SummaryCell(partnerCommissionColumn.getId(), partnerCommissionPlaceholder));
-        summaryCells.add(new SummaryCell(boltCommissionColumn.getId(), boltCommissionPlaceholder));
-        summaryCells.add(new SummaryCell(settlementLimitColumn.getId(), settlementLimitPlaceholder));
-        summaryCells.add(new SummaryCell(voucherColumn.getId(), voucherSumLabel));
-        summaryCells.add(new SummaryCell(cardColumn.getId(), cardSumLabel));
-        summaryCells.add(new SummaryCell(cashColumn.getId(), cashSumLabel));
-        summaryCells.add(new SummaryCell(lotColumn.getId(), lotSumLabel));
-        summaryCells.add(new SummaryCell(turnoverColumn.getId(), turnoverSumLabel));
-        summaryCells.add(new SummaryCell(zlPerKmColumn.getId(), zlPerKmAvgLabel));
-        summaryCells.add(new SummaryCell(fuelPerTurnoverColumn.getId(), fuelPerTurnoverAvgLabel));
-        summaryCells.add(new SummaryCell(createdAtColumn.getId(), createdAtPlaceholder));
-
-        java.util.Map<String, TableColumn<?, ?>> columnMap = new java.util.HashMap<>();
-        for (TableColumn<?, ?> col : driversTable.getColumns()) {
-            columnMap.put(col.getId(), col);
-        }
-        for (SummaryCell sc : summaryCells) {
-            TableColumn<?, ?> tc = columnMap.get(sc.getColumnId());
-            if (tc != null && sc.getNode() instanceof Region r) {
-                r.prefWidthProperty().bind(tc.widthProperty());
-                r.minWidthProperty().bind(tc.widthProperty());
-            }
-        }
-
-        // Re-align summary row when column widths change
-        for (TableColumn<?, ?> col : driversTable.getColumns()) {
-            col.widthProperty().addListener((obs, oldVal, newVal) ->
-                    Platform.runLater(this::reorderSummaryRow));
-        }
-
-        // 11) Reorder summary row when columns are permuted or otherwise updated
-
-        reorderSummaryRow();
-        driversTable.getColumns().addListener((ListChangeListener<TableColumn<?, ?>>) change -> {
-            while (change.next()) {
-                if (change.wasPermutated() || change.wasReplaced() || change.wasUpdated()
-                        || change.wasAdded() || change.wasRemoved()) {
-                    reorderSummaryRow();
-                }
-                if (change.wasAdded()) {
-                    for (TableColumn<?, ?> col : change.getAddedSubList()) {
-                        col.widthProperty().addListener((obs, oldVal, newVal) ->
-                                Platform.runLater(this::reorderSummaryRow));
-                    }
+// 10) Row factory to style summary row
+        driversTable.setRowFactory(tv -> new TableRow<>() {
+            @Override
+            protected void updateItem(Driver item, boolean empty) {
+                super.updateItem(item, empty);
+                if (!empty && item != null && item.isSummary()) {
+                    getStyleClass().add("table-row-summary");
+                    setMouseTransparent(true);
+                } else {
+                    getStyleClass().remove("table-row-summary");
+                    setMouseTransparent(false);
                 }
             }
         });
 
-        // initial alignment after column order restoration
-        Platform.runLater(this::reorderSummaryRow);
 
-        // Clip the summary row inside an outer container
-        Rectangle clipRect = new Rectangle();
-        summaryContainer.setClip(clipRect);
-        clipRect.widthProperty().bind(driversTable.widthProperty());
-        clipRect.heightProperty().bind(summaryContainer.heightProperty());
-
-        // Outer container follows table width so it can shrink independently of column widths
-        summaryContainer.minWidthProperty().bind(driversTable.widthProperty());
-        summaryContainer.prefWidthProperty().bind(driversTable.widthProperty());
-        summaryContainer.maxWidthProperty().bind(driversTable.widthProperty());
-
-        // Bind inner summary row to total column width and enable horizontal scrolling
-        DoubleBinding totalColumnsWidth = Bindings.createDoubleBinding(
-                () -> driversTable.getColumns().stream().mapToDouble(TableColumnBase::getWidth).sum(),
-                driversTable.getColumns().stream().map(TableColumnBase::widthProperty).toArray(Observable[]::new)
-        );
-        summaryRow.prefWidthProperty().bind(totalColumnsWidth);
-        summaryRow.minWidthProperty().bind(totalColumnsWidth);
-        summaryRow.setMouseTransparent(true);
-
-        TableUtils.bindHorizontalScroll(driversTable, summaryRow);
 
     }
 
@@ -294,19 +191,7 @@ public class DriversController {
         });
     }
 
-    /** Rebuilds the summary row so its nodes match the current column order. */
-    private void reorderSummaryRow() {
-        java.util.List<Node> nodes = new java.util.ArrayList<>();
-        for (TableColumn<?, ?> col : driversTable.getColumns()) {
-            for (SummaryCell sc : summaryCells) {
-                if (sc.getColumnId().equals(col.getId())) {
-                    nodes.add(sc.getNode());
-                    break;
-                }
-            }
-        }
-        summaryRow.getChildren().setAll(nodes);
-    }
+
 
     // Dodaje listener, który podświetli komórkę na żółto, gdy jest focusowana
     private void addFocusHighlight(TableCell<?, ?> cell) {
@@ -424,15 +309,31 @@ public class DriversController {
             format.setMaximumFractionDigits(2);
             format.setGroupingUsed(false);
 
-            saldoSumLabel.setText(format.format(sumSaldo));
-            turnoverSumLabel.setText(format.format(sumTurnover));
-            voucherSumLabel.setText(format.format(sumVoucher));
-            lotSumLabel.setText(format.format(sumLot));
-            cashSumLabel.setText(format.format(sumCash));
-            cardSumLabel.setText(format.format(sumCard));
-            fuelSumLabel.setText(format.format(sumFuel));
-            zlPerKmAvgLabel.setText(format.format(avgZlPerKm));
-            fuelPerTurnoverAvgLabel.setText(format.format(avgFuelPerTurnover));
+            Driver summary = new Driver(
+                    "",
+                    "SUMA",
+                    format.format(sumSaldo),
+                    "",
+                    "",
+                    0f,
+                    0f,
+                    0f,
+                    0f,
+                    0f,
+                    0f,
+                    "",
+                    "",
+                    sumFuel,
+                    sumVoucher,
+                    sumCard,
+                    sumCash,
+                    sumLot,
+                    sumTurnover,
+                    avgZlPerKm,
+                    avgFuelPerTurnover,
+                    true
+            );
+            driversTable.getItems().add(summary);
 
         } catch (Exception ex) {
             ex.printStackTrace();

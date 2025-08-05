@@ -1,5 +1,3 @@
- .summary-cell {
-    -fx-border-color: #777;
-    -fx-border-width: 0 1 0 1;
-    -fx-padding: 2 4;
+.table-row-summary {
+    -fx-font-weight: bold;
 }
