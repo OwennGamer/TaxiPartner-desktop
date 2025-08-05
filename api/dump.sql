@@ -29,7 +29,7 @@ CREATE TABLE `collaboration_terms` (
   `term_value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,18 +39,6 @@ CREATE TABLE `collaboration_terms` (
 LOCK TABLES `collaboration_terms` WRITE;
 /*!40000 ALTER TABLE `collaboration_terms` DISABLE KEYS */;
 INSERT INTO `collaboration_terms` VALUES
-(20,'1','percentTurnover','40'),
-(21,'1','cardCommission','3'),
-(22,'1','partnerCommission','20'),
-(23,'1','boltCommission','20'),
-(24,'1','settlementLimit','200'),
-(61,'2','percentTurnover','40'),
-(62,'2','fuelCost','0'),
-(63,'2','cardCommission','3.5'),
-(64,'2','partnerCommission','20'),
-(65,'2','boltCommission','20'),
-(66,'2','settlementLimit','500'),
-(67,'1','fuelCost','0'),
 (68,'3','percentTurnover','40'),
 (69,'3','fuelCost','0'),
 (70,'3','cardCommission','3'),
@@ -86,7 +74,25 @@ INSERT INTO `collaboration_terms` VALUES
 (124,'T98','cardCommission','3'),
 (125,'T98','partnerCommission','20'),
 (126,'T98','boltCommission','20'),
-(127,'T98','settlementLimit','500');
+(127,'T98','settlementLimit','500'),
+(128,'T108','percentTurnover','40'),
+(129,'T108','fuelCost','0'),
+(130,'T108','cardCommission','3'),
+(131,'T108','partnerCommission','0'),
+(132,'T108','boltCommission','0'),
+(133,'T108','settlementLimit','5000'),
+(134,'T0999','percentTurnover','40'),
+(135,'T0999','fuelCost','0'),
+(136,'T0999','cardCommission','3'),
+(137,'T0999','partnerCommission','20'),
+(138,'T0999','boltCommission','20'),
+(139,'T0999','settlementLimit','100'),
+(140,'T088','percentTurnover','40'),
+(141,'T088','fuelCost','0'),
+(142,'T088','cardCommission','3'),
+(143,'T088','partnerCommission','20'),
+(144,'T088','boltCommission','20'),
+(145,'T088','settlementLimit','1000');
 /*!40000 ALTER TABLE `collaboration_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +167,7 @@ CREATE TABLE `historia_salda` (
   `opis` text DEFAULT NULL,
   `data` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +209,14 @@ INSERT INTO `historia_salda` VALUES
 (31,'T14',-100.00,100.92,'Kara',NULL,'2025-05-13 12:14:31'),
 (32,'T66',200.78,300.98,'Rozliczenie',NULL,'2025-06-17 14:53:06'),
 (33,'T66',10.89,311.87,'Rozliczenie',NULL,'2025-06-17 15:07:39'),
-(34,'T66',-11.87,300.00,'Rozliczenie',NULL,'2025-06-17 15:07:54');
+(34,'T66',-11.87,300.00,'Rozliczenie',NULL,'2025-06-17 15:07:54'),
+(35,'T99',-50.00,112.32,'brak zdjęcia paragonu',NULL,'2025-07-30 13:36:13'),
+(36,'T108',-1033.00,2482.20,'Rozliczenie',NULL,'2025-08-01 11:42:01'),
+(37,'T108',0.00,2482.20,'Rozliczenie',NULL,'2025-08-01 11:43:38'),
+(38,'T108',-0.51,2481.69,'Rozliczenie',NULL,'2025-08-01 11:44:05'),
+(39,'T108',0.60,2481.69,'Rozliczenie',NULL,'2025-08-01 11:52:28'),
+(40,'T99',100.30,251.42,'Kara',NULL,'2025-08-04 12:41:15'),
+(41,'T99',100.20,351.62,'Rozliczenie',NULL,'2025-08-04 13:18:02');
 /*!40000 ALTER TABLE `historia_salda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +254,7 @@ CREATE TABLE `inwentaryzacje` (
   `uwagi` text DEFAULT NULL,
   `kierowca_id` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,7 +310,11 @@ INSERT INTO `inwentaryzacje` VALUES
 (44,'SDFSDF',91000,1,'uploads/inventory/front_6823011316a8e.jpg','2025-05-13 10:21:39','uploads/inventory/back_6823011316cd4.jpg','uploads/inventory/left_6823011316e81.jpg','uploads/inventory/right_6823011317018.jpg',4,NULL,NULL,NULL,NULL,1,0,1,1,0,0,1,0,1,NULL,'T14'),
 (45,'DW1234X',1000001,1,'uploads/inventory/front_68381b4298a58.jpg','2025-05-29 10:30:58','uploads/inventory/back_68381b4298ce8.jpg','uploads/inventory/left_68381b4298fa1.jpg','uploads/inventory/right_68381b429927a.jpg',4,NULL,NULL,NULL,NULL,0,0,1,0,1,0,1,1,1,NULL,'T14'),
 (46,'DX23YB',173000,1,'uploads/inventory/front_68876b418e9ea.jpg','2025-07-28 14:21:21','uploads/inventory/back_68876b418ec7e.jpg','uploads/inventory/left_68876b418eeb8.jpg','uploads/inventory/right_68876b418f0f4.jpg',0,NULL,NULL,NULL,NULL,1,1,1,1,0,0,0,1,0,NULL,'T99'),
-(47,'DX23YB',175000,1,'uploads/inventory/front_6887ca0594edf.jpg','2025-07-28 21:05:41','uploads/inventory/back_6887ca0595171.jpg','uploads/inventory/left_6887ca05953d3.jpg','uploads/inventory/right_6887ca05955dc.jpg',0,NULL,NULL,NULL,NULL,1,1,0,1,0,0,0,0,0,NULL,'T98');
+(47,'DX23YB',175000,1,'uploads/inventory/front_6887ca0594edf.jpg','2025-07-28 21:05:41','uploads/inventory/back_6887ca0595171.jpg','uploads/inventory/left_6887ca05953d3.jpg','uploads/inventory/right_6887ca05955dc.jpg',0,NULL,NULL,NULL,NULL,1,1,0,1,0,0,0,0,0,NULL,'T98'),
+(48,'DX23YB',178001,1,'uploads/inventory/front_6889fe0c11ea7.jpg','2025-07-30 13:12:12','uploads/inventory/back_6889fe0c12129.jpg','uploads/inventory/left_6889fe0c12331.jpg','uploads/inventory/right_6889fe0c124ff.jpg',0,NULL,NULL,NULL,NULL,0,1,0,1,1,0,0,0,0,NULL,'T99'),
+(49,'DKL83517',2,1,'uploads/inventory/front_688c88ac6970d.jpg','2025-08-01 11:28:12','uploads/inventory/back_688c88ac698d8.jpg','uploads/inventory/left_688c88ac69a23.jpg','uploads/inventory/right_688c88ac69b84.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,'Nie ','T108'),
+(50,'DX23YB',186001,1,'uploads/inventory/front_688c8b8a6138a.jpg','2025-08-01 11:40:26','uploads/inventory/back_688c8b8a61795.jpg','uploads/inventory/left_688c8b8a61b4d.jpg','uploads/inventory/right_688c8b8a61e23.jpg',5,NULL,NULL,NULL,NULL,1,1,1,0,1,1,1,1,1,NULL,'T108'),
+(51,'DW9YF48',180001,1,'uploads/inventory/front_6891fb60023fe.jpg','2025-08-05 14:38:56','uploads/inventory/back_6891fb60026c8.jpg','uploads/inventory/left_6891fb60028e5.jpg','uploads/inventory/right_6891fb6002b0b.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T99');
 /*!40000 ALTER TABLE `inwentaryzacje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,14 +347,15 @@ CREATE TABLE `kierowcy` (
 LOCK TABLES `kierowcy` WRITE;
 /*!40000 ALTER TABLE `kierowcy` DISABLE KEYS */;
 INSERT INTO `kierowcy` VALUES
-('1','Jan','Kowalski',537.00,'abc123','kierowca','firma','2025-03-29 14:15:21','aktywny',NULL),
-('2','Paweł','Turek',0.00,'d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35','kierowca','firma','2025-04-26 13:23:34','aktywny',NULL),
 ('3','Darek','Darek',0.00,'$2y$10$dew5WmScvalEtk3x16Ge2.2n/c8z7NGbbNyyKGVOQM5f5kWnGJKe2','kierowca','firma','2025-04-26 13:41:54','aktywny',NULL),
+('T088','QQQQ','',0.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:40:29','aktywny',NULL),
+('T0999','Jaka','',100.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:39:36','aktywny',NULL),
 ('T1','Arkadiusz','Ferenc',8978.18,'$2y$10$uGIBPfsEvgZAGXPY3o5dY.dVlxifsMAeCsEIvCSii96SvQVsX.W9S','kierowca','firma','2025-05-07 08:27:15','aktywny','DW1234X'),
+('T108','Michał','Miszczyk',2869.47,'$2y$10$d4z9GpjgCNRRtysqtLqxAOE2BTXAWoDR.Hi7Mtsf/3RS8WT.QgSSu','kierowca','firma','2025-08-01 09:18:57','aktywny','DX23YB'),
 ('T14','Krzysztof','Golonka',-3.88,'$2y$10$dwVJmBxtGzlca0VgHuCjNOw0SP15P29gr3m4jnLmU2KRa1T86fvkq','kierowca','firma','2025-04-26 15:44:47','aktywny','DW1234X'),
 ('T66','hahah','',300.00,'69e91642bc538c7ae9a7686b0a56570ecd279e4976678267365dcedf5183f0b8','kierowca','firma','2025-06-17 12:47:24','aktywny',NULL),
 ('T98','Teścik','Teściowski',113.92,'$2y$10$N7SV5.gOc1Tv4kK3lrc8Q.lGt8ewizI0bkYUtDtgx1y/QwjDMrBzm','kierowca','firma','2025-07-28 19:04:18','aktywny','DX23YB'),
-('T99','Nowy','Kierowca',162.32,'$2y$10$rWoFH4IWmmolt6u4LSZ.Qe1zKC0ZaQE1qNrO/hjvP.LdJmHcaiGye','kierowca','firma','2025-07-28 12:18:16','aktywny','DX23YB');
+('T99','Nowy','Kierowca',351.62,'$2y$10$rWoFH4IWmmolt6u4LSZ.Qe1zKC0ZaQE1qNrO/hjvP.LdJmHcaiGye','kierowca','firma','2025-07-28 12:18:16','aktywny','DW9YF48');
 /*!40000 ALTER TABLE `kierowcy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,10 +376,11 @@ CREATE TABLE `kursy` (
   `source` varchar(50) NOT NULL,
   `via_km` tinyint(1) NOT NULL DEFAULT 0,
   `date` datetime DEFAULT current_timestamp(),
+  `receipt_photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `kursy_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,57 +390,60 @@ CREATE TABLE `kursy` (
 LOCK TABLES `kursy` WRITE;
 /*!40000 ALTER TABLE `kursy` DISABLE KEYS */;
 INSERT INTO `kursy` VALUES
-(94,'1',250.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 11:01:09'),
-(95,'1',400.00,NULL,NULL,'Gotówka','Postój',0,'2025-04-06 11:06:16'),
-(96,'1',100.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 12:27:17'),
-(97,'1',100.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 12:27:40'),
-(98,'1',100.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 12:30:23'),
-(99,'1',120.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 12:31:50'),
-(100,'1',50.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 12:38:57'),
-(101,'1',50.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 13:31:15'),
-(102,'1',100.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 13:31:48'),
-(103,'1',100.00,NULL,NULL,'Karta','Postój',0,'2025-04-06 13:31:55'),
-(208,'T14',100.00,38.80,38.80,'Karta','Postój',0,'2025-04-27 19:57:53'),
-(209,'T14',20.00,7.76,46.56,'Karta','Postój',0,'2025-04-27 20:10:31'),
-(213,'T14',150.00,58.20,154.76,'Karta','Postój',0,'2025-04-29 10:10:45'),
-(214,'T14',25.00,8.00,162.76,'Voucher','Dyspozytornia',0,'2025-05-05 09:55:19'),
-(215,'T14',150.00,-90.00,72.76,'Gotówka','Postój',0,'2025-05-05 09:56:15'),
-(216,'T14',50.00,15.40,88.16,'Karta','Dyspozytornia',0,'2025-05-05 11:22:14'),
-(217,'T14',150.00,-90.00,-1.84,'Gotówka','Postój',0,'2025-05-05 11:22:34'),
-(218,'T14',96.00,30.72,28.88,'Voucher','Dyspozytornia',0,'2025-05-05 11:23:18'),
-(219,'T1',50.00,0.00,10033.18,'Karta','Postój',0,'2025-05-07 10:31:13'),
-(220,'T1',2000.00,-160.00,9873.18,'Karta','Dyspozytornia',0,'2025-05-07 10:31:54'),
-(221,'T1',250.00,180.00,10053.18,'Voucher','Dyspozytornia',0,'2025-05-07 10:32:17'),
-(222,'T14',213.00,68.16,97.04,'Voucher','Dyspozytornia',0,'2025-05-09 11:35:21'),
-(223,'T14',200.00,-120.00,-72.96,'Gotówka','Postój',0,'2025-05-12 13:24:20'),
-(224,'T14',93.00,29.76,-43.20,'Voucher','Dyspozytornia',0,'2025-05-12 13:24:46'),
-(225,'T14',500.00,194.00,150.80,'Karta','Postój',0,'2025-05-12 13:25:50'),
-(226,'T14',100.00,38.80,38.80,'Karta','Postój',0,'2025-05-13 10:22:14'),
-(227,'T14',150.00,-102.00,-63.20,'Gotówka','Dyspozytornia',0,'2025-05-13 10:22:34'),
-(228,'T14',150.00,-90.00,-493.20,'Gotówka','Postój',0,'2025-05-13 10:53:20'),
-(229,'T14',100.00,38.80,-454.40,'Karta','Postój',0,'2025-05-13 10:53:34'),
-(230,'T14',150.00,58.20,-396.20,'Karta','Postój',0,'2025-05-13 12:08:13'),
-(231,'T14',200.00,61.60,-334.60,'Karta','Dyspozytornia',0,'2025-05-13 12:08:40'),
-(232,'T14',111.00,35.52,-299.08,'Voucher','Dyspozytornia',0,'2025-05-13 12:08:59'),
-(233,'T14',250.00,-170.00,-69.08,'Gotówka','Dyspozytornia',0,'2025-05-16 15:41:58'),
-(234,'T14',200.00,77.60,8.52,'Karta','Postój',0,'2025-05-29 10:31:34'),
-(235,'T99',100.00,38.80,38.80,'Karta','Postój',0,'2025-07-28 14:21:40'),
-(236,'T99',150.00,58.20,97.00,'Karta','Postój',0,'2025-07-28 17:17:03'),
-(237,'T99',50.00,19.40,116.40,'Karta','Postój',0,'2025-07-28 18:08:22'),
-(238,'T99',72.00,23.04,139.44,'Voucher','Dyspozytornia',0,'2025-07-28 18:34:01'),
-(239,'T99',100.00,-60.00,79.44,'Gotówka','Postój',0,'2025-07-28 18:54:18'),
-(240,'T14',100.00,38.80,47.32,'Karta','Postój',0,'2025-07-28 18:57:58'),
-(241,'T14',150.00,-90.00,-42.68,'Gotówka','Postój',0,'2025-07-28 18:58:54'),
-(242,'T14',100.00,38.80,-3.88,'Karta','Postój',0,'2025-07-28 19:03:18'),
-(243,'T99',100.00,32.00,111.44,'Voucher','Postój',0,'2025-07-28 19:22:17'),
-(244,'T99',48.00,15.36,126.80,'Voucher','Dyspozytornia',0,'2025-07-28 19:25:28'),
-(245,'T99',111.00,35.52,162.32,'Voucher','Dyspozytornia',1,'2025-07-28 21:00:47'),
-(246,'T98',10.00,-6.80,-6.80,'Gotówka','Dyspozytornia',0,'2025-07-28 21:05:57'),
-(247,'T98',48.00,15.36,8.56,'Voucher','Dyspozytornia',1,'2025-07-28 21:06:28'),
-(248,'T98',25.00,8.00,16.56,'Voucher','Dyspozytornia',0,'2025-07-28 21:08:26'),
-(249,'T98',50.00,16.00,32.56,'Voucher','Dyspozytornia',0,'2025-07-28 21:09:22'),
-(250,'T98',133.00,42.56,75.12,'Voucher','Dyspozytornia',1,'2025-07-28 21:19:17'),
-(251,'T98',100.00,38.80,113.92,'Karta','Postój',0,'2025-07-28 21:19:41');
+(208,'T14',100.00,38.80,38.80,'Karta','Postój',0,'2025-04-27 19:57:53',NULL),
+(209,'T14',20.00,7.76,46.56,'Karta','Postój',0,'2025-04-27 20:10:31',NULL),
+(213,'T14',150.00,58.20,154.76,'Karta','Postój',0,'2025-04-29 10:10:45',NULL),
+(214,'T14',25.00,8.00,162.76,'Voucher','Dyspozytornia',0,'2025-05-05 09:55:19',NULL),
+(215,'T14',150.00,-90.00,72.76,'Gotówka','Postój',0,'2025-05-05 09:56:15',NULL),
+(216,'T14',50.00,15.40,88.16,'Karta','Dyspozytornia',0,'2025-05-05 11:22:14',NULL),
+(217,'T14',150.00,-90.00,-1.84,'Gotówka','Postój',0,'2025-05-05 11:22:34',NULL),
+(218,'T14',96.00,30.72,28.88,'Voucher','Dyspozytornia',0,'2025-05-05 11:23:18',NULL),
+(219,'T1',50.00,0.00,10033.18,'Karta','Postój',0,'2025-05-07 10:31:13',NULL),
+(220,'T1',2000.00,-160.00,9873.18,'Karta','Dyspozytornia',0,'2025-05-07 10:31:54',NULL),
+(221,'T1',250.00,180.00,10053.18,'Voucher','Dyspozytornia',0,'2025-05-07 10:32:17',NULL),
+(222,'T14',213.00,68.16,97.04,'Voucher','Dyspozytornia',0,'2025-05-09 11:35:21',NULL),
+(223,'T14',200.00,-120.00,-72.96,'Gotówka','Postój',0,'2025-05-12 13:24:20',NULL),
+(224,'T14',93.00,29.76,-43.20,'Voucher','Dyspozytornia',0,'2025-05-12 13:24:46',NULL),
+(225,'T14',500.00,194.00,150.80,'Karta','Postój',0,'2025-05-12 13:25:50',NULL),
+(226,'T14',100.00,38.80,38.80,'Karta','Postój',0,'2025-05-13 10:22:14',NULL),
+(227,'T14',150.00,-102.00,-63.20,'Gotówka','Dyspozytornia',0,'2025-05-13 10:22:34',NULL),
+(228,'T14',150.00,-90.00,-493.20,'Gotówka','Postój',0,'2025-05-13 10:53:20',NULL),
+(229,'T14',100.00,38.80,-454.40,'Karta','Postój',0,'2025-05-13 10:53:34',NULL),
+(230,'T14',150.00,58.20,-396.20,'Karta','Postój',0,'2025-05-13 12:08:13',NULL),
+(231,'T14',200.00,61.60,-334.60,'Karta','Dyspozytornia',0,'2025-05-13 12:08:40',NULL),
+(232,'T14',111.00,35.52,-299.08,'Voucher','Dyspozytornia',0,'2025-05-13 12:08:59',NULL),
+(233,'T14',250.00,-170.00,-69.08,'Gotówka','Dyspozytornia',0,'2025-05-16 15:41:58',NULL),
+(234,'T14',200.00,77.60,8.52,'Karta','Postój',0,'2025-05-29 10:31:34',NULL),
+(235,'T99',100.00,38.80,38.80,'Karta','Postój',0,'2025-07-28 14:21:40',NULL),
+(236,'T99',150.00,58.20,97.00,'Karta','Postój',0,'2025-07-28 17:17:03',NULL),
+(237,'T99',50.00,19.40,116.40,'Karta','Postój',0,'2025-07-28 18:08:22',NULL),
+(238,'T99',72.00,23.04,139.44,'Voucher','Dyspozytornia',0,'2025-07-28 18:34:01',NULL),
+(239,'T99',100.00,-60.00,79.44,'Gotówka','Postój',0,'2025-07-28 18:54:18',NULL),
+(240,'T14',100.00,38.80,47.32,'Karta','Postój',0,'2025-07-28 18:57:58',NULL),
+(241,'T14',150.00,-90.00,-42.68,'Gotówka','Postój',0,'2025-07-28 18:58:54',NULL),
+(242,'T14',100.00,38.80,-3.88,'Karta','Postój',0,'2025-07-28 19:03:18',NULL),
+(243,'T99',100.00,32.00,111.44,'Voucher','Postój',0,'2025-07-28 19:22:17',NULL),
+(244,'T99',48.00,15.36,126.80,'Voucher','Dyspozytornia',0,'2025-07-28 19:25:28',NULL),
+(245,'T99',111.00,35.52,162.32,'Voucher','Dyspozytornia',1,'2025-07-28 21:00:47',NULL),
+(246,'T98',10.00,-6.80,-6.80,'Gotówka','Dyspozytornia',0,'2025-07-28 21:05:57',NULL),
+(247,'T98',48.00,15.36,8.56,'Voucher','Dyspozytornia',1,'2025-07-28 21:06:28',NULL),
+(248,'T98',25.00,8.00,16.56,'Voucher','Dyspozytornia',0,'2025-07-28 21:08:26',NULL),
+(249,'T98',50.00,16.00,32.56,'Voucher','Dyspozytornia',0,'2025-07-28 21:09:22',NULL),
+(250,'T98',133.00,42.56,75.12,'Voucher','Dyspozytornia',1,'2025-07-28 21:19:17',NULL),
+(251,'T98',100.00,38.80,113.92,'Karta','Postój',0,'2025-07-28 21:19:41',NULL),
+(252,'T99',100.00,38.80,151.12,'Karta','Postój',0,'2025-07-31 13:27:13',NULL),
+(253,'T108',48.00,19.20,3515.20,'Voucher','Dyspozytornia',1,'2025-08-01 11:29:47',NULL),
+(254,'T108',1.00,-0.60,2481.09,'Gotówka','Postój',0,'2025-08-01 11:45:42',NULL),
+(255,'T108',90.00,34.92,2516.61,'Karta','Postój',0,'2025-08-01 15:30:32',NULL),
+(256,'T108',190.00,76.00,2592.61,'Voucher','Dyspozytornia',0,'2025-08-01 17:55:20',NULL),
+(257,'T108',200.00,77.60,2670.21,'Karta','Dyspozytornia',0,'2025-08-02 13:45:08',NULL),
+(258,'T108',190.00,76.00,2746.21,'Voucher','Dyspozytornia',0,'2025-08-02 17:47:01',NULL),
+(259,'T108',150.00,58.20,2804.41,'Karta','Dyspozytornia',0,'2025-08-04 09:39:47',NULL),
+(260,'T108',50.00,-30.00,2774.41,'Gotówka','Postój',0,'2025-08-04 14:13:37',NULL),
+(261,'T108',150.00,58.20,2832.61,'Karta','Dyspozytornia',0,'2025-08-05 06:52:47',NULL),
+(262,'T108',150.00,58.20,2890.81,'Karta','Dyspozytornia',0,'2025-08-05 08:00:39',NULL),
+(263,'T108',97.00,-58.20,2832.61,'Gotówka','Postój',0,'2025-08-05 11:44:12',NULL),
+(264,'T108',95.00,36.86,2869.47,'Karta','Postój',0,'2025-08-05 15:26:25',NULL);
 /*!40000 ALTER TABLE `kursy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +503,7 @@ CREATE TABLE `pojazdy` (
   `numer_polisy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `rejestracja` (`rejestracja`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,14 +513,14 @@ CREATE TABLE `pojazdy` (
 LOCK TABLES `pojazdy` WRITE;
 /*!40000 ALTER TABLE `pojazdy` DISABLE KEYS */;
 INSERT INTO `pojazdy` VALUES
-(5,'aweaw','asdasd','asdasd',777777,'2025-05-03','2026-04-16',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (6,'sdfsdf','asdfsad','sadfasdf',91000,'2025-04-23','2025-05-10',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (7,'KR1234X','Toyota','Corolla',155009,'2025-12-31','2025-12-31',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (8,'DW1234X','Toyota','Corolla',1000002,'2025-07-23','2025-08-29',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(9,'DKL82535','Mercedes-Benz','V-klasse',1,'2026-04-15','2026-04-18',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(10,'DW9YF48','Toyota','Corolla',180000,'2026-06-27','2026-07-02',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(11,'DX23YB','Toyo','Coro',175000,'2025-06-14','2025-06-20',1,'T98',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',0,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000');
+(9,'DKL82535','Mercedes-Benz','V-klasse',2,'2026-04-15','2026-04-18',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
+(10,'DW9YF48','Toyota','Corolla',187000,'2026-06-27','2026-07-02',1,'T99',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
+(11,'DX23YB','Toyo','Coro',186006,'2025-06-14','2025-06-20',1,'T108',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
+(13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',0,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000'),
+(17,'DKL83517','mercedes-benz','vito',89464,'2025-09-15','2025-09-15',1,'T108',0,1,1,'2025-09-15',0,NULL,'POLCAR','leasing','123');
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,7 +599,7 @@ CREATE TABLE `refuels` (
   PRIMARY KEY (`id`),
   KEY `refuels_ibfk_1` (`driver_id`),
   CONSTRAINT `refuels_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -589,7 +611,9 @@ LOCK TABLES `refuels` WRITE;
 INSERT INTO `refuels` VALUES
 (3,'T14','2025-04-29 16:02:45',30,150,155010,'2025-04-29 14:02:45'),
 (5,'T99','2025-07-28 17:17:49',30,300,174000,'2025-07-28 15:17:49'),
-(6,'T98','2025-07-28 21:20:10',50,250,174500,'2025-07-28 19:20:10');
+(6,'T98','2025-07-28 21:20:10',50,250,174500,'2025-07-28 19:20:10'),
+(7,'T108','2025-08-01 11:46:39',5,30,168005,'2025-08-01 09:46:39'),
+(8,'T108','2025-08-04 07:47:44',47.06,266.83,89265,'2025-08-04 05:47:44');
 /*!40000 ALTER TABLE `refuels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -674,7 +698,7 @@ CREATE TABLE `work_sessions` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `work_sessions_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -683,6 +707,26 @@ CREATE TABLE `work_sessions` (
 
 LOCK TABLES `work_sessions` WRITE;
 /*!40000 ALTER TABLE `work_sessions` DISABLE KEYS */;
+INSERT INTO `work_sessions` VALUES
+(1,'T99','DX23YB','2025-07-30 13:11:32',178001,'2025-07-30 13:12:59',178003),
+(2,'T99','DX23YB','2025-07-30 13:22:39',178004,'2025-07-30 13:27:35',179000),
+(3,'T99','DX23YB','2025-07-30 13:51:08',179001,'2025-07-30 13:51:25',179005),
+(4,'T99','DX23YB','2025-07-30 13:53:18',179008,'2025-07-30 13:53:30',179010),
+(5,'T99','DX23YB','2025-07-31 12:25:34',179020,'2025-07-31 13:26:06',180000),
+(6,'T99','DX23YB','2025-07-31 13:27:07',180001,NULL,NULL),
+(7,'T99','DX23YB','2025-07-31 16:27:53',185000,'2025-07-31 16:28:04',185001),
+(8,'T99','DX23YB','2025-07-31 16:36:57',186000,'2025-07-31 16:37:45',186001),
+(9,'T108','DKL83517','2025-08-01 11:27:18',2,'2025-08-01 11:31:42',3),
+(10,'T108','DKL83517','2025-08-01 11:37:43',88991,'2025-08-01 11:38:21',88991),
+(11,'T108','DX23YB','2025-08-01 11:38:54',186001,'2025-08-01 11:48:39',186005),
+(12,'T108','DKL83517','2025-08-01 11:56:00',89062,'2025-08-01 18:14:30',89169),
+(13,'T108','DKL83517','2025-08-02 12:49:40',89175,'2025-08-02 17:52:00',89263),
+(14,'T108','DKL83517','2025-08-04 07:31:51',89263,NULL,NULL),
+(15,'T108','DKL83517','2025-08-05 06:52:35',89383,NULL,NULL),
+(16,'T99','DW9YF48','2025-08-05 14:38:07',180001,'2025-08-05 14:51:40',182000),
+(17,'T99','DX23YB','2025-08-05 14:52:27',186006,NULL,NULL),
+(18,'T99','DW9YF48','2025-08-05 14:57:47',183000,'2025-08-05 14:58:31',187000),
+(19,'T108','DKL83517','2025-08-05 15:26:22',89464,NULL,NULL);
 /*!40000 ALTER TABLE `work_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -695,4 +739,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-29 12:13:45
+-- Dump completed on 2025-08-05 16:14:21

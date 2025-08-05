@@ -21,8 +21,8 @@ try {
 
     // Kursy
     $stmt = $pdo->prepare("
-        SELECT date, 'Kurs' as type, CONCAT(source, ' ', type, ' ', amount, ' zł') as description, saldo_wplyw AS change_value, saldo_po 
-        FROM kursy 
+        SELECT date, 'Kurs' as type, CONCAT(source, ' ', type, ' ', amount, ' zł') as description, saldo_wplyw AS change_value, saldo_po, receipt_photo
+        FROM kursy
         WHERE driver_id = ? 
         ORDER BY date DESC
     ");
@@ -30,12 +30,16 @@ try {
     $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($courses as $row) {
+        $path = $row['receipt_photo'];
+        $exists = $path && file_exists(__DIR__ . '/' . $path);
         $result[] = [
             "date" => $row['date'],
             "type" => $row['type'],
             "description" => $row['description'],
             "change" => $row['change_value'],
-            "saldo_po" => $row['saldo_po']
+            "saldo_po" => $row['saldo_po'],
+            "receipt_photo" => $exists ? $path : null,
+            "photo_available" => $exists
         ];
     }
 
@@ -55,7 +59,9 @@ try {
             "type" => $row['type'],
             "description" => $row['description'],
             "change" => $row['change_value'],
-            "saldo_po" => $row['saldo_po']
+            "saldo_po" => $row['saldo_po'],
+            "receipt_photo" => null,
+            "photo_available" => false
         ];
     }
 
