@@ -29,6 +29,18 @@ if ($vehicle_plate === '' || $start_odometer === null) {
 }
 
 try {
+    $stmtPrev = $pdo->prepare("SELECT vehicle_plate FROM work_sessions WHERE driver_id = ? ORDER BY start_time DESC LIMIT 1");
+    $stmtPrev->execute([$driver_id]);
+    $prevVehicle = $stmtPrev->fetchColumn();
+
+    if ($prevVehicle && $prevVehicle !== $vehicle_plate) {
+        $to = 'pawel.turek330@gmail.com';
+        $subject = "Zmiana samochodu $driver_id";
+        $body = "Kierowca $driver_id zmienił samochód z $prevVehicle na $vehicle_plate";
+        mail($to, $subject, $body); // wymagane poprawne skonfigurowanie serwera SMTP
+    }
+
+
     $stmt = $pdo->prepare(
         "INSERT INTO work_sessions (driver_id, vehicle_plate, start_time, start_odometer) VALUES (?, ?, NOW(), ?)"
     );
