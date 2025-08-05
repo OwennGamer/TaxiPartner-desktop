@@ -1,0 +1,2 @@
+# Run receipt cleanup daily at 2 AM
+0 2 * * * php /workspace/TaxiPartner-desktop/api/cleanup_receipts.php >/dev/null 2>&1
