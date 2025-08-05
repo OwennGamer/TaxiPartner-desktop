@@ -226,10 +226,10 @@ public class DriversController {
         Platform.runLater(this::reorderSummaryRow);
 
         // Clip the summary row inside an outer container
-        Rectangle clip = new Rectangle();
-        clip.widthProperty().bind(driversTable.widthProperty());
-        clip.heightProperty().bind(summaryContainer.heightProperty());
-        summaryContainer.setClip(clip);
+        Rectangle clipRect = new Rectangle();
+        summaryContainer.setClip(clipRect);
+        clipRect.widthProperty().bind(driversTable.widthProperty());
+        clipRect.heightProperty().bind(summaryContainer.heightProperty());
 
         // Outer container follows table width so it can shrink independently of column widths
         summaryContainer.minWidthProperty().bind(driversTable.widthProperty());
