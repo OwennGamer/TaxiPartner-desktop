@@ -101,7 +101,11 @@ public class TableUtils {
                 }
             }
             if (hBar != null) {
-                hBar.valueProperty().addListener((obs, oldV, newV) -> node.setTranslateX(-newV.doubleValue()));
+                // Bind the node's translateX to the negative scroll value.
+                // Only the node property is bound so the scrollbar remains
+                // fully interactive for the user.
+                node.translateXProperty().unbind();
+                node.translateXProperty().bind(hBar.valueProperty().multiply(-1));
             }
 
         };
