@@ -211,13 +211,26 @@ public class DriversController {
             }
         }
 
-        // 11) Reorder summary row when columns are permuted
+        // Re-align summary row when column widths change
+        for (TableColumn<?, ?> col : driversTable.getColumns()) {
+            col.widthProperty().addListener((obs, oldVal, newVal) ->
+                    Platform.runLater(this::reorderSummaryRow));
+        }
+
+        // 11) Reorder summary row when columns are permuted or otherwise updated
 
         reorderSummaryRow();
         driversTable.getColumns().addListener((ListChangeListener<TableColumn<?, ?>>) change -> {
             while (change.next()) {
-                if (change.wasPermutated() || change.wasReplaced()) {
+                if (change.wasPermutated() || change.wasReplaced() || change.wasUpdated()
+                        || change.wasAdded() || change.wasRemoved()) {
                     reorderSummaryRow();
+                }
+                if (change.wasAdded()) {
+                    for (TableColumn<?, ?> col : change.getAddedSubList()) {
+                        col.widthProperty().addListener((obs, oldVal, newVal) ->
+                                Platform.runLater(this::reorderSummaryRow));
+                    }
                 }
             }
         });
