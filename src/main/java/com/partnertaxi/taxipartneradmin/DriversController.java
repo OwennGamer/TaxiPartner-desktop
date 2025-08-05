@@ -20,6 +20,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -83,6 +84,7 @@ public class DriversController {
     @FXML private Region settlementLimitPlaceholder;
     @FXML private Region createdAtPlaceholder;
     @FXML private HBox summaryRow;
+    @FXML private StackPane summaryContainer;
 
     private final java.util.List<SummaryCell> summaryCells = new java.util.ArrayList<>();
 
@@ -223,24 +225,25 @@ public class DriversController {
         // initial alignment after column order restoration
         Platform.runLater(this::reorderSummaryRow);
 
-        // Clip summary row so overflowing cells are hidden when scrolled
+        // Clip the summary row inside an outer container
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(driversTable.widthProperty());
-        clip.heightProperty().bind(summaryRow.heightProperty());
+        clip.heightProperty().bind(summaryContainer.heightProperty());
+        summaryContainer.setClip(clip);
         summaryRow.setClip(clip);
 
-        // Ensure summary row spans either the full table width or the combined column widths
+        // Outer container follows table width so it can shrink independently of column widths
+        summaryContainer.minWidthProperty().bind(driversTable.widthProperty());
+        summaryContainer.prefWidthProperty().bind(driversTable.widthProperty());
+        summaryContainer.maxWidthProperty().bind(driversTable.widthProperty());
+
+        // Bind inner summary row to total column width and enable horizontal scrolling
         DoubleBinding totalColumnsWidth = Bindings.createDoubleBinding(
                 () -> driversTable.getColumns().stream().mapToDouble(TableColumnBase::getWidth).sum(),
                 driversTable.getColumns().stream().map(TableColumnBase::widthProperty).toArray(Observable[]::new)
         );
-        DoubleBinding maxWidth = Bindings.createDoubleBinding(
-                () -> Math.max(driversTable.getWidth(), totalColumnsWidth.get()),
-                driversTable.widthProperty(), totalColumnsWidth
-        );
-        summaryRow.prefWidthProperty().bind(maxWidth);
-        summaryRow.minWidthProperty().bind(maxWidth);
-        summaryRow.maxWidthProperty().bind(maxWidth);
+        summaryRow.prefWidthProperty().bind(totalColumnsWidth);
+        summaryRow.minWidthProperty().bind(totalColumnsWidth);
         summaryRow.setMouseTransparent(true);
 
         TableUtils.bindHorizontalScroll(driversTable, summaryRow);
