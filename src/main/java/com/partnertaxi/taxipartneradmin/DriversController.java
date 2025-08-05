@@ -230,7 +230,6 @@ public class DriversController {
         clip.widthProperty().bind(driversTable.widthProperty());
         clip.heightProperty().bind(summaryContainer.heightProperty());
         summaryContainer.setClip(clip);
-        summaryRow.setClip(clip);
 
         // Outer container follows table width so it can shrink independently of column widths
         summaryContainer.minWidthProperty().bind(driversTable.widthProperty());
