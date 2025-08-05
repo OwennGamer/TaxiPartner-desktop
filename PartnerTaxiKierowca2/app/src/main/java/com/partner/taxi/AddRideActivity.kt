@@ -1,12 +1,20 @@
 package com.partner.taxi
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class AddRideActivity : AppCompatActivity() {
 
@@ -18,6 +26,25 @@ class AddRideActivity : AppCompatActivity() {
     private lateinit var radioKm: RadioButton
     private lateinit var editTextKm: EditText
     private lateinit var buttonAddRide: Button
+
+    private var receiptPhotoPath: String? = null
+
+    private val requestCameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) launchCamera()
+            else Toast.makeText(this, "Brak dostępu do kamery", Toast.LENGTH_SHORT).show()
+        }
+
+    private val takePictureLauncher =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                showReceiptConfirmationDialog()
+            } else {
+                receiptPhotoPath = null
+            }
+        }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +78,18 @@ class AddRideActivity : AppCompatActivity() {
 
         // 🔵 Kliknięcie przycisku "Dodaj kurs"
         buttonAddRide.setOnClickListener {
-            addRide()
+            val payment = spinnerPaymentType.selectedItem?.toString() ?: ""
+            if (payment == "Karta") {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED
+                ) {
+                    requestCameraPermission.launch(Manifest.permission.CAMERA)
+                } else {
+                    launchCamera()
+                }
+            } else {
+                addRide()
+            }
         }
 
         // 🔵 Obsługa zmiany źródła lub rodzaju płatności
@@ -99,6 +137,23 @@ class AddRideActivity : AppCompatActivity() {
             updateFieldsVisibility()
         }
     }
+
+    private fun launchCamera() {
+        val file = File.createTempFile("receipt_", ".jpg", getExternalFilesDir(null))
+        val uri: Uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+        receiptPhotoPath = file.absolutePath
+        takePictureLauncher.launch(uri)
+    }
+
+    private fun showReceiptConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setMessage("Pamiętaj o wystawieniu paragonu")
+            .setPositiveButton("OK") { _, _ -> addRide() }
+            .setNegativeButton("Anuluj", null)
+            .show()
+    }
+
+
 
     private fun addRide() {
         val driverId = SessionManager.getDriverId(this)
