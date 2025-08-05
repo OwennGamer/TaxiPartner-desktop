@@ -95,9 +95,31 @@ try {
     $currentSaldo = (float)$driver['saldo'];
     $newSaldo = round($currentSaldo + $final_amount, 2);
 
+    // Obsługa zdjęcia paragonu (opcjonalnie)
+    $receiptPath = null;
+    if (!empty($_FILES['receipt']) && $_FILES['receipt']['error'] !== UPLOAD_ERR_NO_FILE) {
+        if ($_FILES['receipt']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = __DIR__ . '/uploads/receipts/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+            $extension = pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION) ?: 'jpg';
+            $filename = uniqid('receipt_') . '.' . $extension;
+            $destination = $uploadDir . $filename;
+            if (move_uploaded_file($_FILES['receipt']['tmp_name'], $destination)) {
+                $receiptPath = 'uploads/receipts/' . $filename;
+            } else {
+                throw new Exception('Nie udało się przesłać paragonu');
+            }
+        } else {
+            throw new Exception('Błąd przesyłania paragonu');
+        }
+    }
+
+
     // Zapisz kurs
-        $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km]);
+        $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, receipt_photo, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km, $receiptPath]);
 
     // Aktualizuj saldo kierowcy
     $stmt = $pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?");
@@ -114,3 +136,4 @@ try {
     exit;
 }
 ?>
+
