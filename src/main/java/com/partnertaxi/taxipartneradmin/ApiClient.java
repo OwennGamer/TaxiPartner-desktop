@@ -245,7 +245,9 @@ public class ApiClient {
                             o.optString("type", ""),
                             o.optString("description", ""),
                             o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
-                            o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00"
+                            o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00",
+                            o.optString("photoUrl", null),
+                            o.optBoolean("photoAvailable", false)
                     ));
                 }
             }

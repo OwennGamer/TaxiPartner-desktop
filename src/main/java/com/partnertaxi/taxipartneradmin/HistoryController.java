@@ -3,9 +3,18 @@ package com.partnertaxi.taxipartneradmin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
@@ -20,6 +29,7 @@ public class HistoryController {
     @FXML private TableColumn<HistoryEntry, String> descriptionColumn;
     @FXML private TableColumn<HistoryEntry, String> changeValueColumn;
     @FXML private TableColumn<HistoryEntry, String> saldoAfterColumn;
+    @FXML private TableColumn<HistoryEntry, Void> photoColumn;
 
     private static final String PREF_KEY_COLUMNS_ORDER = "historyTable.columnsOrder";
     private String driverId;
@@ -71,6 +81,32 @@ public class HistoryController {
             }
         });
 
+        // 6) kolumna "zdjęcie" z przyciskiem
+        photoColumn.setCellFactory(col -> new TableCell<>() {
+            private final Button btn = new Button("Wyświetl");
+
+            {
+                btn.setOnAction(e -> {
+                    HistoryEntry entry = getTableView().getItems().get(getIndex());
+                    if (entry.getPhotoUrl() != null) {
+                        openImageDialog(entry.getPhotoUrl());
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    HistoryEntry entry = getTableView().getItems().get(getIndex());
+                    btn.setDisable(!entry.isPhotoAvailable());
+                    setGraphic(btn);
+                }
+            }
+        });
+
         TableUtils.enableCopyOnCtrlC(historyTable);
         TableUtils.enableColumnsOrderPersistence(historyTable, HistoryController.class, PREF_KEY_COLUMNS_ORDER);
     }
@@ -84,5 +120,24 @@ public class HistoryController {
     private void handleClose() {
         Stage stage = (Stage) historyTable.getScene().getWindow();
         stage.close();
+    }
+
+    private void openImageDialog(String imageUrl) {
+        ImageView imageView = new ImageView(new Image(imageUrl, true));
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(800);
+
+        ScrollPane scrollPane = new ScrollPane(new StackPane(imageView));
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
+        Stage stage = new Stage();
+        stage.setTitle("Podgląd zdjęcia");
+        Scene scene = new Scene(scrollPane, 800, 600);
+        scene.getStylesheets().add(Objects.requireNonNull(
+                HelloApplication.class.getResource("style.css")).toExternalForm());
+        stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.show();
     }
 }
