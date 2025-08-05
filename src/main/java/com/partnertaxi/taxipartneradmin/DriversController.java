@@ -229,6 +229,7 @@ public class DriversController {
         clip.heightProperty().bind(summaryRow.heightProperty());
         summaryRow.setClip(clip);
 
+        // Ensure summary row spans either the full table width or the combined column widths
         DoubleBinding totalColumnsWidth = Bindings.createDoubleBinding(
                 () -> driversTable.getColumns().stream().mapToDouble(TableColumnBase::getWidth).sum(),
                 driversTable.getColumns().stream().map(TableColumnBase::widthProperty).toArray(Observable[]::new)
