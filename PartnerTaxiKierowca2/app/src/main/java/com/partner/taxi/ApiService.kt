@@ -72,14 +72,15 @@ interface ApiService {
         @Part("uwagi") uwagi: RequestBody?
     ): Call<GenericResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("addRide.php")
     fun addRide(
-        @Field("driver_id") driverId: String,
-        @Field("amount") amount: String,
-        @Field("type") type: String,
-        @Field("source") source: String,
-        @Field("via_km") viaKm: Int
+        @Part photo: MultipartBody.Part?,
+        @Part("driver_id") driverId: RequestBody,
+        @Part("amount") amount: RequestBody,
+        @Part("type") type: RequestBody,
+        @Part("source") source: RequestBody,
+        @Part("via_km") viaKm: RequestBody
     ): Call<AddRideResponse>
 
     @GET("getRideHistory.php")

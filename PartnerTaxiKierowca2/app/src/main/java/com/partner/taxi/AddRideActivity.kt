@@ -11,6 +11,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -200,12 +204,30 @@ class AddRideActivity : AppCompatActivity() {
 
         // 🔵 Wysyłka kursu do API
         val viaKm = if (source == "Dyspozytornia" && paymentType == "Voucher" && radioKm.isChecked) 1 else 0
+
+        val driverIdBody = driverId.toRequestBody("text/plain".toMediaTypeOrNull())
+        val amountBody = amountText.toRequestBody("text/plain".toMediaTypeOrNull())
+        val typeBody = paymentType.toRequestBody("text/plain".toMediaTypeOrNull())
+        val sourceBody = source.toRequestBody("text/plain".toMediaTypeOrNull())
+        val viaKmBody = viaKm.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+
+        var photoPart: MultipartBody.Part? = null
+        receiptPhotoPath?.let { path ->
+            val file = File(path)
+            if (file.exists()) {
+                val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                photoPart = MultipartBody.Part.createFormData("photo", file.name, requestFile)
+            }
+        }
+
+
         val call = ApiClient.apiService.addRide(
-            driverId,
-            amountText,
-            paymentType,
-            source,
-            viaKm
+            photoPart,
+            driverIdBody,
+            amountBody,
+            typeBody,
+            sourceBody,
+            viaKmBody
         )
 
         call.enqueue(object : Callback<AddRideResponse> {
