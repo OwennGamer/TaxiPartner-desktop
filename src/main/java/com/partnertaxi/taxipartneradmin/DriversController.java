@@ -240,6 +240,7 @@ public class DriversController {
         );
         summaryRow.prefWidthProperty().bind(maxWidth);
         summaryRow.minWidthProperty().bind(maxWidth);
+        summaryRow.maxWidthProperty().bind(maxWidth);
         summaryRow.setMouseTransparent(true);
 
         TableUtils.bindHorizontalScroll(driversTable, summaryRow);
