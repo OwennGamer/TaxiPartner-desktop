@@ -101,7 +101,15 @@ try {
         if ($_FILES['receipt']['error'] === UPLOAD_ERR_OK) {
             $uploadDir = __DIR__ . '/uploads/receipts/';
             if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
+                if (!mkdir($uploadDir, 0777, true)) {
+                    $mkdirError = error_get_last();
+                    file_put_contents("debug_log.txt", "\xE2\x9D\x8C Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu $uploadDir: " . ($mkdirError['message'] ?? 'unknown') . "\n", FILE_APPEND);
+                    throw new Exception('Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu na paragony');
+                }
+            }
+            if (!is_writable($uploadDir)) {
+                file_put_contents("debug_log.txt", "\xE2\x9D\x8C Katalog $uploadDir nie jest zapisywalny\n", FILE_APPEND);
+                throw new Exception('Katalog na paragony nie jest zapisywalny');
             }
             $extension = pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION) ?: 'jpg';
             $filename = uniqid('receipt_') . '.' . $extension;
@@ -109,10 +117,16 @@ try {
             if (move_uploaded_file($_FILES['receipt']['tmp_name'], $destination)) {
                 $receiptPath = 'uploads/receipts/' . $filename;
             } else {
-                throw new Exception('Nie udało się przesłać paragonu');
+                $moveError = error_get_last();
+                file_put_contents("debug_log.txt", "\xE2\x9D\x8C move_uploaded_file error: " . print_r($moveError, true) . "\n", FILE_APPEND);
+                $message = 'Nie uda\xC5\x82o si\xC4\x99 przes\xC5\x82a\xC4\x87 paragonu';
+                if (!empty($moveError['message'])) {
+                    $message .= ': ' . $moveError['message'];
+                }
+                throw new Exception($message);
             }
         } else {
-            throw new Exception('Błąd przesyłania paragonu');
+            throw new Exception('B\xC5\x82\xC4\x85d przesy\xC5\x82ania paragonu');
         }
     }
 
