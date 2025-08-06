@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import android.graphics.BitmapFactory
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -161,10 +162,14 @@ class AddRideActivity : AppCompatActivity() {
     }
 
     private fun showReceiptConfirmationDialog() {
+        val imageView = ImageView(this)
+        val bitmap = receiptPhotoPath?.let { BitmapFactory.decodeFile(it) }
+        imageView.setImageBitmap(bitmap)
+
         AlertDialog.Builder(this)
             .setMessage("Pamiętaj o wystawieniu paragonu")
+            .setView(imageView)
             .setPositiveButton("OK") { _, _ -> addRide() }
-            .setNegativeButton("Anuluj", null)
             .show()
     }
 
