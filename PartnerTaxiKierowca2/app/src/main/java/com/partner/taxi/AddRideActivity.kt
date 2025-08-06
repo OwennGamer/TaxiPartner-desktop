@@ -169,12 +169,15 @@ class AddRideActivity : AppCompatActivity() {
     }
 
     private fun showReceiptConfirmationDialog() {
-        val imageView = ImageView(this)
-        val bitmap = receiptPhotoPath?.let { BitmapFactory.decodeFile(it) }
-        imageView.setImageBitmap(bitmap)
+        val imageView = ImageView(this).apply {
+            contentDescription = "Podgląd zdjęcia"
+            val bitmap = receiptPhotoPath?.let { BitmapFactory.decodeFile(it) }
+            setImageBitmap(bitmap)
+        }
 
         AlertDialog.Builder(this)
-            .setMessage("Pamiętaj o wystawieniu paragonu")
+            .setTitle("Zdjęcie zapisane")
+            .setMessage("Zdjęcie zostało zapisane. Pamiętaj o wystawieniu paragonu")
             .setView(imageView)
             .setPositiveButton("OK") { _, _ -> addRide() }
             .show()
