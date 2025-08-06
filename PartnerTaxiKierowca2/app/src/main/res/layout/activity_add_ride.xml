@@ -10,14 +10,24 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Spinner: Źródło -->
+        <!-- Opis i wybór: Źródło kursu -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_source"
+            android:layout_marginBottom="4dp"/>
         <Spinner
             android:id="@+id/spinnerSource"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Spinner: Typ płatności -->
+        <!-- Opis i wybór: Rodzaj płatności -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_payment"
+            android:layout_marginBottom="4dp"/>
         <Spinner
             android:id="@+id/spinnerPaymentType"
             android:layout_width="match_parent"
@@ -74,6 +84,15 @@
             android:layout_marginBottom="16dp"
             android:visibility="gone"
             android:adjustViewBounds="true"/>
+
+        <!-- Przycisk: Zrób zdjęcie ponownie -->
+        <Button
+            android:id="@+id/buttonRetakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/retake_photo"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"/>
 
         <!-- Przycisk: Dodaj kurs -->
         <Button

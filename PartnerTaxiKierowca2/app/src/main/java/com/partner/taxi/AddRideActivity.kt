@@ -6,12 +6,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.view.Gravity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import kotlin.math.min
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -20,6 +24,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.io.FileOutputStream
 
 class AddRideActivity : AppCompatActivity() {
 
@@ -32,6 +37,7 @@ class AddRideActivity : AppCompatActivity() {
     private lateinit var editTextKm: EditText
     private lateinit var receiptPreview: ImageView
     private lateinit var buttonAddRide: Button
+    private lateinit var buttonRetakePhoto: Button
 
     private var receiptPhotoPath: String? = null
 
@@ -51,7 +57,17 @@ class AddRideActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
             if (success) {
                 receiptPhotoPath?.let { path ->
-                    val bitmap = BitmapFactory.decodeFile(path)
+                    var bitmap = BitmapFactory.decodeFile(path)
+                    val maxDim = 1280
+                    val ratio = min(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
+                    if (ratio < 1f) {
+                        val newW = (bitmap.width * ratio).toInt()
+                        val newH = (bitmap.height * ratio).toInt()
+                        bitmap = Bitmap.createScaledBitmap(bitmap, newW, newH, true)
+                        FileOutputStream(path).use { out ->
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, out)
+                        }
+                    }
                     receiptPreview.setImageBitmap(bitmap)
                     receiptPreview.visibility = View.VISIBLE
                 }
@@ -75,6 +91,7 @@ class AddRideActivity : AppCompatActivity() {
         radioKm = findViewById(R.id.radioKm)
         editTextKm = findViewById(R.id.editTextKm)
         receiptPreview = findViewById(R.id.receiptPreview)
+        buttonRetakePhoto = findViewById(R.id.buttonRetakePhoto)
         buttonAddRide = findViewById(R.id.buttonAddRide)
 
         // 🔵 Ładowanie danych do spinnerów
@@ -97,7 +114,7 @@ class AddRideActivity : AppCompatActivity() {
         // 🔵 Kliknięcie przycisku "Dodaj kurs"
         buttonAddRide.setOnClickListener {
             val payment = spinnerPaymentType.selectedItem?.toString() ?: ""
-            if (payment == "Karta") {
+            if (payment == "Karta" && receiptPhotoPath == null) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED
                 ) {
@@ -114,6 +131,22 @@ class AddRideActivity : AppCompatActivity() {
                 addRide()
             }
         }
+
+        // 🔵 Ponowne wykonanie zdjęcia
+        buttonRetakePhoto.setOnClickListener {
+            receiptPhotoPath = null
+            receiptPreview.setImageDrawable(null)
+            receiptPreview.visibility = View.GONE
+            buttonRetakePhoto.visibility = View.GONE
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestCameraPermission.launch(Manifest.permission.CAMERA)
+            } else {
+                launchCamera()
+            }
+        }
+
 
         // 🔵 Obsługa zmiany źródła lub rodzaju płatności
         setupDynamicFields()
@@ -182,7 +215,8 @@ class AddRideActivity : AppCompatActivity() {
 
         dialogView.findViewById<Button>(R.id.buttonOk).setOnClickListener {
             dialog.dismiss()
-            addRide()
+            showRememberReceiptDialog()
+            buttonRetakePhoto.visibility = View.VISIBLE
         }
 
         dialogView.findViewById<Button>(R.id.buttonRetry).setOnClickListener {
@@ -190,13 +224,27 @@ class AddRideActivity : AppCompatActivity() {
             receiptPhotoPath = null
             receiptPreview.setImageDrawable(null)
             receiptPreview.visibility = View.GONE
+            buttonRetakePhoto.visibility = View.GONE
             launchCamera()
         }
 
         dialog.show()
     }
 
+    private fun showRememberReceiptDialog() {
+        val textView = TextView(this).apply {
+            text = getString(R.string.remember_receipt)
+            setTextColor(Color.RED)
+            textSize = 24f
+            gravity = Gravity.CENTER
+            setPadding(32, 32, 32, 32)
+        }
 
+        AlertDialog.Builder(this)
+            .setView(textView)
+            .setPositiveButton("OK") { d, _ -> d.dismiss() }
+            .show()
+    }
 
     private fun addRide() {
         val driverId = SessionManager.getDriverId(this)
