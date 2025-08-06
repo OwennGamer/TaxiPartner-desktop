@@ -169,18 +169,31 @@ class AddRideActivity : AppCompatActivity() {
     }
 
     private fun showReceiptConfirmationDialog() {
-        val imageView = ImageView(this).apply {
-            contentDescription = "Podgląd zdjęcia"
+        val dialogView = layoutInflater.inflate(R.layout.dialog_receipt_confirmation, null)
+        dialogView.findViewById<ImageView>(R.id.dialogReceiptImage).apply {
+            adjustViewBounds = true
             val bitmap = receiptPhotoPath?.let { BitmapFactory.decodeFile(it) }
             setImageBitmap(bitmap)
         }
 
-        AlertDialog.Builder(this)
-            .setTitle("Zdjęcie zapisane")
-            .setMessage("Zdjęcie zostało zapisane. Pamiętaj o wystawieniu paragonu")
-            .setView(imageView)
-            .setPositiveButton("OK") { _, _ -> addRide() }
-            .show()
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        dialogView.findViewById<Button>(R.id.buttonOk).setOnClickListener {
+            dialog.dismiss()
+            addRide()
+        }
+
+        dialogView.findViewById<Button>(R.id.buttonRetry).setOnClickListener {
+            dialog.dismiss()
+            receiptPhotoPath = null
+            receiptPreview.setImageDrawable(null)
+            receiptPreview.visibility = View.GONE
+            launchCamera()
+        }
+
+        dialog.show()
     }
 
 
