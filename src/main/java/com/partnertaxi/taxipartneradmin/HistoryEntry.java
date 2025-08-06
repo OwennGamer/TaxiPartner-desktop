@@ -8,17 +8,17 @@ public class HistoryEntry {
     private final StringProperty description;
     private final StringProperty changeValue;
     private final StringProperty saldoAfter;
-    private final StringProperty photoUrl;
+    private final StringProperty receiptPhotoUrl;
     private final BooleanProperty photoAvailable;
 
     public HistoryEntry(String dateTime, String type, String description, String changeValue,
-                        String saldoAfter, String photoUrl, boolean photoAvailable) {
+                        String saldoAfter, String receiptPhotoUrl, boolean photoAvailable) {
         this.dateTime = new SimpleStringProperty(dateTime);
         this.type = new SimpleStringProperty(type);
         this.description = new SimpleStringProperty(description);
         this.changeValue = new SimpleStringProperty(changeValue);
         this.saldoAfter = new SimpleStringProperty(saldoAfter);
-        this.photoUrl = new SimpleStringProperty(photoUrl);
+        this.receiptPhotoUrl = new SimpleStringProperty(receiptPhotoUrl);
         this.photoAvailable = new SimpleBooleanProperty(photoAvailable);
     }
 
@@ -43,12 +43,12 @@ public class HistoryEntry {
     }
 
 
-    public String getPhotoUrl() {
-        return photoUrl.get();
+    public String getReceiptPhotoUrl() {
+        return receiptPhotoUrl.get();
     }
 
-    public StringProperty photoUrlProperty() {
-        return photoUrl;
+    public StringProperty receiptPhotoUrlProperty() {
+        return receiptPhotoUrl;
     }
 
     public boolean isPhotoAvailable() {

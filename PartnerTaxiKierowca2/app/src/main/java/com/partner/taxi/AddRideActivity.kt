@@ -211,18 +211,18 @@ class AddRideActivity : AppCompatActivity() {
         val sourceBody = source.toRequestBody("text/plain".toMediaTypeOrNull())
         val viaKmBody = viaKm.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
-        var photoPart: MultipartBody.Part? = null
+        var receiptPart: MultipartBody.Part? = null
         receiptPhotoPath?.let { path ->
             val file = File(path)
             if (file.exists()) {
                 val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                photoPart = MultipartBody.Part.createFormData("photo", file.name, requestFile)
+                receiptPart = MultipartBody.Part.createFormData("receipt", file.name, requestFile)
             }
         }
 
 
         val call = ApiClient.apiService.addRide(
-            photoPart,
+            receiptPart,
             driverIdBody,
             amountBody,
             typeBody,

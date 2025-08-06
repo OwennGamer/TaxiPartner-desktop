@@ -88,8 +88,8 @@ public class HistoryController {
             {
                 btn.setOnAction(e -> {
                     HistoryEntry entry = getTableView().getItems().get(getIndex());
-                    if (entry.getPhotoUrl() != null) {
-                        openImageDialog(entry.getPhotoUrl());
+                    if (entry.getReceiptPhotoUrl() != null) {
+                        openImageDialog(entry.getReceiptPhotoUrl());
                     }
                 });
             }

@@ -240,14 +240,20 @@ public class ApiClient {
                 JSONArray arr = respJson.getJSONArray("data");
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject o = arr.getJSONObject(i);
+                    String receiptPhoto = o.optString("receipt_photo", null);
+                    String receiptPhotoUrl = (receiptPhoto != null && !receiptPhoto.isEmpty())
+                            ? BASE_URL + receiptPhoto
+                            : null;
+                    boolean photoAvailable = o.optBoolean("photo_available", false);
+
                     list.add(new HistoryEntry(
                             o.optString("date", ""),
                             o.optString("type", ""),
                             o.optString("description", ""),
                             o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
                             o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00",
-                            o.optString("photoUrl", null),
-                            o.optBoolean("photoAvailable", false)
+                            receiptPhotoUrl,
+                            photoAvailable
                     ));
                 }
             }

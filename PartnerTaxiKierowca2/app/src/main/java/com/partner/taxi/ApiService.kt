@@ -75,7 +75,7 @@ interface ApiService {
     @Multipart
     @POST("addRide.php")
     fun addRide(
-        @Part photo: MultipartBody.Part?,
+        @Part("receipt") receipt: MultipartBody.Part?,
         @Part("driver_id") driverId: RequestBody,
         @Part("amount") amount: RequestBody,
         @Part("type") type: RequestBody,
