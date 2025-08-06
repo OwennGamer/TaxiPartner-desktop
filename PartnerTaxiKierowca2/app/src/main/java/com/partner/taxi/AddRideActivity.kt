@@ -35,8 +35,14 @@ class AddRideActivity : AppCompatActivity() {
 
     private val requestCameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) launchCamera()
-            else Toast.makeText(this, "Brak dostępu do kamery", Toast.LENGTH_SHORT).show()
+            if (granted) {
+                Toast.makeText(
+                    this,
+                    "Zrób zdjęcie wydruku z terminala płatniczego",
+                    Toast.LENGTH_LONG
+                ).show()
+                launchCamera()
+            } else Toast.makeText(this, "Brak dostępu do kamery", Toast.LENGTH_SHORT).show()
         }
 
     private val takePictureLauncher =
@@ -89,6 +95,11 @@ class AddRideActivity : AppCompatActivity() {
                 ) {
                     requestCameraPermission.launch(Manifest.permission.CAMERA)
                 } else {
+                    Toast.makeText(
+                        this,
+                        "Zrób zdjęcie wydruku z terminala płatniczego",
+                        Toast.LENGTH_LONG
+                    ).show()
                     launchCamera()
                 }
             } else {
