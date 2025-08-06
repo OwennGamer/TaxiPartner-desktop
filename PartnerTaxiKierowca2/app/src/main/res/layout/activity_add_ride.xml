@@ -66,6 +66,15 @@
             android:visibility="gone"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Podgląd zdjęcia paragonu -->
+        <ImageView
+            android:id="@+id/receiptPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true"/>
+
         <!-- Przycisk: Dodaj kurs -->
         <Button
             android:id="@+id/buttonAddRide"

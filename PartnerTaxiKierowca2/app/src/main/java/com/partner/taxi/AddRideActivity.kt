@@ -30,6 +30,7 @@ class AddRideActivity : AppCompatActivity() {
     private lateinit var radioAmount: RadioButton
     private lateinit var radioKm: RadioButton
     private lateinit var editTextKm: EditText
+    private lateinit var receiptPreview: ImageView
     private lateinit var buttonAddRide: Button
 
     private var receiptPhotoPath: String? = null
@@ -49,6 +50,11 @@ class AddRideActivity : AppCompatActivity() {
     private val takePictureLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
             if (success) {
+                receiptPhotoPath?.let { path ->
+                    val bitmap = BitmapFactory.decodeFile(path)
+                    receiptPreview.setImageBitmap(bitmap)
+                    receiptPreview.visibility = View.VISIBLE
+                }
                 showReceiptConfirmationDialog()
             } else {
                 receiptPhotoPath = null
@@ -68,6 +74,7 @@ class AddRideActivity : AppCompatActivity() {
         radioAmount = findViewById(R.id.radioAmount)
         radioKm = findViewById(R.id.radioKm)
         editTextKm = findViewById(R.id.editTextKm)
+        receiptPreview = findViewById(R.id.receiptPreview)
         buttonAddRide = findViewById(R.id.buttonAddRide)
 
         // 🔵 Ładowanie danych do spinnerów
