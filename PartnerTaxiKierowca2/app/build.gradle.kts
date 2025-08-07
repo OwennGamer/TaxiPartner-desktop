@@ -59,6 +59,9 @@ dependencies {
     // ML Kit Barcode Scanning (on-device)
     implementation("com.google.mlkit:barcode-scanning:17.0.2")
 
+    // Firebase Messaging
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
+
     // Testy
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
