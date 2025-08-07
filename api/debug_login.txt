@@ -1,0 +1,5 @@
+[2025-04-26 17:24:48] login.php called
+POST driver_id=T4, password=abc123
+Stored hash: 6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090
+plain-text compare: false
+Authentication failed

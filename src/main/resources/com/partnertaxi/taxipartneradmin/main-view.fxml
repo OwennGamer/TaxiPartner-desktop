@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.MainController">
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Exit" onAction="#handleExit" />
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About" onAction="#handleAbout" />
+            </Menu>
+        </MenuBar>
+    </top>
+    <center>
+        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+            <Label text="Witamy w Partner Taxi" styleClass="font-24" />
+            <Button text="Start" fx:id="startButton" onAction="#handleStartButton" />
+            <Button text="Dodaj użytkowników" onAction="#addSampleUsers" />
+
+
+        </VBox>
+    </center>
+</BorderPane>

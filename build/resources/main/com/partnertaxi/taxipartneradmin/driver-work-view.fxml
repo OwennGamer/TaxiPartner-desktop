@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.DriverWorkController">
+
+    <VBox spacing="10"
+          AnchorPane.topAnchor="10.0"
+          AnchorPane.leftAnchor="10.0"
+          AnchorPane.rightAnchor="10.0"
+          AnchorPane.bottomAnchor="10.0">
+        <Label text="Czas pracy" styleClass="font-18" />
+        <TableView fx:id="workTable" prefHeight="500">
+            <columns>
+                <TableColumn fx:id="dateColumn" id="dateColumn" text="Data" prefWidth="140"/>
+                <TableColumn fx:id="startTimeColumn" id="startTimeColumn" text="Godzina rozpoczęcia pracy" prefWidth="180"/>
+                <TableColumn fx:id="endTimeColumn" id="endTimeColumn" text="Godzina zakończenia pracy" prefWidth="180"/>
+                <TableColumn fx:id="hoursColumn" id="hoursColumn" text="Godziny" prefWidth="100"/>
+                <TableColumn fx:id="kilometersColumn" id="kilometersColumn" text="Kilometry" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

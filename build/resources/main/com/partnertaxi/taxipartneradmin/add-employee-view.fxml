@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.AddEmployeeController">
+    <content>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Dodaj pracownika" styleClass="font-20"/>
+
+            <StackPane>
+                <TextField fx:id="idField" />
+                <Label fx:id="idFieldPlaceholder" text="ID pracownika" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="nameField" />
+                <Label fx:id="nameFieldPlaceholder" text="Imię i nazwisko" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="firmaField" />
+                <Label fx:id="firmaFieldPlaceholder" text="Firma" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="rodzajUmowyField" />
+                <Label fx:id="rodzajUmowyPlaceholder" text="Rodzaj umowy" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <DatePicker fx:id="dataUmowyPicker" promptText="Data umowy"/>
+
+            <CheckBox fx:id="dowodCheck" text="Dowód"/>
+            <CheckBox fx:id="prawoJazdyCheck" text="Prawo jazdy"/>
+            <CheckBox fx:id="niekaralnoscCheck" text="Niekaralność"/>
+            <CheckBox fx:id="orzPsychCheck" text="Orzeczenie psychologiczne"/>
+            <DatePicker fx:id="dataBadaniaPsychPicker" promptText="Data badania psychologicznego"/>
+            <CheckBox fx:id="orzLekCheck" text="Orzeczenie lekarskie"/>
+            <DatePicker fx:id="dataBadanLekPicker" promptText="Data badań lekarskich"/>
+            <CheckBox fx:id="informacjaPpkCheck" text="Informacja PPK"/>
+            <CheckBox fx:id="rezygnacjaPpkCheck" text="Rezygnacja PPK"/>
+
+            <StackPane>
+                <TextField fx:id="formaWyplatyField" />
+                <Label fx:id="formaWyplatyPlaceholder" text="Forma wypłaty" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <CheckBox fx:id="wynDoRakCheck" text="Wynagrodzenie do rąk własnych"/>
+            <CheckBox fx:id="zgodaNaPrzelewCheck" text="Zgoda na przelew"/>
+            <CheckBox fx:id="ryzykoZawodoweCheck" text="Ryzyko zawodowe"/>
+            <CheckBox fx:id="oswiadczenieZUSCheck" text="Oświadczenie ZUS"/>
+            <CheckBox fx:id="bhpCheck" text="BHP"/>
+            <CheckBox fx:id="regulaminPracyCheck" text="Regulamin pracy"/>
+            <CheckBox fx:id="zasadyEwidencjiKasaCheck" text="Zasady ewidencji kasa"/>
+            <CheckBox fx:id="pit2Check" text="PIT-2"/>
+            <CheckBox fx:id="oswArt188Check" text="Oświadczenie art.188 KP"/>
+            <CheckBox fx:id="rodoCheck" text="RODO"/>
+            <CheckBox fx:id="poraNocnaCheck" text="Pora nocna"/>
+
+            <StackPane>
+                <TextField fx:id="pitEmailField" />
+                <Label fx:id="pitEmailPlaceholder" text="Email do PIT" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="osobaKontaktowaField" />
+                <Label fx:id="osobaKontaktowaPlaceholder" text="Osoba kontaktowa" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="numerPrywatnyField" />
+                <Label fx:id="numerPrywatnyPlaceholder" text="Numer prywatny" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="numerSluzbowyField" />
+                <Label fx:id="numerSluzbowyPlaceholder" text="Numer służbowy" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="modelTelefonuField" />
+                <Label fx:id="modelTelefonuPlaceholder" text="Model telefonu służbowego" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <StackPane>
+                <TextField fx:id="operatorField" />
+                <Label fx:id="operatorPlaceholder" text="Operator" mouseTransparent="true"
+                       styleClass="placeholder-label" StackPane.alignment="CENTER_LEFT"/>
+            </StackPane>
+
+            <DatePicker fx:id="waznoscWizyPicker" promptText="Ważność wizy"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="saveButton" text="Dodaj" onAction="#handleSave" />
+                <Button fx:id="cancelButton" text="Anuluj" onAction="#handleCancel" />
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

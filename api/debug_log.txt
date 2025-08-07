@@ -1,0 +1,2195 @@
+[2025-04-08 15:39:10] Brak połączenia z bazą danych: 
+[2025-04-08 15:41:07] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-08 15:41:47] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-08 15:42:06] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-08 15:42:12] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-08 15:42:14] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-08 15:42:15] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-08 15:42:33] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:17:28] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:17:35] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:20:29] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:28:02] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:37:12] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:46:29] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:46:41] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:47:58] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:48:31] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:48:38] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:48:43] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:48:47] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 08:48:53] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 10:38:03] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 10:40:46] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 10:41:06] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 10:45:27] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 13:06:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 13:06:44] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 14:44:16] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 14:48:57] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 14:49:13] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 14:57:58] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 16:09:53] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 16:15:42] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-09 16:21:15] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 11:21:33] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-04-10 14:36:21] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 14:40:29] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 14:40:42] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 14:45:36] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 14:46:41] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 14:50:48] Endpoint wywołany
+Rejestracja: KR1234
+Brak wyników
+[2025-04-10 14:50:53] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 14:58:12] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:04:12] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:04:27] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:07:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:09:41] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:10:06] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:13:43] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:16:52] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:24:05] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:31:35] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:44:53] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:52:19] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 15:58:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:02:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:06:16] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:09:32] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:12:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:17:33] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:19:40] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:26:10] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:32:03] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:37:59] Endpoint wywołany
+Rejestracja: 1
+Brak wyników
+[2025-04-10 16:38:09] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:44:13] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:46:42] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:49:03] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-10 16:58:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-22 13:39:37] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-22 13:46:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-22 14:21:39] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-22 14:26:33] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-22 14:30:12] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-22 14:30:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-23 11:15:48] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-23 11:40:55] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-23 11:45:45] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-23 11:56:37] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 09:57:01] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 10:13:34] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 10:14:38] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 10:29:35] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 11:54:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 12:14:24] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 12:25:05] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 12:44:25] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 12:48:02] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 12:48:11] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 12:53:10] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 13:16:58] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 13:20:02] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-24 13:35:42] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 09:41:34] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128000,"ostatni_kierowca_id":"1"}
+[2025-04-26 09:41:34] update_vehicle_mileage called
+[2025-04-26 09:42:15] Endpoint wywołany
+Rejestracja: KR1234XX
+Brak wyników
+[2025-04-26 09:42:18] Endpoint wywołany
+Rejestracja: KR1234XX
+Brak wyników
+[2025-04-26 09:42:24] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128358,"ostatni_kierowca_id":"1"}
+[2025-04-26 09:42:24] update_vehicle_mileage called
+[2025-04-26 09:51:41] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128444,"ostatni_kierowca_id":"1"}
+[2025-04-26 09:51:41] update_vehicle_mileage called
+[2025-04-26 09:53:15] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128471,"ostatni_kierowca_id":"1"}
+[2025-04-26 09:53:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128471,"ostatni_kierowca_id":"1"}
+[2025-04-26 09:53:28] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128471,"ostatni_kierowca_id":"1"}
+[2025-04-26 10:00:31] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":128471,"ostatni_kierowca_id":"1"}
+[2025-04-26 10:00:31] update_vehicle_mileage called
+[2025-04-26 10:01:03] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":130000,"ostatni_kierowca_id":"1"}
+[2025-04-26 10:01:34] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":130000,"ostatni_kierowca_id":"1"}
+[2025-04-26 10:01:34] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 11:32:01] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":131000,"ostatni_kierowca_id":"1"}
+[2025-04-26 11:32:01] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 12:14:42] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":132000,"ostatni_kierowca_id":"1"}
+[2025-04-26 12:14:42] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 12:49:21] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135000,"ostatni_kierowca_id":"1"}
+[2025-04-26 12:49:29] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135000,"ostatni_kierowca_id":"1"}
+[2025-04-26 12:49:29] update_vehicle_mileage called
+[2025-04-26 12:51:39] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135001,"ostatni_kierowca_id":"1"}
+[2025-04-26 12:51:39] update_vehicle_mileage called
+[2025-04-26 13:21:13] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135002,"ostatni_kierowca_id":"1"}
+[2025-04-26 13:21:13] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 13:40:26] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135003,"ostatni_kierowca_id":"1"}
+[2025-04-26 13:40:26] update_vehicle_mileage called
+[2025-04-26 13:52:42] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135008,"ostatni_kierowca_id":"1"}
+[2025-04-26 13:52:42] update_vehicle_mileage called
+[2025-04-26 14:07:18] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135101,"ostatni_kierowca_id":"1"}
+[2025-04-26 14:07:24] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135101,"ostatni_kierowca_id":"1"}
+[2025-04-26 14:07:24] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 15:34:21] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135102,"ostatni_kierowca_id":"1"}
+[2025-04-26 15:34:21] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 15:46:48] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":50000,"ostatni_kierowca_id":null}
+[2025-04-26 15:46:48] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 16:41:14] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135109,"ostatni_kierowca_id":"1"}
+[2025-04-26 16:41:14] update_vehicle_mileage called
+[2025-04-26 16:43:25] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135110,"ostatni_kierowca_id":"T4"}
+[2025-04-26 16:43:25] update_vehicle_mileage called
+[2025-04-26 16:57:40] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135111,"ostatni_kierowca_id":"T4"}
+[2025-04-26 16:57:40] update_vehicle_mileage called
+[2025-04-26 16:59:06] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135112,"ostatni_kierowca_id":"T4"}
+[2025-04-26 16:59:06] update_vehicle_mileage called
+[2025-04-26 17:00:47] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135113,"ostatni_kierowca_id":"T4"}
+[2025-04-26 17:00:47] update_vehicle_mileage called
+[2025-04-26 17:04:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135114,"ostatni_kierowca_id":"T4"}
+[2025-04-26 17:04:23] update_vehicle_mileage called
+[2025-04-26 17:07:22] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135115,"ostatni_kierowca_id":"T4"}
+[2025-04-26 17:09:06] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135115,"ostatni_kierowca_id":"T4"}
+[2025-04-26 17:09:06] update_vehicle_mileage called
+[2025-04-26 17:10:13] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135117,"ostatni_kierowca_id":"T14"}
+[2025-04-26 17:29:48] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135117,"ostatni_kierowca_id":"T14"}
+[2025-04-26 17:29:48] update_vehicle_mileage called
+[2025-04-26 17:30:44] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135118,"ostatni_kierowca_id":"T14"}
+[2025-04-26 17:30:44] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-04-26 17:32:25] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":50001,"ostatni_kierowca_id":null}
+[2025-04-26 17:32:25] update_vehicle_mileage called
+[2025-04-26 17:36:46] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135119,"ostatni_kierowca_id":"T14"}
+[2025-04-26 17:36:46] update_vehicle_mileage called
+[2025-04-26 17:37:29] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":135888,"ostatni_kierowca_id":"T14"}
+[2025-04-26 17:37:29] update_vehicle_mileage called
+[2025-04-26 17:57:25] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":136000,"ostatni_kierowca_id":"T14"}
+[2025-04-26 17:57:25] update_vehicle_mileage called
+[2025-04-26 18:08:24] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137000,"ostatni_kierowca_id":"T4"}
+[2025-04-26 18:08:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137000,"ostatni_kierowca_id":"T4"}
+[2025-04-26 18:08:30] update_vehicle_mileage called
+[2025-04-27 08:24:39] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 08:24:39] update_vehicle_mileage called
+[2025-04-27 08:35:35] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137002,"ostatni_kierowca_id":"T4"}
+[2025-04-27 08:35:35] update_vehicle_mileage called
+[2025-04-27 08:51:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137888,"ostatni_kierowca_id":"T4"}
+[2025-04-27 08:51:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137888,"ostatni_kierowca_id":"T4"}
+[2025-04-27 08:51:30] update_vehicle_mileage called
+[2025-04-27 09:01:47] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137999,"ostatni_kierowca_id":"T4"}
+[2025-04-27 09:01:54] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":137999,"ostatni_kierowca_id":"T4"}
+[2025-04-27 09:01:54] update_vehicle_mileage called
+[2025-04-27 09:11:01] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 09:11:01] update_vehicle_mileage called
+[2025-04-27 09:15:56] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 09:15:56] update_vehicle_mileage called
+[2025-04-27 09:31:41] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138002,"ostatni_kierowca_id":"T4"}
+[2025-04-27 09:31:41] update_vehicle_mileage called
+[2025-04-27 10:05:17] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138003,"ostatni_kierowca_id":"T4"}
+[2025-04-27 10:05:18] update_vehicle_mileage called
+[2025-04-27 10:07:37] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138003,"ostatni_kierowca_id":"T4"}
+[2025-04-27 10:07:45] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138003,"ostatni_kierowca_id":"T4"}
+[2025-04-27 10:07:45] update_vehicle_mileage called
+[2025-04-27 10:08:24] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138004,"ostatni_kierowca_id":"T4"}
+[2025-04-27 10:08:24] update_vehicle_mileage called
+[2025-04-27 10:10:40] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138005,"ostatni_kierowca_id":"T4"}
+[2025-04-27 10:10:40] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NDg2MjksImV4cCI6MTc0NTc1MjIyOSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.t5F_3geo_UvgWPIvoCBVEtEBTmg63yITVoQZWw5sPn8","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"53","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NDg2MjksImV4cCI6MTc0NTc1MjIyOSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.t5F_3geo_UvgWPIvoCBVEtEBTmg63yITVoQZWw5sPn8","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"53","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NDg2MjksImV4cCI6MTc0NTc1MjIyOSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.t5F_3geo_UvgWPIvoCBVEtEBTmg63yITVoQZWw5sPn8","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"52","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=50, type=Karta, source=Postój
+[2025-04-27 10:39:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138007,"ostatni_kierowca_id":"T4"}
+[2025-04-27 10:39:20] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NTAzMzUsImV4cCI6MTc0NTc1MzkzNSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.il1K5XToBY47E_jNBGohpGBmdNsULa-UUFj0VVjxzcE","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"53","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NTAzMzUsImV4cCI6MTc0NTc1MzkzNSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.il1K5XToBY47E_jNBGohpGBmdNsULa-UUFj0VVjxzcE","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"60","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NTAzMzUsImV4cCI6MTc0NTc1MzkzNSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.il1K5XToBY47E_jNBGohpGBmdNsULa-UUFj0VVjxzcE","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"53","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Nagłówki: {"Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDU3NTAzMzUsImV4cCI6MTc0NTc1MzkzNSwidXNlcl9pZCI6IlQ0Iiwicm9sZSI6ImRyaXZlciJ9.il1K5XToBY47E_jNBGohpGBmdNsULa-UUFj0VVjxzcE","Content-Type":"application\/x-www-form-urlencoded","Content-Length":"53","Host":"164.126.143.20:8444","Connection":"Keep-Alive","Accept-Encoding":"gzip","User-Agent":"okhttp\/4.12.0"}
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 11:43:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":138008,"ostatni_kierowca_id":"T4"}
+[2025-04-27 11:43:23] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=90, type=Karta, source=Postój
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Bolt
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Bolt
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Bolt
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 12:07:03] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":139636,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:07:12] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":139636,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:07:12] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+[2025-04-27 12:15:52] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:16:00] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:16:00] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+[2025-04-27 12:19:54] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:19:54] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+[2025-04-27 12:32:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140003,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:32:23] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+[2025-04-27 12:36:19] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140005,"ostatni_kierowca_id":"T4"}
+[2025-04-27 12:36:19] update_vehicle_mileage called
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Karta, source=Dyspozytornia
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Voucher, source=Dyspozytornia
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Karta, source=Bolt
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Gotówka, source=Bolt
+\ud83d\udd35 Skrypt startuje
+\ud83d\udd0d Parametry: driver_id=T4, amount=100, type=Voucher, source=Bolt
+[2025-04-27 13:12:43] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140009,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:12:43] update_vehicle_mileage called
+[2025-04-27 13:16:38] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140010,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:16:38] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Bolt
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Bolt
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Bolt
+[2025-04-27 13:24:07] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140011,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:24:07] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Dyspozytornia
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Dyspozytornia
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Bolt
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Bolt
+🔵 Skrypt addRide.php startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Bolt
+[2025-04-27 13:32:28] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140012,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:32:28] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+[2025-04-27 13:36:33] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140113,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:36:33] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Bolt
+[2025-04-27 13:40:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140114,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:40:30] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Dyspozytornia
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Bolt
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Bolt
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Bolt
+[2025-04-27 13:53:32] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140117,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:53:32] update_vehicle_mileage called
+[2025-04-27 13:56:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140118,"ostatni_kierowca_id":"T4"}
+[2025-04-27 13:56:20] update_vehicle_mileage called
+[2025-04-27 14:00:10] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140119,"ostatni_kierowca_id":"T4"}
+[2025-04-27 14:00:10] update_vehicle_mileage called
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Karta, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Gotówka, source=Postój
+🔵 Skrypt startuje
+🔍 Parametry: driver_id=T4, amount=100, type=Voucher, source=Postój
+[2025-04-27 14:29:26] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140120,"ostatni_kierowca_id":"T4"}
+[2025-04-27 14:29:34] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140120,"ostatni_kierowca_id":"T4"}
+[2025-04-27 14:29:34] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 14:36:28] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140121,"ostatni_kierowca_id":"T4"}
+[2025-04-27 14:36:29] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 15:11:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":140122,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:11:20] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 15:12:44] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":141777,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:12:50] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":141777,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:12:56] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":141777,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:12:56] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-04-27 15:32:58] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":142000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:32:58] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-04-27 15:38:46] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":142001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:38:46] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-04-27 15:59:40] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":143000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 15:59:40] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-04-27 16:06:17] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":148001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:06:27] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":148001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:06:28] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-04-27 16:25:18] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":148002,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:25:18] update_vehicle_mileage called
+[2025-04-27 16:25:56] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":148300,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:26:05] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":148300,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:26:05] update_vehicle_mileage called
+[2025-04-27 16:39:57] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":150000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:39:57] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-04-27 16:44:01] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":150001,"ostatni_kierowca_id":"T4"}
+[2025-04-27 16:44:01] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 17:54:45] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":150002,"ostatni_kierowca_id":"T4"}
+[2025-04-27 17:54:45] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-04-27 17:55:47] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":151008,"ostatni_kierowca_id":"T4"}
+[2025-04-27 17:55:47] update_vehicle_mileage called
+[2025-04-27 17:57:29] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":151333,"ostatni_kierowca_id":"T14"}
+[2025-04-27 17:57:29] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:09:31] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":151999,"ostatni_kierowca_id":"T14"}
+[2025-04-27 18:09:31] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:18:20] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":151999,"ostatni_kierowca_id":"T14"}
+[2025-04-27 18:18:20] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:20:15] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":152000,"ostatni_kierowca_id":"T14"}
+[2025-04-27 18:20:15] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:22:54] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":152001,"ostatni_kierowca_id":"T14"}
+[2025-04-27 18:22:54] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:32:50] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":152999,"ostatni_kierowca_id":"T4"}
+[2025-04-27 18:32:58] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":152999,"ostatni_kierowca_id":"T4"}
+[2025-04-27 18:32:58] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:35:28] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":153000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 18:35:28] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:42:57] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":154000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 18:42:57] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-27 18:47:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":154000,"ostatni_kierowca_id":"T4"}
+[2025-04-27 18:47:23] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-28 13:53:32] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155000,"ostatni_kierowca_id":"T4"}
+[2025-04-28 13:53:38] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155000,"ostatni_kierowca_id":"T4"}
+[2025-04-28 13:53:38] update_vehicle_mileage called
+[2025-04-28 13:54:10] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155001,"ostatni_kierowca_id":"T4"}
+[2025-04-28 13:54:10] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-28 14:23:25] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155002,"ostatni_kierowca_id":"T4"}
+[2025-04-28 14:23:26] update_vehicle_mileage called
+[2025-04-28 14:28:34] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155003,"ostatni_kierowca_id":"T4"}
+[2025-04-28 14:28:34] update_vehicle_mileage called
+[2025-04-28 14:37:36] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155003,"ostatni_kierowca_id":"T4"}
+[2025-04-28 14:37:36] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-28 16:12:56] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155004,"ostatni_kierowca_id":"T4"}
+[2025-04-28 16:12:56] update_vehicle_mileage called
+[2025-04-28 16:14:46] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155005,"ostatni_kierowca_id":"T4"}
+[2025-04-28 16:14:46] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-29 07:43:23] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155006,"ostatni_kierowca_id":"T14"}
+[2025-04-29 07:43:28] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155006,"ostatni_kierowca_id":"T14"}
+[2025-04-29 07:43:28] update_vehicle_mileage called
+[2025-04-29 07:43:52] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155007,"ostatni_kierowca_id":"T14"}
+[2025-04-29 07:43:52] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-04-29 14:01:30] Endpoint wywołany
+Rejestracja: KR1234X
+Pojazd znaleziony: {"rejestracja":"KR1234X","przebieg":155007,"ostatni_kierowca_id":"T14"}
+[2025-04-29 14:01:30] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-05 07:51:24] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":50002,"ostatni_kierowca_id":"T14"}
+[2025-05-05 07:51:25] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-05 09:18:08] Endpoint wywołany
+Rejestracja: WB12345
+Pojazd znaleziony: {"rejestracja":"WB12345","przebieg":123000,"ostatni_kierowca_id":null}
+[2025-05-05 09:18:18] Endpoint wywołany
+Rejestracja: WB12345
+Pojazd znaleziony: {"rejestracja":"WB12345","przebieg":123000,"ostatni_kierowca_id":null}
+[2025-05-05 09:18:18] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-07 08:28:28] Endpoint wywołany
+Rejestracja: 1234X
+Brak wyników
+[2025-05-07 08:28:54] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":99999,"ostatni_kierowca_id":"T14"}
+[2025-05-07 08:29:06] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":99999,"ostatni_kierowca_id":"T14"}
+[2025-05-07 08:29:06] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-09 09:32:47] Endpoint wywołany
+Rejestracja: ASDASD
+Pojazd znaleziony: {"rejestracja":"asdasd","przebieg":104000,"ostatni_kierowca_id":null}
+[2025-05-09 09:32:47] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-05-10 01:55:29] Endpoint wywołany
+Nieprawidłowe żądanie
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-12 11:22:30] Endpoint wywołany
+Rejestracja: AWEAW
+Pojazd znaleziony: {"rejestracja":"aweaw","przebieg":555555,"ostatni_kierowca_id":null}
+[2025-05-12 11:22:30] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-13 08:20:10] Endpoint wywołany
+Rejestracja: SDFSDF
+Pojazd znaleziony: {"rejestracja":"sdfsdf","przebieg":90000,"ostatni_kierowca_id":null}
+[2025-05-13 08:20:10] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-05-13 08:52:49] Endpoint wywołany
+Rejestracja: AWEAW
+Pojazd znaleziony: {"rejestracja":"aweaw","przebieg":666666,"ostatni_kierowca_id":"T14"}
+[2025-05-13 08:52:49] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-05-13 10:02:59] Endpoint wywołany
+Rejestracja: WB12345
+Pojazd znaleziony: {"rejestracja":"WB12345","przebieg":250000,"ostatni_kierowca_id":"T14"}
+[2025-05-13 10:02:59] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-05-16 13:41:01] Endpoint wywołany
+Rejestracja: ASDASD
+Pojazd znaleziony: {"rejestracja":"asdasd","przebieg":250000,"ostatni_kierowca_id":"T14"}
+[2025-05-16 13:41:01] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-05-29 08:29:31] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":1000000,"ostatni_kierowca_id":"T1"}
+[2025-05-29 08:29:31] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-04 12:58:34] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-04 12:58:38] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-25 17:55:29] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-25 17:55:34] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-26 11:18:45] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-26 11:18:49] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-27 05:32:24] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-27 05:32:28] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-28 10:00:13] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-28 10:00:19] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-28 22:28:20] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-28 22:28:25] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-30 04:57:05] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-30 04:57:11] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-06-30 20:54:00] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-06-30 20:54:05] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-01 14:54:39] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-01 14:54:44] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-02 05:54:02] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-02 05:54:07] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-03 20:40:06] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-03 20:40:07] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-03 20:40:10] update_vehicle_mileage called
+[2025-07-03 20:40:11] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-05 13:17:51] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-05 13:17:56] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-06 01:12:09] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-06 01:12:15] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-07 23:36:34] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-07 23:36:39] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-08 17:46:20] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-08 17:46:26] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-09 10:41:49] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-09 10:41:54] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-10 23:11:15] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-10 23:11:20] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-10 23:33:00] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-10 23:33:06] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-11 14:46:06] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-11 14:46:11] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-13 00:58:58] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-13 00:59:04] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-13 12:18:06] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-13 12:18:14] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-13 15:17:02] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-13 15:17:07] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-16 08:53:13] update_vehicle_mileage called
+[2025-07-16 08:53:15] Endpoint wywołany
+Nieprawidłowe żądanie
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-16 12:11:07] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-16 12:11:11] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-17 09:17:45] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-17 09:17:46] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-18 13:06:49] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-18 13:06:54] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-18 13:33:40] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-18 13:33:45] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-19 00:31:14] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-19 00:31:19] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-20 14:30:38] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-20 14:30:40] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-20 18:59:55] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-20 18:59:57] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-22 07:06:31] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-22 07:06:36] update_vehicle_mileage called
+[2025-07-22 14:26:08] update_vehicle_mileage called
+[2025-07-22 14:26:09] Endpoint wywołany
+Nieprawidłowe żądanie
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-22 19:05:22] update_vehicle_mileage called
+[2025-07-22 19:05:23] Endpoint wywołany
+Nieprawidłowe żądanie
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-22 19:40:50] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-22 19:40:54] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-23 03:48:10] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-23 03:48:16] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-23 20:46:29] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-23 20:46:34] update_vehicle_mileage called
+[2025-07-25 12:03:00] update_vehicle_mileage called
+[2025-07-25 12:03:01] Endpoint wywołany
+Nieprawidłowe żądanie
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-26 05:45:45] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-26 05:45:51] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-26 17:09:30] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-26 17:09:37] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-27 15:35:51] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-27 15:35:56] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-28 08:04:35] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-28 08:04:40] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-28 12:19:35] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":172888,"ostatni_kierowca_id":null}
+[2025-07-28 12:19:35] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-07-28 16:56:45] Endpoint wywołany
+Rejestracja: DW1234X
+Pojazd znaleziony: {"rejestracja":"DW1234X","przebieg":1000001,"ostatni_kierowca_id":"T14"}
+[2025-07-28 16:56:45] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-28 17:22:06] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":173000,"ostatni_kierowca_id":"T99"}
+[2025-07-28 17:22:07] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-28 19:00:25] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":174000,"ostatni_kierowca_id":"T99"}
+[2025-07-28 19:00:25] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-28 19:05:01] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":174000,"ostatni_kierowca_id":"T99"}
+[2025-07-28 19:05:01] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-29 13:27:34] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":175000,"ostatni_kierowca_id":"T98"}
+[2025-07-29 13:27:34] update_vehicle_mileage called
+[2025-07-29 13:27:47] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":175000,"ostatni_kierowca_id":"T98"}
+[2025-07-29 13:27:48] update_vehicle_mileage called
+[2025-07-29 13:28:03] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":176000,"ostatni_kierowca_id":"T98"}
+[2025-07-29 13:28:04] update_vehicle_mileage called
+[2025-07-29 13:29:43] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":177000,"ostatni_kierowca_id":"T98"}
+[2025-07-29 13:29:43] update_vehicle_mileage called
+[2025-07-29 13:29:46] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":177000,"ostatni_kierowca_id":"T98"}
+[2025-07-29 13:29:47] update_vehicle_mileage called
+[2025-07-29 13:29:47] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":177000,"ostatni_kierowca_id":"T98"}
+[2025-07-29 13:29:48] update_vehicle_mileage called
+[2025-07-29 13:30:35] Endpoint wywołany
+Rejestracja: DKL82535
+Pojazd znaleziony: {"rejestracja":"DKL82535","przebieg":1,"ostatni_kierowca_id":null}
+[2025-07-29 13:30:35] update_vehicle_mileage called
+[2025-07-29 13:30:38] Endpoint wywołany
+Rejestracja: DKL82535
+Pojazd znaleziony: {"rejestracja":"DKL82535","przebieg":2,"ostatni_kierowca_id":null}
+[2025-07-29 13:30:38] update_vehicle_mileage called
+[2025-07-29 13:31:16] Endpoint wywołany
+Rejestracja: DKL82535
+Pojazd znaleziony: {"rejestracja":"DKL82535","przebieg":2,"ostatni_kierowca_id":null}
+[2025-07-29 13:31:16] update_vehicle_mileage called
+[2025-07-29 13:32:02] Endpoint wywołany
+Rejestracja: DKL82535
+Pojazd znaleziony: {"rejestracja":"DKL82535","przebieg":2,"ostatni_kierowca_id":null}
+[2025-07-29 13:32:02] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-29 18:22:57] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-29 18:23:09] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-30 00:20:33] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-30 00:20:38] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-30 10:39:41] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":177000,"ostatni_kierowca_id":"T98"}
+[2025-07-30 10:39:41] update_vehicle_mileage called
+[2025-07-30 10:39:45] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178000,"ostatni_kierowca_id":"T98"}
+[2025-07-30 10:39:45] update_vehicle_mileage called
+[2025-07-30 10:40:35] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178000,"ostatni_kierowca_id":"T98"}
+[2025-07-30 10:40:35] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-30 11:11:31] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178000,"ostatni_kierowca_id":"T98"}
+[2025-07-30 11:11:31] update_vehicle_mileage called
+[2025-07-30 11:12:59] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178001,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:12:59] update_vehicle_mileage called
+[2025-07-30 11:22:29] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178003,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:22:39] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178003,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:22:39] update_vehicle_mileage called
+[2025-07-30 11:27:17] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178004,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:27:35] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":178004,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:27:35] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-30 11:51:08] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":179000,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:51:08] update_vehicle_mileage called
+[2025-07-30 11:51:25] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":179001,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:51:25] update_vehicle_mileage called
+[2025-07-30 11:53:18] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":179005,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:53:18] update_vehicle_mileage called
+[2025-07-30 11:53:30] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":179008,"ostatni_kierowca_id":"T99"}
+[2025-07-30 11:53:30] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-07-31 03:31:05] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-07-31 03:31:07] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-31 10:25:33] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":179010,"ostatni_kierowca_id":"T99"}
+[2025-07-31 10:25:34] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-31 11:26:06] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":179020,"ostatni_kierowca_id":"T99"}
+[2025-07-31 11:26:06] update_vehicle_mileage called
+[2025-07-31 11:27:07] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":180000,"ostatni_kierowca_id":"T99"}
+[2025-07-31 11:27:07] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-31 12:00:31] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":180001,"ostatni_kierowca_id":"T99"}
+[2025-07-31 12:00:44] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":180001,"ostatni_kierowca_id":"T99"}
+[2025-07-31 12:00:58] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":180001,"ostatni_kierowca_id":"T99"}
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-07-31 14:25:46] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":180001,"ostatni_kierowca_id":"T99"}
+[2025-07-31 14:27:53] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":180001,"ostatni_kierowca_id":"T99"}
+[2025-07-31 14:27:53] update_vehicle_mileage called
+[2025-07-31 14:28:04] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":185000,"ostatni_kierowca_id":"T99"}
+[2025-07-31 14:28:04] update_vehicle_mileage called
+[2025-07-31 14:36:57] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":185001,"ostatni_kierowca_id":"T99"}
+[2025-07-31 14:36:57] update_vehicle_mileage called
+[2025-07-31 14:37:45] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":186000,"ostatni_kierowca_id":"T99"}
+[2025-07-31 14:37:45] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-08-01 09:27:09] Endpoint wywołany
+Rejestracja: DKL83571
+Brak wyników
+[2025-08-01 09:27:18] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":1,"ostatni_kierowca_id":null}
+[2025-08-01 09:27:18] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-01 09:31:42] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":2,"ostatni_kierowca_id":"T108"}
+[2025-08-01 09:31:43] update_vehicle_mileage called
+[2025-08-01 09:37:43] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":3,"ostatni_kierowca_id":"T108"}
+[2025-08-01 09:37:43] update_vehicle_mileage called
+[2025-08-01 09:38:21] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":88991,"ostatni_kierowca_id":"T108"}
+[2025-08-01 09:38:21] update_vehicle_mileage called
+[2025-08-01 09:38:46] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":186001,"ostatni_kierowca_id":"T99"}
+[2025-08-01 09:38:54] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":186001,"ostatni_kierowca_id":"T99"}
+[2025-08-01 09:38:54] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-01 09:48:32] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":186001,"ostatni_kierowca_id":"T108"}
+[2025-08-01 09:48:39] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":186001,"ostatni_kierowca_id":"T108"}
+[2025-08-01 09:48:39] update_vehicle_mileage called
+[2025-08-01 09:56:00] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":88991,"ostatni_kierowca_id":"T108"}
+[2025-08-01 09:56:00] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-01 11:21:40] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-01 11:21:46] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-08-01 16:14:30] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89062,"ostatni_kierowca_id":"T108"}
+[2025-08-01 16:14:30] update_vehicle_mileage called
+[2025-08-02 10:49:40] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89169,"ostatni_kierowca_id":"T108"}
+[2025-08-02 10:49:40] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-02 13:59:59] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-02 14:00:04] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-02 15:52:00] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89175,"ostatni_kierowca_id":"T108"}
+[2025-08-02 15:52:00] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-03 05:07:26] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-03 05:07:32] update_vehicle_mileage called
+[2025-08-04 05:31:51] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89263,"ostatni_kierowca_id":"T108"}
+[2025-08-04 05:31:51] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-04 08:57:13] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-04 08:57:20] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt addRide.php startuje
+[2025-08-04 16:11:03] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89263,"ostatni_kierowca_id":"T108"}
+[2025-08-04 16:24:08] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89263,"ostatni_kierowca_id":"T108"}
+[2025-08-05 04:52:35] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89263,"ostatni_kierowca_id":"T108"}
+[2025-08-05 04:52:35] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-05 08:53:24] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-05 08:53:30] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-08-05 12:38:05] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":180000,"ostatni_kierowca_id":null}
+[2025-08-05 12:38:05] update_vehicle_mileage called
+[2025-08-05 12:51:39] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":180001,"ostatni_kierowca_id":"T99"}
+[2025-08-05 12:51:40] update_vehicle_mileage called
+[2025-08-05 12:52:24] Endpoint wywołany
+Rejestracja: DX23YB
+Pojazd znaleziony: {"rejestracja":"DX23YB","przebieg":186005,"ostatni_kierowca_id":"T108"}
+[2025-08-05 12:52:24] update_vehicle_mileage called
+[2025-08-05 12:57:46] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":182000,"ostatni_kierowca_id":"T99"}
+[2025-08-05 12:57:46] update_vehicle_mileage called
+[2025-08-05 12:58:30] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":183000,"ostatni_kierowca_id":"T99"}
+[2025-08-05 12:58:31] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-05 13:26:22] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89383,"ostatni_kierowca_id":"T108"}
+[2025-08-05 13:26:22] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+[2025-08-05 14:56:15] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187000,"ostatni_kierowca_id":"T99"}
+[2025-08-05 14:56:15] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-08-05 16:16:23] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89464,"ostatni_kierowca_id":"T108"}
+[2025-08-05 16:16:23] update_vehicle_mileage called
+[2025-08-06 04:53:45] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89494,"ostatni_kierowca_id":"T108"}
+[2025-08-06 04:53:45] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-06 05:40:48] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-06 05:40:55] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-06 09:54:25] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187001,"ostatni_kierowca_id":"T99"}
+[2025-08-06 09:54:25] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-06 10:15:18] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187002,"ostatni_kierowca_id":"T99"}
+[2025-08-06 10:15:28] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187002,"ostatni_kierowca_id":"T99"}
+[2025-08-06 10:15:28] update_vehicle_mileage called
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-06 10:19:18] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187005,"ostatni_kierowca_id":"T99"}
+[2025-08-06 10:19:25] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187005,"ostatni_kierowca_id":"T99"}
+[2025-08-06 10:19:25] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-06 10:30:51] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187005,"ostatni_kierowca_id":"T99"}
+[2025-08-06 10:30:51] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-08-06 11:11:05] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187006,"ostatni_kierowca_id":"T99"}
+[2025-08-06 11:11:05] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+[2025-08-06 11:34:12] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187007,"ostatni_kierowca_id":"T99"}
+[2025-08-06 11:34:12] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+🔵 Skrypt addRide.php startuje
+❌ Katalog /var/www/html/api/uploads/receipts/ nie jest zapisywalny
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-08-06 12:40:05] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187008,"ostatni_kierowca_id":"T99"}
+[2025-08-06 12:40:05] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-06 13:19:49] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89494,"ostatni_kierowca_id":"T108"}
+[2025-08-06 13:19:49] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-06 15:42:22] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-06 15:42:28] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-06 17:45:31] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89561,"ostatni_kierowca_id":"T108"}
+[2025-08-06 17:45:31] update_vehicle_mileage called
+[2025-08-07 05:02:01] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89601,"ostatni_kierowca_id":"T108"}
+[2025-08-07 05:02:01] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+Hasło z bazy: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+Hasło od użytkownika: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-07 07:28:32] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":188000,"ostatni_kierowca_id":"T99"}
+[2025-08-07 07:28:32] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-08-07 11:57:53] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":89601,"ostatni_kierowca_id":"T108"}
+[2025-08-07 11:57:53] update_vehicle_mileage called

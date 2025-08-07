@@ -1,0 +1,176 @@
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1
+Żądanie otrzymane: {"driver_id":"1","amount":"50","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"50","type":"Got\u00f3wka"}
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","amount":"70.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"140.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"550.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"213.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"37.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"222.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"96.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","km":"15","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","km":"15","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"111.25","type":"Got\u00f3wka"}
+Żądanie otrzymane: {"driver_id":"1","amount":"111.25","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Voucher","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Voucher","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Voucher","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Karta","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Got\u00f3wka","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"100.00","type":"Voucher","source":"Bolt"}
+Żądanie otrzymane: {"driver_id":"1","amount":"30.00","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"72.00","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"111.25","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"164.00","type":"Voucher","source":"Dyspozytornia"}
+Żądanie otrzymane: {"driver_id":"1","amount":"350.00","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"50.00","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: []
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","amount":"250.00","type":"Karta","source":"Post\u00f3j"}
+Żądanie otrzymane: {"driver_id":"1","amount":"400.00","type":"Got\u00f3wka","source":"Post\u00f3j"}
+Żądanie otrzymane: []
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1
+Żądanie otrzymane: {"username":"1","password":"abc123"}
+Żądanie otrzymane: {"username":"1","password":"abc123"}
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1
+Żądanie otrzymane: {"driver_id":"1","password":"abc123"}
+Sprawdzanie w bazie: driver_id=1, password=abc123
+✅ Logowanie udane dla ID: 1

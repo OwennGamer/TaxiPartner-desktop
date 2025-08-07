@@ -1,0 +1,16 @@
+Array
+(
+    [cardCommission] => 22
+    [rola] => kierowca
+    [percentTurnover] => 222
+    [saldo] => 222
+    [settlementLimit] => 666
+    [boltCommission] => 2
+    [imie] => awda
+    [password] => dasd
+    [nazwisko] => 
+    [id] => w2
+    [partnerCommission] => 2
+    [status] => aktywny
+    [fuelCost] => 0
+)

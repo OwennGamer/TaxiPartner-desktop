@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.RefuelsHistoryController"
+            prefWidth="600" prefHeight="400">
+
+    <!-- GÓRA: przyciski Usuń i Odśwież -->
+    <top>
+        <ToolBar>
+            <Button text="Usuń wpis" fx:id="deleteButton" onAction="#handleDeleteRefuel"/>
+            <Button text="Odśwież"   fx:id="refreshButton" onAction="#handleRefresh"/>
+        </ToolBar>
+    </top>
+
+    <!-- ŚRODEK: tytuł i tabela tankowań -->
+    <center>
+        <VBox spacing="5">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label fx:id="titleLabel"
+                   text="Historia tankowań"
+                   styleClass="font-16 bold-text"/>
+            <TableView fx:id="refuelsTable" prefWidth="580" prefHeight="330">
+                <columns>
+                    <TableColumn fx:id="idColumn" id="idColumn"         text="ID"       prefWidth="50"/>
+                    <TableColumn fx:id="dateColumn" id="dateColumn"       text="Data"     prefWidth="150"/>
+                    <TableColumn fx:id="fuelAmountColumn" id="fuelAmountColumn" text="Litry"    prefWidth="80"/>
+                    <TableColumn fx:id="costColumn" id="costColumn"       text="Koszt"    prefWidth="80"/>
+                    <TableColumn fx:id="odometerColumn" id="odometerColumn"   text="Przebieg" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

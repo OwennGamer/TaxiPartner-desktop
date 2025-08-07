@@ -1,0 +1,14 @@
+Array
+(
+    [imie] => Paweł
+    [password] => 2
+    [cardCommission] => 3.5
+    [nazwisko] => Turek
+    [percentTurnover] => 40
+    [id] => 2
+    [partnerCommission] => 20
+    [settlementLimit] => 500
+    [boltCommission] => 20
+    [status] => aktywny
+    [fuelCost] => 0
+)

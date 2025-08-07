@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.EmployeesController"
+            prefWidth="600" prefHeight="400">
+
+    <top>
+        <ToolBar>
+            <Button text="Dodaj pracownika" onAction="#handleAddEmployee" />
+            <Button text="Edytuj pracownika" onAction="#handleEditEmployee" />
+            <Button text="Usuń pracownika" onAction="#handleDeleteEmployee" />
+        </ToolBar>
+    </top>
+
+    <center>
+        <TableView fx:id="employeesTable" prefWidth="1200" prefHeight="350">
+            <columns>
+                <TableColumn fx:id="colId" id="colId" text="Lp." prefWidth="50"/>
+                <TableColumn fx:id="colName" id="colName" text="Imię i nazwisko" prefWidth="150" />
+                <TableColumn fx:id="colFirma" id="colFirma" text="Firma" prefWidth="100" />
+                <TableColumn fx:id="colRodzajUmowy" id="colRodzajUmowy" text="Rodzaj umowy" prefWidth="100" />
+                <TableColumn fx:id="colDataUmowy" id="colDataUmowy" text="Data umowy" prefWidth="100" />
+
+                <TableColumn fx:id="colDowod" id="colDowod" text="Dowód" prefWidth="70" />
+                <TableColumn fx:id="colPrawoJazdy" id="colPrawoJazdy" text="Prawo jazdy" prefWidth="90" />
+                <TableColumn fx:id="colNiekaralnosc" id="colNiekaralnosc" text="Niekaralność" prefWidth="90" />
+                <TableColumn fx:id="colOrzeczeniePsychologiczne" id="colOrzeczeniePsychologiczne" text="Orzeczenie psych." prefWidth="110" />
+                <TableColumn fx:id="colDataBadaniaPsych" id="colDataBadaniaPsych" text="Data nast. bad. psych." prefWidth="130" />
+                <TableColumn fx:id="colOrzeczenieLekarskie" id="colOrzeczenieLekarskie" text="Orzeczenie lek." prefWidth="110" />
+                <TableColumn fx:id="colDataBadanLekarskich" id="colDataBadanLekarskich" text="Data nast. badań" prefWidth="110" />
+                <TableColumn fx:id="colInformacjaPpk" id="colInformacjaPpk" text="Informacja PPK" prefWidth="100" />
+                <TableColumn fx:id="colRezygnacjaPpk" id="colRezygnacjaPpk" text="Rezygnacja PPK" prefWidth="100" />
+                <TableColumn fx:id="colFormaWyplaty" id="colFormaWyplaty" text="Forma wypłaty" prefWidth="100" />
+                <TableColumn fx:id="colWynagrodzenieDoRakWlasnych" id="colWynagrodzenieDoRakWlasnych" text="Wyn. do rąk wł." prefWidth="110" />
+                <TableColumn fx:id="colZgodaNaPrzelew" id="colZgodaNaPrzelew" text="Zgoda na przelew" prefWidth="110" />
+                <TableColumn fx:id="colRyzykoZawodowe" id="colRyzykoZawodowe" text="Ryzyko zawodowe" prefWidth="110" />
+                <TableColumn fx:id="colOswiadczenieZUS" id="colOswiadczenieZUS" text="Oświadczenie ZUS" prefWidth="110" />
+                <TableColumn fx:id="colBhp" id="colBhp" text="BHP" prefWidth="60" />
+                <TableColumn fx:id="colRegulaminPracy" id="colRegulaminPracy" text="Regulamin pracy" prefWidth="110" />
+                <TableColumn fx:id="colZasadyEwidencjiKasa" id="colZasadyEwidencjiKasa" text="Zasady ewidencji kasa" prefWidth="150" />
+                <TableColumn fx:id="colPit2" id="colPit2" text="PIT-2" prefWidth="70" />
+                <TableColumn fx:id="colOswiadczenieArt188KP" id="colOswiadczenieArt188KP" text="Art.188 KP" prefWidth="90" />
+                <TableColumn fx:id="colRodo" id="colRodo" text="RODO" prefWidth="70" />
+                <TableColumn fx:id="colPoraNocna" id="colPoraNocna" text="Pora nocna" prefWidth="90" />
+                <TableColumn fx:id="colPitEmail" id="colPitEmail" text="PIT @" prefWidth="150" />
+                <TableColumn fx:id="colOsobaKontaktowa" id="colOsobaKontaktowa" text="Osoba kontaktowa" prefWidth="150" />
+                <TableColumn fx:id="colNumerPrywatny" id="colNumerPrywatny" text="Numer prywatny" prefWidth="120" />
+                <TableColumn fx:id="colNumerSluzbowy" id="colNumerSluzbowy" text="Numer służbowy" prefWidth="120" />
+                <TableColumn fx:id="colModelTelefonuSluzbowego" id="colModelTelefonuSluzbowego" text="Model tel. sł." prefWidth="120" />
+                <TableColumn fx:id="colOperator" id="colOperator" text="Operator" prefWidth="100" />
+                <TableColumn fx:id="colWaznoscWizy" id="colWaznoscWizy" text="Ważność wizy" prefWidth="100" />
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

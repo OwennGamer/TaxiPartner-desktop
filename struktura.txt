@@ -1,0 +1,136 @@
+Folder PATH listing
+Volume serial number is 68F2-021B
+C:.
+³   .gitignore
+³   build.gradle
+³   gradlew
+³   gradlew.bat
+³   settings.gradle
+³   struktura.txt
+³   
+ÃÄÄÄ.gradle
+³   ³   file-system.probe
+³   ³   
+³   ÃÄÄÄ8.10
+³   ³   ³   gc.properties
+³   ³   ³   
+³   ³   ÃÄÄÄchecksums
+³   ³   ³       checksums.lock
+³   ³   ³       md5-checksums.bin
+³   ³   ³       sha1-checksums.bin
+³   ³   ³       
+³   ³   ÃÄÄÄdependencies-accessors
+³   ³   ³       gc.properties
+³   ³   ³       
+³   ³   ÃÄÄÄexecutionHistory
+³   ³   ³       executionHistory.bin
+³   ³   ³       executionHistory.lock
+³   ³   ³       
+³   ³   ÃÄÄÄexpanded
+³   ³   ÃÄÄÄfileChanges
+³   ³   ³       last-build.bin
+³   ³   ³       
+³   ³   ÃÄÄÄfileHashes
+³   ³   ³       fileHashes.bin
+³   ³   ³       fileHashes.lock
+³   ³   ³       resourceHashesCache.bin
+³   ³   ³       
+³   ³   ÀÄÄÄvcsMetadata
+³   ÃÄÄÄbuildOutputCleanup
+³   ³       buildOutputCleanup.lock
+³   ³       cache.properties
+³   ³       outputFiles.bin
+³   ³       
+³   ÀÄÄÄvcs-1
+³           gc.properties
+³           
+ÃÄÄÄ.idea
+³   ³   .gitignore
+³   ³   compiler.xml
+³   ³   dbnavigator.xml
+³   ³   gradle.xml
+³   ³   misc.xml
+³   ³   vcs.xml
+³   ³   workspace.xml
+³   ³   
+³   ÀÄÄÄlibraries
+³           javafx_swt.xml
+³           mysql_connector_j_9_1_0.xml
+³           
+ÃÄÄÄbuild
+³   ÃÄÄÄclasses
+³   ³   ÀÄÄÄjava
+³   ³       ÀÄÄÄmain
+³   ³           ³   module-info.class
+³   ³           ³   
+³   ³           ÀÄÄÄcom
+³   ³               ÀÄÄÄpartnertaxi
+³   ³                   ÀÄÄÄtaxipartneradmin
+³   ³                           ApiClient.class
+³   ³                           DatabaseConnection.class
+³   ³                           Driver.class
+³   ³                           DriversController.class
+³   ³                           HelloApplication.class
+³   ³                           HelloController.class
+³   ³                           LoginController.class
+³   ³                           MainController.class
+³   ³                           
+³   ÃÄÄÄgenerated
+³   ³   ÀÄÄÄsources
+³   ³       ÃÄÄÄannotationProcessor
+³   ³       ³   ÀÄÄÄjava
+³   ³       ³       ÀÄÄÄmain
+³   ³       ÀÄÄÄheaders
+³   ³           ÀÄÄÄjava
+³   ³               ÀÄÄÄmain
+³   ÃÄÄÄresources
+³   ³   ÀÄÄÄmain
+³   ³       ÀÄÄÄcom
+³   ³           ÀÄÄÄpartnertaxi
+³   ³               ÀÄÄÄtaxipartneradmin
+³   ³                       drivers-view.fxml
+³   ³                       hello-view.fxml
+³   ³                       login-view.fxml
+³   ³                       main-view.fxml
+³   ³                       
+³   ÀÄÄÄtmp
+³       ÀÄÄÄcompileJava
+³           ³   previous-compilation-data.bin
+³           ³   
+³           ÀÄÄÄcompileTransaction
+³               ÃÄÄÄbackup-dir
+³               ÀÄÄÄstash-dir
+ÃÄÄÄgradle
+³   ÀÄÄÄwrapper
+³           gradle-wrapper.jar
+³           gradle-wrapper.properties
+³           
+ÃÄÄÄlibs
+³       mysql-connector-j-9.1.0.jar
+³       
+ÀÄÄÄsrc
+    ÀÄÄÄmain
+        ÃÄÄÄjava
+        ³   ³   module-info.java
+        ³   ³   
+        ³   ÀÄÄÄcom
+        ³       ÀÄÄÄpartnertaxi
+        ³           ÀÄÄÄtaxipartneradmin
+        ³                   ApiClient.java
+        ³                   Driver.java
+        ³                   DriversController.java
+        ³                   HelloApplication.java
+        ³                   HelloController.java
+        ³                   LoginController.java
+        ³                   Main.java
+        ³                   MainController.java
+        ³                   
+        ÀÄÄÄresources
+            ÀÄÄÄcom
+                ÀÄÄÄpartnertaxi
+                    ÀÄÄÄtaxipartneradmin
+                            drivers-view.fxml
+                            hello-view.fxml
+                            login-view.fxml
+                            main-view.fxml
+                            

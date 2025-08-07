@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Opis i wybór: Źródło kursu -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_source"
+            android:layout_marginBottom="4dp"/>
+        <Spinner
+            android:id="@+id/spinnerSource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Opis i wybór: Rodzaj płatności -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_payment"
+            android:layout_marginBottom="4dp"/>
+        <Spinner
+            android:id="@+id/spinnerPaymentType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- RadioGroup: Wybór kwota czy km -->
+        <RadioGroup
+            android:id="@+id/radioGroupAmountOrKm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/radioAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kwota"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radioKm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kilometry"/>
+        </RadioGroup>
+
+        <!-- Pole: Kwota -->
+        <EditText
+            android:id="@+id/editTextAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Wpisz kwotę za kurs"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Pole: Kilometry (ukryte na start) -->
+        <EditText
+            android:id="@+id/editTextKm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Wpisz liczbę kilometrów"
+            android:inputType="number"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Podgląd zdjęcia paragonu -->
+        <ImageView
+            android:id="@+id/receiptPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true"/>
+
+        <!-- Przycisk: Zrób zdjęcie ponownie -->
+        <Button
+            android:id="@+id/buttonRetakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/retake_photo"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Przycisk: Dodaj kurs -->
+        <Button
+            android:id="@+id/buttonAddRide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dodaj kurs"/>
+
+    </LinearLayout>
+</ScrollView>

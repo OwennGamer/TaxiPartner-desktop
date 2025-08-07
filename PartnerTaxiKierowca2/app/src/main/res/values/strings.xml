@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PartnerTaxiKierowca</string>
+
+    <!-- Ekran dodawania kursu -->
+    <string name="source_prompt">Wybierz źródło</string>
+    <string name="payment_prompt">Wybierz rodzaj płatności</string>
+    <string name="label_source">Źródło kursu:</string>
+    <string name="label_payment">Rodzaj płatności:</string>
+    <string name="retake_photo">Zrób zdjęcie ponownie</string>
+    <string name="remember_receipt">PAMIĘTAJ O WYSTAWIENIU PARAGONU</string>
+
+    <string-array name="source_array">
+        <item>Postój</item>
+        <item>Dyspozytornia</item>
+        <item>Bolt</item>
+    </string-array>
+
+    <string-array name="payment_array">
+        <item>Karta</item>
+        <item>Gotówka</item>
+        <item>Voucher</item>
+    </string-array>
+</resources>

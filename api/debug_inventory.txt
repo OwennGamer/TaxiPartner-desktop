@@ -1,0 +1,389 @@
+[2025-04-10 11:21:52] Endpoint wywołany
+POST: []
+FILES: []
+[2025-04-10 15:17:14] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpi4vgdl","error":0,"size":2092800}}
+[2025-04-10 15:17:27] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpkqe2hn","error":0,"size":2092800}}
+[2025-04-10 15:17:38] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpSyRwLL","error":0,"size":2092800}}
+[2025-04-10 15:17:38] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpWx2K58","error":0,"size":2092800}}
+[2025-04-10 15:18:31] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpAOCNPI","error":0,"size":2092800}}
+[2025-04-10 15:18:37] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpQwX9E4","error":0,"size":2092800}}
+[2025-04-10 15:18:37] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZMx1Aw","error":0,"size":2092800}}
+[2025-04-10 15:18:49] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128300","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_8622430303182284220.jpg","full_path":"photo_front_8622430303182284220.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpvqGnuZ","error":0,"size":2092800}}
+[2025-04-10 15:24:29] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:24:37] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:24:42] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:25:28] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:25:39] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:25:41] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:25:42] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:25:45] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:25:46] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128400","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_817631131876057425.jpg","full_path":"photo_front_817631131876057425.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:32:12] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128369","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6355516097234831967.jpg","full_path":"photo_front_6355516097234831967.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:32:13] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128369","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6355516097234831967.jpg","full_path":"photo_front_6355516097234831967.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:32:16] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128369","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6355516097234831967.jpg","full_path":"photo_front_6355516097234831967.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:45:10] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128399","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_9032495462469545861.jpg","full_path":"photo_front_9032495462469545861.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpEErCCb","error":0,"size":1400091}}
+[2025-04-10 15:52:46] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_2203903026421596395.jpg","full_path":"photo_front_2203903026421596395.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:52:53] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_2203903026421596395.jpg","full_path":"photo_front_2203903026421596395.jpg","type":"","tmp_name":"","error":1,"size":0}}
+[2025-04-10 15:58:44] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_1841758445526299244.jpg","full_path":"photo_front_1841758445526299244.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php8Rmlb4","error":0,"size":1584476}}
+[2025-04-10 16:02:43] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128508","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_2791075488478033555.jpg","full_path":"photo_front_2791075488478033555.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpBcbPOQ","error":0,"size":1903009}}
+[2025-04-10 16:02:47] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128508","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_2791075488478033555.jpg","full_path":"photo_front_2791075488478033555.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpKUOQZX","error":0,"size":1903009}}
+[2025-04-10 16:02:49] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128508","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_2791075488478033555.jpg","full_path":"photo_front_2791075488478033555.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpN68qn4","error":0,"size":1903009}}
+[2025-04-10 16:06:46] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128666","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_7139408137393275286.jpg","full_path":"photo_front_7139408137393275286.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpR1V9pW","error":0,"size":2021858}}
+[2025-04-10 16:07:00] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128666","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_7139408137393275286.jpg","full_path":"photo_front_7139408137393275286.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpRvqPoG","error":0,"size":2021858}}
+[2025-04-10 16:07:05] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128666","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_7139408137393275286.jpg","full_path":"photo_front_7139408137393275286.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpufqIoc","error":0,"size":2021858}}
+[2025-04-10 16:12:54] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128457","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6082199189952687727.jpg","full_path":"photo_front_6082199189952687727.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpK89ST1","error":0,"size":2093383}}
+[2025-04-10 16:13:07] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128457","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6082199189952687727.jpg","full_path":"photo_front_6082199189952687727.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php0BR9Im","error":0,"size":2093383}}
+[2025-04-10 16:13:18] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128457","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6082199189952687727.jpg","full_path":"photo_front_6082199189952687727.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpiZx7Kr","error":0,"size":2093383}}
+[2025-04-10 16:13:31] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128457","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_6082199189952687727.jpg","full_path":"photo_front_6082199189952687727.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpFtCoZf","error":0,"size":2093383}}
+[2025-04-10 16:18:05] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128777","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4928176752661314273.jpg","full_path":"photo_front_4928176752661314273.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZipP7z","error":0,"size":1968511}}
+[2025-04-10 16:20:04] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128333","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4420787594024679053.jpg","full_path":"photo_front_4420787594024679053.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpSbIJun","error":0,"size":1829085}}
+[2025-04-10 16:20:21] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128333","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4420787594024679053.jpg","full_path":"photo_front_4420787594024679053.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpeuqD80","error":0,"size":1829085}}
+[2025-04-10 16:26:45] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128555","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3146204463898408425.jpg","full_path":"photo_front_3146204463898408425.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php6hOSqW","error":0,"size":2501531}}
+[2025-04-10 16:26:47] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128555","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3146204463898408425.jpg","full_path":"photo_front_3146204463898408425.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpac59eq","error":0,"size":2501531}}
+[2025-04-10 16:27:04] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128555","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3146204463898408425.jpg","full_path":"photo_front_3146204463898408425.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpWju9mQ","error":0,"size":2501531}}
+[2025-04-10 16:27:30] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128555","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3146204463898408425.jpg","full_path":"photo_front_3146204463898408425.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php13F4HL","error":0,"size":2501531}}
+[2025-04-10 16:32:29] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4451514742749250721.jpg","full_path":"photo_front_4451514742749250721.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZDYPVc","error":0,"size":2558065}}
+Zdjęcie: /tmp/phpZDYPVc
+Celowy plik: /var/www/html/api/uploads/inventory/front_67f7f29d834f5.jpg
+Ścieżka zdjęcia: uploads/inventory/front_67f7f29d834f5.jpg
+[2025-04-10 16:32:34] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4451514742749250721.jpg","full_path":"photo_front_4451514742749250721.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php1xStOd","error":0,"size":2558065}}
+Zdjęcie: /tmp/php1xStOd
+Celowy plik: /var/www/html/api/uploads/inventory/front_67f7f2a276f85.jpg
+Ścieżka zdjęcia: uploads/inventory/front_67f7f2a276f85.jpg
+[2025-04-10 16:32:36] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4451514742749250721.jpg","full_path":"photo_front_4451514742749250721.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php710gec","error":0,"size":2558065}}
+Zdjęcie: /tmp/php710gec
+Celowy plik: /var/www/html/api/uploads/inventory/front_67f7f2a40c294.jpg
+Ścieżka zdjęcia: uploads/inventory/front_67f7f2a40c294.jpg
+[2025-04-10 16:38:27] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_7086801230998302578.jpg","full_path":"photo_front_7086801230998302578.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php48G9sM","error":0,"size":1684943}}
+Plik zapisany: /var/www/html/api/uploads/inventory/front_67f7f40386f7a.jpg
+[2025-04-10 16:38:42] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_7086801230998302578.jpg","full_path":"photo_front_7086801230998302578.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpquBPak","error":0,"size":1684943}}
+Plik zapisany: /var/www/html/api/uploads/inventory/front_67f7f41210036.jpg
+[2025-04-10 16:44:36] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128451","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_4831907281140659598.jpg","full_path":"photo_front_4831907281140659598.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phptkBSIE","error":0,"size":2484750}}
+Zdjęcie zapisane: uploads/inventory/front_67f7f57437a3e.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128451', '0', 'uploads/inventory/front_67f7f57437a3e.jpg')
+[2025-04-10 16:47:06] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128444","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_1664724018780797052.jpg","full_path":"photo_front_1664724018780797052.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpCOgPSI","error":0,"size":2008079}}
+Zdjęcie zapisane: uploads/inventory/front_67f7f60a7c91d.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128444', '0', 'uploads/inventory/front_67f7f60a7c91d.jpg')
+[2025-04-10 16:47:09] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128444","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_1664724018780797052.jpg","full_path":"photo_front_1664724018780797052.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpJ16F5D","error":0,"size":2008079}}
+Zdjęcie zapisane: uploads/inventory/front_67f7f60db102f.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128444', '0', 'uploads/inventory/front_67f7f60db102f.jpg')
+[2025-04-10 16:49:19] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128999","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_599837145582690945.jpg","full_path":"photo_front_599837145582690945.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZXEpNA","error":0,"size":1646753}}
+Zdjęcie zapisane: uploads/inventory/front_67f7f68f516c9.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128999', '0', 'uploads/inventory/front_67f7f68f516c9.jpg')
+[2025-04-10 16:58:46] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128444","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_1920268931724531033.jpg","full_path":"photo_front_1920268931724531033.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpRHIsaX","error":0,"size":2340470}}
+Zdjęcie zapisane: uploads/inventory/front_67f7f8c60f053.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128444', '0', 'uploads/inventory/front_67f7f8c60f053.jpg')
+[2025-04-10 16:58:47] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128444","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_1920268931724531033.jpg","full_path":"photo_front_1920268931724531033.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phptT0jON","error":0,"size":2340470}}
+Zdjęcie zapisane: uploads/inventory/front_67f7f8c7debd7.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128444', '0', 'uploads/inventory/front_67f7f8c7debd7.jpg')
+[2025-04-22 12:10:25] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"1","czyste_wewnatrz":"1"}
+FILES: {"photo_front":{"name":"test.jpg","full_path":"test.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php2xW9z2","error":0,"size":102400}}
+Zdjęcie zapisane: uploads/inventory/front_68078731e50bf.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '1', '1', 'uploads/inventory/front_68078731e50bf.jpg')
+Zapytanie SQL wykonane pomyślnie, ID: 2
+[2025-04-22 12:37:09] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"123456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"test.jpg","full_path":"test.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpa47KJY","error":0,"size":102400}}
+Zdjęcie zapisane: uploads/inventory/front_68078d75539e2.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '123456', '0', 'uploads/inventory/front_68078d75539e2.jpg')
+Zapytanie SQL wykonane pomyślnie, ID: 3
+[2025-04-22 12:41:46] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"128555","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"123.jpg","full_path":"123.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpcOwtD6","error":0,"size":497456}}
+Zdjęcie zapisane: uploads/inventory/front_68078e8ae328b.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '128555', '0', 'uploads/inventory/front_68078e8ae328b.jpg')
+Zapytanie SQL wykonane pomyślnie, ID: 4
+[2025-04-22 13:05:30] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"111111","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"123.jpg","full_path":"123.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpWDDbU4","error":0,"size":497456}}
+Zdjęcie zapisane: uploads/inventory/front_6807941a546ea.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '111111', '0', 'uploads/inventory/front_6807941a546ea.jpg')
+Zapytanie SQL wykonane pomyślnie, ID: 5
+[2025-04-22 13:40:33] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"129000","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3394327157373392102.jpg","full_path":"photo_front_3394327157373392102.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpGirJqQ","error":0,"size":1992030}}
+Zdjęcie zapisane: uploads/inventory/front_68079c51a89ae.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '129000', '0', 'uploads/inventory/front_68079c51a89ae.jpg')
+[2025-04-22 13:41:43] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"129000","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3394327157373392102.jpg","full_path":"photo_front_3394327157373392102.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpbcd9wQ","error":0,"size":1992030}}
+Zdjęcie zapisane: uploads/inventory/front_68079c9721e3f.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje (rejestracja, przebieg, czyste_wewnatrz, photo_front) VALUES ('KR1234X', '129000', '0', 'uploads/inventory/front_68079c9721e3f.jpg')
+[2025-04-22 13:46:56] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"129000","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3590899870034475933.jpg","full_path":"photo_front_3590899870034475933.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpge20BW","error":0,"size":3667974}}
+[2025-04-22 13:47:36] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"129000","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3590899870034475933.jpg","full_path":"photo_front_3590899870034475933.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpLPFrcT","error":0,"size":3667974}}
+[2025-04-22 13:47:58] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"129000","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"photo_front_3590899870034475933.jpg","full_path":"photo_front_3590899870034475933.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpARJ723","error":0,"size":3667974}}
+[2025-04-22 14:14:17] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"123456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"test.jpg","full_path":"test.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpV3EUrI","error":0,"size":102400}}
+Zdjęcie zapisane: uploads/inventory/front_6807a439863c1.jpg
+Zapytanie SQL OK, ID: 6
+
+[2025-04-22 14:18:27] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"123456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"test.jpg","full_path":"test.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpFrn8l5","error":0,"size":102400}}
+Zdjęcie zapisane: uploads/inventory/front_6807a5339872f.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje
+            (rejestracja, przebieg, czyste_wewnatrz, photo_front)
+            VALUES (:re, :prz, :cz, :pf)
+Zapytanie SQL wykonane pomyślnie, ID: 7
+[2025-04-22 14:20:02] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"123456","czyste_wewnatrz":"0"}
+FILES: {"photo_front":{"name":"test.jpg","full_path":"test.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpHAoBcs","error":0,"size":102400}}
+Zdjęcie zapisane: uploads/inventory/front_6807a59228d07.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje
+            (rejestracja, przebieg, czyste_wewnatrz, photo_front)
+            VALUES (:re, :prz, :cz, :pf)
+Zapytanie SQL wykonane pomyślnie, ID: 8
+[2025-04-22 14:22:30] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"129800","czyste_wewnatrz":"1"}
+FILES: {"photo_front":{"name":"photo_front_5485479757049148794.jpg","full_path":"photo_front_5485479757049148794.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpAThY8v","error":0,"size":4455717}}
+Zdjęcie zapisane: uploads/inventory/front_6807a6262bc02.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje
+            (rejestracja, przebieg, czyste_wewnatrz, photo_front)
+            VALUES (:re, :prz, :cz, :pf)
+Zapytanie SQL wykonane pomyślnie, ID: 9
+[2025-04-22 14:27:10] Endpoint wywołany
+POST: {"rejestracja":"KR1234X","przebieg":"999991","czyste_wewnatrz":"1"}
+FILES: {"photo_front":{"name":"photo_front_2697757177347307191.jpg","full_path":"photo_front_2697757177347307191.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpqWKqDu","error":0,"size":3072491}}
+Zdjęcie zapisane: uploads/inventory/front_6807a73ec610a.jpg
+Przygotowanie zapytania SQL: INSERT INTO inwentaryzacje
+            (rejestracja, przebieg, czyste_wewnatrz, photo_front)
+            VALUES (:re, :prz, :cz, :pf)
+Zapytanie SQL wykonane pomyślnie, ID: 10
+[2025-04-24 12:01:32] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpxpB8LY","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpNWBVMQ","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phphP1JkG","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpRT3LKJ","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpKDnbmI","error":0,"size":3083502}}
+[2025-04-24 12:01:52] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpOfQ2Kh","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPlQnVS","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpRawCEi","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php0NBNJF","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpfZpvWb","error":0,"size":3083502}}
+[2025-04-24 12:01:55] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phprwwANf","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpgdcQj8","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpY146He","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpbCUm8O","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpwekBuu","error":0,"size":3083502}}
+[2025-04-24 12:02:06] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpznmZSa","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpenmQ0T","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpMqbi4w","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpgNpKva","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpQGwg8j","error":0,"size":3083502}}
+[2025-04-24 12:02:08] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPXDmIf","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpzGxdEJ","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpXfcWhk","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phptUDBGQ","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php3W8MUg","error":0,"size":3083502}}
+[2025-04-24 12:02:44] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpSqPDEO","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpTawiMN","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpn9vGJf","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpUwwctZ","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpYAubEI","error":0,"size":3083502}}
+[2025-04-24 12:02:44] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128111","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":"ffdsssdfgg"}
+FILES: {"photo_front":{"name":"front_489808296675367454.jpg","full_path":"front_489808296675367454.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpqAhV4j","error":0,"size":2959894},"photo_back":{"name":"back_8713184758769861515.jpg","full_path":"back_8713184758769861515.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php7hNgM8","error":0,"size":3000870},"photo_left":{"name":"left_7457766580746861875.jpg","full_path":"left_7457766580746861875.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phphY7szT","error":0,"size":3007583},"photo_right":{"name":"right_4687267555315432381.jpg","full_path":"right_4687267555315432381.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php4g2xg7","error":0,"size":2992469},"photo_dirt3":{"name":"dirt_7831342140862434544.jpg","full_path":"dirt_7831342140862434544.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpFzxYmu","error":0,"size":3083502}}
+[2025-04-24 12:16:27] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128500","czyste_wewnatrz":"0","kamizelki_qty":"0","licencja":"1","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":"gggbb"}
+FILES: {"photo_front":{"name":"front_6328867360187595951.jpg","full_path":"front_6328867360187595951.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpgeRi3g","error":0,"size":2991572},"photo_back":{"name":"back_18691383230857551.jpg","full_path":"back_18691383230857551.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpWmmjJh","error":0,"size":3110413},"photo_left":{"name":"left_3363766384886152942.jpg","full_path":"left_3363766384886152942.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpHEpeSj","error":0,"size":2698082},"photo_right":{"name":"right_7757234705497566585.jpg","full_path":"right_7757234705497566585.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpBmoKW6","error":0,"size":2696595},"photo_dirt2":{"name":"dirt_68724671670277076843.jpg","full_path":"dirt_68724671670277076843.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZ4t5VP","error":0,"size":3083904}}
+[2025-04-24 12:26:27] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128555","czyste_wewnatrz":"0","kamizelki_qty":"0","licencja":"0","legalizacja":"1","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":"ryccvv"}
+FILES: {"photo_front":{"name":"front_5402385851664409561.jpg","full_path":"front_5402385851664409561.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php5YvZo4","error":0,"size":2988151},"photo_back":{"name":"back_1606658487247381243.jpg","full_path":"back_1606658487247381243.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpKi5uMY","error":0,"size":3159123},"photo_left":{"name":"left_7050505484026456064.jpg","full_path":"left_7050505484026456064.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpUVqYyd","error":0,"size":3022920},"photo_right":{"name":"right_7757948824812360395.jpg","full_path":"right_7757948824812360395.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpeSBeOP","error":0,"size":2661317},"photo_dirt1":{"name":"dirt_51129496861844207180.jpg","full_path":"dirt_51129496861844207180.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpmGwBQX","error":0,"size":3015092}}
+[2025-04-24 12:54:21] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128777","czyste_wewnatrz":"0","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"1","lewarek":"1","trojkat":"0","kamizelka":"0","uwagi":"ffdcccc"}
+FILES: {"photo_front":{"name":"comp_front_4831770750639891484.jpg","full_path":"comp_front_4831770750639891484.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpiavw5r","error":0,"size":187279},"photo_back":{"name":"comp_back_6929549884105717380.jpg","full_path":"comp_back_6929549884105717380.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpeqrgOn","error":0,"size":192622},"photo_left":{"name":"comp_left_159803897920632078.jpg","full_path":"comp_left_159803897920632078.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpFWhEKG","error":0,"size":158832},"photo_right":{"name":"comp_right_4088334127568099254.jpg","full_path":"comp_right_4088334127568099254.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpXRY2AY","error":0,"size":188041},"photo_dirt1":{"name":"comp_dirt_51432585306462005274.jpg","full_path":"comp_dirt_51432585306462005274.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpBybiEL","error":0,"size":191263}}
+[2025-04-24 13:19:54] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128541","czyste_wewnatrz":"0","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"1","lewarek":"0","trojkat":"1","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_1754135441141269227.jpg","full_path":"comp_front_1754135441141269227.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpvWikGW","error":0,"size":168917},"photo_back":{"name":"comp_back_5863128763286791434.jpg","full_path":"comp_back_5863128763286791434.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpk8r9w3","error":0,"size":195881},"photo_left":{"name":"comp_left_5106405608420881629.jpg","full_path":"comp_left_5106405608420881629.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpOJfFrm","error":0,"size":161842},"photo_right":{"name":"comp_right_2985465319160563142.jpg","full_path":"comp_right_2985465319160563142.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZWqITA","error":0,"size":154345},"photo_dirt1":{"name":"comp_dirt_5775439468457217009.jpg","full_path":"comp_dirt_5775439468457217009.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpYKMHHp","error":0,"size":187031},"photo_dirt2":{"name":"comp_dirt_67746944967145552256.jpg","full_path":"comp_dirt_67746944967145552256.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpHFg110","error":0,"size":176204},"photo_dirt3":{"name":"comp_dirt_73477369724014203310.jpg","full_path":"comp_dirt_73477369724014203310.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpnh3OU2","error":0,"size":185721},"photo_dirt4":{"name":"comp_dirt_83028749955506154637.jpg","full_path":"comp_dirt_83028749955506154637.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpvMzcJi","error":0,"size":165198}}
+[2025-04-24 13:20:36] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128541","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_7047922924133778064.jpg","full_path":"comp_front_7047922924133778064.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpR9MZBy","error":0,"size":172093},"photo_back":{"name":"comp_back_2576015552951544406.jpg","full_path":"comp_back_2576015552951544406.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpxnlKB5","error":0,"size":163333},"photo_left":{"name":"comp_left_6293689482968001245.jpg","full_path":"comp_left_6293689482968001245.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpoyReDu","error":0,"size":184212},"photo_right":{"name":"comp_right_4492167738678790363.jpg","full_path":"comp_right_4492167738678790363.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpkLkWtS","error":0,"size":177217}}
+[2025-04-24 13:36:20] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"128508","czyste_wewnatrz":"1","kamizelki_qty":"8","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_1776203061040992878.jpg","full_path":"comp_front_1776203061040992878.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpbhWk7D","error":0,"size":162252},"photo_back":{"name":"comp_back_1212734592619022051.jpg","full_path":"comp_back_1212734592619022051.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpntEwiB","error":0,"size":182666},"photo_left":{"name":"comp_left_6187030127994101531.jpg","full_path":"comp_left_6187030127994101531.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpRm7n4C","error":0,"size":178941},"photo_right":{"name":"comp_right_7310242368074024769.jpg","full_path":"comp_right_7310242368074024769.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpZKTBCX","error":0,"size":197707}}
+[2025-04-26 11:33:00] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"132000","czyste_wewnatrz":"0","kamizelki_qty":"4","licencja":"1","legalizacja":"0","dowod":"0","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"0","lewarek":"1","trojkat":"0","kamizelka":"1","uwagi":"czesc"}
+FILES: {"photo_front":{"name":"comp_front_289340195499287907.jpg","full_path":"comp_front_289340195499287907.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpdZEuQ2","error":0,"size":173085},"photo_back":{"name":"comp_back_450653445321822906.jpg","full_path":"comp_back_450653445321822906.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpqvksV1","error":0,"size":179214},"photo_left":{"name":"comp_left_5923681948518925475.jpg","full_path":"comp_left_5923681948518925475.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpX5dt6a","error":0,"size":174869},"photo_right":{"name":"comp_right_2463109558243724717.jpg","full_path":"comp_right_2463109558243724717.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php8HR7pL","error":0,"size":168494},"photo_dirt1":{"name":"comp_dirt_54791939269137630826.jpg","full_path":"comp_dirt_54791939269137630826.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phph6tCVa","error":0,"size":174844}}
+[2025-04-26 12:30:51] add_inventory.php called
+POST: {"rejestracja":"TEST123","przebieg":"1500","czyste_wewnatrz":"1","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"1","lewarek":"1","trojkat":"1","kamizelka":"1","kamizelki_qty":"2","uwagi":"Testowy rekord z JWT"}
+FILES: []
+KIEROWCA_ID = 1
+[2025-04-26 13:21:47] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135003","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"1","lewarek":"0","trojkat":"1","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_3808568031830360713.jpg","full_path":"comp_front_3808568031830360713.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php6mcQSx","error":0,"size":96833},"photo_back":{"name":"comp_back_3457482753678114417.jpg","full_path":"comp_back_3457482753678114417.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPc7b2y","error":0,"size":138739},"photo_left":{"name":"comp_left_3508932122551852598.jpg","full_path":"comp_left_3508932122551852598.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpivMUI5","error":0,"size":136840},"photo_right":{"name":"comp_right_5434341748590611954.jpg","full_path":"comp_right_5434341748590611954.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpqrOVBU","error":0,"size":140278}}
+KIEROWCA_ID = 1
+[2025-04-26 13:41:03] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135008","czyste_wewnatrz":"1","kamizelki_qty":"2","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"0","lewarek":"1","trojkat":"0","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_7341371052244797019.jpg","full_path":"comp_front_7341371052244797019.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpqBWZxh","error":0,"size":139605},"photo_back":{"name":"comp_back_7377086159259891079.jpg","full_path":"comp_back_7377086159259891079.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpjRQPZk","error":0,"size":150362},"photo_left":{"name":"comp_left_231242829040764383.jpg","full_path":"comp_left_231242829040764383.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpo0IOwQ","error":0,"size":133153},"photo_right":{"name":"comp_right_1497739071318799312.jpg","full_path":"comp_right_1497739071318799312.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpoKoL4y","error":0,"size":141224}}
+KIEROWCA_ID = 2
+[2025-04-26 13:53:25] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135101","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"1","lewarek":"0","trojkat":"1","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_1979421127496725742.jpg","full_path":"comp_front_1979421127496725742.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpe7g2XH","error":0,"size":132519},"photo_back":{"name":"comp_back_7943184519231799824.jpg","full_path":"comp_back_7943184519231799824.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpSSYBIQ","error":0,"size":139471},"photo_left":{"name":"comp_left_7015901521220647085.jpg","full_path":"comp_left_7015901521220647085.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpBmTTIT","error":0,"size":132841},"photo_right":{"name":"comp_right_5337629647068744258.jpg","full_path":"comp_right_5337629647068744258.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpoYQSZV","error":0,"size":147255}}
+KIEROWCA_ID = 0
+[2025-04-26 14:07:56] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135102","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_4281765974101554316.jpg","full_path":"comp_front_4281765974101554316.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpGEsVDg","error":0,"size":160399},"photo_back":{"name":"comp_back_5223818904335562918.jpg","full_path":"comp_back_5223818904335562918.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php1cjCoy","error":0,"size":167022},"photo_left":{"name":"comp_left_4387498257520413295.jpg","full_path":"comp_left_4387498257520413295.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phptfhBGR","error":0,"size":140831},"photo_right":{"name":"comp_right_5967774517389486742.jpg","full_path":"comp_right_5967774517389486742.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpfgkWzT","error":0,"size":144328}}
+KIEROWCA_ID = T4
+[2025-04-26 15:35:28] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135109","czyste_wewnatrz":"0","kamizelki_qty":"4","licencja":"1","legalizacja":"1","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"1","gasnica":"0","lewarek":"1","trojkat":"0","kamizelka":"1","uwagi":"taktakgfxddd"}
+FILES: {"photo_front":{"name":"comp_front_7707037129684461406.jpg","full_path":"comp_front_7707037129684461406.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpWQik83","error":0,"size":210755},"photo_back":{"name":"comp_back_2656631679503859224.jpg","full_path":"comp_back_2656631679503859224.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php4yUt5P","error":0,"size":207407},"photo_left":{"name":"comp_left_2485492005932832611.jpg","full_path":"comp_left_2485492005932832611.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpnqWYd7","error":0,"size":219262},"photo_right":{"name":"comp_right_5704662743706799399.jpg","full_path":"comp_right_5704662743706799399.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpdTL0CT","error":0,"size":214023},"photo_dirt1":{"name":"comp_dirt_58036380687008008935.jpg","full_path":"comp_dirt_58036380687008008935.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpjLWNd2","error":0,"size":157396}}
+KIEROWCA_ID = T4
+[2025-04-26 15:47:52] add_inventory.php called
+POST: {"rejestracja":"DW1234X","przebieg":"50001","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"1","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":"tak"}
+FILES: {"photo_front":{"name":"comp_front_7146361887650568637.jpg","full_path":"comp_front_7146361887650568637.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phptHW9MG","error":0,"size":97765},"photo_back":{"name":"comp_back_1700796560070637790.jpg","full_path":"comp_back_1700796560070637790.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpW0JhGc","error":0,"size":93018},"photo_left":{"name":"comp_left_926105483419696591.jpg","full_path":"comp_left_926105483419696591.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpFeMRWv","error":0,"size":137722},"photo_right":{"name":"comp_right_7719838459220128763.jpg","full_path":"comp_right_7719838459220128763.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpcOvxEG","error":0,"size":101539}}
+KIEROWCA_ID = T14
+[2025-04-26 16:42:02] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135110","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"1","legalizacja":"1","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_3105942327569989996.jpg","full_path":"comp_front_3105942327569989996.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpz9TkgQ","error":0,"size":209924},"photo_back":{"name":"comp_back_8847420407319893804.jpg","full_path":"comp_back_8847420407319893804.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpH3RXLy","error":0,"size":208670},"photo_left":{"name":"comp_left_6478188269452613306.jpg","full_path":"comp_left_6478188269452613306.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPKzQHK","error":0,"size":216044},"photo_right":{"name":"comp_right_204881896584435497.jpg","full_path":"comp_right_204881896584435497.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpCkbql2","error":0,"size":215134}}
+KIEROWCA_ID = T4
+[2025-04-26 16:59:48] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135113","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"1","legalizacja":"1","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"1","lewarek":"1","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_8699225499233176692.jpg","full_path":"comp_front_8699225499233176692.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpxKxWP4","error":0,"size":195696},"photo_back":{"name":"comp_back_9189143073687045872.jpg","full_path":"comp_back_9189143073687045872.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpe2aQpI","error":0,"size":210004},"photo_left":{"name":"comp_left_9157505862552196247.jpg","full_path":"comp_left_9157505862552196247.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpSXwspE","error":0,"size":209081},"photo_right":{"name":"comp_right_3370995010806072732.jpg","full_path":"comp_right_3370995010806072732.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpJWtmN8","error":0,"size":210904}}
+KIEROWCA_ID = T4
+[2025-04-26 17:10:03] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"135117","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"1","legalizacja":"0","dowod":"0","ubezpieczenie":"1","karta_lotniskowa":"1","gasnica":"0","lewarek":"1","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_4804081017098985707.jpg","full_path":"comp_front_4804081017098985707.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpvP6kkH","error":0,"size":187485},"photo_back":{"name":"comp_back_2331435085414398766.jpg","full_path":"comp_back_2331435085414398766.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpBOiBwd","error":0,"size":206445},"photo_left":{"name":"comp_left_1043595766305122467.jpg","full_path":"comp_left_1043595766305122467.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpmYeD4g","error":0,"size":197759},"photo_right":{"name":"comp_right_4708206690909805630.jpg","full_path":"comp_right_4708206690909805630.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpEZYCWb","error":0,"size":191268}}
+KIEROWCA_ID = T14
+[2025-04-26 17:33:45] add_inventory.php called
+POST: {"rejestracja":"DW1234X","przebieg":"50002","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"1","gasnica":"0","lewarek":"1","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_8912109219661456210.jpg","full_path":"comp_front_8912109219661456210.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpFsqokl","error":0,"size":191843},"photo_back":{"name":"comp_back_2309053027352528499.jpg","full_path":"comp_back_2309053027352528499.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpIN6kHI","error":0,"size":205852},"photo_left":{"name":"comp_left_2851093972976969497.jpg","full_path":"comp_left_2851093972976969497.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpc9TMPd","error":0,"size":187245},"photo_right":{"name":"comp_right_3614049427992625128.jpg","full_path":"comp_right_3614049427992625128.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php3oysEL","error":0,"size":194443}}
+KIEROWCA_ID = T14
+[2025-04-26 17:58:00] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"137000","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_6450954148285121570.jpg","full_path":"comp_front_6450954148285121570.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php2oCLlY","error":0,"size":207937},"photo_back":{"name":"comp_back_4675184800124873969.jpg","full_path":"comp_back_4675184800124873969.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpEmImVv","error":0,"size":191411},"photo_left":{"name":"comp_left_7495788836456587859.jpg","full_path":"comp_left_7495788836456587859.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpC1JV9h","error":0,"size":175501},"photo_right":{"name":"comp_right_8457660597822950957.jpg","full_path":"comp_right_8457660597822950957.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpBIsSoG","error":0,"size":196395}}
+KIEROWCA_ID = T4
+[2025-04-27 17:56:19] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"151333","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"1","lewarek":"0","trojkat":"1","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_1125569810588868421.jpg","full_path":"comp_front_1125569810588868421.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpEUaXsR","error":0,"size":140183},"photo_back":{"name":"comp_back_3457770416075559518.jpg","full_path":"comp_back_3457770416075559518.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpfOLDfK","error":0,"size":154638},"photo_left":{"name":"comp_left_6035386729801049636.jpg","full_path":"comp_left_6035386729801049636.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php8bCJuc","error":0,"size":122317},"photo_right":{"name":"comp_right_3596911023453390475.jpg","full_path":"comp_right_3596911023453390475.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php3VuPKG","error":0,"size":156654}}
+KIEROWCA_ID = T14
+[2025-04-27 18:23:28] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"152999","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"1","legalizacja":"1","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_5586359251754931178.jpg","full_path":"comp_front_5586359251754931178.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpc1bIzi","error":0,"size":175894},"photo_back":{"name":"comp_back_4527814266266688892.jpg","full_path":"comp_back_4527814266266688892.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpuuMMAK","error":0,"size":185172},"photo_left":{"name":"comp_left_8967273637214139840.jpg","full_path":"comp_left_8967273637214139840.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phplYycOK","error":0,"size":212500},"photo_right":{"name":"comp_right_719503541480632053.jpg","full_path":"comp_right_719503541480632053.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpwTiGgl","error":0,"size":191100}}
+KIEROWCA_ID = T4
+[2025-04-28 16:15:18] add_inventory.php called
+POST: {"rejestracja":"KR1234X","przebieg":"155006","czyste_wewnatrz":"1","kamizelki_qty":"0","licencja":"0","legalizacja":"0","dowod":"0","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"0","lewarek":"0","trojkat":"0","kamizelka":"0","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_4173746847454160363.jpg","full_path":"comp_front_4173746847454160363.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpheLvxK","error":0,"size":224100},"photo_back":{"name":"comp_back_2403185209637412485.jpg","full_path":"comp_back_2403185209637412485.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phplcp3Ue","error":0,"size":215749},"photo_left":{"name":"comp_left_8814054703094606937.jpg","full_path":"comp_left_8814054703094606937.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpHLi1fb","error":0,"size":222069},"photo_right":{"name":"comp_right_574708115033502576.jpg","full_path":"comp_right_574708115033502576.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPMkenY","error":0,"size":210975}}
+KIEROWCA_ID = T14
+[2025-05-05 09:20:02] add_inventory.php called
+POST: {"rejestracja":"WB12345","przebieg":"250000","czyste_wewnatrz":"0","kamizelki_qty":"2","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_2862289385314679158.jpg","full_path":"comp_front_2862289385314679158.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpdP6CZG","error":0,"size":79661},"photo_back":{"name":"comp_back_7116922208267482108.jpg","full_path":"comp_back_7116922208267482108.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpaHZeBI","error":0,"size":81918},"photo_left":{"name":"comp_left_6989047853875596976.jpg","full_path":"comp_left_6989047853875596976.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpxbvflm","error":0,"size":83370},"photo_right":{"name":"comp_right_4467777354595401376.jpg","full_path":"comp_right_4467777354595401376.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php8PhEwJ","error":0,"size":85670},"photo_dirt1":{"name":"comp_dirt_53418383326099926933.jpg","full_path":"comp_dirt_53418383326099926933.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php3T4tHY","error":0,"size":149965}}
+KIEROWCA_ID = T14
+[2025-05-07 08:30:09] add_inventory.php called
+POST: {"rejestracja":"DW1234X","przebieg":"1000000","czyste_wewnatrz":"1","kamizelki_qty":"5","licencja":"1","legalizacja":"1","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"1","gasnica":"1","lewarek":"1","trojkat":"1","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_2473531720550532596.jpg","full_path":"comp_front_2473531720550532596.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpP7DoAE","error":0,"size":168712},"photo_back":{"name":"comp_back_1195416818101415892.jpg","full_path":"comp_back_1195416818101415892.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpSWadOp","error":0,"size":135387},"photo_left":{"name":"comp_left_8491716129855171615.jpg","full_path":"comp_left_8491716129855171615.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpNbldAQ","error":0,"size":139100},"photo_right":{"name":"comp_right_2429578661317335189.jpg","full_path":"comp_right_2429578661317335189.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpJded5z","error":0,"size":199369}}
+KIEROWCA_ID = T1
+[2025-05-09 09:34:58] add_inventory.php called
+POST: {"rejestracja":"ASDASD","przebieg":"250000","czyste_wewnatrz":"0","kamizelki_qty":"1","licencja":"1","legalizacja":"1","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"1","gasnica":"0","lewarek":"0","trojkat":"1","kamizelka":"1","uwagi":"sghj"}
+FILES: {"photo_front":{"name":"comp_front_7231845898434067911.jpg","full_path":"comp_front_7231845898434067911.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpqdaNcc","error":0,"size":132900},"photo_back":{"name":"comp_back_1325572540516699466.jpg","full_path":"comp_back_1325572540516699466.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpLM0CFw","error":0,"size":77963},"photo_left":{"name":"comp_left_7683908575093416790.jpg","full_path":"comp_left_7683908575093416790.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php6SHcO9","error":0,"size":45657},"photo_right":{"name":"comp_right_7352416096312250669.jpg","full_path":"comp_right_7352416096312250669.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phptjrNj2","error":0,"size":62061},"photo_dirt1":{"name":"comp_dirt_54222355877563147583.jpg","full_path":"comp_dirt_54222355877563147583.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPYj0zN","error":0,"size":106892}}
+KIEROWCA_ID = T14
+[2025-05-12 11:23:55] add_inventory.php called
+POST: {"rejestracja":"AWEAW","przebieg":"666666","czyste_wewnatrz":"1","kamizelki_qty":"5","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"0","gasnica":"1","lewarek":"0","trojkat":"0","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_655309127633480668.jpg","full_path":"comp_front_655309127633480668.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpoSVmx8","error":0,"size":53930},"photo_back":{"name":"comp_back_783960014202851339.jpg","full_path":"comp_back_783960014202851339.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpCEx3th","error":0,"size":48959},"photo_left":{"name":"comp_left_1579502267648931038.jpg","full_path":"comp_left_1579502267648931038.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php6xRYX7","error":0,"size":43999},"photo_right":{"name":"comp_right_5224081091464839410.jpg","full_path":"comp_right_5224081091464839410.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpODDxmM","error":0,"size":62446}}
+KIEROWCA_ID = T14
+[2025-05-13 08:21:39] add_inventory.php called
+POST: {"rejestracja":"SDFSDF","przebieg":"91000","czyste_wewnatrz":"1","kamizelki_qty":"4","licencja":"1","legalizacja":"0","dowod":"1","ubezpieczenie":"1","karta_lotniskowa":"0","gasnica":"0","lewarek":"1","trojkat":"0","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_6255249776498174863.jpg","full_path":"comp_front_6255249776498174863.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php0PPY9m","error":0,"size":113597},"photo_back":{"name":"comp_back_4197960123100191644.jpg","full_path":"comp_back_4197960123100191644.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpJMWt0q","error":0,"size":108290},"photo_left":{"name":"comp_left_694284953395650000.jpg","full_path":"comp_left_694284953395650000.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpCU6WWX","error":0,"size":102430},"photo_right":{"name":"comp_right_629926407705891145.jpg","full_path":"comp_right_629926407705891145.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpeDsFTK","error":0,"size":89452}}
+KIEROWCA_ID = T14
+[2025-05-29 08:30:58] add_inventory.php called
+POST: {"rejestracja":"DW1234X","przebieg":"1000001","czyste_wewnatrz":"1","kamizelki_qty":"4","licencja":"0","legalizacja":"0","dowod":"1","ubezpieczenie":"0","karta_lotniskowa":"1","gasnica":"0","lewarek":"1","trojkat":"1","kamizelka":"1","uwagi":""}
+FILES: {"photo_front":{"name":"comp_front_2016779636356209869.jpg","full_path":"comp_front_2016779636356209869.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpleuTYn","error":0,"size":120732},"photo_back":{"name":"comp_back_3860152735183365143.jpg","full_path":"comp_back_3860152735183365143.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpPvG9mR","error":0,"size":194016},"photo_left":{"name":"comp_left_2289195590468180739.jpg","full_path":"comp_left_2289195590468180739.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/phpQ7h0QP","error":0,"size":212939},"photo_right":{"name":"comp_right_3668338819810247760.jpg","full_path":"comp_right_3668338819810247760.jpg","type":"image\/jpeg","tmp_name":"\/tmp\/php0SkDxh","error":0,"size":179113}}
+KIEROWCA_ID = T14

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "187562115911",
+    "project_id": "partner-taxi-kierowca-2e764",
+    "storage_bucket": "partner-taxi-kierowca-2e764.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187562115911:android:8ed1c3d579fd6557854262",
+        "android_client_info": {
+          "package_name": "com.partner.taxi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxnRySYyBTKcJhMY-DAJhqq-sgFnnRLMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

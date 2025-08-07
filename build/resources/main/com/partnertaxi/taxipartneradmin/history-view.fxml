@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.HistoryController">
+
+    <VBox spacing="10"
+          AnchorPane.topAnchor="10.0"
+          AnchorPane.leftAnchor="10.0"
+          AnchorPane.rightAnchor="10.0"
+          AnchorPane.bottomAnchor="10.0">
+
+        <Label text="Historia kursów i zmian salda" styleClass="font-18" />
+
+        <TableView fx:id="historyTable" id="historyTable" prefHeight="500">
+            <columns>
+                <TableColumn fx:id="dateTimeColumn" id="dateTimeColumn" text="Data i godzina" prefWidth="160"/>
+                <TableColumn fx:id="typeColumn" id="typeColumn" text="Typ" prefWidth="120"/>
+                <TableColumn fx:id="descriptionColumn" id="descriptionColumn" text="Opis" prefWidth="300"/>
+                <TableColumn fx:id="changeValueColumn" id="changeValueColumn" text="Wartość zmiany" prefWidth="120"/>
+                <TableColumn fx:id="saldoAfterColumn" id="saldoAfterColumn" text="Saldo po" prefWidth="100"/>
+                <TableColumn fx:id="photoColumn" id="photoColumn" text="Zdjęcie" prefWidth="100"/>
+            </columns>
+        </TableView>
+
+        <Button text="Zamknij" onAction="#handleClose" />
+
+    </VBox>
+
+</AnchorPane>

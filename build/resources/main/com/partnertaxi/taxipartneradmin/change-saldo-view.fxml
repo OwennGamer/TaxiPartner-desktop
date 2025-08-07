@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.partnertaxi.taxipartneradmin.ChangeSaldoController">
+
+    <Label text="Zmiana salda" styleClass="font-20" />
+
+    <TextField fx:id="amountField" promptText="Kwota (np. -100 lub 200)" />
+
+    <ComboBox fx:id="reasonBox" promptText="Wybierz powód">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Rozliczenie" />
+                <String fx:value="Kara" />
+                <String fx:value="Premia" />
+                <String fx:value="Inny" />
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <TextField fx:id="customReasonField" promptText="Opisz powód (jeśli 'Inny')" visible="false" />
+
+    <HBox spacing="10">
+        <Button text="Zapisz" onAction="#handleSave" />
+        <Button text="Anuluj" onAction="#handleCancel" />
+    </HBox>
+
+</VBox>
