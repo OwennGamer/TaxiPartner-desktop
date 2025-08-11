@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,9 +55,29 @@ class LoginActivity : AppCompatActivity() {
                             SessionManager.saveDriverId(this@LoginActivity, it)
                         }
 
-                        Toast.makeText(this@LoginActivity, "Zalogowano", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@LoginActivity, ChooseVehicleActivity::class.java))
-                        finish()
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val fcmToken = task.result
+                                api.updateFcmToken(fcmToken).enqueue(object : Callback<GenericResponse> {
+                                    override fun onResponse(
+                                        call: Call<GenericResponse>,
+                                        response: Response<GenericResponse>
+                                    ) {
+                                        Log.d("LOGIN", "FCM token updated: ${response.body()?.message}")
+                                    }
+
+                                    override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                                        Log.e("LOGIN", "Failed to update FCM token: ${t.message}")
+                                    }
+                                })
+                            } else {
+                                Log.w("LOGIN", "Fetching FCM token failed", task.exception)
+                            }
+
+                            Toast.makeText(this@LoginActivity, "Zalogowano", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@LoginActivity, ChooseVehicleActivity::class.java))
+                            finish()
+                        }
                     } else {
                         // prosty komunikat o błędzie logowania
                         Toast.makeText(this@LoginActivity, "Błąd logowania", Toast.LENGTH_SHORT).show()

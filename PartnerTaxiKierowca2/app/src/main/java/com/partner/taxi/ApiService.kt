@@ -109,4 +109,10 @@ interface ApiService {
     fun endShift(
         @Field("end_odometer") odometer: Int
     ): Call<GenericResponse>
+
+    @FormUrlEncoded
+    @POST("update_fcm_token.php")
+    fun updateFcmToken(
+        @Field("fcm_token") fcmToken: String
+    ): Call<GenericResponse>
 }
