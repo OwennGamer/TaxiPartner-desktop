@@ -5,9 +5,12 @@ require_once 'db.php';
 
 header('Content-Type: application/json');
 
+$fcmStatus = 'skipped';
+
 $token = getAuthorizationHeader();
 if (!$token || !verifyJWT($token)) {
-    echo json_encode(["status" => "error", "message" => "Brak ważnego tokena"]);
+        http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Brak ważnego tokena", "fcm_status" => $fcmStatus]);
     exit;
 }
 
@@ -18,7 +21,8 @@ $reason = trim($data['reason'] ?? '');
 $customReason = trim($data['custom_reason'] ?? '');
 
 if ($id === '' || $reason === '') {
-    echo json_encode(["status" => "error", "message" => "Brak wymaganych danych"]);
+        http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Brak wymaganych danych", "fcm_status" => $fcmStatus]);
     exit;
 }
 
@@ -33,7 +37,8 @@ $stmt->execute([$id]);
 $current = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$current) {
-    echo json_encode(["status" => "error", "message" => "Kierowca nie znaleziony"]);
+        http_response_code(500);
+    echo json_encode(["status" => "error", "message" => "Kierowca nie znaleziony", "fcm_status" => $fcmStatus]);
     exit;
 }
 
@@ -52,6 +57,7 @@ $pdo->prepare("
 // powiadom kierowcę o zmianie przez Firebase Cloud Messaging
 if (!function_exists('curl_init')) {
     error_log('curl_init() nie jest dostępna, pomijam wysyłkę FCM');
+    $fcmStatus = 'skipped';
 } else {
     try {
         $tokenStmt = $pdo->prepare("SELECT fcm_token FROM kierowcy gdzie id = ?");
@@ -62,6 +68,7 @@ if (!function_exists('curl_init')) {
         if ($fcmToken) {
             if (!defined('FCM_SERVER_KEY')) {
                 error_log('FCM_SERVER_KEY nie jest zdefiniowany w konfiguracji');
+                $fcmStatus = 'skipped';
             } else {
                 $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
                 $headers = [
@@ -86,10 +93,14 @@ if (!function_exists('curl_init')) {
                 $result = curl_exec($ch);
                 if ($result === false) {
                     error_log('FCM send error: ' . curl_error($ch));
+                    $fcmStatus = 'error';
                 } else {
                     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                     if ($httpCode >= 400) {
                         error_log('FCM send failed with HTTP code ' . $httpCode . ': ' . $result);
+                        $fcmStatus = 'error';
+                    } else {
+                        $fcmStatus = 'sent';
                     }
                 }
 
@@ -97,14 +108,24 @@ if (!function_exists('curl_init')) {
             }
         } else {
             error_log('Brak fcm_token dla kierowcy o ID ' . $id);
+            $fcmStatus = 'skipped';
         }
     } catch (Throwable $e) {
         error_log('Wyjątek podczas wysyłania FCM: ' . $e->getMessage());
+        $fcmStatus = 'error';
     }
 }
+
+if ($fcmStatus === 'error') {
+    http_response_code(207);
+} else {
+    http_response_code(200);
+}
+
 
 echo json_encode([
     "status" => "success",
     "message" => "Saldo zaktualizowane",
-    "new_saldo" => $newSaldo
+    "new_saldo" => $newSaldo,
+    "fcm_status" => $fcmStatus
 ]);

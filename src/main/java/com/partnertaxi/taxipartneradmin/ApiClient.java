@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -200,10 +201,34 @@ public class ApiClient {
             }
 
             int code = conn.getResponseCode();
+            InputStream is = (code >= 400) ? conn.getErrorStream() : conn.getInputStream();
+            StringBuilder response = new StringBuilder();
+            if (is != null) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        response.append(line.trim());
+                    }
+                }
+            }
+
+            String fcmStatus = "";
+            if (response.length() > 0) {
+                JSONObject respJson = new JSONObject(response.toString());
+                fcmStatus = respJson.optString("fcm_status", "");
+            }
+
             if (code == 200) {
                 System.out.println("✅ Saldo zmienione pomyślnie.");
+            } else if (code == 207) {
+                System.out.println("⚠️ Saldo zmienione, ale wysyłka FCM nie powiodła się.");
             } else {
                 System.out.println("❌ Błąd zmiany salda. Kod: " + code);
+
+                if (!fcmStatus.isEmpty()) {
+                    System.out.println("ℹ️ fcm_status: " + fcmStatus);
+                }
+
             }
             conn.disconnect();
         } catch (Exception e) {
