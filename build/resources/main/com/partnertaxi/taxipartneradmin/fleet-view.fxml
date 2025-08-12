@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.FleetController"
+            prefWidth="800" prefHeight="600">
+
+    <!-- GÓRA: Pasek narzędzi z przyciskiem -->
+    <top>
+        <ToolBar>
+            <Button text="Dodaj pojazd" onAction="#onAddVehicle"/>
+            <Button text="Edytuj pojazd" onAction="#onEditVehicle"/>
+            <Button text="Usuń pojazd" onAction="#onDeleteVehicle"/>
+            <Button fx:id="btnHistory"
+                    text="Historia pojazdu"
+                    onAction="#onShowHistory"
+                    disable="true"/>
+            <CheckBox fx:id="chkShowInactive"
+                      text="Pokaż nieaktywne"
+                      onAction="#onToggleShowInactive"/>
+
+        </ToolBar>
+    </top>
+
+    <!-- CENTRUM: Tabela pojazdów -->
+    <center>
+        <TableView fx:id="vehicleTable">
+            <columns>
+                <TableColumn fx:id="colId" id="colId" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colRejestracja" id="colRejestracja" text="Rejestracja" prefWidth="100"/>
+                <TableColumn fx:id="colMarka" id="colMarka" text="Marka" prefWidth="100"/>
+                <TableColumn fx:id="colModel" id="colModel" text="Model" prefWidth="100"/>
+                <TableColumn fx:id="colPrzebieg" id="colPrzebieg" text="Przebieg" prefWidth="100"/>
+                <TableColumn fx:id="colUbezpieczenie" id="colUbezpieczenie" text="Ubezpieczenie do" prefWidth="120"/>
+                <TableColumn fx:id="colPrzeglad" id="colPrzeglad" text="Przegląd do" prefWidth="120"/>
+                <TableColumn fx:id="colAktywny" id="colAktywny" text="Aktywny" prefWidth="80"/>
+                <TableColumn fx:id="colInpost" id="colInpost" text="Inpost" prefWidth="80"/>
+                <TableColumn fx:id="colTaxi" id="colTaxi" text="Taxi" prefWidth="60"/>
+                <TableColumn fx:id="colTaksometr" id="colTaksometr" text="Taksometr" prefWidth="80"/>
+                <TableColumn fx:id="colLegalizacjaTaksometruDo" id="colLegalizacjaTaksometruDo" text="Legalizacja taksometru do" prefWidth="160"/>
+                <TableColumn fx:id="colGaz" id="colGaz" text="Gaz" prefWidth="60"/>
+                <TableColumn fx:id="colHomologacjaLpgDo" id="colHomologacjaLpgDo" text="Homologacja LPG do" prefWidth="150"/>
+                <TableColumn fx:id="colFirma" id="colFirma" text="Firma" prefWidth="100"/>
+                <TableColumn fx:id="colFormaWlasnosci" id="colFormaWlasnosci" text="Forma własności" prefWidth="120"/>
+                <TableColumn fx:id="colNumerPolisy" id="colNumerPolisy" text="Numer polisy" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </center>
+
+</BorderPane>
