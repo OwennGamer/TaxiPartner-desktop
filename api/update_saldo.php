@@ -104,6 +104,9 @@ if (!function_exists('curl_init')) {
                     }
                 }
 
+                file_put_contents('debug_fcm.log', date('c').' '.json_encode([$fcmStatus,$httpCode??null,$result]).PHP_EOL, FILE_APPEND);
+                @chmod('debug_fcm.log', 0666);
+
                 curl_close($ch);
             }
         } else {
