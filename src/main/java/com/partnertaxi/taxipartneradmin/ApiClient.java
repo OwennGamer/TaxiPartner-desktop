@@ -26,10 +26,11 @@ public class ApiClient {
     }
 
     // 🔐 Logowanie administratora
-    public static boolean login(String username, String password) {
+    public static String login(String username, String password) {
+        HttpURLConnection conn = null;
         try {
             URL url = new URL(BASE_URL + "admin_login.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json; utf-8");
             conn.setRequestProperty("Accept", "application/json");
@@ -39,28 +40,36 @@ public class ApiClient {
             loginData.put("username", username);
             loginData.put("password", password);
             try (OutputStream os = conn.getOutputStream()) {
-                os.write(loginData.toString().getBytes("utf-8"));
+                os.write(loginData.toString().getBytes(StandardCharsets.UTF_8));
             }
 
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "utf-8"));
+            int responseCode = conn.getResponseCode();
+            InputStream stream = responseCode >= 400 ? conn.getErrorStream() : conn.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
             StringBuilder response = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
                 response.append(line.trim());
             }
+
             JSONObject json = new JSONObject(response.toString());
-            if ("success".equals(json.getString("status"))) {
-                jwtToken = json.getString("token");
-                System.out.println("✅ Zalogowano jako " + username);
-                return true;
-            } else {
-                System.out.println("❌ Błąd logowania: " + json.getString("message"));
-                return false;
+            if (responseCode >= 400 || !"success".equals(json.optString("status"))) {
+                String message = json.optString("message", "Nieznany błąd");
+                System.out.println("❌ Błąd logowania: " + message);
+                return message;
             }
+
+            jwtToken = json.getString("token");
+            System.out.println("✅ Zalogowano jako " + username);
+            return null;
+
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "Błąd połączenia: " + e.getMessage();
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
         }
     }
 

@@ -7,13 +7,13 @@ public class Main {
         // <<< poniżej ustawiamy globalnie polską kulturę formatu liczb
         Locale.setDefault(new Locale("pl", "PL"));
 
-        boolean success = ApiClient.login("admin", "admin");
+        String error = ApiClient.login("admin", "admin");
 
-        if (success) {
+        if (error == null) {
             System.out.println("✅ Logowanie zakończone sukcesem.");
             System.out.println("Token JWT: " + ApiClient.getJwtToken());
         } else {
-            System.out.println("❌ Logowanie nieudane.");
+            System.out.println("❌ Logowanie nieudane: " + error);
         }
     }
 }

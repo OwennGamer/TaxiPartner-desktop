@@ -23,12 +23,12 @@ public class LoginController {
             return;
         }
 
-        boolean success = ApiClient.login(username, password);
+        String error = ApiClient.login(username, password);
 
-        if (success) {
+        if (error == null) {
             HelloApplication.changeScene("drivers-view.fxml", "Zarządzanie kierowcami");
         } else {
-            showAlert("Błąd logowania", "Nieprawidłowy login lub hasło.");
+            showAlert("Błąd logowania", error);
         }
     }
 
