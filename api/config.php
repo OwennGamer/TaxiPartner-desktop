@@ -6,7 +6,8 @@ define('DB_NAME', 'taxi_partner');
 define('DB_USER', 'SQLserwer');
 define('DB_PASS', 'SQL7169%');
 
-define('GOOGLE_APPLICATION_CREDENTIALS', __DIR__ . '/partner-taxi-kierowca-2e764-firebase-adminsdk-fbsvc-3f8d240139.json');
+define('FIREBASE_CREDENTIALS_PATH', __DIR__ . '/partner-taxi-kierowca-2e764-firebase-adminsdk-fbsvc-3f8d240139.json');
 define('FIREBASE_PROJECT_ID', 'partner-taxi-kierowca-2e764');  // ID projektu z Firebase → Project settings → General
-define('FCM_SERVER_KEY', getenv('FCM_SERVER_KEY') ?: '');
+// Ensure the Firebase credential is available for the Google SDK
+putenv('GOOGLE_APPLICATION_CREDENTIALS=' . FIREBASE_CREDENTIALS_PATH);
 ?>
