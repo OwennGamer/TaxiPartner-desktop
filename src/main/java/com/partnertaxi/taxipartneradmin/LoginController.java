@@ -19,7 +19,7 @@ public class LoginController {
         String password = passwordField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Puste pola", "Wprowadź login i hasło.");
+            showAlert("EMPTY_FIELDS");
             return;
         }
 
@@ -28,15 +28,27 @@ public class LoginController {
         if (error == null) {
             HelloApplication.changeScene("drivers-view.fxml", "Zarządzanie kierowcami");
         } else {
-            showAlert("Błąd logowania", error);
+            showAlert(error);
         }
     }
 
-    private void showAlert(String title, String content) {
+    private void showAlert(String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(content);
+
+        if ("EMPTY_FIELDS".equals(error)) {
+            alert.setTitle("Puste pola");
+            alert.setContentText("Wprowadź login i hasło.");
+        } else if (error.toLowerCase().contains("połączenia")) {
+            alert.setTitle("Błąd połączenia");
+            alert.setContentText("Nie można połączyć z serwerem.");
+        } else {
+            alert.setTitle("Błąd logowania");
+            alert.setContentText(error);
+        }
+
         alert.showAndWait();
+
+
     }
 }

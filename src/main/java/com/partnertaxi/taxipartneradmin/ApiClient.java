@@ -54,18 +54,17 @@ public class ApiClient {
 
             JSONObject json = new JSONObject(response.toString());
             if (responseCode >= 400 || !"success".equals(json.optString("status"))) {
-                String message = json.optString("message", "Nieznany błąd");
-                System.out.println("❌ Błąd logowania: " + message);
-                return message;
+                // Zwracamy treść błędu otrzymaną z API
+                return json.optString("message", "Nieprawidłowy login lub hasło");
             }
 
+            // Logowanie zakończone sukcesem - przechowujemy token JWT
             jwtToken = json.getString("token");
-            System.out.println("✅ Zalogowano jako " + username);
             return null;
 
         } catch (Exception e) {
-            e.printStackTrace();
-            return "Błąd połączenia: " + e.getMessage();
+            // Błąd połączenia z serwerem
+            return "Błąd połączenia z serwerem";
         } finally {
             if (conn != null) {
                 conn.disconnect();
