@@ -51,16 +51,25 @@ public class ApiClient {
             while ((line = br.readLine()) != null) {
                 response.append(line.trim());
             }
+            br.close();
 
-            JSONObject json = new JSONObject(response.toString());
-            if (responseCode >= 400 || !"success".equals(json.optString("status"))) {
-                // Zwracamy treść błędu otrzymaną z API
-                return json.optString("message", "Nieprawidłowy login lub hasło");
+            JSONObject json = response.length() > 0 ? new JSONObject(response.toString()) : new JSONObject();
+
+            if (responseCode == HttpURLConnection.HTTP_OK && "success".equals(json.optString("status"))) {
+                // Logowanie zakończone sukcesem - przechowujemy token JWT
+                jwtToken = json.getString("token");
+                return null;
             }
 
-            // Logowanie zakończone sukcesem - przechowujemy token JWT
-            jwtToken = json.getString("token");
-            return null;
+            if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+                return json.optString("message", "Brak wymaganych danych");
+            } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                return json.optString("message", "Nieprawidłowy login lub hasło");
+            } else if (responseCode >= 500) {
+                return json.optString("message", "Błąd serwera");
+            } else {
+                return json.optString("message", "Nieznany błąd");
+            }
 
         } catch (Exception e) {
             // Błąd połączenia z serwerem

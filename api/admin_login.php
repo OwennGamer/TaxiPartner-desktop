@@ -7,6 +7,7 @@ require_once 'jwt_utils.php'; // Upewnij się, że ten plik obsługuje createJWT
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['username']) || !isset($data['password'])) {
+    http_response_code(400);
     echo json_encode(["status" => "error", "message" => "Brak wymaganych danych"]);
     exit;
 }
@@ -20,6 +21,7 @@ try {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
+        http_response_code(401);
         echo json_encode(["status" => "error", "message" => "Nie znaleziono użytkownika"]);
         exit;
     }
@@ -55,6 +57,7 @@ try {
 
     if (!$ok) {
 
+        http_response_code(401);
         echo json_encode(["status" => "error", "message" => "Niepoprawne hasło"]);
         exit;
     }
@@ -75,6 +78,7 @@ try {
     ]);
 
 } catch (PDOException $e) {
+    http_response_code(500);
     echo json_encode(["status" => "error", "message" => "Błąd bazy danych"]);
 }
 ?>
