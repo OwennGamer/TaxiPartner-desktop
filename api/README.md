@@ -2,6 +2,17 @@
 
 This directory contains PHP scripts that form the backend API.
 
+## Firebase configuration
+
+The API uses Firebase Cloud Messaging via service account credentials. Before
+deploying, set the following environment variables:
+
+- `GOOGLE_APPLICATION_CREDENTIALS` – path to the Firebase service account JSON
+  file.
+- `FIREBASE_PROJECT_ID` – the Firebase project identifier.
+
+The previous `FCM_SERVER_KEY` constant has been removed.
+
 ## `get_driver_stats.php`
 Returns aggregated statistics for a driver between two dates.
 

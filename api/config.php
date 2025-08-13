@@ -6,6 +6,16 @@ define('DB_NAME', 'taxi_partner');
 define('DB_USER', 'SQLserwer');
 define('DB_PASS', 'SQL7169%');
 
-define('GOOGLE_APPLICATION_CREDENTIALS', __DIR__ . '/partner-taxi-kierowca-2e764-firebase-adminsdk-fbsvc-3f8d240139.json');
-define('FIREBASE_PROJECT_ID', 'partner-taxi-kierowca-2e764');  // ID projektu z Firebase → Project settings → General
+// Firebase configuration
+$googleCredentials = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+if ($googleCredentials === false || $googleCredentials === '') {
+    throw new RuntimeException('GOOGLE_APPLICATION_CREDENTIALS is not set');
+}
+define('GOOGLE_APPLICATION_CREDENTIALS', $googleCredentials);
+
+$projectId = getenv('FIREBASE_PROJECT_ID');
+if ($projectId === false || $projectId === '') {
+    throw new RuntimeException('FIREBASE_PROJECT_ID is not set');
+}
+define('FIREBASE_PROJECT_ID', $projectId);  // ID projektu z Firebase → Project settings → General
 ?>
