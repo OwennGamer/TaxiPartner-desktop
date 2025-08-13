@@ -9,13 +9,19 @@ define('DB_PASS', 'SQL7169%');
 // Firebase configuration
 $googleCredentials = getenv('GOOGLE_APPLICATION_CREDENTIALS');
 if ($googleCredentials === false || $googleCredentials === '') {
-    throw new RuntimeException('GOOGLE_APPLICATION_CREDENTIALS is not set');
+    http_response_code(500);
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'GOOGLE_APPLICATION_CREDENTIALS is not set']);
+    exit;
 }
 define('GOOGLE_APPLICATION_CREDENTIALS', $googleCredentials);
 
 $projectId = getenv('FIREBASE_PROJECT_ID');
 if ($projectId === false || $projectId === '') {
-    throw new RuntimeException('FIREBASE_PROJECT_ID is not set');
+        http_response_code(500);
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'FIREBASE_PROJECT_ID is not set']);
+    exit;
 }
 define('FIREBASE_PROJECT_ID', $projectId);  // ID projektu z Firebase → Project settings → General
 ?>

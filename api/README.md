@@ -11,6 +11,9 @@ deploying, set the following environment variables:
   file.
 - `FIREBASE_PROJECT_ID` – the Firebase project identifier.
 
+Both variables must be defined in the environment. If any of them are missing,
+`config.php` returns a `500` response with a JSON error message.
+
 The previous `FCM_SERVER_KEY` constant has been removed.
 
 ## `get_driver_stats.php`
