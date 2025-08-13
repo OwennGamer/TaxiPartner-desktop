@@ -29,8 +29,8 @@ try {
         (id, imie, nazwisko, password, status, rola, saldo, koszt_paliwa, created_at)
         VALUES (:id, :imie, :nazwisko, :password, :status, :rola, :saldo, :koszt_paliwa, NOW())");
 
-    // haszujemy hasło SHA-256, bo login.php oczekuje takiego formatu
-    $hashedPassword = hash('sha256', $data['password']);
+    // Haszujemy hasło przy użyciu wbudowanego algorytmu
+    $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 
     $stmt->execute([
         ':id'          => $data['id'],

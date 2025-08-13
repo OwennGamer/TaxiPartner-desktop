@@ -23,11 +23,38 @@ try {
         echo json_encode(["status" => "error", "message" => "Nie znaleziono użytkownika"]);
         exit;
     }
-file_put_contents("debug_log.txt", "Hasło z bazy: {$user['password']}\n", FILE_APPEND);
-file_put_contents("debug_log.txt", "Hasło od użytkownika: " . hash('sha256', $password) . "\n", FILE_APPEND);
+    
+        // Weryfikacja hasła i ewentualna migracja ze starych algorytmów
+    $stored = $user['password'];
+    $ok = false;
 
-    // Porównanie hasła zahashowanego
-    if (!hash_equals($user['password'], hash('sha256', $password))) {
+    // 1) Nowoczesny hasz (bcrypt itp.)
+    if (password_get_info($stored)['algo'] !== 0 && password_verify($password, $stored)) {
+        $ok = true;
+        // Zaktualizuj hasz jeśli stosowany algorytm jest przestarzały
+        if (password_needs_rehash($stored, PASSWORD_DEFAULT)) {
+            $newHash = password_hash($password, PASSWORD_DEFAULT);
+            $update = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $update->execute([$newHash, $user['id']]);
+        }
+    }
+    // 2) Stary hasz SHA-256
+    elseif (preg_match('/^[0-9a-f]{64}$/i', $stored) && hash_equals($stored, hash('sha256', $password))) {
+        $ok = true;
+        $newHash = password_hash($password, PASSWORD_DEFAULT);
+        $update = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+        $update->execute([$newHash, $user['id']]);
+    }
+    // 3) Hasło w postaci czystego tekstu
+    elseif ($password === $stored) {
+        $ok = true;
+        $newHash = password_hash($password, PASSWORD_DEFAULT);
+        $update = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+        $update->execute([$newHash, $user['id']]);
+    }
+
+    if (!$ok) {
+
         echo json_encode(["status" => "error", "message" => "Niepoprawne hasło"]);
         exit;
     }

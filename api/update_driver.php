@@ -37,8 +37,9 @@ try {
     $stmt->execute([$id]);
     $existingPassword = $stmt->fetchColumn();
 
-    if ($existingPassword !== $password) {
-        $hashedPassword = hash('sha256', $password);
+        // Jeżeli hasło zostało zmienione, haszuj je przy użyciu password_hash
+    if (!password_verify($password, $existingPassword)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     } else {
         $hashedPassword = $existingPassword;
     }
