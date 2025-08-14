@@ -66,7 +66,15 @@ public class ApiClient {
             } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
                 return json.optString("message", "Nieprawidłowy login lub hasło");
             } else if (responseCode >= 500) {
-                return json.optString("message", "Błąd serwera");
+                String message = json.optString("message");
+                if (!message.isEmpty()) {
+                    return message;
+                }
+                String error = json.optString("error");
+                if (!error.isEmpty()) {
+                    return error;
+                }
+                return "Błąd serwera";
             } else {
                 return json.optString("message", "Nieznany błąd");
             }
