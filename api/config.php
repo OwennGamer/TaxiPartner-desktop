@@ -11,16 +11,16 @@ $googleCredentials = getenv('GOOGLE_APPLICATION_CREDENTIALS');
 if ($googleCredentials === false || $googleCredentials === '') {
     http_response_code(500);
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'GOOGLE_APPLICATION_CREDENTIALS is not set']);
+    echo json_encode(['status' => 'error', 'message' => 'GOOGLE_APPLICATION_CREDENTIALS is not set']);
     exit;
 }
 define('GOOGLE_APPLICATION_CREDENTIALS', $googleCredentials);
 
 $projectId = getenv('FIREBASE_PROJECT_ID');
 if ($projectId === false || $projectId === '') {
-        http_response_code(500);
+    http_response_code(500);
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'FIREBASE_PROJECT_ID is not set']);
+    echo json_encode(['status' => 'error', 'message' => 'FIREBASE_PROJECT_ID is not set']);
     exit;
 }
 define('FIREBASE_PROJECT_ID', $projectId);  // ID projektu z Firebase → Project settings → General
