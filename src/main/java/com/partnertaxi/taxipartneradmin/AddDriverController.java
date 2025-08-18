@@ -26,6 +26,7 @@ public class AddDriverController {
     @FXML private Label           saldoFieldPlaceholder;
 
     @FXML private ChoiceBox<String> statusChoiceBox;
+    @FXML private ChoiceBox<String> roleChoiceBox;
     @FXML private ChoiceBox<String> fuelCostChoiceBox;
 
     @FXML private TextField       percentTurnoverField;
@@ -51,6 +52,8 @@ public class AddDriverController {
         // Inicjalizacja ChoiceBoxów
         statusChoiceBox.getItems().addAll("aktywny", "nieaktywny");
         statusChoiceBox.setValue("aktywny");
+        roleChoiceBox.getItems().addAll("kierowca", "flotowiec");
+        roleChoiceBox.setValue("kierowca");
         fuelCostChoiceBox.getItems().addAll("firma", "kierowca");
         fuelCostChoiceBox.setValue("firma");
 
@@ -96,7 +99,7 @@ public class AddDriverController {
 
             String password = passwordField.getText().trim();
             String status = statusChoiceBox.getValue();
-            String rola = "kierowca";
+            String rola = roleChoiceBox.getValue();
             float fuelCost = fuelCostChoiceBox.getValue().equals("firma") ? 0f : 1f;
 
             // Pobieramy wartości już sparsowane przez TextFormatter
