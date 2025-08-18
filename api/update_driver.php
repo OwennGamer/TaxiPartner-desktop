@@ -23,6 +23,7 @@ $imie = $data['imie'];
 $nazwisko = $data['nazwisko'];
 $password = $data['password'];
 $status = $data['status'];
+$rola = $data['rola'];
 
 $percentTurnover = $data['percentTurnover'];
 $fuelCost = $data['fuelCost'];
@@ -45,8 +46,8 @@ try {
     }
 
     // 🧾 Aktualizacja tabeli kierowcy
-    $stmt = $pdo->prepare("UPDATE kierowcy SET imie = ?, nazwisko = ?, password = ?, status = ? WHERE id = ?");
-    $stmt->execute([$imie, $nazwisko, $hashedPassword, $status, $id]);
+    $stmt = $pdo->prepare("UPDATE kierowcy SET imie = ?, nazwisko = ?, password = ?, status = ?, rola = ? WHERE id = ?");
+    $stmt->execute([$imie, $nazwisko, $hashedPassword, $status, $rola, $id]);
 
     // 🧾 Aktualizacja collaboration_terms
     $terms = [

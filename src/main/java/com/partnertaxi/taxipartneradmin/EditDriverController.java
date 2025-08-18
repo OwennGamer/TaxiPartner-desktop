@@ -138,6 +138,7 @@ public class EditDriverController {
                     imie, nazwisko,
                     haslo,
                     status,
+                    rola,
                     percentTurnover,
                     fuelCost,
                     cardCommission,

@@ -167,7 +167,7 @@ public class ApiClient {
 
     // ✏️ Edycja kierowcy
     public static void updateDriver(String id, String imie, String nazwisko, String password,
-                                    String status, float percentTurnover,
+                                    String status, String rola, float percentTurnover,
                                     float fuelCost, float cardCommission,
                                     float partnerCommission, float boltCommission,
                                     float settlementLimit) {
@@ -178,6 +178,7 @@ public class ApiClient {
             json.put("nazwisko", nazwisko);
             json.put("password", password);
             json.put("status", status);
+            json.put("rola", rola);
             json.put("percentTurnover", percentTurnover);
             json.put("fuelCost", fuelCost);
             json.put("cardCommission", cardCommission);
