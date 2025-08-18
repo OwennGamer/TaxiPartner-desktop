@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import java.util.Locale;
 
 public class LoginController {
 
@@ -39,7 +40,7 @@ public class LoginController {
         if ("EMPTY_FIELDS".equals(error)) {
             alert.setTitle("Puste pola");
             alert.setContentText("Wprowadź login i hasło.");
-        } else if (error.toLowerCase().contains("połączenia")) {
+        } else if (error.toLowerCase(Locale.ROOT).contains("połączenia")) {
             alert.setTitle("Błąd połączenia");
             alert.setContentText("Nie można połączyć z serwerem.");
         } else {
