@@ -2,9 +2,24 @@ plugins {
   id 'java'
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.13'
-  id 'org.beryx.jlink'           version '3.0.1'
   id 'org.jetbrains.kotlin.jvm'
 }
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
+  }
+}
+
+configurations.classpath {
+  resolutionStrategy {
+    force("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
+  }
+}
+
 
 group = 'com.partnertaxi'
 version = '1.0-SNAPSHOT'  // zostawiamy SNAPSHOT dla developmentu
@@ -52,24 +67,4 @@ test {
   useJUnitPlatform()
 }
 
-jlink {
-  options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages', '--add-modules', 'jdk.localedata', '--include-locales', 'pl']
-  launcher {
-    name = 'app'
-  }
-  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
 
-  jpackage {
-    // nadpisujemy wersję dla instalatora na prostą, numeryczną
-    appVersion     = '1.0'
-    // zmieniono typ na MSI, ponieważ EXE nie jest wspierane
-    installerType  = 'msi'
-    installerOptions = [
-            '--vendor',      'PartnerTaxi',
-            '--win-shortcut',
-            '--icon',        "$projectDir/src/main/resources/test.ico"
-    ]
-    // (opcjonalnie) katalog wyjściowy dla .msi:
-    // installerOutputDir = file("$buildDir/installer")
-  }
-}

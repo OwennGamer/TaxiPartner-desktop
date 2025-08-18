@@ -2,5 +2,13 @@ pluginManagement {
     plugins {
         id 'org.jetbrains.kotlin.jvm' version '1.8.22'
     }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id.startsWith("org.jetbrains.kotlin")) {
+                useVersion("1.8.22")
+            }
+        }
+    }
 }
+
 rootProject.name = "TaxiPartnerAdmin"
