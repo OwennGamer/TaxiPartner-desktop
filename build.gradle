@@ -3,6 +3,7 @@ plugins {
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'org.beryx.jlink'           version '2.25.0'
+  id 'org.jetbrains.kotlin.jvm'
 }
 
 group = 'com.partnertaxi'
@@ -40,6 +41,7 @@ dependencies {
   implementation "com.google.code.gson:gson:2.8.9"
   implementation "mysql:mysql-connector-java:8.0.33"
   implementation "org.json:json:20230227"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 tasks.withType(JavaCompile).configureEach {

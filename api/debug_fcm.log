@@ -1,0 +1,31 @@
+[2025-08-14 15:32:04] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755185524343594%3f7a32d13f7a32d1"
+}
+
+[2025-08-14 15:39:24] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755185964492525%3f7a32d13f7a32d1"
+}
+
+2025-08-14T15:39:24+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1755185964492525%3f7a32d13f7a32d1"}}
+[2025-08-14 15:55:22] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755186922019787%3f7a32d13f7a32d1"
+}
+
+[2025-08-14 15:58:14] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755187094906754%3f7a32d13f7a32d1"
+}
+
+[2025-08-14 15:59:19] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755187158997241%3f7a32d13f7a32d1"
+}
+
+2025-08-14T15:59:19+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1755187158997241%3f7a32d13f7a32d1"}}
+[2025-08-18 08:14:26] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755504866517361%3f7a32d13f7a32d1"
+}
+
+[2025-08-18 08:25:01] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1755505501031919%3f7a32d13f7a32d1"
+}
+
+2025-08-18T08:25:01+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1755505501031919%3f7a32d13f7a32d1"}}

@@ -1,41 +1,27 @@
 <?php
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/fcm.php';
-
 header('Content-Type: application/json; charset=utf-8');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
-    exit;
-}
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/fcm_v1.php';
 
-$input = json_decode(file_get_contents('php://input'), true);
-$token = trim($input['token'] ?? '');
-$messageText = trim($input['message'] ?? '');
+$raw = file_get_contents('php://input');
+$in  = json_decode($raw, true);
 
-if ($token === '' || $messageText === '') {
+$token   = $in['token']   ?? null;
+$title   = $in['title']   ?? 'Saldo';
+$message = $in['message'] ?? 'Test FCM (v1)';
+$data    = isset($in['data']) && is_array($in['data']) ? $in['data'] : [];
+
+if (!$token) {
     http_response_code(400);
-    echo json_encode(['status' => 'error', 'message' => 'Brak tokenu lub wiadomości']);
+    echo json_encode(['status' => 'error', 'message' => 'Brak pola token']);
     exit;
 }
-
-$payload = [
-    'token' => $token,
-    'notification' => [
-        'title' => 'Test',
-        'body' => $messageText
-    ]
-];
 
 try {
-    $response = sendFcmMessage(FIREBASE_PROJECT_ID, $payload);
-    http_response_code(200);
-    echo json_encode([
-        'fcm_status' => $response['statusCode'],
-        'fcm_response' => $response['body']
-    ]);
+    $resp = sendFcmV1($token, $title, $message, $data);
+    echo json_encode(['status' => 'ok', 'fcm' => $resp], JSON_UNESCAPED_UNICODE);
 } catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'FCM send error: ' . $e->getMessage()]);
+    http_response_code(502);
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
 }

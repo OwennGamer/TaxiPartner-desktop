@@ -1,27 +1,30 @@
 <?php
+// =======================
 // Konfiguracja bazy danych
-define('DB_HOST', '127.0.0.1'); // Zmiana na localhost dla wewnętrznych połączeń
-define('DB_PORT', '8443'); // Port MariaDB, upewnij się, że to właściwy port
+// =======================
+define('DB_HOST', '127.0.0.1');   // u Ciebie tak było – zostawiam
+define('DB_PORT', '8443');        // u Ciebie tak było – zostawiam (standard to 3306, ale nie zmieniam)
 define('DB_NAME', 'taxi_partner');
 define('DB_USER', 'SQLserwer');
 define('DB_PASS', 'SQL7169%');
 
-// Firebase configuration
-$googleCredentials = getenv('GOOGLE_APPLICATION_CREDENTIALS');
-if ($googleCredentials === false || $googleCredentials === '') {
-    http_response_code(500);
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => 'GOOGLE_APPLICATION_CREDENTIALS is not set']);
-    exit;
-}
-define('GOOGLE_APPLICATION_CREDENTIALS', $googleCredentials);
+// =======================
+// Firebase Cloud Messaging (HTTP v1)
+// =======================
+// ID projektu Firebase – spróbuj wziąć z ENV (np. FIREBASE_PROJECT_ID), a jak brak to stała:
+define('FCM_PROJECT_ID', getenv('FIREBASE_PROJECT_ID') ?: 'partner-taxi-kierowca-2e764');
 
-$projectId = getenv('FIREBASE_PROJECT_ID');
-if ($projectId === false || $projectId === '') {
-    http_response_code(500);
-    header('Content-Type: application/json');
-    echo json_encode(['status' => 'error', 'message' => 'FIREBASE_PROJECT_ID is not set']);
-    exit;
+// Ścieżka do konta serwisowego (ENV ustawione w Apache) z bezpiecznym fallbackiem do pliku w katalogu API:
+define('GOOGLE_APPLICATION_CREDENTIALS', getenv('GOOGLE_APPLICATION_CREDENTIALS') ?: __DIR__ . '/partner-taxi-kierowca-2e764-firebase-adminsdk-fbsvc-3f8d240139.json');
+
+// Ścieżka do logu FCM (diagnostyka wysyłek):
+define('FCM_LOG_PATH', __DIR__ . '/debug_fcm.log');
+
+// Legacy (niewykorzystywane przy HTTP v1) – zostawiamy pusty dla zgodności z istniejącym kodem:
+if (!defined('FCM_SERVER_KEY')) {
+    define('FCM_SERVER_KEY', '');
 }
-define('FIREBASE_PROJECT_ID', $projectId);  // ID projektu z Firebase → Project settings → General
-?>
+
+
+
+
