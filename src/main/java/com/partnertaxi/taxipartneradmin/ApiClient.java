@@ -5,67 +5,116 @@ import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ApiClient {
 
     private static final String BASE_URL = Config.getBaseUrl();
+    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
+    private static final MediaType FORM = MediaType.get("application/x-www-form-urlencoded");
+    private static final OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .build();
     private static String jwtToken;
 
     public static String getJwtToken() {
         return jwtToken;
     }
 
+    private static class ApiResult {
+        final int code;
+        final String body;
+
+        ApiResult(int code, String body) {
+            this.code = code;
+            this.body = body;
+        }
+    }
+
+    private static ApiResult executeRequest(Request request) {
+        try (Response response = client.newCall(request).execute()) {
+            String respBody = response.body() != null ? response.body().string() : "";
+            return new ApiResult(response.code(), respBody);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResult(-1, null);
+        }
+    }
+
+    private static ApiResult sendJsonPost(String endpoint, JSONObject json) {
+        RequestBody body = RequestBody.create(json.toString(), JSON);
+        Request.Builder builder = new Request.Builder()
+                .url(BASE_URL + endpoint)
+                .post(body)
+                .addHeader("Accept", "application/json");
+        if (jwtToken != null) {
+            builder.addHeader("Authorization", "Bearer " + jwtToken);
+        }
+        return executeRequest(builder.build());
+    }
+
+    private static ApiResult sendPostRequest(String endpoint, String body) {
+        RequestBody requestBody = RequestBody.create(body, FORM);
+        Request.Builder builder = new Request.Builder()
+                .url(BASE_URL + endpoint)
+                .post(requestBody)
+                .addHeader("Accept", "application/json");
+        if (jwtToken != null) {
+            builder.addHeader("Authorization", "Bearer " + jwtToken);
+        }
+        return executeRequest(builder.build());
+    }
+
+    public static String sendGetRequest(String endpoint) {
+        Request.Builder builder = new Request.Builder()
+                .url(BASE_URL + endpoint)
+                .get()
+                .addHeader("Accept", "application/json");
+        if (jwtToken != null) {
+            builder.addHeader("Authorization", "Bearer " + jwtToken);
+        }
+        return executeRequest(builder.build()).body;
+    }
+
     // 🔐 Logowanie administratora
     public static String login(String username, String password) {
-        HttpURLConnection conn = null;
         try {
-            URL url = new URL(BASE_URL + "admin_login.php");
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
             JSONObject loginData = new JSONObject();
             loginData.put("username", username);
             loginData.put("password", password);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(loginData.toString().getBytes(StandardCharsets.UTF_8));
-            }
 
-            int responseCode = conn.getResponseCode();
-            InputStream stream = responseCode >= 400 ? conn.getErrorStream() : conn.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line.trim());
-            }
-            br.close();
+            RequestBody body = RequestBody.create(loginData.toString(), JSON);
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "admin_login.php")
+                    .post(body)
+                    .addHeader("Accept", "application/json")
+                    .build();
 
-            JSONObject json = response.length() > 0 ? new JSONObject(response.toString()) : new JSONObject();
+            ApiResult result = executeRequest(request);
+            JSONObject json = result.body != null && !result.body.isEmpty()
+                    ? new JSONObject(result.body)
+                    : new JSONObject();
 
-            if (responseCode == HttpURLConnection.HTTP_OK && "success".equals(json.optString("status"))) {
-                // Logowanie zakończone sukcesem - przechowujemy token JWT
+            if (result.code == 200 && "success".equals(json.optString("status"))) {
                 jwtToken = json.getString("token");
                 return null;
             }
 
-            if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST) {
+            if (result.code == 400) {
                 return json.optString("message", "Brak wymaganych danych");
-            } else if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+            } else if (result.code == 401) {
                 return json.optString("message", "Nieprawidłowy login lub hasło");
-            } else if (responseCode >= 500) {
+            } else if (result.code >= 500) {
                 String message = json.optString("message");
                 if (!message.isEmpty()) {
                     return message;
@@ -78,14 +127,8 @@ public class ApiClient {
             } else {
                 return json.optString("message", "Nieznany błąd");
             }
-
         } catch (Exception e) {
-            // Błąd połączenia z serwerem
             return "Błąd połączenia z serwerem";
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
         }
     }
 
@@ -96,14 +139,6 @@ public class ApiClient {
                                      float cardCommission, float partnerCommission,
                                      float boltCommission, float settlementLimit, float saldo) {
         try {
-            URL url = new URL(BASE_URL + "add_driver.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("id", id);
             json.put("imie", imie);
@@ -118,17 +153,13 @@ public class ApiClient {
             json.put("boltCommission", boltCommission);
             json.put("settlementLimit", settlementLimit);
             json.put("saldo", saldo);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
 
-            int code = conn.getResponseCode();
-            if (code == 200) {
+            ApiResult res = sendJsonPost("add_driver.php", json);
+            if (res.code == 200) {
                 System.out.println("✅ Użytkownik mobilny dodany przez API.");
             } else {
-                System.out.println("❌ Błąd dodawania użytkownika. Kod: " + code);
+                System.out.println("❌ Błąd dodawania użytkownika. Kod: " + res.code);
             }
-            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,14 +172,6 @@ public class ApiClient {
                                     float partnerCommission, float boltCommission,
                                     float settlementLimit) {
         try {
-            URL url = new URL(BASE_URL + "update_driver.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("id", id);
             json.put("imie", imie);
@@ -161,17 +184,13 @@ public class ApiClient {
             json.put("partnerCommission", partnerCommission);
             json.put("boltCommission", boltCommission);
             json.put("settlementLimit", settlementLimit);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
 
-            int code = conn.getResponseCode();
-            if (code == 200) {
+            ApiResult res = sendJsonPost("update_driver.php", json);
+            if (res.code == 200) {
                 System.out.println("✅ Edycja użytkownika zakończona sukcesem.");
             } else {
-                System.out.println("❌ Błąd edycji użytkownika. Kod: " + code);
+                System.out.println("❌ Błąd edycji użytkownika. Kod: " + res.code);
             }
-            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -180,27 +199,14 @@ public class ApiClient {
     // ❌ Usuwanie kierowcy
     public static void deleteDriver(String id) {
         try {
-            URL url = new URL(BASE_URL + "delete_driver.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("id", id);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
-
-            int code = conn.getResponseCode();
-            if (code == 200) {
+            ApiResult res = sendJsonPost("delete_driver.php", json);
+            if (res.code == 200) {
                 System.out.println("✅ Kierowca usunięty.");
             } else {
-                System.out.println("❌ Błąd usuwania kierowcy. Kod: " + code);
+                System.out.println("❌ Błąd usuwania kierowcy. Kod: " + res.code);
             }
-            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -209,53 +215,28 @@ public class ApiClient {
     // 🔁 Zmiana salda kierowcy
     public static void updateSaldo(String driverId, float amount, String reason) {
         try {
-            URL url = new URL(BASE_URL + "update_saldo.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("id", driverId);
             json.put("amount", amount);
             json.put("reason", reason);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
 
-            int code = conn.getResponseCode();
-            InputStream is = (code >= 400) ? conn.getErrorStream() : conn.getInputStream();
-            StringBuilder response = new StringBuilder();
-            if (is != null) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        response.append(line.trim());
-                    }
-                }
-            }
-
+            ApiResult res = sendJsonPost("update_saldo.php", json);
             String fcmStatus = "";
-            if (response.length() > 0) {
-                JSONObject respJson = new JSONObject(response.toString());
+            if (res.body != null && !res.body.isEmpty()) {
+                JSONObject respJson = new JSONObject(res.body);
                 fcmStatus = respJson.optString("fcm_status", "");
             }
 
-            if (code == 200) {
+            if (res.code == 200) {
                 System.out.println("✅ Saldo zmienione pomyślnie.");
-            } else if (code == 207) {
+            } else if (res.code == 207) {
                 System.out.println("⚠️ Saldo zmienione, ale wysyłka FCM nie powiodła się.");
             } else {
-                System.out.println("❌ Błąd zmiany salda. Kod: " + code);
-
+                System.out.println("❌ Błąd zmiany salda. Kod: " + res.code);
                 if (!fcmStatus.isEmpty()) {
                     System.out.println("ℹ️ fcm_status: " + fcmStatus);
                 }
-
             }
-            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -264,47 +245,32 @@ public class ApiClient {
     public static ObservableList<HistoryEntry> getCombinedHistory(String driverId) {
         ObservableList<HistoryEntry> list = FXCollections.observableArrayList();
         try {
-            URL url = new URL(BASE_URL + "get_combined_history.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("driverId", driverId);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
 
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "utf-8"));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line.trim());
-            }
+            ApiResult res = sendJsonPost("get_combined_history.php", json);
+            if (res.body != null && !res.body.isEmpty()) {
+                JSONObject respJson = new JSONObject(res.body);
+                if ("success".equals(respJson.getString("status"))) {
+                    JSONArray arr = respJson.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        String receiptPhoto = o.optString("receipt_photo", null);
+                        String receiptPhotoUrl = (receiptPhoto != null && !receiptPhoto.isEmpty())
+                                ? BASE_URL + receiptPhoto
+                                : null;
+                        boolean photoAvailable = o.optBoolean("photo_available", false);
 
-            JSONObject respJson = new JSONObject(response.toString());
-            if ("success".equals(respJson.getString("status"))) {
-                JSONArray arr = respJson.getJSONArray("data");
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject o = arr.getJSONObject(i);
-                    String receiptPhoto = o.optString("receipt_photo", null);
-                    String receiptPhotoUrl = (receiptPhoto != null && !receiptPhoto.isEmpty())
-                            ? BASE_URL + receiptPhoto
-                            : null;
-                    boolean photoAvailable = o.optBoolean("photo_available", false);
-
-                    list.add(new HistoryEntry(
-                            o.optString("date", ""),
-                            o.optString("type", ""),
-                            o.optString("description", ""),
-                            o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
-                            o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00",
-                            receiptPhotoUrl,
-                            photoAvailable
-                    ));
+                        list.add(new HistoryEntry(
+                                o.optString("date", ""),
+                                o.optString("type", ""),
+                                o.optString("description", ""),
+                                o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
+                                o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00",
+                                receiptPhotoUrl,
+                                photoAvailable
+                        ));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -313,97 +279,36 @@ public class ApiClient {
         return list;
     }
 
-    // 🔎 GET helper
-    public static String sendGetRequest(String endpoint) {
-        try {
-            URL url = new URL(BASE_URL + endpoint);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), "utf-8"));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line.trim());
-            }
-            conn.disconnect();
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // 🔄 POST helper (x-www-form-urlencoded)
-    public static String sendPostRequest(String endpoint, String body) {
-        try {
-            URL url = new URL(BASE_URL + endpoint);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(body.getBytes(StandardCharsets.UTF_8));
-            }
-
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line.trim());
-            }
-            conn.disconnect();
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
     public static List<Vehicle> getVehicles() {
         List<Vehicle> list = new ArrayList<>();
         try {
-            URL url = new URL(BASE_URL + "get_vehicles.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-            JSONObject json = new JSONObject(sb.toString());
-            if ("success".equals(json.getString("status"))) {
-                JSONArray arr = json.getJSONArray("data");
-                for (int i = 0; i < arr.length(); i++) {
-                    JSONObject o = arr.getJSONObject(i);
-                    list.add(new Vehicle(
-                            o.getInt("id"),
-                            o.getString("rejestracja"),
-                            o.getString("marka"),
-                            o.getString("model"),
-                            o.getInt("przebieg"),
-                            o.getString("ubezpieczenie_do"),
-                            o.getString("przeglad_do"),
-                            o.getInt("aktywny") == 1,
-                            o.optInt("inpost", 0) == 1,
-                            o.optInt("taxi", 0) == 1,
-                            o.optInt("taksometr", 0) == 1,
-                            o.optString("legalizacja_taksometru_do", null),
-                            o.optInt("gaz", 0) == 1,
-                            o.optString("homologacja_lpg_do", null),
-                            o.optString("firma", null),
-                            o.optString("forma_wlasnosci", null),
-                            o.optString("numer_polisy", null)
-                    ));
+            String resp = sendGetRequest("get_vehicles.php");
+            if (resp != null) {
+                JSONObject json = new JSONObject(resp);
+                if ("success".equals(json.getString("status"))) {
+                    JSONArray arr = json.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        list.add(new Vehicle(
+                                o.getInt("id"),
+                                o.getString("rejestracja"),
+                                o.getString("marka"),
+                                o.getString("model"),
+                                o.getInt("przebieg"),
+                                o.getString("ubezpieczenie_do"),
+                                o.getString("przeglad_do"),
+                                o.getInt("aktywny") == 1,
+                                o.optInt("inpost", 0) == 1,
+                                o.optInt("taxi", 0) == 1,
+                                o.optInt("taksometr", 0) == 1,
+                                o.optString("legalizacja_taksometru_do", null),
+                                o.optInt("gaz", 0) == 1,
+                                o.optString("homologacja_lpg_do", null),
+                                o.optString("firma", null),
+                                o.optString("forma_wlasnosci", null),
+                                o.optString("numer_polisy", null)
+                        ));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -607,7 +512,6 @@ public class ApiClient {
         return list;
     }
 
-
     /**
      * Rozpoczyna sesję pracy kierowcy.
      * @return ID utworzonej sesji lub null w razie błędu.
@@ -616,9 +520,9 @@ public class ApiClient {
         try {
             String body = String.format("vehicle_plate=%s&start_odometer=%d",
                     URLEncoder.encode(vehiclePlate, "UTF-8"), startOdometer);
-            String resp = sendPostRequest("start_shift.php", body);
-            if (resp != null) {
-                JSONObject json = new JSONObject(resp);
+            ApiResult resp = sendPostRequest("start_shift.php", body);
+            if (resp.body != null) {
+                JSONObject json = new JSONObject(resp.body);
                 if ("success".equals(json.optString("status"))) {
                     return json.optInt("session_id");
                 }
@@ -636,9 +540,9 @@ public class ApiClient {
     public static Integer endShift(int endOdometer) {
         try {
             String body = "end_odometer=" + endOdometer;
-            String resp = sendPostRequest("end_shift.php", body);
-            if (resp != null) {
-                JSONObject json = new JSONObject(resp);
+            ApiResult resp = sendPostRequest("end_shift.php", body);
+            if (resp.body != null) {
+                JSONObject json = new JSONObject(resp.body);
                 if ("success".equals(json.optString("status"))) {
                     return json.optInt("session_id");
                 }
@@ -656,12 +560,6 @@ public class ApiClient {
                                      String legalizacja, boolean gaz, String homologacja,
                                      String firma, String formaWlasnosci, String numerPolisy) {
         try {
-            URL url = new URL(BASE_URL + "update_vehicle.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("id", id);
             json.put("rejestracja", rejestracja);
@@ -681,12 +579,7 @@ public class ApiClient {
             json.put("forma_wlasnosci", formaWlasnosci == null ? "" : formaWlasnosci);
             json.put("numer_polisy", numerPolisy == null ? "" : numerPolisy);
 
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
-
-            conn.getResponseCode();
-            conn.disconnect();
+            sendJsonPost("update_vehicle.php", json);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -695,24 +588,12 @@ public class ApiClient {
     // ❌ Usuwanie pojazdu
     public static void deleteVehicle(int id) {
         try {
-            URL url = new URL(BASE_URL + "delete_vehicle.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
             String postData = "id=" + id;
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(postData.getBytes(StandardCharsets.UTF_8));
-            }
-
-            conn.getResponseCode();
-            conn.disconnect();
+            sendPostRequest("delete_vehicle.php", postData);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     // 📄 Pobieranie listy pracowników
     public static List<Employee> getEmployees() {
@@ -772,21 +653,8 @@ public class ApiClient {
     // ➕ Dodawanie pracownika
     public static void addEmployee(Employee e) {
         try {
-            URL url = new URL(BASE_URL + "add_employee.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = employeeToJson(e);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
-
-            conn.getResponseCode();
-            conn.disconnect();
+            sendJsonPost("add_employee.php", json);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -795,21 +663,8 @@ public class ApiClient {
     // ✏️ Aktualizacja pracownika
     public static void updateEmployee(Employee e) {
         try {
-            URL url = new URL(BASE_URL + "update_employee.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = employeeToJson(e);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
-
-            conn.getResponseCode();
-            conn.disconnect();
+            sendJsonPost("update_employee.php", json);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -818,22 +673,9 @@ public class ApiClient {
     // ❌ Usuwanie pracownika
     public static void deleteEmployee(String id) {
         try {
-            URL url = new URL(BASE_URL + "delete_employee.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
-            conn.setDoOutput(true);
-
             JSONObject json = new JSONObject();
             json.put("id", id);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.toString().getBytes("utf-8"));
-            }
-
-            conn.getResponseCode();
-            conn.disconnect();
+            sendJsonPost("delete_employee.php", json);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
