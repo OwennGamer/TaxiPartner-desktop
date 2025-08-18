@@ -1,23 +1,8 @@
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
-  }
-}
-
 plugins {
   id 'java'
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.13'
-  id 'org.jetbrains.kotlin.jvm'
-}
-
-configurations.classpath {
-  resolutionStrategy {
-    force("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
-  }
+  id 'org.jetbrains.kotlin.jvm' version '1.8.22'
 }
 
 
