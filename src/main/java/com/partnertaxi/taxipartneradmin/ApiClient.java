@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://164.126.143.20:8444/api/";
+    private static final String BASE_URL = Config.getBaseUrl();
     private static String jwtToken;
 
     public static String getJwtToken() {

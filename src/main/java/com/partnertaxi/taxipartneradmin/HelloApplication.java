@@ -14,6 +14,7 @@ public class HelloApplication extends Application {
 
     // <<< ten blok wykona się jeszcze przed wywołaniem launch()
     static {
+        Config.load();
         // globalne locale na polskie
         Locale.setDefault(new Locale("pl", "PL"));
         // dodatkowo na wszelki wypadek nadpisujemy systemowe properties

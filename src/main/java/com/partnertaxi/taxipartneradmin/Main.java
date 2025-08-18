@@ -4,6 +4,7 @@ import java.util.Locale;  // <<< importujemy Locale
 
 public class Main {
     public static void main(String[] args) {
+        Config.load();
         // <<< poniżej ustawiamy globalnie polską kulturę formatu liczb
         Locale.setDefault(new Locale("pl", "PL"));
 
