@@ -57,6 +57,23 @@ class DashboardActivity : AppCompatActivity() {
         btnPusty3          = findViewById(R.id.btnPusty3)
         btnZakonczPrace    = findViewById(R.id.btnZakonczPrace)
 
+        val role = SessionManager.getRole(this)
+
+        btnFlota.setOnClickListener {
+            if (role != "flotowiec") {
+                Toast.makeText(this, "BRAK UPRAWNIEŃ", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent().setClassName(this, "com.partner.taxi.FleetActivity")
+                startActivity(intent)
+            }
+        }
+
+        if (role != "flotowiec") {
+            btnFlota.alpha = 0.5f
+        }
+
+
+
         // <-- PRZYWRACAMY LOSOWE KOLORY DLA KAFELKÓW -->
         val buttons = listOf(
             btnDodajKurs, btnHistoria, btnTankowanie, btnGrafik,
