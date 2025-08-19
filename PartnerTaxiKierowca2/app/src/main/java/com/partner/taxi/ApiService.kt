@@ -33,6 +33,10 @@ interface ApiService {
         @Query("driver_id") driverId: String
     ): Response<DriverDataResponse>
 
+    @GET("getVehicles.php")
+    suspend fun getVehicles(): VehiclesResponse
+
+
     @FormUrlEncoded
     @POST("update_vehicle_mileage.php")
     fun updateVehicleMileage(

@@ -63,8 +63,7 @@ class DashboardActivity : AppCompatActivity() {
             if (role != "flotowiec") {
                 Toast.makeText(this, "BRAK UPRAWNIEŃ", Toast.LENGTH_SHORT).show()
             } else {
-                val intent = Intent().setClassName(this, "com.partner.taxi.FleetActivity")
-                startActivity(intent)
+                startActivity(Intent(this, FleetActivity::class.java))
             }
         }
 
