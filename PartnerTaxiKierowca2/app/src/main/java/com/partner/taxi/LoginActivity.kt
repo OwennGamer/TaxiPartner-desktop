@@ -54,6 +54,9 @@ class LoginActivity : AppCompatActivity() {
                         loginResponse.driver_id?.let {
                             SessionManager.saveDriverId(this@LoginActivity, it)
                         }
+                        loginResponse.rola?.let {
+                            SessionManager.saveRole(this@LoginActivity, it)
+                        }
 
                         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
