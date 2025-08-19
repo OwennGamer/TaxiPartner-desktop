@@ -35,7 +35,7 @@ object SessionManager {
 
     fun saveRole(context: Context, role: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putString(ROLE_KEY, role).apply()
+        prefs.edit().putString(ROLE_KEY, role.lowercase()).apply()
     }
 
     fun getRole(context: Context): String {

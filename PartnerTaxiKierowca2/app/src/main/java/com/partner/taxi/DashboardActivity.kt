@@ -57,7 +57,7 @@ class DashboardActivity : AppCompatActivity() {
         btnPusty3          = findViewById(R.id.btnPusty3)
         btnZakonczPrace    = findViewById(R.id.btnZakonczPrace)
 
-        val role = SessionManager.getRole(this)
+        val role = SessionManager.getRole(this).lowercase()
 
         btnFlota.setOnClickListener {
             if (role != "flotowiec") {
