@@ -22,8 +22,8 @@ $driver_id = $_POST['driver_id'];
 $password  = $_POST['password'];
 
 try {
-    // 1) Pobierz rekord kierowcy
-    $stmt = $pdo->prepare("SELECT id, password FROM kierowcy WHERE id = ?");
+        // 1) Pobierz rekord kierowcy wraz z przypisaną rolą
+    $stmt = $pdo->prepare("SELECT id, password, rola FROM kierowcy WHERE id = ?")
     $stmt->execute([$driver_id]);
     $user = $stmt->fetch();
 
@@ -69,13 +69,14 @@ try {
         exit;
     }
 
-    // 5) Generujemy JWT i zwracamy driver_id
-    $token = generateJWT($user['id'], 'driver');
+    // 5) Generujemy JWT oraz zwracamy dane kierowcy wraz z rolą
+    $token = generateJWT($user['id'], $user['rola']);
     echo json_encode([
         "status"    => "success",
         "message"   => "Zalogowano pomyślnie",
         "token"     => $token,
-        "driver_id" => $user['id']
+        "driver_id" => $user['id'],
+        "rola"      => $user['rola']
     ]);
 
 } catch (Exception $e) {

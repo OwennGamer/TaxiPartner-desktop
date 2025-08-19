@@ -58,6 +58,10 @@
     <Label text="Status kierowcy"/>
     <ChoiceBox fx:id="statusChoiceBox"/>
 
+    <!-- Rola -->
+    <Label text="Rola"/>
+    <ChoiceBox fx:id="roleChoiceBox"/>
+
     <!-- Koszt paliwa -->
     <Label text="Koszt paliwa (firma/kierowca)"/>
     <ChoiceBox fx:id="fuelCostChoiceBox"/>
