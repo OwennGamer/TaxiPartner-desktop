@@ -33,7 +33,7 @@ interface ApiService {
         @Query("driver_id") driverId: String
     ): Response<DriverDataResponse>
 
-    @GET("getVehicles.php")
+    @GET("get_vehicles.php")
     suspend fun getVehicles(): VehiclesResponse
 
 
