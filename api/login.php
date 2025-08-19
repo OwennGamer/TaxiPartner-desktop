@@ -23,7 +23,7 @@ $password  = $_POST['password'];
 
 try {
         // 1) Pobierz rekord kierowcy wraz z przypisaną rolą
-    $stmt = $pdo->prepare("SELECT id, password, rola FROM kierowcy WHERE id = ?")
+    $stmt = $pdo->prepare("SELECT id, password, rola FROM kierowcy WHERE id = ?");
     $stmt->execute([$driver_id]);
     $user = $stmt->fetch();
 
