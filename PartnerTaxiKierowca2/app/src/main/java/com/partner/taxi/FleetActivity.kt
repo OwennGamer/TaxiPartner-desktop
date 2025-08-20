@@ -1,5 +1,6 @@
 package com.partner.taxi
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -59,7 +60,14 @@ class FleetActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.tvPlate.text = items[position].rejestracja
+            val vehicle = items[position]
+            holder.tvPlate.text = vehicle.rejestracja
+            holder.itemView.setOnClickListener {
+                val context = holder.itemView.context
+                val intent = Intent(context, VehicleDetailActivity::class.java)
+                intent.putExtra("vehicle", vehicle)
+                context.startActivity(intent)
+            }
         }
 
         override fun getItemCount(): Int = items.size

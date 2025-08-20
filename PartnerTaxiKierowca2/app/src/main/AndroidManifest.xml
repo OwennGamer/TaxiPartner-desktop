@@ -64,6 +64,7 @@
         <activity android:name=".HistoryActivity" />
         <activity android:name=".FuelActivity" />
         <activity android:name=".FleetActivity" />
+        <activity android:name=".VehicleDetailActivity" />
 
         <service
             android:name=".TaxiFirebaseService"
