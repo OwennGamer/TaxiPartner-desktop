@@ -3,6 +3,7 @@ package com.partner.taxi
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,13 +31,16 @@ class FleetActivity : AppCompatActivity() {
     private fun loadVehicles() {
         lifecycleScope.launch {
             try {
+                Log.d("FleetActivity", "Fetching vehicles")
                 val response = ApiClient.apiService.getVehicles()
+                Log.d("FleetActivity", "Response status: ${response.status}")
                 if (response.status == "success") {
                     rvFleet.adapter = FleetAdapter(response.data)
                 } else {
                     Toast.makeText(this@FleetActivity, "Błąd: ${response.status}", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
+                Log.e("FleetActivity", "Error loading vehicles", e)
                 Toast.makeText(this@FleetActivity, "Brak połączenia", Toast.LENGTH_SHORT).show()
             }
         }
