@@ -3,6 +3,8 @@ package com.partner.taxi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
+import com.partner.taxi.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,9 +24,21 @@ object ApiClient {
         chain.proceed(req)
     }
 
+    // HttpLoggingInterceptor for debugging network calls.
+    // Logging is enabled only for debug builds. Adjust the level or disable
+    // it entirely for production by changing the condition below.
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
+    }
+
     // OkHttpClient z interceptor’em
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor(authInterceptor)
+        .addInterceptor(loggingInterceptor)
         .build()
 
     // Retrofit łączący się przez nasz OkHttpClient
