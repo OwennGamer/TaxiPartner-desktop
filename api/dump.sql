@@ -29,7 +29,7 @@ CREATE TABLE `collaboration_terms` (
   `term_value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,13 @@ INSERT INTO `collaboration_terms` VALUES
 (142,'T088','cardCommission','3'),
 (143,'T088','partnerCommission','20'),
 (144,'T088','boltCommission','20'),
-(145,'T088','settlementLimit','1000');
+(145,'T088','settlementLimit','1000'),
+(146,'T50','percentTurnover','40'),
+(147,'T50','fuelCost','0'),
+(148,'T50','cardCommission','3'),
+(149,'T50','partnerCommission','20'),
+(150,'T50','boltCommission','20'),
+(151,'T50','settlementLimit','1000');
 /*!40000 ALTER TABLE `collaboration_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +173,7 @@ CREATE TABLE `historia_salda` (
   `opis` text DEFAULT NULL,
   `data` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +222,23 @@ INSERT INTO `historia_salda` VALUES
 (38,'T108',-0.51,2481.69,'Rozliczenie',NULL,'2025-08-01 11:44:05'),
 (39,'T108',0.60,2481.69,'Rozliczenie',NULL,'2025-08-01 11:52:28'),
 (40,'T99',100.30,251.42,'Kara',NULL,'2025-08-04 12:41:15'),
-(41,'T99',100.20,351.62,'Rozliczenie',NULL,'2025-08-04 13:18:02');
+(41,'T99',100.20,351.62,'Rozliczenie',NULL,'2025-08-04 13:18:02'),
+(42,'T99',-50.00,147.58,'Kara',NULL,'2025-08-07 09:29:05'),
+(43,'T99',-50.00,97.58,'Kara',NULL,'2025-08-07 15:53:59'),
+(44,'T99',200.00,297.58,'Premia',NULL,'2025-08-07 15:55:39'),
+(45,'T99',200.00,497.58,'Rozliczenie',NULL,'2025-08-07 15:56:03'),
+(46,'T99',-40.00,457.58,'Kara',NULL,'2025-08-07 16:15:40'),
+(47,'T99',25.00,482.58,'Premia',NULL,'2025-08-07 16:25:59'),
+(48,'T99',-45.00,437.58,'Kara',NULL,'2025-08-11 17:09:16'),
+(49,'T99',60.00,497.58,'Premia',NULL,'2025-08-12 19:30:12'),
+(50,'T99',-60.00,437.58,'Rozliczenie',NULL,'2025-08-12 19:31:01'),
+(51,'T99',21.00,458.58,'Premia',NULL,'2025-08-12 19:46:25'),
+(52,'T99',1.00,459.58,'diagnostic',NULL,'2025-08-14 17:39:23'),
+(53,'T99',1.00,460.58,'diagnostic',NULL,'2025-08-14 17:59:18'),
+(54,'T99',1.00,461.58,'diagnostic',NULL,'2025-08-18 10:25:00'),
+(55,'T99',100.00,561.58,'Rozliczenie',NULL,'2025-08-18 14:48:05'),
+(56,'T99',-500.00,61.58,'Kara',NULL,'2025-08-18 14:49:37'),
+(57,'T99',-30.00,31.58,'Jesteś zjebany',NULL,'2025-08-18 14:51:10');
 /*!40000 ALTER TABLE `historia_salda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +276,7 @@ CREATE TABLE `inwentaryzacje` (
   `uwagi` text DEFAULT NULL,
   `kierowca_id` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +336,9 @@ INSERT INTO `inwentaryzacje` VALUES
 (48,'DX23YB',178001,1,'uploads/inventory/front_6889fe0c11ea7.jpg','2025-07-30 13:12:12','uploads/inventory/back_6889fe0c12129.jpg','uploads/inventory/left_6889fe0c12331.jpg','uploads/inventory/right_6889fe0c124ff.jpg',0,NULL,NULL,NULL,NULL,0,1,0,1,1,0,0,0,0,NULL,'T99'),
 (49,'DKL83517',2,1,'uploads/inventory/front_688c88ac6970d.jpg','2025-08-01 11:28:12','uploads/inventory/back_688c88ac698d8.jpg','uploads/inventory/left_688c88ac69a23.jpg','uploads/inventory/right_688c88ac69b84.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,'Nie ','T108'),
 (50,'DX23YB',186001,1,'uploads/inventory/front_688c8b8a6138a.jpg','2025-08-01 11:40:26','uploads/inventory/back_688c8b8a61795.jpg','uploads/inventory/left_688c8b8a61b4d.jpg','uploads/inventory/right_688c8b8a61e23.jpg',5,NULL,NULL,NULL,NULL,1,1,1,0,1,1,1,1,1,NULL,'T108'),
-(51,'DW9YF48',180001,1,'uploads/inventory/front_6891fb60023fe.jpg','2025-08-05 14:38:56','uploads/inventory/back_6891fb60026c8.jpg','uploads/inventory/left_6891fb60028e5.jpg','uploads/inventory/right_6891fb6002b0b.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T99');
+(51,'DW9YF48',180001,1,'uploads/inventory/front_6891fb60023fe.jpg','2025-08-05 14:38:56','uploads/inventory/back_6891fb60026c8.jpg','uploads/inventory/left_6891fb60028e5.jpg','uploads/inventory/right_6891fb6002b0b.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T99'),
+(52,'DX23YB',187000,1,'uploads/inventory/front_68a32254cb006.jpg','2025-08-18 14:53:40','uploads/inventory/back_68a32254cb345.jpg','uploads/inventory/left_68a32254cb5d2.jpg','uploads/inventory/right_68a32254cb7ff.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T99'),
+(53,'DW9YF48',201000,1,'uploads/inventory/front_68a45389262e2.jpg','2025-08-19 12:35:53','uploads/inventory/back_68a45389266c0.jpg','uploads/inventory/left_68a4538926a91.jpg','uploads/inventory/right_68a4538926d81.jpg',0,NULL,NULL,NULL,NULL,0,0,1,0,1,0,0,1,0,NULL,'T50');
 /*!40000 ALTER TABLE `inwentaryzacje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,11 +376,12 @@ INSERT INTO `kierowcy` VALUES
 ('T088','QQQQ','',0.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:40:29','aktywny',NULL,NULL),
 ('T0999','Jaka','',100.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:39:36','aktywny',NULL,NULL),
 ('T1','Arkadiusz','Ferenc',8978.18,'$2y$10$uGIBPfsEvgZAGXPY3o5dY.dVlxifsMAeCsEIvCSii96SvQVsX.W9S','kierowca','firma','2025-05-07 08:27:15','aktywny','DW1234X',NULL),
-('T108','Michał','Miszczyk',3172.11,'$2y$10$d4z9GpjgCNRRtysqtLqxAOE2BTXAWoDR.Hi7Mtsf/3RS8WT.QgSSu','kierowca','firma','2025-08-01 09:18:57','aktywny','DX23YB',NULL),
+('T108','Michał','Miszczyk',3821.80,'$2y$10$d4z9GpjgCNRRtysqtLqxAOE2BTXAWoDR.Hi7Mtsf/3RS8WT.QgSSu','kierowca','firma','2025-08-01 09:18:57','aktywny','DX23YB',NULL),
 ('T14','Krzysztof','Golonka',-3.88,'$2y$10$dwVJmBxtGzlca0VgHuCjNOw0SP15P29gr3m4jnLmU2KRa1T86fvkq','kierowca','firma','2025-04-26 15:44:47','aktywny','DW1234X',NULL),
+('T50','Flotowiec','',0.00,'$2y$10$9ezp.PasPVrDdNe9JgOtfeJcn0KzEj.Z.38QPfTksVRoZSiyjM3D2','flotowiec','firma','2025-08-19 10:31:29','aktywny','DW9YF48','eqfbFSvXQn2kMbw2QgCTyM:APA91bGNdc3EtnfF9sdAoGct-zHDSPWyFXXke-JPqyASsT8gdJQO0VfZlqHH_Wt1g9BThWiH4w9nHZxrIsl9w7CU-rLhtal9EvN9b8o3TWhxUfqHTbNStGQ'),
 ('T66','hahah','',300.00,'69e91642bc538c7ae9a7686b0a56570ecd279e4976678267365dcedf5183f0b8','kierowca','firma','2025-06-17 12:47:24','aktywny',NULL,NULL),
 ('T98','Teścik','Teściowski',113.92,'$2y$10$N7SV5.gOc1Tv4kK3lrc8Q.lGt8ewizI0bkYUtDtgx1y/QwjDMrBzm','kierowca','firma','2025-07-28 19:04:18','aktywny','DX23YB',NULL),
-('T99','Nowy','Kierowca',197.58,'$2y$10$rWoFH4IWmmolt6u4LSZ.Qe1zKC0ZaQE1qNrO/hjvP.LdJmHcaiGye','kierowca','firma','2025-07-28 12:18:16','aktywny','DW9YF48',NULL);
+('T99','Nowy','Kierowca',70.38,'$2y$10$rWoFH4IWmmolt6u4LSZ.Qe1zKC0ZaQE1qNrO/hjvP.LdJmHcaiGye','kierowca','firma','2025-07-28 12:18:16','aktywny','DX23YB','eqfbFSvXQn2kMbw2QgCTyM:APA91bGNdc3EtnfF9sdAoGct-zHDSPWyFXXke-JPqyASsT8gdJQO0VfZlqHH_Wt1g9BThWiH4w9nHZxrIsl9w7CU-rLhtal9EvN9b8o3TWhxUfqHTbNStGQ');
 /*!40000 ALTER TABLE `kierowcy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,7 +406,7 @@ CREATE TABLE `kursy` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `kursy_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=279 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -458,7 +483,17 @@ INSERT INTO `kursy` VALUES
 (275,'T99',20.00,7.76,197.58,'Karta','Postój',0,'2025-08-06 14:41:13','uploads/receipts/receipt_68934d6962b34.jpg'),
 (276,'T108',100.00,38.80,3055.71,'Karta','Postój',0,'2025-08-06 15:19:53',NULL),
 (277,'T108',150.00,58.20,3113.91,'Karta','Dyspozytornia',0,'2025-08-06 18:09:33',NULL),
-(278,'T108',150.00,58.20,3172.11,'Karta','Dyspozytornia',0,'2025-08-07 07:54:04',NULL);
+(278,'T108',150.00,58.20,3172.11,'Karta','Dyspozytornia',0,'2025-08-07 07:54:04',NULL),
+(279,'T108',75.00,30.00,3202.11,'Voucher','Dyspozytornia',0,'2025-08-07 10:00:22',NULL),
+(280,'T108',35.00,13.58,3215.69,'Karta','Dyspozytornia',0,'2025-08-07 10:23:51',NULL),
+(281,'T108',150.00,58.20,3273.89,'Karta','Dyspozytornia',0,'2025-08-07 13:43:07',NULL),
+(282,'T99',100.00,38.80,70.38,'Karta','Postój',0,'2025-08-18 15:02:31','uploads/receipts/receipt_68a324673f3ec.jpg'),
+(283,'T108',199.00,79.60,3353.49,'Voucher','Dyspozytornia',0,'2025-08-18 17:58:46',NULL),
+(284,'T108',450.00,180.00,3533.49,'Voucher','Dyspozytornia',0,'2025-08-18 23:53:58',NULL),
+(285,'T108',594.00,230.47,3763.96,'Karta','Dyspozytornia',0,'2025-08-19 15:10:42',NULL),
+(286,'T108',105.00,42.00,3805.96,'Voucher','Dyspozytornia',0,'2025-08-20 05:37:17',NULL),
+(287,'T108',180.00,69.84,3875.80,'Karta','Dyspozytornia',0,'2025-08-20 09:30:42',NULL),
+(288,'T108',90.00,-54.00,3821.80,'Gotówka','Postój',0,'2025-08-20 11:02:07',NULL);
 /*!40000 ALTER TABLE `kursy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -532,10 +567,10 @@ INSERT INTO `pojazdy` VALUES
 (7,'KR1234X','Toyota','Corolla',155009,'2025-12-31','2025-12-31',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (8,'DW1234X','Toyota','Corolla',1000002,'2025-07-23','2025-08-29',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (9,'DKL82535','Mercedes-Benz','V-klasse',2,'2026-04-15','2026-04-18',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(10,'DW9YF48','Toyota','Corolla',188000,'2026-06-27','2026-07-02',1,'T99',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(11,'DX23YB','Toyo','Coro',186006,'2025-06-14','2025-06-20',1,'T108',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
+(10,'DW9YF48','Toyota','Corolla',204003,'2026-06-27','2026-07-02',1,'T50',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
+(11,'DX23YB','Toyo','Coro',195000,'2025-06-14','2025-06-20',1,'T99',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',0,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000'),
-(17,'DKL83517','mercedes-benz','vito',89601,'2025-09-15','2025-09-15',1,'T108',0,1,1,'2025-09-15',0,NULL,'POLCAR','leasing','123');
+(17,'DKL83517','mercedes-benz','vito',92158,'2025-09-15','2025-09-15',1,'T108',0,1,1,'2025-09-15',0,NULL,'POLCAR','leasing','123');
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -614,7 +649,7 @@ CREATE TABLE `refuels` (
   PRIMARY KEY (`id`),
   KEY `refuels_ibfk_1` (`driver_id`),
   CONSTRAINT `refuels_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -628,8 +663,37 @@ INSERT INTO `refuels` VALUES
 (5,'T99','2025-07-28 17:17:49',30,300,174000,'2025-07-28 15:17:49'),
 (6,'T98','2025-07-28 21:20:10',50,250,174500,'2025-07-28 19:20:10'),
 (7,'T108','2025-08-01 11:46:39',5,30,168005,'2025-08-01 09:46:39'),
-(8,'T108','2025-08-04 07:47:44',47.06,266.83,89265,'2025-08-04 05:47:44');
+(8,'T108','2025-08-04 07:47:44',47.06,266.83,89265,'2025-08-04 05:47:44'),
+(9,'T108','2025-08-07 10:49:18',21.37,125.01,89665,'2025-08-07 08:49:18'),
+(10,'T108','2025-08-19 08:14:19',36.14,200.22,92078,'2025-08-19 06:14:19');
 /*!40000 ALTER TABLE `refuels` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `serwisy`
+--
+
+DROP TABLE IF EXISTS `serwisy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `serwisy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rejestracja` varchar(20) NOT NULL,
+  `opis` text NOT NULL,
+  `koszt` float NOT NULL,
+  `zdjecia` text DEFAULT NULL,
+  `data` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `serwisy`
+--
+
+LOCK TABLES `serwisy` WRITE;
+/*!40000 ALTER TABLE `serwisy` DISABLE KEYS */;
+/*!40000 ALTER TABLE `serwisy` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -689,7 +753,7 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-(1,'admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','admin'),
+(1,'admin','$2y$10$t0Z.HkVHXwvmqVlAm7EU7ucXSeHDIif.TRhobytQWBT/lJVh7E9Dq','admin'),
 (2,'flota1','8b046d263fdc049847e891edc83077d8684ea98cba7b7ae72deb64eab14939f1','flotowiec'),
 (3,'kierowca1','a89abdeecdb653e7b027d5314df4a02cfbdbf18bf53fd7ef807486af14e1e963','kierowca');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
@@ -713,7 +777,7 @@ CREATE TABLE `work_sessions` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `work_sessions_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -752,7 +816,29 @@ INSERT INTO `work_sessions` VALUES
 (27,'T99','DW9YF48','2025-08-06 13:34:12',187008,NULL,NULL),
 (28,'T99','DW9YF48','2025-08-06 14:40:05',188000,NULL,NULL),
 (29,'T108','DKL83517','2025-08-06 15:19:49',89561,'2025-08-06 19:45:31',89601),
-(30,'T108','DKL83517','2025-08-07 07:02:01',89601,NULL,NULL);
+(30,'T108','DKL83517','2025-08-07 07:02:01',89601,'2025-08-07 13:57:53',89713),
+(31,'T99','DW9YF48','2025-08-07 09:28:32',188001,NULL,NULL),
+(32,'T99','DW9YF48','2025-08-07 15:53:29',190000,'2025-08-07 15:57:25',190001),
+(33,'T99','DW9YF48','2025-08-07 16:15:14',190003,NULL,NULL),
+(34,'T99','DW9YF48','2025-08-07 16:25:49',190005,NULL,NULL),
+(35,'T99','DW9YF48','2025-08-11 17:09:00',190006,'2025-08-11 17:09:53',190007),
+(36,'T99','DW9YF48','2025-08-12 19:30:41',190007,NULL,NULL),
+(37,'T99','DW9YF48','2025-08-12 19:46:08',190009,'2025-08-12 20:10:59',190010),
+(38,'T99','DW9YF48','2025-08-14 17:54:59',191000,NULL,NULL),
+(39,'T99','DW9YF48','2025-08-18 10:09:39',191001,NULL,NULL),
+(40,'T99','DW9YF48','2025-08-18 14:50:22',191002,'2025-08-18 14:52:31',191008),
+(41,'T99','DX23YB','2025-08-18 14:53:05',187000,'2025-08-18 14:56:59',190000),
+(42,'T99','DW9YF48','2025-08-18 15:01:25',193000,'2025-08-18 15:34:58',200000),
+(43,'T108','DKL83517','2025-08-18 17:58:36',91935,'2025-08-19 00:36:59',92071),
+(44,'T108','DKL83517','2025-08-19 07:50:18',92071,NULL,NULL),
+(45,'T99','DX23YB','2025-08-19 12:32:38',191000,'2025-08-19 12:34:11',191005),
+(46,'T50','DW9YF48','2025-08-19 12:35:16',201000,'2025-08-19 12:36:37',202000),
+(47,'T50','DW9YF48','2025-08-19 12:38:48',203000,'2025-08-19 12:48:56',203000),
+(48,'T50','DW9YF48','2025-08-19 13:31:13',204000,'2025-08-19 13:32:46',204001),
+(49,'T99','DX23YB','2025-08-19 13:33:34',195000,'2025-08-19 13:34:36',195000),
+(50,'T50','DW9YF48','2025-08-19 13:35:12',204002,NULL,NULL),
+(51,'T50','DW9YF48','2025-08-19 13:57:16',204003,NULL,NULL),
+(52,'T108','DKL83517','2025-08-20 04:45:06',92158,NULL,NULL);
 /*!40000 ALTER TABLE `work_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -765,4 +851,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-07  9:01:21
+-- Dump completed on 2025-08-20 13:26:19
