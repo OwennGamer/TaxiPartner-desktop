@@ -25,4 +25,3 @@ data class VehicleData(
     val forma_wlasnosci: String?,
     val numer_polisy: String?
 ) : java.io.Serializable
-)
