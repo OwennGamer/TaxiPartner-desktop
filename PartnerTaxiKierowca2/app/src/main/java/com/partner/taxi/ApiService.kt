@@ -119,4 +119,18 @@ interface ApiService {
     fun updateFcmToken(
         @Field("fcm_token") fcmToken: String
     ): Call<GenericResponse>
+
+    @Multipart
+    @POST("add_service.php")
+    fun addService(
+        @Part("opis") opis: RequestBody,
+        @Part("koszt") koszt: RequestBody,
+        @Part("rejestracja") rejestracja: RequestBody,
+        @Part photos: List<MultipartBody.Part>
+    ): Call<GenericResponse>
+
+    @GET("get_services.php")
+    fun getServices(
+        @Query("rejestracja") rejestracja: String
+    ): Call<ServicesResponse>
 }

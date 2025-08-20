@@ -1,6 +1,8 @@
 package com.partner.taxi
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -33,6 +35,12 @@ class VehicleDetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tvFirma).text = "Firma: ${v.firma ?: ""}"
             findViewById<TextView>(R.id.tvFormaWlasnosci).text = "Forma własności: ${v.forma_wlasnosci ?: ""}"
             findViewById<TextView>(R.id.tvNumerPolisy).text = "Numer polisy: ${v.numer_polisy ?: ""}"
+
+            findViewById<Button>(R.id.btnService).setOnClickListener {
+                val intent = Intent(this, ServiceActivity::class.java)
+                intent.putExtra("rejestracja", v.rejestracja)
+                startActivity(intent)
+            }
         }
     }
 
