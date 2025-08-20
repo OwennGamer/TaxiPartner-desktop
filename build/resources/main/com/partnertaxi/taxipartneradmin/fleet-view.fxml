@@ -20,6 +20,14 @@
                     text="Historia pojazdu"
                     onAction="#onShowHistory"
                     disable="true"/>
+            <Button fx:id="btnService"
+                    text="SERWIS"
+                    onAction="#onShowService"
+                    disable="true"/>
+            <Button fx:id="btnDamages"
+                    text="SZKODY"
+                    onAction="#onShowDamages"
+                    disable="true"/>
             <CheckBox fx:id="chkShowInactive"
                       text="Pokaż nieaktywne"
                       onAction="#onToggleShowInactive"/>

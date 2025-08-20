@@ -1,3 +1,5 @@
+package com.partner.taxi
+
 data class ServiceItem(
     val id: Int,
     val rejestracja: String,
