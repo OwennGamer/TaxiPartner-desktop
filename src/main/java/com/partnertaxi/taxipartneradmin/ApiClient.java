@@ -385,6 +385,58 @@ public class ApiClient {
         return null;
     }
 
+    public static List<ServiceRecord> getServiceRecords(String rejestracja) {
+        List<ServiceRecord> list = new ArrayList<>();
+        try {
+            String endpoint = "get_services.php?rejestracja=" + URLEncoder.encode(rejestracja, "UTF-8");
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONArray arr = resp.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        list.add(new ServiceRecord(
+                                o.getInt("id"),
+                                o.getString("date"),
+                                o.getString("description"),
+                                o.optDouble("cost", 0.0)
+                        ));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static List<DamageRecord> getDamageRecords(String rejestracja) {
+        List<DamageRecord> list = new ArrayList<>();
+        try {
+            String endpoint = "get_damages.php?rejestracja=" + URLEncoder.encode(rejestracja, "UTF-8");
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONArray arr = resp.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        list.add(new DamageRecord(
+                                o.getInt("id"),
+                                o.getString("date"),
+                                o.getString("description"),
+                                o.optDouble("cost", 0.0)
+                        ));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     /**
      * Pobiera statystyki kierowcy z API.
      */

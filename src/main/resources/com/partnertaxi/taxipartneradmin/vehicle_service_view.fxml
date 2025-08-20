@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.VehicleServiceController"
+            prefWidth="600" prefHeight="400">
+    <top>
+        <Label text="Serwis pojazdu" style="-fx-padding: 10;" styleClass="font-16"/>
+    </top>
+    <center>
+        <TableView fx:id="serviceTable">
+            <columns>
+                <TableColumn fx:id="colId" id="colId" text="ID" prefWidth="60"/>
+                <TableColumn fx:id="colDate" id="colDate" text="Data" prefWidth="120"/>
+                <TableColumn fx:id="colDescription" id="colDescription" text="Opis" prefWidth="240"/>
+                <TableColumn fx:id="colCost" id="colCost" text="Koszt" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

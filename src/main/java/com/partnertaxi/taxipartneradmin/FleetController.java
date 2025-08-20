@@ -69,6 +69,10 @@ public class FleetController {
     @FXML
     private Button btnHistory;
     @FXML
+    private Button btnService;
+    @FXML
+    private Button btnDamages;
+    @FXML
     private CheckBox chkShowInactive;
 
     private ObservableList<Vehicle> allVehicles;
@@ -99,7 +103,12 @@ public class FleetController {
         filteredVehicles = new FilteredList<>(allVehicles);
         vehicleTable.setItems(filteredVehicles);
         vehicleTable.getSelectionModel().selectedItemProperty().addListener(
-                (obs, oldSelection, newSelection) -> btnHistory.setDisable(newSelection == null)
+                (obs, oldSelection, newSelection) -> {
+                    boolean disable = newSelection == null;
+                    btnHistory.setDisable(disable);
+                    btnService.setDisable(disable);
+                    btnDamages.setDisable(disable);
+                }
         );
         applyFilter();
         chkShowInactive.selectedProperty().addListener((obs, o, n) -> applyFilter());
@@ -158,6 +167,62 @@ public class FleetController {
         } catch (IOException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Nie można otworzyć historii pojazdu.").showAndWait();
+        }
+    }
+
+    @FXML
+    public void onShowService(ActionEvent event) {
+        Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pojazd z listy.").showAndWait();
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/com/partnertaxi/taxipartneradmin/vehicle_service_view.fxml"));
+            Parent root = loader.load();
+
+            VehicleServiceController ctrl = loader.getController();
+            ctrl.setRejestracja(selected.getRejestracja());
+
+            Stage stage = new Stage();
+            stage.setTitle("Serwis pojazdu: " + selected.getRejestracja());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Nie można otworzyć serwisu pojazdu.").showAndWait();
+        }
+    }
+
+    @FXML
+    public void onShowDamages(ActionEvent event) {
+        Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pojazd z listy.").showAndWait();
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/com/partnertaxi/taxipartneradmin/vehicle_damage_view.fxml"));
+            Parent root = loader.load();
+
+            VehicleDamageController ctrl = loader.getController();
+            ctrl.setRejestracja(selected.getRejestracja());
+
+            Stage stage = new Stage();
+            stage.setTitle("Szkody pojazdu: " + selected.getRejestracja());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
+            stage.setScene(scene);
+            stage.setMaximized(true);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Nie można otworzyć szkód pojazdu.").showAndWait();
         }
     }
 
