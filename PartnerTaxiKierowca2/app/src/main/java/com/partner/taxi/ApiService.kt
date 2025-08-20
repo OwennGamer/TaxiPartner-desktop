@@ -133,4 +133,19 @@ interface ApiService {
     fun getServices(
         @Query("rejestracja") rejestracja: String
     ): Call<ServicesResponse>
+
+    @Multipart
+    @POST("add_damage.php")
+    fun addDamage(
+        @Part("rejestracja") rejestracja: RequestBody,
+        @Part("nr_szkody") nrSzkody: RequestBody,
+        @Part("opis") opis: RequestBody,
+        @Part("status") status: RequestBody,
+        @Part photos: List<MultipartBody.Part>,
+    ): Call<GenericResponse>
+
+    @GET("get_damages.php")
+    fun getDamages(
+        @Query("rejestracja") rejestracja: String
+    ): Call<DamagesResponse>
 }

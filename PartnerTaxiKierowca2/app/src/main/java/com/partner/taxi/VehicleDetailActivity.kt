@@ -41,6 +41,12 @@ class VehicleDetailActivity : AppCompatActivity() {
                 intent.putExtra("rejestracja", v.rejestracja)
                 startActivity(intent)
             }
+
+            findViewById<Button>(R.id.btnDamage).setOnClickListener {
+                val intent = Intent(this, DamageActivity::class.java)
+                intent.putExtra("rejestracja", v.rejestracja)
+                startActivity(intent)
+            }
         }
     }
 

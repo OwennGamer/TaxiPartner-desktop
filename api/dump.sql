@@ -697,6 +697,34 @@ LOCK TABLES `serwisy` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `szkody`
+--
+
+DROP TABLE IF EXISTS `szkody`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `szkody` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rejestracja` varchar(50) NOT NULL,
+  `nr_szkody` varchar(100) NOT NULL,
+  `opis` text NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `zdjecia` text DEFAULT NULL,
+  `data` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `szkody`
+--
+
+LOCK TABLES `szkody` WRITE;
+/*!40000 ALTER TABLE `szkody` DISABLE KEYS */;
+/*!40000 ALTER TABLE `szkody` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `trips`
 --
 
@@ -851,4 +879,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 13:26:19
+-- Dump completed on 2025-08-20 13:40:55
