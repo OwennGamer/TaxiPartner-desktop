@@ -376,7 +376,7 @@ INSERT INTO `kierowcy` VALUES
 ('T088','QQQQ','',0.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:40:29','aktywny',NULL,NULL),
 ('T0999','Jaka','',100.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:39:36','aktywny',NULL,NULL),
 ('T1','Arkadiusz','Ferenc',8978.18,'$2y$10$uGIBPfsEvgZAGXPY3o5dY.dVlxifsMAeCsEIvCSii96SvQVsX.W9S','kierowca','firma','2025-05-07 08:27:15','aktywny','DW1234X',NULL),
-('T108','Michał','Miszczyk',3821.80,'$2y$10$d4z9GpjgCNRRtysqtLqxAOE2BTXAWoDR.Hi7Mtsf/3RS8WT.QgSSu','kierowca','firma','2025-08-01 09:18:57','aktywny','DX23YB',NULL),
+('T108','Michał','Miszczyk',3852.84,'$2y$10$d4z9GpjgCNRRtysqtLqxAOE2BTXAWoDR.Hi7Mtsf/3RS8WT.QgSSu','kierowca','firma','2025-08-01 09:18:57','aktywny','DX23YB',NULL),
 ('T14','Krzysztof','Golonka',-3.88,'$2y$10$dwVJmBxtGzlca0VgHuCjNOw0SP15P29gr3m4jnLmU2KRa1T86fvkq','kierowca','firma','2025-04-26 15:44:47','aktywny','DW1234X',NULL),
 ('T50','Flotowiec','',0.00,'$2y$10$9ezp.PasPVrDdNe9JgOtfeJcn0KzEj.Z.38QPfTksVRoZSiyjM3D2','flotowiec','firma','2025-08-19 10:31:29','aktywny','DW9YF48','eqfbFSvXQn2kMbw2QgCTyM:APA91bGNdc3EtnfF9sdAoGct-zHDSPWyFXXke-JPqyASsT8gdJQO0VfZlqHH_Wt1g9BThWiH4w9nHZxrIsl9w7CU-rLhtal9EvN9b8o3TWhxUfqHTbNStGQ'),
 ('T66','hahah','',300.00,'69e91642bc538c7ae9a7686b0a56570ecd279e4976678267365dcedf5183f0b8','kierowca','firma','2025-06-17 12:47:24','aktywny',NULL,NULL),
@@ -406,7 +406,7 @@ CREATE TABLE `kursy` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `kursy_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=289 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -493,7 +493,8 @@ INSERT INTO `kursy` VALUES
 (285,'T108',594.00,230.47,3763.96,'Karta','Dyspozytornia',0,'2025-08-19 15:10:42',NULL),
 (286,'T108',105.00,42.00,3805.96,'Voucher','Dyspozytornia',0,'2025-08-20 05:37:17',NULL),
 (287,'T108',180.00,69.84,3875.80,'Karta','Dyspozytornia',0,'2025-08-20 09:30:42',NULL),
-(288,'T108',90.00,-54.00,3821.80,'Gotówka','Postój',0,'2025-08-20 11:02:07',NULL);
+(288,'T108',90.00,-54.00,3821.80,'Gotówka','Postój',0,'2025-08-20 11:02:07',NULL),
+(289,'T108',80.00,31.04,3852.84,'Karta','Postój',0,'2025-08-20 13:55:14',NULL);
 /*!40000 ALTER TABLE `kursy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -570,7 +571,7 @@ INSERT INTO `pojazdy` VALUES
 (10,'DW9YF48','Toyota','Corolla',204003,'2026-06-27','2026-07-02',1,'T50',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (11,'DX23YB','Toyo','Coro',195000,'2025-06-14','2025-06-20',1,'T99',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
 (13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',0,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000'),
-(17,'DKL83517','mercedes-benz','vito',92158,'2025-09-15','2025-09-15',1,'T108',0,1,1,'2025-09-15',0,NULL,'POLCAR','leasing','123');
+(17,'DKL83517','mercedes-benz','vito',92277,'2025-09-15','2025-09-15',1,'T108',0,1,1,'2025-09-15',0,NULL,'POLCAR','leasing','123');
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,7 +684,8 @@ CREATE TABLE `serwisy` (
   `koszt` float NOT NULL,
   `zdjecia` text DEFAULT NULL,
   `data` datetime DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `rejestracja` (`rejestracja`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -711,7 +713,9 @@ CREATE TABLE `szkody` (
   `status` varchar(50) NOT NULL,
   `zdjecia` text DEFAULT NULL,
   `data` datetime DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `rejestracja` (`rejestracja`),
+  KEY `nr_szkody` (`nr_szkody`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -805,7 +809,7 @@ CREATE TABLE `work_sessions` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `work_sessions_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -866,7 +870,8 @@ INSERT INTO `work_sessions` VALUES
 (49,'T99','DX23YB','2025-08-19 13:33:34',195000,'2025-08-19 13:34:36',195000),
 (50,'T50','DW9YF48','2025-08-19 13:35:12',204002,NULL,NULL),
 (51,'T50','DW9YF48','2025-08-19 13:57:16',204003,NULL,NULL),
-(52,'T108','DKL83517','2025-08-20 04:45:06',92158,NULL,NULL);
+(52,'T108','DKL83517','2025-08-20 04:45:06',92158,NULL,NULL),
+(53,'T108','DKL83517','2025-08-20 13:55:11',92277,NULL,NULL);
 /*!40000 ALTER TABLE `work_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -879,4 +884,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 13:40:55
+-- Dump completed on 2025-08-20 14:32:05

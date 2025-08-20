@@ -83,3 +83,73 @@ Returns daily working time and mileage for a driver.
 }
 ```
 The entries are sorted by `date`.
+
+
+## `add_service.php`
+Adds a vehicle service entry with optional photo uploads.
+
+### Parameters
+- `rejestracja` – vehicle plate number.
+- `opis` – service description.
+- `koszt` – service cost (float).
+- `photos[]` – optional array of JPEG images.
+
+### Response
+```
+{ "status": "success", "id": int }
+```
+
+Images are stored in `uploads/service/` and a valid JWT token is required.
+
+## `get_services.php`
+Returns service records for a vehicle.
+
+### Parameters
+- `rejestracja` – vehicle plate number.
+
+### Response
+```
+{
+  "status": "success",
+  "services": [
+    { "id": int, "rejestracja": string, "opis": string, "koszt": float, "zdjecia": [string], "data": string },
+    ...
+  ]
+}
+```
+
+## `add_damage.php`
+Registers a damage report with photo documentation.
+
+### Parameters
+- `rejestracja` – vehicle plate number.
+- `nr_szkody` – damage identifier.
+- `opis` – description of the damage.
+- `status` – current status string.
+- `photos[]` – optional array of JPEG images.
+
+### Response
+```
+{ "status": "success", "id": int }
+```
+
+Images are stored in `uploads/damages/` and a valid JWT token is required.
+
+## `get_damages.php`
+Lists damages reported for a vehicle.
+
+### Parameters
+- `rejestracja` – vehicle plate number.
+
+### Response
+```
+{
+  "status": "success",
+  "damages": [
+    { "id": int, "rejestracja": string, "nr_szkody": string, "opis": string, "status": string, "zdjecia": [string], "data": string },
+    ...
+  ]
+}
+```
+
+All endpoints in this section require an `Authorization: Bearer <JWT>` header.
