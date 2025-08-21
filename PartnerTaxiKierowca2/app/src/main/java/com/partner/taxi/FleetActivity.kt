@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.io.IOException
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
 
 class FleetActivity : AppCompatActivity() {
