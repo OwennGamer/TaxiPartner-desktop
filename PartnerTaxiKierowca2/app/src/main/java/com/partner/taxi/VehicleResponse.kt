@@ -13,7 +13,7 @@ data class VehicleData(
     val przebieg: Int,
     val ubezpieczenie_do: String?,
     val przeglad_do: String?,
-    val aktywny: Int,
+    val aktywny: Boolean,
     val ostatni_kierowca_id: String?,
     val inpost: Int,
     val taxi: Int,

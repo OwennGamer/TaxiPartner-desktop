@@ -24,7 +24,7 @@ class VehicleDetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tvPrzebieg).text = "Przebieg: ${v.przebieg}"
             findViewById<TextView>(R.id.tvUbezpieczenie).text = "Ubezpieczenie do: ${v.ubezpieczenie_do ?: ""}"
             findViewById<TextView>(R.id.tvPrzeglad).text = "Przegląd do: ${v.przeglad_do ?: ""}"
-            findViewById<TextView>(R.id.tvAktywny).text = "Aktywny: ${v.aktywny == 1}"
+            findViewById<TextView>(R.id.tvAktywny).text = "Aktywny: ${v.aktywny}"
             findViewById<TextView>(R.id.tvOstatniKierowca).text = "Ostatni kierowca ID: ${v.ostatni_kierowca_id ?: ""}"
             findViewById<TextView>(R.id.tvInpost).text = "Inpost: ${v.inpost == 1}"
             findViewById<TextView>(R.id.tvTaxi).text = "Taxi: ${v.taxi == 1}"
