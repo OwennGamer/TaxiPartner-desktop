@@ -290,6 +290,13 @@ public class ApiClient {
                     JSONArray arr = json.getJSONArray("data");
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject o = arr.getJSONObject(i);
+
+                        boolean aktywny = o.optBoolean("aktywny", o.optInt("aktywny", 0) == 1);
+                        boolean inpost = o.optBoolean("inpost", o.optInt("inpost", 0) == 1);
+                        boolean taxi = o.optBoolean("taxi", o.optInt("taxi", 0) == 1);
+                        boolean taksometr = o.optBoolean("taksometr", o.optInt("taksometr", 0) == 1);
+                        boolean gaz = o.optBoolean("gaz", o.optInt("gaz", 0) == 1);
+
                         list.add(new Vehicle(
                                 o.getInt("id"),
                                 o.getString("rejestracja"),
@@ -298,12 +305,12 @@ public class ApiClient {
                                 o.getInt("przebieg"),
                                 o.getString("ubezpieczenie_do"),
                                 o.getString("przeglad_do"),
-                                o.getInt("aktywny") == 1,
-                                o.optInt("inpost", 0) == 1,
-                                o.optInt("taxi", 0) == 1,
-                                o.optInt("taksometr", 0) == 1,
+                                aktywny,
+                                inpost,
+                                taxi,
+                                taksometr,
                                 o.optString("legalizacja_taksometru_do", null),
-                                o.optInt("gaz", 0) == 1,
+                                gaz,
                                 o.optString("homologacja_lpg_do", null),
                                 o.optString("firma", null),
                                 o.optString("forma_wlasnosci", null),
