@@ -148,4 +148,21 @@ interface ApiService {
     fun getDamages(
         @Query("rejestracja") rejestracja: String
     ): Call<DamagesResponse>
+
+    @FormUrlEncoded
+    @POST("update_service.php")
+    fun updateService(
+        @Field("id") id: Int,
+        @Field("opis") opis: String,
+        @Field("koszt") koszt: Float
+    ): Call<GenericResponse>
+
+    @FormUrlEncoded
+    @POST("update_damage.php")
+    fun updateDamage(
+        @Field("id") id: Int,
+        @Field("nr_szkody") nrSzkody: String,
+        @Field("opis") opis: String,
+        @Field("status") status: String
+    ): Call<GenericResponse>
 }

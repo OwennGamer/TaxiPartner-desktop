@@ -41,5 +41,19 @@
             android:layout_marginTop="12dp"
             android:text="SZKODY"/>
 
+        <Button
+            android:id="@+id/btnServiceList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Lista serwisów"/>
+
+        <Button
+            android:id="@+id/btnDamageList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Lista szkód"/>
+
     </LinearLayout>
 </ScrollView>

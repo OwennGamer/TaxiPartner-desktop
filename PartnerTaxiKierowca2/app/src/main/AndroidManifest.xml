@@ -67,6 +67,10 @@
         <activity android:name=".VehicleDetailActivity" />
         <activity android:name=".ServiceActivity" />
         <activity android:name=".DamageActivity" />
+        <activity android:name=".ServiceListActivity" />
+        <activity android:name=".DamageListActivity" />
+        <activity android:name=".ServiceEditActivity" />
+        <activity android:name=".DamageEditActivity" />
 
         <service
             android:name=".TaxiFirebaseService"

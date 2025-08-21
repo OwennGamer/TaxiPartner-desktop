@@ -1,5 +1,7 @@
 package com.partner.taxi
 
+import java.io.Serializable
+
 data class DamageItem(
     val id: Int,
     val rejestracja: String,
@@ -8,7 +10,7 @@ data class DamageItem(
     val status: String,
     val zdjecia: List<String>,
     val data: String
-)
+) : Serializable
 
 data class DamagesResponse(
     val status: String,

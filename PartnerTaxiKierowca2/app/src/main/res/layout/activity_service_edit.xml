@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Opis" />
+
+    <EditText
+        android:id="@+id/editCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Koszt"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btnShowPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pokaż zdjęcia" />
+
+    <Button
+        android:id="@+id/btnUpdateService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zapisz"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

@@ -47,6 +47,19 @@ class VehicleDetailActivity : AppCompatActivity() {
                 intent.putExtra("rejestracja", v.rejestracja)
                 startActivity(intent)
             }
+
+            findViewById<Button>(R.id.btnServiceList).setOnClickListener {
+                val intent = Intent(this, ServiceListActivity::class.java)
+                intent.putExtra("rejestracja", v.rejestracja)
+                startActivity(intent)
+            }
+
+            findViewById<Button>(R.id.btnDamageList).setOnClickListener {
+                val intent = Intent(this, DamageListActivity::class.java)
+                intent.putExtra("rejestracja", v.rejestracja)
+                startActivity(intent)
+            }
+
         }
     }
 
