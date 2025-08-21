@@ -395,12 +395,12 @@ public class ApiClient {
     public static List<ServiceRecord> getServiceRecords(String rejestracja) {
         List<ServiceRecord> list = new ArrayList<>();
         try {
-            String endpoint = "get_services.php?rejestracja=" + URLEncoder.encode(rejestracja, "UTF-8");
+            String endpoint = "get_service.php?rejestracja=" + URLEncoder.encode(rejestracja, "UTF-8");
             String json = sendGetRequest(endpoint);
             if (json != null) {
                 JSONObject resp = new JSONObject(json);
                 if ("success".equals(resp.getString("status"))) {
-                    JSONArray arr = resp.getJSONArray("data");
+                    JSONArray arr = resp.getJSONArray("services");
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject o = arr.getJSONObject(i);
                         list.add(new ServiceRecord(
@@ -426,7 +426,7 @@ public class ApiClient {
             if (json != null) {
                 JSONObject resp = new JSONObject(json);
                 if ("success".equals(resp.getString("status"))) {
-                    JSONArray arr = resp.getJSONArray("data");
+                    JSONArray arr = resp.getJSONArray("damages");
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject o = arr.getJSONObject(i);
                         list.add(new DamageRecord(
