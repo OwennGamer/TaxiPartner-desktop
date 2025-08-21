@@ -2,48 +2,46 @@ package com.partnertaxi.taxipartneradmin;
 
 import javafx.beans.property.*;
 
+import java.util.List;
+
+/**
+ * Model rekordu serwisowego pojazdu.
+ */
+
 public class ServiceRecord {
     private final IntegerProperty id;
-    private final StringProperty date;
-    private final StringProperty description;
-    private final DoubleProperty cost;
+    private final StringProperty rejestracja;
+    private final StringProperty opis;
+    private final StringProperty data;
+    private final List<String> zdjecia;
 
-    public ServiceRecord(int id, String date, String description, double cost) {
+    public ServiceRecord(int id,
+                         String rejestracja,
+                         String opis,
+                         String data,
+                         List<String> zdjecia) {
         this.id = new SimpleIntegerProperty(id);
-        this.date = new SimpleStringProperty(date);
-        this.description = new SimpleStringProperty(description);
-        this.cost = new SimpleDoubleProperty(cost);
+        this.rejestracja = new SimpleStringProperty(rejestracja);
+        this.opis = new SimpleStringProperty(opis);
+        this.data = new SimpleStringProperty(data);
+        this.zdjecia = zdjecia;
     }
 
-    public int getId() {
-        return id.get();
-    }
+    public int getId() { return id.get(); }
 
-    public IntegerProperty idProperty() {
-        return id;
-    }
+    public IntegerProperty idProperty() { return id; }
 
-    public String getDate() {
-        return date.get();
-    }
+    public String getRejestracja() { return rejestracja.get(); }
 
-    public StringProperty dateProperty() {
-        return date;
-    }
+    public StringProperty rejestracjaProperty() { return rejestracja; }
 
-    public String getDescription() {
-        return description.get();
-    }
+    public String getOpis() { return opis.get(); }
 
-    public StringProperty descriptionProperty() {
-        return description;
-    }
+    public StringProperty opisProperty() { return opis; }
 
-    public double getCost() {
-        return cost.get();
-    }
+    public String getData() { return data.get(); }
 
-    public DoubleProperty costProperty() {
-        return cost;
-    }
+    public StringProperty dataProperty() { return data; }
+
+    public List<String> getZdjecia() { return zdjecia; }
 }

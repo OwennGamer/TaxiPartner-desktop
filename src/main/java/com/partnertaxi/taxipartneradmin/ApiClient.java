@@ -431,9 +431,12 @@ public class ApiClient {
                         JSONObject o = arr.getJSONObject(i);
                         list.add(new DamageRecord(
                                 o.getInt("id"),
-                                o.getString("date"),
-                                o.getString("description"),
-                                o.optDouble("cost", 0.0)
+                                o.optString("rejestracja", null),
+                                o.optString("nr_szkody", null),
+                                o.optString("opis", null),
+                                o.optString("status", null),
+                                o.optString("data", null),
+                                parsePhotoArray(o.optJSONArray("zdjecia"))
                         ));
                     }
                 }
@@ -442,6 +445,20 @@ public class ApiClient {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private static List<String> parsePhotoArray(JSONArray arr) {
+        List<String> photos = new ArrayList<>();
+        if (arr != null) {
+            String base = BASE_URL.replace("api/", "");
+            for (int i = 0; i < arr.length(); i++) {
+                String p = arr.optString(i, null);
+                if (p != null && !p.isEmpty()) {
+                    photos.add(base + p);
+                }
+            }
+        }
+        return photos;
     }
 
     /**

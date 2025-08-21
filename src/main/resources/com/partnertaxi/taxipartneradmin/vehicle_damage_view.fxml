@@ -13,10 +13,11 @@
     <center>
         <TableView fx:id="damageTable">
             <columns>
-                <TableColumn fx:id="colId" id="colId" text="ID" prefWidth="60"/>
-                <TableColumn fx:id="colDate" id="colDate" text="Data" prefWidth="120"/>
-                <TableColumn fx:id="colDescription" id="colDescription" text="Opis" prefWidth="240"/>
-                <TableColumn fx:id="colCost" id="colCost" text="Koszt" prefWidth="100"/>
+                <TableColumn fx:id="colNrSzkody" id="colNrSzkody" text="Nr szkody" prefWidth="100"/>
+                <TableColumn fx:id="colStatus" id="colStatus" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="colData" id="colData" text="Data" prefWidth="120"/>
+                <TableColumn fx:id="colOpis" id="colOpis" text="Opis" prefWidth="200"/>
+                <TableColumn fx:id="colZdjecia" id="colZdjecia" text="Zdjęcia" prefWidth="100"/>
             </columns>
         </TableView>
     </center>
