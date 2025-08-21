@@ -39,9 +39,27 @@ class FleetActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this@FleetActivity, "Błąd: ${response.status}", Toast.LENGTH_SHORT).show()
                 }
+            } catch (e: IOException) {
+                Log.e("FleetActivity", "Network error while loading vehicles", e)
+                Toast.makeText(
+                    this@FleetActivity,
+                    "Błąd sieci. Sprawdź połączenie.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } catch (e: JsonSyntaxException) {
+                Log.e("FleetActivity", "Data parsing error while loading vehicles", e)
+                Toast.makeText(
+                    this@FleetActivity,
+                    "Błąd danych serwera",
+                    Toast.LENGTH_SHORT
+                ).show()
             } catch (e: Exception) {
-                Log.e("FleetActivity", "Error loading vehicles", e)
-                Toast.makeText(this@FleetActivity, "Brak połączenia", Toast.LENGTH_SHORT).show()
+                Log.e("FleetActivity", "Unexpected error while loading vehicles", e)
+                Toast.makeText(
+                    this@FleetActivity,
+                    "Nieoczekiwany błąd",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
