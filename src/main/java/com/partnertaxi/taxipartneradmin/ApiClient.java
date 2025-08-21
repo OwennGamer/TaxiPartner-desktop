@@ -291,7 +291,7 @@ public class ApiClient {
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject o = arr.getJSONObject(i);
 
-                        boolean aktywny = o.optBoolean("aktywny", o.optInt("aktywny", 0) == 1);
+                        boolean aktywny = o.optBoolean("aktywny");
                         boolean inpost = o.optBoolean("inpost", o.optInt("inpost", 0) == 1);
                         boolean taxi = o.optBoolean("taxi", o.optInt("taxi", 0) == 1);
                         boolean taksometr = o.optBoolean("taksometr", o.optInt("taksometr", 0) == 1);
