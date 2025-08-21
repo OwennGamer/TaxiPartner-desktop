@@ -4,21 +4,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.scene.control.TableRow;
 
 import java.util.Objects;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDamageController {
@@ -71,6 +73,16 @@ public class VehicleDamageController {
 
         TableUtils.enableCopyOnCtrlC(damageTable);
         TableUtils.enableColumnsOrderPersistence(damageTable, VehicleDamageController.class, PREF_KEY_COLUMNS_ORDER);
+
+        damageTable.setRowFactory(tv -> {
+            TableRow<DamageRecord> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    openEditDialog(row.getItem());
+                }
+            });
+            return row;
+        });
     }
 
     private void loadDamages() {
@@ -103,5 +115,47 @@ public class VehicleDamageController {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+    }
+
+    private void openEditDialog(DamageRecord rec) {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Edycja szkody");
+        ButtonType saveBtn = new ButtonType("Zapisz", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveBtn, ButtonType.CANCEL);
+
+        TextField opisField = new TextField(rec.getOpis());
+        TextField kosztField = new TextField(String.valueOf(rec.getKoszt()));
+        TextField statusField = new TextField(rec.getStatus() == null ? "" : rec.getStatus());
+        Button photoBtn = new Button("Dodaj zdjęcia");
+        List<File> photos = new ArrayList<>();
+        photoBtn.setOnAction(e -> {
+            FileChooser fc = new FileChooser();
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
+            List<File> selected = fc.showOpenMultipleDialog(damageTable.getScene().getWindow());
+            if (selected != null) photos.addAll(selected);
+        });
+
+        VBox box = new VBox(10,
+                new Label("Opis:"), opisField,
+                new Label("Koszt:"), kosztField,
+                new Label("Status:"), statusField,
+                photoBtn);
+        dialog.getDialogPane().setContent(box);
+
+        dialog.setResultConverter(bt -> {
+            if (bt == saveBtn) {
+                double koszt;
+                try {
+                    koszt = Double.parseDouble(kosztField.getText().trim());
+                } catch (NumberFormatException ex) {
+                    return null;
+                }
+                ApiClient.updateDamageRecord(rec.getId(), opisField.getText(), koszt, statusField.getText(), photos);
+                loadDamages();
+            }
+            return null;
+        });
+
+        dialog.showAndWait();
     }
 }

@@ -5,12 +5,14 @@ import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -68,6 +70,18 @@ public class ApiClient {
         Request.Builder builder = new Request.Builder()
                 .url(BASE_URL + endpoint)
                 .post(requestBody)
+                .addHeader("Accept", "application/json");
+        if (jwtToken != null) {
+            builder.addHeader("Authorization", "Bearer " + jwtToken);
+        }
+        return executeRequest(builder.build());
+    }
+
+    private static ApiResult sendMultipartPost(String endpoint, MultipartBody.Builder bodyBuilder) {
+        RequestBody body = bodyBuilder.setType(MultipartBody.FORM).build();
+        Request.Builder builder = new Request.Builder()
+                .url(BASE_URL + endpoint)
+                .post(body)
                 .addHeader("Accept", "application/json");
         if (jwtToken != null) {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
@@ -405,9 +419,12 @@ public class ApiClient {
                         JSONObject o = arr.getJSONObject(i);
                         list.add(new ServiceRecord(
                                 o.getInt("id"),
-                                o.getString("date"),
-                                o.getString("description"),
-                                o.optDouble("cost", 0.0)
+                                o.optString("rejestracja", null),
+                                o.optString("opis", null),
+                                o.optDouble("koszt", 0.0),
+                                o.optString("status", null),
+                                o.optString("data", null),
+                                parsePhotoArray(o.optJSONArray("zdjecia"))
                         ));
                     }
                 }
@@ -435,6 +452,7 @@ public class ApiClient {
                                 o.optString("nr_szkody", null),
                                 o.optString("opis", null),
                                 o.optString("status", null),
+                                o.optDouble("koszt", 0.0),
                                 o.optString("data", null),
                                 parsePhotoArray(o.optJSONArray("zdjecia"))
                         ));
@@ -445,6 +463,48 @@ public class ApiClient {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static boolean updateServiceRecord(int id, String opis, double koszt, String status, List<File> photos) {
+        try {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .addFormDataPart("id", String.valueOf(id))
+                    .addFormDataPart("opis", opis)
+                    .addFormDataPart("koszt", String.valueOf(koszt))
+                    .addFormDataPart("status", status);
+            if (photos != null) {
+                for (File f : photos) {
+                    builder.addFormDataPart("photos[]", f.getName(),
+                            RequestBody.create(f, MediaType.get("image/jpeg")));
+                }
+            }
+            ApiResult res = sendMultipartPost("update_service.php", builder);
+            return res.code == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean updateDamageRecord(int id, String opis, double koszt, String status, List<File> photos) {
+        try {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .addFormDataPart("id", String.valueOf(id))
+                    .addFormDataPart("opis", opis)
+                    .addFormDataPart("koszt", String.valueOf(koszt))
+                    .addFormDataPart("status", status);
+            if (photos != null) {
+                for (File f : photos) {
+                    builder.addFormDataPart("photos[]", f.getName(),
+                            RequestBody.create(f, MediaType.get("image/jpeg")));
+                }
+            }
+            ApiResult res = sendMultipartPost("update_damage.php", builder);
+            return res.code == 200;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private static List<String> parsePhotoArray(JSONArray arr) {

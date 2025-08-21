@@ -14,6 +14,7 @@ public class DamageRecord {
     private final StringProperty nrSzkody;
     private final StringProperty opis;
     private final StringProperty status;
+    private final DoubleProperty koszt;
     private final StringProperty data;
     private final List<String> zdjecia;
 
@@ -22,6 +23,7 @@ public class DamageRecord {
                         String nrSzkody,
                         String opis,
                         String status,
+                        double koszt,
                         String data,
                         List<String> zdjecia) {
         this.id = new SimpleIntegerProperty(id);
@@ -29,6 +31,7 @@ public class DamageRecord {
         this.nrSzkody = new SimpleStringProperty(nrSzkody);
         this.opis = new SimpleStringProperty(opis);
         this.status = new SimpleStringProperty(status);
+        this.koszt = new SimpleDoubleProperty(koszt);
         this.data = new SimpleStringProperty(data);
         this.zdjecia = zdjecia;
     }
@@ -56,6 +59,10 @@ public class DamageRecord {
     public String getData() { return data.get(); }
 
     public StringProperty dataProperty() { return data; }
+
+    public double getKoszt() { return koszt.get(); }
+
+    public DoubleProperty kosztProperty() { return koszt; }
 
     public List<String> getZdjecia() { return zdjecia; }
 }
