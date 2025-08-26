@@ -135,7 +135,10 @@ public class VehicleServiceController {
                 } catch (NumberFormatException ex) {
                     return null;
                 }
-                ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt);
+                boolean ok = ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt);
+                if (!ok) {
+                    new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować serwisu.").showAndWait();
+                }
                 loadServices();
             }
             return null;

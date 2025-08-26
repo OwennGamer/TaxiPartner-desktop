@@ -472,7 +472,15 @@ public class ApiClient {
             json.put("opis", opis);
             json.put("koszt", koszt);
             ApiResult res = sendJsonPost("update_service.php", json);
-            return res.code == 200;
+            if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
+                try {
+                    JSONObject resp = new JSONObject(res.body);
+                    return "success".equals(resp.optString("status"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -486,7 +494,15 @@ public class ApiClient {
             json.put("opis", opis);
             json.put("status", status);
             ApiResult res = sendJsonPost("update_damage.php", json);
-            return res.code == 200;
+            if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
+                try {
+                    JSONObject resp = new JSONObject(res.body);
+                    return "success".equals(resp.optString("status"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

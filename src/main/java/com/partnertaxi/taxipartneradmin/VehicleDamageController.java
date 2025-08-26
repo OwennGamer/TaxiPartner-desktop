@@ -139,7 +139,10 @@ public class VehicleDamageController {
 
         dialog.setResultConverter(bt -> {
             if (bt == saveBtn) {
-                ApiClient.updateDamageRecord(rec.getId(), opisField.getText(), statusBox.getValue());
+                boolean ok = ApiClient.updateDamageRecord(rec.getId(), opisField.getText(), statusBox.getValue());
+                if (!ok) {
+                    new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować szkody.").showAndWait();
+                }
                 loadDamages();
             }
             return null;
