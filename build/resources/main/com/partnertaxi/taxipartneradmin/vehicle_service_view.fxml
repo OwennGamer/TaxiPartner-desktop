@@ -15,6 +15,7 @@
             <columns>
                 <TableColumn fx:id="colData" id="colData" text="Data" prefWidth="120"/>
                 <TableColumn fx:id="colOpis" id="colOpis" text="Opis" prefWidth="300"/>
+                <TableColumn fx:id="colKoszt" text="Koszt"/>
                 <TableColumn fx:id="colZdjecia" id="colZdjecia" text="Zdjęcia" prefWidth="100"/>
             </columns>
         </TableView>

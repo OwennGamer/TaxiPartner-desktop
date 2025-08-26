@@ -118,7 +118,8 @@ public class VehicleDamageController {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Edycja szkody");
         ButtonType saveBtn = new ButtonType("Zapisz", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveBtn, ButtonType.CANCEL);
+        ButtonType cancelBtn = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveBtn, cancelBtn);
 
         TextField opisField = new TextField(rec.getOpis());
         ComboBox<String> statusBox = new ComboBox<>();

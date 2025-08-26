@@ -116,7 +116,8 @@ public class VehicleServiceController {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Edycja serwisu");
         ButtonType saveBtn = new ButtonType("Zapisz", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveBtn, ButtonType.CANCEL);
+        ButtonType cancelBtn = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(saveBtn, cancelBtn);
 
         TextField opisField = new TextField(rec.getOpis());
         TextField kosztField = new TextField(String.valueOf(rec.getKoszt()));
