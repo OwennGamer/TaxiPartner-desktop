@@ -452,7 +452,6 @@ public class ApiClient {
                                 o.optString("nr_szkody", null),
                                 o.optString("opis", null),
                                 o.optString("status", null),
-                                o.optDouble("koszt", 0.0),
                                 o.optString("data", null),
                                 parsePhotoArray(o.optJSONArray("zdjecia"))
                         ));
