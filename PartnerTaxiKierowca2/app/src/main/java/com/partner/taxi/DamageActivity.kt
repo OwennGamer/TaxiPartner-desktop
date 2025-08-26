@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -24,14 +25,17 @@ class DamageActivity : AppCompatActivity() {
     private lateinit var tvPhotosCount: TextView
     private lateinit var btnSave: Button
 
-    private val selectedUris = mutableListOf<Uri>()
+    private val photoUris = mutableListOf<Uri>()
+    private var currentPhotoUri: Uri? = null
 
-    private val pickImages = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
-        selectedUris.clear()
-        if (uris != null) {
-            selectedUris.addAll(uris)
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) {
+            currentPhotoUri?.let {
+                photoUris.add(it)
+                tvPhotosCount.text = "Wybrano ${photoUris.size} zdjęć"
+            }
         }
-        tvPhotosCount.text = "Wybrano ${selectedUris.size} zdjęć"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +60,9 @@ class DamageActivity : AppCompatActivity() {
         spinnerStatus.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, statuses)
 
         btnSelectPhotos.setOnClickListener {
-            pickImages.launch("image/*")
+            val file = File.createTempFile("damage_", ".jpg", getExternalFilesDir(null))
+            currentPhotoUri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+            takePicture.launch(currentPhotoUri)
         }
 
         btnSave.setOnClickListener {
@@ -88,7 +94,7 @@ class DamageActivity : AppCompatActivity() {
         val statusBody = status.toRequestBody("text/plain".toMediaTypeOrNull())
         val rejestracjaBody = rejestracja.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val parts = selectedUris.mapIndexedNotNull { index, uri ->
+        val parts = photoUris.mapIndexedNotNull { index, uri ->
             try {
                 val inputStream = contentResolver.openInputStream(uri)
                 val tempFile = File(cacheDir, "damage_$index.jpg")
