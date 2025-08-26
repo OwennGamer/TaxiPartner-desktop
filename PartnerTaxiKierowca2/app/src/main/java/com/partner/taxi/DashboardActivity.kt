@@ -36,6 +36,7 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!ensureTokenOrRedirect()) return
         setContentView(R.layout.activity_dashboard)
 
         vehiclePlate = intent.getStringExtra("rejestracja")

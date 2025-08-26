@@ -23,6 +23,7 @@ class DamageEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!ensureTokenOrRedirect()) return
         setContentView(R.layout.activity_damage_edit)
 
         editNumber = findViewById(R.id.editDamageNumber)

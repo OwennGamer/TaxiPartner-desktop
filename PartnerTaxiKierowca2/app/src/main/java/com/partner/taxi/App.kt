@@ -8,6 +8,11 @@ import android.os.Build
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        // Przywróć token z pamięci i ustaw w ApiClient
+        val token = SessionManager.getToken(this)
+        if (token.isNotEmpty()) {
+            ApiClient.jwtToken = token
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 "default",                // ID kanału – musi być "default"

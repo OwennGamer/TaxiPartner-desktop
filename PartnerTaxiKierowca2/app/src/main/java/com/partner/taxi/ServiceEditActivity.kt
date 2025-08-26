@@ -20,6 +20,7 @@ class ServiceEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!ensureTokenOrRedirect()) return
         setContentView(R.layout.activity_service_edit)
 
         editDescription = findViewById(R.id.editDescription)

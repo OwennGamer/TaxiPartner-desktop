@@ -81,6 +81,7 @@ class AddRideActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!ensureTokenOrRedirect()) return
         setContentView(R.layout.activity_add_ride)
 
         spinnerSource = findViewById(R.id.spinnerSource)
