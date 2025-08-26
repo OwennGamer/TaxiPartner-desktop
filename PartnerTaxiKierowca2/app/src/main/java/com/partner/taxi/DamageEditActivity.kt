@@ -50,7 +50,11 @@ class DamageEditActivity : AppCompatActivity() {
 
         btnPhotos.setOnClickListener {
             if (damage.zdjecia.isNotEmpty()) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(damage.zdjecia[0]))
+                val uris = ArrayList(damage.zdjecia.map { Uri.parse(it) })
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    setDataAndType(uris[0], "image/*")
+                    putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
+                }
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Brak zdjęć", Toast.LENGTH_SHORT).show()

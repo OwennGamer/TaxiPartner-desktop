@@ -30,7 +30,12 @@ class DamageListActivity : AppCompatActivity() {
                         response: Response<DamagesResponse>
                     ) {
                         if (response.isSuccessful) {
-                            damages = response.body()?.damages ?: emptyList()
+                            damages = response.body()?.damages?.map { item ->
+                                val photos = item.zdjecia.map { photo ->
+                                    if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+                                }
+                                item.copy(zdjecia = photos)
+                            } ?: emptyList()
                             val items = damages.map {
                                 "${it.nr_szkody} - ${it.status}"
                             }

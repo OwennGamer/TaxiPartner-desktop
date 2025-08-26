@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://164.126.143.20:8444/api/"
+    const val BASE_URL = "http://164.126.143.20:8444/api/"
 
     // tutaj będziemy przechowywać token po zalogowaniu
     var jwtToken: String? = null
