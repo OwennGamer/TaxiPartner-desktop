@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TableRow;
 
@@ -19,8 +18,6 @@ import java.util.Objects;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleServiceController {
@@ -28,6 +25,7 @@ public class VehicleServiceController {
     @FXML private TableView<ServiceRecord> serviceTable;
     @FXML private TableColumn<ServiceRecord, String> colData;
     @FXML private TableColumn<ServiceRecord, String> colOpis;
+    @FXML private TableColumn<ServiceRecord, Double> colKoszt;
     @FXML private TableColumn<ServiceRecord, Void> colZdjecia;
 
     private static final String PREF_KEY_COLUMNS_ORDER = "vehicleServiceTable.columnsOrder";
@@ -43,6 +41,7 @@ public class VehicleServiceController {
     public void initialize() {
         colData.setCellValueFactory(new PropertyValueFactory<>("data"));
         colOpis.setCellValueFactory(new PropertyValueFactory<>("opis"));
+        colKoszt.setCellValueFactory(cellData -> cellData.getValue().kosztProperty().asObject());
 
         colZdjecia.setCellFactory(col -> new TableCell<>() {
             private final Button btn = new Button("Wyświetl");
@@ -121,21 +120,11 @@ public class VehicleServiceController {
 
         TextField opisField = new TextField(rec.getOpis());
         TextField kosztField = new TextField(String.valueOf(rec.getKoszt()));
-        TextField statusField = new TextField(rec.getStatus() == null ? "" : rec.getStatus());
-        Button photoBtn = new Button("Dodaj zdjęcia");
-        List<File> photos = new ArrayList<>();
-        photoBtn.setOnAction(e -> {
-            FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
-            List<File> selected = fc.showOpenMultipleDialog(serviceTable.getScene().getWindow());
-            if (selected != null) photos.addAll(selected);
-        });
+
 
         VBox box = new VBox(10,
                 new Label("Opis:"), opisField,
-                new Label("Koszt:"), kosztField,
-                new Label("Status:"), statusField,
-                photoBtn);
+                new Label("Koszt:"), kosztField);
         dialog.getDialogPane().setContent(box);
 
         dialog.setResultConverter(bt -> {
@@ -146,7 +135,7 @@ public class VehicleServiceController {
                 } catch (NumberFormatException ex) {
                     return null;
                 }
-                ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt, statusField.getText(), photos);
+                ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt);
                 loadServices();
             }
             return null;
