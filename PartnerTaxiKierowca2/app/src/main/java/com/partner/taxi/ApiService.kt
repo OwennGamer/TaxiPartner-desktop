@@ -129,7 +129,7 @@ interface ApiService {
         @Part photos: List<MultipartBody.Part>
     ): Call<GenericResponse>
 
-    @GET("get_services.php")
+    @GET("get_service.php")
     fun getServices(
         @Query("rejestracja") rejestracja: String
     ): Call<ServicesResponse>
