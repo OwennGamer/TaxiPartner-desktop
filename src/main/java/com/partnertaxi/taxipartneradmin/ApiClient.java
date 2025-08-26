@@ -516,7 +516,13 @@ public class ApiClient {
             for (int i = 0; i < arr.length(); i++) {
                 String p = arr.optString(i, null);
                 if (p != null && !p.isEmpty()) {
-                    photos.add(base + p);
+                    if (p.startsWith("http")) {
+                        photos.add(p);
+                    } else {
+                        photos.add(base + p);
+                    }
+                } else {
+                    System.err.println("Invalid photo path: " + p);
                 }
             }
         }
