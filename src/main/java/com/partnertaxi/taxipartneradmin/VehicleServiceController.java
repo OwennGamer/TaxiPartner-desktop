@@ -58,6 +58,7 @@ public class VehicleServiceController {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
+                    btn.setDisable(true);
                 } else {
                     ServiceRecord rec = getTableView().getItems().get(getIndex());
                     btn.setDisable(rec.getZdjecia() == null || rec.getZdjecia().isEmpty());
@@ -89,7 +90,10 @@ public class VehicleServiceController {
 
 
     private void openImagesDialog(List<String> urls) {
-        if (urls == null || urls.isEmpty()) return;
+        if (urls == null || urls.isEmpty()) {
+            new Alert(Alert.AlertType.INFORMATION, "Brak zdjęć").showAndWait();
+            return;
+        }
 
         javafx.scene.layout.VBox box = new javafx.scene.layout.VBox(10);
         for (String url : urls) {
