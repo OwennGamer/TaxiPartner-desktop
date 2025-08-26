@@ -27,6 +27,7 @@ if (!$decoded) {
 $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 $opis = trim($_POST['opis'] ?? '');
 $status = trim($_POST['status'] ?? '');
+$koszt = isset($_POST['koszt']) && $_POST['koszt'] !== '' ? floatval($_POST['koszt']) : null;
 
 if ($id <= 0 || $opis === '' || $status === '') {
     http_response_code(400);
@@ -35,12 +36,19 @@ if ($id <= 0 || $opis === '' || $status === '') {
 }
 
 try {
-    $upd = $pdo->prepare('UPDATE szkody SET opis=:op, status=:st WHERE id=:id');
-    $upd->execute([
+    $fields = 'opis=:op, status=:st';
+    $params = [
         ':op' => $opis,
         ':st' => $status,
         ':id' => $id
-    ]);
+    ];
+    if ($koszt !== null) {
+        $fields .= ', koszt=:ko';
+        $params[':ko'] = $koszt;
+    }
+
+    $upd = $pdo->prepare("UPDATE szkody SET $fields WHERE id=:id");
+    $upd->execute($params);
 
     echo json_encode(['status' => 'success']);
 } catch (PDOException $e) {

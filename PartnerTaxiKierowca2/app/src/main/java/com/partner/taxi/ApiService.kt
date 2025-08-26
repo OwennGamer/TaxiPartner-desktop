@@ -164,7 +164,6 @@ interface ApiService {
         @Field("rejestracja") rejestracja: String,
         @Field("nr_szkody") nrSzkody: String,
         @Field("opis") opis: String,
-        @Field("status") status: String,
-        @Field("koszt") koszt: Float
+        @Field("status") status: String
     ): Call<GenericResponse>
 }

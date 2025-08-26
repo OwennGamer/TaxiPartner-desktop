@@ -16,13 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Opis" />
-
-    <EditText
-        android:id="@+id/editDamageCost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Koszt"
-        android:inputType="numberDecimal" />
+    
 
     <Spinner
         android:id="@+id/spinnerStatus"

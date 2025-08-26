@@ -16,7 +16,6 @@ import retrofit2.Response
 class DamageEditActivity : AppCompatActivity() {
     private lateinit var editNumber: EditText
     private lateinit var editDescription: EditText
-    private lateinit var editCost: EditText
     private lateinit var spinnerStatus: Spinner
     private lateinit var btnPhotos: Button
     private lateinit var btnSave: Button
@@ -29,7 +28,6 @@ class DamageEditActivity : AppCompatActivity() {
 
         editNumber = findViewById(R.id.editDamageNumber)
         editDescription = findViewById(R.id.editDamageDescription)
-        editCost = findViewById(R.id.editDamageCost)
         spinnerStatus = findViewById(R.id.spinnerStatus)
         btnPhotos = findViewById(R.id.btnShowPhotos)
         btnSave = findViewById(R.id.btnUpdateDamage)
@@ -62,13 +60,9 @@ class DamageEditActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             val nr = editNumber.text.toString()
             val opis = editDescription.text.toString()
-            val koszt = editCost.text.toString().toFloatOrNull()
-            if (koszt == null) {
-                Toast.makeText(this, "Podaj koszt", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+
             val status = spinnerStatus.selectedItem as String
-            ApiClient.apiService.updateDamage(damage.id, damage.rejestracja, nr, opis, status, koszt)
+            ApiClient.apiService.updateDamage(damage.id, damage.rejestracja, nr, opis, status)
                 .enqueue(object : Callback<GenericResponse> {
                     override fun onResponse(
                         call: Call<GenericResponse>,
