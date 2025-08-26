@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TableRow;
 
@@ -19,8 +18,6 @@ import java.util.Objects;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDamageController {
@@ -124,33 +121,25 @@ public class VehicleDamageController {
         dialog.getDialogPane().getButtonTypes().addAll(saveBtn, ButtonType.CANCEL);
 
         TextField opisField = new TextField(rec.getOpis());
-        TextField kosztField = new TextField(String.valueOf(rec.getKoszt()));
-        TextField statusField = new TextField(rec.getStatus() == null ? "" : rec.getStatus());
-        Button photoBtn = new Button("Dodaj zdjęcia");
-        List<File> photos = new ArrayList<>();
-        photoBtn.setOnAction(e -> {
-            FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png"));
-            List<File> selected = fc.showOpenMultipleDialog(damageTable.getScene().getWindow());
-            if (selected != null) photos.addAll(selected);
-        });
+        ComboBox<String> statusBox = new ComboBox<>();
+        statusBox.getItems().addAll(
+                "niezgłoszona",
+                "zgłoszona",
+                "czeka na wycenę",
+                "czeka na naprawę",
+                "czeka na rozliczenie",
+                "zamknięta"
+        );
+        statusBox.setValue(rec.getStatus());
 
         VBox box = new VBox(10,
                 new Label("Opis:"), opisField,
-                new Label("Koszt:"), kosztField,
-                new Label("Status:"), statusField,
-                photoBtn);
+                new Label("Status:"), statusBox);
         dialog.getDialogPane().setContent(box);
 
         dialog.setResultConverter(bt -> {
             if (bt == saveBtn) {
-                double koszt;
-                try {
-                    koszt = Double.parseDouble(kosztField.getText().trim());
-                } catch (NumberFormatException ex) {
-                    return null;
-                }
-                ApiClient.updateDamageRecord(rec.getId(), opisField.getText(), koszt, statusField.getText(), photos);
+                ApiClient.updateDamageRecord(rec.getId(), opisField.getText(), statusBox.getValue());
                 loadDamages();
             }
             return null;

@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
+
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -479,20 +479,13 @@ public class ApiClient {
         }
     }
 
-    public static boolean updateDamageRecord(int id, String opis, double koszt, String status, List<File> photos) {
+    public static boolean updateDamageRecord(int id, String opis, String status) {
         try {
-            MultipartBody.Builder builder = new MultipartBody.Builder()
-                    .addFormDataPart("id", String.valueOf(id))
-                    .addFormDataPart("opis", opis)
-                    .addFormDataPart("koszt", String.valueOf(koszt))
-                    .addFormDataPart("status", status);
-            if (photos != null) {
-                for (File f : photos) {
-                    builder.addFormDataPart("photos[]", f.getName(),
-                            RequestBody.create(f, MediaType.get("image/jpeg")));
-                }
-            }
-            ApiResult res = sendMultipartPost("update_damage.php", builder);
+            JSONObject json = new JSONObject();
+            json.put("id", id);
+            json.put("opis", opis);
+            json.put("status", status);
+            ApiResult res = sendJsonPost("update_damage.php", json);
             return res.code == 200;
         } catch (Exception e) {
             e.printStackTrace();
