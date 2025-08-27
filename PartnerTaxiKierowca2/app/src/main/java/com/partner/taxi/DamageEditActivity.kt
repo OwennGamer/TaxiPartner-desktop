@@ -1,5 +1,6 @@
 package com.partner.taxi
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -74,6 +75,7 @@ class DamageEditActivity : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful && response.body()?.status == "success") {
                             Toast.makeText(this@DamageEditActivity, "Zaktualizowano", Toast.LENGTH_SHORT).show()
+                            setResult(Activity.RESULT_OK)
                             finish()
                         } else {
                             Toast.makeText(

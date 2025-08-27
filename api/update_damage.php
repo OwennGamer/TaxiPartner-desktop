@@ -25,6 +25,8 @@ if (!$decoded) {
 }
 
 $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+$rejestracja = trim($_POST['rejestracja'] ?? '');
+$nrSzkody = trim($_POST['nr_szkody'] ?? '');
 $opis = trim($_POST['opis'] ?? '');
 $status = trim($_POST['status'] ?? '');
 
@@ -35,8 +37,9 @@ if ($id <= 0 || $opis === '' || $status === '') {
 }
 
 try {
-    $upd = $pdo->prepare("UPDATE szkody SET opis=:op, status=:st WHERE id=:id");
+    $upd = $pdo->prepare("UPDATE szkody SET nr_szkody=:nr, opis=:op, status=:st WHERE id=:id");
     $upd->execute([
+        ':nr' => $nrSzkody,
         ':op' => $opis,
         ':st' => $status,
         ':id' => $id
