@@ -128,7 +128,8 @@ public class VehicleServiceController {
 
         VBox box = new VBox(10,
                 new Label("Opis:"), opisField,
-                new Label("Koszt:"), kosztField;
+                new Label("Koszt:"), kosztField
+        );
 
         dialog.getDialogPane().setContent(box);
 
