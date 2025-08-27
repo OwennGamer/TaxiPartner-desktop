@@ -23,45 +23,7 @@ class ServiceListActivity : AppCompatActivity() {
 
         val rejestracja = intent.getStringExtra("rejestracja") ?: ""
         if (rejestracja.isNotEmpty()) {
-            ApiClient.apiService.getServices(rejestracja)
-                .enqueue(object : Callback<ServicesResponse> {
-                    override fun onResponse(
-                        call: Call<ServicesResponse>,
-                        response: Response<ServicesResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            val base = ApiClient.BASE_URL.replace("api/", "")
-                            services = response.body()?.services?.map { item ->
-                                val photos = item.zdjecia.map { photo ->
-                                    if (photo.startsWith("http")) photo else base + photo
-                                }
-                                item.copy(zdjecia = photos)
-                            } ?: emptyList()
-                            val items = services.map {
-                                "${it.data}: ${it.opis} (${it.koszt})"
-                            }
-                            listView.adapter = ArrayAdapter(
-                                this@ServiceListActivity,
-                                android.R.layout.simple_list_item_1,
-                                items
-                            )
-                        } else {
-                            Toast.makeText(
-                                this@ServiceListActivity,
-                                "Błąd pobierania",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<ServicesResponse>, t: Throwable) {
-                        Toast.makeText(
-                            this@ServiceListActivity,
-                            t.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                })
+            loadServices(rejestracja)
         }
 
         listView.setOnItemClickListener { _, _, position, _ ->
@@ -70,5 +32,53 @@ class ServiceListActivity : AppCompatActivity() {
             intent.putExtra("service", item)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val rejestracja = intent.getStringExtra("rejestracja") ?: return
+        loadServices(rejestracja)
+    }
+
+    private fun loadServices(rejestracja: String) {
+        ApiClient.apiService.getServices(rejestracja)
+            .enqueue(object : Callback<ServicesResponse> {
+                override fun onResponse(
+                    call: Call<ServicesResponse>,
+                    response: Response<ServicesResponse>,
+                ) {
+                    if (response.isSuccessful) {
+                        val base = ApiClient.BASE_URL.replace("api/", "")
+                        services = response.body()?.services?.map { item ->
+                            val photos = item.zdjecia.map { photo ->
+                                if (photo.startsWith("http")) photo else base + photo
+                            }
+                            item.copy(zdjecia = photos)
+                        } ?: emptyList()
+                        val items = services.map {
+                            "${it.data}: ${it.opis} (${it.koszt})"
+                        }
+                        listView.adapter = ArrayAdapter(
+                            this@ServiceListActivity,
+                            android.R.layout.simple_list_item_1,
+                            items
+                        )
+                    } else {
+                        Toast.makeText(
+                            this@ServiceListActivity,
+                            "Błąd pobierania",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ServicesResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@ServiceListActivity,
+                        t.localizedMessage,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
     }
 }
