@@ -29,8 +29,9 @@ class ServiceEditActivity : AppCompatActivity() {
         btnSave = findViewById(R.id.btnUpdateService)
 
         service = (intent.getSerializableExtra("service") as ServiceItem).let { item ->
+            val base = ApiClient.BASE_URL.replace("api/", "")
             val photos = item.zdjecia.map { photo ->
-                if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+                if (photo.startsWith("http")) photo else base + photo
             }
             item.copy(zdjecia = photos)
         }

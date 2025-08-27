@@ -40,12 +40,22 @@ if (!is_dir($uploadDir)) {
 }
 
 $paths = [];
-if (!empty($_FILES['photos']) && isset($_FILES['photos']['name']) && is_array($_FILES['photos']['name'])) {
-    foreach ($_FILES['photos']['name'] as $idx => $originalName) {
-        if ($_FILES['photos']['error'][$idx] === UPLOAD_ERR_OK) {
+if (!empty($_FILES['photos'])) {
+    $files = $_FILES['photos'];
+    if (!is_array($files['name'])) {
+        $files = [
+            'name' => [$files['name']],
+            'type' => [$files['type']],
+            'tmp_name' => [$files['tmp_name']],
+            'error' => [$files['error']],
+            'size' => [$files['size']],
+        ];
+    }
+    foreach ($files['name'] as $idx => $originalName) {
+        if ($files['error'][$idx] === UPLOAD_ERR_OK) {
             $filename = uniqid('serv_') . '.jpg';
             $target = $uploadDir . $filename;
-            if (move_uploaded_file($_FILES['photos']['tmp_name'][$idx], $target)) {
+            if (move_uploaded_file($files['tmp_name'][$idx], $target)) {
                 $paths[] = 'uploads/service/' . $filename;
             }
         }

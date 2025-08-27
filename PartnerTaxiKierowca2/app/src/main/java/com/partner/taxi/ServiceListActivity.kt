@@ -30,9 +30,10 @@ class ServiceListActivity : AppCompatActivity() {
                         response: Response<ServicesResponse>
                     ) {
                         if (response.isSuccessful) {
+                            val base = ApiClient.BASE_URL.replace("api/", "")
                             services = response.body()?.services?.map { item ->
                                 val photos = item.zdjecia.map { photo ->
-                                    if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+                                    if (photo.startsWith("http")) photo else base + photo
                                 }
                                 item.copy(zdjecia = photos)
                             } ?: emptyList()

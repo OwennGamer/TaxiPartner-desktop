@@ -36,7 +36,8 @@ try {
     $stmt->execute([':re' => $rejestracja]);
     $services = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $photos = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
+        $decoded = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
+        $photos = is_array($decoded) ? $decoded : [];
         $row['zdjecia'] = array_map(function ($p) {
             return ltrim($p, '/');
         }, $photos);
