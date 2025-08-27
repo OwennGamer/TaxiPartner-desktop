@@ -486,10 +486,11 @@ public class ApiClient {
         }
     }
 
-    public static boolean updateDamageRecord(int id, String opis, String status) {
+    public static boolean updateDamageRecord(int id, String nrSzkody, String opis, String status) {
         try {
             JSONObject json = new JSONObject();
             json.put("id", id);
+            json.put("nr_szkody", nrSzkody);
             json.put("opis", opis);
             json.put("status", status);
             ApiResult res = sendJsonPost("update_damage.php", json);

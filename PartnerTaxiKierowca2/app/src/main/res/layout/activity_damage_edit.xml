@@ -5,18 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nr szkody" />
+
     <EditText
         android:id="@+id/editDamageNumber"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Nr szkody" />
+        android:text="Opis" />
 
     <EditText
         android:id="@+id/editDamageDescription"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Opis" />
-    
+        android:text="Status" />
 
     <Spinner
         android:id="@+id/spinnerStatus"
@@ -35,4 +47,5 @@
         android:layout_height="wrap_content"
         android:text="Zapisz"
         android:layout_marginTop="16dp" />
+    
 </LinearLayout>

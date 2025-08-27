@@ -120,7 +120,7 @@ public class VehicleDamageController {
         ButtonType saveBtn = new ButtonType("Zapisz", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelBtn = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(saveBtn, cancelBtn);
-
+        TextField nrSzkodyField = new TextField(rec.getNrSzkody());
         TextField opisField = new TextField(rec.getOpis());
         ComboBox<String> statusBox = new ComboBox<>();
         statusBox.getItems().addAll(
@@ -134,13 +134,14 @@ public class VehicleDamageController {
         statusBox.setValue(rec.getStatus());
 
         VBox box = new VBox(10,
+                new Label("Nr szkody:"), nrSzkodyField,
                 new Label("Opis:"), opisField,
                 new Label("Status:"), statusBox);
         dialog.getDialogPane().setContent(box);
 
         dialog.setResultConverter(bt -> {
             if (bt == saveBtn) {
-                boolean ok = ApiClient.updateDamageRecord(rec.getId(), opisField.getText(), statusBox.getValue());
+                boolean ok = ApiClient.updateDamageRecord(rec.getId(), nrSzkodyField.getText(), opisField.getText(), statusBox.getValue());
                 if (!ok) {
                     new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować szkody.").showAndWait();
                 }
