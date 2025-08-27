@@ -1,0 +1,52 @@
+<?php
+header('Content-Type: application/json; charset=utf-8');
+
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/jwt_utils.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    echo json_encode(['status' => 'error', 'message' => 'Method not allowed']);
+    exit;
+}
+
+$token = getAuthorizationHeader();
+if (!$token) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Brak tokena']);
+    exit;
+}
+$decoded = verifyJWT($token);
+if (!$decoded) {
+    http_response_code(401);
+    echo json_encode(['status' => 'error', 'message' => 'Nieprawidłowy token']);
+    exit;
+}
+
+$id = (int)($_GET['id'] ?? 0);
+if ($id <= 0) {
+    http_response_code(400);
+    echo json_encode(['status' => 'error', 'message' => 'Brak ID']);
+    exit;
+}
+
+try {
+    $stmt = $pdo->prepare("SELECT id, rejestracja, opis, koszt, zdjecia, data FROM serwisy WHERE id = :id LIMIT 1");
+    $stmt->execute([':id' => $id]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+        $decoded = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
+        $photos = is_array($decoded) ? $decoded : [];
+        $row['zdjecia'] = array_map(function($p) {
+            return ltrim($p, '/');
+        }, $photos);
+        echo json_encode(['status' => 'success', 'service' => $row]);
+    } else {
+        http_response_code(404);
+        echo json_encode(['status' => 'error', 'message' => 'Nie znaleziono']);
+    }
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Błąd bazy danych']);
+}

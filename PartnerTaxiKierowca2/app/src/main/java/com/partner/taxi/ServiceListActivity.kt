@@ -27,9 +27,8 @@ class ServiceListActivity : AppCompatActivity() {
         }
 
         listView.setOnItemClickListener { _, _, position, _ ->
-            val item = services[position]
             val intent = Intent(this, ServiceEditActivity::class.java)
-            intent.putExtra("service", item)
+            intent.putExtra("service_id", services[position].id)
             startActivity(intent)
         }
     }
