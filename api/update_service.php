@@ -27,9 +27,8 @@ if (!$decoded) {
 $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 $opis = trim($_POST['opis'] ?? '');
 $koszt = isset($_POST['koszt']) ? floatval($_POST['koszt']) : null;
-$status = trim($_POST['status'] ?? '');
 
-if ($id <= 0 || $opis === '' || $koszt === null || $status === '') {
+if ($id <= 0 || $opis === '' || $koszt === null) {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Brak wymaganych danych']);
     exit;
@@ -61,11 +60,10 @@ try {
     $paths = $row && $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
     $paths = array_merge($paths, $newPaths);
 
-    $upd = $pdo->prepare('UPDATE serwisy SET opis=:op, koszt=:ko, status=:st, zdjecia=:zdj WHERE id=:id');
+    $upd = $pdo->prepare('UPDATE serwisy SET opis=:op, koszt=:ko, zdjecia=:zdj WHERE id=:id');
     $upd->execute([
         ':op' => $opis,
         ':ko' => $koszt,
-        ':st' => $status,
         ':zdj' => json_encode($paths),
         ':id' => $id
     ]);

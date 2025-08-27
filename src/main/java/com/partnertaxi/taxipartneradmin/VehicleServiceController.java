@@ -126,22 +126,10 @@ public class VehicleServiceController {
         TextField opisField = new TextField(rec.getOpis());
         TextField kosztField = new TextField(String.valueOf(rec.getKoszt()));
 
-        ComboBox<String> statusBox = new ComboBox<>();
-        statusBox.getItems().addAll(
-                "zaplanowany",
-                "w trakcie",
-                "zakończony"
-        );
-        if (rec.getStatus() != null && !statusBox.getItems().contains(rec.getStatus())) {
-            statusBox.getItems().add(rec.getStatus());
-        }
-        statusBox.setValue(rec.getStatus());
-
-
         VBox box = new VBox(10,
                 new Label("Opis:"), opisField,
-                new Label("Koszt:"), kosztField,
-                new Label("Status:"), statusBox);
+                new Label("Koszt:"), kosztField;
+
         dialog.getDialogPane().setContent(box);
 
         dialog.setResultConverter(bt -> {
@@ -152,7 +140,7 @@ public class VehicleServiceController {
                 } catch (NumberFormatException ex) {
                     return null;
                 }
-                boolean ok = ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt, statusBox.getValue());
+                boolean ok = ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt);
                 if (!ok) {
                     new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować serwisu.").showAndWait();
                 }
