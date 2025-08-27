@@ -147,7 +147,7 @@ public class VehicleDamageController {
                         opisField.getText(),
                         statusBox.getValue());
                 if (ok) {
-                    loadDamages();
+                    loadDamages(); // refresh table after successful update
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować szkody.").showAndWait();
                 }

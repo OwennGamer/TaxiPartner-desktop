@@ -495,12 +495,13 @@ public class ApiClient {
      */
     public static boolean updateDamageRecord(int id, String nrSzkody, String opis, String status) {
         try {
-            JSONObject json = new JSONObject();
-            json.put("id", id);
-            json.put("nr_szkody", nrSzkody != null ? nrSzkody.trim() : "");
-            json.put("opis", opis);
-            json.put("status", status);
-            ApiResult res = sendJsonPost("update_damage.php", json);
+            String body = String.format("id=%d&nr_szkody=%s&opis=%s&status=%s",
+                    id,
+                    URLEncoder.encode(nrSzkody != null ? nrSzkody.trim() : "", "UTF-8"),
+                    URLEncoder.encode(opis, "UTF-8"),
+                    URLEncoder.encode(status, "UTF-8"));
+
+            ApiResult res = sendPostRequest("update_damage.php", body);
             if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
                 try {
                     JSONObject resp = new JSONObject(res.body);
