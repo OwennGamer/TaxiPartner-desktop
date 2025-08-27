@@ -41,13 +41,24 @@ if (!is_dir($uploadDir)) {
 }
 
 $paths = [];
-if (!empty($_FILES['photos']['name']) && is_array($_FILES['photos']['name'])) {
-    $count = count($_FILES['photos']['name']);
+if (!empty($_FILES['photos'])) {
+    $files = $_FILES['photos'];
+    // Upewnij się, że mamy tablicę plików niezależnie od liczby przesłanych zdjęć
+    if (!is_array($files['name'])) {
+        $files = [
+            'name' => [$files['name']],
+            'type' => [$files['type']],
+            'tmp_name' => [$files['tmp_name']],
+            'error' => [$files['error']],
+            'size' => [$files['size']],
+        ];
+    }
+    $count = count($files['name']);
     for ($i = 0; $i < $count; $i++) {
-        if ($_FILES['photos']['error'][$i] === UPLOAD_ERR_OK) {
+        if ($files['error'][$i] === UPLOAD_ERR_OK) {
             $filename = uniqid('damage_') . '.jpg';
             $target = $uploadDir . $filename;
-            if (move_uploaded_file($_FILES['photos']['tmp_name'][$i], $target)) {
+            if (move_uploaded_file($files['tmp_name'][$i], $target)) {
                 $paths[] = 'uploads/damages/' . $filename;
             }
         }

@@ -53,10 +53,7 @@ class DamageListActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         damages = response.body()?.damages?.map { item ->
-                            val photos = item.zdjecia.map { photo ->
-                                if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
-                            }
-                            item.copy(zdjecia = photos)
+                            item.copy(zdjecia = prefixPhotoPaths(item.zdjecia))
                         } ?: emptyList()
                         val items = damages.map {
                             "${it.nr_szkody} - ${it.status} - ${formatDate(it.data)}"
@@ -84,7 +81,11 @@ class DamageListActivity : AppCompatActivity() {
                 }
             })
     }
-
+    private fun prefixPhotoPaths(paths: List<String>): List<String> {
+        return paths.map { photo ->
+            if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+        }
+    }
     private fun formatDate(dateString: String): String {
         return try {
             LocalDate.parse(dateString).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))

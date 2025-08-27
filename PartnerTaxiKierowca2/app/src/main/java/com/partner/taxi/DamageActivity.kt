@@ -104,7 +104,7 @@ class DamageActivity : AppCompatActivity() {
                 inputStream?.close()
                 outputStream.close()
                 val requestFile = tempFile.asRequestBody("image/*".toMediaTypeOrNull())
-                MultipartBody.Part.createFormData("photos[]", tempFile.name, requestFile)
+                MultipartBody.Part.createFormData("photos", tempFile.name, requestFile)
             } catch (e: Exception) {
                 null
             }

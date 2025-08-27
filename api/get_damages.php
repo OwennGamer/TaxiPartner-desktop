@@ -32,11 +32,15 @@ if ($rejestracja === '') {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT id, rejestracja, nr_szkody, opis, status, zdjecia, data FROM szkody WHERE rejestracja = :re ORDER BY data DESC");
+    $stmt = $pdo->prepare(
+        "SELECT id, rejestracja, nr_szkody, opis, status, zdjecia, data " .
+        "FROM szkody WHERE rejestracja = :re ORDER BY data DESC"
+    );
     $stmt->execute([':re' => $rejestracja]);
     $damages = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $row['zdjecia'] = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
+        $decoded = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
+        $row['zdjecia'] = is_array($decoded) ? $decoded : [];
         $damages[] = $row;
     }
     echo json_encode(['status' => 'success', 'damages' => $damages]);
