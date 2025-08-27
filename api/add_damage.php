@@ -36,6 +36,9 @@ if ($rejestracja === '' || $nr_szkody === '' || $opis === '' || $status === '') 
 }
 
 function normalizeFilesArray(array $files): array {
+    if (!is_array($files['name'])) {
+        return [$files];
+    }
     $normalized = [];
     foreach ($files['name'] as $index => $name) {
         $normalized[] = [
@@ -55,16 +58,14 @@ if (!is_dir($uploadDir)) {
 }
 
 $paths = [];
-if (!empty($_FILES['photos'])) {
-    $files = $_FILES['photos'];
-    $files = is_array($files['name']) ? normalizeFilesArray($files) : [$files];
-    foreach ($files as $file) {
-        if ($file['error'] === UPLOAD_ERR_OK) {
-            $filename = uniqid('damage_') . '.jpg';
-            $target = $uploadDir . $filename;
-            if (move_uploaded_file($file['tmp_name'], $target)) {
-                $paths[] = 'uploads/damages/' . $filename;
-            }
+$files = $_FILES['photos'] ?? $_FILES['photos'] ?? [];
+$files = isset($files['name']) ? normalizeFilesArray($files) : [];
+foreach ($files as $file) {
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        $filename = uniqid('damage_') . '.jpg';
+        $target = $uploadDir . $filename;
+        if (move_uploaded_file($file['tmp_name'], $target)) {
+            $paths[] = 'uploads/damages/' . $filename;
         }
     }
 }

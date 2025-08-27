@@ -40,8 +40,7 @@ if (!is_dir($uploadDir)) {
 }
 
 $paths = [];
-if (!empty($_FILES['photos'])) {
-    $files = $_FILES['photos'];
+function normalizeFilesArray(array $files): array {
     if (!is_array($files['name'])) {
         $files = [
             'name' => [$files['name']],
@@ -51,13 +50,26 @@ if (!empty($_FILES['photos'])) {
             'size' => [$files['size']],
         ];
     }
-    foreach ($files['name'] as $idx => $originalName) {
-        if ($files['error'][$idx] === UPLOAD_ERR_OK) {
-            $filename = uniqid('serv_') . '.jpg';
-            $target = $uploadDir . $filename;
-            if (move_uploaded_file($files['tmp_name'][$idx], $target)) {
-                $paths[] = 'uploads/service/' . $filename;
-            }
+        $normalized = [];
+    foreach ($files['name'] as $i => $name) {
+        $normalized[] = [
+            'name' => $name,
+            'type' => $files['type'][$i],
+            'tmp_name' => $files['tmp_name'][$i],
+            'error' => $files['error'][$i],
+            'size' => $files['size'][$i],
+        ];
+    }
+    return $normalized;
+}
+$files = $_FILES['photos'] ?? $_FILES['photos'] ?? [];
+$files = isset($files['name']) ? normalizeFilesArray($files) : [];
+foreach ($files as $file) {
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        $filename = uniqid('serv_') . '.jpg';
+        $target = $uploadDir . $filename;
+        if (move_uploaded_file($file['tmp_name'], $target)) {
+            $paths[] = 'uploads/service/' . $filename;
         }
     }
 }

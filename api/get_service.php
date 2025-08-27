@@ -38,9 +38,7 @@ try {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $decoded = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
         $photos = is_array($decoded) ? $decoded : [];
-        $row['zdjecia'] = array_map(function ($p) {
-            return ltrim($p, '/');
-        }, $photos);
+        $row['zdjecia'] = array_map(fn($p) => ltrim($p, '/'), $photos);
         $services[] = $row;
     }
     echo json_encode(['status' => 'success', 'services' => $services]);

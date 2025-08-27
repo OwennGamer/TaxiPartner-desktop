@@ -27,8 +27,9 @@ class ServiceListActivity : AppCompatActivity() {
         }
 
         listView.setOnItemClickListener { _, _, position, _ ->
+            val item = services[position]
             val intent = Intent(this, ServiceEditActivity::class.java)
-            intent.putExtra("service_id", services[position].id)
+            intent.putExtra("service", item)
             startActivity(intent)
         }
     }
@@ -47,12 +48,8 @@ class ServiceListActivity : AppCompatActivity() {
                     response: Response<ServicesResponse>,
                 ) {
                     if (response.isSuccessful) {
-                        val base = ApiClient.BASE_URL.replace("api/", "")
                         services = response.body()?.services?.map { item ->
-                            val photos = item.zdjecia.map { photo ->
-                                if (photo.startsWith("http")) photo else base + photo
-                            }
-                            item.copy(zdjecia = photos)
+                            item.copy(zdjecia = prefixPhotoPaths(item.zdjecia))
                         } ?: emptyList()
                         val items = services.map {
                             "${it.data}: ${it.opis} (${it.koszt})"
@@ -79,5 +76,12 @@ class ServiceListActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+    }
+
+    private fun prefixPhotoPaths(paths: List<String>): List<String> {
+        val base = ApiClient.BASE_URL.replace("api/", "")
+        return paths.map { photo ->
+            if (photo.startsWith("http")) photo else base + photo.trimStart('/')
+        }
     }
 }
