@@ -141,7 +141,11 @@ public class VehicleDamageController {
 
         dialog.setResultConverter(bt -> {
             if (bt == saveBtn) {
-                boolean ok = ApiClient.updateDamageRecord(rec.getId(), nrSzkodyField.getText(), opisField.getText(), statusBox.getValue());
+                boolean ok = ApiClient.updateDamageRecord(
+                        rec.getId(),
+                        nrSzkodyField.getText().trim(),
+                        opisField.getText(),
+                        statusBox.getValue());
                 if (ok) {
                     loadDamages();
                 } else {

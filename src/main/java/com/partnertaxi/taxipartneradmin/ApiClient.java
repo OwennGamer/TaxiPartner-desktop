@@ -486,11 +486,20 @@ public class ApiClient {
         }
     }
 
+    /**
+     * Updates an existing damage record.
+     *
+     * @param id        unique record identifier
+     * @param nrSzkody  claim number to store
+     * @param opis      damage description
+     * @param status    current claim status
+     * @return {@code true} when the update succeeds
+     */
     public static boolean updateDamageRecord(int id, String nrSzkody, String opis, String status) {
         try {
             JSONObject json = new JSONObject();
             json.put("id", id);
-            json.put("nr_szkody", nrSzkody);
+            json.put("nr_szkody", nrSzkody != null ? nrSzkody.trim() : "");
             json.put("opis", opis);
             json.put("status", status);
             ApiResult res = sendJsonPost("update_damage.php", json);
