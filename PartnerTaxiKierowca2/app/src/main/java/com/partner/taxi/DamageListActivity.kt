@@ -9,10 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class DamageListActivity : AppCompatActivity() {
     private lateinit var listView: ListView
     private var damages: List<DamageItem> = emptyList()
+    private lateinit var rejestracja: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,46 +24,9 @@ class DamageListActivity : AppCompatActivity() {
 
         listView = findViewById(R.id.listDamages)
 
-        val rejestracja = intent.getStringExtra("rejestracja") ?: ""
+        rejestracja = intent.getStringExtra("rejestracja") ?: ""
         if (rejestracja.isNotEmpty()) {
-            ApiClient.apiService.getDamages(rejestracja)
-                .enqueue(object : Callback<DamagesResponse> {
-                    override fun onResponse(
-                        call: Call<DamagesResponse>,
-                        response: Response<DamagesResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            damages = response.body()?.damages?.map { item ->
-                                val photos = item.zdjecia.map { photo ->
-                                    if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
-                                }
-                                item.copy(zdjecia = photos)
-                            } ?: emptyList()
-                            val items = damages.map {
-                                "${it.nr_szkody} - ${it.status}"
-                            }
-                            listView.adapter = ArrayAdapter(
-                                this@DamageListActivity,
-                                android.R.layout.simple_list_item_1,
-                                items
-                            )
-                        } else {
-                            Toast.makeText(
-                                this@DamageListActivity,
-                                "Błąd pobierania",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<DamagesResponse>, t: Throwable) {
-                        Toast.makeText(
-                            this@DamageListActivity,
-                            t.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                })
+            loadDamages()
         }
 
         listView.setOnItemClickListener { _, _, position, _ ->
@@ -68,6 +34,62 @@ class DamageListActivity : AppCompatActivity() {
             val intent = Intent(this, DamageEditActivity::class.java)
             intent.putExtra("damage", item)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::rejestracja.isInitialized && rejestracja.isNotEmpty()) {
+            loadDamages()
+        }
+    }
+
+    private fun loadDamages() {
+        ApiClient.apiService.getDamages(rejestracja)
+            .enqueue(object : Callback<DamagesResponse> {
+                override fun onResponse(
+                    call: Call<DamagesResponse>,
+                    response: Response<DamagesResponse>,
+                ) {
+                    if (response.isSuccessful) {
+                        damages = response.body()?.damages?.map { item ->
+                            val photos = item.zdjecia.map { photo ->
+                                if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+                            }
+                            item.copy(zdjecia = photos)
+                        } ?: emptyList()
+                        val items = damages.map {
+                            "${it.nr_szkody} - ${it.status} - ${formatDate(it.data)}"
+                        }
+                        listView.adapter = ArrayAdapter(
+                            this@DamageListActivity,
+                            android.R.layout.simple_list_item_1,
+                            items
+                        )
+                    } else {
+                        Toast.makeText(
+                            this@DamageListActivity,
+                            "Błąd pobierania",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<DamagesResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@DamageListActivity,
+                        t.localizedMessage,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+    }
+
+    private fun formatDate(dateString: String): String {
+        return try {
+            LocalDate.parse(dateString).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        } catch (e: Exception) {
+            dateString
         }
     }
 }
