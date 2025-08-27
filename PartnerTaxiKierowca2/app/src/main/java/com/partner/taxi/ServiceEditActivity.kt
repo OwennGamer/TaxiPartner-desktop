@@ -28,13 +28,24 @@ class ServiceEditActivity : AppCompatActivity() {
         btnPhotos = findViewById(R.id.btnShowPhotos)
         btnSave = findViewById(R.id.btnUpdateService)
 
-        service = intent.getSerializableExtra("service") as ServiceItem
+        service = (intent.getSerializableExtra("service") as ServiceItem).let { item ->
+            val photos = item.zdjecia.map { photo ->
+                if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+            }
+            item.copy(zdjecia = photos)
+        }
         editDescription.setText(service.opis)
         editCost.setText(service.koszt.toString())
 
         btnPhotos.setOnClickListener {
             if (service.zdjecia.isNotEmpty()) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(service.zdjecia[0]))
+                val uris = ArrayList<Uri>().apply {
+                    service.zdjecia.forEach { add(Uri.parse(it)) }
+                }
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    setDataAndType(uris[0], "image/*")
+                    putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
+                }
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Brak zdjęć", Toast.LENGTH_SHORT).show()
