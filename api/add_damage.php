@@ -35,6 +35,20 @@ if ($rejestracja === '' || $nr_szkody === '' || $opis === '' || $status === '') 
     exit;
 }
 
+function normalizeFilesArray(array $files): array {
+    $normalized = [];
+    foreach ($files['name'] as $index => $name) {
+        $normalized[] = [
+            'name' => $name,
+            'type' => $files['type'][$index],
+            'tmp_name' => $files['tmp_name'][$index],
+            'error' => $files['error'][$index],
+            'size' => $files['size'][$index],
+        ];
+    }
+    return $normalized;
+}
+
 $uploadDir = __DIR__ . '/uploads/damages/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
@@ -43,22 +57,12 @@ if (!is_dir($uploadDir)) {
 $paths = [];
 if (!empty($_FILES['photos'])) {
     $files = $_FILES['photos'];
-    // Upewnij się, że mamy tablicę plików niezależnie od liczby przesłanych zdjęć
-    if (!is_array($files['name'])) {
-        $files = [
-            'name' => [$files['name']],
-            'type' => [$files['type']],
-            'tmp_name' => [$files['tmp_name']],
-            'error' => [$files['error']],
-            'size' => [$files['size']],
-        ];
-    }
-    $count = count($files['name']);
-    for ($i = 0; $i < $count; $i++) {
-        if ($files['error'][$i] === UPLOAD_ERR_OK) {
+    $files = is_array($files['name']) ? normalizeFilesArray($files) : [$files];
+    foreach ($files as $file) {
+        if ($file['error'] === UPLOAD_ERR_OK) {
             $filename = uniqid('damage_') . '.jpg';
             $target = $uploadDir . $filename;
-            if (move_uploaded_file($files['tmp_name'][$i], $target)) {
+            if (move_uploaded_file($file['tmp_name'], $target)) {
                 $paths[] = 'uploads/damages/' . $filename;
             }
         }

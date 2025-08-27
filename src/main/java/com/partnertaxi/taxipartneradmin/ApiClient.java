@@ -523,6 +523,7 @@ public class ApiClient {
             for (int i = 0; i < arr.length(); i++) {
                 String p = arr.optString(i, null);
                 if (p != null && !p.isEmpty()) {
+                    p = p.replaceFirst("^/+", "");
                     if (p.startsWith("http")) {
                         photos.add(p);
                     } else {

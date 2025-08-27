@@ -82,8 +82,9 @@ class DamageListActivity : AppCompatActivity() {
             })
     }
     private fun prefixPhotoPaths(paths: List<String>): List<String> {
+        val base = ApiClient.BASE_URL.replace("api/", "")
         return paths.map { photo ->
-            if (photo.startsWith("http")) photo else ApiClient.BASE_URL + photo
+            if (photo.startsWith("http")) photo else base + photo.trimStart('/')
         }
     }
     private fun formatDate(dateString: String): String {

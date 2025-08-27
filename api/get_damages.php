@@ -40,7 +40,12 @@ try {
     $damages = [];
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $decoded = $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
-        $row['zdjecia'] = is_array($decoded) ? $decoded : [];
+        if (is_array($decoded)) {
+            $decoded = array_map(fn($p) => ltrim($p, '/'), $decoded);
+        } else {
+            $decoded = [];
+        }
+        $row['zdjecia'] = $decoded;
         $damages[] = $row;
     }
     echo json_encode(['status' => 'success', 'damages' => $damages]);
