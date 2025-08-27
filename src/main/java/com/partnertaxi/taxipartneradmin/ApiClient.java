@@ -466,11 +466,9 @@ public class ApiClient {
 
     public static boolean updateServiceRecord(int id, String opis, double koszt) {
         try {
-            JSONObject json = new JSONObject();
-            json.put("id", id);
-            json.put("opis", opis);
-            json.put("koszt", koszt);
-            ApiResult res = sendJsonPost("update_service.php", json);
+            String body = String.format("id=%d&opis=%s&koszt=%s",
+                    id, URLEncoder.encode(opis, "UTF-8"), koszt);
+            ApiResult res = sendPostRequest("update_service.php", body);
             if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
                 try {
                     JSONObject resp = new JSONObject(res.body);
