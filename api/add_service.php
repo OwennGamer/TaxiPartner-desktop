@@ -1,4 +1,5 @@
-<?php
+$lastError = error_get_last();
+            error_log('MOVE ERROR (' . $file['error'] . '): ' . $file['tmp_name'] . ' -> ' . $target . ' | ' . print_r($lastError, true));<?php
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/db.php';
@@ -62,17 +63,18 @@ function normalizeFilesArray(array $files): array {
     }
     return $normalized;
 }
-$files = $_FILES['photos'] ?? $_FILES['photos'] ?? [];
+$files = $_FILES['photos'] ?? [];
+error_log('FILES: ' . print_r($_FILES, true));
 $files = isset($files['name']) ? normalizeFilesArray($files) : [];
 foreach ($files as $file) {
     if ($file['error'] === UPLOAD_ERR_OK) {
         $filename = uniqid('serv_') . '.jpg';
         $target = $uploadDir . $filename;
-        error_log('FILES: ' . print_r($_FILES, true));
         if (move_uploaded_file($file['tmp_name'], $target)) {
             $paths[] = 'uploads/service/' . $filename;
         } else {
-            error_log('MOVE ERROR: ' . print_r(error_get_last(), true));
+            $lastError = error_get_last();
+            error_log('MOVE ERROR (' . $file['error'] . '): ' . $file['tmp_name'] . ' -> ' . $target . ' | ' . print_r($lastError, true));
         }
     }
 }
