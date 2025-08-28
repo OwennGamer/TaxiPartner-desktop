@@ -29,7 +29,7 @@ class ServiceEditActivity : AppCompatActivity() {
         btnPhotos = findViewById(R.id.btnShowPhotos)
         btnSave = findViewById(R.id.btnUpdateService)
 
-        val passed = intent.getSerializableExtra("service") as? ServiceItem
+        val passed = intent.getParcelableExtra<ServiceItem>("service")
         if (passed != null) {
             setupService(passed)
             return

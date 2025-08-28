@@ -1,7 +1,9 @@
 package com.partner.taxi
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ServiceItem(
     val id: Int,
     val rejestracja: String,
@@ -9,9 +11,10 @@ data class ServiceItem(
     val koszt: Float,
     val zdjecia: List<String>,
     val data: String
-) : Serializable
+) : Parcelable
 
 data class ServicesResponse(
     val status: String,
     val services: List<ServiceItem>
+
 )
