@@ -3,6 +3,7 @@ package com.partner.taxi
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -29,7 +30,11 @@ class ServiceEditActivity : AppCompatActivity() {
         btnPhotos = findViewById(R.id.btnShowPhotos)
         btnSave = findViewById(R.id.btnUpdateService)
 
-        val passed = intent.getParcelableExtra<ServiceItem>("service")
+        val passed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra("service", ServiceItem::class.java)
+        } else {
+            @Suppress("DEPRECATION") intent.getParcelableExtra<ServiceItem>("service")
+        }
         if (passed != null) {
             setupService(passed)
             return
