@@ -1,5 +1,4 @@
-$lastError = error_get_last();
-            error_log('MOVE ERROR (' . $file['error'] . '): ' . $file['tmp_name'] . ' -> ' . $target . ' | ' . print_r($lastError, true));<?php
+<?php
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/db.php';
