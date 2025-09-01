@@ -2,22 +2,47 @@ package com.partner.taxi
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
+import kotlin.math.min
 
 class ServiceEditActivity : AppCompatActivity() {
     private lateinit var editDescription: EditText
     private lateinit var editCost: EditText
-    private lateinit var btnPhotos: Button
     private lateinit var btnSave: Button
+    private lateinit var rvPhotos: RecyclerView
+    private lateinit var photoAdapter: PhotoAdapter
+    private val photoUris = mutableListOf<Uri>()
+    private var currentPhotoUri: Uri? = null
+
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) {
+            currentPhotoUri?.let {
+                photoUris.add(it)
+                photoAdapter.notifyDataSetChanged()
+            }
+        }
+    }
     private lateinit var service: ServiceItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +52,15 @@ class ServiceEditActivity : AppCompatActivity() {
 
         editDescription = findViewById(R.id.editDescription)
         editCost = findViewById(R.id.editCost)
-        btnPhotos = findViewById(R.id.btnShowPhotos)
         btnSave = findViewById(R.id.btnUpdateService)
+        rvPhotos = findViewById(R.id.rvPhotos)
+
+        photoAdapter = PhotoAdapter(photoUris, ::launchCamera, ::previewPhoto) { index ->
+            photoUris.removeAt(index)
+            photoAdapter.notifyDataSetChanged()
+        }
+        rvPhotos.adapter = photoAdapter
+        rvPhotos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val passed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("service", ServiceItem::class.java)
@@ -82,20 +114,9 @@ class ServiceEditActivity : AppCompatActivity() {
         editDescription.setText(service.opis)
         editCost.setText(service.koszt.toString())
 
-        btnPhotos.setOnClickListener {
-            if (service.zdjecia.isNotEmpty()) {
-                val uris = ArrayList<Uri>().apply {
-                    service.zdjecia.forEach { add(Uri.parse(it)) }
-                }
-                val intent = Intent(Intent.ACTION_VIEW).apply {
-                    setDataAndType(uris[0], "image/*")
-                    putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
-                }
-                startActivity(intent)
-            } else {
-                Toast.makeText(this@ServiceEditActivity, "Brak zdjęć", Toast.LENGTH_SHORT).show()
-            }
-        }
+        photoUris.clear()
+        service.zdjecia.forEach { photoUris.add(Uri.parse(it)) }
+        photoAdapter.notifyDataSetChanged()
 
         btnSave.setOnClickListener {
             val opis = editDescription.text.toString()
@@ -104,7 +125,11 @@ class ServiceEditActivity : AppCompatActivity() {
                 Toast.makeText(this@ServiceEditActivity, "Podaj koszt", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            ApiClient.apiService.updateService(service.id, opis, koszt)
+            val idBody = service.id.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val opisBody = opis.toRequestBody("text/plain".toMediaTypeOrNull())
+            val kosztBody = koszt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val parts = prepareParts()
+            ApiClient.apiService.updateService(idBody, opisBody, kosztBody, parts)
                 .enqueue(object : Callback<GenericResponse> {
                     override fun onResponse(
                         call: Call<GenericResponse>,
@@ -133,4 +158,45 @@ class ServiceEditActivity : AppCompatActivity() {
                 })
         }
     }
+
+    private fun launchCamera() {
+        val file = File.createTempFile("service_", ".jpg", getExternalFilesDir(null))
+        currentPhotoUri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+        takePicture.launch(currentPhotoUri)
+    }
+
+    private fun previewPhoto(uri: Uri) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "image/*")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        startActivity(intent)
+    }
+
+    private fun prepareParts(): List<MultipartBody.Part> {
+        return photoUris.filter { it.scheme != "http" && it.scheme != "https" }
+            .mapIndexedNotNull { index, uri ->
+                try {
+                    val input = contentResolver.openInputStream(uri) ?: return@mapIndexedNotNull null
+                    var bitmap = BitmapFactory.decodeStream(input)
+                    input.close()
+                    val maxDim = 1280
+                    val ratio = min(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
+                    if (ratio < 1f) {
+                        val newW = (bitmap.width * ratio).toInt()
+                        val newH = (bitmap.height * ratio).toInt()
+                        bitmap = Bitmap.createScaledBitmap(bitmap, newW, newH, true)
+                    }
+                    val file = File(cacheDir, "service_up_$index.jpg")
+                    FileOutputStream(file).use { out ->
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, out)
+                    }
+                    val req = file.asRequestBody("image/*".toMediaTypeOrNull())
+                    MultipartBody.Part.createFormData("photos[]", file.name, req)
+                } catch (e: Exception) {
+                    null
+                }
+            }
+    }
+
 }

@@ -122,7 +122,7 @@ class ServiceActivity : AppCompatActivity() {
                 }
             })
     }
-    
+
     private fun scaleBitmap(src: Bitmap, maxSize: Int): Bitmap {
         val (w, h) = src.width to src.height
         val ratio = w.toFloat() / h

@@ -154,21 +154,23 @@ interface ApiService {
         @Query("rejestracja") rejestracja: String
     ): Call<DamagesResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("update_service.php")
     fun updateService(
-        @Field("id") id: Int,
-        @Field("opis") opis: String,
-        @Field("koszt") koszt: Float
+        @Part("id") id: RequestBody,
+        @Part("opis") opis: RequestBody,
+        @Part("koszt") koszt: RequestBody,
+        @Part photos: List<MultipartBody.Part>,
     ): Call<GenericResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("update_damage.php")
     fun updateDamage(
-        @Field("id") id: Int,
-        @Field("rejestracja") rejestracja: String,
-        @Field("nr_szkody") nrSzkody: String,
-        @Field("opis") opis: String,
-        @Field("status") status: String
+        @Part("id") id: RequestBody,
+        @Part("rejestracja") rejestracja: RequestBody,
+        @Part("nr_szkody") nrSzkody: RequestBody,
+        @Part("opis") opis: RequestBody,
+        @Part("status") status: RequestBody,
+        @Part photos: List<MultipartBody.Part>,
     ): Call<GenericResponse>
 }

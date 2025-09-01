@@ -26,11 +26,14 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/btnShowPhotos"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPhotos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pokaż zdjęcia" />
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp" />
 
     <Button
         android:id="@+id/btnUpdateService"
