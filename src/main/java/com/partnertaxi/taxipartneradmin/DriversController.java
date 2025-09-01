@@ -49,6 +49,7 @@ public class DriversController {
     @FXML private TableColumn<Driver, Float>   turnoverColumn;
     @FXML private TableColumn<Driver, Float>   zlPerKmColumn;
     @FXML private TableColumn<Driver, Float>   fuelPerTurnoverColumn;
+    @FXML private TableColumn<Driver, Void>    logoutColumn;
 
 
     @FXML
@@ -76,6 +77,7 @@ public class DriversController {
         turnoverColumn.setId("turnoverColumn");
         zlPerKmColumn.setId("zlPerKmColumn");
         fuelPerTurnoverColumn.setId("fuelPerTurnoverColumn");
+        logoutColumn.setId("logoutColumn");
 
         // 2) Formatter liczb z przecinkiem
         final NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -90,6 +92,28 @@ public class DriversController {
         setupTextColumn(vehiclePlateColumn, "vehiclePlate");
         setupTextColumn(fuelCostColumn, "fuelCostText");
         setupTextColumn(createdAtColumn, "createdAt");
+        // Logout button column
+        logoutColumn.setCellFactory(col -> new TableCell<>() {
+            private final Button btn = new Button("Wyloguj");
+            {
+                btn.setOnAction(evt -> {
+                    Driver d = getTableView().getItems().get(getIndex());
+                    if (d != null && !d.isSummary()) {
+                        handleRemoteLogout(d.getId());
+                    }
+                });
+            }
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    Driver d = getTableView().getItems().get(getIndex());
+                    setGraphic(d != null && !d.isSummary() ? btn : null);
+                }
+            }
+        });
 
         // 4) Saldo: parsujemy raw string i formatujemy
         saldoColumn.setCellValueFactory(data -> {
@@ -400,6 +424,10 @@ public class DriversController {
                 loadDrivers();
             }
         });
+    }
+
+    public void handleRemoteLogout(String driverId) {
+        ApiClient.logoutDriver(driverId);
     }
 
     @FXML

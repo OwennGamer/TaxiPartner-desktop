@@ -227,6 +227,22 @@ public class ApiClient {
         }
     }
 
+    // 🚪 Zdalne wylogowanie kierowcy
+    public static void logoutDriver(String driverId) {
+        try {
+            JSONObject json = new JSONObject();
+            json.put("id", driverId);
+            ApiResult res = sendJsonPost("remote_logout.php", json);
+            if (res.code == 200) {
+                System.out.println("✅ Kierowca wylogowany zdalnie.");
+            } else {
+                System.out.println("❌ Błąd zdalnego wylogowania. Kod: " + res.code);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // 🔁 Zmiana salda kierowcy
     public static void updateSaldo(String driverId, float amount, String reason) {
         try {
