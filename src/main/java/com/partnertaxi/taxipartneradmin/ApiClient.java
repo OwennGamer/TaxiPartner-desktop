@@ -21,6 +21,7 @@ import okhttp3.Response;
 public class ApiClient {
 
     private static final String BASE_URL = Config.getBaseUrl();
+    private static final String DEVICE_ID = "admin_panel";
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private static final MediaType FORM = MediaType.get("application/x-www-form-urlencoded");
     private static final OkHttpClient client = new OkHttpClient.Builder()
@@ -59,6 +60,7 @@ public class ApiClient {
                 .url(BASE_URL + endpoint)
                 .post(body)
                 .addHeader("Accept", "application/json");
+        builder.addHeader("Device-Id", DEVICE_ID);
         if (jwtToken != null) {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
         }
@@ -71,6 +73,7 @@ public class ApiClient {
                 .url(BASE_URL + endpoint)
                 .post(requestBody)
                 .addHeader("Accept", "application/json");
+        builder.addHeader("Device-Id", DEVICE_ID);
         if (jwtToken != null) {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
         }
@@ -83,6 +86,7 @@ public class ApiClient {
                 .url(BASE_URL + endpoint)
                 .post(body)
                 .addHeader("Accept", "application/json");
+        builder.addHeader("Device-Id", DEVICE_ID);
         if (jwtToken != null) {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
         }
@@ -94,6 +98,7 @@ public class ApiClient {
                 .url(BASE_URL + endpoint)
                 .get()
                 .addHeader("Accept", "application/json");
+        builder.addHeader("Device-Id", DEVICE_ID);
         if (jwtToken != null) {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
         }
@@ -106,12 +111,14 @@ public class ApiClient {
             JSONObject loginData = new JSONObject();
             loginData.put("username", username);
             loginData.put("password", password);
+            loginData.put("device_id", DEVICE_ID);
 
             RequestBody body = RequestBody.create(loginData.toString(), JSON);
             Request request = new Request.Builder()
                     .url(BASE_URL + "admin_login.php")
                     .post(body)
                     .addHeader("Accept", "application/json")
+                    .addHeader("Device-Id", DEVICE_ID)
                     .build();
 
             ApiResult result = executeRequest(request);

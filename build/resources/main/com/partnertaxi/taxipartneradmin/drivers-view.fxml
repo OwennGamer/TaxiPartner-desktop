@@ -56,6 +56,7 @@
                     <TableColumn fx:id="zlPerKmColumn"          id="zlPerKmColumn"          text="ZŁ / KM"          prefWidth="100"/>
                     <TableColumn fx:id="fuelPerTurnoverColumn"  id="fuelPerTurnoverColumn"  text="PALIWO / OBRÓT"   prefWidth="120"/>
                     <TableColumn fx:id="createdAtColumn"         id="createdAtColumn"         text="Dodano"           prefWidth="150"/>
+                    <TableColumn fx:id="logoutColumn"           id="logoutColumn"           text="Wyloguj"          prefWidth="100"/>
                 </columns>
             </TableView>
         </VBox>
