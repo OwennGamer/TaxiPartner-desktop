@@ -427,24 +427,22 @@ public class DriversController {
     }
 
     public void handleRemoteLogout(String driverId) {
+        ButtonType yes = new ButtonType("Tak", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert c = new Alert(Alert.AlertType.CONFIRMATION,
-                "Wylogować kierowcę " + driverId + "?",
-                ButtonType.OK, ButtonType.CANCEL);
+                "Wylogować kierowcę " + driverId + "?", yes, no);
         c.setTitle("Potwierdzenie");
         c.setHeaderText(null);
         c.showAndWait().ifPresent(b -> {
-            if (b == ButtonType.OK) {
-                ApiClient.logoutDriver(driverId);
-                loadDrivers();
-                new Alert(Alert.AlertType.INFORMATION,
-                        "Kierowca " + driverId + " wylogowany." , ButtonType.OK)
-                        .showAndWait();
+            if (b == yes) {
                 boolean success = ApiClient.logoutDriver(driverId);
                 if (success) {
                     loadDrivers();
-                    new Alert(Alert.AlertType.INFORMATION,
-                            "Kierowca " + driverId + " wylogowany.", ButtonType.OK)
-                            .showAndWait();
+                    Alert info = new Alert(Alert.AlertType.INFORMATION,
+                            "Kierowca " + driverId + " wylogowany.", ButtonType.OK);
+                    info.setTitle("Komunikat");
+                    info.setHeaderText(null);
+                    info.showAndWait();
                 } else {
                     showError("Błąd", "Nie udało się wylogować kierowcy.");
                 }
