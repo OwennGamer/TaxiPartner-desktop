@@ -4,6 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/jwt_utils.php';
+require_once __DIR__ . '/upload_utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -37,11 +38,41 @@ if ($id <= 0 || $opis === '' || $status === '') {
 }
 
 try {
-    $upd = $pdo->prepare("UPDATE szkody SET nr_szkody=:nr, opis=:op, status=:st WHERE id=:id");
+    $stmt = $pdo->prepare("SELECT zdjecia FROM szkody WHERE id=:id");
+    $stmt->execute([':id' => $id]);
+    $existing = $stmt->fetchColumn();
+    $paths = $existing ? json_decode($existing, true) : [];
+    if (!is_array($paths)) {
+        $paths = [];
+    }
+
+    $uploadDir = __DIR__ . '/uploads/damages/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $files = $_FILES['photos'] ?? [];
+    error_log('FILES: ' . print_r($_FILES, true));
+    $files = isset($files['name']) ? normalizeFilesArray($files) : [];
+    foreach ($files as $file) {
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            $filename = uniqid('damage_') . '.jpg';
+            $target = $uploadDir . $filename;
+            if (move_uploaded_file($file['tmp_name'], $target)) {
+                $paths[] = 'uploads/damages/' . $filename;
+            } else {
+                $lastError = error_get_last();
+                error_log('MOVE ERROR (' . $file['error'] . '): ' . $file['tmp_name'] . ' -> ' . $target . ' | ' . print_r($lastError, true));
+            }
+        }
+    }
+
+    $upd = $pdo->prepare("UPDATE szkody SET nr_szkody=:nr, opis=:op, status=:st, zdjecia=:zdj WHERE id=:id");
     $upd->execute([
         ':nr' => $nrSzkody,
         ':op' => $opis,
         ':st' => $status,
+        ':zdj' => json_encode($paths),
         ':id' => $id
     ]);
 
