@@ -71,6 +71,14 @@ try {
     ];
 
     $jwt = generateJWT($user['id'], $user['role'], $device_id);
+    // zapisz token w tabeli jwt_tokens
+    try {
+        $expiresAt = date('Y-m-d H:i:s', time() + 28800); // 8 godzin
+        $ins = $pdo->prepare("INSERT INTO jwt_tokens (token, driver_id, device_id, expires_at) VALUES (?, ?, ?, ?)");
+        $ins->execute([$jwt, $user['id'], $device_id, $expiresAt]);
+    } catch (Exception $e) {
+        // jeśli zapis nie powiedzie się, kontynuujemy logowanie
+    }
 
     echo json_encode([
         "status" => "success",
