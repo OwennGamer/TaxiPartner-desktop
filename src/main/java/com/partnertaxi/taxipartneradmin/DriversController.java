@@ -427,7 +427,20 @@ public class DriversController {
     }
 
     public void handleRemoteLogout(String driverId) {
-        ApiClient.logoutDriver(driverId);
+        Alert c = new Alert(Alert.AlertType.CONFIRMATION,
+                "Wylogować kierowcę " + driverId + "?",
+                ButtonType.OK, ButtonType.CANCEL);
+        c.setTitle("Potwierdzenie");
+        c.setHeaderText(null);
+        c.showAndWait().ifPresent(b -> {
+            if (b == ButtonType.OK) {
+                ApiClient.logoutDriver(driverId);
+                loadDrivers();
+                new Alert(Alert.AlertType.INFORMATION,
+                        "Kierowca " + driverId + " wylogowany." , ButtonType.OK)
+                        .showAndWait();
+            }
+        });
     }
 
     @FXML
