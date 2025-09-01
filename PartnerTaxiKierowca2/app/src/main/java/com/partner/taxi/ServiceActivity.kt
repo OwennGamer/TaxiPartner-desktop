@@ -1,6 +1,7 @@
 package com.partner.taxi
 
-import android.net.Uri
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -27,17 +28,16 @@ class ServiceActivity : AppCompatActivity() {
     private lateinit var tvPhotosCount: TextView
     private lateinit var btnSave: Button
 
-    private val photoUris = mutableListOf<Uri>()
-    private var currentPhotoUri: Uri? = null
+    private val photoFiles = mutableListOf<File>()
+    private var currentPhotoFile: File? = null
 
     private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success) {
-            currentPhotoUri?.let {
-                photoUris.add(it)
-                tvPhotosCount.text = "Wybrano ${photoUris.size} zdjęć"
+            currentPhotoFile?.let {
+                photoFiles.add(it)
+                tvPhotosCount.text = "Wybrano ${photoFiles.size} zdjęć"
             }
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +53,9 @@ class ServiceActivity : AppCompatActivity() {
 
         btnSelectPhotos.setOnClickListener {
             val file = File.createTempFile("service_", ".jpg", getExternalFilesDir(null))
-            currentPhotoUri = FileProvider.getUriForFile(this, "$packageName.provider", file)
-            takePicture.launch(currentPhotoUri)
+            currentPhotoFile = file
+            val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+            takePicture.launch(uri)
         }
 
         btnSave.setOnClickListener {
@@ -84,16 +85,16 @@ class ServiceActivity : AppCompatActivity() {
         val kosztBody = koszt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val rejestracjaBody = rejestracja.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val parts = photoUris.mapIndexedNotNull { index, uri ->
+        val compressed = mutableListOf<File>()
+        val parts = photoFiles.mapNotNull { file ->
             try {
-                val inputStream = contentResolver.openInputStream(uri)
-                val tempFile = File(cacheDir, "photo_$index.jpg")
-                val outputStream = FileOutputStream(tempFile)
-                inputStream?.copyTo(outputStream)
-                inputStream?.close()
-                outputStream.close()
-                val requestFile = tempFile.asRequestBody("image/*".toMediaTypeOrNull())
-                MultipartBody.Part.createFormData("photos[]", tempFile.name, requestFile)
+                val cmp = compressFile(file)
+                file.delete()
+                cmp?.let {
+                    compressed.add(it)
+                    val requestFile = it.asRequestBody("image/*".toMediaTypeOrNull())
+                    MultipartBody.Part.createFormData("photos[]", it.name, requestFile)
+                }
             } catch (e: Exception) {
                 null
             }
@@ -103,8 +104,9 @@ class ServiceActivity : AppCompatActivity() {
             .enqueue(object : Callback<GenericResponse> {
                 override fun onResponse(
                     call: Call<GenericResponse>,
-                    response: Response<GenericResponse>
+                    response: Response<GenericResponse>,
                 ) {
+                    compressed.forEach { it.delete() }
                     if (response.isSuccessful && response.body()?.status == "success") {
                         Toast.makeText(this@ServiceActivity, "Serwis zapisany", Toast.LENGTH_SHORT).show()
                         finish()
@@ -115,8 +117,30 @@ class ServiceActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    compressed.forEach { it.delete() }
                     Toast.makeText(this@ServiceActivity, "Błąd sieci: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             })
+    }
+    
+    private fun scaleBitmap(src: Bitmap, maxSize: Int): Bitmap {
+        val (w, h) = src.width to src.height
+        val ratio = w.toFloat() / h
+        val (nw, nh) = if (ratio > 1) {
+            maxSize to (maxSize / ratio).toInt()
+        } else {
+            (maxSize * ratio).toInt() to maxSize
+        }
+        return Bitmap.createScaledBitmap(src, nw, nh, true)
+    }
+
+    private fun compressFile(orig: File?): File? = orig?.let {
+        val bmp = BitmapFactory.decodeFile(it.absolutePath)
+        val scaled = scaleBitmap(bmp, 1024)
+        val out = File(cacheDir, "comp_${it.name}")
+        FileOutputStream(out).use { fos ->
+            scaled.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+        }
+        out
     }
 }

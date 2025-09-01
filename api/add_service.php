@@ -4,6 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/jwt_utils.php';
+require_once __DIR__ . '/upload_utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -40,28 +41,6 @@ if (!is_dir($uploadDir)) {
 }
 
 $paths = [];
-function normalizeFilesArray(array $files): array {
-    if (!is_array($files['name'])) {
-        $files = [
-            'name' => [$files['name']],
-            'type' => [$files['type']],
-            'tmp_name' => [$files['tmp_name']],
-            'error' => [$files['error']],
-            'size' => [$files['size']],
-        ];
-    }
-        $normalized = [];
-    foreach ($files['name'] as $i => $name) {
-        $normalized[] = [
-            'name' => $name,
-            'type' => $files['type'][$i],
-            'tmp_name' => $files['tmp_name'][$i],
-            'error' => $files['error'][$i],
-            'size' => $files['size'][$i],
-        ];
-    }
-    return $normalized;
-}
 $files = $_FILES['photos'] ?? [];
 error_log('FILES: ' . print_r($_FILES, true));
 $files = isset($files['name']) ? normalizeFilesArray($files) : [];

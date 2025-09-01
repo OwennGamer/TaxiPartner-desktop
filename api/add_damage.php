@@ -4,6 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/jwt_utils.php';
+require_once __DIR__ . '/upload_utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -33,23 +34,6 @@ if ($rejestracja === '' || $nr_szkody === '' || $opis === '' || $status === '') 
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Brak wymaganych danych']);
     exit;
-}
-
-function normalizeFilesArray(array $files): array {
-    if (!is_array($files['name'])) {
-        return [$files];
-    }
-    $normalized = [];
-    foreach ($files['name'] as $index => $name) {
-        $normalized[] = [
-            'name' => $name,
-            'type' => $files['type'][$index],
-            'tmp_name' => $files['tmp_name'][$index],
-            'error' => $files['error'][$index],
-            'size' => $files['size'][$index],
-        ];
-    }
-    return $normalized;
 }
 
 $uploadDir = __DIR__ . '/uploads/damages/';
