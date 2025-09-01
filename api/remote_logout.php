@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/fcm_v1.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -39,6 +40,25 @@ function tableExists(PDO $pdo, string $table): bool {
 }
 
 try {
+    $stmt = $pdo->prepare('SELECT fcm_token FROM kierowcy WHERE id = ?');
+    $stmt->execute([$driverId]);
+    $fcmToken = $stmt->fetchColumn();
+
+    $fcmStatus = 'no_token';
+    if ($fcmToken) {
+        try {
+            sendFcmV1(
+                $fcmToken,
+                'Taxi Partner',
+                'Zostałeś zdalnie wylogowany',
+                ['type' => 'logout']
+            );
+            $fcmStatus = 'sent';
+        } catch (Exception $e) {
+            $fcmStatus = 'error: ' . $e->getMessage();
+        }
+    }
+
     $pdo->beginTransaction();
 
     $stmt = $pdo->prepare('UPDATE kierowcy SET fcm_token = NULL WHERE id = ?');
@@ -53,7 +73,7 @@ try {
     }
 
     $pdo->commit();
-    echo json_encode(['status' => 'success']);
+    echo json_encode(['status' => 'success', 'fcm_status' => $fcmStatus]);
 } catch (PDOException $e) {
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
