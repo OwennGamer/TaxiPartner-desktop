@@ -439,6 +439,15 @@ public class DriversController {
                 new Alert(Alert.AlertType.INFORMATION,
                         "Kierowca " + driverId + " wylogowany." , ButtonType.OK)
                         .showAndWait();
+                boolean success = ApiClient.logoutDriver(driverId);
+                if (success) {
+                    loadDrivers();
+                    new Alert(Alert.AlertType.INFORMATION,
+                            "Kierowca " + driverId + " wylogowany.", ButtonType.OK)
+                            .showAndWait();
+                } else {
+                    showError("Błąd", "Nie udało się wylogować kierowcy.");
+                }
             }
         });
     }
