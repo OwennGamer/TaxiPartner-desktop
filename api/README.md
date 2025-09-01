@@ -153,3 +153,18 @@ Lists damages reported for a vehicle.
 ```
 
 All endpoints in this section require an `Authorization: Bearer <JWT>` header.
+
+## `remote_logout.php`
+Remotely logs out a driver. Requires an admin JWT.
+
+### Request
+POST JSON body:
+```
+{ "id": "driver_id" }
+```
+
+### Response
+```
+{ "status": "success" }
+```
+Returns an error message on failure.
