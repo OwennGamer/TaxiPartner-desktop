@@ -61,6 +61,47 @@ class TaxiFirebaseService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
+        if (message.data["type"] == "logout") {
+            SessionManager.clearSession(applicationContext)
+            SessionManager.clearSessionId(applicationContext)
+
+            val loginIntent = Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(loginIntent)
+
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    CHANNEL_ID,
+                    "Taxi notifications",
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            val pending = PendingIntent.getActivity(
+                this,
+                0,
+                loginIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+
+            val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("Taxi Partner")
+                .setContentText("Zostałeś wylogowany")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setLargeIcon(largeIcon)
+                .setContentIntent(pending)
+                .setAutoCancel(true)
+                .build()
+
+            notificationManager.notify(1002, notification)
+            return
+        }
         val text = message.notification?.body ?: message.data["message"] ?: return
 
         val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
