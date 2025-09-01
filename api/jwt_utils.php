@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/db.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -22,9 +23,24 @@ function generateJWT($user_id, $role, $device_id) {
 
 // Funkcja weryfikująca token JWT
 function verifyJWT($jwt) {
-    global $secret_key;
+    global $secret_key, $pdo;
     try {
-        return JWT::decode($jwt, new Key($secret_key, 'HS256'));
+        $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
+
+        // sprawdź czy token istnieje w tabeli i nie wygasł
+        $stmt = $pdo->prepare("SELECT expires_at FROM jwt_tokens WHERE token = ? LIMIT 1");
+        $stmt->execute([$jwt]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return false;
+        }
+
+        if (strtotime($row['expires_at']) < time()) {
+            return false;
+        }
+
+        return $decoded;
     } catch (Exception $e) {
         return false;
     }

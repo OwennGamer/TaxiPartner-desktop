@@ -55,6 +55,13 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             }
 
             override fun onResponse(call: Call, response: Response) {
+                if (response.code == 401) {
+                    SessionManager.clearSession(applicationContext)
+                    val loginIntent = Intent(applicationContext, LoginActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(loginIntent)
+                }
                 response.close()
             }
         })

@@ -27,6 +27,7 @@ if (($decoded->role ?? '') !== 'admin') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $driverId = $input['id'] ?? '';
+$deviceId = $input['device_id'] ?? null;
 if ($driverId === '') {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Brak ID kierowcy']);
@@ -66,7 +67,20 @@ try {
 
     $tables = ['jwt_tokens', 'driver_sessions', 'sessions'];
     foreach ($tables as $tbl) {
-        if (tableExists($pdo, $tbl)) {
+        if (!tableExists($pdo, $tbl)) {
+            continue;
+        }
+
+        if ($tbl === 'jwt_tokens') {
+            $sql = "DELETE FROM {$tbl} WHERE driver_id = ?";
+            $params = [$driverId];
+            if ($deviceId !== null && $deviceId !== '') {
+                $sql .= " AND device_id = ?";
+                $params[] = $deviceId;
+            }
+            $del = $pdo->prepare($sql);
+            $del->execute($params);
+        } else {
             $del = $pdo->prepare("DELETE FROM {$tbl} WHERE driver_id = ?");
             $del->execute([$driverId]);
         }

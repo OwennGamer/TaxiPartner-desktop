@@ -70,8 +70,17 @@ try {
         exit;
     }
 
-    // 5) Generujemy JWT oraz zwracamy dane kierowcy wraz z rolą
+    // 5) Generujemy JWT, zapisujemy go w bazie i zwracamy dane kierowcy wraz z rolą
     $token = generateJWT($user['id'], $user['rola'], $device_id);
+    // zapisz token w tabeli jwt_tokens
+    try {
+        $expiresAt = date('Y-m-d H:i:s', time() + 28800); // 8 godzin
+        $ins = $pdo->prepare("INSERT INTO jwt_tokens (token, driver_id, device_id, expires_at) VALUES (?, ?, ?, ?)");
+        $ins->execute([$token, $user['id'], $device_id, $expiresAt]);
+    } catch (Exception $e) {
+        // jeśli zapis nie powiedzie się, kontynuujemy bez przerwania logowania
+    }
+
     echo json_encode([
         "status"    => "success",
         "message"   => "Zalogowano pomyślnie",

@@ -8,6 +8,7 @@ import android.os.Build
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        ApiClient.init(this)
         // Przywróć token z pamięci i ustaw w ApiClient
         val token = SessionManager.getToken(this)
         if (token.isNotEmpty()) {
