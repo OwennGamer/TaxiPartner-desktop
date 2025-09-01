@@ -6,14 +6,15 @@ use Firebase\JWT\Key;
 $secret_key = "tajny_klucz"; // 🔴 Zmień na bardziej skomplikowany klucz!
 
 // Funkcja generująca token JWT
-function generateJWT($user_id, $role) {
+function generateJWT($user_id, $role, $device_id) {
     global $secret_key;
 
     $payload = [
-        "iat" => time(),      
-        "exp" => time() + 28800, 
+        "iat" => time(),
+        "exp" => time() + 28800,
         "user_id" => $user_id,
-        "role" => $role  // 🟢 Dodajemy rolę do tokena
+        "role" => $role,  // 🟢 Dodajemy rolę do tokena
+        "device_id" => $device_id
     ];
 
     return JWT::encode($payload, $secret_key, 'HS256');

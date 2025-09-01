@@ -9,7 +9,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once 'db.php';
 require_once 'jwt_utils.php';
 
-if (empty($_POST['driver_id']) || empty($_POST['password'])) {
+if (empty($_POST['driver_id']) || empty($_POST['password']) || empty($_POST['device_id'])) {
     http_response_code(400);
     echo json_encode([
         "status"  => "error",
@@ -20,6 +20,7 @@ if (empty($_POST['driver_id']) || empty($_POST['password'])) {
 
 $driver_id = $_POST['driver_id'];
 $password  = $_POST['password'];
+$device_id = $_POST['device_id'];
 
 try {
         // 1) Pobierz rekord kierowcy wraz z przypisaną rolą
@@ -70,7 +71,7 @@ try {
     }
 
     // 5) Generujemy JWT oraz zwracamy dane kierowcy wraz z rolą
-    $token = generateJWT($user['id'], $user['rola']);
+    $token = generateJWT($user['id'], $user['rola'], $device_id);
     echo json_encode([
         "status"    => "success",
         "message"   => "Zalogowano pomyślnie",

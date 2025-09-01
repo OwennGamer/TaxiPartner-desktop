@@ -6,6 +6,7 @@ require_once 'jwt_utils.php'; // Upewnij się, że ten plik obsługuje createJWT
 
 $data = json_decode(file_get_contents("php://input"), true);
 
+$device_id = $data['device_id'] ?? 'admin_panel';
 if (!isset($data['username']) || !isset($data['password'])) {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "Brak wymaganych danych"]);
@@ -69,7 +70,7 @@ try {
         "role" => $user['role']
     ];
 
-    $jwt = generateJWT($user['id'], $user['role']);
+    $jwt = generateJWT($user['id'], $user['role'], $device_id);
 
     echo json_encode([
         "status" => "success",

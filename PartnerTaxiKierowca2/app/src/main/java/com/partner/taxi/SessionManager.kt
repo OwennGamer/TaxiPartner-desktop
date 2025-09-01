@@ -9,6 +9,7 @@ object SessionManager {
     private const val DRIVER_ID_KEY = "driver_id"
     private const val TOKEN_KEY = "token"
     private const val ROLE_KEY = "role"
+    private const val DEVICE_ID_KEY = "device_id"
     private const val CURRENT_SESSION_KEY = "current_session_id"
     private const val SESSION_ID_KEY = "session_id"
     private const val VEHICLE_PLATE_KEY = "vehicle_plate"
@@ -31,6 +32,16 @@ object SessionManager {
     fun getToken(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return prefs.getString(TOKEN_KEY, "") ?: ""
+    }
+
+    fun saveDeviceId(context: Context, deviceId: String) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putString(DEVICE_ID_KEY, deviceId).apply()
+    }
+
+    fun getDeviceId(context: Context): String {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return prefs.getString(DEVICE_ID_KEY, "") ?: ""
     }
 
     fun saveRole(context: Context, role: String) {

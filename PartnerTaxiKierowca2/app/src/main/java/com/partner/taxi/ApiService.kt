@@ -20,7 +20,8 @@ interface ApiService {
     @POST("login.php")
     fun login(
         @Field("driver_id") driverId: String,
-        @Field("password") password: String
+        @Field("password") password: String,
+        @Field("device_id") deviceId: String
     ): Call<LoginResponse>
 
     @GET("get_vehicle_info.php")

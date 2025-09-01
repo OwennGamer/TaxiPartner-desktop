@@ -11,14 +11,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
     const val BASE_URL = "http://164.126.143.20:8444/api/"
 
-    // tutaj będziemy przechowywać token po zalogowaniu
+    // tutaj będziemy przechowywać token i identyfikator urządzenia po zalogowaniu
     var jwtToken: String? = null
+    var deviceId: String? = null
 
     // Interceptor dokładający Authorization, jeśli token != null
     private val authInterceptor = Interceptor { chain ->
         val req = chain.request().newBuilder().apply {
             jwtToken?.let {
                 addHeader("Authorization", "Bearer $it")
+            }
+            deviceId?.let {
+                addHeader("Device-Id", it)
             }
         }.build()
         chain.proceed(req)

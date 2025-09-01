@@ -2,6 +2,8 @@ package com.partner.taxi
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +20,18 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val savedToken = SessionManager.getToken(this)
+        val savedDeviceId = SessionManager.getDeviceId(this)
+        if (savedToken.isNotEmpty() && savedDeviceId == deviceId && isTokenValid(savedToken, deviceId)) {
+            ApiClient.jwtToken = savedToken
+            ApiClient.deviceId = deviceId
+            startActivity(Intent(this, ChooseVehicleActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_login)
 
         val loginEt = findViewById<EditText>(R.id.editUsername)
@@ -33,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            api.login(user, pass).enqueue(object : Callback<LoginResponse> {
+            api.login(user, pass, deviceId).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
@@ -46,11 +60,13 @@ class LoginActivity : AppCompatActivity() {
                         && loginResponse?.status == "success"
                         && loginResponse.token != null
                     ) {
-                        // zapisujemy token dla interceptor’a
+                        // zapisujemy token i deviceId dla interceptor’a
                         ApiClient.jwtToken = loginResponse.token
+                        ApiClient.deviceId = deviceId
 
-                        // opcjonalnie trzymamy w SharedPreferences
+                        // zapisujemy w SharedPreferences
                         SessionManager.saveToken(this@LoginActivity, loginResponse.token)
+                        SessionManager.saveDeviceId(this@LoginActivity, deviceId)
                         loginResponse.driver_id?.let {
                             SessionManager.saveDriverId(this@LoginActivity, it)
                         }
@@ -98,4 +114,20 @@ class LoginActivity : AppCompatActivity() {
             })
         }
     }
+
+    private fun isTokenValid(token: String, deviceId: String): Boolean {
+        return try {
+            val parts = token.split(".")
+            if (parts.size != 3) return false
+            val payloadJson = String(Base64.decode(parts[1], Base64.URL_SAFE or Base64.NO_WRAP))
+            val obj = org.json.JSONObject(payloadJson)
+            val exp = obj.optLong("exp", 0)
+            val tokenDevice = obj.optString("device_id", "")
+            val now = System.currentTimeMillis() / 1000
+            exp > now && tokenDevice == deviceId
+        } catch (e: Exception) {
+            false
+        }
+    }
+
 }
