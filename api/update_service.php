@@ -78,11 +78,48 @@ foreach ($files as $file) {
     }
 }
 
+$remove = $_POST['remove_photos'] ?? [];
+if (!is_array($remove)) {
+    $remove = [$remove];
+}
+
 try {
     $stmt = $pdo->prepare('SELECT zdjecia FROM serwisy WHERE id = :id');
     $stmt->execute([':id' => $id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $paths = $row && $row['zdjecia'] ? json_decode($row['zdjecia'], true) : [];
+    $deleted = [];
+
+    foreach ($remove as $r) {
+        $r = trim($r);
+        $file = null;
+        if ($r === '') {
+            continue;
+        }
+        if (is_numeric($r)) {
+            $idx = (int)$r;
+            if (isset($paths[$idx])) {
+                $file = $paths[$idx];
+                unset($paths[$idx]);
+            }
+        } else {
+            $needle = $r;
+            if (!in_array($needle, $paths, true)) {
+                $parsed = parse_url($r, PHP_URL_PATH);
+                $needle = $parsed ? ltrim($parsed, '/') : $needle;
+            }
+            $idx = array_search($needle, $paths, true);
+            if ($idx !== false) {
+                $file = $paths[$idx];
+                unset($paths[$idx]);
+            }
+        }
+        if ($file) {
+            $deleted[] = $file;
+        }
+    }
+
+    $paths = array_values($paths);
     $paths = array_merge($paths, $newPaths);
 
     $upd = $pdo->prepare('UPDATE serwisy SET opis=:op, koszt=:ko, zdjecia=:zdj WHERE id=:id');
@@ -92,6 +129,13 @@ try {
         ':zdj' => json_encode($paths),
         ':id' => $id
     ]);
+
+    foreach ($deleted as $file) {
+        $full = __DIR__ . '/' . $file;
+        if (is_file($full)) {
+            @unlink($full);
+        }
+    }
 
     echo json_encode(['status' => 'success']);
 } catch (PDOException $e) {
