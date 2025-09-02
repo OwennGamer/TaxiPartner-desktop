@@ -2,7 +2,6 @@ package com.partner.taxi
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -15,7 +14,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,32 +24,30 @@ class LoginActivity : AppCompatActivity() {
     private val api = ApiClient.apiService
     private lateinit var deviceId: String
 
-    private val permissionLauncher: ActivityResultLauncher<Array<String>> =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val allGranted = permissions.values.all { it }
-            if (allGranted) {
-                proceedAfterPermissions()
-            } else {
-                AlertDialog.Builder(this)
-                    .setTitle("Wymagane uprawnienia")
-                    .setMessage("Odmowa uprawnień do powiadomień i aparatu uniemożliwia działanie aplikacji.")
-                    .setPositiveButton("Ponów") { _, _ ->
-                        permissionLauncher.launch(getRequiredPermissions())
-                    }
-                    .setNegativeButton("Zamknij") { _, _ -> finish() }
-                    .show()
-            }
-        }
+    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        if (hasRequiredPermissions()) {
-            proceedAfterPermissions()
-        } else {
-            permissionLauncher.launch(getRequiredPermissions())
-        }
+        permissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                val allGranted = permissions.values.all { it }
+                if (allGranted) {
+                    proceedAfterPermissions()
+                } else {
+                    AlertDialog.Builder(this)
+                        .setTitle("Wymagane uprawnienia")
+                        .setMessage("Odmowa uprawnień do powiadomień i aparatu uniemożliwia działanie aplikacji.")
+                        .setPositiveButton("Ponów") { _, _ ->
+                            permissionLauncher.launch(getRequiredPermissions())
+                        }
+                        .setNegativeButton("Zamknij") { _, _ -> finish() }
+                        .show()
+                }
+            }
+
+        permissionLauncher.launch(getRequiredPermissions())
     }
 
     private fun proceedAfterPermissions() {
@@ -159,11 +155,7 @@ class LoginActivity : AppCompatActivity() {
         }
         return perms.toTypedArray()
     }
-
-    private fun hasRequiredPermissions(): Boolean =
-        getRequiredPermissions().all {
-            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-        }
+    
 
     private fun isTokenValid(token: String, deviceId: String): Boolean {
         return try {
