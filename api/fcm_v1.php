@@ -81,7 +81,7 @@ function sendFcmV1(string $deviceToken, string $title, string $body, array $data
             'android' => [
                 'priority' => 'HIGH',
                 'notification' => [
-                    'channel_id' => 'default',
+                    'channel_id' => 'taxi_notifications',
                 ],
             ],
             'data' => array_map('strval', $data),

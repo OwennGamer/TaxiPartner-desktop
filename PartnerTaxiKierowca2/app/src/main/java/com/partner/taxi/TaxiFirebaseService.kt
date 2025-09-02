@@ -29,6 +29,17 @@ class TaxiFirebaseService : FirebaseMessagingService() {
         private const val PREF_PENDING_FCM_TOKEN = "pending_fcm_token"
     }
 
+    private fun ensureChannel(notificationManager: NotificationManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                "Taxi notifications",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
@@ -73,97 +84,81 @@ class TaxiFirebaseService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        if (message.data["type"] == "logout") {
-            SessionManager.clearSession(applicationContext)
-            SessionManager.clearSessionId(applicationContext)
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        ensureChannel(notificationManager)
 
-            val loginIntent = Intent(this, LoginActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            startActivity(loginIntent)
+        when (message.data["type"]) {
+            "logout" -> {
+                SessionManager.clearSession(applicationContext)
+                SessionManager.clearSessionId(applicationContext)
 
-            val notificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channel = NotificationChannel(
-                    CHANNEL_ID,
-                    "Taxi notifications",
-                    NotificationManager.IMPORTANCE_DEFAULT
+                val loginIntent = Intent(this, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(loginIntent)
+
+                val pending = PendingIntent.getActivity(
+                    this,
+                    0,
+                    loginIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
-                notificationManager.createNotificationChannel(channel)
+
+                val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+
+                val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setContentTitle("Taxi Partner")
+                    .setContentText("Zostałeś wylogowany")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setLargeIcon(largeIcon)
+                    .setContentIntent(pending)
+                    .setAutoCancel(true)
+                    .build()
+
+                notificationManager.notify(1002, notification)
+                return
             }
 
-            val pending = PendingIntent.getActivity(
-                this,
-                0,
-                loginIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
+            "saldo_update" -> {
+                val amount = message.data["amount"]
+                val saldoPo = message.data["saldo_po"]
+                if (amount != null && saldoPo != null) {
+                    val text = "Zmiana salda: $amount, nowe saldo: $saldoPo"
 
-            val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+                    val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                    val last = prefs.getString(PREF_LAST_MESSAGE, null)
+                    if (text != last) {
+                        prefs.edit().putString(PREF_LAST_MESSAGE, text).apply()
+                        // Opcjonalnie zapamiętaj najnowsze saldo
+                        prefs.edit().putString("last_saldo", saldoPo).apply()
 
-            val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Taxi Partner")
-                .setContentText("Zostałeś wylogowany")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(largeIcon)
-                .setContentIntent(pending)
-                .setAutoCancel(true)
-                .build()
-
-            notificationManager.notify(1002, notification)
-            return
-        }
-
-        if (message.data["type"] == "saldo_update") {
-            val amount = message.data["amount"]
-            val saldoPo = message.data["saldo_po"]
-            if (amount != null && saldoPo != null) {
-                val text = "Zmiana salda: $amount, nowe saldo: $saldoPo"
-
-                val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                val last = prefs.getString(PREF_LAST_MESSAGE, null)
-                if (text != last) {
-                    prefs.edit().putString(PREF_LAST_MESSAGE, text).apply()
-                    // Opcjonalnie zapamiętaj najnowsze saldo
-                    prefs.edit().putString("last_saldo", saldoPo).apply()
-
-                    val notificationManager =
-                        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        val channel = NotificationChannel(
-                            CHANNEL_ID,
-                            "Taxi notifications",
-                            NotificationManager.IMPORTANCE_DEFAULT
+                        val intent = Intent(this, DashboardActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        val pending = PendingIntent.getActivity(
+                            this,
+                            0,
+                            intent,
+                            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                         )
-                        notificationManager.createNotificationChannel(channel)
+                        val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+
+                        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                            .setContentTitle("Taxi Partner")
+                            .setContentText(text)
+                            .setSmallIcon(R.drawable.ic_launcher_foreground)
+                            .setLargeIcon(largeIcon)
+                            .setContentIntent(pending)
+                            .setAutoCancel(true)
+                            .build()
+
+                        notificationManager.notify(1003, notification)
                     }
-
-                    val intent = Intent(this, DashboardActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    }
-                    val pending = PendingIntent.getActivity(
-                        this,
-                        0,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                    )
-
-                    val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
-
-                    val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setContentTitle("Taxi Partner")
-                        .setContentText(text)
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setLargeIcon(largeIcon)
-                        .setContentIntent(pending)
-                        .setAutoCancel(true)
-                        .build()
-
-                    notificationManager.notify(1003, notification)
+                    return
                 }
             }
-            return
+
         }
         val text = message.notification?.body ?: message.data["message"] ?: return
 
@@ -172,16 +167,6 @@ class TaxiFirebaseService : FirebaseMessagingService() {
         if (text == last) return
         prefs.edit().putString(PREF_LAST_MESSAGE, text).apply()
 
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "Taxi notifications",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
 
         val intent = Intent(this, DashboardActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
