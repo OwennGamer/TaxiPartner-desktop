@@ -26,14 +26,17 @@ class TaxiFirebaseService : FirebaseMessagingService() {
     companion object {
         private const val CHANNEL_ID = "taxi_notifications"
         private const val PREF_LAST_MESSAGE = "last_fcm_message"
+        private const val PREF_PENDING_FCM_TOKEN = "pending_fcm_token"
     }
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        prefs.edit().putString(PREF_PENDING_FCM_TOKEN, token).apply()
 
         val jwt = SessionManager.getToken(applicationContext)
         if (jwt.isEmpty()) {
-            Log.w("TaxiFirebaseService", "JWT token missing; skipping update")
+            Log.w("TaxiFirebaseService", "JWT token missing; stored token for later")
             return
         }
 
@@ -61,6 +64,8 @@ class TaxiFirebaseService : FirebaseMessagingService() {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
                     startActivity(loginIntent)
+                } else {
+                    prefs.edit().remove(PREF_PENDING_FCM_TOKEN).apply()
                 }
                 response.close()
             }

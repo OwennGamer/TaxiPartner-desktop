@@ -107,28 +107,52 @@ class LoginActivity : AppCompatActivity() {
                             SessionManager.saveRole(this@LoginActivity, it)
                         }
 
-                        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val fcmToken = task.result
-                                api.updateFcmToken(fcmToken).enqueue(object : Callback<GenericResponse> {
-                                    override fun onResponse(
-                                        call: Call<GenericResponse>,
-                                        response: Response<GenericResponse>
-                                    ) {
-                                        Log.d("LOGIN", "FCM token updated: ${response.body()?.message}")
-                                    }
+                        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+                        val pendingToken = prefs.getString("pending_fcm_token", null)
 
-                                    override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                                        Log.e("LOGIN", "Failed to update FCM token: ${t.message}")
-                                    }
-                                })
-                            } else {
-                                Log.w("LOGIN", "Fetching FCM token failed", task.exception)
-                            }
+                        fun proceed() {
 
                             Toast.makeText(this@LoginActivity, "Zalogowano", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this@LoginActivity, ChooseVehicleActivity::class.java))
                             finish()
+                        }
+
+                        if (pendingToken != null) {
+                            api.updateFcmToken(pendingToken).enqueue(object : Callback<GenericResponse> {
+                                override fun onResponse(
+                                    call: Call<GenericResponse>,
+                                    response: Response<GenericResponse>
+                                ) {
+                                    Log.d("LOGIN", "FCM token updated: ${response.body()?.message}")
+                                }
+
+                                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                                    Log.e("LOGIN", "Failed to update FCM token: ${t.message}")
+                                }
+                            })
+                            prefs.edit().remove("pending_fcm_token").apply()
+                            proceed()
+                        } else {
+                            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val fcmToken = task.result
+                                    api.updateFcmToken(fcmToken).enqueue(object : Callback<GenericResponse> {
+                                        override fun onResponse(
+                                            call: Call<GenericResponse>,
+                                            response: Response<GenericResponse>
+                                        ) {
+                                            Log.d("LOGIN", "FCM token updated: ${response.body()?.message}")
+                                        }
+
+                                        override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                                            Log.e("LOGIN", "Failed to update FCM token: ${t.message}")
+                                        }
+                                    })
+                                } else {
+                                    Log.w("LOGIN", "Fetching FCM token failed", task.exception)
+                                }
+                                proceed()
+                            }
                         }
                     } else {
                         // prosty komunikat o błędzie logowania
@@ -155,7 +179,7 @@ class LoginActivity : AppCompatActivity() {
         }
         return perms.toTypedArray()
     }
-    
+
 
     private fun isTokenValid(token: String, deviceId: String): Boolean {
         return try {
