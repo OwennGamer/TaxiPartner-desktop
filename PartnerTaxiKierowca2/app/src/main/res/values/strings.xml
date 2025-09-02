@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PartnerTaxiKierowca</string>
+    <string name="app_name">Partner Taxi Kierowca</string>
 
     <!-- Ekran dodawania kursu -->
     <string name="source_prompt">Wybierz źródło</string>
