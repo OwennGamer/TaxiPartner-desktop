@@ -20,7 +20,11 @@ if (!$token) {
 
 try {
     $resp = sendFcmV1($token, $title, $message, $data);
-    echo json_encode(['status' => 'ok', 'fcm' => $resp], JSON_UNESCAPED_UNICODE);
+    if ($resp === null) {
+        echo json_encode(['status' => 'skipped:no_credentials'], JSON_UNESCAPED_UNICODE);
+    } else {
+        echo json_encode(['status' => 'ok', 'fcm' => $resp], JSON_UNESCAPED_UNICODE);
+    }
 } catch (Exception $e) {
     http_response_code(502);
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()], JSON_UNESCAPED_UNICODE);

@@ -79,14 +79,17 @@ try {
 
         // Wyślij FCM przez HTTP v1
         $resp = sendFcmV1($fcmToken, $title, $body, $dataPayload);
-        $fcmStatus = 'sent';
-
-        // Dodatkowy log obok logu z fcm_v1.php
-        @file_put_contents(__DIR__ . '/debug_fcm.log', date('c') . ' ' . json_encode([
-            'status' => $fcmStatus,
-            'resp'   => $resp
-        ], JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
-        @chmod(__DIR__ . '/debug_fcm.log', 0666);
+        if ($resp === null) {
+            $fcmStatus = 'skipped:no_credentials';
+        } else {
+            $fcmStatus = 'sent';
+            // Dodatkowy log obok logu z fcm_v1.php
+            @file_put_contents(__DIR__ . '/debug_fcm.log', date('c') . ' ' . json_encode([
+                'status' => $fcmStatus,
+                'resp'   => $resp
+            ], JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
+            @chmod(__DIR__ . '/debug_fcm.log', 0666);
+        }
     } else {
         error_log('Brak fcm_token dla kierowcy o ID ' . $id);
         $fcmStatus = 'skipped:no_token';

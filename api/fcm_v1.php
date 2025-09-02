@@ -7,11 +7,16 @@ function b64url($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
 
-/** Zwraca access_token Google OAuth2 dla scope firebase.messaging */
-function getGoogleAccessToken(): string {
+/**
+ * Zwraca access_token Google OAuth2 dla scope firebase.messaging
+ *
+ * @return string|null access token lub null, gdy brak pliku konta serwisowego
+ */
+function getGoogleAccessToken(): ?string {
     $jsonPath = GOOGLE_APPLICATION_CREDENTIALS;
-    if (!file_exists($jsonPath)) {
-        throw new Exception("Brak pliku konta serwisowego: $jsonPath");
+    if (!is_readable($jsonPath)) {
+        error_log("Brak pliku konta serwisowego: $jsonPath");
+        return null;
     }
     $sa = json_decode(file_get_contents($jsonPath), true, 512, JSON_THROW_ON_ERROR);
 
@@ -66,9 +71,17 @@ function getGoogleAccessToken(): string {
     return $json['access_token'];
 }
 
-/** Wysyła powiadomienie FCM v1 na pojedynczy token. */
-function sendFcmV1(string $deviceToken, string $title, string $body, array $data = []): array {
+/**
+ * Wysyła powiadomienie FCM v1 na pojedynczy token.
+ *
+ * @return array|null zwraca odpowiedź FCM lub null, gdy brak danych konta serwisowego
+ */
+function sendFcmV1(string $deviceToken, string $title, string $body, array $data = []): ?array {
     $accessToken = getGoogleAccessToken();
+    if (!$accessToken) {
+        return null;
+    }
+
 
     $url = 'https://fcm.googleapis.com/v1/projects/' . FCM_PROJECT_ID . '/messages:send';
     $payload = [

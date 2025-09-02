@@ -48,13 +48,13 @@ try {
     $fcmStatus = 'no_token';
     if ($fcmToken) {
         try {
-            sendFcmV1(
+            $resp = sendFcmV1(
                 $fcmToken,
                 'Taxi Partner',
                 'Zostałeś zdalnie wylogowany',
                 ['type' => 'logout']
             );
-            $fcmStatus = 'sent';
+            $fcmStatus = $resp === null ? 'skipped:no_credentials' : 'sent';
         } catch (Exception $e) {
             $fcmStatus = 'error: ' . $e->getMessage();
         }
