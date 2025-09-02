@@ -82,7 +82,6 @@ jlink {
     icon = file('src/main/resources/icons/partner-taxi.ico').absolutePath
 
     // Windows extras:
-    winMenu     = true
     winShortcut = true
 
     // Dodatkowe opcje instalatora:
@@ -90,7 +89,8 @@ jlink {
             '--win-dir-chooser',
             '--win-menu-group', 'Partner Taxi',
             '--vendor', 'Partner Taxi',
-            '--description', 'Aplikacja desktopowa Partner Taxi (JavaFX).'
+            '--description', 'Aplikacja desktopowa Partner Taxi (JavaFX).',
+            '--win-menu'
     ]
   }
 }
