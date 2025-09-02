@@ -1,6 +1,9 @@
 package com.partner.taxi
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Base64
@@ -8,7 +11,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,11 +24,37 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private val api = ApiClient.apiService
+    private lateinit var deviceId: String
+
+    private val permissionLauncher: ActivityResultLauncher<Array<String>> =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val allGranted = permissions.values.all { it }
+            if (allGranted) {
+                proceedAfterPermissions()
+            } else {
+                AlertDialog.Builder(this)
+                    .setTitle("Wymagane uprawnienia")
+                    .setMessage("Odmowa uprawnień do powiadomień i aparatu uniemożliwia działanie aplikacji.")
+                    .setPositiveButton("Ponów") { _, _ ->
+                        permissionLauncher.launch(getRequiredPermissions())
+                    }
+                    .setNegativeButton("Zamknij") { _, _ -> finish() }
+                    .show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        if (hasRequiredPermissions()) {
+            proceedAfterPermissions()
+        } else {
+            permissionLauncher.launch(getRequiredPermissions())
+        }
+    }
+
+    private fun proceedAfterPermissions() {
         val savedToken = SessionManager.getToken(this)
         val savedDeviceId = SessionManager.getDeviceId(this)
         if (savedToken.isNotEmpty() && savedDeviceId == deviceId && isTokenValid(savedToken, deviceId)) {
@@ -31,6 +64,10 @@ class LoginActivity : AppCompatActivity() {
             finish()
             return
         }
+        initLoginUI()
+    }
+
+    private fun initLoginUI() {
 
         setContentView(R.layout.activity_login)
 
@@ -114,6 +151,19 @@ class LoginActivity : AppCompatActivity() {
             })
         }
     }
+
+    private fun getRequiredPermissions(): Array<String> {
+        val perms = mutableListOf(Manifest.permission.CAMERA)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            perms.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+        return perms.toTypedArray()
+    }
+
+    private fun hasRequiredPermissions(): Boolean =
+        getRequiredPermissions().all {
+            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+        }
 
     private fun isTokenValid(token: String, deviceId: String): Boolean {
         return try {

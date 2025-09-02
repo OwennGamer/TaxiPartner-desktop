@@ -5,14 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;      // <<< konieczny import
+import java.io.InputStream;
+import java.util.Locale;
 import java.util.Objects;
 
 public class HelloApplication extends Application {
 
     private static Stage primaryStage;
 
-    // <<< ten blok wykona się jeszcze przed wywołaniem launch()
+    // Blok statyczny — wykona się przed launch()
     static {
         Config.load();
         // globalne locale na polskie
@@ -25,7 +26,24 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        changeScene("login-view.fxml", "Logowanie administratora");
+
+        // Ikona okna — najpierw próbujemy /icons/app-icon.png, a jeśli brak, szukamy /app-icon.png
+        try {
+            InputStream iconStream = HelloApplication.class.getResourceAsStream("/icons/app-icon.png");
+            if (iconStream == null) {
+                iconStream = HelloApplication.class.getResourceAsStream("/app-icon.png");
+            }
+            if (iconStream != null) {
+                primaryStage.getIcons().add(new javafx.scene.image.Image(iconStream));
+            } else {
+                System.err.println("Uwaga: nie znaleziono ikony app-icon.png w zasobach.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Domyślny tytuł okna
+        changeScene("login-view.fxml", "Partner Taxi");
         stage.setMaximized(true);
         stage.show();
     }

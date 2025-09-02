@@ -93,7 +93,7 @@ public class AddVehicleController {
 
             int taksometr = taksometrCheckbox.isSelected() ? 1 : 0;
             String legalizacja = "";
-            if (taxi == 1) {
+            if (taksometr == 1) {
                 if (legalizacjaDatePicker.getValue() == null) {
                     showError("Wybierz datę legalizacji taksometru.");
                     return;

@@ -109,6 +109,57 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             notificationManager.notify(1002, notification)
             return
         }
+
+        if (message.data["type"] == "saldo_update") {
+            val amount = message.data["amount"]
+            val saldoPo = message.data["saldo_po"]
+            if (amount != null && saldoPo != null) {
+                val text = "Zmiana salda: $amount, nowe saldo: $saldoPo"
+
+                val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                val last = prefs.getString(PREF_LAST_MESSAGE, null)
+                if (text != last) {
+                    prefs.edit().putString(PREF_LAST_MESSAGE, text).apply()
+                    // Opcjonalnie zapamiętaj najnowsze saldo
+                    prefs.edit().putString("last_saldo", saldoPo).apply()
+
+                    val notificationManager =
+                        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        val channel = NotificationChannel(
+                            CHANNEL_ID,
+                            "Taxi notifications",
+                            NotificationManager.IMPORTANCE_DEFAULT
+                        )
+                        notificationManager.createNotificationChannel(channel)
+                    }
+
+                    val intent = Intent(this, DashboardActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    val pending = PendingIntent.getActivity(
+                        this,
+                        0,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+
+                    val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+
+                    val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setContentTitle("Taxi Partner")
+                        .setContentText(text)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setLargeIcon(largeIcon)
+                        .setContentIntent(pending)
+                        .setAutoCancel(true)
+                        .build()
+
+                    notificationManager.notify(1003, notification)
+                }
+            }
+            return
+        }
         val text = message.notification?.body ?: message.data["message"] ?: return
 
         val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
