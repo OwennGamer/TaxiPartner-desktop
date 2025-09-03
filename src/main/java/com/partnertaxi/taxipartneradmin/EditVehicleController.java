@@ -42,7 +42,14 @@ public class EditVehicleController {
         homologacjaDatePicker.setVisible(false);
         firmaOtherField.setVisible(false);
 
-        taxiCheckbox.setOnAction(e -> taxiBox.setVisible(taxiCheckbox.isSelected()));
+        taxiCheckbox.setOnAction(e -> {
+            boolean selected = taxiCheckbox.isSelected();
+            taxiBox.setVisible(selected);
+            if (!selected) {
+                taksometrCheckbox.setSelected(false);
+                legalizacjaDatePicker.setValue(null);
+            }
+        });
         gazCheckbox.setOnAction(e -> homologacjaDatePicker.setVisible(gazCheckbox.isSelected()));
         firmaChoiceBox.getItems().addAll("FUN", "POLCAR", "LINKPOST", "BLS", "INNA");
         firmaChoiceBox.setOnAction(e -> firmaOtherField.setVisible("INNA".equals(firmaChoiceBox.getValue())));
@@ -130,7 +137,7 @@ public class EditVehicleController {
 
             int taksometr = taksometrCheckbox.isSelected() ? 1 : 0;
             String legalizacja = "";
-            if (taxi == 1) {
+            if (taksometr == 1) {
                 if (legalizacjaDatePicker.getValue() == null) {
                     showError("Wybierz datę legalizacji taksometru.");
                     return;
