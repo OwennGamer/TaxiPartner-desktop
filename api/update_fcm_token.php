@@ -12,7 +12,7 @@ if (!$decoded) {
     exit;
 }
 
-if ($decoded->role !== 'driver' && $decoded->role !== 'flotowiec') {
+if ($decoded->role !== 'kierowca' && $decoded->role !== 'flotowiec') {
     http_response_code(403);
     echo json_encode(["status" => "error", "message" => "Brak uprawnień"]);
     exit;

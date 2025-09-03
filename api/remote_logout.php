@@ -50,8 +50,8 @@ try {
         try {
             $resp = sendFcmV1(
                 $fcmToken,
-                'Taxi Partner',
-                'Zostałeś zdalnie wylogowany',
+                null,
+                null,
                 ['type' => 'logout']
             );
             $fcmStatus = $resp === null ? 'skipped:no_credentials' : 'sent';

@@ -76,7 +76,7 @@ function getGoogleAccessToken(): ?string {
  *
  * @return array|null zwraca odpowiedź FCM lub null, gdy brak danych konta serwisowego
  */
-function sendFcmV1(string $deviceToken, string $title, string $body, array $data = []): ?array {
+function sendFcmV1(string $deviceToken, ?string $title = null, ?string $body = null, array $data = []): ?array {
     $accessToken = getGoogleAccessToken();
     if (!$accessToken) {
         return null;
@@ -84,22 +84,25 @@ function sendFcmV1(string $deviceToken, string $title, string $body, array $data
 
 
     $url = 'https://fcm.googleapis.com/v1/projects/' . FCM_PROJECT_ID . '/messages:send';
-    $payload = [
-        'message' => [
-            'token' => $deviceToken,
-            'notification' => [
-                'title' => $title,
-                'body'  => $body,
-            ],
-            'android' => [
-                'priority' => 'HIGH',
-                'notification' => [
-                    'channel_id' => 'taxi_notifications',
-                ],
-            ],
-            'data' => array_map('strval', $data),
+    $message = [
+        'token' => $deviceToken,
+        'android' => [
+            'priority' => 'HIGH',
         ],
+        'data' => array_map('strval', $data),
     ];
+
+    if ($title !== null || $body !== null) {
+        $message['notification'] = array_filter([
+            'title' => $title,
+            'body'  => $body,
+        ], static fn($v) => $v !== null);
+        $message['android']['notification'] = [
+            'channel_id' => 'taxi_notifications',
+        ];
+    }
+
+    $payload = ['message' => $message];
 
     $ch = curl_init($url);
     curl_setopt_array($ch, [
