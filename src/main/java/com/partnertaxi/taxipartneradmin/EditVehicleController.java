@@ -67,7 +67,7 @@ public class EditVehicleController {
         taxiCheckbox.setSelected(v.isTaxi());
         taxiBox.setVisible(v.isTaxi());
         taksometrCheckbox.setSelected(v.isTaksometr());
-        if (v.isTaxi() && v.getLegalizacjaTaksometruDo() != null && !v.getLegalizacjaTaksometruDo().isEmpty()) {
+        if (v.isTaksometr() && v.getLegalizacjaTaksometruDo() != null && !v.getLegalizacjaTaksometruDo().isEmpty()) {
             legalizacjaDatePicker.setValue(LocalDate.parse(v.getLegalizacjaTaksometruDo()));
         }
 
