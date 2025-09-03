@@ -11,15 +11,9 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Callback
-import okhttp3.Call
-import okhttp3.Response
-import java.io.IOException
-import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TaxiFirebaseService : FirebaseMessagingService() {
 
@@ -51,55 +45,27 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             return
         }
 
-        val json = JSONObject().apply {
-            put("fcm_token", token)
-        }
+        // Ensure ApiClient has the current auth data
+        ApiClient.jwtToken = jwt
+        ApiClient.deviceId = SessionManager.getDeviceId(applicationContext)
 
-        val body = json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
-
-        val deviceId = SessionManager.getDeviceId(applicationContext)
-
-        val request = Request.Builder()
-            .url("http://164.126.143.20:8444/api/update_fcm_token.php")
-            .post(body)
-            .addHeader("Device-Id", deviceId)
-            .addHeader("Authorization", "Bearer $jwt")
-            .build()
-
-        OkHttpClient().newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("TaxiFirebaseService", "Failed to send token", e)
+        ApiClient.apiService.updateFcmToken(token).enqueue(object : Callback<GenericResponse> {
+            override fun onResponse(
+                call: Call<GenericResponse>,
+                response: Response<GenericResponse>
+            ) {
+                if (response.isSuccessful && response.body()?.status == "success") {
+                    prefs.edit().remove(PREF_PENDING_FCM_TOKEN).apply()
+                } else {
+                    Log.e(
+                        "TaxiFirebaseService",
+                        "Failed to update token: ${response.body()?.message}"
+                    )
+                }
             }
 
-            override fun onResponse(call: Call, response: Response) {
-                response.use { res ->
-                    if (res.code == 401) {
-                        SessionManager.clearSession(applicationContext)
-                        val loginIntent = Intent(applicationContext, LoginActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        }
-                        startActivity(loginIntent)
-                        return
-                    }
-
-                    if (res.isSuccessful) {
-                        val bodyString = res.body?.string()
-                        val status = try {
-                            JSONObject(bodyString ?: "").optString("status")
-                        } catch (e: Exception) {
-                            null
-                        }
-                        if (status == "success") {
-                            prefs.edit().remove(PREF_PENDING_FCM_TOKEN).apply()
-                        } else {
-                            Log.e("TaxiFirebaseService", "Failed to update token: $bodyString")
-                        }
-                    } else {
-                        Log.e("TaxiFirebaseService", "Failed to send token, code ${res.code}")
-                    }
-
-                }
-
+            override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                Log.e("TaxiFirebaseService", "Failed to send token", t)
             }
         })
     }
