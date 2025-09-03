@@ -57,9 +57,12 @@ class TaxiFirebaseService : FirebaseMessagingService() {
 
         val body = json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
 
+        val deviceId = SessionManager.getDeviceId(applicationContext)
+
         val request = Request.Builder()
             .url("http://164.126.143.20:8444/api/update_fcm_token.php")
             .post(body)
+            .addHeader("Device-Id", deviceId)
             .addHeader("Authorization", "Bearer $jwt")
             .build()
 
@@ -69,16 +72,34 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 401) {
-                    SessionManager.clearSession(applicationContext)
-                    val loginIntent = Intent(applicationContext, LoginActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                response.use { res ->
+                    if (res.code == 401) {
+                        SessionManager.clearSession(applicationContext)
+                        val loginIntent = Intent(applicationContext, LoginActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        startActivity(loginIntent)
+                        return
                     }
-                    startActivity(loginIntent)
-                } else {
-                    prefs.edit().remove(PREF_PENDING_FCM_TOKEN).apply()
+
+                    if (res.isSuccessful) {
+                        val bodyString = res.body?.string()
+                        val status = try {
+                            JSONObject(bodyString ?: "").optString("status")
+                        } catch (e: Exception) {
+                            null
+                        }
+                        if (status == "success") {
+                            prefs.edit().remove(PREF_PENDING_FCM_TOKEN).apply()
+                        } else {
+                            Log.e("TaxiFirebaseService", "Failed to update token: $bodyString")
+                        }
+                    } else {
+                        Log.e("TaxiFirebaseService", "Failed to send token, code ${res.code}")
+                    }
+
                 }
-                response.close()
+
             }
         })
     }
