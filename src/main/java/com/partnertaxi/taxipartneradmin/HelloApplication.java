@@ -46,7 +46,12 @@ public class HelloApplication extends Application {
         changeScene("login-view.fxml", "Partner Taxi");
         stage.setMaximized(true);
         stage.show();
+
+        // Sprawdzenie aktualizacji w osobnym wątku, aby nie blokować wątku UI
+        new Thread(Updater::checkForUpdates).start();
     }
+
+
 
     public static void changeScene(String fxmlFile) {
         changeScene(fxmlFile, "Partner Taxi");
