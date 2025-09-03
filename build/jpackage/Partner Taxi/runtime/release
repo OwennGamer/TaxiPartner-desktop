@@ -1,0 +1,2 @@
+JAVA_VERSION="17.0.13"
+MODULES="java.base java.logging java.transaction.xa java.xml java.sql jdk.unsupported com.google.gson java.management java.security.sasl java.naming com.partnertaxi.merged.module java.prefs java.datatransfer java.desktop javafx.base javafx.graphics javafx.controls java.scripting javafx.fxml kotlin.stdlib okhttp3 com.partnertaxi.taxipartneradmin"
