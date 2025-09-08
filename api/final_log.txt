@@ -1,14 +1,30 @@
 Array
 (
-    [imie] => Paweł
-    [password] => 2
-    [cardCommission] => 3.5
-    [nazwisko] => Turek
+    [cardCommission] => 3
+    [rola] => flotowiec
     [percentTurnover] => 40
-    [id] => 2
+    [saldo] => 0
+    [settlementLimit] => 1000
+    [boltCommission] => 0
+    [imie] => test
+    [password] => 123
+    [nazwisko] => 
+    [id] => test
     [partnerCommission] => 20
-    [settlementLimit] => 500
-    [boltCommission] => 20
     [status] => aktywny
     [fuelCost] => 0
 )
+
+▶ Wstawiam: percentTurnover = 40
+✅ Wstawiono: percentTurnover
+▶ Wstawiam: fuelCost = 0
+✅ Wstawiono: fuelCost
+▶ Wstawiam: cardCommission = 3
+✅ Wstawiono: cardCommission
+▶ Wstawiam: partnerCommission = 20
+✅ Wstawiono: partnerCommission
+▶ Wstawiam: boltCommission = 0
+✅ Wstawiono: boltCommission
+▶ Wstawiam: settlementLimit = 1000
+✅ Wstawiono: settlementLimit
+✅ Kierowca i warunki współpracy dodane (z osobnymi wpisami)

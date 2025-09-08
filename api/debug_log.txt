@@ -2690,3 +2690,375 @@ Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222002,"ostatni_kierowca_
 Rejestracja: DW9YF48
 Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222003,"ostatni_kierowca_id":"T50"}
 [2025-08-28 12:57:43] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-28 15:41:41] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":93790,"ostatni_kierowca_id":"T108"}
+[2025-08-28 15:41:41] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-28 15:49:51] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":93970,"ostatni_kierowca_id":"T108"}
+[2025-08-28 15:49:51] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-29 01:10:15] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-29 01:10:18] update_vehicle_mileage called
+[2025-08-29 05:14:59] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":93977,"ostatni_kierowca_id":"T108"}
+[2025-08-29 05:14:59] update_vehicle_mileage called
+[2025-08-29 09:27:55] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":93977,"ostatni_kierowca_id":"T108"}
+[2025-08-29 09:27:55] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-08-29 13:20:33] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222003,"ostatni_kierowca_id":"T50"}
+[2025-08-29 13:20:33] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-08-29 14:14:54] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":94020,"ostatni_kierowca_id":"T108"}
+[2025-08-29 14:14:54] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-30 21:39:11] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-30 21:39:20] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-31 00:21:06] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-31 00:21:09] update_vehicle_mileage called
+[2025-08-31 11:32:22] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":94060,"ostatni_kierowca_id":"T108"}
+[2025-08-31 11:32:22] update_vehicle_mileage called
+[2025-08-31 15:56:13] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":94178,"ostatni_kierowca_id":"T108"}
+[2025-08-31 15:56:13] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-08-31 23:17:00] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-08-31 23:17:08] update_vehicle_mileage called
+[2025-09-01 02:37:24] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":94180,"ostatni_kierowca_id":"T108"}
+[2025-09-01 02:37:24] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-09-01 09:08:12] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222018,"ostatni_kierowca_id":"T50"}
+[2025-09-01 09:08:13] update_vehicle_mileage called
+[2025-09-01 10:26:25] Endpoint wywołany
+Rejestracja: T50
+Brak wyników
+[2025-09-01 10:26:37] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222019,"ostatni_kierowca_id":"T50"}
+[2025-09-01 10:26:37] update_vehicle_mileage called
+[2025-09-01 10:28:57] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222020,"ostatni_kierowca_id":"T50"}
+[2025-09-01 10:29:06] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222020,"ostatni_kierowca_id":"T50"}
+[2025-09-01 10:29:07] update_vehicle_mileage called
+[2025-09-01 10:39:02] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222021,"ostatni_kierowca_id":"T50"}
+[2025-09-01 10:39:02] update_vehicle_mileage called
+[2025-09-01 10:39:11] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222022,"ostatni_kierowca_id":"T50"}
+[2025-09-01 10:39:11] update_vehicle_mileage called
+[2025-09-01 12:02:02] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222023,"ostatni_kierowca_id":"T50"}
+[2025-09-01 12:02:02] update_vehicle_mileage called
+[2025-09-01 12:02:39] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222030,"ostatni_kierowca_id":"T50"}
+[2025-09-01 12:02:40] update_vehicle_mileage called
+[2025-09-01 12:09:02] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222031,"ostatni_kierowca_id":"T50"}
+[2025-09-01 12:09:02] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-09-01 12:11:02] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222032,"ostatni_kierowca_id":"T50"}
+[2025-09-01 12:11:03] update_vehicle_mileage called
+[2025-09-01 13:32:28] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222035,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:32:33] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222035,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:32:33] update_vehicle_mileage called
+[2025-09-01 13:45:31] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222036,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:45:31] update_vehicle_mileage called
+[2025-09-01 13:46:40] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222050,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:46:40] update_vehicle_mileage called
+[2025-09-01 13:46:51] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222051,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:46:51] update_vehicle_mileage called
+[2025-09-01 13:48:03] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222055,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:48:03] update_vehicle_mileage called
+[2025-09-01 13:48:41] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222056,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:48:41] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-09-01 13:49:49] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222057,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:49:49] update_vehicle_mileage called
+[2025-09-01 13:50:14] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":222057,"ostatni_kierowca_id":"T50"}
+[2025-09-01 13:50:15] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-01 14:18:15] Endpoint wywołany
+Rejestracja: DW8YK68
+Pojazd znaleziony: {"rejestracja":"DW8YK68","przebieg":1,"ostatni_kierowca_id":null}
+[2025-09-01 14:18:15] update_vehicle_mileage called
+[2025-09-01 14:18:22] Endpoint wywołany
+Rejestracja: DW8YK68
+Pojazd znaleziony: {"rejestracja":"DW8YK68","przebieg":1,"ostatni_kierowca_id":null}
+[2025-09-01 14:18:22] update_vehicle_mileage called
+[2025-09-01 14:20:33] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":1,"ostatni_kierowca_id":null}
+[2025-09-01 14:20:34] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-01 22:52:41] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-01 22:52:51] update_vehicle_mileage called
+[2025-09-02 03:02:54] update_vehicle_mileage called
+[2025-09-02 03:02:55] update_vehicle_mileage called
+[2025-09-02 03:02:55] update_vehicle_mileage called
+[2025-09-02 17:19:47] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":180000,"ostatni_kierowca_id":null}
+[2025-09-02 17:19:47] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-09-02 17:21:50] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":181000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 17:21:50] update_vehicle_mileage called
+[2025-09-02 17:26:01] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":182000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 17:26:01] update_vehicle_mileage called
+[2025-09-02 17:32:17] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":182000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 17:32:17] update_vehicle_mileage called
+[2025-09-02 18:13:55] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":183000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 18:13:56] update_vehicle_mileage called
+[2025-09-02 18:16:02] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":185000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 18:16:02] update_vehicle_mileage called
+[2025-09-02 18:32:16] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":185000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 18:32:16] update_vehicle_mileage called
+[2025-09-02 18:45:06] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":186000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 18:45:06] update_vehicle_mileage called
+[2025-09-02 19:14:27] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":186000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 19:14:27] update_vehicle_mileage called
+[2025-09-02 19:26:01] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 19:26:06] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":187000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 19:26:06] update_vehicle_mileage called
+[2025-09-02 19:31:57] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":188000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 19:31:57] update_vehicle_mileage called
+[2025-09-02 19:34:49] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":190000,"ostatni_kierowca_id":"T99"}
+[2025-09-02 19:34:49] update_vehicle_mileage called
+[2025-09-03 01:41:52] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-03 01:41:55] Endpoint wywołany
+Nieprawidłowe żądanie
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-03 02:00:21] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-03 02:00:31] update_vehicle_mileage called
+[2025-09-03 06:17:45] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":191000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 06:17:51] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":191000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 06:17:51] update_vehicle_mileage called
+[2025-09-03 06:55:49] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":192000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 06:56:02] Endpoint wywołany
+Rejestracja: DW9YF4
+Brak wyników
+[2025-09-03 06:56:08] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":192000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 06:56:08] update_vehicle_mileage called
+[2025-09-03 07:13:47] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":193000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 07:13:47] update_vehicle_mileage called
+[2025-09-03 07:46:15] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":194000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 07:46:15] update_vehicle_mileage called
+[2025-09-03 07:49:14] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":195000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 07:49:14] update_vehicle_mileage called
+[2025-09-03 07:49:40] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":200000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 07:49:40] update_vehicle_mileage called
+[2025-09-03 08:00:34] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":201000,"ostatni_kierowca_id":"T99"}
+[2025-09-03 08:00:34] update_vehicle_mileage called
+[2025-09-03 08:47:29] Endpoint wywołany
+Rejestracja: DW9YF48
+Pojazd znaleziony: {"rejestracja":"DW9YF48","przebieg":202000,"ostatni_kierowca_id":"T1"}
+[2025-09-03 08:47:29] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-03 14:47:59] Endpoint wywołany
+Rejestracja: DW3NC94
+Brak wyników
+[2025-09-03 14:54:43] Endpoint wywołany
+Rejestracja: DW3NC94
+Pojazd znaleziony: {"rejestracja":"DW3NC94","przebieg":1,"ostatni_kierowca_id":null}
+[2025-09-03 14:54:43] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-04 01:51:44] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-04 07:40:39] Endpoint wywołany
+Rejestracja: DKL83517
+Pojazd znaleziony: {"rejestracja":"DKL83517","przebieg":0,"ostatni_kierowca_id":null}
+[2025-09-04 07:40:39] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
+[2025-09-04 12:31:45] Endpoint wywołany
+Rejestracja: TEST
+Pojazd znaleziony: {"rejestracja":"test","przebieg":0,"ostatni_kierowca_id":null}
+[2025-09-04 12:31:45] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-09-04 12:34:25] Endpoint wywołany
+Rejestracja: TEST
+Pojazd znaleziony: {"rejestracja":"test","przebieg":100,"ostatni_kierowca_id":"T1"}
+[2025-09-04 12:34:25] update_vehicle_mileage called
+[2025-09-04 12:34:53] Endpoint wywołany
+Rejestracja: TEST
+Pojazd znaleziony: {"rejestracja":"test","przebieg":155,"ostatni_kierowca_id":"T1"}
+[2025-09-04 12:34:53] update_vehicle_mileage called
+[2025-09-04 12:36:01] Endpoint wywołany
+Rejestracja: TEST
+Pojazd znaleziony: {"rejestracja":"test","przebieg":155,"ostatni_kierowca_id":"T1"}
+[2025-09-04 12:36:01] update_vehicle_mileage called
+[2025-09-04 13:09:29] Endpoint wywołany
+Rejestracja: DW9YK67
+Brak wyników
+[2025-09-04 13:09:36] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":0,"ostatni_kierowca_id":null}
+[2025-09-04 13:09:36] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-09-04 13:15:03] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":119511,"ostatni_kierowca_id":"T21"}
+[2025-09-04 13:15:03] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-04 13:16:42] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":119600,"ostatni_kierowca_id":"T21"}
+[2025-09-04 13:17:04] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":119600,"ostatni_kierowca_id":"T21"}
+[2025-09-04 13:17:04] update_vehicle_mileage called
+[2025-09-04 13:18:39] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":119600,"ostatni_kierowca_id":"T21"}
+[2025-09-04 13:18:39] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+[2025-09-04 16:54:00] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":119600,"ostatni_kierowca_id":"T21"}
+[2025-09-04 16:54:00] update_vehicle_mileage called
+[2025-09-04 20:43:32] Endpoint wywołany
+Rejestracja: DW8YK68
+Pojazd znaleziony: {"rejestracja":"DW8YK68","przebieg":2,"ostatni_kierowca_id":null}
+[2025-09-04 20:43:32] update_vehicle_mileage called
+[2025-09-04 20:44:14] Endpoint wywołany
+Rejestracja: DW8YK67
+Pojazd znaleziony: {"rejestracja":"DW8YK67","przebieg":119699,"ostatni_kierowca_id":"T21"}
+[2025-09-04 20:44:14] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-04 22:24:58] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-04 22:25:25] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-05 06:33:37] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-05 06:33:46] update_vehicle_mileage called
+[2025-09-05 14:23:38] Endpoint wywołany
+Rejestracja: DW8YK66
+Pojazd znaleziony: {"rejestracja":"DW8YK66","przebieg":0,"ostatni_kierowca_id":null}
+[2025-09-05 14:23:38] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt get_combined_history.php startuje
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-05 20:15:53] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-05 20:16:02] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-06 02:43:41] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-06 02:43:49] update_vehicle_mileage called
+🔵 Skrypt get_combined_history.php startuje
+[2025-09-07 04:25:09] Endpoint wywołany
+Nieprawidłowe żądanie
+[2025-09-07 04:25:16] update_vehicle_mileage called
+[2025-09-08 10:17:05] Endpoint wywołany
+Rejestracja: DW
+Pojazd znaleziony: {"rejestracja":"DW","przebieg":0,"ostatni_kierowca_id":null}
+[2025-09-08 10:17:05] update_vehicle_mileage called
+🔵 Skrypt addRide.php startuje
+🔵 Skrypt addRide.php startuje
