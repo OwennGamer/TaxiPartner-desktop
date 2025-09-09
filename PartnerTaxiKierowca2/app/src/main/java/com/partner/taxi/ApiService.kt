@@ -24,6 +24,12 @@ interface ApiService {
         @Field("device_id") deviceId: String
     ): Call<LoginResponse>
 
+    @FormUrlEncoded
+    @POST("refresh_token.php")
+    fun refreshToken(
+        @Field("device_id") deviceId: String
+    ): Call<RefreshTokenResponse>
+
     @GET("get_vehicle_info.php")
     fun getVehicleInfo(
         @Query("rejestracja") rejestracja: String

@@ -1,7 +1,6 @@
 package com.partner.taxi
 
 import android.content.Context
-import android.content.Intent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -35,18 +34,25 @@ object ApiClient {
         chain.proceed(req)
     }
 
-    // Interceptor reagujący na błędy 401 i wylogowujący użytkownika
+    // Interceptor reagujący na błędy 401 i próbujący odświeżyć token
     private val unauthorizedInterceptor = Interceptor { chain ->
-        val response = chain.proceed(chain.request())
+        var request = chain.request()
+        var response = chain.proceed(request)
         if (response.code == 401) {
-            appContext?.let { ctx ->
-                SessionManager.clearSession(ctx)
-                jwtToken = null
-                deviceId = null
-                val intent = Intent(ctx, LoginActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            response.close()
+            val refreshed = refreshToken()
+            if (refreshed) {
+                request = request.newBuilder().apply {
+                    jwtToken?.let { addHeader("Authorization", "Bearer $it") }
+                    deviceId?.let { addHeader("Device-Id", it) }
+                }.build()
+                response = chain.proceed(request)
+            } else {
+                appContext?.let { ctx ->
+                    jwtToken = null
+                    SessionManager.clearToken(ctx)
                 }
-                ctx.startActivity(intent)
+
             }
         }
         response
@@ -70,12 +76,42 @@ object ApiClient {
         .addInterceptor(loggingInterceptor)
         .build()
 
+    // Osobny klient bez unauthorizedInterceptor do odświeżania tokenu
+    private val refreshClient = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .build()
+
     // Retrofit łączący się przez nasz OkHttpClient
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    private val refreshRetrofit: Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .client(refreshClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private fun refreshToken(): Boolean {
+        val device = deviceId ?: return false
+        val service = refreshRetrofit.create(ApiService::class.java)
+        return try {
+            val call = service.refreshToken(device)
+            val resp = call.execute()
+            if (resp.isSuccessful) {
+                resp.body()?.token?.let { newToken ->
+                    jwtToken = newToken
+                    appContext?.let { SessionManager.saveToken(it, newToken) }
+                    return true
+                }
+            }
+            false
+        } catch (e: Exception) {
+            false
+        }
+    }
 
     val apiService: ApiService = retrofit.create(ApiService::class.java)
 }

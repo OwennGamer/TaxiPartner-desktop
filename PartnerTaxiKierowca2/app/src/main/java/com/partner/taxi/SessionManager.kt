@@ -34,6 +34,11 @@ object SessionManager {
         return prefs.getString(TOKEN_KEY, "") ?: ""
     }
 
+    fun clearToken(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().remove(TOKEN_KEY).apply()
+    }
+
     fun saveDeviceId(context: Context, deviceId: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().putString(DEVICE_ID_KEY, deviceId).apply()
