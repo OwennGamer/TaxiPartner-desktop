@@ -53,10 +53,18 @@ class LoginActivity : AppCompatActivity() {
     private fun proceedAfterPermissions() {
         val savedToken = SessionManager.getToken(this)
         val savedDeviceId = SessionManager.getDeviceId(this)
+        val sessionId = SessionManager.getSessionId(this)
+        val vehiclePlate = SessionManager.getVehiclePlate(this)
         if (savedToken.isNotEmpty() && savedDeviceId == deviceId && isTokenValid(savedToken, deviceId)) {
             ApiClient.jwtToken = savedToken
             ApiClient.deviceId = deviceId
-            startActivity(Intent(this, ChooseVehicleActivity::class.java))
+            if (!sessionId.isNullOrEmpty()) {
+                val intent = Intent(this, DashboardActivity::class.java)
+                intent.putExtra("rejestracja", vehiclePlate)
+                startActivity(intent)
+            } else {
+                startActivity(Intent(this, ChooseVehicleActivity::class.java))
+            }
             finish()
             return
         }
