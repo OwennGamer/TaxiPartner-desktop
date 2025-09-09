@@ -136,11 +136,20 @@ class DashboardActivity : AppCompatActivity() {
 
         // Wczytaj saldo od razu
         loadDriverSaldo()
+
+        lockTaskIfSessionActive()
     }
 
     override fun onResume() {
         super.onResume()
         loadDriverSaldo()
+        lockTaskIfSessionActive()
+    }
+
+    private fun lockTaskIfSessionActive() {
+        if (!SessionManager.getSessionId(this).isNullOrEmpty()) {
+            runCatching { startLockTask() }
+        }
     }
 
     private fun loadDriverSaldo(onComplete: (() -> Unit)? = null) {
@@ -194,6 +203,7 @@ class DashboardActivity : AppCompatActivity() {
 
                                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) { }
                             })
+                        runCatching { stopLockTask() }
                         startActivity(Intent(this@DashboardActivity, ChooseVehicleActivity::class.java))
                         finish()
                     } else {
@@ -249,5 +259,22 @@ class DashboardActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+    }
+
+    override fun onBackPressed() {
+        if (!SessionManager.getSessionId(this).isNullOrEmpty()) {
+            Toast.makeText(this, "Użyj przycisku 'Zakończ pracę'", Toast.LENGTH_SHORT).show()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        if (!SessionManager.getSessionId(this).isNullOrEmpty()) {
+            val intent = Intent(this, DashboardActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            startActivity(intent)
+        }
     }
 }
