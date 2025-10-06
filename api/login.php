@@ -74,7 +74,7 @@ try {
     $token = generateJWT($user['id'], $user['rola'], $device_id);
     // zapisz token w tabeli jwt_tokens
     try {
-        $expiresAt = date('Y-m-d H:i:s', time() + 28800); // 8 godzin
+        $expiresAt = getTokenExpiryDate();
         $ins = $pdo->prepare("INSERT INTO jwt_tokens (token, driver_id, device_id, expires_at) VALUES (?, ?, ?, ?)");
         $ins->execute([$token, $user['id'], $device_id, $expiresAt]);
     } catch (Exception $e) {
