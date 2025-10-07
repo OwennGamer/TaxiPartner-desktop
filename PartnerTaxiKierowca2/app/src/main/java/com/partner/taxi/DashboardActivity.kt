@@ -1,7 +1,7 @@
 package com.partner.taxi
 
 import android.app.ActivityManager
-import android.app.DevicePolicyManager
+import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
