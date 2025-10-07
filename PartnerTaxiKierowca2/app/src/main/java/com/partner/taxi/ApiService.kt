@@ -44,6 +44,11 @@ interface ApiService {
     suspend fun getVehicles(): VehiclesResponse
 
 
+    @GET("mobile_update.php")
+    fun getMobileUpdate(
+        @Query("platform") platform: String = "android"
+    ): Call<MobileUpdateResponse>
+
     @FormUrlEncoded
     @POST("update_vehicle_mileage.php")
     fun updateVehicleMileage(

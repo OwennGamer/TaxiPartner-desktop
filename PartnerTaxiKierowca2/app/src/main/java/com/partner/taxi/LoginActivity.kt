@@ -51,6 +51,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun proceedAfterPermissions() {
+        UpdateManager.checkForUpdates(
+            activity = this,
+            onReady = { continueAfterUpdateCheck() }
+        )
+    }
+
+    private fun continueAfterUpdateCheck() {
         val savedToken = SessionManager.getToken(this)
         val savedDeviceId = SessionManager.getDeviceId(this)
         val sessionId = SessionManager.getSessionId(this)
