@@ -1,5 +1,8 @@
 package com.partner.taxi
 
+import android.app.ActivityManager
+import android.app.DevicePolicyManager
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -147,7 +150,26 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun lockTaskIfSessionActive() {
-        if (!SessionManager.getSessionId(this).isNullOrEmpty()) {
+        val sessionActive = !SessionManager.getSessionId(this).isNullOrEmpty()
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+        val lockTaskState = activityManager?.lockTaskModeState ?: ActivityManager.LOCK_TASK_MODE_NONE
+
+        if (!sessionActive) {
+            if (lockTaskState != ActivityManager.LOCK_TASK_MODE_NONE) {
+                runCatching { stopLockTask() }
+            }
+            return
+        }
+
+        val devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as? DevicePolicyManager
+        val lockTaskPermitted = devicePolicyManager?.isLockTaskPermitted(packageName) == true
+
+        if (!lockTaskPermitted && lockTaskState != ActivityManager.LOCK_TASK_MODE_NONE) {
+            runCatching { stopLockTask() }
+            return
+        }
+
+        if (lockTaskPermitted && lockTaskState == ActivityManager.LOCK_TASK_MODE_NONE) {
             runCatching { startLockTask() }
         }
     }
