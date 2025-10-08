@@ -157,6 +157,7 @@ class DashboardActivity : AppCompatActivity() {
         val wasLocked = isLockTaskActive()
         if (wasLocked) {
             restoreLockTaskAfterNavigation = true
+            runCatching { stopLockTask() }
         }
         startActivity(intent)
 
