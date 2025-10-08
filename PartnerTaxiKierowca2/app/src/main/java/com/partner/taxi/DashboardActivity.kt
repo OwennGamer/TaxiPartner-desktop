@@ -36,6 +36,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnPusty3: MaterialButton
     private lateinit var btnZakonczPrace: MaterialButton
     private var vehiclePlate: String? = null
+    private var restoreLockTaskAfterNavigation = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,18 +147,19 @@ class DashboardActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         loadDriverSaldo()
-        lockTaskIfSessionActive()
+        if (restoreLockTaskAfterNavigation || !isLockTaskActive()) {
+            lockTaskIfSessionActive()
+        }
+        restoreLockTaskAfterNavigation = false
     }
 
     private fun startActivityHandlingLockTask(intent: Intent) {
         val wasLocked = isLockTaskActive()
         if (wasLocked) {
-            runCatching { stopLockTask() }
+            restoreLockTaskAfterNavigation = true
         }
         startActivity(intent)
-        if (wasLocked) {
-            window?.decorView?.post { lockTaskIfSessionActive() }
-        }
+
     }
 
     private fun isLockTaskActive(): Boolean {
