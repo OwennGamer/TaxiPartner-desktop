@@ -67,7 +67,7 @@ class DashboardActivity : AppCompatActivity() {
             if (role != "flotowiec") {
                 Toast.makeText(this, "BRAK UPRAWNIEŃ", Toast.LENGTH_SHORT).show()
             } else {
-                startActivity(Intent(this, FleetActivity::class.java))
+                startActivityHandlingLockTask(Intent(this, FleetActivity::class.java))
             }
         }
 
@@ -93,17 +93,17 @@ class DashboardActivity : AppCompatActivity() {
 
         // Listener do dodawania kursu
         btnDodajKurs.setOnClickListener {
-            startActivity(Intent(this, AddRideActivity::class.java))
+            startActivityHandlingLockTask(Intent(this, AddRideActivity::class.java))
         }
 
         // Listener do historii
         btnHistoria.setOnClickListener {
-            startActivity(Intent(this, HistoryActivity::class.java))
+            startActivityHandlingLockTask(Intent(this, HistoryActivity::class.java))
         }
 
         // Listener do tankowania
         btnTankowanie.setOnClickListener {
-            startActivity(Intent(this, FuelActivity::class.java))
+            startActivityHandlingLockTask(Intent(this, FuelActivity::class.java))
         }
 
         // Listener do zakończenia pracy
@@ -147,6 +147,23 @@ class DashboardActivity : AppCompatActivity() {
         super.onResume()
         loadDriverSaldo()
         lockTaskIfSessionActive()
+    }
+
+    private fun startActivityHandlingLockTask(intent: Intent) {
+        val wasLocked = isLockTaskActive()
+        if (wasLocked) {
+            runCatching { stopLockTask() }
+        }
+        startActivity(intent)
+        if (wasLocked) {
+            window?.decorView?.post { lockTaskIfSessionActive() }
+        }
+    }
+
+    private fun isLockTaskActive(): Boolean {
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+        val lockTaskState = activityManager?.lockTaskModeState ?: ActivityManager.LOCK_TASK_MODE_NONE
+        return lockTaskState != ActivityManager.LOCK_TASK_MODE_NONE
     }
 
     private fun lockTaskIfSessionActive() {
