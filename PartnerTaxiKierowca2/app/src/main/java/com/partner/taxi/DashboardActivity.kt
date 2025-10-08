@@ -155,12 +155,12 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun startActivityHandlingLockTask(intent: Intent) {
         val wasLocked = isLockTaskActive()
-        if (wasLocked) {
+        val stopped = runCatching { stopLockTask() }.isSuccess
+        if (wasLocked || stopped) {
             restoreLockTaskAfterNavigation = true
-            runCatching { stopLockTask() }
+
         }
         startActivity(intent)
-
     }
 
     private fun isLockTaskActive(): Boolean {
