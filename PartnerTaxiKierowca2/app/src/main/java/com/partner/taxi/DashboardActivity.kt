@@ -154,10 +154,17 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun startActivityHandlingLockTask(intent: Intent) {
-        val wasLocked = isLockTaskActive()
-        val stopped = runCatching { stopLockTask() }.isSuccess
-        if (wasLocked || stopped) {
+        val lockTaskActive = isLockTaskActive()
+        if (lockTaskActive) {
             restoreLockTaskAfterNavigation = true
+
+            val devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as? DevicePolicyManager
+            val lockTaskPermitted = devicePolicyManager?.isLockTaskPermitted(packageName) == true
+
+            if (lockTaskPermitted) {
+                // W trybie kioskowym można zatrzymać lock task tylko jeśli aplikacja ma uprawnienia
+                runCatching { stopLockTask() }
+            }
 
         }
         startActivity(intent)
