@@ -20,4 +20,25 @@
         <item>Gotówka</item>
         <item>Voucher</item>
     </string-array>
+
+    <!-- Aktualizacje aplikacji -->
+    <string name="update_no_new_version">Masz już najnowszą wersję aplikacji.</string>
+    <string name="update_check_failed">Nie udało się sprawdzić dostępności aktualizacji.</string>
+    <string name="update_check_error">Błąd sprawdzania aktualizacji: %1$s</string>
+    <string name="update_available_title">Dostępna aktualizacja %1$s</string>
+    <string name="update_action_install">Aktualizuj teraz</string>
+    <string name="update_action_later">Później</string>
+    <string name="update_changelog_title">Lista zmian:</string>
+    <string name="update_current_version">Twoja wersja: %1$s</string>
+    <string name="update_latest_version">Nowa wersja: %1$s</string>
+    <string name="update_mandatory_note">Ta aktualizacja jest wymagana, aby kontynuować korzystanie z aplikacji.</string>
+    <string name="update_download_title">Pobieranie aktualizacji</string>
+    <string name="update_download_description">Wersja %1$s</string>
+    <string name="update_download_started">Rozpoczęto pobieranie aktualizacji…</string>
+    <string name="update_download_failed">Pobieranie aktualizacji nie powiodło się.</string>
+    <string name="update_permission_title">Zezwól na instalację</string>
+    <string name="update_permission_message">Aby zainstalować aktualizację spoza sklepu Google Play, zezwól aplikacji na instalowanie nieznanych aplikacji w ustawieniach.</string>
+    <string name="update_permission_action">Przejdź do ustawień</string>
+    <string name="update_permission_toast">Po włączeniu zgody wróć do aplikacji i ponownie uruchom aktualizację.</string>
+    <string name="update_install_error">Nie udało się uruchomić instalatora aktualizacji.</string>
 </resources>
