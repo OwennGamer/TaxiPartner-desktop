@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +24,9 @@ import retrofit2.Response
 import kotlinx.coroutines.launch
 
 class DashboardActivity : AppCompatActivity() {
+    companion object {
+        private const val TAG = "DashboardActivity"
+    }
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var tvLabelLicznik: TextView
     private lateinit var tvLicznik: TextView
@@ -37,6 +41,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnZakonczPrace: MaterialButton
     private var vehiclePlate: String? = null
     private var restoreLockTaskAfterNavigation = false
+    private var suppressNextUserLeaveHint = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,16 +99,19 @@ class DashboardActivity : AppCompatActivity() {
 
         // Listener do dodawania kursu
         btnDodajKurs.setOnClickListener {
+            Log.d(TAG, "Kliknięto 'Dodaj kurs'")
             startActivityHandlingLockTask(Intent(this, AddRideActivity::class.java))
         }
 
         // Listener do historii
         btnHistoria.setOnClickListener {
+            Log.d(TAG, "Kliknięto 'Historia'")
             startActivityHandlingLockTask(Intent(this, HistoryActivity::class.java))
         }
 
         // Listener do tankowania
         btnTankowanie.setOnClickListener {
+            Log.d(TAG, "Kliknięto 'Tankowanie'")
             startActivityHandlingLockTask(Intent(this, FuelActivity::class.java))
         }
 
@@ -154,7 +162,10 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun startActivityHandlingLockTask(intent: Intent) {
-        if (isLockTaskActive()) {
+        val lockTaskActive = isLockTaskActive()
+        Log.d(TAG, "startActivityHandlingLockTask: lockTaskActive=$lockTaskActive intent=${intent.component}")
+
+        if (lockTaskActive) {
             restoreLockTaskAfterNavigation = true
 
             val devicePolicyManager =
@@ -162,19 +173,31 @@ class DashboardActivity : AppCompatActivity() {
             val lockTaskPermitted =
                 devicePolicyManager?.isLockTaskPermitted(packageName) == true
 
+            Log.d(TAG, "lockTaskPermitted=$lockTaskPermitted")
+
             if (lockTaskPermitted) {
                 // Jeżeli aplikacja ma pełne uprawnienia kioskowe – zwykłe zatrzymanie lock task
                 runCatching { stopLockTask() }
+                    .onFailure { error ->
+                        Log.w(TAG, "stopLockTask() nie powiodło się mimo uprawnień", error)
+                    }
             } else {
                 // W przypadku ręcznego pinowania ekranu spróbuj wyjść z trybu, a brak uprawnień po prostu ignoruj
                 try {
                     stopLockTask()
                 } catch (_: SecurityException) {
                     // Użytkownik musi ręcznie zdjąć pin – przechodzimy dalej, aby nie blokować nawigacji
+                    Log.i(TAG, "Brak uprawnień do wyjścia z trybu pinowania – kontynuujemy nawigację")
                 }
             }
         }
-        startActivity(intent)
+        suppressNextUserLeaveHint = true
+        runCatching {
+            startActivity(intent)
+        }.onFailure { error ->
+            suppressNextUserLeaveHint = false
+            Log.e(TAG, "startActivity(${intent.component}) zakończone błędem", error)
+        }
     }
 
     private fun isLockTaskActive(): Boolean {
@@ -327,6 +350,10 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onUserLeaveHint() {
         super.onUserLeaveHint()
+        if (suppressNextUserLeaveHint) {
+            suppressNextUserLeaveHint = false
+            return
+        }
         if (!SessionManager.getSessionId(this).isNullOrEmpty()) {
             val intent = Intent(this, DashboardActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
