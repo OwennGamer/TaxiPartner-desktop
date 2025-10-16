@@ -154,18 +154,25 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun startActivityHandlingLockTask(intent: Intent) {
-        val lockTaskActive = isLockTaskActive()
-        if (lockTaskActive) {
+        if (isLockTaskActive()) {
             restoreLockTaskAfterNavigation = true
 
-            val devicePolicyManager = getSystemService(Context.DEVICE_POLICY_SERVICE) as? DevicePolicyManager
-            val lockTaskPermitted = devicePolicyManager?.isLockTaskPermitted(packageName) == true
+            val devicePolicyManager =
+                getSystemService(Context.DEVICE_POLICY_SERVICE) as? DevicePolicyManager
+            val lockTaskPermitted =
+                devicePolicyManager?.isLockTaskPermitted(packageName) == true
 
             if (lockTaskPermitted) {
-                // W trybie kioskowym można zatrzymać lock task tylko jeśli aplikacja ma uprawnienia
+                // Jeżeli aplikacja ma pełne uprawnienia kioskowe – zwykłe zatrzymanie lock task
                 runCatching { stopLockTask() }
+            } else {
+                // W przypadku ręcznego pinowania ekranu spróbuj wyjść z trybu, a brak uprawnień po prostu ignoruj
+                try {
+                    stopLockTask()
+                } catch (_: SecurityException) {
+                    // Użytkownik musi ręcznie zdjąć pin – przechodzimy dalej, aby nie blokować nawigacji
+                }
             }
-
         }
         startActivity(intent)
     }
