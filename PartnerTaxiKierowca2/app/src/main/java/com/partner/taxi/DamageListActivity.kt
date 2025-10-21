@@ -73,11 +73,7 @@ class DamageListActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<DamagesResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@DamageListActivity,
-                        t.localizedMessage,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    this@DamageListActivity.showConnectionIssueToast(t)
                 }
             })
     }

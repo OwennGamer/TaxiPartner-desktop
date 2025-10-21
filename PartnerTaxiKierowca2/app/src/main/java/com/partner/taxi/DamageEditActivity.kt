@@ -115,11 +115,7 @@ class DamageEditActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                        Toast.makeText(
-                            this@DamageEditActivity,
-                            t.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
+                        this@DamageEditActivity.showConnectionIssueToast(t)
                     }
                 })
         }

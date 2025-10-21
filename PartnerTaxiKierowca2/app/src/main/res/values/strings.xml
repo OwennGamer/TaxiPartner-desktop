@@ -41,4 +41,5 @@
     <string name="update_permission_action">Przejdź do ustawień</string>
     <string name="update_permission_toast">Po włączeniu zgody wróć do aplikacji i ponownie uruchom aktualizację.</string>
     <string name="update_install_error">Nie udało się uruchomić instalatora aktualizacji.</string>
+    <string name="connection_issue_retry">Problem z połączeniem z serwerem. Twoja sesja nadal jest aktywna. Spróbuj ponownie.</string>
 </resources>

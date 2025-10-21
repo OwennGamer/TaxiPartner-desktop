@@ -175,11 +175,7 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("LOGIN", "Błąd sieci: ${t.message}")
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Błąd sieci: ${t.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    this@LoginActivity.showConnectionIssueToast(t)
                 }
             })
         }

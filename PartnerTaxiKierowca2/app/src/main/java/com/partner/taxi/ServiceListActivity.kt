@@ -69,11 +69,7 @@ class ServiceListActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ServicesResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@ServiceListActivity,
-                        t.localizedMessage,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    this@ServiceListActivity.showConnectionIssueToast(t)
                 }
             })
     }

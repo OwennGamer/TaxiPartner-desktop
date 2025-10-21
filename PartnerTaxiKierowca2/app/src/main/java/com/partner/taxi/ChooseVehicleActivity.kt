@@ -190,21 +190,13 @@ class ChooseVehicleActivity : AppCompatActivity() {
                         }
 
                         override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                            Toast.makeText(
-                                this@ChooseVehicleActivity,
-                                "Błąd sieci: ${t.localizedMessage}",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            this@ChooseVehicleActivity.showConnectionIssueToast(t)
 
                         }
                     })
             }
             override fun onFailure(call: Call<VehicleResponse>, t: Throwable) {
-                Toast.makeText(
-                    this@ChooseVehicleActivity,
-                    "Błąd sieci: ${t.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                this@ChooseVehicleActivity.showConnectionIssueToast(t)
             }
         })
     }
@@ -235,11 +227,7 @@ class ChooseVehicleActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<StartShiftResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@ChooseVehicleActivity,
-                        "Błąd sieci: ${t.localizedMessage}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    this@ChooseVehicleActivity.showConnectionIssueToast(t)
                 }
             })
     }

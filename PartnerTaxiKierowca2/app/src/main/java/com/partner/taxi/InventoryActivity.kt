@@ -405,11 +405,7 @@ class InventoryActivity : AppCompatActivity() {
                 Log.e(TAG, "onFailure", t)
                 progressBar.visibility = View.GONE
                 btnSubmit.isEnabled    = true
-                Toast.makeText(
-                    this@InventoryActivity,
-                    "Błąd sieci: ${t.localizedMessage}",
-                    Toast.LENGTH_LONG
-                ).show()
+                this@InventoryActivity.showConnectionIssueToast(t)
             }
         })
     }

@@ -329,7 +329,7 @@ class AddRideActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<AddRideResponse>, t: Throwable) {
-                Toast.makeText(this@AddRideActivity, "Błąd połączenia: ${t.message}", Toast.LENGTH_LONG).show()
+                this@AddRideActivity.showConnectionIssueToast(t)
             }
         })
     }

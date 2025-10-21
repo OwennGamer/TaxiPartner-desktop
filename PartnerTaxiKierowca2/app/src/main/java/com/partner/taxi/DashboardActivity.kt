@@ -251,7 +251,7 @@ class DashboardActivity : AppCompatActivity() {
                 }
             } catch (e: Exception) {
                 tvLicznik.text = "0.00 zł"
-                Toast.makeText(this@DashboardActivity, "Brak połączenia", Toast.LENGTH_SHORT).show()
+                this@DashboardActivity.showConnectionIssueToast(e)
             } finally {
                 onComplete?.invoke()
             }
@@ -292,11 +292,7 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@DashboardActivity,
-                        "Błąd sieci: ${t.localizedMessage}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    this@DashboardActivity.showConnectionIssueToast(t)
                 }
             })
     }
@@ -331,11 +327,7 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<VehicleResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@DashboardActivity,
-                        "Błąd sieci: ${t.localizedMessage}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    this@DashboardActivity.showConnectionIssueToast(t)
                 }
             })
     }

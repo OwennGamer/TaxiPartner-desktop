@@ -44,11 +44,7 @@ class FleetActivity : AppCompatActivity() {
                 }
             } catch (e: IOException) {
                 Log.e("FleetActivity", "Network error while loading vehicles", e)
-                Toast.makeText(
-                    this@FleetActivity,
-                    "Błąd sieci. Sprawdź połączenie.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                this@FleetActivity.showConnectionIssueToast(e)
             } catch (e: JsonSyntaxException) {
                 Log.e("FleetActivity", "Data parsing error while loading vehicles", e)
                 Toast.makeText(

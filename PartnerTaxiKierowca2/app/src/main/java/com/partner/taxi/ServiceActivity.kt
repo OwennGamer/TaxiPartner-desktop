@@ -118,7 +118,7 @@ class ServiceActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
                     compressed.forEach { it.delete() }
-                    Toast.makeText(this@ServiceActivity, "Błąd sieci: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
+                    this@ServiceActivity.showConnectionIssueToast(t)
                 }
             })
     }

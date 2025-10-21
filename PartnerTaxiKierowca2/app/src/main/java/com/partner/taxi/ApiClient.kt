@@ -1,11 +1,13 @@
 package com.partner.taxi
 
 import android.content.Context
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import com.partner.taxi.BuildConfig
+import java.io.IOException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -39,18 +41,30 @@ object ApiClient {
         var request = chain.request()
         var response = chain.proceed(request)
         if (response.code == 401) {
-            response.close()
-            val refreshed = refreshToken()
-            if (refreshed) {
-                request = request.newBuilder().apply {
-                    jwtToken?.let { addHeader("Authorization", "Bearer $it") }
-                    deviceId?.let { addHeader("Device-Id", it) }
-                }.build()
-                response = chain.proceed(request)
-            } else {
-                appContext?.let { ctx ->
-                    jwtToken = null
-                    SessionManager.clearToken(ctx)
+            when (val refreshResult = refreshToken()) {
+                RefreshTokenResult.Success -> {
+                    response.close()
+                    request = request.newBuilder().apply {
+                        jwtToken?.let { addHeader("Authorization", "Bearer $it") }
+                        deviceId?.let { addHeader("Device-Id", it) }
+                    }.build()
+                    response = chain.proceed(request)
+                }
+
+                RefreshTokenResult.Unauthorized -> {
+                    Log.w("ApiClient", "Token refresh rejected by server. Clearing local session.")
+                    appContext?.let { ctx ->
+                        jwtToken = null
+                        SessionManager.clearToken(ctx)
+                    }
+                }
+
+                is RefreshTokenResult.NetworkError -> {
+                    response.close()
+                    throw TokenRefreshException(
+                        "Nie udało się odświeżyć tokenu z powodu problemu z siecią.",
+                        refreshResult.exception
+                    )
                 }
 
             }
@@ -94,23 +108,48 @@ object ApiClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private fun refreshToken(): Boolean {
-        val device = deviceId ?: return false
+    private fun refreshToken(): RefreshTokenResult {
+        val device = deviceId ?: return RefreshTokenResult.Unauthorized
         val service = refreshRetrofit.create(ApiService::class.java)
         return try {
             val call = service.refreshToken(device)
             val resp = call.execute()
             if (resp.isSuccessful) {
-                resp.body()?.token?.let { newToken ->
+                val newToken = resp.body()?.token
+                if (!newToken.isNullOrEmpty()) {
                     jwtToken = newToken
                     appContext?.let { SessionManager.saveToken(it, newToken) }
-                    return true
+                    RefreshTokenResult.Success
+                } else {
+                    Log.w("ApiClient", "Refresh token response missing token field")
+                    RefreshTokenResult.Unauthorized
                 }
+
+            } else if (resp.code() == 401 || resp.code() == 403) {
+                RefreshTokenResult.Unauthorized
+            } else {
+                Log.w(
+                    "ApiClient",
+                    "Unexpected response while refreshing token: ${resp.code()} ${resp.message()}"
+                )
+                RefreshTokenResult.NetworkError(
+                    IOException("Refresh token request failed with HTTP ${resp.code()}")
+                )
             }
-            false
+        } catch (io: IOException) {
+            RefreshTokenResult.NetworkError(io)
         } catch (e: Exception) {
-            false
+            Log.e("ApiClient", "Unexpected error while refreshing token", e)
+            RefreshTokenResult.NetworkError(
+                IOException(e.message ?: "Unexpected error during token refresh", e)
+            )
         }
+    }
+
+    private sealed class RefreshTokenResult {
+        object Success : RefreshTokenResult()
+        object Unauthorized : RefreshTokenResult()
+        data class NetworkError(val exception: IOException) : RefreshTokenResult()
     }
 
     val apiService: ApiService = retrofit.create(ApiService::class.java)

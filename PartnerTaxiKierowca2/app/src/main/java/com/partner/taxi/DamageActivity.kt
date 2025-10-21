@@ -129,7 +129,7 @@ class DamageActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
                     compressed.forEach { it.delete() }
-                    Toast.makeText(this@DamageActivity, "Błąd sieci: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
+                    this@DamageActivity.showConnectionIssueToast(t)
                 }
             })
     }

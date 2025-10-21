@@ -103,7 +103,7 @@ class ServiceEditActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ServiceDetailResponse>, t: Throwable) {
-                    Toast.makeText(this@ServiceEditActivity, t.localizedMessage, Toast.LENGTH_LONG).show()
+                    this@ServiceEditActivity.showConnectionIssueToast(t)
                     finish()
                 }
             })
@@ -149,11 +149,7 @@ class ServiceEditActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                        Toast.makeText(
-                            this@ServiceEditActivity,
-                            t.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
+                        this@ServiceEditActivity.showConnectionIssueToast(t)
                     }
                 })
         }

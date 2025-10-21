@@ -65,9 +65,7 @@ class FuelActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                        Toast.makeText(this@FuelActivity,
-                            "Błąd sieci: ${t.localizedMessage}",
-                            Toast.LENGTH_LONG).show()
+                        this@FuelActivity.showConnectionIssueToast(t)
                     }
                 })
         }
