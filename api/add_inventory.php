@@ -5,6 +5,12 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';       // getAuthorizationHeader() i verifyJWT()
 require_once __DIR__ . '/jwt_utils.php';
+require_once __DIR__ . '/phpmailer/PHPMailer-master/src/Exception.php';
+require_once __DIR__ . '/phpmailer/PHPMailer-master/src/PHPMailer.php';
+require_once __DIR__ . '/phpmailer/PHPMailer-master/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // debug
 file_put_contents(__DIR__ . "/debug_inventory.txt",
@@ -88,6 +94,14 @@ function uploadPhoto(string $field, string $prefix, string $uploadDir): ?string 
     return null;
 }
 
+function qtyLabel($value): string {
+    return $value === null || $value === '' ? 'brak danych' : (string)$value;
+}
+
+function escapeHtml(string $value): string {
+    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
 // Zdjęcia pojazdu
 $photoFront = uploadPhoto('photo_front','front_',$uploadDir);
 $photoBack  = uploadPhoto('photo_back', 'back_',$uploadDir);
@@ -113,6 +127,87 @@ if ($czyste_wewnatrz === 0 &&
 }
 
 try {
+    // Pobranie poprzedniej inwentaryzacji dla porównania
+    $prevStmt = $pdo->prepare("
+        SELECT id, czyste_wewnatrz, licencja, dowod, ubezpieczenie,
+               karta_lotniskowa, gasnica, lewarek, trojkat,
+               kamizelki_qty, uwagi
+          FROM inwentaryzacje
+         WHERE LOWER(rejestracja) = LOWER(:re)
+         ORDER BY data_dodania DESC, id DESC
+         LIMIT 1
+    ");
+    $prevStmt->execute([':re' => $rejestracja]);
+    $prevInventory = $prevStmt->fetch(PDO::FETCH_ASSOC) ?: null;
+
+    $differences = [];
+
+    if ($czyste_wewnatrz === 0) {
+        $prevClean = $prevInventory ? (int)($prevInventory['czyste_wewnatrz'] ?? 0) : null;
+        $msg = 'Auto czyste wewnątrz? Nie';
+        if ($prevClean === 1) {
+            $msg .= ' (poprzednio Tak)';
+        }
+        $differences[] = $msg;
+    }
+
+    if ($prevInventory) {
+        $toggleMessages = [
+            'licencja' => [
+                'on_to_off' => 'Poprzednio licencja była zaznaczona a teraz nie jest',
+                'off_to_on' => 'Poprzednio licencja nie była zaznaczona a teraz jest',
+            ],
+            'dowod' => [
+                'on_to_off' => 'Poprzednio kopia dowodu była zaznaczona a teraz nie jest',
+                'off_to_on' => 'Poprzednio kopia dowodu nie była zaznaczona a teraz jest',
+            ],
+            'ubezpieczenie' => [
+                'on_to_off' => 'Poprzednio kopia ubezpieczenia była zaznaczona a teraz nie jest',
+                'off_to_on' => 'Poprzednio kopia ubezpieczenia nie była zaznaczona a teraz jest',
+            ],
+            'karta_lotniskowa' => [
+                'on_to_off' => 'Poprzednio karta lotniskowa była zaznaczona a teraz nie jest',
+                'off_to_on' => 'Poprzednio karta lotniskowa nie była zaznaczona a teraz jest',
+            ],
+            'gasnica' => [
+                'on_to_off' => 'Poprzednio gaśnica była zaznaczona a teraz nie jest',
+                'off_to_on' => 'Poprzednio gaśnica nie była zaznaczona a teraz jest',
+            ],
+            'lewarek' => [
+                'on_to_off' => 'Poprzednio lewarek był zaznaczony a teraz nie jest',
+                'off_to_on' => 'Poprzednio lewarek nie był zaznaczony a teraz jest',
+            ],
+            'trojkat' => [
+                'on_to_off' => 'Poprzednio trójkąt był zaznaczony a teraz nie jest',
+                'off_to_on' => 'Poprzednio trójkąt nie był zaznaczony a teraz jest',
+            ],
+        ];
+
+        foreach ($toggleMessages as $field => $messages) {
+            $prevValue = (int)($prevInventory[$field] ?? 0);
+            $currentValue = (int)(${$field} ?? 0);
+
+            if ($prevValue === 1 && $currentValue === 0) {
+                $differences[] = $messages['on_to_off'];
+            } elseif ($prevValue === 0 && $currentValue === 1) {
+                $differences[] = $messages['off_to_on'];
+            }
+        }
+
+        $prevQty = $prevInventory['kamizelki_qty'] ?? null;
+        if ($prevQty !== null) {
+            $prevQty = (int)$prevQty;
+        }
+        if ($prevQty !== $kamizelki_qty) {
+            $differences[] = 'Ilość podanych kamizelek różni się od poprzednio zapisanej ilości (poprzednio ' .
+                qtyLabel($prevQty) . ', teraz ' . qtyLabel($kamizelki_qty) . ')';
+        }
+    }
+
+    if ($uwagi !== null && trim($uwagi) !== '') {
+        $differences[] = 'Czy masz dodatkowe uwagi - Tak - ' . $uwagi;
+    }
+
     // 1) Wstawiamy rekord inwentaryzacji
     $sql = "INSERT INTO inwentaryzacje
       (rejestracja, przebieg, czyste_wewnatrz,
@@ -177,6 +272,43 @@ try {
       ':re'  => $rejestracja,
       ':kid' => $kierowca_id
     ]);
+
+    if (!empty($differences)) {
+        try {
+            $mail = new PHPMailer(true);
+            $mail->CharSet = 'UTF-8';
+            $mail->Encoding = 'base64';
+
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'aplikacja.partnertaxi@gmail.com';
+            $mail->Password = 'scfj ojvw fejw oewh';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('aplikacja.partnertaxi@gmail.com', 'Partner Taxi System');
+            $mail->addAddress('pawel.turek330@gmail.com');
+
+            $mail->isHTML(true);
+            $subjectPlate = preg_replace("/[\r\n]+/", ' ', $rejestracja);
+            $mail->Subject = 'WYKRYTO RÓŻNICĘ W STOSUNKU DO POPRZEDNIEJ INWENTARYZACJI "' . $subjectPlate . '"';
+
+            $body = '<p>Wykryto różnice w stosunku do poprzedniej inwentaryzacji pojazdu <strong>'
+                . escapeHtml($rejestracja) . '</strong>.</p>';
+            $body .= '<p>Kierowca: <strong>' . escapeHtml($kierowca_id) . '</strong></p>';
+            $body .= '<ul>';
+            foreach ($differences as $diff) {
+                $body .= '<li>' . escapeHtml($diff) . '</li>';
+            }
+            $body .= '</ul>';
+
+            $mail->Body = $body;
+            $mail->send();
+        } catch (Exception $e) {
+            error_log('Błąd przy wysyłaniu maila (inwentaryzacja): ' . $e->getMessage());
+        }
+    }
 
     // 4) Zwracamy sukces
     echo json_encode([

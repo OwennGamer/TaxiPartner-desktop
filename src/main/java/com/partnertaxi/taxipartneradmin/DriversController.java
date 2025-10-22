@@ -15,7 +15,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -23,6 +25,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
+import java.time.temporal.TemporalAdjusters;
 
 
 public class DriversController {
@@ -51,6 +54,25 @@ public class DriversController {
     @FXML private TableColumn<Driver, Float>   zlPerKmColumn;
     @FXML private TableColumn<Driver, Float>   fuelPerTurnoverColumn;
     @FXML private TableColumn<Driver, Void>    logoutColumn;
+    @FXML private ComboBox<DateFilterOption>   dateFilterCombo;
+    @FXML private HBox                         customRangeBox;
+    @FXML private DatePicker                   startDatePicker;
+    @FXML private DatePicker                   endDatePicker;
+
+    private LocalDate statsStartDate;
+    private LocalDate statsEndDate;
+    private DateFilterOption currentDateFilter = DateFilterOption.CURRENT_MONTH;
+    private LocalDate customStartDate;
+    private LocalDate customEndDate;
+    private boolean updatingCustomRange;
+
+    private enum DateFilterOption {
+        PREVIOUS_YEAR,
+        PREVIOUS_MONTH,
+        CURRENT_YEAR,
+        CURRENT_MONTH,
+        CUSTOM
+    }
 
 
     @FXML
@@ -179,8 +201,7 @@ public class DriversController {
             return true;
         });
 
-        // 7) Wczytanie danych
-        loadDrivers();
+        // 7) Konfiguracja filtrów dat
 
         // 8) Przywracamy zaznaczanie całych wierszy
         driversTable.getSelectionModel().setCellSelectionEnabled(false);
@@ -209,6 +230,7 @@ public class DriversController {
 
 
 
+        setupDateFilters();
     }
 
 
@@ -262,6 +284,154 @@ public class DriversController {
     }
 
 
+    private void setupDateFilters() {
+        if (dateFilterCombo == null) {
+            loadDrivers();
+            return;
+        }
+
+        dateFilterCombo.setItems(FXCollections.observableArrayList(DateFilterOption.values()));
+        dateFilterCombo.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(DateFilterOption option) {
+                if (option == null) {
+                    return "";
+                }
+                return switch (option) {
+                    case PREVIOUS_YEAR -> "Poprzedni rok";
+                    case PREVIOUS_MONTH -> "Poprzedni miesiąc";
+                    case CURRENT_YEAR -> "Aktualny rok";
+                    case CURRENT_MONTH -> "Aktualny miesiąc";
+                    case CUSTOM -> "Wybierz zakres dat";
+                };
+            }
+
+            @Override
+            public DateFilterOption fromString(String string) {
+                return null;
+            }
+        });
+
+        if (customRangeBox != null) {
+            customRangeBox.setVisible(false);
+            customRangeBox.setManaged(false);
+        }
+
+        if (startDatePicker != null) {
+            startDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> handleCustomRangeChange());
+        }
+        if (endDatePicker != null) {
+            endDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> handleCustomRangeChange());
+        }
+
+        dateFilterCombo.getSelectionModel().selectedItemProperty().addListener((obs, oldOpt, newOpt) -> {
+            if (newOpt != null) {
+                applyDateFilter(newOpt);
+            }
+        });
+
+        dateFilterCombo.getSelectionModel().select(currentDateFilter);
+    }
+
+    private void applyDateFilter(DateFilterOption option) {
+        currentDateFilter = option;
+        switch (option) {
+            case PREVIOUS_YEAR -> {
+                setCustomRangeVisible(false);
+                LocalDate now = LocalDate.now().minusYears(1);
+                LocalDate start = now.with(TemporalAdjusters.firstDayOfYear());
+                LocalDate end = now.with(TemporalAdjusters.lastDayOfYear());
+                updateStatsRange(start, end);
+            }
+            case PREVIOUS_MONTH -> {
+                setCustomRangeVisible(false);
+                LocalDate month = LocalDate.now().minusMonths(1);
+                LocalDate start = month.withDayOfMonth(1);
+                LocalDate end = month.withDayOfMonth(month.lengthOfMonth());
+                updateStatsRange(start, end);
+            }
+            case CURRENT_YEAR -> {
+                setCustomRangeVisible(false);
+                LocalDate now = LocalDate.now();
+                LocalDate start = now.with(TemporalAdjusters.firstDayOfYear());
+                updateStatsRange(start, now);
+            }
+            case CURRENT_MONTH -> {
+                setCustomRangeVisible(false);
+                LocalDate now = LocalDate.now();
+                LocalDate start = now.withDayOfMonth(1);
+                updateStatsRange(start, now);
+            }
+            case CUSTOM -> {
+                setCustomRangeVisible(true);
+                if (customStartDate == null || customEndDate == null) {
+                    LocalDate now = LocalDate.now();
+                    customStartDate = now.withDayOfMonth(1);
+                    customEndDate = now;
+                }
+                setCustomPickerValues(customStartDate, customEndDate);
+                updateStatsRange(customStartDate, customEndDate);
+            }
+        }
+    }
+
+    private void setCustomRangeVisible(boolean visible) {
+        if (customRangeBox != null) {
+            customRangeBox.setVisible(visible);
+            customRangeBox.setManaged(visible);
+        }
+    }
+
+    private void setCustomPickerValues(LocalDate start, LocalDate end) {
+        if (startDatePicker == null || endDatePicker == null) {
+            return;
+        }
+        updatingCustomRange = true;
+        startDatePicker.setValue(start);
+        endDatePicker.setValue(end);
+        updatingCustomRange = false;
+    }
+
+    private void handleCustomRangeChange() {
+        if (updatingCustomRange || currentDateFilter != DateFilterOption.CUSTOM) {
+            return;
+        }
+        LocalDate start = startDatePicker != null ? startDatePicker.getValue() : null;
+        LocalDate end = endDatePicker != null ? endDatePicker.getValue() : null;
+        if (start == null || end == null) {
+            return;
+        }
+        if (end.isBefore(start)) {
+            showError("Błędny zakres dat", "Data końcowa nie może być wcześniejsza niż początkowa.");
+            updatingCustomRange = true;
+            startDatePicker.setValue(customStartDate);
+            endDatePicker.setValue(customEndDate);
+            updatingCustomRange = false;
+            return;
+        }
+        customStartDate = start;
+        customEndDate = end;
+        updateStatsRange(start, end);
+    }
+
+    private void updateStatsRange(LocalDate start, LocalDate end) {
+        if (start == null || end == null) {
+            return;
+        }
+        if (end.isBefore(start)) {
+            showError("Błędny zakres dat", "Data końcowa nie może być wcześniejsza niż początkowa.");
+            return;
+        }
+        if (start.equals(statsStartDate) && end.equals(statsEndDate)) {
+            return;
+        }
+        statsStartDate = start;
+        statsEndDate = end;
+        loadDrivers();
+    }
+
+
+
     private void loadDrivers() {
         try {
             String resp = ApiClient.sendGetRequest("get_drivers.php");
@@ -285,12 +455,15 @@ public class DriversController {
             float totalFuelPerTurnover = 0f;
             int driverCount = 0;
 
-            // default stats range: all available history up through today
-            LocalDate start = LocalDate.of(1970, 1, 1); // include all rides
-            LocalDate end = LocalDate.now().plusDays(1); // include today's rides
+            LocalDate effectiveStart = statsStartDate != null ? statsStartDate : LocalDate.of(1970, 1, 1);
+            LocalDate effectiveEnd = statsEndDate != null ? statsEndDate : LocalDate.now();
+            if (effectiveEnd.isBefore(effectiveStart)) {
+                showError("Błędny zakres dat", "Data końcowa nie może być wcześniejsza niż początkowa.");
+                return;
+            }
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String startDate = start.format(fmt);
-            String endDate = end.format(fmt);
+            String startDate = effectiveStart.format(fmt);
+            String endDate = effectiveEnd.plusDays(1).format(fmt);
 
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject o = arr.get(i).getAsJsonObject();
@@ -303,7 +476,6 @@ public class DriversController {
                         ? o.get("vehiclePlate").getAsString() : "";
 
                 float percentTurnover = o.has("percentTurnover")   ? o.get("percentTurnover").getAsFloat()   : 0f;
-                float fuelCost        = o.has("fuelCost")          ? o.get("fuelCost").getAsFloat()          : 0f;
                 float fuelCostSum     = o.has("fuelCostSum") && !o.get("fuelCostSum").isJsonNull()
                         ? o.get("fuelCostSum").getAsFloat() : 0f;
                 float cardComm        = o.has("cardCommission")    ? o.get("cardCommission").getAsFloat()    : 0f;
@@ -321,6 +493,7 @@ public class DriversController {
                 float turnover = 0f;
                 float zlPerKm = 0f;
                 float fuelPerTurnover = 0f;
+                float fuelSum = 0f;
 
                 if (stats != null) {
                     voucher = stats.getVoucher();
@@ -334,12 +507,13 @@ public class DriversController {
                     if (turnover > 0) {
                         fuelPerTurnover = stats.getFuelSum() / turnover;
                     }
+                    fuelSum = stats.getFuelSum();
                 }
 
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, "",
                         percentTurnover, fuelCost, cardComm, partComm,
-                        boltComm, settLimit, createdAt, plate, fuelCostSum,
+                        boltComm, settLimit, createdAt, plate, fuelSum,
                         voucher, cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
 
@@ -353,7 +527,7 @@ public class DriversController {
                 sumLot      += lotVal;
                 sumCash     += cashVal;
                 sumCard     += cardVal;
-                sumFuel     += fuelCostSum;
+                sumFuel     += fuelSum;
                 totalZlPerKm += zlPerKm;
                 totalFuelPerTurnover += fuelPerTurnover;
             }
