@@ -512,7 +512,7 @@ public class DriversController {
 
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, "",
-                        percentTurnover, fuelCost, cardComm, partComm,
+                        percentTurnover, fuelCostSum, cardComm, partComm,
                         boltComm, settLimit, createdAt, plate, fuelSum,
                         voucher, cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
