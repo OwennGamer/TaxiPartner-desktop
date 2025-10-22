@@ -49,6 +49,7 @@ public class ApiClient {
             String respBody = response.body() != null ? response.body().string() : "";
             return new ApiResult(response.code(), respBody);
         } catch (Exception e) {
+            RemoteLogService.logHandledException("Błąd podczas wywołania " + request.url(), e);
             e.printStackTrace();
             return new ApiResult(-1, null);
         }

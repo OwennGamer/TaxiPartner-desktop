@@ -16,6 +16,42 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `app_error_logs`
+--
+
+DROP TABLE IF EXISTS `app_error_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `app_error_logs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `source` varchar(32) NOT NULL,
+  `level` varchar(16) NOT NULL DEFAULT 'ERROR',
+  `summary` varchar(255) NOT NULL,
+  `message` text DEFAULT NULL,
+  `stacktrace` longtext DEFAULT NULL,
+  `driver_id` varchar(64) DEFAULT NULL,
+  `license_plate` varchar(32) DEFAULT NULL,
+  `app_version` varchar(32) DEFAULT NULL,
+  `device_id` varchar(64) DEFAULT NULL,
+  `metadata` longtext DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `idx_app_error_logs_driver` (`driver_id`),
+  KEY `idx_app_error_logs_plate` (`license_plate`),
+  KEY `idx_app_error_logs_created` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_error_logs`
+--
+
+LOCK TABLES `app_error_logs` WRITE;
+/*!40000 ALTER TABLE `app_error_logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `app_error_logs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `collaboration_terms`
 --
 
@@ -29,7 +65,7 @@ CREATE TABLE `collaboration_terms` (
   `term_value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,66 +75,42 @@ CREATE TABLE `collaboration_terms` (
 LOCK TABLES `collaboration_terms` WRITE;
 /*!40000 ALTER TABLE `collaboration_terms` DISABLE KEYS */;
 INSERT INTO `collaboration_terms` VALUES
-(68,'3','percentTurnover','40'),
-(69,'3','fuelCost','0'),
-(70,'3','cardCommission','3'),
-(71,'3','partnerCommission','20'),
-(72,'3','boltCommission','20'),
-(73,'3','settlementLimit','500'),
-(80,'T14','percentTurnover','40'),
-(81,'T14','fuelCost','0'),
-(82,'T14','cardCommission','3'),
-(83,'T14','partnerCommission','20'),
-(84,'T14','boltCommission','20'),
-(85,'T14','settlementLimit','1000'),
-(86,'T1','percentTurnover','80'),
-(87,'T1','fuelCost','0'),
-(88,'T1','cardCommission','100'),
-(89,'T1','partnerCommission','10'),
-(90,'T1','boltCommission','0'),
-(91,'T1','settlementLimit','20000'),
-(110,'T66','percentTurnover','20.1'),
-(111,'T66','fuelCost','0'),
-(112,'T66','cardCommission','90.1'),
-(113,'T66','partnerCommission','10'),
-(114,'T66','boltCommission','10.98'),
-(115,'T66','settlementLimit','500.8'),
-(116,'T99','percentTurnover','40'),
-(117,'T99','fuelCost','0'),
-(118,'T99','cardCommission','3'),
-(119,'T99','partnerCommission','20'),
-(120,'T99','boltCommission','20'),
-(121,'T99','settlementLimit','200'),
-(122,'T98','percentTurnover','40'),
-(123,'T98','fuelCost','0'),
-(124,'T98','cardCommission','3'),
-(125,'T98','partnerCommission','20'),
-(126,'T98','boltCommission','20'),
-(127,'T98','settlementLimit','500'),
-(128,'T108','percentTurnover','40'),
-(129,'T108','fuelCost','0'),
-(130,'T108','cardCommission','3'),
-(131,'T108','partnerCommission','0'),
-(132,'T108','boltCommission','0'),
-(133,'T108','settlementLimit','5000'),
-(134,'T0999','percentTurnover','40'),
-(135,'T0999','fuelCost','0'),
-(136,'T0999','cardCommission','3'),
-(137,'T0999','partnerCommission','20'),
-(138,'T0999','boltCommission','20'),
-(139,'T0999','settlementLimit','100'),
-(140,'T088','percentTurnover','40'),
-(141,'T088','fuelCost','0'),
-(142,'T088','cardCommission','3'),
-(143,'T088','partnerCommission','20'),
-(144,'T088','boltCommission','20'),
-(145,'T088','settlementLimit','1000'),
-(146,'T50','percentTurnover','40'),
-(147,'T50','fuelCost','0'),
-(148,'T50','cardCommission','3'),
-(149,'T50','partnerCommission','20'),
-(150,'T50','boltCommission','20'),
-(151,'T50','settlementLimit','1000');
+(37,'T14','percentTurnover','80'),
+(38,'T14','fuelCost','0'),
+(39,'T14','cardCommission','3'),
+(40,'T14','partnerCommission','10'),
+(41,'T14','boltCommission','0'),
+(42,'T14','settlementLimit','1000'),
+(43,'T1','percentTurnover','80'),
+(44,'T1','fuelCost','0'),
+(45,'T1','cardCommission','3'),
+(46,'T1','partnerCommission','10'),
+(47,'T1','boltCommission','0'),
+(48,'T1','settlementLimit','1000'),
+(49,'T108','percentTurnover','40'),
+(50,'T108','fuelCost','0'),
+(51,'T108','cardCommission','3'),
+(52,'T108','partnerCommission','0'),
+(53,'T108','boltCommission','0'),
+(54,'T108','settlementLimit','3000'),
+(55,'T21','percentTurnover','40'),
+(56,'T21','fuelCost','0'),
+(57,'T21','cardCommission','3'),
+(58,'T21','partnerCommission','0'),
+(59,'T21','boltCommission','0'),
+(60,'T21','settlementLimit','1000'),
+(67,'test','percentTurnover','40'),
+(68,'test','fuelCost','0'),
+(69,'test','cardCommission','3'),
+(70,'test','partnerCommission','20'),
+(71,'test','boltCommission','0'),
+(72,'test','settlementLimit','1000'),
+(73,'T22','percentTurnover','40'),
+(74,'T22','fuelCost','0'),
+(75,'T22','cardCommission','3'),
+(76,'T22','partnerCommission','0'),
+(77,'T22','boltCommission','0'),
+(78,'T22','settlementLimit','1000');
 /*!40000 ALTER TABLE `collaboration_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,8 +137,6 @@ CREATE TABLE `drivers` (
 
 LOCK TABLES `drivers` WRITE;
 /*!40000 ALTER TABLE `drivers` DISABLE KEYS */;
-INSERT INTO `drivers` VALUES
-('T14','Jan Kowalski','pass123',0,'2025-02-18 16:15:16');
 /*!40000 ALTER TABLE `drivers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,8 +162,6 @@ CREATE TABLE `drivers_backup` (
 
 LOCK TABLES `drivers_backup` WRITE;
 /*!40000 ALTER TABLE `drivers_backup` DISABLE KEYS */;
-INSERT INTO `drivers_backup` VALUES
-('T14','Jan Kowalski','pass123',0,'2025-02-18 16:15:16');
 /*!40000 ALTER TABLE `drivers_backup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +181,7 @@ CREATE TABLE `historia_salda` (
   `opis` text DEFAULT NULL,
   `data` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,62 +191,60 @@ CREATE TABLE `historia_salda` (
 LOCK TABLES `historia_salda` WRITE;
 /*!40000 ALTER TABLE `historia_salda` DISABLE KEYS */;
 INSERT INTO `historia_salda` VALUES
-(1,'10',-50.00,50.00,'rozliczenie',NULL,'2025-03-29 19:38:10'),
-(2,'10',200.00,250.00,'rozliczenie',NULL,'2025-03-29 19:38:49'),
-(3,'10',-100.00,150.00,'rozliczenie',NULL,'2025-03-29 19:39:05'),
-(5,'10',100.00,250.00,'inny',NULL,'2025-03-29 19:52:57'),
-(6,'10',100.00,350.00,'inny',NULL,'2025-03-29 19:53:58'),
-(7,'T50',200.00,1200.00,'kara',NULL,'2025-04-04 15:54:44'),
-(8,'T1',100.00,1100.00,'nagrodówka',NULL,'2025-04-04 15:55:39'),
-(9,'9',100.00,200.00,'nagrodówka',NULL,'2025-04-04 15:56:00'),
-(10,'T52',-300.00,-78.00,'karownia',NULL,'2025-04-04 16:02:15'),
-(11,'4',20.00,120.00,'Premia',NULL,'2025-04-06 10:40:39'),
-(12,'1',-100.00,197.00,'nie tak',NULL,'2025-04-06 11:02:37'),
-(13,'1',230.00,187.00,'Premia',NULL,'2025-04-06 11:06:55'),
-(14,'1',100.00,287.00,'Premia',NULL,'2025-04-06 11:08:25'),
-(15,'T4',100.00,100.00,'Premia',NULL,'2025-04-26 17:52:21'),
-(16,'T4',100.00,255.20,'Premia',NULL,'2025-04-27 13:01:52'),
-(17,'T4',50.00,344.00,'Premia',NULL,'2025-04-27 13:14:51'),
-(18,'T4',-378.92,0.00,'Rozliczenie',NULL,'2025-04-27 13:44:14'),
-(19,'T4',-75.00,0.00,'Rozliczenie',NULL,'2025-04-27 16:38:02'),
-(20,'T4',-50.00,92.50,'Kara',NULL,'2025-04-27 17:35:19'),
-(21,'T14',50.00,96.56,'Premia',NULL,'2025-04-27 20:20:40'),
-(22,'T4',120.00,335.17,'Premia',NULL,'2025-04-27 20:48:07'),
-(23,'T4',-100.00,277.45,'bo tak',NULL,'2025-04-28 16:46:29'),
-(24,'T1',-1200.00,8853.18,'Kara',NULL,'2025-05-07 10:36:26'),
-(25,'T1',125.00,8978.18,'Premia',NULL,'2025-05-07 10:37:09'),
-(26,'T14',-50.00,47.04,'Kara',NULL,'2025-05-09 11:38:13'),
-(27,'T14',500.00,650.80,'Kara',NULL,'2025-05-12 13:27:16'),
-(28,'T14',-650.80,0.00,'Rozliczenie',NULL,'2025-05-12 13:28:14'),
-(29,'T14',-340.00,-403.20,'kom',NULL,'2025-05-13 10:23:37'),
-(30,'T14',500.00,200.92,'Premia',NULL,'2025-05-13 12:13:46'),
-(31,'T14',-100.00,100.92,'Kara',NULL,'2025-05-13 12:14:31'),
-(32,'T66',200.78,300.98,'Rozliczenie',NULL,'2025-06-17 14:53:06'),
-(33,'T66',10.89,311.87,'Rozliczenie',NULL,'2025-06-17 15:07:39'),
-(34,'T66',-11.87,300.00,'Rozliczenie',NULL,'2025-06-17 15:07:54'),
-(35,'T99',-50.00,112.32,'brak zdjęcia paragonu',NULL,'2025-07-30 13:36:13'),
-(36,'T108',-1033.00,2482.20,'Rozliczenie',NULL,'2025-08-01 11:42:01'),
-(37,'T108',0.00,2482.20,'Rozliczenie',NULL,'2025-08-01 11:43:38'),
-(38,'T108',-0.51,2481.69,'Rozliczenie',NULL,'2025-08-01 11:44:05'),
-(39,'T108',0.60,2481.69,'Rozliczenie',NULL,'2025-08-01 11:52:28'),
-(40,'T99',100.30,251.42,'Kara',NULL,'2025-08-04 12:41:15'),
-(41,'T99',100.20,351.62,'Rozliczenie',NULL,'2025-08-04 13:18:02'),
-(42,'T99',-50.00,147.58,'Kara',NULL,'2025-08-07 09:29:05'),
-(43,'T99',-50.00,97.58,'Kara',NULL,'2025-08-07 15:53:59'),
-(44,'T99',200.00,297.58,'Premia',NULL,'2025-08-07 15:55:39'),
-(45,'T99',200.00,497.58,'Rozliczenie',NULL,'2025-08-07 15:56:03'),
-(46,'T99',-40.00,457.58,'Kara',NULL,'2025-08-07 16:15:40'),
-(47,'T99',25.00,482.58,'Premia',NULL,'2025-08-07 16:25:59'),
-(48,'T99',-45.00,437.58,'Kara',NULL,'2025-08-11 17:09:16'),
-(49,'T99',60.00,497.58,'Premia',NULL,'2025-08-12 19:30:12'),
-(50,'T99',-60.00,437.58,'Rozliczenie',NULL,'2025-08-12 19:31:01'),
-(51,'T99',21.00,458.58,'Premia',NULL,'2025-08-12 19:46:25'),
-(52,'T99',1.00,459.58,'diagnostic',NULL,'2025-08-14 17:39:23'),
-(53,'T99',1.00,460.58,'diagnostic',NULL,'2025-08-14 17:59:18'),
-(54,'T99',1.00,461.58,'diagnostic',NULL,'2025-08-18 10:25:00'),
-(55,'T99',100.00,561.58,'Rozliczenie',NULL,'2025-08-18 14:48:05'),
-(56,'T99',-500.00,61.58,'Kara',NULL,'2025-08-18 14:49:37'),
-(57,'T99',-30.00,31.58,'Jesteś zjebany',NULL,'2025-08-18 14:51:10');
+(1,'T99',100.00,40.00,'Premia',NULL,'2025-09-02 19:23:07'),
+(2,'T99',78.00,118.00,'Premia',NULL,'2025-09-02 19:24:38'),
+(3,'T99',-90.00,28.00,'Rozliczenie',NULL,'2025-09-02 19:25:07'),
+(4,'T99',78.00,106.00,'Rozliczenie',NULL,'2025-09-02 19:26:17'),
+(5,'T99',77.00,183.00,'Rozliczenie',NULL,'2025-09-02 19:26:53'),
+(6,'T99',100.00,283.00,'Rozliczenie',NULL,'2025-09-02 19:34:11'),
+(7,'T99',232.00,515.00,'Rozliczenie',NULL,'2025-09-02 20:14:44'),
+(8,'T99',111.00,626.00,'Premia',NULL,'2025-09-02 20:32:30'),
+(9,'T99',567.00,1193.00,'Rozliczenie',NULL,'2025-09-02 20:45:24'),
+(10,'T99',12.00,1205.00,'Kara',NULL,'2025-09-02 21:14:36'),
+(11,'T99',100.00,1305.00,'Rozliczenie',NULL,'2025-09-03 09:47:49'),
+(12,'T99',-90.00,1215.00,'Kara',NULL,'2025-09-03 09:48:15'),
+(13,'T99',32.00,1247.00,'Rozliczenie',NULL,'2025-09-03 09:49:52'),
+(14,'T1',100.00,100.00,'Rozliczenie',NULL,'2025-09-03 10:01:18'),
+(15,'T99',100.00,1347.00,'Rozliczenie',NULL,'2025-09-03 10:08:48'),
+(16,'T99',-10.00,1337.00,'Kara',NULL,'2025-09-03 10:09:42'),
+(17,'T99',-100.00,1237.00,'Kara',NULL,'2025-09-03 10:10:12'),
+(18,'T99',10.00,1247.00,'Kara',NULL,'2025-09-03 10:10:43'),
+(19,'T99',111.00,1358.00,'Premia',NULL,'2025-09-03 10:11:26'),
+(20,'T99',100.00,1458.00,'Premia',NULL,'2025-09-03 10:11:53'),
+(21,'T99',-100.00,1358.00,'Kara',NULL,'2025-09-03 10:14:13'),
+(22,'T99',100.00,1458.00,'Rozliczenie',NULL,'2025-09-03 10:14:53'),
+(23,'T99',100.00,1558.00,'Rozliczenie',NULL,'2025-09-03 10:15:12'),
+(24,'T1',22.00,122.00,'Rozliczenie',NULL,'2025-09-03 10:16:35'),
+(25,'T1',33.00,155.00,'Rozliczenie',NULL,'2025-09-03 10:17:11'),
+(26,'T1',100.00,255.00,'Kara',NULL,'2025-09-03 10:50:25'),
+(27,'T1',111.00,366.00,'Rozliczenie',NULL,'2025-09-03 10:59:52'),
+(28,'T1',1.00,367.00,'Rozliczenie',NULL,'2025-09-03 11:02:37'),
+(29,'T1',1.00,368.00,'Rozliczenie',NULL,'2025-09-03 11:03:41'),
+(30,'T1',22.00,390.00,'Rozliczenie',NULL,'2025-09-03 11:03:56'),
+(31,'T99',33.00,1591.00,'Rozliczenie',NULL,'2025-09-03 11:05:13'),
+(32,'T99',333.00,1924.00,'Rozliczenie',NULL,'2025-09-03 11:05:27'),
+(33,'T108',2328.00,2328.00,'Rozliczenie',NULL,'2025-09-04 09:42:19'),
+(34,'T108',933.00,3261.00,'Rozliczenie',NULL,'2025-09-04 09:42:56'),
+(35,'T108',0.37,3261.37,'Rozliczenie',NULL,'2025-09-04 09:43:30'),
+(36,'T108',0.18,3261.55,'Rozliczenie',NULL,'2025-09-04 09:43:54'),
+(37,'T108',1600.00,4861.55,'podstawa IX',NULL,'2025-09-04 09:44:54'),
+(38,'T108',-207.00,4654.55,'rata 11/20',NULL,'2025-09-04 09:45:23'),
+(39,'T108',-2.00,4653.34,'Kara',NULL,'2025-09-04 09:50:56'),
+(40,'T108',1.21,4654.55,'Premia',NULL,'2025-09-04 09:52:31'),
+(41,'T108',320.00,5048.15,'dniówka za Leszno 31-08',NULL,'2025-09-04 14:22:56'),
+(42,'T1',-194.00,0.00,'Kara',NULL,'2025-09-04 14:52:31'),
+(43,'T1',45.00,45.00,'jesteś zjebany',NULL,'2025-09-04 14:53:02'),
+(44,'T1',-45.00,0.00,'Rozliczenie',NULL,'2025-09-04 14:53:31'),
+(45,'T21',-60.00,-36.72,'Kara',NULL,'2025-09-04 15:15:19'),
+(46,'T21',36.72,0.00,'bo tak',NULL,'2025-09-04 15:17:37'),
+(47,'T21',1195.21,1195.21,'Rozliczenie',NULL,'2025-09-04 15:19:30'),
+(48,'T21',424.26,1619.47,'Rozliczenie',NULL,'2025-09-04 15:19:50'),
+(49,'T21',-1400.00,219.47,'Rozliczenie',NULL,'2025-09-04 15:21:07'),
+(50,'T15',-13.58,0.00,'Rozliczenie',NULL,'2025-09-05 16:28:01'),
+(51,'T15',-41.03,-41.03,'Rozliczenie',NULL,'2025-09-05 16:28:35'),
+(52,'test',50.00,166.40,'Rozliczenie',NULL,'2025-10-20 10:34:39'),
+(53,'T22',543.64,2653.64,'Rozliczenie',NULL,'2025-10-20 10:48:21'),
+(54,'T22',-2000.00,653.64,'Rozliczenie',NULL,'2025-10-20 10:52:40');
 /*!40000 ALTER TABLE `historia_salda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +282,7 @@ CREATE TABLE `inwentaryzacje` (
   `uwagi` text DEFAULT NULL,
   `kierowca_id` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,59 +292,13 @@ CREATE TABLE `inwentaryzacje` (
 LOCK TABLES `inwentaryzacje` WRITE;
 /*!40000 ALTER TABLE `inwentaryzacje` DISABLE KEYS */;
 INSERT INTO `inwentaryzacje` VALUES
-(1,'KR1234X',128444,0,'uploads/inventory/front_67f7f8c7debd7.jpg','2025-04-16 17:16:53',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(2,'KR1234X',1,1,'uploads/inventory/front_68078731e50bf.jpg','2025-04-22 14:10:25',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(3,'KR1234X',123456,0,'uploads/inventory/front_68078d75539e2.jpg','2025-04-22 14:37:09',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(4,'KR1234X',128555,0,'uploads/inventory/front_68078e8ae328b.jpg','2025-04-22 14:41:46',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(5,'KR1234X',111111,0,'uploads/inventory/front_6807941a546ea.jpg','2025-04-22 15:05:30',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(6,'KR1234X',123456,0,'uploads/inventory/front_6807a439863c1.jpg','2025-04-22 16:14:17',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(7,'KR1234X',123456,0,'uploads/inventory/front_6807a5339872f.jpg','2025-04-22 16:18:27',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(8,'KR1234X',123456,0,'uploads/inventory/front_6807a59228d07.jpg','2025-04-22 16:20:02',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(9,'KR1234X',129800,1,'uploads/inventory/front_6807a6262bc02.jpg','2025-04-22 16:22:30',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(10,'KR1234X',999991,1,'uploads/inventory/front_6807a73ec610a.jpg','2025-04-22 16:27:10',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(11,'KR1234X',128111,0,'uploads/inventory/front_680a281ca573e.jpg','2025-04-24 14:01:32','uploads/inventory/back_680a281ca7aa1.jpg','uploads/inventory/left_680a281ca9df3.jpg','uploads/inventory/right_680a281cac26e.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a281cae82b.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(12,'KR1234X',128111,0,'uploads/inventory/front_680a28302bb8a.jpg','2025-04-24 14:01:52','uploads/inventory/back_680a28302ded6.jpg','uploads/inventory/left_680a283030289.jpg','uploads/inventory/right_680a28303263e.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a283034904.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(13,'KR1234X',128111,0,'uploads/inventory/front_680a2833d4d78.jpg','2025-04-24 14:01:55','uploads/inventory/back_680a2833d6dec.jpg','uploads/inventory/left_680a2833d8eb7.jpg','uploads/inventory/right_680a2833db053.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a2833dd20e.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(14,'KR1234X',128111,0,'uploads/inventory/front_680a283e204ac.jpg','2025-04-24 14:02:06','uploads/inventory/back_680a283e22a22.jpg','uploads/inventory/left_680a283e24edf.jpg','uploads/inventory/right_680a283e271d7.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a283e29328.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(15,'KR1234X',128111,0,'uploads/inventory/front_680a28402d66d.jpg','2025-04-24 14:02:08','uploads/inventory/back_680a28402f9b3.jpg','uploads/inventory/left_680a284031e24.jpg','uploads/inventory/right_680a28403435c.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a284036841.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(16,'KR1234X',128111,0,'uploads/inventory/front_680a28643319d.jpg','2025-04-24 14:02:44','uploads/inventory/back_680a2864353b9.jpg','uploads/inventory/left_680a2864375fe.jpg','uploads/inventory/right_680a2864397c6.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a28643b9a0.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(17,'KR1234X',128111,0,'uploads/inventory/front_680a2864727bd.jpg','2025-04-24 14:02:44','uploads/inventory/back_680a286474884.jpg','uploads/inventory/left_680a2864769c6.jpg','uploads/inventory/right_680a286478aef.jpg',2,NULL,NULL,'uploads/inventory/dirt3_680a28647acdd.jpg',NULL,1,0,1,0,1,1,0,0,1,'ffdsssdfgg','0'),
-(18,'KR1234X',128500,0,'uploads/inventory/front_680a2b9b5512f.jpg','2025-04-24 14:16:27','uploads/inventory/back_680a2b9b57265.jpg','uploads/inventory/left_680a2b9b5947f.jpg','uploads/inventory/right_680a2b9b5b22b.jpg',0,NULL,'uploads/inventory/dirt2_680a2b9b5cf86.jpg',NULL,NULL,1,0,0,0,0,0,0,0,0,'gggbb','0'),
-(19,'KR1234X',128555,0,'uploads/inventory/front_680a2df32565c.jpg','2025-04-24 14:26:27','uploads/inventory/back_680a2df329746.jpg','uploads/inventory/left_680a2df32cf09.jpg','uploads/inventory/right_680a2df32f0c6.jpg',0,'uploads/inventory/dirt1_680a2df330e42.jpg',NULL,NULL,NULL,0,1,0,0,0,0,0,0,0,'ryccvv','0'),
-(20,'KR1234X',128777,0,'uploads/inventory/front_680a347d68e8b.jpg','2025-04-24 14:54:21','uploads/inventory/back_680a347d69182.jpg','uploads/inventory/left_680a347d693f5.jpg','uploads/inventory/right_680a347d6961c.jpg',0,'uploads/inventory/dirt1_680a347d698cf.jpg',NULL,NULL,NULL,0,0,0,0,0,1,1,0,0,'ffdcccc','0'),
-(21,'KR1234X',128541,0,'uploads/inventory/front_680a3a7aafec2.jpg','2025-04-24 15:19:54','uploads/inventory/back_680a3a7ab01dd.jpg','uploads/inventory/left_680a3a7ab048a.jpg','uploads/inventory/right_680a3a7ab06d3.jpg',0,'uploads/inventory/dirt1_680a3a7ab0904.jpg','uploads/inventory/dirt2_680a3a7ab0bdc.jpg','uploads/inventory/dirt3_680a3a7ab0e56.jpg','uploads/inventory/dirt4_680a3a7ab10e2.jpg',0,0,0,1,0,1,0,1,0,NULL,'0'),
-(22,'KR1234X',128541,1,'uploads/inventory/front_680a3aa43dda4.jpg','2025-04-24 15:20:36','uploads/inventory/back_680a3aa43e0b2.jpg','uploads/inventory/left_680a3aa43e305.jpg','uploads/inventory/right_680a3aa43e58b.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'0'),
-(23,'KR1234X',128508,1,'uploads/inventory/front_680a3e54e8d80.jpg','2025-04-24 15:36:20','uploads/inventory/back_680a3e54e9071.jpg','uploads/inventory/left_680a3e54e9300.jpg','uploads/inventory/right_680a3e54e9571.jpg',8,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,1,NULL,'0'),
-(24,'KR1234X',132000,0,'uploads/inventory/front_680cc46cc5183.jpg','2025-04-26 13:33:00','uploads/inventory/back_680cc46cc54d5.jpg','uploads/inventory/left_680cc46cc574d.jpg','uploads/inventory/right_680cc46cc59bd.jpg',4,'uploads/inventory/dirt1_680cc46cc5c22.jpg',NULL,NULL,NULL,1,0,0,1,0,0,1,0,1,'czesc','0'),
-(25,'TEST123',1500,1,NULL,'2025-04-26 14:30:51',NULL,NULL,NULL,2,NULL,NULL,NULL,NULL,1,0,1,1,0,1,1,1,1,'Testowy rekord z JWT','1'),
-(26,'KR1234X',135003,1,'uploads/inventory/front_680cddeb774cb.jpg','2025-04-26 15:21:47','uploads/inventory/back_680cddeb77707.jpg','uploads/inventory/left_680cddeb7794a.jpg','uploads/inventory/right_680cddeb77b56.jpg',0,NULL,NULL,NULL,NULL,0,0,0,1,0,1,0,1,0,NULL,'1'),
-(27,'KR1234X',135008,1,'uploads/inventory/front_680ce26fbf1e2.jpg','2025-04-26 15:41:03','uploads/inventory/back_680ce26fbf468.jpg','uploads/inventory/left_680ce26fbf6b6.jpg','uploads/inventory/right_680ce26fbf893.jpg',2,NULL,NULL,NULL,NULL,0,0,0,0,1,0,1,0,1,NULL,'2'),
-(28,'KR1234X',135101,1,'uploads/inventory/front_680ce55553841.jpg','2025-04-26 15:53:25','uploads/inventory/back_680ce55553aa9.jpg','uploads/inventory/left_680ce55553c9f.jpg','uploads/inventory/right_680ce55553e79.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,1,0,1,0,NULL,'0'),
-(29,'KR1234X',135102,1,'uploads/inventory/front_680ce8bc5346d.jpg','2025-04-26 16:07:56','uploads/inventory/back_680ce8bc53769.jpg','uploads/inventory/left_680ce8bc539c4.jpg','uploads/inventory/right_680ce8bc53bec.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T4'),
-(30,'KR1234X',135109,0,'uploads/inventory/front_680cfd401f7da.jpg','2025-04-26 17:35:28','uploads/inventory/back_680cfd401fb78.jpg','uploads/inventory/left_680cfd401fe44.jpg','uploads/inventory/right_680cfd4020129.jpg',4,'uploads/inventory/dirt1_680cfd4020450.jpg',NULL,NULL,NULL,1,1,1,1,1,0,1,0,1,'taktakgfxddd','T4'),
-(31,'DW1234X',50001,1,'uploads/inventory/front_680d0028a9a84.jpg','2025-04-26 17:47:52','uploads/inventory/back_680d0028a9cab.jpg','uploads/inventory/left_680d0028a9e6c.jpg','uploads/inventory/right_680d0028aa0cf.jpg',0,NULL,NULL,NULL,NULL,0,0,0,1,1,1,0,0,0,'tak','T14'),
-(32,'KR1234X',135110,1,'uploads/inventory/front_680d0cdac6194.jpg','2025-04-26 18:42:02','uploads/inventory/back_680d0cdac6537.jpg','uploads/inventory/left_680d0cdac67d3.jpg','uploads/inventory/right_680d0cdac6a71.jpg',0,NULL,NULL,NULL,NULL,1,1,1,0,1,0,0,0,0,NULL,'T4'),
-(33,'KR1234X',135113,1,'uploads/inventory/front_680d110446018.jpg','2025-04-26 18:59:48','uploads/inventory/back_680d110446386.jpg','uploads/inventory/left_680d1104466b5.jpg','uploads/inventory/right_680d110446986.jpg',0,NULL,NULL,NULL,NULL,1,1,1,0,0,1,1,0,0,NULL,'T4'),
-(34,'KR1234X',135117,1,'uploads/inventory/front_680d136bebbea.jpg','2025-04-26 19:10:03','uploads/inventory/back_680d136bebf49.jpg','uploads/inventory/left_680d136bec221.jpg','uploads/inventory/right_680d136bec523.jpg',0,NULL,NULL,NULL,NULL,1,0,0,1,1,0,1,0,0,NULL,'T14'),
-(35,'DW1234X',50002,1,'uploads/inventory/front_680d18f93b4f9.jpg','2025-04-26 19:33:45','uploads/inventory/back_680d18f93b922.jpg','uploads/inventory/left_680d18f93bc8f.jpg','uploads/inventory/right_680d18f93bfa2.jpg',0,NULL,NULL,NULL,NULL,0,0,1,1,1,0,1,0,0,NULL,'T14'),
-(36,'KR1234X',137000,1,'uploads/inventory/front_680d1ea87135f.jpg','2025-04-26 19:58:00','uploads/inventory/back_680d1ea871739.jpg','uploads/inventory/left_680d1ea8719dd.jpg','uploads/inventory/right_680d1ea871c53.jpg',0,NULL,NULL,NULL,NULL,0,0,0,1,0,1,0,0,0,NULL,'T4'),
-(37,'KR1234X',151333,1,'uploads/inventory/front_680e6fc350e19.jpg','2025-04-27 19:56:19','uploads/inventory/back_680e6fc351101.jpg','uploads/inventory/left_680e6fc351320.jpg','uploads/inventory/right_680e6fc3514e2.jpg',0,NULL,NULL,NULL,NULL,0,0,1,1,0,1,0,1,0,NULL,'T14'),
-(38,'KR1234X',152999,1,'uploads/inventory/front_680e76203a0f6.jpg','2025-04-27 20:23:28','uploads/inventory/back_680e76203a41f.jpg','uploads/inventory/left_680e76203a6b4.jpg','uploads/inventory/right_680e76203a9d7.jpg',0,NULL,NULL,NULL,NULL,1,1,1,0,1,0,0,0,0,NULL,'T4'),
-(39,'KR1234X',155006,1,'uploads/inventory/front_680fa99699d65.jpg','2025-04-28 18:15:18','uploads/inventory/back_680fa9969a0cd.jpg','uploads/inventory/left_680fa9969a37a.jpg','uploads/inventory/right_680fa9969a676.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T14'),
-(40,'WB12345',250000,0,'uploads/inventory/front_681882c28ae86.jpg','2025-05-05 11:20:02','uploads/inventory/back_681882c28b07b.jpg','uploads/inventory/left_681882c28b1e3.jpg','uploads/inventory/right_681882c28b34e.jpg',2,'uploads/inventory/dirt1_681882c28b4b2.jpg',NULL,NULL,NULL,1,0,1,0,1,1,0,0,1,NULL,'T14'),
-(41,'DW1234X',1000000,1,'uploads/inventory/front_681b1a11ac948.jpg','2025-05-07 10:30:09','uploads/inventory/back_681b1a11acc68.jpg','uploads/inventory/left_681b1a11acec8.jpg','uploads/inventory/right_681b1a11ad0dd.jpg',5,NULL,NULL,NULL,NULL,1,1,1,1,1,1,1,1,1,NULL,'T1'),
-(42,'ASDASD',250000,0,'uploads/inventory/front_681dcc426b981.jpg','2025-05-09 11:34:58','uploads/inventory/back_681dcc426bc36.jpg','uploads/inventory/left_681dcc426bdbb.jpg','uploads/inventory/right_681dcc426bee2.jpg',1,'uploads/inventory/dirt1_681dcc426c031.jpg',NULL,NULL,NULL,1,1,1,1,1,0,0,1,1,'sghj','T14'),
-(43,'AWEAW',666666,1,'uploads/inventory/front_6821da4bad40e.jpg','2025-05-12 13:23:55','uploads/inventory/back_6821da4bad5ca.jpg','uploads/inventory/left_6821da4bad6de.jpg','uploads/inventory/right_6821da4bad7e5.jpg',5,NULL,NULL,NULL,NULL,1,0,1,0,0,1,0,0,1,NULL,'T14'),
-(44,'SDFSDF',91000,1,'uploads/inventory/front_6823011316a8e.jpg','2025-05-13 10:21:39','uploads/inventory/back_6823011316cd4.jpg','uploads/inventory/left_6823011316e81.jpg','uploads/inventory/right_6823011317018.jpg',4,NULL,NULL,NULL,NULL,1,0,1,1,0,0,1,0,1,NULL,'T14'),
-(45,'DW1234X',1000001,1,'uploads/inventory/front_68381b4298a58.jpg','2025-05-29 10:30:58','uploads/inventory/back_68381b4298ce8.jpg','uploads/inventory/left_68381b4298fa1.jpg','uploads/inventory/right_68381b429927a.jpg',4,NULL,NULL,NULL,NULL,0,0,1,0,1,0,1,1,1,NULL,'T14'),
-(46,'DX23YB',173000,1,'uploads/inventory/front_68876b418e9ea.jpg','2025-07-28 14:21:21','uploads/inventory/back_68876b418ec7e.jpg','uploads/inventory/left_68876b418eeb8.jpg','uploads/inventory/right_68876b418f0f4.jpg',0,NULL,NULL,NULL,NULL,1,1,1,1,0,0,0,1,0,NULL,'T99'),
-(47,'DX23YB',175000,1,'uploads/inventory/front_6887ca0594edf.jpg','2025-07-28 21:05:41','uploads/inventory/back_6887ca0595171.jpg','uploads/inventory/left_6887ca05953d3.jpg','uploads/inventory/right_6887ca05955dc.jpg',0,NULL,NULL,NULL,NULL,1,1,0,1,0,0,0,0,0,NULL,'T98'),
-(48,'DX23YB',178001,1,'uploads/inventory/front_6889fe0c11ea7.jpg','2025-07-30 13:12:12','uploads/inventory/back_6889fe0c12129.jpg','uploads/inventory/left_6889fe0c12331.jpg','uploads/inventory/right_6889fe0c124ff.jpg',0,NULL,NULL,NULL,NULL,0,1,0,1,1,0,0,0,0,NULL,'T99'),
-(49,'DKL83517',2,1,'uploads/inventory/front_688c88ac6970d.jpg','2025-08-01 11:28:12','uploads/inventory/back_688c88ac698d8.jpg','uploads/inventory/left_688c88ac69a23.jpg','uploads/inventory/right_688c88ac69b84.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,'Nie ','T108'),
-(50,'DX23YB',186001,1,'uploads/inventory/front_688c8b8a6138a.jpg','2025-08-01 11:40:26','uploads/inventory/back_688c8b8a61795.jpg','uploads/inventory/left_688c8b8a61b4d.jpg','uploads/inventory/right_688c8b8a61e23.jpg',5,NULL,NULL,NULL,NULL,1,1,1,0,1,1,1,1,1,NULL,'T108'),
-(51,'DW9YF48',180001,1,'uploads/inventory/front_6891fb60023fe.jpg','2025-08-05 14:38:56','uploads/inventory/back_6891fb60026c8.jpg','uploads/inventory/left_6891fb60028e5.jpg','uploads/inventory/right_6891fb6002b0b.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T99'),
-(52,'DX23YB',187000,1,'uploads/inventory/front_68a32254cb006.jpg','2025-08-18 14:53:40','uploads/inventory/back_68a32254cb345.jpg','uploads/inventory/left_68a32254cb5d2.jpg','uploads/inventory/right_68a32254cb7ff.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T99'),
-(53,'DW9YF48',201000,1,'uploads/inventory/front_68a45389262e2.jpg','2025-08-19 12:35:53','uploads/inventory/back_68a45389266c0.jpg','uploads/inventory/left_68a4538926a91.jpg','uploads/inventory/right_68a4538926d81.jpg',0,NULL,NULL,NULL,NULL,0,0,1,0,1,0,0,1,0,NULL,'T50');
+(5,'DW3NC94',1,1,'uploads/inventory/front_68b856eb355b5.jpg','2025-09-03 16:55:39','uploads/inventory/back_68b856eb3587c.jpg','uploads/inventory/left_68b856eb35a55.jpg','uploads/inventory/right_68b856eb35c4f.jpg',0,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,0,NULL,'T14'),
+(6,'DKL83517',95149,1,'uploads/inventory/front_68b942b38e473.jpg','2025-09-04 09:41:39','uploads/inventory/back_68b942b38e8a8.jpg','uploads/inventory/left_68b942b38eac0.jpg','uploads/inventory/right_68b942b38ef59.jpg',8,NULL,NULL,NULL,NULL,1,0,0,0,1,1,1,1,1,NULL,'T108'),
+(7,'TEST',100,1,'uploads/inventory/front_68b986eb78bad.jpg','2025-09-04 14:32:43','uploads/inventory/back_68b986eb78dde.jpg','uploads/inventory/left_68b986eb78f99.jpg','uploads/inventory/right_68b986eb7911a.jpg',5,NULL,NULL,NULL,NULL,0,0,0,0,0,0,0,0,1,NULL,'T1'),
+(8,'DW8YK67',119511,1,'uploads/inventory/front_68b99022d1139.jpg','2025-09-04 15:12:02','uploads/inventory/back_68b99022d13a5.jpg','uploads/inventory/left_68b99022d15d8.jpg','uploads/inventory/right_68b99022d17a8.jpg',0,NULL,NULL,NULL,NULL,1,1,0,0,1,1,1,1,0,NULL,'T21'),
+(9,'DW8YK66',1,1,'uploads/inventory/front_68baf29bb11c2.jpg','2025-09-05 16:24:27','uploads/inventory/back_68baf29bb15e1.jpg','uploads/inventory/left_68baf29bb19ef.jpg','uploads/inventory/right_68baf29bb1d83.jpg',5,NULL,NULL,NULL,NULL,1,1,1,1,1,1,1,1,1,NULL,'T15'),
+(10,'DW',1,1,'uploads/inventory/front_68bead42b5b83.jpg','2025-09-08 12:17:38','uploads/inventory/back_68bead42b5e0e.jpg','uploads/inventory/left_68bead42b6022.jpg','uploads/inventory/right_68bead42b6240.jpg',0,NULL,NULL,NULL,NULL,1,1,0,1,0,0,0,0,0,NULL,'test'),
+(11,'DW6WF39',259126,1,'uploads/inventory/front_68f5f6f60a1ea.jpg','2025-10-20 10:46:46','uploads/inventory/back_68f5f6f60a5d8.jpg','uploads/inventory/left_68f5f6f60a967.jpg','uploads/inventory/right_68f5f6f60acca.jpg',5,NULL,NULL,NULL,NULL,1,1,0,0,1,1,1,1,1,NULL,'T22');
 /*!40000 ALTER TABLE `inwentaryzacje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +317,7 @@ CREATE TABLE `jwt_tokens` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,6 +326,52 @@ CREATE TABLE `jwt_tokens` (
 
 LOCK TABLES `jwt_tokens` WRITE;
 /*!40000 ALTER TABLE `jwt_tokens` DISABLE KEYS */;
+INSERT INTO `jwt_tokens` VALUES
+(1,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY3MzQyOTgsImV4cCI6MTc1Njc2MzA5OCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ._jv9pjCsx4ry41TPTY7uCkytJflWHyYOoaFK4Xx4qOk','1','admin_panel','2025-09-01 21:44:58'),
+(5,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY3MzU4NjAsImV4cCI6MTc1Njc2NDY2MCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.0qJtoW9dTOkoxiKhcoYsKRNEvE_Wdjse0LIGUw3qaCQ','1','admin_panel','2025-09-01 22:11:00'),
+(6,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4MzMyODUsImV4cCI6MTc1Njg2MjA4NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.ryShNhOWIAOp6Jra1DCPlhRmKPRnEeHc_txbZB1NH7U','1','admin_panel','2025-09-03 01:14:45'),
+(10,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4MzYwNzUsImV4cCI6MTc1Njg2NDg3NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.UPkDCfz9GzOLHf4Oysom7s0d-VNom0onv8QogOxMdj0','1','admin_panel','2025-09-03 02:01:15'),
+(11,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4MzY4NjMsImV4cCI6MTc1Njg2NTY2MywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.ezyJ57OMtmqOhMu9GTZ81jT_jBgscVYPW7RRP6v_Xhc','1','admin_panel','2025-09-03 02:14:23'),
+(13,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4Mzc4OTUsImV4cCI6MTc1Njg2NjY5NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.XRrGXrIXOV_tUXYTbsmyswdjF3ZfIFkzp_dtmXkybDI','1','admin_panel','2025-09-03 02:31:35'),
+(14,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4Mzg3MTIsImV4cCI6MTc1Njg2NzUxMiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.CF005FWF22_f_JE3ZL717TgtWVzVT1_1V1o0Yc5WnyY','1','admin_panel','2025-09-03 02:45:12'),
+(15,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4NDA0NTUsImV4cCI6MTc1Njg2OTI1NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.IEyEoOmxsfddQUSsgPAET8HBK0-EHX9yhrVtNwEfMPQ','1','admin_panel','2025-09-03 03:14:15'),
+(16,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4NDExMzYsImV4cCI6MTc1Njg2OTkzNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.dDWefQgaltxk8HNITF-FumVu8o5ZIzZBZnbDijDhtdw','1','admin_panel','2025-09-03 03:25:36'),
+(23,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4ODU2NTYsImV4cCI6MTc1NjkxNDQ1NiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.uBvYeCe2Px-YT246u3z5jbPdPxnsDLcRalGEhOMwpz0','1','admin_panel','2025-09-03 15:47:36'),
+(25,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4ODY4ODUsImV4cCI6MTc1NjkxNTY4NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.XL_Pr2TSq5WrfynQ5bZ6Aju_osgkstezdVuAoBOWfgk','1','admin_panel','2025-09-03 16:08:05'),
+(30,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4ODgxNzgsImV4cCI6MTc1NjkxNjk3OCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.6puAZTxCuR2iOI6XX4HmT7TunJVQf5t6V5qgRpxwOzI','1','admin_panel','2025-09-03 16:29:38'),
+(36,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4ODk5NzIsImV4cCI6MTc1NjkxODc3MiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.6L6J56LgrzT-PqsMwxuJ0f3tLGXaYdWs1GZiAIu2vOU','1','admin_panel','2025-09-03 16:59:32'),
+(39,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4OTAzMDIsImV4cCI6MTc1NjkxOTEwMiwidXNlcl9pZCI6IlQ5OSIsInJvbGUiOiJmbG90b3dpZWMiLCJkZXZpY2VfaWQiOiJlZWI2MzA5MWQyNjM2ZGZlIn0.E3a49BD5eJVdsESvX9Fhjl7u6DiMM7RxS7SnUoVJFQg','T99','eeb63091d2636dfe','2025-09-03 17:05:02'),
+(40,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4OTA4MzIsImV4cCI6MTc1NjkxOTYzMiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.ywKV_l7paaeObiQl1cxUNJWRPCWVW7w6NnIxveIUN_Y','1','admin_panel','2025-09-03 17:13:52'),
+(42,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4OTE2MjAsImV4cCI6MTc1NjkyMDQyMCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.JFDJeZdsn6Cjigb8XQGPPPwDXeElv2zDU21swSg6qJU','1','admin_panel','2025-09-03 17:27:00'),
+(43,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4OTI5MzIsImV4cCI6MTc1NjkyMTczMiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.FMEvPRgUL_58eRwQuOjitOxj8iZwJadzPqZodwYNem8','1','admin_panel','2025-09-03 17:48:52'),
+(44,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY4OTMxMTYsImV4cCI6MTc1NjkyMTkxNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.RxNpTGz6H3InHSLNogLUtSDotESx6u-IJO-SXcPnhAQ','1','admin_panel','2025-09-03 17:51:56'),
+(45,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5MDI1MDUsImV4cCI6MTc1NjkzMTMwNSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.hAaK11wngYx10ZiUnjibxlwGVnB4F617zmFujzk47Oc','1','admin_panel','2025-09-03 20:28:25'),
+(46,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5MDk1NDIsImV4cCI6MTc1NjkzODM0MiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.8EepvAk9vDTB1wPM5Cgkv7-Z6aea6WW0NvsQtRUfZ8E','1','admin_panel','2025-09-03 22:25:42'),
+(47,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5MDk3MTYsImV4cCI6MTc1NjkzODUxNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.g__gZ4Y1idbdCmh9_OU3KUwW6Vt6_Mm9jCxcKRdMpTY','1','admin_panel','2025-09-03 22:28:36'),
+(48,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5MTAyOTcsImV4cCI6MTc1NjkzOTA5NywidXNlcl9pZCI6IlQxNCIsInJvbGUiOiJmbG90b3dpZWMiLCJkZXZpY2VfaWQiOiJhOWVlNzc2YmFkMzQyMDYzIn0.m4XY475B1tLi-8l30Qhxl3CCXC7T6JdVuTkbfAR8xe0','T14','a9ee776bad342063','2025-09-03 22:38:17'),
+(49,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5NzA1NzUsImV4cCI6MTc1Njk5OTM3NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.NPiICR6gWYcKn2D0G2Yz33iWP_5bgndb3BqgRAn3d8U','1','admin_panel','2025-09-04 15:22:55'),
+(50,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5NzEyMTcsImV4cCI6MTc1NzAwMDAxNywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.a3l1O7odagXYR-Uo3xCi-s3WVilr8_wSqhCkGSV8vwg','1','admin_panel','2025-09-04 15:33:37'),
+(51,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5NzE2MjAsImV4cCI6MTc1NzAwMDQyMCwidXNlcl9pZCI6IlQxMDgiLCJyb2xlIjoia2llcm93Y2EiLCJkZXZpY2VfaWQiOiJiZWRlZWI0YmM2YTg2YTQ1In0.3ohpIQjpIkr6PRn5401lm2pbAoAI7musViZFUjoF3G4','T108','bedeeb4bc6a86a45','2025-09-04 15:40:20'),
+(52,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5ODg5OTksImV4cCI6MTc1NzAxNzc5OSwidXNlcl9pZCI6IlQxIiwicm9sZSI6ImZsb3Rvd2llYyIsImRldmljZV9pZCI6IjdhZDNlNzYyMTY0NjgyYWMifQ.oRrHyDbczIt8E1mJCa6AxZayRTkbSrGcfNJWfbJ4bro','T1','7ad3e762164682ac','2025-09-04 20:29:59'),
+(53,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTY5OTEzMDQsImV4cCI6MTc1NzAyMDEwNCwidXNlcl9pZCI6IlQyMSIsInJvbGUiOiJraWVyb3djYSIsImRldmljZV9pZCI6ImExZDYwNzY1NmNjYmNkNTIifQ.i5ocAI9BD3UBa4jywK49TD1cGUpA4Q-AfpDNLNodxiE','T21','a1d607656ccbcd52','2025-09-04 21:08:24'),
+(54,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTcwODIwMjUsImV4cCI6MTc1NzExMDgyNSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ._rKI1RgeKVwiya9GfA3aN4LzTy-D9dG5DAO_biL4yX8','1','admin_panel','2025-09-05 22:20:25'),
+(55,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTcwODIxNzYsImV4cCI6MTc1NzExMDk3NiwidXNlcl9pZCI6IlQxNSIsInJvbGUiOiJraWVyb3djYSIsImRldmljZV9pZCI6IjAyZTA1MjMyMmIyOTgxNjYifQ.V5oKykvjyo0Zw6DfHQd9rAiu9o_R63VN7n22OmBQZnU','T15','02e052322b298166','2025-09-05 22:22:56'),
+(56,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTczMTY0NTAsImV4cCI6MTc1NzM0NTI1MCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.dqsuRfOOQsns3IrKDTeYV4TQ7Xxd8s2fUQztfPxKeGI','1','admin_panel','2025-09-08 15:27:30'),
+(57,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTczMjY1MTEsImV4cCI6MTc1NzM1NTMxMSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.hoYnLYUdhplVP2F4I3nlN0DZd2rONuYhOloN5MTnHSI','1','admin_panel','2025-09-08 18:15:11'),
+(59,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTczMzk1OTIsImV4cCI6MTc1NzM2ODM5MiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.q_hY-vSHoaxq3of9JP-kr5E3UA3RLjbx0NgvK5g13s8','1','admin_panel','2025-09-08 21:53:12'),
+(60,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTczNDAyODIsImV4cCI6MTc1NzM2OTA4MiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.LM99PRT3NG-3hJYCIpidEujkLcaoRFiwsXsxtbOXhHI','1','admin_panel','2025-09-08 22:04:42'),
+(62,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTgwMDYxMTQsImV4cCI6MTc1ODAzNDkxNCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.WPNyIMdifZlgGIO2PhjPnCi3H4NBZUA1_upPx1L3IWY','1','admin_panel','2025-09-16 15:01:54'),
+(63,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTk4NDc2ODAsImV4cCI6MjA3NTIwNzY4MCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.1M_5B-y-JrKBSl8ZJAB0SUFgJqQl4L43NTP7jF-XSls','1','admin_panel','2035-10-05 14:34:40'),
+(65,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MDY1NDUsImV4cCI6MjA3NTk2NjU0NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Sq3MMm3wjFO4jjav9NPE07HmdkZPVeTi56AhN1So7VY','1','admin_panel','2035-10-14 09:22:25'),
+(66,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MDY5NDgsImV4cCI6MjA3NTk2Njk0OCwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiZWViNjMwOTFkMjYzNmRmZSJ9.0FKzJkaBgOKW3TisqmZpovMpOSfUkycaMc2PmDFxnsE','test','eeb63091d2636dfe','2035-10-14 09:29:08'),
+(67,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MDY5OTIsImV4cCI6MjA3NTk2Njk5MiwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiOTdmZTYyZWVmYTY4MzAxNSJ9.sqMPrXTjSQPK8eouGD7BAXQpvrYg49kB2Kx5YCl8e5E','test','97fe62eefa683015','2035-10-14 09:29:52'),
+(68,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MTU1MDgsImV4cCI6MjA3NTk3NTUwOCwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiZWViNjMwOTFkMjYzNmRmZSJ9.OTC-fSIu1V44TDyK8TXSkBZHi7ZmmtOSO5gnwUoE1QE','test','eeb63091d2636dfe','2035-10-14 11:51:48'),
+(69,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NDkyMjcsImV4cCI6MjA3NjMwOTIyNywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Fxtxvw5TcLiatvrRz_z308SI_PV70_oHaSoPHQbfoQI','1','admin_panel','2035-10-18 08:33:47'),
+(70,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NDk1MjksImV4cCI6MjA3NjMwOTUyOSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.2qW67g1pXnnOdCR-4qXaHcpSXFyqA1krweLXQxnu1IA','1','admin_panel','2035-10-18 08:38:49'),
+(71,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NDk3NTYsImV4cCI6MjA3NjMwOTc1NiwidXNlcl9pZCI6IlQyMiIsInJvbGUiOiJraWVyb3djYSIsImRldmljZV9pZCI6IjM3YzBiNzUwOGRmNTllYmEifQ.d-IpW5-LkJKAJ2b454DG7OlpnXs2sIyo0BvDcqnM5dU','T22','37c0b7508df59eba','2035-10-18 08:42:36'),
+(72,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NTA1NjMsImV4cCI6MjA3NjMxMDU2MywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.lRUuIDmg8CVmroCIgxqbLwKhhOMCHsJHz3IacJzWMIg','1','admin_panel','2035-10-18 08:56:03'),
+(73,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NjEzMzQsImV4cCI6MjA3NjMyMTMzNCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.TsFyb81R5vFyUUvLqljl0IiVZsq_2NYcLtDq-PWjobc','1','admin_panel','2035-10-18 11:55:34'),
+(74,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEwNDQ3MDYsImV4cCI6MjA3NjQwNDcwNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ._TbJutUki-sFR8pntFQo81SU_flvjJsl8VYcmTyEIxk','1','admin_panel','2035-10-19 11:05:06');
 /*!40000 ALTER TABLE `jwt_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,16 +405,12 @@ CREATE TABLE `kierowcy` (
 LOCK TABLES `kierowcy` WRITE;
 /*!40000 ALTER TABLE `kierowcy` DISABLE KEYS */;
 INSERT INTO `kierowcy` VALUES
-('3','Darek','Darek',0.00,'$2y$10$dew5WmScvalEtk3x16Ge2.2n/c8z7NGbbNyyKGVOQM5f5kWnGJKe2','kierowca','firma','2025-04-26 13:41:54','aktywny',NULL,NULL),
-('T088','QQQQ','',0.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:40:29','aktywny',NULL,NULL),
-('T0999','Jaka','',100.00,'489cd5dbc708c7e541de4d7cd91ce6d0f1613573b7fc5b40d3942ccb9555cf35','kierowca','firma','2025-08-05 11:39:36','aktywny',NULL,NULL),
-('T1','Arkadiusz','Ferenc',8978.18,'$2y$10$uGIBPfsEvgZAGXPY3o5dY.dVlxifsMAeCsEIvCSii96SvQVsX.W9S','kierowca','firma','2025-05-07 08:27:15','aktywny','DW1234X',NULL),
-('T108','Michał','Miszczyk',5646.37,'$2y$10$d4z9GpjgCNRRtysqtLqxAOE2BTXAWoDR.Hi7Mtsf/3RS8WT.QgSSu','kierowca','firma','2025-08-01 09:18:57','aktywny','DX23YB',NULL),
-('T14','Krzysztof','Golonka',-3.88,'$2y$10$dwVJmBxtGzlca0VgHuCjNOw0SP15P29gr3m4jnLmU2KRa1T86fvkq','kierowca','firma','2025-04-26 15:44:47','aktywny','DW1234X',NULL),
-('T50','Flotowiec','',38.80,'$2y$10$9ezp.PasPVrDdNe9JgOtfeJcn0KzEj.Z.38QPfTksVRoZSiyjM3D2','flotowiec','firma','2025-08-19 10:31:29','aktywny','DW9YF48',NULL),
-('T66','hahah','',300.00,'69e91642bc538c7ae9a7686b0a56570ecd279e4976678267365dcedf5183f0b8','kierowca','firma','2025-06-17 12:47:24','aktywny',NULL,NULL),
-('T98','Teścik','Teściowski',113.92,'$2y$10$N7SV5.gOc1Tv4kK3lrc8Q.lGt8ewizI0bkYUtDtgx1y/QwjDMrBzm','kierowca','firma','2025-07-28 19:04:18','aktywny','DX23YB',NULL),
-('T99','Nowy','Kierowca',70.38,'$2y$10$rWoFH4IWmmolt6u4LSZ.Qe1zKC0ZaQE1qNrO/hjvP.LdJmHcaiGye','kierowca','firma','2025-07-28 12:18:16','aktywny','DX23YB','eqfbFSvXQn2kMbw2QgCTyM:APA91bGNdc3EtnfF9sdAoGct-zHDSPWyFXXke-JPqyASsT8gdJQO0VfZlqHH_Wt1g9BThWiH4w9nHZxrIsl9w7CU-rLhtal9EvN9b8o3TWhxUfqHTbNStGQ');
+('T1','Arkadiusz','Ferenc',0.00,'$2y$10$1Ba0skCLXWf/5FsAQ7M9ZO8YwtEcBUfqMRWvoW.ShmITNqXourrly','flotowiec','firma','2025-09-04 07:24:21','aktywny','TEST','fbK6e1iNTBWZYgXJ7ia98t:APA91bFL0m5aBTcEtDGXzsRyybeg5FNURQiZvLJnhhfYNPXhoDhYqJodr5xtmOjZluH0Fgnu_MtyafvvLWDLgs6iE2i2lntgUHOuo8Ido9n1gigerxD5EiU'),
+('T108','Michał','Miszczyk',4970.15,'$2y$10$jsk6KWNcQDlwQhu865FhGuHzQqZAS4l3mj0SGTwbAgq.OeTaqTayi','kierowca','firma','2025-09-04 07:36:02','aktywny','DKL83517','chgh7TqoT2y9X4uIfW8cBD:APA91bERTAfgBrbi6pXn7hqjDnbInGW_ZrzlXPWl4d0eX1WuRFUt0Mi_ax9Hb_UnzJpMPyGECTgD-bRTePv9q-3N3orF2FK65buB1IPOYtGbp4hCYAZeCZE'),
+('T14','Krzysztof','Golonka',0.00,'$2y$10$k4H6mnU3nnOy4UDolimGUuI7xiHXiw6cS71Z1pPFO9xrpaCzL.eF6','','firma','2025-09-03 14:34:32','aktywny','DW3NC94','dJwbb1IeSsOnCaiD3h6ym9:APA91bHM5B7ZmREn-KB4GuV9kSRAUgLqI_Pua8FBWM9YY6KczpcgxVm55wvQh3ttSlx07N5hMaQNikAerSOWJFaFdcifADKh87i6WR_JnYVs3Q3qSA3WghQ'),
+('T21','Ivan','Semianyk',219.47,'$2y$10$bgutnSj0jcYwmndqdejOkuFtb1lT.1T7fV38Z1qCld/DLbPWG/jJS','kierowca','firma','2025-09-04 13:07:01','aktywny','DW8YK67','dRrdQzZjRcKIKVYDG3q2Hs:APA91bEkO79pElzTVXuBIDZ7nY-YTLwbngW9c23ITGfLk2Suk38DMwhG6W6GA_Mp8uEomQE5YqEFRJF-3-n0XS_-SUjWuxTgDSM7bkDh-1G1i0ghnZuPv20'),
+('T22','Rafał','Zieliński',690.84,'$2y$10$h8g4jQrngfJwNCbPoK0pDe9dxJh8OSiAhHm35JmcYbLzS7LdbTUMO','kierowca','firma','2025-10-20 08:40:05','aktywny','DW6WF39','dqf_MXLvSCWqP4fFFW6apO:APA91bFwxEO7PNvZtaRlvYnWSu7XAwv4SUXdA7iJBrommcRbWwotHChGsO04px-ljGC9LX8WXffccXrngQqH9g7yOl-ZFiImRQpd569mLeebzWeO7xaFjlU'),
+('test','test','',205.20,'$2y$10$n6GmtFN0gj5S7Mm66SkLcuTrT3tYjYZd6Suk8bC2XftmM9QdCrnO6','flotowiec','firma','2025-09-08 10:15:45','aktywny','DW','e7QW9jhJQHKjeMTTBgHU_y:APA91bGwecF-iApmnnlHeD3-8xKsOZUWx7PTeXfdMIJ_GWKPSlngKNeieea3wS7ORIuo7Bm9VJJ5MIYCUiIPbHlXnNOXHZsNFuEXEwtz2nQ97YXmO8b1H1M');
 /*!40000 ALTER TABLE `kierowcy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -433,7 +435,7 @@ CREATE TABLE `kursy` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `kursy_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=324 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -443,119 +445,19 @@ CREATE TABLE `kursy` (
 LOCK TABLES `kursy` WRITE;
 /*!40000 ALTER TABLE `kursy` DISABLE KEYS */;
 INSERT INTO `kursy` VALUES
-(208,'T14',100.00,38.80,38.80,'Karta','Postój',0,'2025-04-27 19:57:53',NULL),
-(209,'T14',20.00,7.76,46.56,'Karta','Postój',0,'2025-04-27 20:10:31',NULL),
-(213,'T14',150.00,58.20,154.76,'Karta','Postój',0,'2025-04-29 10:10:45',NULL),
-(214,'T14',25.00,8.00,162.76,'Voucher','Dyspozytornia',0,'2025-05-05 09:55:19',NULL),
-(215,'T14',150.00,-90.00,72.76,'Gotówka','Postój',0,'2025-05-05 09:56:15',NULL),
-(216,'T14',50.00,15.40,88.16,'Karta','Dyspozytornia',0,'2025-05-05 11:22:14',NULL),
-(217,'T14',150.00,-90.00,-1.84,'Gotówka','Postój',0,'2025-05-05 11:22:34',NULL),
-(218,'T14',96.00,30.72,28.88,'Voucher','Dyspozytornia',0,'2025-05-05 11:23:18',NULL),
-(219,'T1',50.00,0.00,10033.18,'Karta','Postój',0,'2025-05-07 10:31:13',NULL),
-(220,'T1',2000.00,-160.00,9873.18,'Karta','Dyspozytornia',0,'2025-05-07 10:31:54',NULL),
-(221,'T1',250.00,180.00,10053.18,'Voucher','Dyspozytornia',0,'2025-05-07 10:32:17',NULL),
-(222,'T14',213.00,68.16,97.04,'Voucher','Dyspozytornia',0,'2025-05-09 11:35:21',NULL),
-(223,'T14',200.00,-120.00,-72.96,'Gotówka','Postój',0,'2025-05-12 13:24:20',NULL),
-(224,'T14',93.00,29.76,-43.20,'Voucher','Dyspozytornia',0,'2025-05-12 13:24:46',NULL),
-(225,'T14',500.00,194.00,150.80,'Karta','Postój',0,'2025-05-12 13:25:50',NULL),
-(226,'T14',100.00,38.80,38.80,'Karta','Postój',0,'2025-05-13 10:22:14',NULL),
-(227,'T14',150.00,-102.00,-63.20,'Gotówka','Dyspozytornia',0,'2025-05-13 10:22:34',NULL),
-(228,'T14',150.00,-90.00,-493.20,'Gotówka','Postój',0,'2025-05-13 10:53:20',NULL),
-(229,'T14',100.00,38.80,-454.40,'Karta','Postój',0,'2025-05-13 10:53:34',NULL),
-(230,'T14',150.00,58.20,-396.20,'Karta','Postój',0,'2025-05-13 12:08:13',NULL),
-(231,'T14',200.00,61.60,-334.60,'Karta','Dyspozytornia',0,'2025-05-13 12:08:40',NULL),
-(232,'T14',111.00,35.52,-299.08,'Voucher','Dyspozytornia',0,'2025-05-13 12:08:59',NULL),
-(233,'T14',250.00,-170.00,-69.08,'Gotówka','Dyspozytornia',0,'2025-05-16 15:41:58',NULL),
-(234,'T14',200.00,77.60,8.52,'Karta','Postój',0,'2025-05-29 10:31:34',NULL),
-(235,'T99',100.00,38.80,38.80,'Karta','Postój',0,'2025-07-28 14:21:40',NULL),
-(236,'T99',150.00,58.20,97.00,'Karta','Postój',0,'2025-07-28 17:17:03',NULL),
-(237,'T99',50.00,19.40,116.40,'Karta','Postój',0,'2025-07-28 18:08:22',NULL),
-(238,'T99',72.00,23.04,139.44,'Voucher','Dyspozytornia',0,'2025-07-28 18:34:01',NULL),
-(239,'T99',100.00,-60.00,79.44,'Gotówka','Postój',0,'2025-07-28 18:54:18',NULL),
-(240,'T14',100.00,38.80,47.32,'Karta','Postój',0,'2025-07-28 18:57:58',NULL),
-(241,'T14',150.00,-90.00,-42.68,'Gotówka','Postój',0,'2025-07-28 18:58:54',NULL),
-(242,'T14',100.00,38.80,-3.88,'Karta','Postój',0,'2025-07-28 19:03:18',NULL),
-(243,'T99',100.00,32.00,111.44,'Voucher','Postój',0,'2025-07-28 19:22:17',NULL),
-(244,'T99',48.00,15.36,126.80,'Voucher','Dyspozytornia',0,'2025-07-28 19:25:28',NULL),
-(245,'T99',111.00,35.52,162.32,'Voucher','Dyspozytornia',1,'2025-07-28 21:00:47',NULL),
-(246,'T98',10.00,-6.80,-6.80,'Gotówka','Dyspozytornia',0,'2025-07-28 21:05:57',NULL),
-(247,'T98',48.00,15.36,8.56,'Voucher','Dyspozytornia',1,'2025-07-28 21:06:28',NULL),
-(248,'T98',25.00,8.00,16.56,'Voucher','Dyspozytornia',0,'2025-07-28 21:08:26',NULL),
-(249,'T98',50.00,16.00,32.56,'Voucher','Dyspozytornia',0,'2025-07-28 21:09:22',NULL),
-(250,'T98',133.00,42.56,75.12,'Voucher','Dyspozytornia',1,'2025-07-28 21:19:17',NULL),
-(251,'T98',100.00,38.80,113.92,'Karta','Postój',0,'2025-07-28 21:19:41',NULL),
-(252,'T99',100.00,38.80,151.12,'Karta','Postój',0,'2025-07-31 13:27:13',NULL),
-(253,'T108',48.00,19.20,3515.20,'Voucher','Dyspozytornia',1,'2025-08-01 11:29:47',NULL),
-(254,'T108',1.00,-0.60,2481.09,'Gotówka','Postój',0,'2025-08-01 11:45:42',NULL),
-(255,'T108',90.00,34.92,2516.61,'Karta','Postój',0,'2025-08-01 15:30:32',NULL),
-(256,'T108',190.00,76.00,2592.61,'Voucher','Dyspozytornia',0,'2025-08-01 17:55:20',NULL),
-(257,'T108',200.00,77.60,2670.21,'Karta','Dyspozytornia',0,'2025-08-02 13:45:08',NULL),
-(258,'T108',190.00,76.00,2746.21,'Voucher','Dyspozytornia',0,'2025-08-02 17:47:01',NULL),
-(259,'T108',150.00,58.20,2804.41,'Karta','Dyspozytornia',0,'2025-08-04 09:39:47',NULL),
-(260,'T108',50.00,-30.00,2774.41,'Gotówka','Postój',0,'2025-08-04 14:13:37',NULL),
-(261,'T108',150.00,58.20,2832.61,'Karta','Dyspozytornia',0,'2025-08-05 06:52:47',NULL),
-(262,'T108',150.00,58.20,2890.81,'Karta','Dyspozytornia',0,'2025-08-05 08:00:39',NULL),
-(263,'T108',97.00,-58.20,2832.61,'Gotówka','Postój',0,'2025-08-05 11:44:12',NULL),
-(264,'T108',95.00,36.86,2869.47,'Karta','Postój',0,'2025-08-05 15:26:25',NULL),
-(265,'T99',100.00,38.80,390.42,'Karta','Postój',0,'2025-08-05 16:56:43',NULL),
-(266,'T99',100.00,-60.00,330.42,'Gotówka','Postój',0,'2025-08-05 16:57:23',NULL),
-(267,'T99',100.00,38.80,369.22,'Karta','Postój',0,'2025-08-05 17:01:12',NULL),
-(268,'T108',150.00,58.20,2927.67,'Karta','Dyspozytornia',0,'2025-08-05 18:00:14',NULL),
-(269,'T108',150.00,58.20,2985.87,'Karta','Dyspozytornia',0,'2025-08-06 07:58:59',NULL),
-(270,'T108',80.00,31.04,3016.91,'Karta','Postój',0,'2025-08-06 12:12:52',NULL),
-(271,'T99',100.00,38.80,408.02,'Karta','Postój',0,'2025-08-06 14:00:09',NULL),
-(272,'T99',550.00,-330.00,78.02,'Gotówka','Postój',0,'2025-08-06 14:01:27',NULL),
-(273,'T99',300.00,92.40,170.42,'Karta','Dyspozytornia',0,'2025-08-06 14:02:19',NULL),
-(274,'T99',50.00,19.40,189.82,'Karta','Postój',0,'2025-08-06 14:17:10',NULL),
-(275,'T99',20.00,7.76,197.58,'Karta','Postój',0,'2025-08-06 14:41:13',NULL),
-(276,'T108',100.00,38.80,3055.71,'Karta','Postój',0,'2025-08-06 15:19:53',NULL),
-(277,'T108',150.00,58.20,3113.91,'Karta','Dyspozytornia',0,'2025-08-06 18:09:33',NULL),
-(278,'T108',150.00,58.20,3172.11,'Karta','Dyspozytornia',0,'2025-08-07 07:54:04',NULL),
-(279,'T108',75.00,30.00,3202.11,'Voucher','Dyspozytornia',0,'2025-08-07 10:00:22',NULL),
-(280,'T108',35.00,13.58,3215.69,'Karta','Dyspozytornia',0,'2025-08-07 10:23:51',NULL),
-(281,'T108',150.00,58.20,3273.89,'Karta','Dyspozytornia',0,'2025-08-07 13:43:07',NULL),
-(282,'T99',100.00,38.80,70.38,'Karta','Postój',0,'2025-08-18 15:02:31','uploads/receipts/receipt_68a324673f3ec.jpg'),
-(283,'T108',199.00,79.60,3353.49,'Voucher','Dyspozytornia',0,'2025-08-18 17:58:46',NULL),
-(284,'T108',450.00,180.00,3533.49,'Voucher','Dyspozytornia',0,'2025-08-18 23:53:58',NULL),
-(285,'T108',594.00,230.47,3763.96,'Karta','Dyspozytornia',0,'2025-08-19 15:10:42',NULL),
-(286,'T108',105.00,42.00,3805.96,'Voucher','Dyspozytornia',0,'2025-08-20 05:37:17',NULL),
-(287,'T108',180.00,69.84,3875.80,'Karta','Dyspozytornia',0,'2025-08-20 09:30:42',NULL),
-(288,'T108',90.00,-54.00,3821.80,'Gotówka','Postój',0,'2025-08-20 11:02:07',NULL),
-(289,'T108',80.00,31.04,3852.84,'Karta','Postój',0,'2025-08-20 13:55:14',NULL),
-(290,'T108',105.00,42.00,3894.84,'Voucher','Dyspozytornia',0,'2025-08-20 17:45:05',NULL),
-(291,'T108',105.00,42.00,3936.84,'Voucher','Dyspozytornia',0,'2025-08-21 05:32:05',NULL),
-(292,'T108',120.00,46.56,3983.40,'Karta','Postój',0,'2025-08-21 13:57:06',NULL),
-(293,'T108',105.00,42.00,4025.40,'Voucher','Dyspozytornia',0,'2025-08-21 17:34:29',NULL),
-(294,'T108',105.00,42.00,4067.40,'Voucher','Dyspozytornia',0,'2025-08-22 05:27:39',NULL),
-(295,'T108',75.00,30.00,4097.40,'Voucher','Dyspozytornia',0,'2025-08-22 09:38:32',NULL),
-(296,'T108',115.00,44.62,4142.02,'Karta','Postój',0,'2025-08-22 12:58:41',NULL),
-(297,'T108',450.00,180.00,4322.02,'Voucher','Dyspozytornia',0,'2025-08-22 16:23:06',NULL),
-(298,'T108',500.00,200.00,4522.02,'Voucher','Dyspozytornia',0,'2025-08-23 04:24:23',NULL),
-(299,'T108',280.00,108.64,4630.66,'Karta','Dyspozytornia',0,'2025-08-25 11:42:07',NULL),
-(300,'T108',100.00,38.80,4669.46,'Karta','Dyspozytornia',0,'2025-08-25 11:42:16',NULL),
-(301,'T108',250.00,97.00,4766.46,'Karta','Dyspozytornia',0,'2025-08-25 14:02:55',NULL),
-(302,'T108',200.00,77.60,4844.06,'Karta','Dyspozytornia',0,'2025-08-25 18:14:38',NULL),
-(303,'T108',210.00,84.00,4928.06,'Voucher','Dyspozytornia',0,'2025-08-26 06:01:58',NULL),
-(304,'T108',200.00,77.60,5005.66,'Karta','Dyspozytornia',0,'2025-08-26 08:37:54',NULL),
-(305,'T108',90.00,-54.00,4951.66,'Gotówka','Postój',0,'2025-08-26 11:01:14',NULL),
-(306,'T108',120.00,46.56,4998.22,'Karta','Postój',0,'2025-08-26 13:52:47',NULL),
-(307,'T108',200.00,77.60,5075.82,'Karta','Dyspozytornia',0,'2025-08-26 16:00:20',NULL),
-(308,'T108',180.00,72.00,5147.82,'Voucher','Dyspozytornia',0,'2025-08-26 17:56:11',NULL),
-(309,'T108',200.00,77.60,5225.42,'Karta','Dyspozytornia',0,'2025-08-27 08:05:33',NULL),
-(310,'T108',141.00,54.71,5280.13,'Karta','Postój',0,'2025-08-27 12:25:57',NULL),
-(311,'T108',167.00,-100.20,5179.93,'Gotówka','Postój',0,'2025-08-27 14:58:47',NULL),
-(312,'T108',400.00,155.20,5335.13,'Karta','Dyspozytornia',0,'2025-08-27 22:17:01',NULL),
-(313,'T108',200.00,77.60,5412.73,'Karta','Dyspozytornia',0,'2025-08-28 08:06:41',NULL),
-(314,'T108',150.00,58.20,5470.93,'Karta','Dyspozytornia',0,'2025-08-28 12:35:55',NULL),
-(315,'T108',100.00,-60.00,5410.93,'Gotówka','Postój',0,'2025-08-28 12:36:00',NULL),
-(316,'T108',100.00,-60.00,5350.93,'Gotówka','Postój',0,'2025-08-28 15:41:56',NULL),
-(317,'T108',105.00,42.00,5392.93,'Voucher','Dyspozytornia',0,'2025-08-28 17:41:48',NULL),
-(318,'T108',120.00,46.56,5439.49,'Karta','Postój',0,'2025-08-29 11:27:59',NULL),
-(319,'T108',200.00,77.60,5517.09,'Karta','Dyspozytornia',0,'2025-08-29 11:29:08',NULL),
-(320,'T108',127.00,49.28,5566.37,'Karta','Postój',0,'2025-08-29 15:38:55',NULL),
-(321,'T108',105.00,42.00,5608.37,'Voucher','Dyspozytornia',0,'2025-09-01 05:33:45',NULL),
-(322,'T108',95.00,38.00,5646.37,'Voucher','Dyspozytornia',0,'2025-09-01 09:25:39',NULL),
-(323,'T50',100.00,38.80,38.80,'Karta','Postój',0,'2025-09-01 14:09:56','uploads/receipts/receipt_68b58d14848c4.jpg');
+(2,'T108',1.00,0.40,4654.95,'Voucher','Dyspozytornia',0,'2025-09-04 09:47:29',NULL),
+(3,'T108',1.00,0.39,4655.34,'Karta','Dyspozytornia',0,'2025-09-04 09:48:38',NULL),
+(4,'T108',49.00,19.60,4674.15,'Voucher','Dyspozytornia',0,'2025-09-04 11:09:22',NULL),
+(5,'T108',35.00,14.00,4688.15,'Voucher','Dyspozytornia',0,'2025-09-04 11:45:58',NULL),
+(6,'T108',100.00,40.00,4728.15,'Voucher','Dyspozytornia',0,'2025-09-04 12:57:24',NULL),
+(7,'T1',250.00,194.00,194.00,'Karta','Postój',0,'2025-09-04 14:33:30',NULL),
+(8,'T21',60.00,23.28,23.28,'Karta','Postój',0,'2025-09-04 15:13:27',NULL),
+(9,'T108',130.00,-78.00,4970.15,'Gotówka','Postój',0,'2025-09-04 15:39:54',NULL),
+(11,'test',100.00,38.80,38.80,'Karta','Postój',0,'2025-09-08 12:18:11',NULL),
+(12,'test',100.00,38.80,77.60,'Karta','Postój',0,'2025-09-08 12:18:47',NULL),
+(13,'test',100.00,38.80,116.40,'Karta','Postój',0,'2025-10-16 12:22:00','uploads/receipts/receipt_68f0c748dabd4.jpg'),
+(14,'T22',93.00,37.20,690.84,'Voucher','Dyspozytornia',0,'2025-10-20 12:16:29',NULL),
+(15,'test',100.00,38.80,205.20,'Karta','Postój',0,'2025-10-21 09:35:50','uploads/receipts/receipt_68f737d618c2d.jpg');
 /*!40000 ALTER TABLE `kursy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -615,7 +517,7 @@ CREATE TABLE `pojazdy` (
   `numer_polisy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `rejestracja` (`rejestracja`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -625,14 +527,14 @@ CREATE TABLE `pojazdy` (
 LOCK TABLES `pojazdy` WRITE;
 /*!40000 ALTER TABLE `pojazdy` DISABLE KEYS */;
 INSERT INTO `pojazdy` VALUES
-(6,'sdfsdf','asdfsad','sadfasdf',91000,'2025-04-23','2025-05-10',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(7,'KR1234X','Toyota','Corolla',155009,'2025-12-31','2025-12-31',1,'T14',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(8,'DW1234X','Toyota','Corolla',1000002,'2025-07-23','2025-08-29',1,'T14',1,1,1,'2025-08-29',1,'2025-08-31','FUN','własne','1231231'),
-(9,'DKL82535','Mercedes-Benz','V-klasse',2,'2026-04-15','2026-04-18',1,NULL,0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(10,'DW9YF48','Toyota','Corolla',222035,'2026-06-27','2026-07-02',1,'T50',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(11,'DX23YB','Toyo','Coro',195000,'2025-06-14','2025-06-20',1,'T99',0,0,0,NULL,0,NULL,NULL,NULL,NULL),
-(13,'DW0000','Fiat','OOOO',190000,'2025-06-12','2025-06-15',0,NULL,1,1,1,'2025-06-04',1,'2025-06-21','FUN','własny','polisa0000'),
-(17,'DKL83517','mercedes-benz','vito',94380,'2025-09-15','2025-09-15',1,'T108',0,1,1,'2025-09-15',0,NULL,'POLCAR','leasing','123');
+(1,'DW8YK68','Toyota','Corolla',119699,'2026-03-21','2026-01-07',1,NULL,0,1,0,NULL,1,'2034-01-11','FUN','leasing','1092893036'),
+(6,'DW3NC94','Toyota','Avensis',1,'2026-05-26','2026-08-26',1,'T14',0,1,1,'2026-02-26',1,'2031-06-08','FUN','pożyczka','1107748922'),
+(7,'DKL83517','Mercedes-Benz','Vito Tourer',95149,'2099-12-12','2025-12-27',1,'T108',0,1,0,NULL,0,NULL,'POLCAR','leasing','0000'),
+(9,'DW8YK67','Toyota','Corolla',119699,'2040-01-01','2040-01-01',1,'T21',0,1,0,NULL,1,'2040-01-01','FUN','leasing','0000'),
+(10,'DW8YK66','Toyota','Corolla',1,'2099-01-01','2099-01-01',1,'T15',0,1,0,NULL,1,'2099-01-01','FUN','leasing','0000'),
+(11,'DW','Toy','Cor',25,'2025-09-20','2025-09-25',1,'test',0,0,0,NULL,0,NULL,'FUN','tak','12313'),
+(12,'DW6WF39','Toyota','Camry',259126,'2080-01-01','2080-01-01',1,'T22',0,1,1,'2080-10-01',0,NULL,'FUN','leasing','0000'),
+(13,'DW6RX78','Renault','Master',1,'2099-01-01','2026-03-08',1,NULL,1,0,0,NULL,0,NULL,'FUN','własność','0000');
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -688,8 +590,7 @@ CREATE TABLE `pracownicy` (
 LOCK TABLES `pracownicy` WRITE;
 /*!40000 ALTER TABLE `pracownicy` DISABLE KEYS */;
 INSERT INTO `pracownicy` VALUES
-('1','Paweł Turek','OCTO','UZ','2026-07-18',1,1,1,1,'2025-07-10',1,'2025-07-13',1,1,'Gotówka',1,1,1,1,1,1,1,1,1,1,1,'asdasd@dashdash','Jolanta','61661611','616161661','Nokia','Orange','2025-07-25'),
-('3','Ferenc Arkadio','FUN','','2025-07-26',0,0,1,0,NULL,0,'2025-07-19',0,1,'',0,1,1,0,0,0,0,1,0,0,0,'','','','','','','2025-08-08');
+('DYSPO1','Natalia Bułgajewska','POLCAR9','UZ','2025-09-11',0,0,0,0,NULL,0,NULL,1,1,'gotówka',1,0,1,1,0,0,0,1,0,1,0,'n.bulgajewska@wp.pl','Adam Witek 794480160','','','','',NULL);
 /*!40000 ALTER TABLE `pracownicy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -711,7 +612,7 @@ CREATE TABLE `refuels` (
   PRIMARY KEY (`id`),
   KEY `refuels_ibfk_1` (`driver_id`),
   CONSTRAINT `refuels_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -721,16 +622,8 @@ CREATE TABLE `refuels` (
 LOCK TABLES `refuels` WRITE;
 /*!40000 ALTER TABLE `refuels` DISABLE KEYS */;
 INSERT INTO `refuels` VALUES
-(3,'T14','2025-04-29 16:02:45',30,150,155010,'2025-04-29 14:02:45'),
-(5,'T99','2025-07-28 17:17:49',30,300,174000,'2025-07-28 15:17:49'),
-(6,'T98','2025-07-28 21:20:10',50,250,174500,'2025-07-28 19:20:10'),
-(7,'T108','2025-08-01 11:46:39',5,30,168005,'2025-08-01 09:46:39'),
-(8,'T108','2025-08-04 07:47:44',47.06,266.83,89265,'2025-08-04 05:47:44'),
-(9,'T108','2025-08-07 10:49:18',21.37,125.01,89665,'2025-08-07 08:49:18'),
-(10,'T108','2025-08-19 08:14:19',36.14,200.22,92078,'2025-08-19 06:14:19'),
-(11,'T108','2025-08-21 14:25:56',25.49,143.76,92415,'2025-08-21 12:25:56'),
-(12,'T108','2025-08-26 08:54:42',52.65,301.68,93371,'2025-08-26 06:54:42'),
-(13,'T108','2025-08-28 09:52:40',52.71,292.01,93852,'2025-08-28 07:52:40');
+(1,'T1','2025-09-04 14:34:16',25.65,25,150,'2025-09-04 12:34:16'),
+(2,'T108','2025-09-04 16:31:42',47.87,272.38,95269,'2025-09-04 14:31:42');
 /*!40000 ALTER TABLE `refuels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -750,7 +643,7 @@ CREATE TABLE `serwisy` (
   `data` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `rejestracja` (`rejestracja`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -772,7 +665,8 @@ INSERT INTO `serwisy` VALUES
 (10,'DW9YF48','ooooo',900,'[]','2025-08-27 15:15:40'),
 (11,'DW9YF48','ttttt',500,'[]','2025-08-28 14:58:26'),
 (12,'DW9YF48','qwert',336,'[\"uploads\\/service\\/serv_68b1a94a2bfe8.jpg\"]','2025-08-29 15:21:14'),
-(13,'DW9YF48','wym olej',258,'[\"uploads\\/service\\/serv_68b562a04f555.jpg\",\"uploads\\/service\\/serv_68b562a04f85a.jpg\",\"uploads\\/service\\/serv_68b562eeea731.jpg\"]','2025-09-01 11:08:48');
+(13,'DW9YF48','wym olej',258,'[\"uploads\\/service\\/serv_68b562a04f555.jpg\",\"uploads\\/service\\/serv_68b562a04f85a.jpg\",\"uploads\\/service\\/serv_68b562eeea731.jpg\"]','2025-09-01 11:08:48'),
+(14,'DW9YF48','olej',500,'[\"uploads\\/service\\/serv_68b7f381a9997.jpg\"]','2025-09-03 09:51:29');
 /*!40000 ALTER TABLE `serwisy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -865,7 +759,7 @@ CREATE TABLE `users` (
   `role` enum('kierowca','flotowiec','admin') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -875,9 +769,7 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
-(1,'admin','$2y$10$t0Z.HkVHXwvmqVlAm7EU7ucXSeHDIif.TRhobytQWBT/lJVh7E9Dq','admin'),
-(2,'flota1','8b046d263fdc049847e891edc83077d8684ea98cba7b7ae72deb64eab14939f1','flotowiec'),
-(3,'kierowca1','a89abdeecdb653e7b027d5314df4a02cfbdbf18bf53fd7ef807486af14e1e963','kierowca');
+(1,'admin','$2y$10$QywPTAi6qFPfLJPRYhWAAOvjBLuP2lPK6DDBbhwTZADoTP2p8bejK','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -899,7 +791,7 @@ CREATE TABLE `work_sessions` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `work_sessions_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -909,14 +801,6 @@ CREATE TABLE `work_sessions` (
 LOCK TABLES `work_sessions` WRITE;
 /*!40000 ALTER TABLE `work_sessions` DISABLE KEYS */;
 INSERT INTO `work_sessions` VALUES
-(1,'T99','DX23YB','2025-07-30 13:11:32',178001,'2025-07-30 13:12:59',178003),
-(2,'T99','DX23YB','2025-07-30 13:22:39',178004,'2025-07-30 13:27:35',179000),
-(3,'T99','DX23YB','2025-07-30 13:51:08',179001,'2025-07-30 13:51:25',179005),
-(4,'T99','DX23YB','2025-07-30 13:53:18',179008,'2025-07-30 13:53:30',179010),
-(5,'T99','DX23YB','2025-07-31 12:25:34',179020,'2025-07-31 13:26:06',180000),
-(6,'T99','DX23YB','2025-07-31 13:27:07',180001,NULL,NULL),
-(7,'T99','DX23YB','2025-07-31 16:27:53',185000,'2025-07-31 16:28:04',185001),
-(8,'T99','DX23YB','2025-07-31 16:36:57',186000,'2025-07-31 16:37:45',186001),
 (9,'T108','DKL83517','2025-08-01 11:27:18',2,'2025-08-01 11:31:42',3),
 (10,'T108','DKL83517','2025-08-01 11:37:43',88991,'2025-08-01 11:38:21',88991),
 (11,'T108','DX23YB','2025-08-01 11:38:54',186001,'2025-08-01 11:48:39',186005),
@@ -924,91 +808,56 @@ INSERT INTO `work_sessions` VALUES
 (13,'T108','DKL83517','2025-08-02 12:49:40',89175,'2025-08-02 17:52:00',89263),
 (14,'T108','DKL83517','2025-08-04 07:31:51',89263,NULL,NULL),
 (15,'T108','DKL83517','2025-08-05 06:52:35',89383,NULL,NULL),
-(16,'T99','DW9YF48','2025-08-05 14:38:07',180001,'2025-08-05 14:51:40',182000),
-(17,'T99','DX23YB','2025-08-05 14:52:27',186006,NULL,NULL),
-(18,'T99','DW9YF48','2025-08-05 14:57:47',183000,'2025-08-05 14:58:31',187000),
 (19,'T108','DKL83517','2025-08-05 15:26:22',89464,'2025-08-05 18:16:23',89494),
-(20,'T99','DW9YF48','2025-08-05 16:56:16',187001,NULL,NULL),
 (21,'T108','DKL83517','2025-08-06 06:53:45',89494,NULL,NULL),
-(22,'T99','DW9YF48','2025-08-06 11:54:25',187002,NULL,NULL),
-(23,'T99','DW9YF48','2025-08-06 12:15:28',187005,NULL,NULL),
-(24,'T99','DW9YF48','2025-08-06 12:19:25',187005,NULL,NULL),
-(25,'T99','DW9YF48','2025-08-06 12:30:51',187006,NULL,NULL),
-(26,'T99','DW9YF48','2025-08-06 13:11:05',187007,NULL,NULL),
-(27,'T99','DW9YF48','2025-08-06 13:34:12',187008,NULL,NULL),
-(28,'T99','DW9YF48','2025-08-06 14:40:05',188000,NULL,NULL),
 (29,'T108','DKL83517','2025-08-06 15:19:49',89561,'2025-08-06 19:45:31',89601),
 (30,'T108','DKL83517','2025-08-07 07:02:01',89601,'2025-08-07 13:57:53',89713),
-(31,'T99','DW9YF48','2025-08-07 09:28:32',188001,NULL,NULL),
-(32,'T99','DW9YF48','2025-08-07 15:53:29',190000,'2025-08-07 15:57:25',190001),
-(33,'T99','DW9YF48','2025-08-07 16:15:14',190003,NULL,NULL),
-(34,'T99','DW9YF48','2025-08-07 16:25:49',190005,NULL,NULL),
-(35,'T99','DW9YF48','2025-08-11 17:09:00',190006,'2025-08-11 17:09:53',190007),
-(36,'T99','DW9YF48','2025-08-12 19:30:41',190007,NULL,NULL),
-(37,'T99','DW9YF48','2025-08-12 19:46:08',190009,'2025-08-12 20:10:59',190010),
-(38,'T99','DW9YF48','2025-08-14 17:54:59',191000,NULL,NULL),
-(39,'T99','DW9YF48','2025-08-18 10:09:39',191001,NULL,NULL),
-(40,'T99','DW9YF48','2025-08-18 14:50:22',191002,'2025-08-18 14:52:31',191008),
-(41,'T99','DX23YB','2025-08-18 14:53:05',187000,'2025-08-18 14:56:59',190000),
-(42,'T99','DW9YF48','2025-08-18 15:01:25',193000,'2025-08-18 15:34:58',200000),
 (43,'T108','DKL83517','2025-08-18 17:58:36',91935,'2025-08-19 00:36:59',92071),
 (44,'T108','DKL83517','2025-08-19 07:50:18',92071,NULL,NULL),
-(45,'T99','DX23YB','2025-08-19 12:32:38',191000,'2025-08-19 12:34:11',191005),
-(46,'T50','DW9YF48','2025-08-19 12:35:16',201000,'2025-08-19 12:36:37',202000),
-(47,'T50','DW9YF48','2025-08-19 12:38:48',203000,'2025-08-19 12:48:56',203000),
-(48,'T50','DW9YF48','2025-08-19 13:31:13',204000,'2025-08-19 13:32:46',204001),
-(49,'T99','DX23YB','2025-08-19 13:33:34',195000,'2025-08-19 13:34:36',195000),
-(50,'T50','DW9YF48','2025-08-19 13:35:12',204002,NULL,NULL),
-(51,'T50','DW9YF48','2025-08-19 13:57:16',204003,NULL,NULL),
 (52,'T108','DKL83517','2025-08-20 04:45:06',92158,NULL,NULL),
 (53,'T108','DKL83517','2025-08-20 13:55:11',92277,'2025-08-20 17:58:04',92329),
-(54,'T50','DW9YF48','2025-08-20 14:54:48',204004,NULL,NULL),
-(55,'T50','DW9YF48','2025-08-20 14:58:55',204006,NULL,NULL),
-(56,'T50','DW9YF48','2025-08-20 15:01:14',204008,NULL,NULL),
 (57,'T108','DKL83517','2025-08-21 04:31:36',92329,NULL,NULL),
-(58,'T50','DW9YF48','2025-08-21 09:25:22',205001,NULL,NULL),
-(59,'T50','DW9YF48','2025-08-21 10:03:35',205008,NULL,NULL),
-(60,'T50','DW9YF48','2025-08-21 10:34:05',205010,NULL,NULL),
-(61,'T50','DW9YF48','2025-08-21 11:35:50',205011,NULL,NULL),
-(62,'T50','DW9YF48','2025-08-21 12:13:46',205012,NULL,NULL),
 (63,'T108','DKL83517','2025-08-21 13:57:02',92405,'2025-08-21 18:03:28',92463),
-(64,'T50','DW9YF48','2025-08-21 14:55:51',210000,NULL,NULL),
-(65,'T50','DW9YF48','2025-08-21 14:55:52',210000,'2025-08-21 15:00:23',211000),
 (66,'T108','DKL83517','2025-08-22 04:34:30',92463,NULL,NULL),
 (67,'T108','DKL83517','2025-08-22 12:58:34',92545,'2025-08-22 17:22:43',92649),
 (68,'T108','DKL83517','2025-08-23 03:04:12',92649,'2025-08-23 04:32:59',92742),
 (69,'T108','DKL83517','2025-08-25 07:13:37',92943,NULL,NULL),
-(70,'T50','DW9YF48','2025-08-25 14:53:07',212000,NULL,NULL),
 (71,'T108','DKL83517','2025-08-25 18:14:31',93235,'2025-08-25 18:32:19',93240),
 (72,'T108','DKL83517','2025-08-26 04:26:23',93240,NULL,NULL),
-(73,'T50','DW9YF48','2025-08-26 10:40:55',215000,NULL,NULL),
 (74,'T108','DKL83517','2025-08-26 13:52:42',93414,'2025-08-26 18:07:31',93547),
-(75,'T50','DW9YF48','2025-08-26 14:02:43',215001,'2025-08-26 14:20:51',216000),
 (76,'T108','DKL83517','2025-08-27 06:57:16',93547,NULL,NULL),
-(77,'T50','DW9YF48','2025-08-27 10:37:56',216000,NULL,NULL),
-(78,'T50','DW9YF48','2025-08-27 14:03:29',217000,'2025-08-27 14:26:58',217000),
 (79,'T108','DKL83517','2025-08-27 14:58:43',93673,'2025-08-27 22:36:13',93790),
-(80,'T50','DW9YF48','2025-08-27 15:14:38',218000,NULL,NULL),
-(81,'T50','DW9YF48','2025-08-27 16:42:17',218000,NULL,NULL),
 (82,'T108','DKL83517','2025-08-28 08:06:36',93790,NULL,NULL),
-(83,'T50','DW9YF48','2025-08-28 13:23:22',220000,NULL,NULL),
-(84,'T50','DW9YF48','2025-08-28 13:44:57',221000,NULL,NULL),
-(85,'T50','DW9YF48','2025-08-28 13:58:58',222000,NULL,NULL),
-(86,'T50','DW9YF48','2025-08-28 14:13:36',222001,NULL,NULL),
-(87,'T50','DW9YF48','2025-08-28 14:24:01',222002,NULL,NULL),
-(88,'T50','DW9YF48','2025-08-28 14:34:03',222003,NULL,NULL),
-(89,'T50','DW9YF48','2025-08-28 14:57:43',222003,NULL,NULL),
 (90,'T108','DKL83517','2025-08-28 17:41:41',93970,'2025-08-28 17:49:51',93977),
 (91,'T108','DKL83517','2025-08-29 07:14:59',93977,NULL,NULL),
 (92,'T108','DKL83517','2025-08-29 11:27:55',94020,'2025-08-29 16:14:54',94060),
-(93,'T50','DW9YF48','2025-08-29 15:20:33',222018,NULL,NULL),
 (94,'T108','DKL83517','2025-08-31 13:32:22',94178,'2025-08-31 17:56:13',94180),
 (95,'T108','DKL83517','2025-09-01 04:37:24',94380,NULL,NULL),
-(96,'T50','DW9YF48','2025-09-01 11:08:13',222019,NULL,NULL),
-(97,'T50','DW9YF48','2025-09-01 12:26:37',222020,'2025-09-01 12:29:07',222021),
-(98,'T50','DW9YF48','2025-09-01 12:39:02',222022,'2025-09-01 12:39:11',222023),
-(99,'T50','DW9YF48','2025-09-01 14:02:02',222030,'2025-09-01 14:02:39',222031),
-(100,'T50','DW9YF48','2025-09-01 14:09:02',222032,'2025-09-01 14:11:02',222035);
+(125,'T14','DW3NC94','2025-09-03 16:54:43',1,NULL,NULL),
+(126,'T108','DKL83517','2025-09-04 09:40:40',95149,NULL,NULL),
+(127,'T1','TEST','2025-09-04 14:31:45',100,'2025-09-04 14:34:25',155),
+(128,'T1','TEST','2025-09-04 14:34:53',155,NULL,NULL),
+(129,'T1','TEST','2025-09-04 14:36:01',155,NULL,NULL),
+(130,'T21','DW8YK67','2025-09-04 15:09:36',119511,'2025-09-04 15:15:03',119600),
+(131,'T21','DW8YK67','2025-09-04 15:17:04',119600,NULL,NULL),
+(132,'T21','DW8YK67','2025-09-04 15:18:39',119600,NULL,NULL),
+(133,'T21','DW8YK67','2025-09-04 18:54:00',119699,NULL,NULL),
+(134,'T21','DW8YK68','2025-09-04 22:43:34',119699,NULL,NULL),
+(135,'T21','DW8YK67','2025-09-04 22:44:16',119699,NULL,NULL),
+(137,'test','DW','2025-09-08 12:17:05',1,NULL,NULL),
+(138,'test','DW','2025-09-09 16:48:29',3,NULL,NULL),
+(139,'test','DW','2025-10-07 16:35:43',4,'2025-10-07 16:47:10',5),
+(140,'test','DW','2025-10-07 18:18:19',6,'2025-10-08 11:26:42',7),
+(141,'test','DW','2025-10-08 11:27:56',8,NULL,NULL),
+(142,'test','DW','2025-10-16 11:29:18',9,NULL,NULL),
+(143,'test','DW','2025-10-16 11:29:59',10,'2025-10-16 11:30:25',11),
+(144,'test','DW','2025-10-16 13:51:53',11,'2025-10-16 13:53:35',13),
+(145,'test','DW','2025-10-16 13:53:51',14,NULL,NULL),
+(146,'test','DW','2025-10-17 14:43:46',15,'2025-10-17 14:59:36',15),
+(147,'test','DW','2025-10-18 19:09:36',18,'2025-10-20 10:35:11',20),
+(148,'T22','DW6WF39','2025-10-20 10:45:19',259126,'2025-10-20 10:53:37',259126),
+(149,'T22','DW6WF39','2025-10-20 10:54:55',259126,NULL,NULL),
+(150,'test','DW','2025-10-21 09:35:22',25,NULL,NULL);
 /*!40000 ALTER TABLE `work_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1021,4 +870,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-01 15:29:12
+-- Dump completed on 2025-10-22 12:18:19

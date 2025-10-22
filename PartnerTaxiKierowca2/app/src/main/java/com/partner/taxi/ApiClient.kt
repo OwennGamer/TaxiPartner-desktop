@@ -53,6 +53,10 @@ object ApiClient {
 
                 RefreshTokenResult.Unauthorized -> {
                     Log.w("ApiClient", "Token refresh rejected by server. Clearing local session.")
+                    RemoteLogService.logWarning(
+                        summary = "Odrzucono odświeżenie tokenu",
+                        details = "Serwer zwrócił HTTP 401 dla urządzenia $device"
+                    )
                     appContext?.let { ctx ->
                         jwtToken = null
                         SessionManager.clearToken(ctx)
@@ -61,6 +65,10 @@ object ApiClient {
 
                 is RefreshTokenResult.NetworkError -> {
                     response.close()
+                    RemoteLogService.logHandledException(
+                        summary = "Błąd sieci podczas odświeżania tokenu",
+                        throwable = refreshResult.exception
+                    )
                     throw TokenRefreshException(
                         "Nie udało się odświeżyć tokenu z powodu problemu z siecią.",
                         refreshResult.exception
@@ -126,20 +134,36 @@ object ApiClient {
                 }
 
             } else if (resp.code() == 401 || resp.code() == 403) {
+                RemoteLogService.logWarning(
+                    summary = "Odrzucono odświeżenie tokenu",
+                    details = "HTTP ${resp.code()} podczas odświeżania tokenu"
+                )
                 RefreshTokenResult.Unauthorized
             } else {
                 Log.w(
                     "ApiClient",
                     "Unexpected response while refreshing token: ${resp.code()} ${resp.message()}"
                 )
+                RemoteLogService.logWarning(
+                    summary = "Nieoczekiwana odpowiedź odświeżenia tokenu",
+                    details = "Kod ${resp.code()} ${resp.message()}"
+                )
                 RefreshTokenResult.NetworkError(
                     IOException("Refresh token request failed with HTTP ${resp.code()}")
                 )
             }
         } catch (io: IOException) {
+            RemoteLogService.logHandledException(
+                summary = "Wyjątek sieci podczas odświeżania tokenu",
+                throwable = io
+            )
             RefreshTokenResult.NetworkError(io)
         } catch (e: Exception) {
             Log.e("ApiClient", "Unexpected error while refreshing token", e)
+            RemoteLogService.logHandledException(
+                summary = "Nieoczekiwany błąd podczas odświeżania tokenu",
+                throwable = e
+            )
             RefreshTokenResult.NetworkError(
                 IOException(e.message ?: "Unexpected error during token refresh", e)
             )

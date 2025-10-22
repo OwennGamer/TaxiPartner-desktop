@@ -21,6 +21,11 @@ public class HelloApplication extends Application {
         // dodatkowo na wszelki wypadek nadpisujemy systemowe properties
         System.setProperty("user.language", "pl");
         System.setProperty("user.country", "PL");
+
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            RemoteLogService.logCrash("Nieobsługiwany wyjątek w wątku " + thread.getName(), throwable);
+            throwable.printStackTrace();
+        });
     }
 
     @Override

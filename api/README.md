@@ -2,6 +2,67 @@
 
 This directory contains PHP scripts that form the backend API.
 
+## Centralised application logs
+
+The desktop and mobile applications can stream crash reports and handled
+exceptions to the backend using the `log_error.php` endpoint. Each log entry
+stores the driver identifier, licence plate, application version and raw
+stack trace, making it easy to search for incidents reported by drivers.
+
+### Implementacja po stronie aplikacji mobilnej (Android)
+
+Kod Androida zawiera usługę `RemoteLogService`, która automatycznie:
+
+- rejestruje globalny `UncaughtExceptionHandler`, wysyłając crash do backendu,
+- wysyła ostrzeżenia dla błędów sieciowych poprzez `showConnectionIssueToast`,
+- dołącza do zgłoszenia `driver_id` oraz aktualną tablicę z `SessionManager`.
+
+Aby raportowanie działało:
+
+1. `App.onCreate()` wywołuje `RemoteLogService.install(this)` – mechanizm jest już dodany.
+2. `ApiClient` przekazuje `Device-Id` i token JWT (jeśli dostępny), więc serwer powiąże log z kontem.
+3. Własne logi można wysłać poprzez `RemoteLogService.logHandledException(...)`, `logWarning(...)` itd.,
+   np. w krytycznych fragmentach kodu działalności (Activity).
+
+Serwer przechowuje dane maksymalnie 60 dni, a logi można filtrować po `driver_id`
+i `license_plate`, dzięki czemu obsługa ma ten sam wgląd w problemy z Androida i desktopu.
+
+### `log_error.php`
+- Method: `POST`
+- Headers: `Device-Id` (required), `Authorization` (optional JWT)
+- Body:
+  ```json
+  {
+    "summary": "Short message shown in the UI",
+    "message": "Detailed description",
+    "stacktrace": "Raw stack trace (optional)",
+    "driver_id": "123",
+    "license_plate": "WX 12345",
+    "app_version": "2.4.1",
+    "source": "desktop|mobile",
+    "metadata": { "any": "structured data" }
+  }
+  ```
+- Response: `201` on success with `{ "status": "success", "log_id": number }`
+
+### `get_error_logs.php`
+- Method: `GET`
+- Requires a valid admin/flotowiec JWT (includes `auth.php`).
+- Query parameters (all optional):
+  - `driver_id`
+  - `license_plate`
+  - `from` / `to` (ISO 8601, `YYYY-MM-DD HH:MM:SS` or `YYYY-MM-DD`)
+  - `limit` (default 200, max 2000)
+- Response: `200` with `data` array sorted by `created_at DESC`.
+
+### `cleanup_error_logs.php`
+
+CLI utility that deletes log entries older than 60 days. Add it to cron, e.g.:
+
+```
+0 2 * * * /usr/bin/php /var/www/api/cleanup_error_logs.php >> /var/log/cron.log 2>&1
+```
+
 ## Firebase configuration
 
 The API uses Firebase Cloud Messaging via service account credentials. Before
