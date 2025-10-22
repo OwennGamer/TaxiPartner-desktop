@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.beans.property.SimpleStringProperty;
 import com.partnertaxi.taxipartneradmin.TableUtils;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -151,20 +152,47 @@ public class DriversController {
         setupFloatColumn(zlPerKmColumn,          nf);
         setupFloatColumn(fuelPerTurnoverColumn,  nf);
 
-        // 6) Wczytanie danych
+        // 6) Sortowanie z podsumowaniem zawsze na dole
+        driversTable.setSortPolicy(table -> {
+            var items = table.getItems();
+            if (items == null || items.isEmpty()) {
+                return true;
+            }
+
+            Driver summary = null;
+            for (int i = 0; i < items.size(); i++) {
+                Driver driver = items.get(i);
+                if (driver != null && driver.isSummary()) {
+                    summary = items.remove(i);
+                    break;
+                }
+            }
+
+            if (table.getComparator() != null) {
+                FXCollections.sort(items, table.getComparator());
+            }
+
+            if (summary != null) {
+                items.add(summary);
+            }
+
+            return true;
+        });
+
+        // 7) Wczytanie danych
         loadDrivers();
 
-        // 7) Przywracamy zaznaczanie całych wierszy
+        // 8) Przywracamy zaznaczanie całych wierszy
         driversTable.getSelectionModel().setCellSelectionEnabled(false);
         driversTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-// 8) Ctrl+C: kopiujemy wartość focusowanej komórki
+// 9) Ctrl+C: kopiujemy wartość focusowanej komórki
         TableUtils.enableCopyOnCtrlC(driversTable);
 
-        // 9) Zapamiętujemy i odtwarzamy kolejność kolumn
+        // 10) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
 
-// 10) Row factory to style summary row
+// 11) Row factory to style summary row
         driversTable.setRowFactory(tv -> new TableRow<>() {
             @Override
             protected void updateItem(Driver item, boolean empty) {
