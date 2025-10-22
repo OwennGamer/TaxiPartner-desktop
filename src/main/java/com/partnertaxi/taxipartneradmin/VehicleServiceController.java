@@ -1,5 +1,6 @@
 package com.partnertaxi.taxipartneradmin;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class VehicleServiceController {
     @FXML private TableColumn<ServiceRecord, String> colOpis;
     @FXML private TableColumn<ServiceRecord, Double> colKoszt;
     @FXML private TableColumn<ServiceRecord, Void> colZdjecia;
+    @FXML private Button addServiceButton;
+    @FXML private Button editServiceButton;
 
     private static final String PREF_KEY_COLUMNS_ORDER = "vehicleServiceTable.columnsOrder";
 
@@ -70,11 +73,15 @@ public class VehicleServiceController {
         TableUtils.enableCopyOnCtrlC(serviceTable);
         TableUtils.enableColumnsOrderPersistence(serviceTable, VehicleServiceController.class, PREF_KEY_COLUMNS_ORDER);
 
+        if (editServiceButton != null) {
+            editServiceButton.disableProperty().bind(Bindings.isNull(serviceTable.getSelectionModel().selectedItemProperty()));
+        }
+
         serviceTable.setRowFactory(tv -> {
             TableRow<ServiceRecord> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    openEditDialog(row.getItem());
+                    openServiceDialog(row.getItem());
                 }
             });
             return row;
@@ -116,15 +123,16 @@ public class VehicleServiceController {
         stage.show();
     }
 
-    private void openEditDialog(ServiceRecord rec) {
+    private void openServiceDialog(ServiceRecord rec) {
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Edycja serwisu");
+        boolean editing = rec != null;
+        dialog.setTitle(editing ? "Edycja serwisu" : "Dodawanie serwisu");
         ButtonType saveBtn = new ButtonType("Zapisz", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelBtn = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(saveBtn, cancelBtn);
 
-        TextField opisField = new TextField(rec.getOpis());
-        TextField kosztField = new TextField(String.valueOf(rec.getKoszt()));
+        TextField opisField = new TextField(editing ? rec.getOpis() : "");
+        TextField kosztField = new TextField(editing ? String.valueOf(rec.getKoszt()) : "");
 
         VBox box = new VBox(10,
                 new Label("Opis:"), opisField,
@@ -135,22 +143,50 @@ public class VehicleServiceController {
 
         dialog.setResultConverter(bt -> {
             if (bt == saveBtn) {
-                double koszt;
-                try {
-                    koszt = Double.parseDouble(kosztField.getText().trim());
-                } catch (NumberFormatException ex) {
+                if (rejestracja == null || rejestracja.isEmpty()) {
+                    new Alert(Alert.AlertType.ERROR, "Brak numeru rejestracyjnego pojazdu.").showAndWait();
                     return null;
                 }
-                boolean ok = ApiClient.updateServiceRecord(rec.getId(), opisField.getText(), koszt);
-                if (!ok) {
-                    new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować serwisu.").showAndWait();
+                double koszt;
+                try {
+                    koszt = Double.parseDouble(kosztField.getText().trim().replace(',', '.'));
+                } catch (NumberFormatException ex) {
+                    new Alert(Alert.AlertType.ERROR, "Nieprawidłowy format kosztu.").showAndWait();
+                    return null;
                 }
-                loadServices();
+                String opis = opisField.getText().trim();
+                boolean ok;
+                if (editing) {
+                    ok = ApiClient.updateServiceRecord(rec.getId(), opis, koszt);
+                } else {
+                    ok = ApiClient.addServiceRecord(rejestracja, opis, koszt);
+                }
+                if (!ok) {
+                    String message = editing
+                            ? "Nie udało się zaktualizować serwisu."
+                            : "Nie udało się dodać serwisu.";
+                    new Alert(Alert.AlertType.ERROR, message).showAndWait();
+                } else {
+                    loadServices();
+                }
             }
             return null;
         });
 
         dialog.showAndWait();
+    }
+
+    @FXML
+    private void onAddService() {
+        openServiceDialog(null);
+    }
+
+    @FXML
+    private void onEditService() {
+        ServiceRecord selected = serviceTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            openServiceDialog(selected);
+        }
     }
 
 }

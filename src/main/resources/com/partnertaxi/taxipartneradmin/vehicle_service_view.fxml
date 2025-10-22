@@ -20,4 +20,11 @@
             </columns>
         </TableView>
     </center>
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 10;">
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="addServiceButton" text="Dodaj serwis" onAction="#onAddService"/>
+            <Button fx:id="editServiceButton" text="Edytuj" onAction="#onEditService"/>
+        </HBox>
+    </bottom>
 </BorderPane>

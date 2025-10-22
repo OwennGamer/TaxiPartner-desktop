@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -92,6 +93,18 @@ public class ApiClient {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
         }
         return executeRequest(builder.build());
+    }
+
+    private static boolean isSuccess(ApiResult res) {
+        if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
+            try {
+                JSONObject resp = new JSONObject(res.body);
+                return "success".equals(resp.optString("status"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     public static String sendGetRequest(String endpoint) {
@@ -464,6 +477,20 @@ public class ApiClient {
         return list;
     }
 
+    public static boolean addServiceRecord(String rejestracja, String opis, double koszt) {
+        try {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .addFormDataPart("rejestracja", rejestracja != null ? rejestracja : "")
+                    .addFormDataPart("opis", opis != null ? opis : "")
+                    .addFormDataPart("koszt", String.format(Locale.US, "%.2f", koszt));
+            ApiResult res = sendMultipartPost("add_service.php", builder);
+            return isSuccess(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static List<DamageRecord> getDamageRecords(String rejestracja) {
         List<DamageRecord> list = new ArrayList<>();
         try {
@@ -495,18 +522,27 @@ public class ApiClient {
 
     public static boolean updateServiceRecord(int id, String opis, double koszt) {
         try {
-            String body = String.format("id=%d&opis=%s&koszt=%s",
-                    id, URLEncoder.encode(opis, "UTF-8"), koszt);
-            ApiResult res = sendPostRequest("update_service.php", body);
-            if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
-                try {
-                    JSONObject resp = new JSONObject(res.body);
-                    return "success".equals(resp.optString("status"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .addFormDataPart("id", String.valueOf(id))
+                    .addFormDataPart("opis", opis != null ? opis : "")
+                    .addFormDataPart("koszt", String.format(Locale.US, "%.2f", koszt));
+            ApiResult res = sendMultipartPost("update_service.php", builder);
+            return isSuccess(res);
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
+        }
+    }
+
+    public static boolean addDamageRecord(String rejestracja, String nrSzkody, String opis, String status) {
+        try {
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .addFormDataPart("rejestracja", rejestracja != null ? rejestracja : "")
+                    .addFormDataPart("nr_szkody", nrSzkody != null ? nrSzkody : "")
+                    .addFormDataPart("opis", opis != null ? opis : "")
+                    .addFormDataPart("status", status != null ? status : "");
+            ApiResult res = sendMultipartPost("add_damage.php", builder);
+            return isSuccess(res);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -517,29 +553,23 @@ public class ApiClient {
      * Updates an existing damage record.
      *
      * @param id        unique record identifier
+     * @param rejestracja vehicle registration number
      * @param nrSzkody  claim number to store
      * @param opis      damage description
      * @param status    current claim status
      * @return {@code true} when the update succeeds
      */
-    public static boolean updateDamageRecord(int id, String nrSzkody, String opis, String status) {
+    public static boolean updateDamageRecord(int id, String rejestracja, String nrSzkody, String opis, String status) {
         try {
-            String body = String.format("id=%d&nr_szkody=%s&opis=%s&status=%s",
-                    id,
-                    URLEncoder.encode(nrSzkody != null ? nrSzkody.trim() : "", "UTF-8"),
-                    URLEncoder.encode(opis, "UTF-8"),
-                    URLEncoder.encode(status, "UTF-8"));
+            MultipartBody.Builder builder = new MultipartBody.Builder()
+                    .addFormDataPart("id", String.valueOf(id))
+                    .addFormDataPart("rejestracja", rejestracja != null ? rejestracja : "")
+                    .addFormDataPart("nr_szkody", nrSzkody != null ? nrSzkody.trim() : "")
+                    .addFormDataPart("opis", opis != null ? opis : "")
+                    .addFormDataPart("status", status != null ? status : "");
 
-            ApiResult res = sendPostRequest("update_damage.php", body);
-            if (res.code == 200 && res.body != null && !res.body.isEmpty()) {
-                try {
-                    JSONObject resp = new JSONObject(res.body);
-                    return "success".equals(resp.optString("status"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            return false;
+            ApiResult res = sendMultipartPost("update_damage.php", builder);
+            return isSuccess(res);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

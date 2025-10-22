@@ -1,5 +1,6 @@
 package com.partnertaxi.taxipartneradmin;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,11 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TableRow;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import com.partnertaxi.taxipartneradmin.TableUtils;
-
-import java.util.List;
 
 public class VehicleDamageController {
 
@@ -28,6 +29,8 @@ public class VehicleDamageController {
     @FXML private TableColumn<DamageRecord, String> colData;
     @FXML private TableColumn<DamageRecord, String> colOpis;
     @FXML private TableColumn<DamageRecord, Void> colZdjecia;
+    @FXML private Button addDamageButton;
+    @FXML private Button editDamageButton;
 
     private static final String PREF_KEY_COLUMNS_ORDER = "vehicleDamageTable.columnsOrder";
 
@@ -72,11 +75,14 @@ public class VehicleDamageController {
         TableUtils.enableCopyOnCtrlC(damageTable);
         TableUtils.enableColumnsOrderPersistence(damageTable, VehicleDamageController.class, PREF_KEY_COLUMNS_ORDER);
 
+        if (editDamageButton != null) {
+            editDamageButton.disableProperty().bind(Bindings.isNull(damageTable.getSelectionModel().selectedItemProperty()));
+        }
         damageTable.setRowFactory(tv -> {
             TableRow<DamageRecord> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
-                    openEditDialog(row.getItem());
+                    openDamageDialog(row.getItem());
                 }
             });
             return row;
@@ -118,24 +124,28 @@ public class VehicleDamageController {
         stage.show();
     }
 
-    private void openEditDialog(DamageRecord rec) {
+    private void openDamageDialog(DamageRecord rec) {
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Edycja szkody");
+        boolean editing = rec != null;
+        dialog.setTitle(editing ? "Edycja szkody" : "Dodawanie szkody");
         ButtonType saveBtn = new ButtonType("Zapisz", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelBtn = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(saveBtn, cancelBtn);
-        TextField nrSzkodyField = new TextField(rec.getNrSzkody());
-        TextField opisField = new TextField(rec.getOpis());
+        TextField nrSzkodyField = new TextField(editing ? rec.getNrSzkody() : "");
+        TextField opisField = new TextField(editing ? rec.getOpis() : "");
         ComboBox<String> statusBox = new ComboBox<>();
-        statusBox.getItems().addAll(
+        statusBox.getItems().addAll(Arrays.asList(
                 "niezgłoszona",
                 "zgłoszona",
                 "czeka na wycenę",
                 "czeka na naprawę",
                 "czeka na rozliczenie",
                 "zamknięta"
-        );
-        statusBox.setValue(rec.getStatus());
+        ));
+        if (editing && rec.getStatus() != null && !statusBox.getItems().contains(rec.getStatus())) {
+            statusBox.getItems().add(rec.getStatus());
+        }
+        statusBox.setValue(editing ? rec.getStatus() : statusBox.getItems().isEmpty() ? null : statusBox.getItems().get(0));
 
         VBox box = new VBox(10,
                 new Label("Nr szkody:"), nrSzkodyField,
@@ -145,15 +155,39 @@ public class VehicleDamageController {
 
         dialog.setResultConverter(bt -> {
             if (bt == saveBtn) {
-                boolean ok = ApiClient.updateDamageRecord(
-                        rec.getId(),
-                        nrSzkodyField.getText().trim(),
-                        opisField.getText(),
-                        statusBox.getValue());
-                if (ok) {
-                    loadDamages(); // refresh table after successful update
+                if (rejestracja == null || rejestracja.isEmpty()) {
+                    new Alert(Alert.AlertType.ERROR, "Brak numeru rejestracyjnego pojazdu.").showAndWait();
+                    return null;
+                }
+
+                String nrSzkody = nrSzkodyField.getText().trim();
+                String opis = opisField.getText().trim();
+                String status = statusBox.getValue();
+
+                boolean ok;
+                if (editing) {
+                    ok = ApiClient.updateDamageRecord(
+                            rec.getId(),
+                            rejestracja,
+                            nrSzkody,
+                            opis,
+                            status
+                    );
                 } else {
-                    new Alert(Alert.AlertType.ERROR, "Nie udało się zaktualizować szkody.").showAndWait();
+                    ok = ApiClient.addDamageRecord(
+                            rejestracja,
+                            nrSzkody,
+                            opis,
+                            status
+                    );
+                }
+                if (ok) {
+                    loadDamages();
+                } else {
+                    String message = editing
+                            ? "Nie udało się zaktualizować szkody."
+                            : "Nie udało się dodać szkody.";
+                    new Alert(Alert.AlertType.ERROR, message).showAndWait();
                 }
 
             }
@@ -161,5 +195,18 @@ public class VehicleDamageController {
         });
 
         dialog.showAndWait();
+    }
+
+    @FXML
+    private void onAddDamage() {
+        openDamageDialog(null);
+    }
+
+    @FXML
+    private void onEditDamage() {
+        DamageRecord selected = damageTable.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            openDamageDialog(selected);
+        }
     }
 }
