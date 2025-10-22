@@ -59,6 +59,7 @@ public class EmployeesController {
     public void initialize() {
         if (colId != null) {
             colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+            colId.setComparator(TableUtils.naturalIdComparator());
         }
         if (colName != null) {
             colName.setCellValueFactory(new PropertyValueFactory<>("name"));

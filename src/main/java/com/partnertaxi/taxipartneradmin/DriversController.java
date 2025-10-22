@@ -216,6 +216,11 @@ public class DriversController {
     // Helper dla tekstowych kolumn
     private <T> void setupTextColumn(TableColumn<Driver, T> col, String propertyName) {
         col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        if ("id".equals(propertyName)) {
+            @SuppressWarnings("unchecked")
+            TableColumn<Driver, String> idCol = (TableColumn<Driver, String>) col;
+            idCol.setComparator(TableUtils.naturalIdComparator());
+        }
         col.setCellFactory(c -> {
             TableCell<Driver, T> cell = new TableCell<>() {
                 @Override protected void updateItem(T item, boolean empty) {

@@ -44,6 +44,7 @@ public class RefuelsHistoryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // podstawowe kolumny
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idColumn.setComparator(TableUtils.naturalIdComparator());
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("refuelDate"));
         fuelAmountColumn.setCellValueFactory(new PropertyValueFactory<>("fuelAmount"));
         costColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));

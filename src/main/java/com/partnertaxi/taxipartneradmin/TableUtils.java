@@ -11,13 +11,91 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
 import javafx.geometry.Orientation;
+import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 
 public class TableUtils {
+
+    private static final Comparator<String> NATURAL_ID_COMPARATOR = (left, right) -> {
+        if (Objects.equals(left, right)) {
+            return 0;
+        }
+        if (left == null) {
+            return -1;
+        }
+        if (right == null) {
+            return 1;
+        }
+
+        int indexLeft = 0;
+        int indexRight = 0;
+        int lengthLeft = left.length();
+        int lengthRight = right.length();
+
+        while (indexLeft < lengthLeft && indexRight < lengthRight) {
+            char charLeft = left.charAt(indexLeft);
+            char charRight = right.charAt(indexRight);
+
+            boolean digitLeft = Character.isDigit(charLeft);
+            boolean digitRight = Character.isDigit(charRight);
+
+            if (digitLeft && digitRight) {
+                int startLeft = indexLeft;
+                int startRight = indexRight;
+
+                while (indexLeft < lengthLeft && Character.isDigit(left.charAt(indexLeft))) {
+                    indexLeft++;
+                }
+                while (indexRight < lengthRight && Character.isDigit(right.charAt(indexRight))) {
+                    indexRight++;
+                }
+
+                String numberLeft = left.substring(startLeft, indexLeft);
+                String numberRight = right.substring(startRight, indexRight);
+
+                BigInteger valueLeft = new BigInteger(numberLeft);
+                BigInteger valueRight = new BigInteger(numberRight);
+                int compare = valueLeft.compareTo(valueRight);
+                if (compare != 0) {
+                    return compare;
+                }
+
+                compare = Integer.compare(numberLeft.length(), numberRight.length());
+                if (compare != 0) {
+                    return compare;
+                }
+
+            } else if (digitLeft != digitRight) {
+                return digitLeft ? 1 : -1;
+            } else {
+                int compare = Character.compare(Character.toUpperCase(charLeft), Character.toUpperCase(charRight));
+                if (compare != 0) {
+                    return compare;
+                }
+                indexLeft++;
+                indexRight++;
+            }
+        }
+
+        if (indexLeft < lengthLeft) {
+            return 1;
+        }
+        if (indexRight < lengthRight) {
+            return -1;
+        }
+
+        return 0;
+    };
+
+    public static Comparator<String> naturalIdComparator() {
+        return NATURAL_ID_COMPARATOR;
+    }
 
     public static <T> void enableCopyOnCtrlC(TableView<T> table) {
         table.setOnKeyPressed(evt -> {
