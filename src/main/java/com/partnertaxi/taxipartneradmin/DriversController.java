@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 import javafx.beans.property.SimpleStringProperty;
 import com.partnertaxi.taxipartneradmin.TableUtils;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -26,12 +23,8 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Map;
-import java.util.List;
 import java.time.temporal.TemporalAdjusters;
 
 
@@ -66,40 +59,7 @@ public class DriversController {
     @FXML private HBox                         customRangeBox;
     @FXML private DatePicker                   startDatePicker;
     @FXML private DatePicker                   endDatePicker;
-    @FXML private HBox                         summaryRow;
-    @FXML private StackPane                    idPlaceholder;
-    @FXML private StackPane                    namePlaceholder;
-    @FXML private Label                        nameSummaryLabel;
-    @FXML private StackPane                    saldoSumContainer;
-    @FXML private Label                        saldoSumValue;
-    @FXML private StackPane                    statusPlaceholder;
-    @FXML private StackPane                    vehiclePlatePlaceholder;
-    @FXML private StackPane                    fuelCostPlaceholder;
-    @FXML private StackPane                    fuelSumContainer;
-    @FXML private Label                        fuelSumValue;
-    @FXML private StackPane                    percentTurnoverPlaceholder;
-    @FXML private StackPane                    cardCommissionPlaceholder;
-    @FXML private StackPane                    partnerCommissionPlaceholder;
-    @FXML private StackPane                    boltCommissionPlaceholder;
-    @FXML private StackPane                    settlementLimitPlaceholder;
-    @FXML private StackPane                    voucherCurrentContainer;
-    @FXML private Label                        voucherCurrentSumValue;
-    @FXML private StackPane                    voucherPreviousContainer;
-    @FXML private Label                        voucherPreviousSumValue;
-    @FXML private StackPane                    cardSumContainer;
-    @FXML private Label                        cardSumValue;
-    @FXML private StackPane                    cashSumContainer;
-    @FXML private Label                        cashSumValue;
-    @FXML private StackPane                    lotSumContainer;
-    @FXML private Label                        lotSumValue;
-    @FXML private StackPane                    turnoverSumContainer;
-    @FXML private Label                        turnoverSumValue;
-    @FXML private StackPane                    zlPerKmAvgContainer;
-    @FXML private Label                        zlPerKmAvgValue;
-    @FXML private StackPane                    fuelPerTurnoverAvgContainer;
-    @FXML private Label                        fuelPerTurnoverAvgValue;
-    @FXML private StackPane                    createdAtPlaceholder;
-    @FXML private StackPane                    logoutPlaceholder;
+
 
     private LocalDate statsStartDate;
     private LocalDate statsEndDate;
@@ -107,8 +67,6 @@ public class DriversController {
     private LocalDate customStartDate;
     private LocalDate customEndDate;
     private boolean updatingCustomRange;
-    private final Map<String, Region> summaryNodes = new HashMap<>();
-    private final List<Region> summaryNodesDefaultOrder = new ArrayList<>();
 
     private enum DateFilterOption {
         PREVIOUS_YEAR,
@@ -271,8 +229,6 @@ public class DriversController {
             }
         });
 
-
-        configureSummaryRow();
         setupDateFilters();
     }
 
@@ -306,153 +262,7 @@ public class DriversController {
         return nf;
     }
 
-    private void configureSummaryRow() {
-        if (summaryRow == null) {
-            return;
-        }
 
-        summaryNodes.clear();
-        summaryNodesDefaultOrder.clear();
-
-        registerSummaryNode("idColumn", idPlaceholder);
-        registerSummaryNode("nameColumn", namePlaceholder);
-        registerSummaryNode("saldoColumn", saldoSumContainer);
-        registerSummaryNode("statusColumn", statusPlaceholder);
-        registerSummaryNode("vehiclePlateColumn", vehiclePlatePlaceholder);
-        registerSummaryNode("fuelCostColumn", fuelCostPlaceholder);
-        registerSummaryNode("fuelCostSumColumn", fuelSumContainer);
-        registerSummaryNode("percentTurnoverColumn", percentTurnoverPlaceholder);
-        registerSummaryNode("cardCommissionColumn", cardCommissionPlaceholder);
-        registerSummaryNode("partnerCommissionColumn", partnerCommissionPlaceholder);
-        registerSummaryNode("boltCommissionColumn", boltCommissionPlaceholder);
-        registerSummaryNode("settlementLimitColumn", settlementLimitPlaceholder);
-        registerSummaryNode("voucherCurrentColumn", voucherCurrentContainer);
-        registerSummaryNode("voucherPreviousColumn", voucherPreviousContainer);
-        registerSummaryNode("cardColumn", cardSumContainer);
-        registerSummaryNode("cashColumn", cashSumContainer);
-        registerSummaryNode("lotColumn", lotSumContainer);
-        registerSummaryNode("turnoverColumn", turnoverSumContainer);
-        registerSummaryNode("zlPerKmColumn", zlPerKmAvgContainer);
-        registerSummaryNode("fuelPerTurnoverColumn", fuelPerTurnoverAvgContainer);
-        registerSummaryNode("createdAtColumn", createdAtPlaceholder);
-        registerSummaryNode("logoutColumn", logoutPlaceholder);
-
-        bindColumnWidth(idPlaceholder, idColumn);
-        bindColumnWidth(namePlaceholder, nameColumn);
-        bindColumnWidth(saldoSumContainer, saldoColumn);
-        bindColumnWidth(statusPlaceholder, statusColumn);
-        bindColumnWidth(vehiclePlatePlaceholder, vehiclePlateColumn);
-        bindColumnWidth(fuelCostPlaceholder, fuelCostColumn);
-        bindColumnWidth(fuelSumContainer, fuelCostSumColumn);
-        bindColumnWidth(percentTurnoverPlaceholder, percentTurnoverColumn);
-        bindColumnWidth(cardCommissionPlaceholder, cardCommissionColumn);
-        bindColumnWidth(partnerCommissionPlaceholder, partnerCommissionColumn);
-        bindColumnWidth(boltCommissionPlaceholder, boltCommissionColumn);
-        bindColumnWidth(settlementLimitPlaceholder, settlementLimitColumn);
-        bindColumnWidth(voucherCurrentContainer, voucherCurrentColumn);
-        bindColumnWidth(voucherPreviousContainer, voucherPreviousColumn);
-        bindColumnWidth(cardSumContainer, cardColumn);
-        bindColumnWidth(cashSumContainer, cashColumn);
-        bindColumnWidth(lotSumContainer, lotColumn);
-        bindColumnWidth(turnoverSumContainer, turnoverColumn);
-        bindColumnWidth(zlPerKmAvgContainer, zlPerKmColumn);
-        bindColumnWidth(fuelPerTurnoverAvgContainer, fuelPerTurnoverColumn);
-        bindColumnWidth(createdAtPlaceholder, createdAtColumn);
-        bindColumnWidth(logoutPlaceholder, logoutColumn);
-
-        TableUtils.bindHorizontalScroll(driversTable, summaryRow);
-        updateSummaryRowOrder();
-
-        driversTable.getColumns().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> {
-            while (change.next()) {
-                updateSummaryRowOrder();
-            }
-        });
-    }
-
-    private void registerSummaryNode(String columnId, Region node) {
-        if (columnId == null || node == null) {
-            return;
-        }
-        summaryNodes.put(columnId, node);
-        if (!summaryNodesDefaultOrder.contains(node)) {
-            summaryNodesDefaultOrder.add(node);
-        }
-    }
-
-    private void bindColumnWidth(Region node, TableColumn<Driver, ?> column) {
-        if (node == null || column == null) {
-            return;
-        }
-        node.minWidthProperty().bind(column.widthProperty());
-        node.prefWidthProperty().bind(column.widthProperty());
-        node.maxWidthProperty().bind(column.widthProperty());
-    }
-
-    private void updateSummaryRowOrder() {
-        if (summaryRow == null) {
-            return;
-        }
-        List<Region> ordered = new ArrayList<>();
-        for (TableColumn<Driver, ?> column : driversTable.getColumns()) {
-            Region node = summaryNodes.get(column.getId());
-            if (node != null && !ordered.contains(node)) {
-                ordered.add(node);
-            }
-        }
-        for (Region node : summaryNodesDefaultOrder) {
-            if (!ordered.contains(node)) {
-                ordered.add(node);
-            }
-        }
-        summaryRow.getChildren().setAll(ordered);
-    }
-
-    private void updateSummaryRowValues(NumberFormat format,
-                                        float sumSaldo,
-                                        float sumFuel,
-                                        float sumVoucherCurrent,
-                                        float sumVoucherPrevious,
-                                        float sumCard,
-                                        float sumCash,
-                                        float sumLot,
-                                        float sumTurnover,
-                                        float avgZlPerKm,
-                                        float avgFuelPerTurnover) {
-        if (nameSummaryLabel != null) {
-            nameSummaryLabel.setText("SUMA");
-        }
-        if (saldoSumValue != null) {
-            saldoSumValue.setText(format.format(sumSaldo));
-        }
-        if (fuelSumValue != null) {
-            fuelSumValue.setText(format.format(sumFuel));
-        }
-        if (voucherCurrentSumValue != null) {
-            voucherCurrentSumValue.setText(format.format(sumVoucherCurrent));
-        }
-        if (voucherPreviousSumValue != null) {
-            voucherPreviousSumValue.setText(format.format(sumVoucherPrevious));
-        }
-        if (cardSumValue != null) {
-            cardSumValue.setText(format.format(sumCard));
-        }
-        if (cashSumValue != null) {
-            cashSumValue.setText(format.format(sumCash));
-        }
-        if (lotSumValue != null) {
-            lotSumValue.setText(format.format(sumLot));
-        }
-        if (turnoverSumValue != null) {
-            turnoverSumValue.setText(format.format(sumTurnover));
-        }
-        if (zlPerKmAvgValue != null) {
-            zlPerKmAvgValue.setText(format.format(avgZlPerKm));
-        }
-        if (fuelPerTurnoverAvgValue != null) {
-            fuelPerTurnoverAvgValue.setText(format.format(avgFuelPerTurnover));
-        }
-    }
 
     // Helper dla numerycznych kolumn z formatowaniem
     private void setupFloatColumn(TableColumn<Driver, Float> col, NumberFormat nf) {
@@ -637,7 +447,6 @@ public class DriversController {
             JsonObject json = JsonParser.parseString(resp).getAsJsonObject();
             if (!"success".equals(json.get("status").getAsString())) {
                 showError("Błąd", json.get("message").getAsString());
-                updateSummaryRowValues(createNumberFormat(), 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
                 return;
             }
             JsonArray arr = json.getAsJsonArray("drivers");
@@ -660,7 +469,6 @@ public class DriversController {
             LocalDate effectiveEnd = statsEndDate != null ? statsEndDate : LocalDate.now();
             if (effectiveEnd.isBefore(effectiveStart)) {
                 showError("Błędny zakres dat", "Data końcowa nie może być wcześniejsza niż początkowa.");
-                updateSummaryRowValues(createNumberFormat(), 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
                 return;
             }
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -768,22 +576,11 @@ public class DriversController {
                     true
             );
             driversTable.getItems().add(summary);
-            updateSummaryRowValues(format,
-                    sumSaldo,
-                    sumFuel,
-                    sumVoucherCurrent,
-                    sumVoucherPrevious,
-                    sumCard,
-                    sumCash,
-                    sumLot,
-                    sumTurnover,
-                    avgZlPerKm,
-                    avgFuelPerTurnover);
 
         } catch (Exception ex) {
             ex.printStackTrace();
             showError("Błąd połączenia", "Nie można się połączyć z serwerem.");
-            updateSummaryRowValues(createNumberFormat(), 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+
         }
     }
 

@@ -39,7 +39,7 @@ CREATE TABLE `app_error_logs` (
   KEY `idx_app_error_logs_driver` (`driver_id`),
   KEY `idx_app_error_logs_plate` (`license_plate`),
   KEY `idx_app_error_logs_created` (`created_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +48,75 @@ CREATE TABLE `app_error_logs` (
 
 LOCK TABLES `app_error_logs` WRITE;
 /*!40000 ALTER TABLE `app_error_logs` DISABLE KEYS */;
+INSERT INTO `app_error_logs` VALUES
+(1,'mobile','WARN','Odrzucono odświeżenie tokenu','Serwer zwrócił HTTP 401 dla urządzenia unknown',NULL,NULL,NULL,'1.1.2','eeb63091d2636dfe',NULL,'2025-10-22 12:54:43'),
+(2,'mobile','WARN','Odrzucono odświeżenie tokenu','Serwer zwrócił HTTP 401 dla urządzenia unknown',NULL,'test','DW1','1.1.2','eeb63091d2636dfe',NULL,'2025-10-22 15:42:17'),
+(3,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:51:40'),
+(4,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:51:40'),
+(5,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-22 16:51:41'),
+(6,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:51:58'),
+(7,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:51:58'),
+(8,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-22 16:51:58'),
+(9,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:52:10'),
+(10,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:52:10'),
+(11,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-22 16:52:10'),
+(12,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:52:28'),
+(13,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 16:52:28'),
+(14,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-22 16:52:28'),
+(15,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 17:28:31'),
+(16,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-22 17:28:32'),
+(17,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-22 17:28:32'),
+(18,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-23 10:01:17'),
+(19,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-23 10:01:17'),
+(20,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 10:01:17'),
+(21,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-23 15:59:55'),
+(22,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-23 15:59:55'),
+(23,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 15:59:55'),
+(24,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:04:01'),
+(25,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test','DW','1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:04:01'),
+(26,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test','DW','1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:04:01'),
+(27,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:09:34'),
+(28,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:09:34'),
+(29,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:35'),
+(30,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:35'),
+(31,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:10:35'),
+(32,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:41'),
+(33,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:41'),
+(34,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:10:41'),
+(35,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:45'),
+(36,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:45'),
+(37,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:10:45'),
+(38,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:46'),
+(39,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:10:46'),
+(40,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:10:46'),
+(41,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:00'),
+(42,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:00'),
+(43,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:11:00'),
+(44,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:01'),
+(45,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:01'),
+(46,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:11:02'),
+(47,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:09'),
+(48,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:10'),
+(49,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:11:10'),
+(50,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:51'),
+(51,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:11:51'),
+(52,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:11:51'),
+(53,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:12:28'),
+(54,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:12:28'),
+(55,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:12:28'),
+(56,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:13:18'),
+(57,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:13:19'),
+(58,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:13:19'),
+(59,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:14:46'),
+(60,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:14:46'),
+(61,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:14:46'),
+(62,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:14:55'),
+(63,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-23 16:14:55'),
+(64,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-23 16:14:55'),
+(65,'mobile','WARN','Nieoczekiwana odpowiedź odświeżenia tokenu','Kod 404 Not Found',NULL,'test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-24 09:32:42'),
+(66,'mobile','ERROR','Błąd sieci podczas odświeżania tokenu','Refresh token request failed with HTTP 404','java.io.IOException: Refresh token request failed with HTTP 404\n	at com.partner.taxi.ApiClient.refreshToken(ApiClient.kt:152)\n	at com.partner.taxi.ApiClient.unauthorizedInterceptor$lambda$8(ApiClient.kt:44)\n	at com.partner.taxi.ApiClient.$r8$lambda$qA_KXSgo0vHlCNINe58vablllzg(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda1.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at com.partner.taxi.ApiClient.authInterceptor$lambda$3(ApiClient.kt:36)\n	at com.partner.taxi.ApiClient.$r8$lambda$kqQhDfdtA_cdsPC_o7qWK3NjtQE(Unknown Source:0)\n	at com.partner.taxi.ApiClient$$ExternalSyntheticLambda0.intercept(D8$$SyntheticClass:0)\n	at okhttp3.internal.http.RealInterceptorChain.proceed(RealInterceptorChain.kt:109)\n	at okhttp3.internal.connection.RealCall.getResponseWithInterceptorChain$okhttp(RealCall.kt:201)\n	at okhttp3.internal.connection.RealCall$AsyncCall.run(RealCall.kt:517)\n	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)\n	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)\n	at java.lang.Thread.run(Thread.java:1119)','test',NULL,'1.1.3','97fe62eefa683015',NULL,'2025-10-24 09:32:42'),
+(67,'mobile','WARN','Problem z połączeniem z API','Nie udało się odświeżyć tokenu z powodu problemu z siecią.',NULL,'test',NULL,'1.1.3','97fe62eefa683015','{\"exception\":\"com.partner.taxi.TokenRefreshException\",\"cause\":\"java.io.IOException\",\"thread\":\"main\"}','2025-10-24 09:32:42'),
+(68,'mobile','WARN','Odrzucono odświeżenie tokenu','Serwer zwrócił HTTP 401 dla urządzenia unknown',NULL,NULL,NULL,'1.1.3','eeb63091d2636dfe',NULL,'2025-10-24 09:33:01');
 /*!40000 ALTER TABLE `app_error_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +134,7 @@ CREATE TABLE `collaboration_terms` (
   `term_value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +179,13 @@ INSERT INTO `collaboration_terms` VALUES
 (75,'T22','cardCommission','3'),
 (76,'T22','partnerCommission','0'),
 (77,'T22','boltCommission','0'),
-(78,'T22','settlementLimit','1000');
+(78,'T22','settlementLimit','1000'),
+(79,'test1','percentTurnover','40'),
+(80,'test1','fuelCost','0'),
+(81,'test1','cardCommission','3'),
+(82,'test1','partnerCommission','20'),
+(83,'test1','boltCommission','20'),
+(84,'test1','settlementLimit','500');
 /*!40000 ALTER TABLE `collaboration_terms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,10 +253,11 @@ CREATE TABLE `historia_salda` (
   `zmiana` decimal(10,2) NOT NULL,
   `saldo_po` decimal(10,2) NOT NULL,
   `powod` varchar(100) NOT NULL,
+  `counter_type` enum('saldo','voucher_current','voucher_previous') NOT NULL DEFAULT 'saldo',
   `opis` text DEFAULT NULL,
   `data` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,60 +267,62 @@ CREATE TABLE `historia_salda` (
 LOCK TABLES `historia_salda` WRITE;
 /*!40000 ALTER TABLE `historia_salda` DISABLE KEYS */;
 INSERT INTO `historia_salda` VALUES
-(1,'T99',100.00,40.00,'Premia',NULL,'2025-09-02 19:23:07'),
-(2,'T99',78.00,118.00,'Premia',NULL,'2025-09-02 19:24:38'),
-(3,'T99',-90.00,28.00,'Rozliczenie',NULL,'2025-09-02 19:25:07'),
-(4,'T99',78.00,106.00,'Rozliczenie',NULL,'2025-09-02 19:26:17'),
-(5,'T99',77.00,183.00,'Rozliczenie',NULL,'2025-09-02 19:26:53'),
-(6,'T99',100.00,283.00,'Rozliczenie',NULL,'2025-09-02 19:34:11'),
-(7,'T99',232.00,515.00,'Rozliczenie',NULL,'2025-09-02 20:14:44'),
-(8,'T99',111.00,626.00,'Premia',NULL,'2025-09-02 20:32:30'),
-(9,'T99',567.00,1193.00,'Rozliczenie',NULL,'2025-09-02 20:45:24'),
-(10,'T99',12.00,1205.00,'Kara',NULL,'2025-09-02 21:14:36'),
-(11,'T99',100.00,1305.00,'Rozliczenie',NULL,'2025-09-03 09:47:49'),
-(12,'T99',-90.00,1215.00,'Kara',NULL,'2025-09-03 09:48:15'),
-(13,'T99',32.00,1247.00,'Rozliczenie',NULL,'2025-09-03 09:49:52'),
-(14,'T1',100.00,100.00,'Rozliczenie',NULL,'2025-09-03 10:01:18'),
-(15,'T99',100.00,1347.00,'Rozliczenie',NULL,'2025-09-03 10:08:48'),
-(16,'T99',-10.00,1337.00,'Kara',NULL,'2025-09-03 10:09:42'),
-(17,'T99',-100.00,1237.00,'Kara',NULL,'2025-09-03 10:10:12'),
-(18,'T99',10.00,1247.00,'Kara',NULL,'2025-09-03 10:10:43'),
-(19,'T99',111.00,1358.00,'Premia',NULL,'2025-09-03 10:11:26'),
-(20,'T99',100.00,1458.00,'Premia',NULL,'2025-09-03 10:11:53'),
-(21,'T99',-100.00,1358.00,'Kara',NULL,'2025-09-03 10:14:13'),
-(22,'T99',100.00,1458.00,'Rozliczenie',NULL,'2025-09-03 10:14:53'),
-(23,'T99',100.00,1558.00,'Rozliczenie',NULL,'2025-09-03 10:15:12'),
-(24,'T1',22.00,122.00,'Rozliczenie',NULL,'2025-09-03 10:16:35'),
-(25,'T1',33.00,155.00,'Rozliczenie',NULL,'2025-09-03 10:17:11'),
-(26,'T1',100.00,255.00,'Kara',NULL,'2025-09-03 10:50:25'),
-(27,'T1',111.00,366.00,'Rozliczenie',NULL,'2025-09-03 10:59:52'),
-(28,'T1',1.00,367.00,'Rozliczenie',NULL,'2025-09-03 11:02:37'),
-(29,'T1',1.00,368.00,'Rozliczenie',NULL,'2025-09-03 11:03:41'),
-(30,'T1',22.00,390.00,'Rozliczenie',NULL,'2025-09-03 11:03:56'),
-(31,'T99',33.00,1591.00,'Rozliczenie',NULL,'2025-09-03 11:05:13'),
-(32,'T99',333.00,1924.00,'Rozliczenie',NULL,'2025-09-03 11:05:27'),
-(33,'T108',2328.00,2328.00,'Rozliczenie',NULL,'2025-09-04 09:42:19'),
-(34,'T108',933.00,3261.00,'Rozliczenie',NULL,'2025-09-04 09:42:56'),
-(35,'T108',0.37,3261.37,'Rozliczenie',NULL,'2025-09-04 09:43:30'),
-(36,'T108',0.18,3261.55,'Rozliczenie',NULL,'2025-09-04 09:43:54'),
-(37,'T108',1600.00,4861.55,'podstawa IX',NULL,'2025-09-04 09:44:54'),
-(38,'T108',-207.00,4654.55,'rata 11/20',NULL,'2025-09-04 09:45:23'),
-(39,'T108',-2.00,4653.34,'Kara',NULL,'2025-09-04 09:50:56'),
-(40,'T108',1.21,4654.55,'Premia',NULL,'2025-09-04 09:52:31'),
-(41,'T108',320.00,5048.15,'dniówka za Leszno 31-08',NULL,'2025-09-04 14:22:56'),
-(42,'T1',-194.00,0.00,'Kara',NULL,'2025-09-04 14:52:31'),
-(43,'T1',45.00,45.00,'jesteś zjebany',NULL,'2025-09-04 14:53:02'),
-(44,'T1',-45.00,0.00,'Rozliczenie',NULL,'2025-09-04 14:53:31'),
-(45,'T21',-60.00,-36.72,'Kara',NULL,'2025-09-04 15:15:19'),
-(46,'T21',36.72,0.00,'bo tak',NULL,'2025-09-04 15:17:37'),
-(47,'T21',1195.21,1195.21,'Rozliczenie',NULL,'2025-09-04 15:19:30'),
-(48,'T21',424.26,1619.47,'Rozliczenie',NULL,'2025-09-04 15:19:50'),
-(49,'T21',-1400.00,219.47,'Rozliczenie',NULL,'2025-09-04 15:21:07'),
-(50,'T15',-13.58,0.00,'Rozliczenie',NULL,'2025-09-05 16:28:01'),
-(51,'T15',-41.03,-41.03,'Rozliczenie',NULL,'2025-09-05 16:28:35'),
-(52,'test',50.00,166.40,'Rozliczenie',NULL,'2025-10-20 10:34:39'),
-(53,'T22',543.64,2653.64,'Rozliczenie',NULL,'2025-10-20 10:48:21'),
-(54,'T22',-2000.00,653.64,'Rozliczenie',NULL,'2025-10-20 10:52:40');
+(1,'T99',100.00,40.00,'Premia','saldo',NULL,'2025-09-02 19:23:07'),
+(2,'T99',78.00,118.00,'Premia','saldo',NULL,'2025-09-02 19:24:38'),
+(3,'T99',-90.00,28.00,'Rozliczenie','saldo',NULL,'2025-09-02 19:25:07'),
+(4,'T99',78.00,106.00,'Rozliczenie','saldo',NULL,'2025-09-02 19:26:17'),
+(5,'T99',77.00,183.00,'Rozliczenie','saldo',NULL,'2025-09-02 19:26:53'),
+(6,'T99',100.00,283.00,'Rozliczenie','saldo',NULL,'2025-09-02 19:34:11'),
+(7,'T99',232.00,515.00,'Rozliczenie','saldo',NULL,'2025-09-02 20:14:44'),
+(8,'T99',111.00,626.00,'Premia','saldo',NULL,'2025-09-02 20:32:30'),
+(9,'T99',567.00,1193.00,'Rozliczenie','saldo',NULL,'2025-09-02 20:45:24'),
+(10,'T99',12.00,1205.00,'Kara','saldo',NULL,'2025-09-02 21:14:36'),
+(11,'T99',100.00,1305.00,'Rozliczenie','saldo',NULL,'2025-09-03 09:47:49'),
+(12,'T99',-90.00,1215.00,'Kara','saldo',NULL,'2025-09-03 09:48:15'),
+(13,'T99',32.00,1247.00,'Rozliczenie','saldo',NULL,'2025-09-03 09:49:52'),
+(14,'T1',100.00,100.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:01:18'),
+(15,'T99',100.00,1347.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:08:48'),
+(16,'T99',-10.00,1337.00,'Kara','saldo',NULL,'2025-09-03 10:09:42'),
+(17,'T99',-100.00,1237.00,'Kara','saldo',NULL,'2025-09-03 10:10:12'),
+(18,'T99',10.00,1247.00,'Kara','saldo',NULL,'2025-09-03 10:10:43'),
+(19,'T99',111.00,1358.00,'Premia','saldo',NULL,'2025-09-03 10:11:26'),
+(20,'T99',100.00,1458.00,'Premia','saldo',NULL,'2025-09-03 10:11:53'),
+(21,'T99',-100.00,1358.00,'Kara','saldo',NULL,'2025-09-03 10:14:13'),
+(22,'T99',100.00,1458.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:14:53'),
+(23,'T99',100.00,1558.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:15:12'),
+(24,'T1',22.00,122.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:16:35'),
+(25,'T1',33.00,155.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:17:11'),
+(26,'T1',100.00,255.00,'Kara','saldo',NULL,'2025-09-03 10:50:25'),
+(27,'T1',111.00,366.00,'Rozliczenie','saldo',NULL,'2025-09-03 10:59:52'),
+(28,'T1',1.00,367.00,'Rozliczenie','saldo',NULL,'2025-09-03 11:02:37'),
+(29,'T1',1.00,368.00,'Rozliczenie','saldo',NULL,'2025-09-03 11:03:41'),
+(30,'T1',22.00,390.00,'Rozliczenie','saldo',NULL,'2025-09-03 11:03:56'),
+(31,'T99',33.00,1591.00,'Rozliczenie','saldo',NULL,'2025-09-03 11:05:13'),
+(32,'T99',333.00,1924.00,'Rozliczenie','saldo',NULL,'2025-09-03 11:05:27'),
+(33,'T108',2328.00,2328.00,'Rozliczenie','saldo',NULL,'2025-09-04 09:42:19'),
+(34,'T108',933.00,3261.00,'Rozliczenie','saldo',NULL,'2025-09-04 09:42:56'),
+(35,'T108',0.37,3261.37,'Rozliczenie','saldo',NULL,'2025-09-04 09:43:30'),
+(36,'T108',0.18,3261.55,'Rozliczenie','saldo',NULL,'2025-09-04 09:43:54'),
+(37,'T108',1600.00,4861.55,'podstawa IX','saldo',NULL,'2025-09-04 09:44:54'),
+(38,'T108',-207.00,4654.55,'rata 11/20','saldo',NULL,'2025-09-04 09:45:23'),
+(39,'T108',-2.00,4653.34,'Kara','saldo',NULL,'2025-09-04 09:50:56'),
+(40,'T108',1.21,4654.55,'Premia','saldo',NULL,'2025-09-04 09:52:31'),
+(41,'T108',320.00,5048.15,'dniówka za Leszno 31-08','saldo',NULL,'2025-09-04 14:22:56'),
+(42,'T1',-194.00,0.00,'Kara','saldo',NULL,'2025-09-04 14:52:31'),
+(43,'T1',45.00,45.00,'jesteś zjebany','saldo',NULL,'2025-09-04 14:53:02'),
+(44,'T1',-45.00,0.00,'Rozliczenie','saldo',NULL,'2025-09-04 14:53:31'),
+(45,'T21',-60.00,-36.72,'Kara','saldo',NULL,'2025-09-04 15:15:19'),
+(46,'T21',36.72,0.00,'bo tak','saldo',NULL,'2025-09-04 15:17:37'),
+(47,'T21',1195.21,1195.21,'Rozliczenie','saldo',NULL,'2025-09-04 15:19:30'),
+(48,'T21',424.26,1619.47,'Rozliczenie','saldo',NULL,'2025-09-04 15:19:50'),
+(49,'T21',-1400.00,219.47,'Rozliczenie','saldo',NULL,'2025-09-04 15:21:07'),
+(50,'T15',-13.58,0.00,'Rozliczenie','saldo',NULL,'2025-09-05 16:28:01'),
+(51,'T15',-41.03,-41.03,'Rozliczenie','saldo',NULL,'2025-09-05 16:28:35'),
+(52,'test',50.00,166.40,'Rozliczenie','saldo',NULL,'2025-10-20 10:34:39'),
+(53,'T22',543.64,2653.64,'Rozliczenie','saldo',NULL,'2025-10-20 10:48:21'),
+(54,'T22',-2000.00,653.64,'Rozliczenie','saldo',NULL,'2025-10-20 10:52:40'),
+(55,'test',100.67,305.87,'Rozliczenie','saldo',NULL,'2025-10-22 12:31:17'),
+(56,'test',100.03,405.90,'Rozliczenie','saldo',NULL,'2025-10-22 12:49:56');
 /*!40000 ALTER TABLE `historia_salda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +360,7 @@ CREATE TABLE `inwentaryzacje` (
   `uwagi` text DEFAULT NULL,
   `kierowca_id` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +376,10 @@ INSERT INTO `inwentaryzacje` VALUES
 (8,'DW8YK67',119511,1,'uploads/inventory/front_68b99022d1139.jpg','2025-09-04 15:12:02','uploads/inventory/back_68b99022d13a5.jpg','uploads/inventory/left_68b99022d15d8.jpg','uploads/inventory/right_68b99022d17a8.jpg',0,NULL,NULL,NULL,NULL,1,1,0,0,1,1,1,1,0,NULL,'T21'),
 (9,'DW8YK66',1,1,'uploads/inventory/front_68baf29bb11c2.jpg','2025-09-05 16:24:27','uploads/inventory/back_68baf29bb15e1.jpg','uploads/inventory/left_68baf29bb19ef.jpg','uploads/inventory/right_68baf29bb1d83.jpg',5,NULL,NULL,NULL,NULL,1,1,1,1,1,1,1,1,1,NULL,'T15'),
 (10,'DW',1,1,'uploads/inventory/front_68bead42b5b83.jpg','2025-09-08 12:17:38','uploads/inventory/back_68bead42b5e0e.jpg','uploads/inventory/left_68bead42b6022.jpg','uploads/inventory/right_68bead42b6240.jpg',0,NULL,NULL,NULL,NULL,1,1,0,1,0,0,0,0,0,NULL,'test'),
-(11,'DW6WF39',259126,1,'uploads/inventory/front_68f5f6f60a1ea.jpg','2025-10-20 10:46:46','uploads/inventory/back_68f5f6f60a5d8.jpg','uploads/inventory/left_68f5f6f60a967.jpg','uploads/inventory/right_68f5f6f60acca.jpg',5,NULL,NULL,NULL,NULL,1,1,0,0,1,1,1,1,1,NULL,'T22');
+(11,'DW6WF39',259126,1,'uploads/inventory/front_68f5f6f60a1ea.jpg','2025-10-20 10:46:46','uploads/inventory/back_68f5f6f60a5d8.jpg','uploads/inventory/left_68f5f6f60a967.jpg','uploads/inventory/right_68f5f6f60acca.jpg',5,NULL,NULL,NULL,NULL,1,1,0,0,1,1,1,1,1,NULL,'T22'),
+(12,'DW1',2,1,'uploads/inventory/front_68f8dfe3cf2d9.jpg','2025-10-22 15:45:07','uploads/inventory/back_68f8dfe3cf57d.jpg','uploads/inventory/left_68f8dfe3cf792.jpg','uploads/inventory/right_68f8dfe3cf9a8.jpg',5,NULL,NULL,NULL,NULL,1,1,1,1,1,1,1,1,1,NULL,'test'),
+(13,'DW',39,1,'uploads/inventory/front_68f8e0ce457fd.jpg','2025-10-22 15:49:02','uploads/inventory/back_68f8e0ce45aa2.jpg','uploads/inventory/left_68f8e0ce45ca6.jpg','uploads/inventory/right_68f8e0ce45e6a.jpg',1,NULL,NULL,NULL,NULL,1,0,1,0,1,0,0,1,1,'brud','test1'),
+(14,'DW',40,1,'uploads/inventory/front_68fa35adbbfdd.jpg','2025-10-23 16:03:25','uploads/inventory/back_68fa35adbc2dd.jpg','uploads/inventory/left_68fa35adbc57c.jpg','uploads/inventory/right_68fa35adbc7c8.jpg',6,NULL,NULL,NULL,NULL,1,1,1,1,1,1,1,1,1,NULL,'test');
 /*!40000 ALTER TABLE `inwentaryzacje` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +398,7 @@ CREATE TABLE `jwt_tokens` (
   `expires_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,15 +444,29 @@ INSERT INTO `jwt_tokens` VALUES
 (62,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTgwMDYxMTQsImV4cCI6MTc1ODAzNDkxNCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.WPNyIMdifZlgGIO2PhjPnCi3H4NBZUA1_upPx1L3IWY','1','admin_panel','2025-09-16 15:01:54'),
 (63,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTk4NDc2ODAsImV4cCI6MjA3NTIwNzY4MCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.1M_5B-y-JrKBSl8ZJAB0SUFgJqQl4L43NTP7jF-XSls','1','admin_panel','2035-10-05 14:34:40'),
 (65,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MDY1NDUsImV4cCI6MjA3NTk2NjU0NSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Sq3MMm3wjFO4jjav9NPE07HmdkZPVeTi56AhN1So7VY','1','admin_panel','2035-10-14 09:22:25'),
-(66,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MDY5NDgsImV4cCI6MjA3NTk2Njk0OCwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiZWViNjMwOTFkMjYzNmRmZSJ9.0FKzJkaBgOKW3TisqmZpovMpOSfUkycaMc2PmDFxnsE','test','eeb63091d2636dfe','2035-10-14 09:29:08'),
-(67,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MDY5OTIsImV4cCI6MjA3NTk2Njk5MiwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiOTdmZTYyZWVmYTY4MzAxNSJ9.sqMPrXTjSQPK8eouGD7BAXQpvrYg49kB2Kx5YCl8e5E','test','97fe62eefa683015','2035-10-14 09:29:52'),
-(68,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA2MTU1MDgsImV4cCI6MjA3NTk3NTUwOCwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiZWViNjMwOTFkMjYzNmRmZSJ9.OTC-fSIu1V44TDyK8TXSkBZHi7ZmmtOSO5gnwUoE1QE','test','eeb63091d2636dfe','2035-10-14 11:51:48'),
 (69,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NDkyMjcsImV4cCI6MjA3NjMwOTIyNywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Fxtxvw5TcLiatvrRz_z308SI_PV70_oHaSoPHQbfoQI','1','admin_panel','2035-10-18 08:33:47'),
 (70,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NDk1MjksImV4cCI6MjA3NjMwOTUyOSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.2qW67g1pXnnOdCR-4qXaHcpSXFyqA1krweLXQxnu1IA','1','admin_panel','2035-10-18 08:38:49'),
 (71,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NDk3NTYsImV4cCI6MjA3NjMwOTc1NiwidXNlcl9pZCI6IlQyMiIsInJvbGUiOiJraWVyb3djYSIsImRldmljZV9pZCI6IjM3YzBiNzUwOGRmNTllYmEifQ.d-IpW5-LkJKAJ2b454DG7OlpnXs2sIyo0BvDcqnM5dU','T22','37c0b7508df59eba','2035-10-18 08:42:36'),
 (72,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NTA1NjMsImV4cCI6MjA3NjMxMDU2MywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.lRUuIDmg8CVmroCIgxqbLwKhhOMCHsJHz3IacJzWMIg','1','admin_panel','2035-10-18 08:56:03'),
 (73,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjA5NjEzMzQsImV4cCI6MjA3NjMyMTMzNCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.TsFyb81R5vFyUUvLqljl0IiVZsq_2NYcLtDq-PWjobc','1','admin_panel','2035-10-18 11:55:34'),
-(74,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEwNDQ3MDYsImV4cCI6MjA3NjQwNDcwNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ._TbJutUki-sFR8pntFQo81SU_flvjJsl8VYcmTyEIxk','1','admin_panel','2035-10-19 11:05:06');
+(74,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEwNDQ3MDYsImV4cCI6MjA3NjQwNDcwNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ._TbJutUki-sFR8pntFQo81SU_flvjJsl8VYcmTyEIxk','1','admin_panel','2035-10-19 11:05:06'),
+(75,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMjkwMzksImV4cCI6MjA3NjQ4OTAzOSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.7Zu-lXljQsFck7ueBzoY-GJfbZ3EU8VlRmMSmLjpus4','1','admin_panel','2035-10-20 10:30:39'),
+(76,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMjkyMTgsImV4cCI6MjA3NjQ4OTIxOCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.CfQ4xHSXxjFyzeKPqlIzygXMmbpmfOjTZZUUod2VKHM','1','admin_panel','2035-10-20 10:33:38'),
+(77,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMzAwMzcsImV4cCI6MjA3NjQ5MDAzNywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.cZO33mTG907aI5kQ07ym7qxB5TdezYHfog3jVMAU_PI','1','admin_panel','2035-10-20 10:47:17'),
+(79,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMzA4NjgsImV4cCI6MjA3NjQ5MDg2OCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.UfDrn5pxGCw30vlAfhfALdxA66g0dMvDKSoovBHRVdY','1','admin_panel','2035-10-20 11:01:08'),
+(80,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMzE0MTEsImV4cCI6MjA3NjQ5MTQxMSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Y7s44dIRYWHGXsWu8OxZ6E1GRIONJqSYrg5S9JSfoR8','1','admin_panel','2035-10-20 11:10:11'),
+(81,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMzg2ODgsImV4cCI6MjA3NjQ5ODY4OCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.nUa0lL_H4sFWAQqWMDhj9Yk6HOZ7vur5eNrs-LHd5TE','1','admin_panel','2035-10-20 13:11:28'),
+(82,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExMzg5ODcsImV4cCI6MjA3NjQ5ODk4NywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Tw7GzKDa45VA3ejZ_zWo08ckNrg1pXX9JpSiNdAteeo','1','admin_panel','2035-10-20 13:16:27'),
+(85,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExNDM4MjEsImV4cCI6MjA3NjUwMzgyMSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.dnYWxYLnLzSGlRhs6cA0Om7hTtgCt18Ib9ONmlf8c6o','1','admin_panel','2035-10-20 14:37:01'),
+(86,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExNDM5MzksImV4cCI6MjA3NjUwMzkzOSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.cf6QKB3HHo6egfSf4Bs0QsSxyXzfDT_gKzH3fsx5pFM','1','admin_panel','2035-10-20 14:38:59'),
+(87,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExNDU3MDYsImV4cCI6MjA3NjUwNTcwNiwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.OtG2SV6MLJm3g_D7VJCdKN6uO-xYxqKBX3v7Hpvb46o','1','admin_panel','2035-10-20 15:08:26'),
+(88,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExNDYyMDksImV4cCI6MjA3NjUwNjIwOSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.rTkJq-_p69FNihC4UtJ43aty-XzcdMemIxk-9711J8Y','1','admin_panel','2035-10-20 15:16:49'),
+(89,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjExNDYzNTQsImV4cCI6MjA3NjUwNjM1NCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.sSDk89VfcT8oTY26nt09eG8EER-o104v1BH8QAaBfhw','1','admin_panel','2035-10-20 15:19:14'),
+(90,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEyMjc4MTAsImV4cCI6MjA3NjU4NzgxMCwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.OJkXNgrC0g4Qjhq0vf5b1GfWToV4wFBCdPUV9TO4ePw','1','admin_panel','2035-10-21 13:56:50'),
+(92,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEyOTA3OTMsImV4cCI6MjA3NjY1MDc5MywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.B5j9d3l2qAOAIpc_wBMSW-P3ugkkBSMheC2tiVPPFeQ','1','admin_panel','2035-10-22 07:26:33'),
+(93,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEyOTA4NTcsImV4cCI6MjA3NjY1MDg1NywidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.jDQWKhVdCa6-517jLQqxTYDCDzJBm2Y-wA2v9FDKYtA','1','admin_panel','2035-10-22 07:27:37'),
+(94,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEyOTExOTAsImV4cCI6MjA3NjY1MTE5MCwidXNlcl9pZCI6InRlc3QiLCJyb2xlIjoiZmxvdG93aWVjIiwiZGV2aWNlX2lkIjoiZWViNjMwOTFkMjYzNmRmZSJ9.elp4CIVEoP85hjRftBNZP73Kwd4PKhzfoPcaTzPUOyE','test','eeb63091d2636dfe','2035-10-22 07:33:10'),
+(95,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NjEzMDE2MjUsImV4cCI6MjA3NjY2MTYyNSwidXNlcl9pZCI6MSwicm9sZSI6ImFkbWluIiwiZGV2aWNlX2lkIjoiYWRtaW5fcGFuZWwifQ.Ug1JowT9AlR3pnU0-kEF_a3lvHSsq-YdS64GzxiDUWU','1','admin_panel','2035-10-22 10:27:05');
 /*!40000 ALTER TABLE `jwt_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,6 +482,10 @@ CREATE TABLE `kierowcy` (
   `imie` varchar(100) NOT NULL,
   `nazwisko` varchar(100) NOT NULL,
   `saldo` decimal(10,2) DEFAULT 0.00,
+  `voucher_current_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `voucher_current_month` varchar(7) DEFAULT NULL,
+  `voucher_previous_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `voucher_previous_month` varchar(7) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `rola` varchar(20) DEFAULT 'kierowca',
   `koszt_paliwa` varchar(20) DEFAULT 'firma',
@@ -405,12 +504,13 @@ CREATE TABLE `kierowcy` (
 LOCK TABLES `kierowcy` WRITE;
 /*!40000 ALTER TABLE `kierowcy` DISABLE KEYS */;
 INSERT INTO `kierowcy` VALUES
-('T1','Arkadiusz','Ferenc',0.00,'$2y$10$1Ba0skCLXWf/5FsAQ7M9ZO8YwtEcBUfqMRWvoW.ShmITNqXourrly','flotowiec','firma','2025-09-04 07:24:21','aktywny','TEST','fbK6e1iNTBWZYgXJ7ia98t:APA91bFL0m5aBTcEtDGXzsRyybeg5FNURQiZvLJnhhfYNPXhoDhYqJodr5xtmOjZluH0Fgnu_MtyafvvLWDLgs6iE2i2lntgUHOuo8Ido9n1gigerxD5EiU'),
-('T108','Michał','Miszczyk',4970.15,'$2y$10$jsk6KWNcQDlwQhu865FhGuHzQqZAS4l3mj0SGTwbAgq.OeTaqTayi','kierowca','firma','2025-09-04 07:36:02','aktywny','DKL83517','chgh7TqoT2y9X4uIfW8cBD:APA91bERTAfgBrbi6pXn7hqjDnbInGW_ZrzlXPWl4d0eX1WuRFUt0Mi_ax9Hb_UnzJpMPyGECTgD-bRTePv9q-3N3orF2FK65buB1IPOYtGbp4hCYAZeCZE'),
-('T14','Krzysztof','Golonka',0.00,'$2y$10$k4H6mnU3nnOy4UDolimGUuI7xiHXiw6cS71Z1pPFO9xrpaCzL.eF6','','firma','2025-09-03 14:34:32','aktywny','DW3NC94','dJwbb1IeSsOnCaiD3h6ym9:APA91bHM5B7ZmREn-KB4GuV9kSRAUgLqI_Pua8FBWM9YY6KczpcgxVm55wvQh3ttSlx07N5hMaQNikAerSOWJFaFdcifADKh87i6WR_JnYVs3Q3qSA3WghQ'),
-('T21','Ivan','Semianyk',219.47,'$2y$10$bgutnSj0jcYwmndqdejOkuFtb1lT.1T7fV38Z1qCld/DLbPWG/jJS','kierowca','firma','2025-09-04 13:07:01','aktywny','DW8YK67','dRrdQzZjRcKIKVYDG3q2Hs:APA91bEkO79pElzTVXuBIDZ7nY-YTLwbngW9c23ITGfLk2Suk38DMwhG6W6GA_Mp8uEomQE5YqEFRJF-3-n0XS_-SUjWuxTgDSM7bkDh-1G1i0ghnZuPv20'),
-('T22','Rafał','Zieliński',690.84,'$2y$10$h8g4jQrngfJwNCbPoK0pDe9dxJh8OSiAhHm35JmcYbLzS7LdbTUMO','kierowca','firma','2025-10-20 08:40:05','aktywny','DW6WF39','dqf_MXLvSCWqP4fFFW6apO:APA91bFwxEO7PNvZtaRlvYnWSu7XAwv4SUXdA7iJBrommcRbWwotHChGsO04px-ljGC9LX8WXffccXrngQqH9g7yOl-ZFiImRQpd569mLeebzWeO7xaFjlU'),
-('test','test','',205.20,'$2y$10$n6GmtFN0gj5S7Mm66SkLcuTrT3tYjYZd6Suk8bC2XftmM9QdCrnO6','flotowiec','firma','2025-09-08 10:15:45','aktywny','DW','e7QW9jhJQHKjeMTTBgHU_y:APA91bGwecF-iApmnnlHeD3-8xKsOZUWx7PTeXfdMIJ_GWKPSlngKNeieea3wS7ORIuo7Bm9VJJ5MIYCUiIPbHlXnNOXHZsNFuEXEwtz2nQ97YXmO8b1H1M');
+('T1','Arkadiusz','Ferenc',0.00,0.00,'2025-10',0.00,'2025-09','$2y$10$1Ba0skCLXWf/5FsAQ7M9ZO8YwtEcBUfqMRWvoW.ShmITNqXourrly','flotowiec','firma','2025-09-04 07:24:21','aktywny','TEST','fbK6e1iNTBWZYgXJ7ia98t:APA91bFL0m5aBTcEtDGXzsRyybeg5FNURQiZvLJnhhfYNPXhoDhYqJodr5xtmOjZluH0Fgnu_MtyafvvLWDLgs6iE2i2lntgUHOuo8Ido9n1gigerxD5EiU'),
+('T108','Michał','Miszczyk',4970.15,0.00,'2025-10',0.00,'2025-09','$2y$10$jsk6KWNcQDlwQhu865FhGuHzQqZAS4l3mj0SGTwbAgq.OeTaqTayi','kierowca','firma','2025-09-04 07:36:02','aktywny','DKL83517','chgh7TqoT2y9X4uIfW8cBD:APA91bERTAfgBrbi6pXn7hqjDnbInGW_ZrzlXPWl4d0eX1WuRFUt0Mi_ax9Hb_UnzJpMPyGECTgD-bRTePv9q-3N3orF2FK65buB1IPOYtGbp4hCYAZeCZE'),
+('T14','Krzysztof','Golonka',0.00,0.00,'2025-10',0.00,'2025-09','$2y$10$k4H6mnU3nnOy4UDolimGUuI7xiHXiw6cS71Z1pPFO9xrpaCzL.eF6','','firma','2025-09-03 14:34:32','aktywny','DW3NC94','dJwbb1IeSsOnCaiD3h6ym9:APA91bHM5B7ZmREn-KB4GuV9kSRAUgLqI_Pua8FBWM9YY6KczpcgxVm55wvQh3ttSlx07N5hMaQNikAerSOWJFaFdcifADKh87i6WR_JnYVs3Q3qSA3WghQ'),
+('T21','Ivan','Semianyk',219.47,0.00,'2025-10',0.00,'2025-09','$2y$10$bgutnSj0jcYwmndqdejOkuFtb1lT.1T7fV38Z1qCld/DLbPWG/jJS','kierowca','firma','2025-09-04 13:07:01','aktywny','DW8YK67','dRrdQzZjRcKIKVYDG3q2Hs:APA91bEkO79pElzTVXuBIDZ7nY-YTLwbngW9c23ITGfLk2Suk38DMwhG6W6GA_Mp8uEomQE5YqEFRJF-3-n0XS_-SUjWuxTgDSM7bkDh-1G1i0ghnZuPv20'),
+('T22','Rafał','Zieliński',690.84,0.00,'2025-10',0.00,'2025-09','$2y$10$h8g4jQrngfJwNCbPoK0pDe9dxJh8OSiAhHm35JmcYbLzS7LdbTUMO','kierowca','firma','2025-10-20 08:40:05','aktywny','DW6WF39','dqf_MXLvSCWqP4fFFW6apO:APA91bFwxEO7PNvZtaRlvYnWSu7XAwv4SUXdA7iJBrommcRbWwotHChGsO04px-ljGC9LX8WXffccXrngQqH9g7yOl-ZFiImRQpd569mLeebzWeO7xaFjlU'),
+('test','test','',405.90,0.00,'2025-10',0.00,'2025-09','$2y$10$n6GmtFN0gj5S7Mm66SkLcuTrT3tYjYZd6Suk8bC2XftmM9QdCrnO6','flotowiec','firma','2025-09-08 10:15:45','aktywny','DW','d54oOO9iS8CWokb6VwbGor:APA91bElWxCVl624e8PV_fbqFU0GZtn9mkJE6glc3gfajCJEzBUAly5IYuJw359zc-sWdxwbyGNgmHxkQTcltQsfEODGyHRHT4O07M2ojnN4IIW4ibLAl4U'),
+('test1','qwe','',0.00,0.00,'2025-10',0.00,'2025-09','$2y$10$2OIBRdwXnWEMkDrbg2EK5OZ3SEYCqGnGGl4O4w9gWtCK0bwlxAYJi','flotowiec','firma','2025-10-22 13:47:22','aktywny','DW',NULL);
 /*!40000 ALTER TABLE `kierowcy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,7 +617,7 @@ CREATE TABLE `pojazdy` (
   `numer_polisy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `rejestracja` (`rejestracja`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -532,9 +632,10 @@ INSERT INTO `pojazdy` VALUES
 (7,'DKL83517','Mercedes-Benz','Vito Tourer',95149,'2099-12-12','2025-12-27',1,'T108',0,1,0,NULL,0,NULL,'POLCAR','leasing','0000'),
 (9,'DW8YK67','Toyota','Corolla',119699,'2040-01-01','2040-01-01',1,'T21',0,1,0,NULL,1,'2040-01-01','FUN','leasing','0000'),
 (10,'DW8YK66','Toyota','Corolla',1,'2099-01-01','2099-01-01',1,'T15',0,1,0,NULL,1,'2099-01-01','FUN','leasing','0000'),
-(11,'DW','Toy','Cor',25,'2025-09-20','2025-09-25',1,'test',0,0,0,NULL,0,NULL,'FUN','tak','12313'),
+(11,'DW','Toy','Cor',123,'2025-09-20','2025-09-25',1,'test',0,0,0,NULL,0,NULL,'FUN','tak','12313'),
 (12,'DW6WF39','Toyota','Camry',259126,'2080-01-01','2080-01-01',1,'T22',0,1,1,'2080-10-01',0,NULL,'FUN','leasing','0000'),
-(13,'DW6RX78','Renault','Master',1,'2099-01-01','2026-03-08',1,NULL,1,0,0,NULL,0,NULL,'FUN','własność','0000');
+(13,'DW6RX78','Renault','Master',1,'2099-01-01','2026-03-08',1,NULL,1,0,0,NULL,0,NULL,'FUN','własność','0000'),
+(14,'DW1','Toy','Cor',5,'2026-02-12','2025-11-01',1,'test',0,1,1,'2025-10-17',0,NULL,'FUN','własne','123213');
 /*!40000 ALTER TABLE `pojazdy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,7 +744,7 @@ CREATE TABLE `serwisy` (
   `data` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `rejestracja` (`rejestracja`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -666,7 +767,9 @@ INSERT INTO `serwisy` VALUES
 (11,'DW9YF48','ttttt',500,'[]','2025-08-28 14:58:26'),
 (12,'DW9YF48','qwert',336,'[\"uploads\\/service\\/serv_68b1a94a2bfe8.jpg\"]','2025-08-29 15:21:14'),
 (13,'DW9YF48','wym olej',258,'[\"uploads\\/service\\/serv_68b562a04f555.jpg\",\"uploads\\/service\\/serv_68b562a04f85a.jpg\",\"uploads\\/service\\/serv_68b562eeea731.jpg\"]','2025-09-01 11:08:48'),
-(14,'DW9YF48','olej',500,'[\"uploads\\/service\\/serv_68b7f381a9997.jpg\"]','2025-09-03 09:51:29');
+(14,'DW9YF48','olej',500,'[\"uploads\\/service\\/serv_68b7f381a9997.jpg\"]','2025-09-03 09:51:29'),
+(15,'DW','olej',50,'[\"uploads\\/service\\/serv_68f8b9c044a5c.jpg\"]','2025-10-22 13:02:24'),
+(16,'DW','klocki',600,'[]','2025-10-22 15:12:05');
 /*!40000 ALTER TABLE `serwisy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -688,7 +791,7 @@ CREATE TABLE `szkody` (
   PRIMARY KEY (`id`),
   KEY `rejestracja` (`rejestracja`),
   KEY `nr_szkody` (`nr_szkody`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -708,7 +811,9 @@ INSERT INTO `szkody` VALUES
 (8,'DW9YF48','TEST-112510','upload test przez curl','zgłoszona','[\"uploads\\/damages\\/damage_68b171f6ba95f.jpg\"]','2025-08-29 11:25:10'),
 (9,'DW9YF48','TEST-manual','upload test reczny','zgłoszona','[\"uploads\\/damages\\/damage_68b1731ac79ac.jpg\"]','2025-08-29 11:30:02'),
 (10,'DW9YF48','6345','hhhhhh','niezgłoszona','[\"uploads\\/damages\\/damage_68b1aa43c93f0.jpg\",\"uploads\\/damages\\/damage_68b1aa43cb37e.jpg\"]','2025-08-29 15:25:23'),
-(11,'DW9YF48','75455','calka','zgłoszona','[\"uploads\\/damages\\/damage_68b5630b6bfc1.jpg\",\"uploads\\/damages\\/damage_68b5631c31649.jpg\"]','2025-09-01 11:10:35');
+(11,'DW9YF48','75455','calka','zgłoszona','[\"uploads\\/damages\\/damage_68b5630b6bfc1.jpg\",\"uploads\\/damages\\/damage_68b5631c31649.jpg\"]','2025-09-01 11:10:35'),
+(12,'DW','666','całka','czeka na naprawę','[\"uploads\\/damages\\/damage_68f8b9da4c990.jpg\"]','2025-10-22 13:02:50'),
+(13,'DW','444','tafsdfs','zamknięta','[\"uploads\\/damages\\/damage_68f8d882ade3d.jpg\"]','2025-10-22 15:12:55');
 /*!40000 ALTER TABLE `szkody` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +896,7 @@ CREATE TABLE `work_sessions` (
   PRIMARY KEY (`id`),
   KEY `driver_id` (`driver_id`),
   CONSTRAINT `work_sessions_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `kierowcy` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -857,7 +962,14 @@ INSERT INTO `work_sessions` VALUES
 (147,'test','DW','2025-10-18 19:09:36',18,'2025-10-20 10:35:11',20),
 (148,'T22','DW6WF39','2025-10-20 10:45:19',259126,'2025-10-20 10:53:37',259126),
 (149,'T22','DW6WF39','2025-10-20 10:54:55',259126,NULL,NULL),
-(150,'test','DW','2025-10-21 09:35:22',25,NULL,NULL);
+(150,'test','DW','2025-10-21 09:35:22',25,NULL,NULL),
+(151,'test','DW','2025-10-22 12:55:04',26,'2025-10-22 15:15:49',30),
+(152,'test','DW1','2025-10-22 15:17:35',1,NULL,NULL),
+(153,'test','DW1','2025-10-22 15:44:24',2,'2025-10-22 15:46:13',5),
+(154,'test','DW','2025-10-22 15:46:30',31,NULL,NULL),
+(155,'test1','DW','2025-10-22 15:48:14',39,NULL,NULL),
+(156,'test','DW','2025-10-23 16:02:32',40,'2025-10-23 16:03:35',41),
+(157,'test','DW','2025-10-24 09:33:15',123,NULL,NULL);
 /*!40000 ALTER TABLE `work_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -870,4 +982,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-22 12:18:19
+-- Dump completed on 2025-10-24 14:45:29
