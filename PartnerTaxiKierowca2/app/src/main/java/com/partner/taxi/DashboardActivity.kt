@@ -34,6 +34,7 @@ class DashboardActivity : AppCompatActivity() {
     }
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var tvLabelLicznik: TextView
+    private lateinit var tvLabelLicznikSubtitle: TextView
     private lateinit var tvLicznik: TextView
     private lateinit var tvVoucherCurrentLabel: TextView
     private lateinit var tvVoucherCurrentValue: TextView
@@ -65,6 +66,7 @@ class DashboardActivity : AppCompatActivity() {
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         tvLabelLicznik     = findViewById(R.id.tvLabelLicznik)
+        tvLabelLicznikSubtitle = findViewById(R.id.tvLabelLicznikSubtitle)
         tvLicznik          = findViewById(R.id.tvLicznik)
         tvVoucherCurrentLabel = findViewById(R.id.tvVoucherCurrentLabel)
         tvVoucherCurrentValue = findViewById(R.id.tvVoucherCurrentValue)
@@ -278,7 +280,8 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun updateSaldoViews(data: DriverData) {
         val locale = Locale("pl", "PL")
-        tvLabelLicznik.text = getString(R.string.label_saldo_without_vouchers)
+        tvLabelLicznik.text = getString(R.string.label_saldo)
+        tvLabelLicznikSubtitle.text = getString(R.string.label_without_vouchers)
         tvLicznik.text = formatCurrency(data.saldo, locale)
 
         val currentMonthLabel = monthDisplayName(data.voucherCurrentMonth, locale)
@@ -293,7 +296,8 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun resetVoucherViews() {
         val locale = Locale("pl", "PL")
-        tvLabelLicznik.text = getString(R.string.label_saldo_without_vouchers)
+        tvLabelLicznik.text = getString(R.string.label_saldo)
+        tvLabelLicznikSubtitle.text = getString(R.string.label_without_vouchers)
         tvLicznik.text = formatCurrency(0f, locale)
         tvVoucherCurrentLabel.text = getString(R.string.label_vouchers_month, getString(R.string.label_month_current))
         tvVoucherPreviousLabel.text = getString(R.string.label_vouchers_month, getString(R.string.label_month_previous))

@@ -46,10 +46,20 @@
                     android:id="@+id/tvLabelLicznik"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LICZNIK"
+                    android:text="@string/label_saldo"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
+
+                <TextView
+                    android:id="@+id/tvLabelLicznikSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_without_vouchers"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/darker_gray"/>
 
                 <TextView
                     android:id="@+id/tvLicznik"

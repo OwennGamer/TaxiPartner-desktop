@@ -8,7 +8,8 @@
     <string name="label_payment">Rodzaj płatności:</string>
     <string name="retake_photo">Zrób zdjęcie ponownie</string>
     <string name="remember_receipt">PAMIĘTAJ O WYSTAWIENIU PARAGONU</string>
-    <string name="label_saldo_without_vouchers">SALDO (BEZ VOUCHERÓW)</string>
+    <string name="label_saldo">LICZNIK</string>
+    <string name="label_without_vouchers">(bez voucherów)</string>
     <string name="label_vouchers_month">Vouchery (%1$s)</string>
     <string name="label_month_current">bieżący miesiąc</string>
     <string name="label_month_previous">poprzedni miesiąc</string>

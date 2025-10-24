@@ -17,6 +17,7 @@ public class Driver {
 
     private float voucherCurrent;
     private float voucherPrevious;
+    private float voucher;
     private float card;
     private float cash;
     private float lot;
@@ -49,6 +50,7 @@ public class Driver {
             float fuelCostSum,
             float voucherCurrent,
             float voucherPrevious,
+            float voucher,
             float card,
             float cash,
             float lot,
@@ -74,6 +76,7 @@ public class Driver {
         this.fuelCostSum = fuelCostSum;
         this.voucherCurrent = voucherCurrent;
         this.voucherPrevious = voucherPrevious;
+        this.voucher = voucher;
         this.card = card;
         this.cash = cash;
         this.lot = lot;
@@ -100,6 +103,7 @@ public class Driver {
             float fuelCostSum,
             float voucherCurrent,
             float voucherPrevious,
+            float voucher,
             float card,
             float cash,
             float lot,
@@ -109,7 +113,7 @@ public class Driver {
     ) {
         this(id, name, saldo, status, rola, percentTurnover, fuelCost, cardCommission,
                 partnerCommission, boltCommission, settlementLimit, createdAt, vehiclePlate,
-                fuelCostSum, voucherCurrent, voucherPrevious, card, cash, lot, turnover, zlPerKm, fuelPerTurnover, false);
+                fuelCostSum, voucherCurrent, voucherPrevious, voucher, card, cash, lot, turnover, zlPerKm, fuelPerTurnover, false);
     }
 
     public String getId() { return id; }
@@ -126,6 +130,7 @@ public class Driver {
     public float getSettlementLimit() { return settlementLimit; }
     public float getVoucherCurrent() { return voucherCurrent; }
     public float getVoucherPrevious() { return voucherPrevious; }
+    public float getVoucher() { return voucher; }
     public float getCard() { return card; }
     public float getCash() { return cash; }
     public float getLot() { return lot; }

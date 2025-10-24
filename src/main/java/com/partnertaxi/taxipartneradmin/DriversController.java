@@ -48,6 +48,7 @@ public class DriversController {
     @FXML private TableColumn<Driver, String>  vehiclePlateColumn;
     @FXML private TableColumn<Driver, Float>   voucherCurrentColumn;
     @FXML private TableColumn<Driver, Float>   voucherPreviousColumn;
+    @FXML private TableColumn<Driver, Float>   voucherColumn;
     @FXML private TableColumn<Driver, Float>   cardColumn;
     @FXML private TableColumn<Driver, Float>   cashColumn;
     @FXML private TableColumn<Driver, Float>   lotColumn;
@@ -97,6 +98,7 @@ public class DriversController {
         createdAtColumn.setId("createdAtColumn");
         voucherCurrentColumn.setId("voucherCurrentColumn");
         voucherPreviousColumn.setId("voucherPreviousColumn");
+        voucherColumn.setId("voucherColumn");
         cardColumn.setId("cardColumn");
         cashColumn.setId("cashColumn");
         lotColumn.setId("lotColumn");
@@ -168,6 +170,7 @@ public class DriversController {
         setupFloatColumn(settlementLimitColumn,  nf);
         setupFloatColumn(voucherCurrentColumn,   nf);
         setupFloatColumn(voucherPreviousColumn, nf);
+        setupFloatColumn(voucherColumn,         nf);
         setupFloatColumn(cardColumn,             nf);
         setupFloatColumn(cashColumn,             nf);
         setupFloatColumn(lotColumn,              nf);
@@ -461,6 +464,7 @@ public class DriversController {
             float sumCash = 0f;
             float sumCard = 0f;
             float sumFuel = 0f;
+            float sumVoucher = 0f;
             float totalZlPerKm = 0f;
             float totalFuelPerTurnover = 0f;
             int driverCount = 0;
@@ -507,6 +511,7 @@ public class DriversController {
                 float zlPerKm = 0f;
                 float fuelPerTurnover = 0f;
                 float fuelSum = 0f;
+                float voucherTotal = 0f;
 
                 if (stats != null) {
                     cardVal = stats.getCard();
@@ -520,13 +525,15 @@ public class DriversController {
                         fuelPerTurnover = stats.getFuelSum() / turnover;
                     }
                     fuelSum = stats.getFuelSum();
+                    voucherTotal = stats.getVoucher();
                 }
 
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, "",
                         percentTurnover, fuelCostSum, cardComm, partComm,
                         boltComm, settLimit, createdAt, plate, fuelSum,
-                        voucherCurrent, voucherPrevious, cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
+                        voucherCurrent, voucherPrevious, voucherTotal,
+                        cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
 
 
@@ -537,6 +544,7 @@ public class DriversController {
                 sumTurnover += turnover;
                 sumVoucherCurrent  += voucherCurrent;
                 sumVoucherPrevious += voucherPrevious;
+                sumVoucher        += voucherTotal;
                 sumLot      += lotVal;
                 sumCash     += cashVal;
                 sumCard     += cardVal;
@@ -567,6 +575,7 @@ public class DriversController {
                     sumFuel,
                     sumVoucherCurrent,
                     sumVoucherPrevious,
+                    sumVoucher,
                     sumCard,
                     sumCash,
                     sumLot,

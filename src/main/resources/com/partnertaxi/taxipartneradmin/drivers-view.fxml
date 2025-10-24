@@ -59,6 +59,7 @@
                     <TableColumn fx:id="settlementLimitColumn"   id="settlementLimitColumn"   text="Graniczna kwota"   prefWidth="120"/>
                     <TableColumn fx:id="voucherCurrentColumn"    id="voucherCurrentColumn"    text="Vouchery (aktualny)" prefWidth="130"/>
                     <TableColumn fx:id="voucherPreviousColumn"   id="voucherPreviousColumn"   text="Vouchery (poprzedni)" prefWidth="140"/>
+                    <TableColumn fx:id="voucherColumn"           id="voucherColumn"           text="Vouchery (razem)"    prefWidth="130"/>
                     <TableColumn fx:id="cardColumn"              id="cardColumn"              text="Karta"             prefWidth="100"/>
                     <TableColumn fx:id="cashColumn"              id="cashColumn"              text="Gotówka"           prefWidth="100"/>
                     <TableColumn fx:id="lotColumn"               id="lotColumn"               text="LOT"               prefWidth="100"/>

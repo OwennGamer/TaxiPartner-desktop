@@ -69,54 +69,7 @@
                     <TableColumn fx:id="logoutColumn"           id="logoutColumn"           text="Wyloguj"          prefWidth="100"/>
                 </columns>
             </TableView>
-            <HBox fx:id="summaryRow" id="summaryRow" spacing="0" alignment="CENTER_LEFT">
-                <children>
-                    <StackPane fx:id="idPlaceholder" id="idPlaceholder" styleClass="summary-cell summary-cell-left" />
-                    <StackPane fx:id="namePlaceholder" id="namePlaceholder" styleClass="summary-cell summary-cell-left">
-                        <Label fx:id="nameSummaryLabel" text="SUMA" />
-                    </StackPane>
-                    <StackPane fx:id="saldoSumContainer" id="saldoSumLabel" styleClass="summary-cell">
-                        <Label fx:id="saldoSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="statusPlaceholder" id="statusPlaceholder" styleClass="summary-cell summary-cell-left" />
-                    <StackPane fx:id="vehiclePlatePlaceholder" id="vehiclePlatePlaceholder" styleClass="summary-cell summary-cell-left" />
-                    <StackPane fx:id="fuelCostPlaceholder" id="fuelCostPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="fuelSumContainer" id="fuelSumLabel" styleClass="summary-cell">
-                        <Label fx:id="fuelSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="percentTurnoverPlaceholder" id="percentTurnoverPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="cardCommissionPlaceholder" id="cardCommissionPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="partnerCommissionPlaceholder" id="partnerCommissionPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="boltCommissionPlaceholder" id="boltCommissionPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="settlementLimitPlaceholder" id="settlementLimitPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="voucherCurrentContainer" id="voucherCurrentSumLabel" styleClass="summary-cell">
-                        <Label fx:id="voucherCurrentSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="voucherPreviousContainer" id="voucherPreviousSumLabel" styleClass="summary-cell">
-                        <Label fx:id="voucherPreviousSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="cardSumContainer" id="cardSumLabel" styleClass="summary-cell">
-                        <Label fx:id="cardSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="cashSumContainer" id="cashSumLabel" styleClass="summary-cell">
-                        <Label fx:id="cashSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="lotSumContainer" id="lotSumLabel" styleClass="summary-cell">
-                        <Label fx:id="lotSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="turnoverSumContainer" id="turnoverSumLabel" styleClass="summary-cell">
-                        <Label fx:id="turnoverSumValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="zlPerKmAvgContainer" id="zlPerKmAvgLabel" styleClass="summary-cell">
-                        <Label fx:id="zlPerKmAvgValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="fuelPerTurnoverAvgContainer" id="fuelPerTurnoverAvgLabel" styleClass="summary-cell">
-                        <Label fx:id="fuelPerTurnoverAvgValue" text="0,00" />
-                    </StackPane>
-                    <StackPane fx:id="createdAtPlaceholder" id="createdAtPlaceholder" styleClass="summary-cell" />
-                    <StackPane fx:id="logoutPlaceholder" id="logoutColumn" styleClass="summary-cell" />
-                </children>
-            </HBox>
+
         </VBox>
     </center>
 

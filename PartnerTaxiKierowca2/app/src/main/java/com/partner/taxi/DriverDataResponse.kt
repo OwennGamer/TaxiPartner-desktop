@@ -1,5 +1,7 @@
 package com.partner.taxi
 
+import com.google.gson.annotations.SerializedName
+
 data class DriverDataResponse(
     val status: String,
     val data: DriverData?
@@ -10,8 +12,8 @@ data class DriverData(
     val imie: String,
     val nazwisko: String,
     val saldo: Float,
-    val voucherCurrentAmount: Float,
-    val voucherCurrentMonth: String?,
-    val voucherPreviousAmount: Float,
-    val voucherPreviousMonth: String?
+    @SerializedName("voucher_current_amount") val voucherCurrentAmount: Float,
+    @SerializedName("voucher_current_month") val voucherCurrentMonth: String?,
+    @SerializedName("voucher_previous_amount") val voucherPreviousAmount: Float,
+    @SerializedName("voucher_previous_month") val voucherPreviousMonth: String?
 )
