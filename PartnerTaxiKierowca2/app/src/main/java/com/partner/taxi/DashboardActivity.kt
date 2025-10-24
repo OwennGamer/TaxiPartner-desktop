@@ -22,6 +22,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlinx.coroutines.launch
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import java.time.format.TextStyle
+import java.util.Locale
 
 class DashboardActivity : AppCompatActivity() {
     companion object {
@@ -30,6 +35,10 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var tvLabelLicznik: TextView
     private lateinit var tvLicznik: TextView
+    private lateinit var tvVoucherCurrentLabel: TextView
+    private lateinit var tvVoucherCurrentValue: TextView
+    private lateinit var tvVoucherPreviousLabel: TextView
+    private lateinit var tvVoucherPreviousValue: TextView
     private lateinit var btnDodajKurs: MaterialButton
     private lateinit var btnHistoria: MaterialButton
     private lateinit var btnTankowanie: MaterialButton
@@ -57,6 +66,12 @@ class DashboardActivity : AppCompatActivity() {
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
         tvLabelLicznik     = findViewById(R.id.tvLabelLicznik)
         tvLicznik          = findViewById(R.id.tvLicznik)
+        tvVoucherCurrentLabel = findViewById(R.id.tvVoucherCurrentLabel)
+        tvVoucherCurrentValue = findViewById(R.id.tvVoucherCurrentValue)
+        tvVoucherPreviousLabel = findViewById(R.id.tvVoucherPreviousLabel)
+        tvVoucherPreviousValue = findViewById(R.id.tvVoucherPreviousValue)
+
+        resetVoucherViews()
         btnDodajKurs       = findViewById(R.id.btnDodajKurs)
         btnHistoria        = findViewById(R.id.btnHistoria)
         btnTankowanie      = findViewById(R.id.btnTankowanie)
@@ -242,21 +257,63 @@ class DashboardActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response = ApiClient.apiService.getDriverData(driverId)
-                if (response.isSuccessful && response.body()?.status == "success") {
-                    val saldo = response.body()?.data?.saldo ?: 0f
-                    tvLicznik.text = String.format("%.2f zł", saldo)
+                val body = response.body()
+                if (response.isSuccessful && body?.status == "success" && body.data != null) {
+                    val data = body.data
+                    updateSaldoViews(data)
                 } else {
                     tvLicznik.text = "0.00 zł"
+                    resetVoucherViews()
                     Toast.makeText(this@DashboardActivity, "Błąd pobierania salda", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 tvLicznik.text = "0.00 zł"
+                resetVoucherViews()
                 this@DashboardActivity.showConnectionIssueToast(e)
             } finally {
                 onComplete?.invoke()
             }
         }
     }
+
+    private fun updateSaldoViews(data: DriverData) {
+        val locale = Locale("pl", "PL")
+        tvLabelLicznik.text = getString(R.string.label_saldo_without_vouchers)
+        tvLicznik.text = formatCurrency(data.saldo, locale)
+
+        val currentMonthLabel = monthDisplayName(data.voucherCurrentMonth, locale)
+        val previousMonthLabel = monthDisplayName(data.voucherPreviousMonth, locale)
+
+        tvVoucherCurrentLabel.text = getString(R.string.label_vouchers_month, currentMonthLabel ?: getString(R.string.label_month_current))
+        tvVoucherPreviousLabel.text = getString(R.string.label_vouchers_month, previousMonthLabel ?: getString(R.string.label_month_previous))
+
+        tvVoucherCurrentValue.text = formatCurrency(data.voucherCurrentAmount, locale)
+        tvVoucherPreviousValue.text = formatCurrency(data.voucherPreviousAmount, locale)
+    }
+
+    private fun resetVoucherViews() {
+        val locale = Locale("pl", "PL")
+        tvLabelLicznik.text = getString(R.string.label_saldo_without_vouchers)
+        tvLicznik.text = formatCurrency(0f, locale)
+        tvVoucherCurrentLabel.text = getString(R.string.label_vouchers_month, getString(R.string.label_month_current))
+        tvVoucherPreviousLabel.text = getString(R.string.label_vouchers_month, getString(R.string.label_month_previous))
+        tvVoucherCurrentValue.text = formatCurrency(0f, locale)
+        tvVoucherPreviousValue.text = formatCurrency(0f, locale)
+    }
+
+    private fun monthDisplayName(monthKey: String?, locale: Locale): String? {
+        if (monthKey.isNullOrBlank()) return null
+        return try {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM")
+            val ym = YearMonth.parse(monthKey, formatter)
+            val monthName = ym.month.getDisplayName(TextStyle.FULL, locale)
+            monthName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
+        } catch (ex: DateTimeParseException) {
+            null
+        }
+    }
+
+    private fun formatCurrency(value: Float, locale: Locale): String = String.format(locale, "%.2f zł", value)
 
     private fun endShiftAndUpdate(odometer: Int, plate: String) {
         ApiClient.apiService.endShift(odometer)

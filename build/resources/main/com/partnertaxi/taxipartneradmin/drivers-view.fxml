@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 
@@ -25,6 +26,14 @@
             <Button text="Czas pracy" onAction="#handleShowWork"/>
             <Button text="Flota" onAction="#openFleetView"/>
             <Button text="Pracownicy" onAction="#openEmployeesView"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="Zakres dat:" />
+            <ComboBox fx:id="dateFilterCombo" prefWidth="180" />
+            <HBox fx:id="customRangeBox" alignment="CENTER_LEFT" spacing="5">
+                <DatePicker fx:id="startDatePicker" promptText="Od" />
+                <Label text="–" />
+                <DatePicker fx:id="endDatePicker" promptText="Do" />
+            </HBox>
         </ToolBar>
     </top>
 

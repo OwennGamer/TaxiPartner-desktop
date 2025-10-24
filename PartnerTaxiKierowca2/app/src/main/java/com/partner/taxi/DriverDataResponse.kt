@@ -9,5 +9,9 @@ data class DriverData(
     val id: String,
     val imie: String,
     val nazwisko: String,
-    val saldo: Float
+    val saldo: Float,
+    val voucherCurrentAmount: Float,
+    val voucherCurrentMonth: String?,
+    val voucherPreviousAmount: Float,
+    val voucherPreviousMonth: String?
 )

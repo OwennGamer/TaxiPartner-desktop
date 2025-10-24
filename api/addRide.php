@@ -3,6 +3,7 @@ header("Content-Type: application/json");
 
 require_once "db.php"; // Połączenie z bazą
 require_once "auth.php"; // Autoryzacja
+require_once __DIR__ . "/voucher_utils.php";
 
 // 🔵 Start debugowania
 file_put_contents("debug_log.txt", "🔵 Skrypt addRide.php startuje\n", FILE_APPEND);
@@ -23,7 +24,7 @@ try {
     $pdo->beginTransaction();
 
     // Pobranie danych kierowcy
-    $stmt = $pdo->prepare("SELECT saldo FROM kierowcy WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ?");
     $stmt->execute([$driver_id]);
     $driver = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -31,6 +32,8 @@ try {
         echo json_encode(["status" => "error", "message" => "Nie znaleziono kierowcy"]);
         exit;
     }
+
+    $driver = voucher_refresh_buckets($pdo, $driver);
 
     // Pobranie warunków współpracy
     $stmtTerms = $pdo->prepare("SELECT term_name, term_value FROM collaboration_terms WHERE driver_id = ?");
@@ -93,7 +96,11 @@ try {
 
     // Nowe saldo
     $currentSaldo = (float)$driver['saldo'];
-    $newSaldo = round($currentSaldo + $final_amount, 2);
+    $newSaldo = $currentSaldo;
+
+    if (strtolower($type) !== 'voucher') {
+        $newSaldo = round($currentSaldo + $final_amount, 2);
+    }
 
     // Obsługa zdjęcia paragonu (opcjonalnie)
     $receiptPath = null;
@@ -135,9 +142,14 @@ try {
         $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, receipt_photo, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
     $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km, $receiptPath]);
 
-    // Aktualizuj saldo kierowcy
-    $stmt = $pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?");
-    $stmt->execute([$newSaldo, $driver_id]);
+    if (strtolower($type) === 'voucher') {
+        $rideMonth = (new DateTime())->format('Y-m');
+        $bucket = voucher_bucket_for_month($driver, $rideMonth);
+        $driver = voucher_increment_bucket($pdo, $driver_id, $driver, $final_amount, $bucket);
+    } else {
+        $stmt = $pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?");
+        $stmt->execute([$newSaldo, $driver_id]);
+    }
 
     $pdo->commit();
 

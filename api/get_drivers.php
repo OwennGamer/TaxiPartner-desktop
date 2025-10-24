@@ -1,6 +1,7 @@
 <?php
 require_once 'auth.php';
 require_once 'db.php';
+require_once __DIR__ . '/voucher_utils.php';
 
 header('Content-Type: application/json');
 
@@ -33,6 +34,7 @@ try {
     $drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($drivers as &$driver) {
+        $driver = voucher_refresh_buckets($pdo, $driver);
         // Pobierz warunki współpracy
         $termsStmt = $pdo->prepare("
             SELECT term_name, term_value

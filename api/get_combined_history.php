@@ -45,8 +45,8 @@ try {
 
     // Zmiany salda
     $stmt = $pdo->prepare("
-        SELECT data as date, 'Zmiana salda' as type, powod as description, zmiana AS change_value, saldo_po 
-        FROM historia_salda 
+        SELECT data as date, powod as description, zmiana AS change_value, saldo_po, counter_type
+        FROM historia_salda
         WHERE kierowca_id = ? 
         ORDER BY data DESC
     ");
@@ -54,9 +54,15 @@ try {
     $saldo_changes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($saldo_changes as $row) {
+        $counterType = $row['counter_type'] ?? 'saldo';
+        $typeLabel = match ($counterType) {
+            'voucher_current'  => 'Zmiana voucherów (bieżący)',
+            'voucher_previous' => 'Zmiana voucherów (poprzedni)',
+            default            => 'Zmiana salda'
+        };
         $result[] = [
             "date" => $row['date'],
-            "type" => $row['type'],
+            "type" => $typeLabel,
             "description" => $row['description'],
             "change" => $row['change_value'],
             "saldo_po" => $row['saldo_po'],

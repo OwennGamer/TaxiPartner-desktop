@@ -26,8 +26,8 @@ try {
 
     // 1. Dodaj kierowcę
     $stmt = $pdo->prepare("INSERT INTO kierowcy
-        (id, imie, nazwisko, password, status, rola, saldo, koszt_paliwa, created_at)
-        VALUES (:id, :imie, :nazwisko, :password, :status, :rola, :saldo, :koszt_paliwa, NOW())");
+        (id, imie, nazwisko, password, status, rola, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month, koszt_paliwa, created_at)
+        VALUES (:id, :imie, :nazwisko, :password, :status, :rola, :saldo, :voucher_current_amount, :voucher_current_month, :voucher_previous_amount, :voucher_previous_month, :koszt_paliwa, NOW())");
 
     // Haszujemy hasło przy użyciu wbudowanego algorytmu
     $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -37,10 +37,14 @@ try {
         ':imie'        => $data['imie'],
         ':nazwisko'    => $data['nazwisko'],
         ':password'    => $hashedPassword,
-        ':status'      => $data['status'],
-        ':rola'        => $data['rola'],
-        ':saldo'       => $data['saldo'],
-        ':koszt_paliwa'=> $data['fuelCost'] == 0 ? 'firma' : 'kierowca'
+        ':status'                  => $data['status'],
+        ':rola'                    => $data['rola'],
+        ':saldo'                   => $data['saldo'],
+        ':voucher_current_amount'  => 0,
+        ':voucher_current_month'   => null,
+        ':voucher_previous_amount' => 0,
+        ':voucher_previous_month'  => null,
+        ':koszt_paliwa'            => $data['fuelCost'] == 0 ? 'firma' : 'kierowca'
     ]);
 
     // 2. Dodaj warunki współpracy do collaboration_terms (1 wpis = 1 warunek)

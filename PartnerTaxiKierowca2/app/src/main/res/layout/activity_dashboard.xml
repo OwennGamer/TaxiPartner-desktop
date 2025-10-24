@@ -60,6 +60,47 @@
                     android:textStyle="bold"
                     android:textAlignment="center"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+                <TextView
+                    android:id="@+id/tvVoucherCurrentLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="VOUCHERY (AKTUALNY)"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:id="@+id/tvVoucherCurrentValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0.00 zł"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:id="@+id/tvVoucherPreviousLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="VOUCHERY (POPRZEDNI)"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:id="@+id/tvVoucherPreviousValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0.00 zł"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"/>
+
             </LinearLayout>
 
             <!-- 3) Przyciski w siatce 2×4 -->

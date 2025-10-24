@@ -3,6 +3,7 @@ require_once 'config.php';
 require_once 'auth.php';
 require_once 'db.php';
 require_once __DIR__ . '/fcm_v1.php';
+require_once __DIR__ . '/voucher_utils.php';
 
 header('Content-Type: application/json');
 
@@ -18,10 +19,16 @@ if (!$token || !verifyJWT($token)) {
 
 // --- Dane wejściowe ---
 $data = json_decode(file_get_contents("php://input"), true);
-$id           = trim($data['id'] ?? '');
-$amount       = floatval($data['amount'] ?? 0);
-$reason       = trim($data['reason'] ?? '');
-$customReason = trim($data['custom_reason'] ?? '');
+$id                 = trim($data['id'] ?? '');
+$saldoDelta         = isset($data['saldo_amount']) ? floatval($data['saldo_amount']) : floatval($data['amount'] ?? 0);
+$voucherCurrentDelta = floatval($data['voucher_current_amount'] ?? 0);
+$voucherPreviousDelta = floatval($data['voucher_previous_amount'] ?? 0);
+$reason            = trim($data['reason'] ?? '');
+$customReason      = trim($data['custom_reason'] ?? '');
+
+if ($customReason !== '') {
+    $reason = $reason === '' ? $customReason : $reason . ': ' . $customReason;
+}
 
 if ($id === '' || $reason === '') {
     http_response_code(500);
@@ -29,13 +36,14 @@ if ($id === '' || $reason === '') {
     exit;
 }
 
-// Jeśli powód to "inny", dołącz opis
-if ($reason === 'inny' && $customReason !== '') {
-    $reason .= ': ' . $customReason;
+if (abs($saldoDelta) < 1e-6 && abs($voucherCurrentDelta) < 1e-6 && abs($voucherPreviousDelta) < 1e-6) {
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Brak zmian do zapisania", "fcm_status" => $fcmStatus]);
+    exit;
 }
 
 // --- Pobierz aktualne saldo ---
-$stmt = $pdo->prepare("SELECT saldo FROM kierowcy WHERE id = ?");
+$stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ?");
 $stmt->execute([$id]);
 $current = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -45,17 +53,33 @@ if (!$current) {
     exit;
 }
 
+$current = voucher_refresh_buckets($pdo, $current);
+
 $currentSaldo = floatval($current['saldo']);
-$newSaldo = $currentSaldo + $amount;
+$newSaldo = $currentSaldo;
 
-// --- Aktualizacja salda ---
-$pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?")->execute([$newSaldo, $id]);
+if (abs($saldoDelta) >= 1e-6) {
+    $newSaldo = $currentSaldo + $saldoDelta;
+    $pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?")->execute([$newSaldo, $id]);
+    $pdo->prepare("INSERT INTO historia_salda (kierowca_id, zmiana, saldo_po, powod, counter_type) VALUES (?, ?, ?, ?, ?)")
+        ->execute([$id, $saldoDelta, $newSaldo, $reason, 'saldo']);
+}
 
-// --- Historia zmian ---
-$pdo->prepare("
-    INSERT INTO historia_salda (kierowca_id, zmiana, saldo_po, powod)
-    VALUES (?, ?, ?, ?)
-")->execute([$id, $amount, $newSaldo, $reason]);
+if (abs($voucherCurrentDelta) >= 1e-6) {
+    $before = isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : 0.0;
+    $current = voucher_increment_bucket($pdo, $id, $current, $voucherCurrentDelta, 'current');
+    $after = isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : $before;
+    $pdo->prepare("INSERT INTO historia_salda (kierowca_id, zmiana, saldo_po, powod, counter_type) VALUES (?, ?, ?, ?, ?)")
+        ->execute([$id, $voucherCurrentDelta, $after, $reason, 'voucher_current']);
+}
+
+if (abs($voucherPreviousDelta) >= 1e-6) {
+    $beforePrev = isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : 0.0;
+    $current = voucher_increment_bucket($pdo, $id, $current, $voucherPreviousDelta, 'previous');
+    $afterPrev = isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : $beforePrev;
+    $pdo->prepare("INSERT INTO historia_salda (kierowca_id, zmiana, saldo_po, powod, counter_type) VALUES (?, ?, ?, ?, ?)")
+        ->execute([$id, $voucherPreviousDelta, $afterPrev, $reason, 'voucher_previous']);
+}
 
 // --- Wysyłka powiadomienia FCM (HTTP v1) ---
 try {
@@ -65,7 +89,7 @@ try {
     $driver   = $tokenStmt->fetch(PDO::FETCH_ASSOC);
     $fcmToken = $driver['fcm_token'] ?? null;
 
-    if ($fcmToken) {
+    if ($fcmToken && abs($saldoDelta) >= 1e-6) {
         $title = 'Zmiana salda';
         $body  = 'Administrator dokonał zmiany salda z powodu: ' . $reason;
 
@@ -73,7 +97,7 @@ try {
         $dataPayload = [
             'type'      => 'saldo_update',
             'driver_id' => (string)$id,
-            'amount'    => (string)$amount,
+            'amount'    => (string)$saldoDelta,
             'saldo_po'  => (string)$newSaldo,
         ];
 
@@ -108,8 +132,10 @@ if (str_starts_with($fcmStatus, 'error')) {
 
 // --- Odpowiedź ---
 echo json_encode([
-    "status"     => "success",
-    "message"    => "Saldo zaktualizowane",
-    "new_saldo"  => $newSaldo,
-    "fcm_status" => $fcmStatus
-], JSON_UNESCAPED_UNICODE);
+        "status"                   => "success",
+        "message"                  => "Saldo zaktualizowane",
+        "new_saldo"                => $newSaldo,
+        "voucher_current_amount"   => isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : 0.0,
+        "voucher_previous_amount"  => isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : 0.0,
+        "fcm_status"               => $fcmStatus
+    ], JSON_UNESCAPED_UNICODE);

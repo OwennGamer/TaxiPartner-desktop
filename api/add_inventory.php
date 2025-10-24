@@ -5,9 +5,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';       // getAuthorizationHeader() i verifyJWT()
 require_once __DIR__ . '/jwt_utils.php';
-require_once __DIR__ . '/phpmailer/PHPMailer-master/src/Exception.php';
-require_once __DIR__ . '/phpmailer/PHPMailer-master/src/PHPMailer.php';
-require_once __DIR__ . '/phpmailer/PHPMailer-master/src/SMTP.php';
+require_once __DIR__ . '/mailer_utils.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -56,7 +54,7 @@ $kamizelki_qty    = isset($_POST['kamizelki_qty'])   ? (int)$_POST['kamizelki_qt
 $licencja         = isset($_POST['licencja'])         ? (int)$_POST['licencja']         : 0;
 $legalizacja      = isset($_POST['legalizacja'])      ? (int)$_POST['legalizacja']      : 0;
 $dowod            = isset($_POST['dowod'])            ? (int)$_POST['dowod']            : 0;
-$ubezpieczenie    = isset($_POST['ubezpieczenie'])    ? (int)$_POST['ubezpieczenie']    : 0;
+$ubezpieczenie    = isset($_POST['ubezpieczenie'])    ? (int)$_POST['ubezpieczenie'])    : 0;
 $karta_lotniskowa = isset($_POST['karta_lotniskowa']) ? (int)$_POST['karta_lotniskowa'] : 0;
 $gasnica          = isset($_POST['gasnica'])          ? (int)$_POST['gasnica']          : 0;
 $lewarek          = isset($_POST['lewarek'])          ? (int)$_POST['lewarek']          : 0;
@@ -199,8 +197,8 @@ try {
             $prevQty = (int)$prevQty;
         }
         if ($prevQty !== $kamizelki_qty) {
-            $differences[] = 'Ilość podanych kamizelek różni się od poprzednio zapisanej ilości (poprzednio ' .
-                qtyLabel($prevQty) . ', teraz ' . qtyLabel($kamizelki_qty) . ')';
+            $differences[] = 'Ilość podanych kamizelek różni się od poprzednio zapisanej ilości (poprzednio '
+                . qtyLabel($prevQty) . ', teraz ' . qtyLabel($kamizelki_qty) . ')';
         }
     }
 
@@ -274,39 +272,43 @@ try {
     ]);
 
     if (!empty($differences)) {
-        try {
-            $mail = new PHPMailer(true);
-            $mail->CharSet = 'UTF-8';
-            $mail->Encoding = 'base64';
+        if (loadMailer()) {
+            try {
+                $mail = new PHPMailer(true);
+                $mail->CharSet = 'UTF-8';
+                $mail->Encoding = 'base64';
 
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'aplikacja.partnertaxi@gmail.com';
-            $mail->Password = 'scfj ojvw fejw oewh';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'aplikacja.partnertaxi@gmail.com';
+                $mail->Password = 'scfj ojvw fejw oewh';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
 
-            $mail->setFrom('aplikacja.partnertaxi@gmail.com', 'Partner Taxi System');
-            $mail->addAddress('pawel.turek330@gmail.com');
+                $mail->setFrom('aplikacja.partnertaxi@gmail.com', 'Partner Taxi System');
+                $mail->addAddress('biuro@taxi-partner.com.pl');
 
-            $mail->isHTML(true);
-            $subjectPlate = preg_replace("/[\r\n]+/", ' ', $rejestracja);
-            $mail->Subject = 'WYKRYTO RÓŻNICĘ W STOSUNKU DO POPRZEDNIEJ INWENTARYZACJI "' . $subjectPlate . '"';
+                $mail->isHTML(true);
+                $subjectPlate = preg_replace("/[\r\n]+/", ' ', $rejestracja);
+                $mail->Subject = 'WYKRYTO RÓŻNICĘ W STOSUNKU DO POPRZEDNIEJ INWENTARYZACJI "' . $subjectPlate . '"';
 
-            $body = '<p>Wykryto różnice w stosunku do poprzedniej inwentaryzacji pojazdu <strong>'
-                . escapeHtml($rejestracja) . '</strong>.</p>';
-            $body .= '<p>Kierowca: <strong>' . escapeHtml($kierowca_id) . '</strong></p>';
-            $body .= '<ul>';
-            foreach ($differences as $diff) {
-                $body .= '<li>' . escapeHtml($diff) . '</li>';
+                $body = '<p>Wykryto różnice w stosunku do poprzedniej inwentaryzacji pojazdu <strong>'
+                    . escapeHtml($rejestracja) . '</strong>.</p>';
+                $body .= '<p>Kierowca: <strong>' . escapeHtml($kierowca_id) . '</strong></p>';
+                $body .= '<ul>';
+                foreach ($differences as $diff) {
+                    $body .= '<li>' . escapeHtml($diff) . '</li>';
+                }
+                $body .= '</ul>';
+
+                $mail->Body = $body;
+                $mail->send();
+            } catch (Exception $e) {
+                error_log('Błąd przy wysyłaniu maila (inwentaryzacja): ' . $e->getMessage());
             }
-            $body .= '</ul>';
-
-            $mail->Body = $body;
-            $mail->send();
-        } catch (Exception $e) {
-            error_log('Błąd przy wysyłaniu maila (inwentaryzacja): ' . $e->getMessage());
+        } else {
+            error_log('PHPMailer unavailable – pominięto wysłanie powiadomienia o różnicach inwentaryzacji.');
         }
     }
 

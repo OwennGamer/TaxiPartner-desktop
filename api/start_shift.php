@@ -1,10 +1,7 @@
 <?php
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
-
-require_once __DIR__ . '/phpmailer/PHPMailer-master/src/Exception.php';
-require_once __DIR__ . '/phpmailer/PHPMailer-master/src/PHPMailer.php';
-require_once __DIR__ . '/phpmailer/PHPMailer-master/src/SMTP.php';
+require_once __DIR__ . '/mailer_utils.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -43,29 +40,34 @@ try {
 
     // Jeśli zmieniono pojazd — wyślij e-mail
     if ($prevVehicle && $prevVehicle !== $vehicle_plate) {
-        $mail = new PHPMailer(true);
-        try {
-            $mail->CharSet = 'UTF-8';
-            $mail->Encoding = 'base64';
+        $mailerAvailable = loadMailer();
+        if ($mailerAvailable) {
+            try {
+                $mail = new PHPMailer(true);
+                $mail->CharSet = 'UTF-8';
+                $mail->Encoding = 'base64';
 
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'aplikacja.partnertaxi@gmail.com';
-            $mail->Password = 'scfj ojvw fejw oewh';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'aplikacja.partnertaxi@gmail.com';
+                $mail->Password = 'scfj ojvw fejw oewh';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
 
-            $mail->setFrom('aplikacja.partnertaxi@gmail.com', 'Partner Taxi System');
-            $mail->addAddress('bok@taxi-partner.com.pl');
+                $mail->setFrom('aplikacja.partnertaxi@gmail.com', 'Partner Taxi System');
+                $mail->addAddress('biuro@taxi-partner.com.pl');
 
-            $mail->isHTML(true);
-            $mail->Subject = "TEST!!! Zmiana samochodu przez kierowcę $driver_id !!!TEST";
-            $mail->Body = "Kierowca <b>$driver_id</b> zmienił samochód z <b>$prevVehicle</b> na <b>$vehicle_plate</b>.";
+                $mail->isHTML(true);
+                $mail->Subject = "TEST!!! Zmiana samochodu przez kierowcę $driver_id !!!TEST";
+                $mail->Body = "Kierowca <b>$driver_id</b> zmienił samochód z <b>$prevVehicle</b> na <b>$vehicle_plate</b>.";
 
-            $mail->send();
-        } catch (Exception $e) {
-            error_log("Błąd przy wysyłaniu maila: {$mail->ErrorInfo}");
+                $mail->send();
+            } catch (Exception $e) {
+                error_log("Błąd przy wysyłaniu maila: {$mail->ErrorInfo}");
+            }
+        } else {
+            error_log('PHPMailer unavailable – pominięto wysłanie informacji o zmianie pojazdu.');
         }
     }
 
@@ -81,4 +83,3 @@ try {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Błąd bazy danych']);
 }
-
