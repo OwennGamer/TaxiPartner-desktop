@@ -87,7 +87,8 @@ public class DriversViewAlignmentTest extends ApplicationTest {
             case "partnerCommissionColumn" -> "partnerCommissionPlaceholder";
             case "boltCommissionColumn" -> "boltCommissionPlaceholder";
             case "settlementLimitColumn" -> "settlementLimitPlaceholder";
-            case "voucherColumn" -> "voucherSumLabel";
+            case "voucherCurrentColumn" -> "voucherCurrentSumLabel";
+            case "voucherPreviousColumn" -> "voucherPreviousSumLabel";
             case "cardColumn" -> "cardSumLabel";
             case "cashColumn" -> "cashSumLabel";
             case "lotColumn" -> "lotSumLabel";

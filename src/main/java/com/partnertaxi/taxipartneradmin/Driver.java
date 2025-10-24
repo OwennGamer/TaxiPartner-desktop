@@ -15,7 +15,8 @@ public class Driver {
     private float boltCommission;
     private float settlementLimit;
 
-    private float voucher;
+    private float voucherCurrent;
+    private float voucherPrevious;
     private float card;
     private float cash;
     private float lot;
@@ -46,7 +47,8 @@ public class Driver {
             String createdAt,
             String vehiclePlate,
             float fuelCostSum,
-            float voucher,
+            float voucherCurrent,
+            float voucherPrevious,
             float card,
             float cash,
             float lot,
@@ -70,7 +72,8 @@ public class Driver {
         this.fuelCostText = (fuelCost == 0f) ? "firma" : "kierowca";
         this.vehiclePlate = vehiclePlate;
         this.fuelCostSum = fuelCostSum;
-        this.voucher = voucher;
+        this.voucherCurrent = voucherCurrent;
+        this.voucherPrevious = voucherPrevious;
         this.card = card;
         this.cash = cash;
         this.lot = lot;
@@ -95,7 +98,8 @@ public class Driver {
             String createdAt,
             String vehiclePlate,
             float fuelCostSum,
-            float voucher,
+            float voucherCurrent,
+            float voucherPrevious,
             float card,
             float cash,
             float lot,
@@ -105,7 +109,7 @@ public class Driver {
     ) {
         this(id, name, saldo, status, rola, percentTurnover, fuelCost, cardCommission,
                 partnerCommission, boltCommission, settlementLimit, createdAt, vehiclePlate,
-                fuelCostSum, voucher, card, cash, lot, turnover, zlPerKm, fuelPerTurnover, false);
+                fuelCostSum, voucherCurrent, voucherPrevious, card, cash, lot, turnover, zlPerKm, fuelPerTurnover, false);
     }
 
     public String getId() { return id; }
@@ -120,7 +124,8 @@ public class Driver {
     public float getPartnerCommission() { return partnerCommission; }
     public float getBoltCommission() { return boltCommission; }
     public float getSettlementLimit() { return settlementLimit; }
-    public float getVoucher() { return voucher; }
+    public float getVoucherCurrent() { return voucherCurrent; }
+    public float getVoucherPrevious() { return voucherPrevious; }
     public float getCard() { return card; }
     public float getCash() { return cash; }
     public float getLot() { return lot; }

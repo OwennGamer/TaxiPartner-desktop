@@ -270,12 +270,14 @@ public class ApiClient {
     }
 
     // 🔁 Zmiana salda kierowcy
-    public static void updateSaldo(String driverId, float amount, String reason) {
+    public static void updateSaldo(String driverId, float saldoAmount, float voucherCurrentAmount, float voucherPreviousAmount, String reason) {
         try {
             JSONObject json = new JSONObject();
             json.put("id", driverId);
-            json.put("amount", amount);
             json.put("reason", reason);
+            json.put("saldo_amount", saldoAmount);
+            json.put("voucher_current_amount", voucherCurrentAmount);
+            json.put("voucher_previous_amount", voucherPreviousAmount);
 
             ApiResult res = sendJsonPost("update_saldo.php", json);
             String fcmStatus = "";

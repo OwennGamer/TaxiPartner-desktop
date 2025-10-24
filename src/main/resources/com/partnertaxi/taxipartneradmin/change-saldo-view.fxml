@@ -12,7 +12,21 @@
 
     <Label text="Zmiana salda" styleClass="font-20" />
 
-    <TextField fx:id="amountField" promptText="Kwota (np. -100 lub 200)" />
+    <GridPane hgap="10" vgap="8">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <Label text="Saldo" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <TextField fx:id="saldoField" GridPane.rowIndex="0" GridPane.columnIndex="1" promptText="np. -100 lub 200" />
+
+        <Label text="Vouchery (aktualny)" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <TextField fx:id="voucherCurrentField" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="np. 150" />
+
+        <Label text="Vouchery (poprzedni)" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <TextField fx:id="voucherPreviousField" GridPane.rowIndex="2" GridPane.columnIndex="1" promptText="np. -50" />
+    </GridPane>
 
     <ComboBox fx:id="reasonBox" promptText="Wybierz powód">
         <items>
