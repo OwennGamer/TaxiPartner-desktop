@@ -169,7 +169,43 @@ class InventoryActivity : AppCompatActivity() {
         btnPhotoDirt4.setOnClickListener  { launchCamera(REQ_DIRT4) }
 
         btnSubmit.setOnClickListener { validateAndSubmit() }
+
+        restoreState(savedInstanceState)
+        syncDynamicSections()
     }
+
+    private fun restoreState(savedInstanceState: Bundle?) {
+        fun restoreFile(key: String): File? = savedInstanceState?.getString(key)?.let {
+            val f = File(it)
+            if (f.exists()) f else null
+        }
+
+        frontFile = restoreFile("frontFile")
+        backFile  = restoreFile("backFile")
+        leftFile  = restoreFile("leftFile")
+        rightFile = restoreFile("rightFile")
+        dirtFile1 = restoreFile("dirtFile1")
+        dirtFile2 = restoreFile("dirtFile2")
+        dirtFile3 = restoreFile("dirtFile3")
+        dirtFile4 = restoreFile("dirtFile4")
+
+        showPreview(imgFrontPreview, frontFile)
+        showPreview(imgBackPreview,  backFile)
+        showPreview(imgLeftPreview,  leftFile)
+        showPreview(imgRightPreview, rightFile)
+        showPreview(imgPhotoDirt1,   dirtFile1)
+        showPreview(imgPhotoDirt2,   dirtFile2)
+        showPreview(imgPhotoDirt3,   dirtFile3)
+        showPreview(imgPhotoDirt4,   dirtFile4)
+    }
+
+    private fun syncDynamicSections() {
+        dirtPhotoSection.visibility = if (radioCleanNo.isChecked) View.VISIBLE else View.GONE
+        edittextVestCount.visibility = if (checkboxKamizelka.isChecked) View.VISIBLE else View.GONE
+        editTextNotes.visibility = if (radioNotesYes.isChecked) View.VISIBLE else View.GONE
+    }
+
+
 
     private fun launchCamera(reqCode: Int) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -226,12 +262,7 @@ class InventoryActivity : AppCompatActivity() {
     ) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != RESULT_OK) return
-        fun show(iv: ImageView, f: File?) {
-            f?.let {
-                iv.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
-                iv.visibility = View.VISIBLE
-            }
-        }
+        fun show(iv: ImageView, f: File?) = showPreview(iv, f)
         when (requestCode) {
             REQ_FRONT  -> show(imgFrontPreview, frontFile)
             REQ_BACK   -> show(imgBackPreview,  backFile)
@@ -241,6 +272,13 @@ class InventoryActivity : AppCompatActivity() {
             REQ_DIRT2  -> show(imgPhotoDirt2,   dirtFile2)
             REQ_DIRT3  -> show(imgPhotoDirt3,   dirtFile3)
             REQ_DIRT4  -> show(imgPhotoDirt4,   dirtFile4)
+        }
+    }
+
+    private fun showPreview(iv: ImageView, f: File?) {
+        f?.takeIf { it.exists() }?.let {
+            iv.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
+            iv.visibility = View.VISIBLE
         }
     }
 
@@ -409,4 +447,17 @@ class InventoryActivity : AppCompatActivity() {
             }
         })
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("frontFile", frontFile?.absolutePath)
+        outState.putString("backFile",  backFile?.absolutePath)
+        outState.putString("leftFile",  leftFile?.absolutePath)
+        outState.putString("rightFile", rightFile?.absolutePath)
+        outState.putString("dirtFile1", dirtFile1?.absolutePath)
+        outState.putString("dirtFile2", dirtFile2?.absolutePath)
+        outState.putString("dirtFile3", dirtFile3?.absolutePath)
+        outState.putString("dirtFile4", dirtFile4?.absolutePath)
+        super.onSaveInstanceState(outState)
+    }
+
 }
