@@ -104,6 +104,8 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             "logout" -> {
                 SessionManager.clearSession(applicationContext)
                 SessionManager.clearSessionId(applicationContext)
+                ApiClient.jwtToken = null
+                ApiClient.deviceId = null
 
                 val loginIntent = Intent(this, LoginActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

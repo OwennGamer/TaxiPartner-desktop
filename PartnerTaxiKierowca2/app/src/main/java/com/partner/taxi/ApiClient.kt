@@ -53,9 +53,10 @@ object ApiClient {
 
                 RefreshTokenResult.Unauthorized -> {
                     Log.w("ApiClient", "Token refresh rejected by server. Clearing local session.")
+                    val device = deviceId ?: "unknown"
                     RemoteLogService.logWarning(
                         summary = "Odrzucono odświeżenie tokenu",
-                        details = "Serwer zwrócił HTTP 401 dla urządzenia $device"
+                        details = "Serwer odrzucił prośbę o odświeżenie dla urządzenia $device"
                     )
                     appContext?.let { ctx ->
                         jwtToken = null
@@ -133,10 +134,16 @@ object ApiClient {
                     RefreshTokenResult.Unauthorized
                 }
 
-            } else if (resp.code() == 401 || resp.code() == 403) {
+            } else if (resp.code() == 401 || resp.code() == 403 || resp.code() == 404) {
+                val code = resp.code()
+                val summary = if (code == 404) {
+                    "Endpoint odświeżania tokenu niedostępny"
+                } else {
+                    "Odrzucono odświeżenie tokenu"
+                }
                 RemoteLogService.logWarning(
-                    summary = "Odrzucono odświeżenie tokenu",
-                    details = "HTTP ${resp.code()} podczas odświeżania tokenu"
+                    summary = summary,
+                    details = "HTTP $code podczas odświeżania tokenu"
                 )
                 RefreshTokenResult.Unauthorized
             } else {

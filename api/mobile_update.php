@@ -6,9 +6,9 @@
 header('Content-Type: application/json; charset=utf-8');
 
 // KONFIGURACJA TESTOWA — DOSTOSUJ
-$latestVersion   = "1.1.2";        // docelowy versionName (musi być "większy" niż 1.0)
+$latestVersion   = "1.1.4";        // docelowy versionName (musi być "większy" niż 1.0)
 $mandatory       = true;           // scenariusz: aktualizacja WYMUSZONA
-$apkFileName     = "app-1.1.2.apk";// nazwa pliku, który wrzucisz do /api/updates
+$apkFileName     = "app-1.1.4.apk";// nazwa pliku, który wrzucisz do /api/updates
 $changelog       = "• Poprawki stabilności\n• Usprawnienia UI\n• Logowanie błędów aktualizacji";
 
 // ZŁÓŻ URL do pliku APK (port 8444 zgodnie z Twoim BASE_URL)

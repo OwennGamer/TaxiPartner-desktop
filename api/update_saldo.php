@@ -58,14 +58,18 @@ $current = voucher_refresh_buckets($pdo, $current);
 $currentSaldo = floatval($current['saldo']);
 $newSaldo = $currentSaldo;
 
-if (abs($saldoDelta) >= 1e-6) {
+$changedSaldo = abs($saldoDelta) >= 1e-6;
+$changedVoucherCurrent = abs($voucherCurrentDelta) >= 1e-6;
+$changedVoucherPrevious = abs($voucherPreviousDelta) >= 1e-6;
+
+if ($changedSaldo) {
     $newSaldo = $currentSaldo + $saldoDelta;
     $pdo->prepare("UPDATE kierowcy SET saldo = ? WHERE id = ?")->execute([$newSaldo, $id]);
     $pdo->prepare("INSERT INTO historia_salda (kierowca_id, zmiana, saldo_po, powod, counter_type) VALUES (?, ?, ?, ?, ?)")
         ->execute([$id, $saldoDelta, $newSaldo, $reason, 'saldo']);
 }
 
-if (abs($voucherCurrentDelta) >= 1e-6) {
+if ($changedVoucherCurrent) {
     $before = isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : 0.0;
     $current = voucher_increment_bucket($pdo, $id, $current, $voucherCurrentDelta, 'current');
     $after = isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : $before;
@@ -73,13 +77,16 @@ if (abs($voucherCurrentDelta) >= 1e-6) {
         ->execute([$id, $voucherCurrentDelta, $after, $reason, 'voucher_current']);
 }
 
-if (abs($voucherPreviousDelta) >= 1e-6) {
+if ($changedVoucherPrevious) {
     $beforePrev = isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : 0.0;
     $current = voucher_increment_bucket($pdo, $id, $current, $voucherPreviousDelta, 'previous');
     $afterPrev = isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : $beforePrev;
     $pdo->prepare("INSERT INTO historia_salda (kierowca_id, zmiana, saldo_po, powod, counter_type) VALUES (?, ?, ?, ?, ?)")
         ->execute([$id, $voucherPreviousDelta, $afterPrev, $reason, 'voucher_previous']);
 }
+
+$voucherCurrentAfter = isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : 0.0;
+$voucherPreviousAfter = isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : 0.0;
 
 // --- Wysyłka powiadomienia FCM (HTTP v1) ---
 try {
@@ -89,16 +96,39 @@ try {
     $driver   = $tokenStmt->fetch(PDO::FETCH_ASSOC);
     $fcmToken = $driver['fcm_token'] ?? null;
 
-    if ($fcmToken && abs($saldoDelta) >= 1e-6) {
+    $hasChangesForNotification = $changedSaldo || $changedVoucherCurrent || $changedVoucherPrevious;
+
+    if ($fcmToken && $hasChangesForNotification) {
         $title = 'Zmiana salda';
-        $body  = 'Administrator dokonał zmiany salda z powodu: ' . $reason;
+
+        $bodyChanges = [];
+        $formatSigned = static function (float $value): string {
+            $sign = $value >= 0 ? '+' : '';
+            return $sign . number_format($value, 2, ',', ' ') . ' zł';
+        };
+
+        if ($changedSaldo) {
+            $bodyChanges[] = 'saldo ' . $formatSigned($saldoDelta) . ' (po: ' . number_format($newSaldo, 2, ',', ' ') . ' zł)';
+        }
+        if ($changedVoucherCurrent) {
+            $bodyChanges[] = 'vouchery (bieżące) ' . $formatSigned($voucherCurrentDelta) . ' (po: ' . number_format($voucherCurrentAfter, 2, ',', ' ') . ' zł)';
+        }
+        if ($changedVoucherPrevious) {
+            $bodyChanges[] = 'vouchery (poprzednie) ' . $formatSigned($voucherPreviousDelta) . ' (po: ' . number_format($voucherPreviousAfter, 2, ',', ' ') . ' zł)';
+        }
+
+        $body = 'Administrator dokonał zmiany: ' . implode(', ', $bodyChanges) . '. Powód: ' . $reason;
 
         // Dodatkowe dane dla aplikacji (odebranie w onMessageReceived)
         $dataPayload = [
-            'type'      => 'saldo_update',
-            'driver_id' => (string)$id,
-            'amount'    => (string)$saldoDelta,
-            'saldo_po'  => (string)$newSaldo,
+            'type'                     => 'saldo_update',
+            'driver_id'                => (string)$id,
+            'saldo_change'             => sprintf('%.2f', $saldoDelta),
+            'saldo_po'                 => sprintf('%.2f', $newSaldo),
+            'voucher_current_change'   => sprintf('%.2f', $voucherCurrentDelta),
+            'voucher_current_after'    => sprintf('%.2f', $voucherCurrentAfter),
+            'voucher_previous_change'  => sprintf('%.2f', $voucherPreviousDelta),
+            'voucher_previous_after'   => sprintf('%.2f', $voucherPreviousAfter),
         ];
 
         // Wyślij FCM przez HTTP v1
@@ -114,7 +144,7 @@ try {
             ], JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
             @chmod(__DIR__ . '/debug_fcm.log', 0666);
         }
-    } else {
+    } elseif (!$fcmToken) {
         error_log('Brak fcm_token dla kierowcy o ID ' . $id);
         $fcmStatus = 'skipped:no_token';
     }
