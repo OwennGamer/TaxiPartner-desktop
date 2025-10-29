@@ -15,6 +15,12 @@ class App : Application() {
         if (token.isNotEmpty()) {
             ApiClient.jwtToken = token
         }
+
+        val storedDeviceId = SessionManager.getDeviceId(this)
+        if (storedDeviceId.isNotEmpty()) {
+            ApiClient.deviceId = storedDeviceId
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 "default",                // ID kanału – musi być "default"

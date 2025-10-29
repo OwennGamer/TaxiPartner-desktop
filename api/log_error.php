@@ -2,6 +2,30 @@
 require_once __DIR__ . '/jwt_utils.php';
 require_once __DIR__ . '/db.php';
 
+const ERROR_LOG_DIR = __DIR__ . '/logs';
+const ERROR_LOG_FILE = ERROR_LOG_DIR . '/app_error.log';
+
+function appendLogEntry(array $entry): void
+{
+    if (!is_dir(ERROR_LOG_DIR)) {
+        if (!@mkdir(ERROR_LOG_DIR, 0775, true) && !is_dir(ERROR_LOG_DIR)) {
+            error_log('log_error.php: unable to create log directory ' . ERROR_LOG_DIR);
+            return;
+        }
+    }
+
+    $encoded = json_encode($entry, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if ($encoded === false) {
+        error_log('log_error.php: failed to encode log entry');
+        return;
+    }
+
+    $result = @file_put_contents(ERROR_LOG_FILE, $encoded . PHP_EOL, FILE_APPEND | LOCK_EX);
+    if ($result === false) {
+        error_log('log_error.php: failed to write to log file ' . ERROR_LOG_FILE);
+    }
+}
+
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -73,6 +97,9 @@ if (isset($payload['metadata'])) {
     }
 }
 
+$occurredAt = isset($payload['occurred_at']) ? trim((string)$payload['occurred_at']) : '';
+$occurredAt = $occurredAt !== '' ? $occurredAt : null;
+
 try {
     $stmt = $pdo->prepare(
         'INSERT INTO app_error_logs (source, level, summary, message, stacktrace, driver_id, license_plate, app_version, device_id, metadata) '
@@ -92,10 +119,28 @@ try {
         ':metadata' => $metadata,
     ]);
 
+    $logId = (int)$pdo->lastInsertId();
+
+    appendLogEntry([
+        'log_id' => $logId,
+        'reported_at' => date('c'),
+        'occurred_at' => $occurredAt,
+        'level' => $level,
+        'source' => $source,
+        'device_id' => $deviceId,
+        'driver_id' => $driverId,
+        'license_plate' => $licensePlate,
+        'summary' => $summary,
+        'message' => $message !== '' ? $message : null,
+        'stacktrace' => $stacktrace,
+        'metadata' => isset($payload['metadata']) ? $payload['metadata'] : null,
+        'app_version' => $appVersion,
+    ]);
+
     http_response_code(201);
     echo json_encode([
         "status" => "success",
-        "log_id" => (int)$pdo->lastInsertId(),
+        "log_id" => $logId,
     ]);
 } catch (PDOException $e) {
     error_log('log_error.php failed: ' . $e->getMessage());

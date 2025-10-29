@@ -1,0 +1,2 @@
+# Ignore runtime error logs generated on the server
+*.log
