@@ -7,4 +7,7 @@
     <color name="colorOnPrimary">#FFFFFFFF</color>
     <color name="colorSecondary">#625B71</color>
     <color name="colorPrimaryContainer">#EADDFF</color>
+
+    <!-- Legacy names referenced from the AndroidManifest metadata -->
+    <color name="purple_500">#6200EE</color>
 </resources>
