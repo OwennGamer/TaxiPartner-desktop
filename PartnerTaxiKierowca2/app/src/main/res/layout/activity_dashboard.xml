@@ -189,13 +189,13 @@
                 app:layout_constraintDimensionRatio="1:1"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPusty1"
+                android:id="@+id/btnChangeSaldo"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp"
-                android:text="PUSTY 1"
+                android:text="@string/dashboard_change_saldo"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/btnGrafik"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -226,7 +226,7 @@
                 android:layout_marginStart="8dp"
                 android:text="PUSTY 3"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@id/btnPusty1"
+                app:layout_constraintTop_toBottomOf="@id/btnChangeSaldo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintWidth_percent="0.48"
                 app:layout_constraintDimensionRatio="1:1"/>

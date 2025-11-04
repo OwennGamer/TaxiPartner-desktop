@@ -16,6 +16,8 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
+import kotlin.math.abs
 
 class TaxiFirebaseService : FirebaseMessagingService() {
 
@@ -135,17 +137,83 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             }
 
             "saldo_update" -> {
-                val amount = message.data["amount"]
-                val saldoPo = message.data["saldo_po"]
-                if (amount != null && saldoPo != null) {
-                    val text = "Zmiana salda: $amount, nowe saldo: $saldoPo"
+                val locale = Locale("pl", "PL")
+                val saldoChange = parseAmount(message.data["saldo_change"]) ?: 0.0
+                val saldoAfter = parseAmount(message.data["saldo_po"])
+                val voucherCurrentChange = parseAmount(message.data["voucher_current_change"]) ?: 0.0
+                val voucherCurrentAfter = parseAmount(message.data["voucher_current_after"])
+                val voucherPreviousChange = parseAmount(message.data["voucher_previous_change"]) ?: 0.0
+                val voucherPreviousAfter = parseAmount(message.data["voucher_previous_after"])
+                val reason = message.data["reason"]?.takeIf { it.isNotBlank() }
+                val initiatorRole = message.data["initiator_role"]?.takeIf { it.isNotBlank() }
+                val initiatorId = message.data["initiator_id"]?.takeIf { it.isNotBlank() }
+
+                val changeParts = mutableListOf<String>()
+                if (abs(saldoChange) > 1e-6) {
+                    val part = buildChangeSummary(
+                        getString(R.string.change_saldo_notification_saldo_label),
+                        saldoChange,
+                        saldoAfter,
+                        locale
+                    )
+                    changeParts += part
+                }
+                if (abs(voucherCurrentChange) > 1e-6) {
+                    val part = buildChangeSummary(
+                        getString(R.string.change_saldo_notification_voucher_current_label),
+                        voucherCurrentChange,
+                        voucherCurrentAfter,
+                        locale
+                    )
+                    changeParts += part
+                }
+                if (abs(voucherPreviousChange) > 1e-6) {
+                    val part = buildChangeSummary(
+                        getString(R.string.change_saldo_notification_voucher_previous_label),
+                        voucherPreviousChange,
+                        voucherPreviousAfter,
+                        locale
+                    )
+                    changeParts += part
+                }
+
+                val summary = if (changeParts.isNotEmpty()) {
+                    getString(
+                        R.string.change_saldo_notification_summary,
+                        changeParts.joinToString(", ")
+                    )
+                } else null
+
+                val notificationBody = buildString {
+                    if (!summary.isNullOrBlank()) {
+                        append(summary)
+                    }
+                    if (!reason.isNullOrBlank()) {
+                        if (isNotEmpty()) append(". ")
+                        append(getString(R.string.change_saldo_notification_reason, reason))
+                    }
+                    if (!initiatorRole.isNullOrBlank() || !initiatorId.isNullOrBlank()) {
+                        if (isNotEmpty()) append(". ")
+                        val who = listOfNotNull(initiatorRole, initiatorId).joinToString(" ")
+                        append(getString(R.string.change_saldo_notification_initiator, who))
+                    }
+                }
+
+                if (notificationBody.isNotEmpty()) {
 
                     val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                     val last = prefs.getString(PREF_LAST_MESSAGE, null)
-                    if (text != last) {
-                        prefs.edit().putString(PREF_LAST_MESSAGE, text).apply()
-                        // Opcjonalnie zapamiętaj najnowsze saldo
-                        prefs.edit().putString("last_saldo", saldoPo).apply()
+                    if (notificationBody != last) {
+                        prefs.edit().putString(PREF_LAST_MESSAGE, notificationBody).apply()
+                        message.data["saldo_po"]?.let {
+                            prefs.edit().putString("last_saldo", it).apply()
+                        }
+                        message.data["voucher_current_after"]?.let {
+                            prefs.edit().putString("last_voucher_current", it).apply()
+                        }
+                        message.data["voucher_previous_after"]?.let {
+                            prefs.edit().putString("last_voucher_previous", it).apply()
+                        }
 
                         val intent = Intent(this, DashboardActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -159,8 +227,11 @@ class TaxiFirebaseService : FirebaseMessagingService() {
                         val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
 
                         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setContentTitle("Taxi Partner")
-                            .setContentText(text)
+                            .setContentTitle(getString(R.string.change_saldo_notification_title))
+                            .setContentText(notificationBody)
+                            .setStyle(
+                                NotificationCompat.BigTextStyle().bigText(notificationBody)
+                            )
                             .setSmallIcon(R.drawable.ic_launcher_foreground)
                             .setLargeIcon(largeIcon)
                             .setContentIntent(pending)
@@ -204,6 +275,26 @@ class TaxiFirebaseService : FirebaseMessagingService() {
             .build()
 
         notificationManager.notify(1001, notification)
+    }
+
+    private fun parseAmount(raw: String?): Double? {
+        if (raw.isNullOrBlank()) return null
+        return raw.replace(',', '.').toDoubleOrNull()
+    }
+
+    private fun buildChangeSummary(
+        label: String,
+        change: Double,
+        after: Double?,
+        locale: Locale
+    ): String {
+        val changeText = String.format(locale, "%+.2f zł", change)
+        val afterText = after?.let { String.format(locale, "%.2f zł", it) }
+        return if (afterText != null) {
+            "$label $changeText (po: $afterText)"
+        } else {
+            "$label $changeText"
+        }
     }
 
 }

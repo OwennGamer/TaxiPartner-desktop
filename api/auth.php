@@ -25,6 +25,23 @@ if (!$decoded || !$deviceId || ($decoded->device_id ?? '') !== $deviceId) {
     http_response_code(401);
     exit;
 }
+
+if (isset($requiredRole)) {
+    $tokenRole = strtolower($decoded->role ?? '');
+    if ($tokenRole !== strtolower($requiredRole)) {
+        echo json_encode(["status" => "error", "message" => "Niewystarczające uprawnienia"]);
+        http_response_code(403);
+        exit;
+    }
+}
+
+$GLOBALS['AUTHENTICATED_JWT'] = $decoded;
+
+function getAuthenticatedJwt()
+{
+    return $GLOBALS['AUTHENTICATED_JWT'] ?? null;
+}
+
 ?>
 
 

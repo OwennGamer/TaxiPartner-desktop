@@ -10,7 +10,8 @@ if (!$decoded) {
     echo json_encode(["status" => "error", "message" => "Brak ważnego tokena"]);
     exit;
 }
-if ($decoded->role !== 'admin' && $decoded->role !== 'flotowiec') {
+$role = strtolower($decoded->role ?? '');
+if (!in_array($role, ['admin', 'administrator', 'flotowiec'], true)) {
     echo json_encode(["status" => "error", "message" => "Brak uprawnień"]);
     exit;
 }

@@ -1,4 +1,5 @@
 <?php
+$requiredRole = 'administrator';
 require_once 'config.php';
 require_once 'auth.php';
 require_once 'db.php';
@@ -10,9 +11,9 @@ header('Content-Type: application/json');
 $fcmStatus = 'skipped';
 
 // --- Autoryzacja ---
-$token = getAuthorizationHeader();
-if (!$token || !verifyJWT($token)) {
-    http_response_code(500);
+$decodedToken = getAuthenticatedJwt();
+if (!$decodedToken) {
+    http_response_code(401);
     echo json_encode(["status" => "error", "message" => "Brak ważnego tokena", "fcm_status" => $fcmStatus]);
     exit;
 }
@@ -129,6 +130,9 @@ try {
             'voucher_current_after'    => sprintf('%.2f', $voucherCurrentAfter),
             'voucher_previous_change'  => sprintf('%.2f', $voucherPreviousDelta),
             'voucher_previous_after'   => sprintf('%.2f', $voucherPreviousAfter),
+            'reason'                   => $reason,
+            'initiator_role'           => (string)($decodedToken->role ?? ''),
+            'initiator_id'             => (string)($decodedToken->user_id ?? ''),
         ];
 
         // Wyślij FCM przez HTTP v1
@@ -164,8 +168,19 @@ if (str_starts_with($fcmStatus, 'error')) {
 echo json_encode([
         "status"                   => "success",
         "message"                  => "Saldo zaktualizowane",
+        "driver_id"                => (string)$id,
         "new_saldo"                => $newSaldo,
+        "saldo_change"             => $saldoDelta,
         "voucher_current_amount"   => isset($current['voucher_current_amount']) ? (float)$current['voucher_current_amount'] : 0.0,
+        "voucher_current_change"   => $voucherCurrentDelta,
+        "voucher_current_after"    => $voucherCurrentAfter,
         "voucher_previous_amount"  => isset($current['voucher_previous_amount']) ? (float)$current['voucher_previous_amount'] : 0.0,
+        "voucher_previous_change"  => $voucherPreviousDelta,
+        "voucher_previous_after"   => $voucherPreviousAfter,
+        "reason"                   => $reason,
+        "requested_by"             => [
+            "user_id" => $decodedToken->user_id ?? null,
+            "role"    => $decodedToken->role ?? null,
+        ],
         "fcm_status"               => $fcmStatus
     ], JSON_UNESCAPED_UNICODE);

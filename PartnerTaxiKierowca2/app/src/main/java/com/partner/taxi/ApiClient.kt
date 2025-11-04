@@ -183,5 +183,9 @@ object ApiClient {
         data class NetworkError(val exception: IOException) : RefreshTokenResult()
     }
 
+    suspend fun updateSaldo(request: UpdateSaldoRequest): retrofit2.Response<UpdateSaldoResponse> {
+        return apiService.updateSaldo(request)
+    }
+
     val apiService: ApiService = retrofit.create(ApiService::class.java)
 }

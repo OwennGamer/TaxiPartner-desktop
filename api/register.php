@@ -13,7 +13,7 @@ if (!$data || !isset($data['username']) || !isset($data['password']) || !isset($
 }
 
 // Obsługiwane role użytkowników
-$allowed_roles = ["kierowca", "flotowiec"];
+$allowed_roles = ["kierowca", "flotowiec", "administrator", "admin"];
 if (!in_array($data['role'], $allowed_roles)) {
     echo json_encode(["status" => "error", "message" => "Nieprawidłowa rola użytkownika"]);
     exit;

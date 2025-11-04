@@ -46,7 +46,7 @@ public class EditDriverController {
     private void initialize() {
         // 1) inicjalizacja ComboBoxów
         statusBox.getItems().addAll("aktywny", "nieaktywny");
-        roleBox.getItems().addAll("kierowca", "flotowiec");
+        roleBox.getItems().addAll("kierowca", "flotowiec", "administrator");
         fuelCostBox.getItems().addAll("firma", "kierowca");
 
         // 2) placeholdery

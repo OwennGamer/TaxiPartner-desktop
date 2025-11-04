@@ -9,11 +9,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
@@ -45,13 +47,21 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnTankowanie: MaterialButton
     private lateinit var btnGrafik: MaterialButton
     private lateinit var btnFlota: MaterialButton
-    private lateinit var btnPusty1: MaterialButton
+    private lateinit var btnChangeSaldo: MaterialButton
     private lateinit var btnPusty2: MaterialButton
     private lateinit var btnPusty3: MaterialButton
     private lateinit var btnZakonczPrace: MaterialButton
     private var vehiclePlate: String? = null
     private var restoreLockTaskAfterNavigation = false
     private var suppressNextUserLeaveHint = false
+
+    private val changeSaldoLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            loadDriverSaldo()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,12 +89,28 @@ class DashboardActivity : AppCompatActivity() {
         btnTankowanie      = findViewById(R.id.btnTankowanie)
         btnGrafik          = findViewById(R.id.btnGrafik)
         btnFlota           = findViewById(R.id.btnFlota)
-        btnPusty1          = findViewById(R.id.btnPusty1)
+        btnChangeSaldo     = findViewById(R.id.btnChangeSaldo)
         btnPusty2          = findViewById(R.id.btnPusty2)
         btnPusty3          = findViewById(R.id.btnPusty3)
         btnZakonczPrace    = findViewById(R.id.btnZakonczPrace)
 
         val role = SessionManager.getRole(this).lowercase()
+        val isAdmin = role == "administrator"
+
+        btnChangeSaldo.visibility = if (isAdmin) View.VISIBLE else View.GONE
+        if (isAdmin) {
+            btnChangeSaldo.setOnClickListener {
+                val intent = Intent(this, ChangeSaldoActivity::class.java).apply {
+                    putExtra(
+                        ChangeSaldoActivity.EXTRA_DRIVER_ID,
+                        SessionManager.getDriverId(this@DashboardActivity)
+                    )
+                }
+                changeSaldoLauncher.launch(intent)
+            }
+        } else {
+            btnChangeSaldo.setOnClickListener(null)
+        }
 
         btnFlota.setOnClickListener {
             if (role != "flotowiec") {
@@ -103,7 +129,7 @@ class DashboardActivity : AppCompatActivity() {
         // <-- PRZYWRACAMY LOSOWE KOLORY DLA KAFELKÓW -->
         val buttons = listOf(
             btnDodajKurs, btnHistoria, btnTankowanie, btnGrafik,
-            btnFlota, btnPusty1, btnPusty2, btnPusty3
+            btnFlota, btnChangeSaldo, btnPusty2, btnPusty3
         )
         val colors = listOf(
             "#F44336", "#E91E63", "#9C27B0", "#673AB7",
@@ -347,8 +373,18 @@ class DashboardActivity : AppCompatActivity() {
                         startActivity(Intent(this@DashboardActivity, ChooseVehicleActivity::class.java))
                         finish()
                     } else {
-                        val msg = response.body()?.message ?: "Błąd zakończenia"
+                        val body = response.body()
+                        val msg = body?.message ?: "Błąd zakończenia"
                         Toast.makeText(this@DashboardActivity, msg, Toast.LENGTH_LONG).show()
+                        RemoteLogService.logWarning(
+                            summary = "Nieudane zakończenie zmiany",
+                            details = "status=${body?.status ?: "brak"} podczas endShift",
+                            metadata = mapOf(
+                                "http_code" to response.code(),
+                                "status" to body?.status,
+                                "message" to body?.message
+                            )
+                        )
                     }
                 }
 

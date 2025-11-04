@@ -185,4 +185,9 @@ interface ApiService {
         @Part("status") status: RequestBody,
         @Part photos: List<MultipartBody.Part>,
     ): Call<GenericResponse>
+
+    @POST("update_saldo.php")
+    suspend fun updateSaldo(
+        @Body request: UpdateSaldoRequest
+    ): Response<UpdateSaldoResponse>
 }

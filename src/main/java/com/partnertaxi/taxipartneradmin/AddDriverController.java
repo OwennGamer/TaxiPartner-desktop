@@ -52,7 +52,7 @@ public class AddDriverController {
         // Inicjalizacja ChoiceBoxów
         statusChoiceBox.getItems().addAll("aktywny", "nieaktywny");
         statusChoiceBox.setValue("aktywny");
-        roleChoiceBox.getItems().addAll("kierowca", "flotowiec");
+        roleChoiceBox.getItems().addAll("kierowca", "flotowiec", "administrator");
         roleChoiceBox.setValue("kierowca");
         fuelCostChoiceBox.getItems().addAll("firma", "kierowca");
         fuelCostChoiceBox.setValue("firma");
