@@ -4,77 +4,170 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:padding="24dp"
     tools:context=".ChangeSaldoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
         <TextView
-            android:id="@+id/changeSaldoHeader"
+            android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Zmiana salda"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="20dp"
+            android:text="@string/change_saldo_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/black" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutOperation"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:id="@+id/layoutDriverId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Rodzaj operacji"
-            app:endIconMode="dropdown_menu">
-
-            <AutoCompleteTextView
-                android:id="@+id/inputOperation"
-                style="@style/Widget.MaterialComponents.AutoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:focusable="false"
-                android:cursorVisible="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutAmount"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:hint="Kwota">
+            android:hint="@string/change_saldo_driver_id_label"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/colorPrimary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputAmount"
+                android:id="@+id/inputDriverId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutComment"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+            android:id="@+id/layoutSaldoAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/change_saldo_saldo_hint"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputSaldoAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutVoucherCurrent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/change_saldo_voucher_current_hint"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputVoucherCurrent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutVoucherPrevious"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/change_saldo_voucher_previous_hint"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputVoucherPrevious"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/change_saldo_reason_hint"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:endIconMode="dropdown_menu">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/inputReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutCustomReason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:hint="Komentarz">
+            android:hint="@string/change_saldo_custom_reason_hint"
+            android:visibility="gone"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/colorPrimary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputComment"
+                android:id="@+id/inputCustomReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:imeOptions="actionDone"
                 android:inputType="textCapSentences|textMultiLine"
                 android:minLines="3" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/buttonSave"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Zapisz" />
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/change_saldo_submit" />
+
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/change_saldo_cancel" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.MaterialComponents.ProgressIndicator.Circular.Indeterminate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>
