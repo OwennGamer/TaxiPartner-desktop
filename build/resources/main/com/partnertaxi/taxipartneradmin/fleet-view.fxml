@@ -31,6 +31,7 @@
             <CheckBox fx:id="chkShowInactive"
                       text="Pokaż nieaktywne"
                       onAction="#onToggleShowInactive"/>
+            <Button text="Odśwież" onAction="#onRefresh"/>
 
         </ToolBar>
     </top>

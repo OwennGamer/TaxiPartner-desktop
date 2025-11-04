@@ -130,9 +130,7 @@ public class FleetController {
             stage.setMaximized(true);
             stage.showAndWait();
 
-            List<Vehicle> updatedList = ApiClient.getVehicles();
-            allVehicles.setAll(updatedList);
-            applyFilter();
+            reloadVehicles();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -246,9 +244,7 @@ public class FleetController {
             stage.setMaximized(true);
             stage.showAndWait();
 
-            List<Vehicle> updatedList = ApiClient.getVehicles();
-            allVehicles.setAll(updatedList);
-            applyFilter();
+            reloadVehicles();
         } catch (IOException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Nie można otworzyć formularza edycji.").showAndWait();
@@ -268,15 +264,24 @@ public class FleetController {
         conf.showAndWait().ifPresent(b -> {
             if (b == ButtonType.OK) {
                 ApiClient.deleteVehicle(selected.getId());
-                List<Vehicle> updatedList = ApiClient.getVehicles();
-                allVehicles.setAll(updatedList);
-                applyFilter();
+                reloadVehicles();
             }
         });
     }
 
     @FXML
+    public void onRefresh(ActionEvent event) {
+        reloadVehicles();
+    }
+
+//    @FXML
     public void onToggleShowInactive(ActionEvent event) {
+        applyFilter();
+    }
+
+    private void reloadVehicles() {
+        List<Vehicle> updatedList = ApiClient.getVehicles();
+        allVehicles.setAll(updatedList);
         applyFilter();
     }
 
