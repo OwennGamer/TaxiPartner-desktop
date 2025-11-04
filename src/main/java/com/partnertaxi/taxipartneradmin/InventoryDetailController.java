@@ -1,15 +1,23 @@
 package com.partnertaxi.taxipartneradmin;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class InventoryDetailController {
@@ -65,44 +73,114 @@ public class InventoryDetailController {
         cbTrojkat.setSelected(rec.isTrojkat());
         cbKamizelka.setSelected(rec.isKamizelka());
 
-        setupImageViewer(rec.getPhotoFront(), imgFront);
-        setupImageViewer(rec.getPhotoBack(), imgBack);
-        setupImageViewer(rec.getPhotoLeft(), imgLeft);
-        setupImageViewer(rec.getPhotoRight(), imgRight);
-        setupImageViewer(rec.getPhotoDirt1(), imgDirt1);
-        setupImageViewer(rec.getPhotoDirt2(), imgDirt2);
-        setupImageViewer(rec.getPhotoDirt3(), imgDirt3);
-        setupImageViewer(rec.getPhotoDirt4(), imgDirt4);
+        List<String> vehiclePhotos = new ArrayList<>();
+        List<String> dirtPhotos = new ArrayList<>();
+
+        setupImageViewer(rec.getPhotoFront(), imgFront, vehiclePhotos);
+        setupImageViewer(rec.getPhotoBack(), imgBack, vehiclePhotos);
+        setupImageViewer(rec.getPhotoLeft(), imgLeft, vehiclePhotos);
+        setupImageViewer(rec.getPhotoRight(), imgRight, vehiclePhotos);
+        setupImageViewer(rec.getPhotoDirt1(), imgDirt1, dirtPhotos);
+        setupImageViewer(rec.getPhotoDirt2(), imgDirt2, dirtPhotos);
+        setupImageViewer(rec.getPhotoDirt3(), imgDirt3, dirtPhotos);
+        setupImageViewer(rec.getPhotoDirt4(), imgDirt4, dirtPhotos);
     }
 
-    private void setupImageViewer(String path, ImageView view) {
+    private void setupImageViewer(String path, ImageView view, List<String> group) {
         if (path != null && !path.isEmpty()) {
             String url = "http://164.126.143.20:8444/" + path;
             // ustawiamy miniaturkę
             view.setImage(new Image(url, 100, 80, true, true));
             view.setStyle("-fx-cursor: hand;");
             // kliknięcie otwiera duże okno
-            view.setOnMouseClicked(e -> openImageDialog(url));
+            int index = group.size();
+            group.add(url);
+            view.setOnMouseClicked(e -> openImageDialog(group, index));
         } else {
             view.setImage(null);
+            view.setOnMouseClicked(null);
+            view.setStyle(null);
         }
     }
 
-    private void openImageDialog(String imageUrl) {
-        ImageView imageView = new ImageView(new Image(imageUrl, true));
-        imageView.setPreserveRatio(true);
-        imageView.setFitWidth(800);
+    private void openImageDialog(List<String> imageUrls, int startIndex) {
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            return;
+        }
 
-        ScrollPane scrollPane = new ScrollPane(new StackPane(imageView));
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
+        int safeIndex = Math.max(0, Math.min(startIndex, imageUrls.size() - 1));
 
         Stage stage = new Stage();
         stage.setTitle("Podgląd zdjęcia");
-        Scene scene = new Scene(scrollPane, 800, 600);
+
+        ImageView imageView = new ImageView();
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(800);
+
+        StackPane imageContainer = new StackPane(imageView);
+        imageContainer.setStyle("-fx-background-color: black;");
+
+        ScrollPane scrollPane = new ScrollPane(imageContainer);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
+        IntegerProperty currentIndex = new SimpleIntegerProperty(safeIndex);
+
+        StackPane leftArrow = createArrowPane("\u25C0", () -> {
+            if (currentIndex.get() > 0) {
+                currentIndex.set(currentIndex.get() - 1);
+            }
+        });
+
+        StackPane rightArrow = createArrowPane("\u25B6", () -> {
+            if (currentIndex.get() < imageUrls.size() - 1) {
+                currentIndex.set(currentIndex.get() + 1);
+            }
+        });
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(scrollPane);
+        borderPane.setLeft(leftArrow);
+        borderPane.setRight(rightArrow);
+
+        Runnable updateContent = () -> {
+            imageView.setImage(new Image(imageUrls.get(currentIndex.get()), true));
+            stage.setTitle(String.format("Podgląd zdjęcia (%d/%d)", currentIndex.get() + 1, imageUrls.size()));
+            updateArrowState(leftArrow, currentIndex.get() > 0);
+            updateArrowState(rightArrow, currentIndex.get() < imageUrls.size() - 1);
+        };
+
+        currentIndex.addListener((obs, oldVal, newVal) -> updateContent.run());
+        updateContent.run();
+
+        Scene scene = new Scene(borderPane, 800, 600);
         scene.getStylesheets().add(Objects.requireNonNull(HelloApplication.class.getResource("style.css")).toExternalForm());
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+    }
+
+    private StackPane createArrowPane(String symbol, Runnable action) {
+        Label label = new Label(symbol);
+        label.setStyle("-fx-text-fill: white; -fx-font-size: 48px;");
+
+        StackPane container = new StackPane(label);
+        container.setAlignment(Pos.CENTER);
+        container.setPrefWidth(80);
+        container.setStyle("-fx-background-color: rgba(0, 0, 0, 0.25);");
+        container.setCursor(Cursor.HAND);
+        container.setOnMouseClicked(e -> {
+            if (!container.isDisable()) {
+                action.run();
+            }
+        });
+
+        return container;
+    }
+
+    private void updateArrowState(StackPane arrowPane, boolean enabled) {
+        arrowPane.setDisable(!enabled);
+        arrowPane.setOpacity(enabled ? 1.0 : 0.3);
+        arrowPane.setCursor(enabled ? Cursor.HAND : Cursor.DEFAULT);
     }
 }
