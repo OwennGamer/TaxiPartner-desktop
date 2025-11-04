@@ -2,5 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purple_500">#6200EE</color>
+    <!-- Brand palette -->
+    <color name="colorPrimary">#6750A4</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+    <color name="colorSecondary">#625B71</color>
+    <color name="colorPrimaryContainer">#EADDFF</color>
 </resources>
