@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXMLLoader;
@@ -77,6 +78,7 @@ public class FleetController {
 
     private ObservableList<Vehicle> allVehicles;
     private FilteredList<Vehicle> filteredVehicles;
+    private SortedList<Vehicle> sortedVehicles;
 
     @FXML
     public void initialize() {
@@ -101,7 +103,9 @@ public class FleetController {
         List<Vehicle> vehicles = ApiClient.getVehicles();
         allVehicles = FXCollections.observableArrayList(vehicles);
         filteredVehicles = new FilteredList<>(allVehicles);
-        vehicleTable.setItems(filteredVehicles);
+        sortedVehicles = new SortedList<>(filteredVehicles);
+        sortedVehicles.comparatorProperty().bind(vehicleTable.comparatorProperty());
+        vehicleTable.setItems(sortedVehicles);
         vehicleTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
                     boolean disable = newSelection == null;

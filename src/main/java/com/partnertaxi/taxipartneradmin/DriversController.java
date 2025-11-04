@@ -485,6 +485,9 @@ public class DriversController {
                 String fullName  = o.get("imie").getAsString() + " " + o.get("nazwisko").getAsString();
                 String saldo     = o.get("saldo").getAsString();
                 String status    = o.has("status") ? o.get("status").getAsString() : "";
+                String role      = o.has("rola") && !o.get("rola").isJsonNull()
+                        ? o.get("rola").getAsString()
+                        : "";
                 String createdAt = o.has("created_at") ? o.get("created_at").getAsString() : "";
                 String plate     = o.has("vehiclePlate") && !o.get("vehiclePlate").isJsonNull()
                         ? o.get("vehiclePlate").getAsString() : "";
@@ -529,7 +532,7 @@ public class DriversController {
                 }
 
                 driversTable.getItems().add(new Driver(
-                        id, fullName, saldo, status, "",
+                        id, fullName, saldo, status, role,
                         percentTurnover, fuelCostSum, cardComm, partComm,
                         boltComm, settLimit, createdAt, plate, fuelSum,
                         voucherCurrent, voucherPrevious, voucherTotal,

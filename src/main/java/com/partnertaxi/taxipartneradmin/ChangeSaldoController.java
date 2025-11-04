@@ -66,29 +66,48 @@ public class ChangeSaldoController {
             float voucherPreviousAmount = getFloatValue(voucherPreviousFormatter);
 
             if (Math.abs(saldoAmount) < 1e-6 && Math.abs(voucherCurrentAmount) < 1e-6 && Math.abs(voucherPreviousAmount) < 1e-6) {
-                showAlert("Błąd", "Podaj kwotę zmiany dla przynajmniej jednego licznika.");
+                showAlert(Alert.AlertType.ERROR, "Błąd", "Podaj kwotę zmiany dla przynajmniej jednego licznika.");
                 return;
             }
 
 
-            String reason = reasonBox.getValue();
-            if (reason == null || reason.isEmpty()) {
-                showAlert("Błąd", "Musisz wybrać powód zmiany salda.");
+            String selectedReason = reasonBox.getValue();
+            if (selectedReason == null || selectedReason.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Błąd", "Musisz wybrać powód zmiany salda.");
                 return;
             }
 
-            String description;
-            if ("Inny".equals(reason)) {
-                description = customReasonField.getText().trim();
-                if (description.isEmpty()) {
-                    showAlert("Błąd", "Podaj opis dla powodu 'Inny'.");
+            String customReason = null;
+            if ("Inny".equals(selectedReason)) {
+                customReason = customReasonField.getText().trim();
+                if (customReason.isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, "Błąd", "Podaj opis dla powodu 'Inny'.");
                     return;
                 }
-            } else {
-                description = reason;
+
             }
 
-            ApiClient.updateSaldo(driverId, saldoAmount, voucherCurrentAmount, voucherPreviousAmount, description);
+            ApiClient.SaldoUpdateResult result = ApiClient.updateSaldo(
+                    driverId,
+                    saldoAmount,
+                    voucherCurrentAmount,
+                    voucherPreviousAmount,
+                    selectedReason,
+                    customReason
+            );
+
+            if (!result.isSuccess()) {
+                showAlert(Alert.AlertType.ERROR, "Błąd", result.getMessage());
+                return;
+            }
+
+            String message = result.getMessage();
+            if (message != null && !message.isBlank()) {
+                Alert.AlertType alertType = result.isFcmWarning()
+                        ? Alert.AlertType.WARNING
+                        : Alert.AlertType.INFORMATION;
+                showAlert(alertType, result.isFcmWarning() ? "Uwaga" : "Sukces", message);
+            }
 
             if (onSuccess != null) {
                 onSuccess.run();
@@ -96,7 +115,7 @@ public class ChangeSaldoController {
             closeWindow();
 
         } catch (Exception e) {
-            showAlert("Błąd", "Nieprawidłowa wartość kwoty.");
+            showAlert(Alert.AlertType.ERROR, "Błąd", "Nieprawidłowa wartość kwoty.");
         }
     }
 
@@ -142,8 +161,8 @@ public class ChangeSaldoController {
         return value == null ? 0f : value.floatValue();
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type, message, ButtonType.OK);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.showAndWait();

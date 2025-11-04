@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -96,6 +97,7 @@ class DashboardActivity : AppCompatActivity() {
 
         val role = SessionManager.getRole(this).lowercase()
         val isAdmin = role == "administrator"
+        val canAccessFleet = role == "flotowiec" || isAdmin
 
         btnChangeSaldo.visibility = if (isAdmin) View.VISIBLE else View.GONE
         if (isAdmin) {
@@ -106,23 +108,21 @@ class DashboardActivity : AppCompatActivity() {
                         SessionManager.getDriverId(this@DashboardActivity)
                     )
                 }
-                changeSaldoLauncher.launch(intent)
+                launchActivityForResultHandlingLockTask(changeSaldoLauncher, intent)
             }
         } else {
             btnChangeSaldo.setOnClickListener(null)
         }
 
         btnFlota.setOnClickListener {
-            if (role != "flotowiec") {
+            if (!canAccessFleet) {
                 Toast.makeText(this, "BRAK UPRAWNIEŃ", Toast.LENGTH_SHORT).show()
             } else {
                 startActivityHandlingLockTask(Intent(this, FleetActivity::class.java))
             }
         }
 
-        if (role != "flotowiec") {
-            btnFlota.alpha = 0.5f
-        }
+        btnFlota.alpha = if (canAccessFleet) 1f else 0.5f
 
 
 
@@ -240,6 +240,48 @@ class DashboardActivity : AppCompatActivity() {
         }.onFailure { error ->
             suppressNextUserLeaveHint = false
             Log.e(TAG, "startActivity(${intent.component}) zakończone błędem", error)
+        }
+    }
+
+    private fun launchActivityForResultHandlingLockTask(
+        launcher: ActivityResultLauncher<Intent>,
+        intent: Intent
+    ) {
+        val lockTaskActive = isLockTaskActive()
+        Log.d(TAG, "launchActivityForResultHandlingLockTask: lockTaskActive=$lockTaskActive intent=${intent.component}")
+
+        if (lockTaskActive) {
+            restoreLockTaskAfterNavigation = true
+
+            val devicePolicyManager =
+                getSystemService(Context.DEVICE_POLICY_SERVICE) as? DevicePolicyManager
+            val lockTaskPermitted =
+                devicePolicyManager?.isLockTaskPermitted(packageName) == true
+
+            if (lockTaskPermitted) {
+                runCatching { stopLockTask() }
+                    .onFailure { error ->
+                        Log.w(TAG, "stopLockTask() nie powiodło się mimo uprawnień", error)
+                    }
+            } else {
+                try {
+                    stopLockTask()
+                } catch (_: SecurityException) {
+                    Log.i(TAG, "Brak uprawnień do wyjścia z trybu pinowania – kontynuujemy nawigację")
+                }
+            }
+        }
+
+        suppressNextUserLeaveHint = true
+        runCatching {
+            launcher.launch(intent)
+        }.onFailure { error ->
+            suppressNextUserLeaveHint = false
+            Log.e(
+                TAG,
+                "launchActivityForResultHandlingLockTask(${intent.component}) zakończone błędem",
+                error
+            )
         }
     }
 

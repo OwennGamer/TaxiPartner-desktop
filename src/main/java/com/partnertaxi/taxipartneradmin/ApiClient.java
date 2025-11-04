@@ -45,6 +45,30 @@ public class ApiClient {
         }
     }
 
+    public static class SaldoUpdateResult {
+        private final boolean success;
+        private final boolean fcmWarning;
+        private final String message;
+
+        public SaldoUpdateResult(boolean success, boolean fcmWarning, String message) {
+            this.success = success;
+            this.fcmWarning = fcmWarning;
+            this.message = message;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public boolean isFcmWarning() {
+            return fcmWarning;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
     private static ApiResult executeRequest(Request request) {
         try (Response response = client.newCall(request).execute()) {
             String respBody = response.body() != null ? response.body().string() : "";
@@ -270,34 +294,68 @@ public class ApiClient {
     }
 
     // 🔁 Zmiana salda kierowcy
-    public static void updateSaldo(String driverId, float saldoAmount, float voucherCurrentAmount, float voucherPreviousAmount, String reason) {
+    public static SaldoUpdateResult updateSaldo(String driverId,
+                                                float saldoAmount,
+                                                float voucherCurrentAmount,
+                                                float voucherPreviousAmount,
+                                                String reason,
+                                                String customReason) {
         try {
             JSONObject json = new JSONObject();
             json.put("id", driverId);
             json.put("reason", reason);
+            if (customReason != null && !customReason.isBlank()) {
+                json.put("custom_reason", customReason);
+            }
             json.put("saldo_amount", saldoAmount);
             json.put("voucher_current_amount", voucherCurrentAmount);
             json.put("voucher_previous_amount", voucherPreviousAmount);
 
             ApiResult res = sendJsonPost("update_saldo.php", json);
-            String fcmStatus = "";
+            String message = null;
+            String fcmStatus = null;
             if (res.body != null && !res.body.isEmpty()) {
                 JSONObject respJson = new JSONObject(res.body);
-                fcmStatus = respJson.optString("fcm_status", "");
+                message = respJson.optString("message", null);
+                fcmStatus = respJson.optString("fcm_status", null);
             }
 
-            if (res.code == 200) {
-                System.out.println("✅ Saldo zmienione pomyślnie.");
-            } else if (res.code == 207) {
-                System.out.println("⚠️ Saldo zmienione, ale wysyłka FCM nie powiodła się.");
-            } else {
+            boolean success = res.code == 200 || res.code == 207;
+            boolean fcmWarning = res.code == 207;
+
+            if (!success) {
+                if (message == null || message.isBlank()) {
+                    message = res.code == -1
+                            ? "Nie udało się połączyć z serwerem."
+                            : "Nie udało się zmienić salda (HTTP " + res.code + ").";
+                }
+                if (fcmStatus != null && !fcmStatus.isBlank()) {
+                    message += "\nFCM: " + fcmStatus;
+                }
                 System.out.println("❌ Błąd zmiany salda. Kod: " + res.code);
-                if (!fcmStatus.isEmpty()) {
+                if (fcmStatus != null && !fcmStatus.isBlank()) {
                     System.out.println("ℹ️ fcm_status: " + fcmStatus);
                 }
+                return new SaldoUpdateResult(false, false, message);
             }
+
+            if (message == null || message.isBlank()) {
+                message = fcmWarning
+                        ? "Saldo zmienione, ale powiadomienie push nie zostało wysłane."
+                        : "Saldo zaktualizowane.";
+            } else if (fcmWarning && fcmStatus != null && !fcmStatus.isBlank()) {
+                message += "\nFCM: " + fcmStatus;
+            }
+
+            if (fcmWarning) {
+                System.out.println("⚠️ Saldo zmienione, ale wysyłka FCM zgłosiła problem.");
+            } else {
+                System.out.println("✅ Saldo zmienione pomyślnie.");
+            }
+            return new SaldoUpdateResult(true, fcmWarning, message);
         } catch (Exception e) {
             e.printStackTrace();
+            return new SaldoUpdateResult(false, false, "Błąd komunikacji: " + e.getMessage());
         }
     }
 
