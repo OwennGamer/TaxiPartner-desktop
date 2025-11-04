@@ -1,145 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="24dp"
+    tools:context=".ChangeSaldoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/changeSaldoTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/changeSaldoHeader"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/change_saldo_title"
+            android:text="Zmiana salda"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_marginBottom="16dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutDriverId"
+            android:id="@+id/textInputLayoutOperation"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/change_saldo_driver_id_label">
+            android:layout_marginBottom="16dp"
+            android:hint="Rodzaj operacji"
+            app:endIconMode="dropdown_menu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputDriverId"
+            <AutoCompleteTextView
+                android:id="@+id/inputOperation"
+                style="@style/Widget.MaterialComponents.AutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="none"
+                android:focusable="false"
+                android:cursorVisible="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutSaldoAmount"
+            android:id="@+id/textInputLayoutAmount"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/change_saldo_saldo_hint">
+            android:layout_marginBottom="16dp"
+            android:hint="Kwota">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSaldoAmount"
+                android:id="@+id/inputAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned"
-                android:maxLines="1" />
+                android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutVoucherCurrent"
+            android:id="@+id/textInputLayoutComment"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/change_saldo_voucher_current_hint">
+            android:layout_marginBottom="24dp"
+            android:hint="Komentarz">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputVoucherCurrent"
+                android:id="@+id/inputComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned"
-                android:maxLines="1" />
+                android:inputType="textCapSentences|textMultiLine"
+                android:minLines="3" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutVoucherPrevious"
+        <Button
+            android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/change_saldo_voucher_previous_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputVoucherPrevious"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal|numberSigned"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutReason"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/change_saldo_reason_hint"
-            app:endIconMode="dropdown">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/inputReason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutCustomReason"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:hint="@string/change_saldo_custom_reason_hint"
-            android:visibility="gone">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputCustomReason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonSubmit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:text="@string/change_saldo_submit" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonCancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:text="@string/change_saldo_cancel" />
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:visibility="gone" />
+            android:text="Zapisz" />
 
     </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</ScrollView>
