@@ -496,6 +496,18 @@ public class DriversController {
                         ? o.get("vehiclePlate").getAsString() : "";
 
                 float percentTurnover = o.has("percentTurnover")   ? o.get("percentTurnover").getAsFloat()   : 0f;
+                float fuelCostFlag    = 0f;
+                if (o.has("fuelCost") && !o.get("fuelCost").isJsonNull()) {
+                    try {
+                        fuelCostFlag = o.get("fuelCost").getAsFloat();
+                    } catch (RuntimeException ex) {
+                        String raw = o.get("fuelCost").getAsString();
+                        fuelCostFlag = "kierowca".equalsIgnoreCase(raw.trim()) ? 1f : 0f;
+                    }
+                } else if (o.has("koszt_paliwa") && !o.get("koszt_paliwa").isJsonNull()) {
+                    String raw = o.get("koszt_paliwa").getAsString();
+                    fuelCostFlag = "kierowca".equalsIgnoreCase(raw.trim()) ? 1f : 0f;
+                }
                 float fuelCostSum     = o.has("fuelCostSum") && !o.get("fuelCostSum").isJsonNull()
                         ? o.get("fuelCostSum").getAsFloat() : 0f;
                 float cardComm        = o.has("cardCommission")    ? o.get("cardCommission").getAsFloat()    : 0f;
@@ -538,7 +550,7 @@ public class DriversController {
 
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, role,
-                        percentTurnover, fuelCostSum, cardComm, partComm,
+                        percentTurnover, fuelCostFlag, cardComm, partComm,
                         boltComm, settLimit, fixedCosts, createdAt, plate, fuelSum,
                         voucherCurrent, voucherPrevious, voucherTotal,
                         cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover

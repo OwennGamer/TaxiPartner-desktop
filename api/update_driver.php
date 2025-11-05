@@ -26,7 +26,16 @@ $status = $data['status'];
 $rola = $data['rola'];
 
 $percentTurnover = $data['percentTurnover'];
-$fuelCost = $data['fuelCost'];
+$fuelCostRaw = $data['fuelCost'] ?? 0;
+$fuelCostValue = 0.0;
+
+if (is_numeric($fuelCostRaw)) {
+    $fuelCostValue = (float)$fuelCostRaw;
+} elseif (is_string($fuelCostRaw)) {
+    $fuelCostValue = (strtolower(trim($fuelCostRaw)) === 'kierowca') ? 1.0 : 0.0;
+}
+
+$kosztPaliwa = $fuelCostValue >= 0.5 ? 'kierowca' : 'firma';
 $cardCommission = $data['cardCommission'];
 $partnerCommission = $data['partnerCommission'];
 $boltCommission = $data['boltCommission'];
@@ -47,13 +56,13 @@ try {
     }
 
     // 🧾 Aktualizacja tabeli kierowcy
-    $stmt = $pdo->prepare("UPDATE kierowcy SET imie = ?, nazwisko = ?, password = ?, status = ?, rola = ? WHERE id = ?");
-    $stmt->execute([$imie, $nazwisko, $hashedPassword, $status, $rola, $id]);
+    $stmt = $pdo->prepare("UPDATE kierowcy SET imie = ?, nazwisko = ?, password = ?, status = ?, rola = ?, koszt_paliwa = ? WHERE id = ?");
+    $stmt->execute([$imie, $nazwisko, $hashedPassword, $status, $rola, $kosztPaliwa, $id]);
 
     // 🧾 Aktualizacja collaboration_terms
     $terms = [
         'percentTurnover' => $percentTurnover,
-        'fuelCost' => $fuelCost,
+        'fuelCost' => $fuelCostValue,
         'cardCommission' => $cardCommission,
         'partnerCommission' => $partnerCommission,
         'boltCommission' => $boltCommission,

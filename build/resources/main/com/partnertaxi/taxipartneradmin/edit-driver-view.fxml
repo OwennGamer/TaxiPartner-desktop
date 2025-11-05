@@ -96,6 +96,16 @@
                StackPane.alignment="CENTER_LEFT"/>
     </StackPane>
 
+    <!-- Koszty stałe -->
+    <StackPane>
+        <TextField fx:id="fixedCostsField"/>
+        <Label fx:id="fixedCostsPlaceholder"
+               text="Koszty stałe"
+               mouseTransparent="true"
+               styleClass="placeholder-label"
+               StackPane.alignment="CENTER_LEFT"/>
+    </StackPane>
+
     <HBox spacing="10" alignment="CENTER">
         <Button fx:id="saveButton"   text="Zapisz" onAction="#handleSave"/>
         <Button fx:id="cancelButton" text="Anuluj" onAction="#handleCancel"/>
