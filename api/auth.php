@@ -28,7 +28,11 @@ if (!$decoded || !$deviceId || ($decoded->device_id ?? '') !== $deviceId) {
 
 if (isset($requiredRole)) {
     $tokenRole = strtolower($decoded->role ?? '');
-    if ($tokenRole !== strtolower($requiredRole)) {
+    $allowedRoles = is_array($requiredRole)
+        ? array_map('strtolower', $requiredRole)
+        : [strtolower($requiredRole)];
+
+    if (!in_array($tokenRole, $allowedRoles, true)) {
         echo json_encode(["status" => "error", "message" => "Niewystarczające uprawnienia"]);
         http_response_code(403);
         exit;
