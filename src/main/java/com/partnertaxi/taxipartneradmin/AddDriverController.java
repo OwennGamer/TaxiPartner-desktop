@@ -45,7 +45,7 @@ public class AddDriverController {
     @FXML private Label           settlementLimitPlaceholder;
 
     @FXML private TextField       fixedCostsField;
-    @FXML private Label
+    @FXML private Label           fixedCostsPlaceholder;
 
     @FXML private Button          saveButton;
     @FXML private Button          cancelButton;
