@@ -133,7 +133,7 @@ class AddRideActivity : AppCompatActivity() {
             val payment = spinnerPaymentType.selectedItem?.toString() ?: ""
             if (payment == "Karta" && receiptPhotoPath == null) {
                 requestReceiptPhoto(true)
-                }
+
             } else {
                 addRide()
             }
@@ -249,27 +249,27 @@ class AddRideActivity : AppCompatActivity() {
             .show()
     }
 
-private fun requestReceiptPhoto(isMandatory: Boolean) {
-    val messageRes = if (isMandatory) {
-        R.string.receipt_photo_prompt_mandatory
-    } else {
-        R.string.receipt_photo_prompt_optional
+    private fun requestReceiptPhoto(isMandatory: Boolean) {
+        val messageRes = if (isMandatory) {
+            R.string.receipt_photo_prompt_mandatory
+        } else {
+            R.string.receipt_photo_prompt_optional
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            pendingReceiptPromptRes = messageRes
+            requestCameraPermission.launch(Manifest.permission.CAMERA)
+        } else {
+            Toast.makeText(this, getString(messageRes), Toast.LENGTH_LONG).show()
+            launchCamera()
+        }
     }
 
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-        != PackageManager.PERMISSION_GRANTED
-    ) {
-        pendingReceiptPromptRes = messageRes
-        requestCameraPermission.launch(Manifest.permission.CAMERA)
-    } else {
-        Toast.makeText(this, getString(messageRes), Toast.LENGTH_LONG).show()
-        launchCamera()
+    private fun isCardPayment(): Boolean {
+        return spinnerPaymentType.selectedItem?.toString() == "Karta"
     }
-}
-
-private fun isCardPayment(): Boolean {
-    return spinnerPaymentType.selectedItem?.toString() == "Karta"
-}
 
     private fun addRide() {
         val driverId = SessionManager.getDriverId(this)
