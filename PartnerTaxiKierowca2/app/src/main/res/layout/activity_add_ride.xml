@@ -76,6 +76,14 @@
             android:visibility="gone"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Przycisk: Dodaj zdjęcie paragonu -->
+        <Button
+            android:id="@+id/buttonAddReceiptPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_receipt_photo" />
+
         <!-- Podgląd zdjęcia paragonu -->
         <ImageView
             android:id="@+id/receiptPreview"

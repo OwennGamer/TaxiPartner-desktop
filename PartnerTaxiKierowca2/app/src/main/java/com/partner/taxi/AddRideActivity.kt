@@ -37,20 +37,29 @@ class AddRideActivity : AppCompatActivity() {
     private lateinit var editTextKm: EditText
     private lateinit var receiptPreview: ImageView
     private lateinit var buttonAddRide: Button
+    private lateinit var buttonAddReceiptPhoto: Button
     private lateinit var buttonRetakePhoto: Button
 
     private var receiptPhotoPath: String? = null
+    private var pendingReceiptPromptRes: Int? = null
 
     private val requestCameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            val messageRes = pendingReceiptPromptRes
+            pendingReceiptPromptRes = null
             if (granted) {
-                Toast.makeText(
-                    this,
-                    "Zrób zdjęcie wydruku z terminala płatniczego",
-                    Toast.LENGTH_LONG
-                ).show()
+                messageRes?.let {
+                    Toast.makeText(
+                        this,
+                        getString(it),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
                 launchCamera()
-            } else Toast.makeText(this, "Brak dostępu do kamery", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Brak dostępu do kamery", Toast.LENGTH_SHORT).show()
+                buttonAddReceiptPhoto.visibility = View.VISIBLE
+            }
         }
 
     private val takePictureLauncher =
@@ -70,10 +79,12 @@ class AddRideActivity : AppCompatActivity() {
                     }
                     receiptPreview.setImageBitmap(bitmap)
                     receiptPreview.visibility = View.VISIBLE
+                    buttonAddReceiptPhoto.visibility = View.GONE
                 }
                 showReceiptConfirmationDialog()
             } else {
                 receiptPhotoPath = null
+                buttonAddReceiptPhoto.visibility = View.VISIBLE
             }
         }
 
@@ -94,6 +105,11 @@ class AddRideActivity : AppCompatActivity() {
         receiptPreview = findViewById(R.id.receiptPreview)
         buttonRetakePhoto = findViewById(R.id.buttonRetakePhoto)
         buttonAddRide = findViewById(R.id.buttonAddRide)
+        buttonAddReceiptPhoto = findViewById(R.id.buttonAddReceiptPhoto)
+
+        buttonAddReceiptPhoto.setOnClickListener {
+            requestReceiptPhoto(isCardPayment())
+        }
 
         // 🔵 Ładowanie danych do spinnerów
         val sourceAdapter = ArrayAdapter.createFromResource(
@@ -116,17 +132,7 @@ class AddRideActivity : AppCompatActivity() {
         buttonAddRide.setOnClickListener {
             val payment = spinnerPaymentType.selectedItem?.toString() ?: ""
             if (payment == "Karta" && receiptPhotoPath == null) {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    requestCameraPermission.launch(Manifest.permission.CAMERA)
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Zrób zdjęcie wydruku z terminala płatniczego",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    launchCamera()
+                requestReceiptPhoto(true)
                 }
             } else {
                 addRide()
@@ -139,13 +145,8 @@ class AddRideActivity : AppCompatActivity() {
             receiptPreview.setImageDrawable(null)
             receiptPreview.visibility = View.GONE
             buttonRetakePhoto.visibility = View.GONE
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                requestCameraPermission.launch(Manifest.permission.CAMERA)
-            } else {
-                launchCamera()
-            }
+            buttonAddReceiptPhoto.visibility = View.VISIBLE
+            requestReceiptPhoto(isCardPayment())
         }
 
 
@@ -226,7 +227,8 @@ class AddRideActivity : AppCompatActivity() {
             receiptPreview.setImageDrawable(null)
             receiptPreview.visibility = View.GONE
             buttonRetakePhoto.visibility = View.GONE
-            launchCamera()
+            buttonAddReceiptPhoto.visibility = View.VISIBLE
+            requestReceiptPhoto(isCardPayment())
         }
 
         dialog.show()
@@ -246,6 +248,28 @@ class AddRideActivity : AppCompatActivity() {
             .setPositiveButton("OK") { d, _ -> d.dismiss() }
             .show()
     }
+
+private fun requestReceiptPhoto(isMandatory: Boolean) {
+    val messageRes = if (isMandatory) {
+        R.string.receipt_photo_prompt_mandatory
+    } else {
+        R.string.receipt_photo_prompt_optional
+    }
+
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        != PackageManager.PERMISSION_GRANTED
+    ) {
+        pendingReceiptPromptRes = messageRes
+        requestCameraPermission.launch(Manifest.permission.CAMERA)
+    } else {
+        Toast.makeText(this, getString(messageRes), Toast.LENGTH_LONG).show()
+        launchCamera()
+    }
+}
+
+private fun isCardPayment(): Boolean {
+    return spinnerPaymentType.selectedItem?.toString() == "Karta"
+}
 
     private fun addRide() {
         val driverId = SessionManager.getDriverId(this)

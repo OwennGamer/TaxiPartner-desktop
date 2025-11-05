@@ -6,8 +6,11 @@
     <string name="payment_prompt">Wybierz rodzaj płatności</string>
     <string name="label_source">Źródło kursu:</string>
     <string name="label_payment">Rodzaj płatności:</string>
+    <string name="add_receipt_photo">Dodaj zdjęcie potwierdzenia</string>
     <string name="retake_photo">Zrób zdjęcie ponownie</string>
     <string name="remember_receipt">PAMIĘTAJ O WYSTAWIENIU PARAGONU</string>
+    <string name="receipt_photo_prompt_mandatory">Zrób zdjęcie wydruku z terminala płatniczego</string>
+    <string name="receipt_photo_prompt_optional">Dodaj zdjęcie potwierdzenia płatności (opcjonalnie)</string>
     <string name="label_saldo">LICZNIK</string>
     <string name="label_without_vouchers">(bez voucherów)</string>
     <string name="label_vouchers_month">Vouchery z (%1$s)</string>
