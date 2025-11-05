@@ -57,6 +57,7 @@
                     <TableColumn fx:id="partnerCommissionColumn" id="partnerCommissionColumn" text="Prowizja partner" prefWidth="100"/>
                     <TableColumn fx:id="boltCommissionColumn"    id="boltCommissionColumn"    text="Prowizja Bolt"     prefWidth="100"/>
                     <TableColumn fx:id="settlementLimitColumn"   id="settlementLimitColumn"   text="Graniczna kwota"   prefWidth="120"/>
+                    <TableColumn fx:id="fixedCostsColumn"        id="fixedCostsColumn"        text="Koszty stałe"      prefWidth="120"/>
                     <TableColumn fx:id="voucherCurrentColumn"    id="voucherCurrentColumn"    text="Vouchery (aktualny)" prefWidth="130"/>
                     <TableColumn fx:id="voucherPreviousColumn"   id="voucherPreviousColumn"   text="Vouchery (poprzedni)" prefWidth="140"/>
                     <TableColumn fx:id="voucherColumn"           id="voucherColumn"           text="Vouchery (razem)"    prefWidth="130"/>

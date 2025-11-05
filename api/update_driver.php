@@ -31,6 +31,7 @@ $cardCommission = $data['cardCommission'];
 $partnerCommission = $data['partnerCommission'];
 $boltCommission = $data['boltCommission'];
 $settlementLimit = $data['settlementLimit'];
+$fixedCosts = isset($data['fixedCosts']) ? (float)$data['fixedCosts'] : 0.0;
 
 try {
     // 🔐 Haszuj hasło tylko jeśli zmienione
@@ -56,7 +57,8 @@ try {
         'cardCommission' => $cardCommission,
         'partnerCommission' => $partnerCommission,
         'boltCommission' => $boltCommission,
-        'settlementLimit' => $settlementLimit
+        'settlementLimit' => $settlementLimit,
+        'fixedCosts' => $fixedCosts
     ];
 
     foreach ($terms as $key => $value) {

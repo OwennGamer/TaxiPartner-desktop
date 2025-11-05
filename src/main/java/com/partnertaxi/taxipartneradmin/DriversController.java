@@ -45,6 +45,7 @@ public class DriversController {
     @FXML private TableColumn<Driver, Float>   partnerCommissionColumn;
     @FXML private TableColumn<Driver, Float>   boltCommissionColumn;
     @FXML private TableColumn<Driver, Float>   settlementLimitColumn;
+    @FXML private TableColumn<Driver, Float>   fixedCostsColumn;
     @FXML private TableColumn<Driver, String>  vehiclePlateColumn;
     @FXML private TableColumn<Driver, Float>   voucherCurrentColumn;
     @FXML private TableColumn<Driver, Float>   voucherPreviousColumn;
@@ -95,6 +96,7 @@ public class DriversController {
         partnerCommissionColumn.setId("partnerCommissionColumn");
         boltCommissionColumn.setId("boltCommissionColumn");
         settlementLimitColumn.setId("settlementLimitColumn");
+        fixedCostsColumn.setId("fixedCostsColumn");
         createdAtColumn.setId("createdAtColumn");
         voucherCurrentColumn.setId("voucherCurrentColumn");
         voucherPreviousColumn.setId("voucherPreviousColumn");
@@ -168,6 +170,7 @@ public class DriversController {
         setupFloatColumn(partnerCommissionColumn, nf);
         setupFloatColumn(boltCommissionColumn,   nf);
         setupFloatColumn(settlementLimitColumn,  nf);
+        setupFloatColumn(fixedCostsColumn,       nf);
         setupFloatColumn(voucherCurrentColumn,   nf);
         setupFloatColumn(voucherPreviousColumn, nf);
         setupFloatColumn(voucherColumn,         nf);
@@ -499,6 +502,8 @@ public class DriversController {
                 float partComm        = o.has("partnerCommission") ? o.get("partnerCommission").getAsFloat() : 0f;
                 float boltComm        = o.has("boltCommission")    ? o.get("boltCommission").getAsFloat()    : 0f;
                 float settLimit       = o.has("settlementLimit")   ? o.get("settlementLimit").getAsFloat()   : 0f;
+                float fixedCosts      = o.has("fixedCosts") && !o.get("fixedCosts").isJsonNull()
+                        ? o.get("fixedCosts").getAsFloat() : 0f;
                 float voucherCurrent  = o.has("voucher_current_amount") && !o.get("voucher_current_amount").isJsonNull()
                         ? o.get("voucher_current_amount").getAsFloat() : 0f;
                 float voucherPrevious = o.has("voucher_previous_amount") && !o.get("voucher_previous_amount").isJsonNull()
@@ -534,7 +539,7 @@ public class DriversController {
                 driversTable.getItems().add(new Driver(
                         id, fullName, saldo, status, role,
                         percentTurnover, fuelCostSum, cardComm, partComm,
-                        boltComm, settLimit, createdAt, plate, fuelSum,
+                        boltComm, settLimit, fixedCosts, createdAt, plate, fuelSum,
                         voucherCurrent, voucherPrevious, voucherTotal,
                         cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
@@ -567,6 +572,7 @@ public class DriversController {
                     format.format(sumSaldo),
                     "",
                     "",
+                    0f,
                     0f,
                     0f,
                     0f,

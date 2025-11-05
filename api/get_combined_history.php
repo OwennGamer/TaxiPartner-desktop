@@ -58,6 +58,7 @@ try {
         $typeLabel = match ($counterType) {
             'voucher_current'  => 'Zmiana voucherów (bieżący)',
             'voucher_previous' => 'Zmiana voucherów (poprzedni)',
+            'fixed_costs'      => 'Koszty stałe',
             default            => 'Zmiana salda'
         };
         $result[] = [

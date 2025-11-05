@@ -37,6 +37,9 @@ public class EditDriverController {
     @FXML private TextField       settlementLimitField;
     @FXML private Label           settlementLimitPlaceholder;
 
+    @FXML private TextField       fixedCostsField;
+    @FXML private Label           fixedCostsPlaceholder;
+
     @FXML private Button          saveButton;
     @FXML private Button          cancelButton;
 
@@ -57,6 +60,7 @@ public class EditDriverController {
         bindPlaceholder(partnerCommissionField, partnerCommissionPlaceholder);
         bindPlaceholder(boltCommissionField, boltCommissionPlaceholder);
         bindPlaceholder(settlementLimitField, settlementLimitPlaceholder);
+        bindPlaceholder(fixedCostsField, fixedCostsPlaceholder);
 
         // 3) TextFormatter z przecinkiem zamiast kropki
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -70,6 +74,7 @@ public class EditDriverController {
         partnerCommissionField.setTextFormatter(new TextFormatter<>(converter, null));
         boltCommissionField.setTextFormatter(new TextFormatter<>(converter, null));
         settlementLimitField.setTextFormatter(new TextFormatter<>(converter, null));
+        fixedCostsField.setTextFormatter(new TextFormatter<>(converter, null));
     }
 
     private void bindPlaceholder(TextInputControl field, Label placeholder) {
@@ -104,6 +109,10 @@ public class EditDriverController {
         @SuppressWarnings("unchecked")
         TextFormatter<Number> tfSettle = (TextFormatter<Number>) settlementLimitField.getTextFormatter();
         tfSettle.setValue(driver.getSettlementLimit());
+
+        @SuppressWarnings("unchecked")
+        TextFormatter<Number> tfFixed = (TextFormatter<Number>) fixedCostsField.getTextFormatter();
+        tfFixed.setValue(driver.getFixedCosts());
     }
 
     @FXML
@@ -119,16 +128,12 @@ public class EditDriverController {
             float fuelCost   = fuelCostBox.getValue().equals("firma") ? 0f : 1f;
 
             // pobieramy sparsowane wartości z TextFormatterów
-            @SuppressWarnings("unchecked")
-            float percentTurnover = ((TextFormatter<Number>)percentTurnoverField.getTextFormatter()).getValue().floatValue();
-            @SuppressWarnings("unchecked")
-            float cardCommission  = ((TextFormatter<Number>)cardCommissionField.getTextFormatter()).getValue().floatValue();
-            @SuppressWarnings("unchecked")
-            float partnerCommission = ((TextFormatter<Number>)partnerCommissionField.getTextFormatter()).getValue().floatValue();
-            @SuppressWarnings("unchecked")
-            float boltCommission  = ((TextFormatter<Number>)boltCommissionField.getTextFormatter()).getValue().floatValue();
-            @SuppressWarnings("unchecked")
-            float settlementLimit = ((TextFormatter<Number>)settlementLimitField.getTextFormatter()).getValue().floatValue();
+            float percentTurnover   = getNumericValue(percentTurnoverField);
+            float cardCommission    = getNumericValue(cardCommissionField);
+            float partnerCommission = getNumericValue(partnerCommissionField);
+            float boltCommission    = getNumericValue(boltCommissionField);
+            float settlementLimit   = getNumericValue(settlementLimitField);
+            float fixedCosts        = getNumericValue(fixedCostsField);
 
             // jeżeli brak nowego hasła, użyj starego
             String haslo = password.isEmpty() ? driver.getId() : password;
@@ -144,7 +149,8 @@ public class EditDriverController {
                     cardCommission,
                     partnerCommission,
                     boltCommission,
-                    settlementLimit
+                    settlementLimit,
+                    fixedCosts
             );
             closeWindow();
         } catch (Exception ex) {
@@ -167,5 +173,20 @@ public class EditDriverController {
         a.setTitle(title);
         a.setHeaderText(null);
         a.showAndWait();
+    }
+
+    private float getNumericValue(TextField field) {
+        TextFormatter<?> formatter = field.getTextFormatter();
+        if (formatter != null) {
+            Object value = formatter.getValue();
+            if (value instanceof Number number) {
+                return number.floatValue();
+            }
+        }
+        String text = field.getText();
+        if (text == null || text.isBlank()) {
+            return 0f;
+        }
+        return Float.parseFloat(text.replace(',', '.'));
     }
 }

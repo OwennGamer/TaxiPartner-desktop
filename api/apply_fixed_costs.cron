@@ -1,0 +1,2 @@
+# Run fixed costs deduction on the first day of every month at 00:30
+30 0 1 * * php /workspace/TaxiPartner-desktop/api/apply_fixed_costs.php >/dev/null 2>&1

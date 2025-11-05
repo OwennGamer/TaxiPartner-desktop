@@ -14,6 +14,7 @@ public class Driver {
     private float partnerCommission;
     private float boltCommission;
     private float settlementLimit;
+    private float fixedCosts;
 
     private float voucherCurrent;
     private float voucherPrevious;
@@ -45,6 +46,7 @@ public class Driver {
             float partnerCommission,
             float boltCommission,
             float settlementLimit,
+            float fixedCosts,
             String createdAt,
             String vehiclePlate,
             float fuelCostSum,
@@ -70,6 +72,7 @@ public class Driver {
         this.partnerCommission = partnerCommission;
         this.boltCommission = boltCommission;
         this.settlementLimit = settlementLimit;
+        this.fixedCosts = fixedCosts;
         this.createdAt = createdAt;
         this.fuelCostText = (fuelCost == 0f) ? "firma" : "kierowca";
         this.vehiclePlate = vehiclePlate;
@@ -98,6 +101,7 @@ public class Driver {
             float partnerCommission,
             float boltCommission,
             float settlementLimit,
+            float fixedCosts,
             String createdAt,
             String vehiclePlate,
             float fuelCostSum,
@@ -112,7 +116,7 @@ public class Driver {
             float fuelPerTurnover
     ) {
         this(id, name, saldo, status, rola, percentTurnover, fuelCost, cardCommission,
-                partnerCommission, boltCommission, settlementLimit, createdAt, vehiclePlate,
+                partnerCommission, boltCommission, settlementLimit, fixedCosts, createdAt, vehiclePlate,
                 fuelCostSum, voucherCurrent, voucherPrevious, voucher, card, cash, lot, turnover, zlPerKm, fuelPerTurnover, false);
     }
 
@@ -128,6 +132,7 @@ public class Driver {
     public float getPartnerCommission() { return partnerCommission; }
     public float getBoltCommission() { return boltCommission; }
     public float getSettlementLimit() { return settlementLimit; }
+    public float getFixedCosts() { return fixedCosts; }
     public float getVoucherCurrent() { return voucherCurrent; }
     public float getVoucherPrevious() { return voucherPrevious; }
     public float getVoucher() { return voucher; }

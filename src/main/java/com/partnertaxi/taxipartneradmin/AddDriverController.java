@@ -44,6 +44,9 @@ public class AddDriverController {
     @FXML private TextField       settlementLimitField;
     @FXML private Label           settlementLimitPlaceholder;
 
+    @FXML private TextField       fixedCostsField;
+    @FXML private Label
+
     @FXML private Button          saveButton;
     @FXML private Button          cancelButton;
 
@@ -67,6 +70,7 @@ public class AddDriverController {
         bindPlaceholder(partnerCommissionField, partnerCommissionPlaceholder);
         bindPlaceholder(boltCommissionField,    boltCommissionPlaceholder);
         bindPlaceholder(settlementLimitField,   settlementLimitPlaceholder);
+        bindPlaceholder(fixedCostsField,        fixedCostsPlaceholder);
 
         // Formatter dla pól liczbowych z przecinkiem jako separatorem dziesiętnym
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -81,6 +85,7 @@ public class AddDriverController {
         partnerCommissionField.setTextFormatter(new TextFormatter<>(converter, null));
         boltCommissionField.setTextFormatter(new TextFormatter<>(converter, null));
         settlementLimitField.setTextFormatter(new TextFormatter<>(converter, null));
+        fixedCostsField.setTextFormatter(new TextFormatter<>(converter, null));
         saldoField.setTextFormatter(new TextFormatter<>(converter, null));
     }
 
@@ -103,18 +108,19 @@ public class AddDriverController {
             float fuelCost = fuelCostChoiceBox.getValue().equals("firma") ? 0f : 1f;
 
             // Pobieramy wartości już sparsowane przez TextFormatter
-            float percentTurnover   = ((Number)percentTurnoverField.getTextFormatter().getValue()).floatValue();
-            float cardCommission    = ((Number)cardCommissionField.getTextFormatter().getValue()).floatValue();
-            float partnerCommission = ((Number)partnerCommissionField.getTextFormatter().getValue()).floatValue();
-            float boltCommission    = ((Number)boltCommissionField.getTextFormatter().getValue()).floatValue();
-            float settlementLimit   = ((Number)settlementLimitField.getTextFormatter().getValue()).floatValue();
-            float saldo             = ((Number)saldoField.getTextFormatter().getValue()).floatValue();
+            float percentTurnover   = getNumericValue(percentTurnoverField);
+            float cardCommission    = getNumericValue(cardCommissionField);
+            float partnerCommission = getNumericValue(partnerCommissionField);
+            float boltCommission    = getNumericValue(boltCommissionField);
+            float settlementLimit   = getNumericValue(settlementLimitField);
+            float fixedCosts        = getNumericValue(fixedCostsField);
+            float saldo             = getNumericValue(saldoField);
 
             ApiClient.addMobileUser(
                     id, imie, nazwisko, password, status, rola,
                     percentTurnover, fuelCost,
                     cardCommission, partnerCommission,
-                    boltCommission, settlementLimit, saldo
+                    boltCommission, settlementLimit, fixedCosts, saldo
             );
             closeWindow();
         } catch(Exception ex) {
@@ -137,5 +143,20 @@ public class AddDriverController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.showAndWait();
+    }
+
+    private float getNumericValue(TextField field) {
+        TextFormatter<?> formatter = field.getTextFormatter();
+        if (formatter != null) {
+            Object value = formatter.getValue();
+            if (value instanceof Number number) {
+                return number.floatValue();
+            }
+        }
+        String text = field.getText();
+        if (text == null || text.isBlank()) {
+            return 0f;
+        }
+        return Float.parseFloat(text.replace(',', '.'));
     }
 }

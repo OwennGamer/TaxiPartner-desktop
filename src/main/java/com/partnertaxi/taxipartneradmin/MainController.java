@@ -37,6 +37,7 @@ public class MainController {
                 10f,               // partnerCommission
                 15f,               // boltCommission
                 200f,              // settlementLimit
+                300f,              // fixedCosts
                 0f                 // saldo (dodany brakujący parametr)
         );
     }

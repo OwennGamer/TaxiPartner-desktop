@@ -22,6 +22,8 @@ if (!in_array($role, ['admin', 'administrator'], true)) {
 $data = json_decode(file_get_contents("php://input"), true);
 file_put_contents(__DIR__ . "/final_log.txt", print_r($data, true));
 
+$fixedCosts = isset($data['fixedCosts']) ? (float)$data['fixedCosts'] : 0.0;
+
 try {
     $pdo->beginTransaction();
 
@@ -50,12 +52,13 @@ try {
 
     // 2. Dodaj warunki współpracy do collaboration_terms (1 wpis = 1 warunek)
     $terms = [
-        'percentTurnover' => $data['percentTurnover'],
-        'fuelCost'        => $data['fuelCost'],
-        'cardCommission'  => $data['cardCommission'],
+        'percentTurnover'  => $data['percentTurnover'],
+        'fuelCost'         => $data['fuelCost'],
+        'cardCommission'   => $data['cardCommission'],
         'partnerCommission'=> $data['partnerCommission'],
-        'boltCommission'  => $data['boltCommission'],
-        'settlementLimit' => $data['settlementLimit']
+        'boltCommission'   => $data['boltCommission'],
+        'settlementLimit'  => $data['settlementLimit'],
+        'fixedCosts'       => $fixedCosts
     ];
 
     $stmt2 = $pdo->prepare("INSERT INTO collaboration_terms (driver_id, term_name, term_value) VALUES (:driver_id, :term_name, :term_value)");

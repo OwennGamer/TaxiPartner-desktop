@@ -196,7 +196,7 @@ public class ApiClient {
                                      String status, String rola,
                                      float percentTurnover, float fuelCost,
                                      float cardCommission, float partnerCommission,
-                                     float boltCommission, float settlementLimit, float saldo) {
+                                     float boltCommission, float settlementLimit, float fixedCosts, float saldo) {
         try {
             JSONObject json = new JSONObject();
             json.put("id", id);
@@ -211,6 +211,7 @@ public class ApiClient {
             json.put("partnerCommission", partnerCommission);
             json.put("boltCommission", boltCommission);
             json.put("settlementLimit", settlementLimit);
+            json.put("fixedCosts", fixedCosts);
             json.put("saldo", saldo);
 
             ApiResult res = sendJsonPost("add_driver.php", json);
@@ -229,7 +230,7 @@ public class ApiClient {
                                     String status, String rola, float percentTurnover,
                                     float fuelCost, float cardCommission,
                                     float partnerCommission, float boltCommission,
-                                    float settlementLimit) {
+                                    float settlementLimit, float fixedCosts) {
         try {
             JSONObject json = new JSONObject();
             json.put("id", id);
@@ -244,6 +245,7 @@ public class ApiClient {
             json.put("partnerCommission", partnerCommission);
             json.put("boltCommission", boltCommission);
             json.put("settlementLimit", settlementLimit);
+            json.put("fixedCosts", fixedCosts);
 
             ApiResult res = sendJsonPost("update_driver.php", json);
             if (res.code == 200) {
