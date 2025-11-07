@@ -71,10 +71,15 @@ try {
 
     $mail->isHTML(true);
     $subjectType = preg_replace("/[\r\n]+/", ' ', $type);
-    $mail->Subject = 'Nowe zgłoszenie ' . $subjectType;
-
     $driverLabel = $driverId !== '' ? $driverId : 'nieznany';
     $plateLabel = $vehiclePlate !== '' ? $vehiclePlate : 'nieznany';
+
+    $driverSubject = preg_replace("/[\r\n]+/", ' ', $driverLabel);
+    $plateSubject = preg_replace("/[\r\n]+/", ' ', $plateLabel);
+
+    $mail->Subject = 'Nowe zgłoszenie ' . $subjectType
+        . ' | Kierowca: ' . $driverSubject
+        . ' | Rejestracja: ' . $plateSubject;
 
     $body = '<p>Typ zgłoszenia: <strong>' . escapeHtml($subjectType) . '</strong></p>';
     $body .= '<p>Kierowca ID: <strong>' . escapeHtml($driverLabel) . '</strong></p>';

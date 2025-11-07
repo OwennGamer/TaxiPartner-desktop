@@ -259,3 +259,369 @@
 }
 
 2025-09-05T14:28:35+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1757082515735371%3f7a32d13f7a32d1"}}
+[2025-10-16 09:22:47] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1760606567027064%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-20 08:34:39] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1760949279879286%3f7a32d13f7a32d1"
+}
+
+2025-10-20T08:34:39+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1760949279879286%3f7a32d13f7a32d1"}}
+[2025-10-20 08:48:21] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1760950101837433%3f7a32d13f7a32d1"
+}
+
+2025-10-20T08:48:21+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1760950101837433%3f7a32d13f7a32d1"}}
+[2025-10-20 08:52:40] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1760950360946898%3f7a32d13f7a32d1"
+}
+
+2025-10-20T08:52:40+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1760950360946898%3f7a32d13f7a32d1"}}
+[2025-10-22 10:31:17] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761129077866287%3f7a32d13f7a32d1"
+}
+
+2025-10-22T10:31:17+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761129077866287%3f7a32d13f7a32d1"}}
+[2025-10-22 10:49:56] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761130196768416%3f7a32d13f7a32d1"
+}
+
+2025-10-22T10:49:56+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761130196768416%3f7a32d13f7a32d1"}}
+[2025-10-22 13:47:44] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761140864251269%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-23 13:59:30] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761227970502641%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-23 14:04:52] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761228292091602%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-24 12:52:46] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761310366452709%3f7a32d13f7a32d1"
+}
+
+2025-10-24T12:52:46+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761310366452709%3f7a32d13f7a32d1"}}
+[2025-10-27 17:32:14] http=404 err=- resp={
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}
+
+[2025-10-27 17:33:36] http=404 err=- resp={
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}
+
+[2025-10-27 17:34:11] http=404 err=- resp={
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}
+
+[2025-10-27 17:41:29] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761586889470187%3f7a32d13f7a32d1"
+}
+
+2025-10-27T17:41:29+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761586889470187%3f7a32d13f7a32d1"}}
+[2025-10-27 17:41:48] http=404 err=- resp={
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}
+
+[2025-10-27 17:42:07] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761586927378390%3f7a32d13f7a32d1"
+}
+
+2025-10-27T17:42:07+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761586927378390%3f7a32d13f7a32d1"}}
+[2025-10-27 17:47:27] http=404 err=- resp={
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}
+
+[2025-10-27 17:47:46] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761587266536996%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-27 17:51:10] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761587470042833%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-28 12:29:38] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761654578759762%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-28 12:30:32] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761654632141134%3f7a32d13f7a32d1"
+}
+
+2025-10-28T12:30:32+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761654632141134%3f7a32d13f7a32d1"}}
+[2025-10-28 12:31:29] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761654689467129%3f7a32d13f7a32d1"
+}
+
+2025-10-28T12:31:29+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761654689467129%3f7a32d13f7a32d1"}}
+[2025-10-28 13:19:16] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761657556063117%3f7a32d13f7a32d1"
+}
+
+2025-10-28T13:19:16+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761657556063117%3f7a32d13f7a32d1"}}
+[2025-10-28 13:20:06] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761657606329130%3f7a32d13f7a32d1"
+}
+
+2025-10-28T13:20:06+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761657606329130%3f7a32d13f7a32d1"}}
+[2025-10-28 13:20:34] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761657634270720%3f7a32d13f7a32d1"
+}
+
+2025-10-28T13:20:34+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761657634270720%3f7a32d13f7a32d1"}}
+[2025-10-28 13:23:13] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761657793053393%3f7a32d13f7a32d1"
+}
+
+2025-10-28T13:23:13+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761657793053393%3f7a32d13f7a32d1"}}
+[2025-10-28 13:23:45] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761657825886838%3f7a32d13f7a32d1"
+}
+
+2025-10-28T13:23:45+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761657825886838%3f7a32d13f7a32d1"}}
+[2025-10-28 13:33:36] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761658416127749%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-29 09:11:05] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761729065276040%3f7a32d13f7a32d1"
+}
+
+2025-10-29T09:11:05+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761729065276040%3f7a32d13f7a32d1"}}
+[2025-10-29 09:12:05] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761729125652673%3f7a32d13f7a32d1"
+}
+
+2025-10-29T09:12:05+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761729125652673%3f7a32d13f7a32d1"}}
+[2025-10-29 09:29:29] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761730169764221%3f7a32d13f7a32d1"
+}
+
+2025-10-29T09:29:29+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761730169764221%3f7a32d13f7a32d1"}}
+[2025-10-29 09:30:33] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761730232985528%3f7a32d13f7a32d1"
+}
+
+2025-10-29T09:30:33+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761730232985528%3f7a32d13f7a32d1"}}
+[2025-10-29 09:31:14] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761730274126137%3f7a32d13f7a32d1"
+}
+
+2025-10-29T09:31:14+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761730274126137%3f7a32d13f7a32d1"}}
+[2025-10-29 09:43:24] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761731004203932%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-29 09:43:38] http=404 err=- resp={
+  "error": {
+    "code": 404,
+    "message": "Requested entity was not found.",
+    "status": "NOT_FOUND",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.firebase.fcm.v1.FcmError",
+        "errorCode": "UNREGISTERED"
+      }
+    ]
+  }
+}
+
+[2025-10-29 09:46:23] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761731183186361%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-29 09:49:31] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761731371642252%3f7a32d1f9fd7ecd"
+}
+
+[2025-10-31 09:23:54] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761902634862879%3f7a32d13f7a32d1"
+}
+
+2025-10-31T09:23:54+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761902634862879%3f7a32d13f7a32d1"}}
+[2025-10-31 09:26:01] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761902761287280%3f7a32d13f7a32d1"
+}
+
+2025-10-31T09:26:01+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761902761287280%3f7a32d13f7a32d1"}}
+[2025-10-31 09:26:54] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761902814239075%3f7a32d13f7a32d1"
+}
+
+2025-10-31T09:26:54+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761902814239075%3f7a32d13f7a32d1"}}
+[2025-10-31 09:27:39] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761902859697272%3f7a32d13f7a32d1"
+}
+
+2025-10-31T09:27:39+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761902859697272%3f7a32d13f7a32d1"}}
+[2025-10-31 09:31:50] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1761903110561754%3f7a32d13f7a32d1"
+}
+
+2025-10-31T09:31:50+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1761903110561754%3f7a32d13f7a32d1"}}
+[2025-11-04 13:19:12] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762262352086634%3f7a32d1f9fd7ecd"
+}
+
+[2025-11-04 14:02:49] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762264969727873%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:02:49+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762264969727873%3f7a32d13f7a32d1"}}
+[2025-11-04 14:03:30] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762265010869076%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:03:30+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762265010869076%3f7a32d13f7a32d1"}}
+[2025-11-04 14:03:49] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762265029472980%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:03:49+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762265029472980%3f7a32d13f7a32d1"}}
+[2025-11-04 14:04:29] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762265069402808%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:04:29+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762265069402808%3f7a32d13f7a32d1"}}
+[2025-11-04 14:04:58] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762265098430339%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:04:58+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762265098430339%3f7a32d13f7a32d1"}}
+[2025-11-04 14:05:37] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762265137654323%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:05:37+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762265137654323%3f7a32d13f7a32d1"}}
+[2025-11-04 14:07:52] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762265272908527%3f7a32d13f7a32d1"
+}
+
+2025-11-04T14:07:52+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762265272908527%3f7a32d13f7a32d1"}}
+[2025-11-05 09:52:01] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762336321433451%3f7a32d13f7a32d1"
+}
+
+2025-11-05T09:52:01+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762336321433451%3f7a32d13f7a32d1"}}
+[2025-11-05 09:53:03] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762336383741396%3f7a32d13f7a32d1"
+}
+
+2025-11-05T09:53:03+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762336383741396%3f7a32d13f7a32d1"}}
+[2025-11-05 09:53:29] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762336409257364%3f7a32d13f7a32d1"
+}
+
+2025-11-05T09:53:29+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762336409257364%3f7a32d13f7a32d1"}}
+[2025-11-05 09:54:16] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762336455973240%3f7a32d13f7a32d1"
+}
+
+2025-11-05T09:54:16+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762336455973240%3f7a32d13f7a32d1"}}
+[2025-11-05 09:56:34] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762336594088901%3f7a32d13f7a32d1"
+}
+
+2025-11-05T09:56:34+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762336594088901%3f7a32d13f7a32d1"}}
+[2025-11-05 09:59:23] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762336762951581%3f7a32d13f7a32d1"
+}
+
+2025-11-05T09:59:23+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762336762951581%3f7a32d13f7a32d1"}}
+[2025-11-05 10:18:46] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762337926382685%3f7a32d13f7a32d1"
+}
+
+2025-11-05T10:18:46+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762337926382685%3f7a32d13f7a32d1"}}
+[2025-11-05 10:19:27] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762337967291474%3f7a32d13f7a32d1"
+}
+
+2025-11-05T10:19:27+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762337967291474%3f7a32d13f7a32d1"}}
+[2025-11-05 14:05:23] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762351523790697%3f7a32d1f9fd7ecd"
+}
+
+[2025-11-05 14:08:05] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762351685291807%3f7a32d13f7a32d1"
+}
+
+2025-11-05T14:08:05+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762351685291807%3f7a32d13f7a32d1"}}
+[2025-11-05 14:08:44] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762351724738382%3f7a32d13f7a32d1"
+}
+
+2025-11-05T14:08:44+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762351724738382%3f7a32d13f7a32d1"}}
+[2025-11-07 09:00:55] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762506055363647%3f7a32d13f7a32d1"
+}
+
+2025-11-07T09:00:55+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762506055363647%3f7a32d13f7a32d1"}}
+[2025-11-07 09:00:55] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762506055635471%3f7a32d13f7a32d1"
+}
+
+2025-11-07T09:00:55+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762506055635471%3f7a32d13f7a32d1"}}
+[2025-11-07 10:00:51] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762509651244518%3f7a32d13f7a32d1"
+}
+
+2025-11-07T10:00:51+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762509651244518%3f7a32d13f7a32d1"}}
+[2025-11-07 10:02:40] http=200 err=- resp={
+  "name": "projects/partner-taxi-kierowca-2e764/messages/0:1762509760146432%3f7a32d13f7a32d1"
+}
+
+2025-11-07T10:02:40+00:00 {"status":"sent","resp":{"name":"projects\/partner-taxi-kierowca-2e764\/messages\/0:1762509760146432%3f7a32d13f7a32d1"}}

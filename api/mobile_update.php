@@ -6,10 +6,10 @@
 header('Content-Type: application/json; charset=utf-8');
 
 // KONFIGURACJA TESTOWA — DOSTOSUJ
-$latestVersion   = "1.1.4";        // docelowy versionName (musi być "większy" niż 1.0)
+$latestVersion   = "1.1.7";        // docelowy versionName (musi być "większy" niż 1.0)
 $mandatory       = true;           // scenariusz: aktualizacja WYMUSZONA
-$apkFileName     = "app-1.1.4.apk";// nazwa pliku, który wrzucisz do /api/updates
-$changelog       = "• Poprawki stabilności\n• Usprawnienia UI\n• Logowanie błędów aktualizacji";
+$apkFileName     = "app-1.1.7.apk";// nazwa pliku, który wrzucisz do /api/updates
+$changelog       = "• Dodanie funkcji ZGŁOSZENIA ";
 
 // ZŁÓŻ URL do pliku APK (port 8444 zgodnie z Twoim BASE_URL)
 $schemeHostPort  = "http://164.126.143.20:8444";
