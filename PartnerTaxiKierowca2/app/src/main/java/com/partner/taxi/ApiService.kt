@@ -186,6 +186,16 @@ interface ApiService {
         @Part photos: List<MultipartBody.Part>,
     ): Call<GenericResponse>
 
+    @Multipart
+    @POST("send_report.php")
+    fun sendReport(
+        @Part("type") type: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("driver_id") driverId: RequestBody,
+        @Part("vehicle_plate") vehiclePlate: RequestBody,
+        @Part photo: MultipartBody.Part?,
+    ): Call<GenericResponse>
+
     @POST("update_saldo.php")
     suspend fun updateSaldo(
         @Body request: UpdateSaldoRequest

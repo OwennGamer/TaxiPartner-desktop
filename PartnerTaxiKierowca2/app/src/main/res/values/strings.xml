@@ -90,4 +90,18 @@
     </string-array>
 
     <string name="dashboard_change_saldo">Zmień saldo</string>
+    <string name="dashboard_reports">ZGŁOSZENIA</string>
+
+    <string name="report_title">Zgłoszenia</string>
+    <string name="report_section_service">SERWIS</string>
+    <string name="report_section_other">INNE</string>
+    <string name="report_description_hint">Opisz zgłoszenie</string>
+    <string name="report_take_photo">Dodaj zdjęcie</string>
+    <string name="report_photo_status_none">Brak zdjęcia</string>
+    <string name="report_photo_status_added">Dodano zdjęcie</string>
+    <string name="report_send">Wyślij</string>
+    <string name="report_error_description">Podaj opis zgłoszenia.</string>
+    <string name="report_error_vehicle_plate">Brak przypisanego pojazdu. Wróć i wybierz pojazd.</string>
+    <string name="report_send_success">Zgłoszenie wysłane.</string>
+    <string name="report_send_error">Nie udało się wysłać zgłoszenia.</string>
 </resources>

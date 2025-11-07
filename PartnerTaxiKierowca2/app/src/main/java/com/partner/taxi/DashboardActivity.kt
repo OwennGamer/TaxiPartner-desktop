@@ -50,7 +50,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var btnFlota: MaterialButton
     private lateinit var btnChangeSaldo: MaterialButton
     private lateinit var btnPusty2: MaterialButton
-    private lateinit var btnPusty3: MaterialButton
+    private lateinit var btnReports: MaterialButton
     private lateinit var btnZakonczPrace: MaterialButton
     private var vehiclePlate: String? = null
     private var restoreLockTaskAfterNavigation = false
@@ -92,7 +92,7 @@ class DashboardActivity : AppCompatActivity() {
         btnFlota           = findViewById(R.id.btnFlota)
         btnChangeSaldo     = findViewById(R.id.btnChangeSaldo)
         btnPusty2          = findViewById(R.id.btnPusty2)
-        btnPusty3          = findViewById(R.id.btnPusty3)
+        btnReports         = findViewById(R.id.btnReports)
         btnZakonczPrace    = findViewById(R.id.btnZakonczPrace)
 
         val role = SessionManager.getRole(this).lowercase()
@@ -129,7 +129,7 @@ class DashboardActivity : AppCompatActivity() {
         // <-- PRZYWRACAMY LOSOWE KOLORY DLA KAFELKÓW -->
         val buttons = listOf(
             btnDodajKurs, btnHistoria, btnTankowanie, btnGrafik,
-            btnFlota, btnChangeSaldo, btnPusty2, btnPusty3
+            btnFlota, btnChangeSaldo, btnPusty2, btnReports
         )
         val colors = listOf(
             "#F44336", "#E91E63", "#9C27B0", "#673AB7",
@@ -156,6 +156,13 @@ class DashboardActivity : AppCompatActivity() {
         btnTankowanie.setOnClickListener {
             Log.d(TAG, "Kliknięto 'Tankowanie'")
             startActivityHandlingLockTask(Intent(this, FuelActivity::class.java))
+        }
+
+        btnReports.setOnClickListener {
+            val intent = Intent(this, ReportActivity::class.java).apply {
+                vehiclePlate?.let { putExtra("rejestracja", it) }
+            }
+            startActivityHandlingLockTask(intent)
         }
 
         // Listener do zakończenia pracy

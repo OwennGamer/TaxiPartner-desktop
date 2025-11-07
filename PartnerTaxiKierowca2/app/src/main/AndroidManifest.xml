@@ -73,6 +73,7 @@
         <activity android:name=".ServiceEditActivity" />
         <activity android:name=".DamageEditActivity" />
         <activity android:name=".ChangeSaldoActivity" />
+        <activity android:name=".ReportActivity" />
 
         <service
             android:name=".TaxiFirebaseService"
