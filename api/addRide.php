@@ -23,8 +23,8 @@ $via_km = isset($_POST['via_km']) ? (int)$_POST['via_km'] : 0;
 try {
     $pdo->beginTransaction();
 
-    // Pobranie danych kierowcy
-    $stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ?");
+    // Pobranie danych kierowcy z blokadą – zapobiega równoczesnym dodaniom dla tego samego kierowcy
+    $stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ? FOR UPDATE");
     $stmt->execute([$driver_id]);
     $driver = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -137,10 +137,23 @@ try {
         }
     }
 
+    // Sprawdzenie duplikatu w tej samej sekundzie (np. wielokrotne kliknięcie przycisku)
+    $nowDateTime = (new DateTimeImmutable())->format('Y-m-d H:i:s');
+    $duplicateCheck = $pdo->prepare(
+        "SELECT id FROM kursy WHERE driver_id = ? AND amount = ? AND type = ? AND source = ? AND via_km = ? AND DATE_FORMAT(date, '%Y-%m-%d %H:%i:%s') = ? LIMIT 1"
+    );
+    $duplicateCheck->execute([$driver_id, $amount, $type, $source, $via_km, $nowDateTime]);
+
+    if ($duplicateCheck->fetch(PDO::FETCH_ASSOC)) {
+        $pdo->rollBack();
+        echo json_encode(["status" => "error", "message" => "Kurs o tym samym czasie został już zapisany – ponowne dodanie zostało zablokowane."]);
+        exit;
+    }
+
 
     // Zapisz kurs
-        $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, receipt_photo, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km, $receiptPath]);
+        $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, receipt_photo, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km, $receiptPath, $nowDateTime]);
 
     if (strtolower($type) === 'voucher') {
         $rideMonth = (new DateTime())->format('Y-m');

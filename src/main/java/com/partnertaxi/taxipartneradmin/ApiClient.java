@@ -7,6 +7,15 @@ import org.json.JSONObject;
 
 
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalQueries;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +39,16 @@ public class ApiClient {
             .readTimeout(10, TimeUnit.SECONDS)
             .build();
     private static String jwtToken;
+    private static final DateTimeFormatter HISTORY_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final List<DateTimeFormatter> HISTORY_INPUT_FORMATS = List.of(
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME,
+            new DateTimeFormatterBuilder()
+                    .appendPattern("yyyy-MM-dd HH:mm:ss")
+                    .toFormatter(),
+            new DateTimeFormatterBuilder()
+                    .appendPattern("yyyy-MM-dd'T'HH:mm:ss")
+                    .toFormatter()
+    );
 
     public static String getJwtToken() {
         return jwtToken;
@@ -379,9 +398,10 @@ public class ApiClient {
                                 ? BASE_URL + receiptPhoto
                                 : null;
                         boolean photoAvailable = o.optBoolean("photo_available", false);
+                        String localizedDate = formatHistoryDate(o.optString("date", ""));
 
                         list.add(new HistoryEntry(
-                                o.optString("date", ""),
+                                localizedDate,
                                 o.optString("type", ""),
                                 o.optString("description", ""),
                                 o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
@@ -396,6 +416,35 @@ public class ApiClient {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private static String formatHistoryDate(String rawDate) {
+        if (rawDate == null || rawDate.isBlank()) {
+            return "";
+        }
+
+        String trimmed = rawDate.trim();
+        ZoneId systemZone = ZoneId.systemDefault();
+
+        for (DateTimeFormatter formatter : HISTORY_INPUT_FORMATS) {
+            try {
+                TemporalAccessor parsed = formatter.parse(trimmed);
+                ZonedDateTime zoned;
+
+                if (parsed.query(TemporalQueries.offset()) != null || parsed.query(TemporalQueries.zone()) != null) {
+                    zoned = ZonedDateTime.from(parsed);
+                } else {
+                    LocalDateTime localDateTime = LocalDateTime.from(parsed);
+                    zoned = localDateTime.atZone(ZoneOffset.UTC);
+                }
+
+                return zoned.withZoneSameInstant(systemZone).format(HISTORY_OUTPUT_FORMAT);
+            } catch (DateTimeParseException ignored) {
+                // try next format
+            }
+        }
+
+        return trimmed;
     }
 
     public static List<Vehicle> getVehicles() {
