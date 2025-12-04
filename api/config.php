@@ -1,4 +1,6 @@
 <?php
+// Wymuszamy strefę czasową, aby wszystkie znaczniki czasu były zapisywane w czasie lokalnym
+date_default_timezone_set('Europe/Warsaw');
 // =======================
 // Konfiguracja bazy danych
 // =======================
