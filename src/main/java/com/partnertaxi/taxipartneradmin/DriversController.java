@@ -3,7 +3,7 @@ package com.partnertaxi.taxipartneradmin;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleFloatProperty;
 import com.partnertaxi.taxipartneradmin.TableUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -35,7 +35,7 @@ public class DriversController {
     @FXML private TableView<Driver> driversTable;
     @FXML private TableColumn<Driver, String>  idColumn;
     @FXML private TableColumn<Driver, String>  nameColumn;
-    @FXML private TableColumn<Driver, String>  saldoColumn;
+    @FXML private TableColumn<Driver, Float>   saldoColumn;
     @FXML private TableColumn<Driver, String>  statusColumn;
     @FXML private TableColumn<Driver, String>  fuelCostColumn;
     @FXML private TableColumn<Driver, Float>   fuelCostSumColumn;
@@ -143,20 +143,12 @@ public class DriversController {
         });
 
         // 4) Saldo: parsujemy raw string i formatujemy
-        saldoColumn.setCellValueFactory(data -> {
-            String raw = data.getValue().getSaldo();
-            try {
-                float v = Float.parseFloat(raw.replace(',', '.'));
-                return new SimpleStringProperty(nf.format(v));
-            } catch (Exception e) {
-                return new SimpleStringProperty(raw);
-            }
-        });
+        saldoColumn.setCellValueFactory(data -> new SimpleFloatProperty(data.getValue().getSaldoValue()).asObject());
         saldoColumn.setCellFactory(col -> {
-            TableCell<Driver, String> cell = new TableCell<>() {
-                @Override protected void updateItem(String text, boolean empty) {
-                    super.updateItem(text, empty);
-                    setText(empty ? null : text);
+            TableCell<Driver, Float> cell = new TableCell<>() {
+                @Override protected void updateItem(Float value, boolean empty) {
+                    super.updateItem(value, empty);
+                    setText((empty || value == null) ? null : nf.format(value));
                 }
             };
             addFocusHighlight(cell);

@@ -5,6 +5,7 @@ public class Driver {
     private String id;
     private String name;
     private String saldo;
+    private float saldoValue;
     private String status;
     private String rola;
 
@@ -64,6 +65,7 @@ public class Driver {
         this.id = id;
         this.name = name;
         this.saldo = saldo;
+        this.saldoValue = parseSaldoValue(saldo);
         this.status = status;
         this.rola = rola;
         this.percentTurnover = percentTurnover;
@@ -123,6 +125,7 @@ public class Driver {
     public String getId() { return id; }
     public String getName() { return name; }
     public String getSaldo() { return saldo; }
+    public float getSaldoValue() { return saldoValue; }
     public String getStatus() { return status; }
     public String getRola() { return rola; }
 
@@ -153,5 +156,13 @@ public class Driver {
 
     public boolean isSummary() {
         return summary;
+    }
+
+    private float parseSaldoValue(String saldo) {
+        try {
+            return Float.parseFloat(saldo.replace(',', '.'));
+        } catch (Exception ignored) {
+            return 0f;
+        }
     }
 }

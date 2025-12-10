@@ -68,6 +68,8 @@ public class FleetController {
     @FXML
     private TableColumn<Vehicle, String> colNumerPolisy;
     @FXML
+    private TableColumn<Vehicle, String> colOstatniaInwentaryzacja;
+    @FXML
     private Button btnHistory;
     @FXML
     private Button btnService;
@@ -99,6 +101,7 @@ public class FleetController {
         colFirma.setCellValueFactory(new PropertyValueFactory<>("firma"));
         colFormaWlasnosci.setCellValueFactory(new PropertyValueFactory<>("formaWlasnosci"));
         colNumerPolisy.setCellValueFactory(new PropertyValueFactory<>("numerPolisy"));
+        colOstatniaInwentaryzacja.setCellValueFactory(new PropertyValueFactory<>("ostatniaInwentaryzacja"));
 
         List<Vehicle> vehicles = ApiClient.getVehicles();
         allVehicles = FXCollections.observableArrayList(vehicles);

@@ -15,6 +15,7 @@
     <Label text="Edytuj kierowcę" styleClass="font-20" />
 
     <!-- Imię i nazwisko -->
+    <Label text="Imię i nazwisko" />
     <StackPane>
         <TextField fx:id="nameField"/>
         <Label fx:id="nameFieldPlaceholder"
@@ -25,6 +26,7 @@
     </StackPane>
 
     <!-- Hasło -->
+    <Label text="Hasło (opcjonalne)" />
     <StackPane>
         <PasswordField fx:id="passwordField"/>
         <Label fx:id="passwordFieldPlaceholder"
@@ -47,6 +49,7 @@
     <ComboBox fx:id="fuelCostBox" promptText="Koszt paliwa"/>
 
     <!-- Procent obrotu -->
+    <Label text="Procent obrotu" />
     <StackPane>
         <TextField fx:id="percentTurnoverField"/>
         <Label fx:id="percentTurnoverPlaceholder"
@@ -57,6 +60,7 @@
     </StackPane>
 
     <!-- Prowizja za kartę -->
+    <Label text="Prowizja za kartę" />
     <StackPane>
         <TextField fx:id="cardCommissionField"/>
         <Label fx:id="cardCommissionPlaceholder"
@@ -67,6 +71,7 @@
     </StackPane>
 
     <!-- Prowizja partnera -->
+    <Label text="Prowizja partnera" />
     <StackPane>
         <TextField fx:id="partnerCommissionField"/>
         <Label fx:id="partnerCommissionPlaceholder"
@@ -77,6 +82,7 @@
     </StackPane>
 
     <!-- Prowizja Bolt -->
+    <Label text="Prowizja Bolt" />
     <StackPane>
         <TextField fx:id="boltCommissionField"/>
         <Label fx:id="boltCommissionPlaceholder"
@@ -87,6 +93,7 @@
     </StackPane>
 
     <!-- Graniczna kwota rozliczenia -->
+    <Label text="Limit rozliczenia" />
     <StackPane>
         <TextField fx:id="settlementLimitField"/>
         <Label fx:id="settlementLimitPlaceholder"
@@ -97,6 +104,7 @@
     </StackPane>
 
     <!-- Koszty stałe -->
+    <Label text="Koszty stałe" />
     <StackPane>
         <TextField fx:id="fixedCostsField"/>
         <Label fx:id="fixedCostsPlaceholder"

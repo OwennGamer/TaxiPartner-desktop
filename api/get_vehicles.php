@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 require_once "db.php";
 
 try {
-    $stmt = $pdo->query("SELECT id, rejestracja, marka, model, przebieg, ubezpieczenie_do, przeglad_do, aktywny, inpost, taxi, taksometr, legalizacja_taksometru_do, gaz, homologacja_lpg_do, firma, forma_wlasnosci, numer_polisy FROM pojazdy");
+    $stmt = $pdo->query("SELECT p.id, p.rejestracja, p.marka, p.model, p.przebieg, p.ubezpieczenie_do, p.przeglad_do, p.aktywny, p.inpost, p.taxi, p.taksometr, p.legalizacja_taksometru_do, p.gaz, p.homologacja_lpg_do, p.firma, p.forma_wlasnosci, p.numer_polisy, (SELECT MAX(data_dodania) FROM inwentaryzacje i WHERE i.rejestracja = p.rejestracja) AS ostatnia_inwentaryzacja FROM pojazdy p");
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($vehicles as &$v) {
         $v['aktywny'] = (bool)$v['aktywny'];

@@ -20,12 +20,13 @@ public class Vehicle {
     private final StringProperty firma;
     private final StringProperty formaWlasnosci;
     private final StringProperty numerPolisy;
+    private final StringProperty ostatniaInwentaryzacja;
 
     public Vehicle(int id, String rejestracja, String marka, String model,
                    int przebieg, String ubezpieczenieDo, String przegladDo, boolean aktywny,
                    boolean inpost, boolean taxi, boolean taksometr, String legalizacjaTaksometruDo,
                    boolean gaz, String homologacjaLpgDo, String firma,
-                   String formaWlasnosci, String numerPolisy) {
+                   String formaWlasnosci, String numerPolisy, String ostatniaInwentaryzacja) {
         this.id = new SimpleIntegerProperty(id);
         this.rejestracja = new SimpleStringProperty(rejestracja);
         this.marka = new SimpleStringProperty(marka);
@@ -43,6 +44,7 @@ public class Vehicle {
         this.firma = new SimpleStringProperty(firma);
         this.formaWlasnosci = new SimpleStringProperty(formaWlasnosci);
         this.numerPolisy = new SimpleStringProperty(numerPolisy);
+        this.ostatniaInwentaryzacja = new SimpleStringProperty(ostatniaInwentaryzacja);
     }
 
     public int getId() {
@@ -179,5 +181,12 @@ public class Vehicle {
 
     public StringProperty numerPolisyProperty() {
         return numerPolisy;
+    }
+    public String getOstatniaInwentaryzacja() {
+        return ostatniaInwentaryzacja.get();
+    }
+
+    public StringProperty ostatniaInwentaryzacjaProperty() {
+        return ostatniaInwentaryzacja;
     }
 }

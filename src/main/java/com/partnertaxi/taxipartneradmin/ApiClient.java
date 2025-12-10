@@ -481,7 +481,9 @@ public class ApiClient {
                                 o.optString("homologacja_lpg_do", null),
                                 o.optString("firma", null),
                                 o.optString("forma_wlasnosci", null),
-                                o.optString("numer_polisy", null)
+                                o.optString("numer_polisy", null),
+                                o.optString("ostatnia_inwentaryzacja", "")
+
                         ));
                     }
                 }
