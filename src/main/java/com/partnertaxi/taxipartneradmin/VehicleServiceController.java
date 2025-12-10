@@ -1,14 +1,19 @@
 package com.partnertaxi.taxipartneradmin;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
@@ -102,12 +107,31 @@ public class VehicleServiceController {
             return;
         }
 
-        javafx.scene.layout.VBox box = new javafx.scene.layout.VBox(10);
+        VBox box = new VBox(10);
         for (String url : urls) {
             ImageView imageView = new ImageView(new Image(url, true));
             imageView.setPreserveRatio(true);
             imageView.setFitWidth(800);
-            box.getChildren().add(imageView);
+            DoubleProperty rotationAngle = new SimpleDoubleProperty(0);
+            imageView.rotateProperty().bind(rotationAngle);
+
+            Button rotateLeft = new Button("Obróć w lewo");
+            rotateLeft.setOnAction(e -> rotationAngle.set((rotationAngle.get() - 90 + 360) % 360));
+
+            Button rotateRight = new Button("Obróć w prawo");
+            rotateRight.setOnAction(e -> rotationAngle.set((rotationAngle.get() + 90) % 360));
+
+            HBox controls = new HBox(10, rotateLeft, rotateRight);
+            controls.setAlignment(Pos.CENTER);
+            controls.setStyle("-fx-padding: 10; -fx-background-color: #222; -fx-border-color: #444; -fx-border-width: 1 0 0 0;");
+
+            BorderPane pane = new BorderPane();
+            pane.setCenter(imageView);
+            pane.setBottom(controls);
+            BorderPane.setAlignment(controls, Pos.CENTER);
+            pane.setStyle("-fx-padding: 10;");
+
+            box.getChildren().add(pane);
         }
 
         ScrollPane scrollPane = new ScrollPane(new StackPane(box));

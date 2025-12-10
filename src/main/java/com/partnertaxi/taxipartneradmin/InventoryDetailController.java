@@ -1,11 +1,14 @@
 package com.partnertaxi.taxipartneradmin;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -117,6 +121,9 @@ public class InventoryDetailController {
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(800);
 
+        DoubleProperty rotationAngle = new SimpleDoubleProperty(0);
+        imageView.rotateProperty().bind(rotationAngle);
+
         StackPane imageContainer = new StackPane(imageView);
         imageContainer.setStyle("-fx-background-color: black;");
 
@@ -138,16 +145,30 @@ public class InventoryDetailController {
             }
         });
 
+        HBox controls = new HBox(10);
+        controls.setAlignment(Pos.CENTER);
+        controls.setStyle("-fx-padding: 10; -fx-background-color: #222; -fx-border-color: #444; -fx-border-width: 1 0 0 0;");
+
+        Button rotateLeft = new Button("Obróć w lewo");
+        rotateLeft.setOnAction(e -> rotationAngle.set((rotationAngle.get() - 90 + 360) % 360));
+
+        Button rotateRight = new Button("Obróć w prawo");
+        rotateRight.setOnAction(e -> rotationAngle.set((rotationAngle.get() + 90) % 360));
+
+        controls.getChildren().addAll(rotateLeft, rotateRight);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(scrollPane);
         borderPane.setLeft(leftArrow);
         borderPane.setRight(rightArrow);
+        borderPane.setBottom(controls);
 
         Runnable updateContent = () -> {
             imageView.setImage(new Image(imageUrls.get(currentIndex.get()), true));
             stage.setTitle(String.format("Podgląd zdjęcia (%d/%d)", currentIndex.get() + 1, imageUrls.size()));
             updateArrowState(leftArrow, currentIndex.get() > 0);
             updateArrowState(rightArrow, currentIndex.get() < imageUrls.size() - 1);
+            rotationAngle.set(0);
         };
 
         currentIndex.addListener((obs, oldVal, newVal) -> updateContent.run());

@@ -1,5 +1,7 @@
 package com.partnertaxi.taxipartneradmin;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,8 +11,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -127,13 +132,30 @@ public class HistoryController {
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(800);
 
+        DoubleProperty rotationAngle = new SimpleDoubleProperty(0);
+        imageView.rotateProperty().bind(rotationAngle);
+
         ScrollPane scrollPane = new ScrollPane(new StackPane(imageView));
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
+        Button rotateLeft = new Button("Obróć w lewo");
+        rotateLeft.setOnAction(e -> rotationAngle.set((rotationAngle.get() - 90 + 360) % 360));
+
+        Button rotateRight = new Button("Obróć w prawo");
+        rotateRight.setOnAction(e -> rotationAngle.set((rotationAngle.get() + 90) % 360));
+
+        HBox controls = new HBox(10, rotateLeft, rotateRight);
+        controls.setAlignment(Pos.CENTER);
+        controls.setStyle("-fx-padding: 10; -fx-background-color: #222; -fx-border-color: #444; -fx-border-width: 1 0 0 0;");
+
+        BorderPane root = new BorderPane();
+        root.setCenter(scrollPane);
+        root.setBottom(controls);
+
         Stage stage = new Stage();
         stage.setTitle("Podgląd zdjęcia");
-        Scene scene = new Scene(scrollPane, 800, 600);
+        Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(Objects.requireNonNull(
                 HelloApplication.class.getResource("style.css")).toExternalForm());
         stage.setScene(scene);
