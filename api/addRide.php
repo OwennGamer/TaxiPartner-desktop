@@ -137,8 +137,24 @@ try {
         }
     }
 
+    // Sprawdzenie minimalnego odstępu czasowego od ostatniego kursu
+    $now = new DateTimeImmutable();
+    $nowDateTime = $now->format('Y-m-d H:i:s');
+    $lastRideStmt = $pdo->prepare("SELECT date FROM kursy WHERE driver_id = ? ORDER BY date DESC LIMIT 1");
+    $lastRideStmt->execute([$driver_id]);
+    $lastRideDate = $lastRideStmt->fetchColumn();
+
+    if ($lastRideDate) {
+        $lastRideTime = new DateTimeImmutable($lastRideDate);
+        $secondsSinceLastRide = $now->getTimestamp() - $lastRideTime->getTimestamp();
+        if ($secondsSinceLastRide < 300) {
+            $pdo->rollBack();
+            echo json_encode(["status" => "error", "message" => "Zbyt krótki czas od dodania ostatniego kursu"]);
+            exit;
+        }
+    }
+
     // Sprawdzenie duplikatu w tej samej sekundzie (np. wielokrotne kliknięcie przycisku)
-    $nowDateTime = (new DateTimeImmutable())->format('Y-m-d H:i:s');
     $duplicateCheck = $pdo->prepare(
         "SELECT id FROM kursy WHERE driver_id = ? AND amount = ? AND type = ? AND source = ? AND via_km = ? AND DATE_FORMAT(date, '%Y-%m-%d %H:%i:%s') = ? LIMIT 1"
     );
@@ -175,4 +191,3 @@ try {
     exit;
 }
 ?>
-
