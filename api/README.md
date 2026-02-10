@@ -63,6 +63,40 @@ CLI utility that deletes log entries older than 60 days. Add it to cron, e.g.:
 0 2 * * * /usr/bin/php /var/www/api/cleanup_error_logs.php >> /var/log/cron.log 2>&1
 ```
 
+## Awaria mobilna: „Problem z połączeniem z serwerem. Twoja sesja nadal jest aktywna”
+
+Jeśli kierowca widzi wyzerowane wartości (`0,00 zł`) i toast z błędem połączenia,
+najczęściej oznacza to utknięty stan sesji po stronie urządzenia i/lub serwera.
+
+### Szybka naprawa (support / admin)
+
+1. W panelu desktop kliknij **Wyloguj** przy kierowcy (zdalny logout przez `remote_logout.php`).
+2. Poproś kierowcę o pełne zamknięcie aplikacji i ponowne logowanie.
+3. Gdy problem trwa (np. brak dostępu do panelu), uruchom awaryjny reset sesji po SSH:
+
+```bash
+php api/reset_driver_session_cli.php <DRIVER_ID> [DEVICE_ID]
+```
+
+Przykład dla kierowcy `T2`:
+
+```bash
+php api/reset_driver_session_cli.php T2
+```
+
+Skrypt czyści tokeny JWT (`jwt_tokens`), sesje pomocnicze (`driver_sessions` / `sessions`,
+jeśli istnieją) i `fcm_token` kierowcy.
+
+### Jak zapobiegać
+
+- Monitoruj wpisy z `summary = "Problem z połączeniem z API"` w `app_error_logs`
+  (to zwykle `TokenRefreshException` po stronie Androida).
+- Utrzymuj stabilność sieci API (reverse proxy, timeouty upstream, DNS).
+- Zachowaj procedurę awaryjną: przy pierwszym zgłoszeniu „sesja nadal aktywna”
+  wykonaj zdalne wylogowanie lub CLI reset zanim użytkownik zacznie reinstalację aplikacji.
+- Wsparcie powinno zapisywać `driver_id`, `device_id`, wersję aplikacji i godzinę incydentu,
+  aby szybciej znaleźć wpisy w `get_error_logs.php`.
+
 ## Firebase configuration
 
 The API uses Firebase Cloud Messaging via service account credentials. Before
