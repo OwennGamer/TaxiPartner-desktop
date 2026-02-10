@@ -8,5 +8,6 @@ import com.google.gson.annotations.SerializedName
 data class StartShiftResponse(
     val status: String,
     val message: String,
-    @SerializedName("session_id") val sessionId: String?
+    @SerializedName("session_id") val sessionId: String?,
+    @SerializedName("require_inventory") val requireInventory: Boolean?
 )

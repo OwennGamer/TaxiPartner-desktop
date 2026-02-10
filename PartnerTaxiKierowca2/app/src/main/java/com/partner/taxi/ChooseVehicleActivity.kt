@@ -179,7 +179,7 @@ class ChooseVehicleActivity : AppCompatActivity() {
                             resp: Response<GenericResponse>
                         ) {
                             if (resp.isSuccessful && resp.body()?.status == "success") {
-                                startShiftAndContinue(vehicle.ostatni_kierowca_id, rejestracja, przebieg)
+                                startShiftAndContinue(rejestracja, przebieg)
                             } else {
                                 Toast.makeText(
                                     this@ChooseVehicleActivity,
@@ -202,7 +202,6 @@ class ChooseVehicleActivity : AppCompatActivity() {
     }
 
     private fun startShiftAndContinue(
-        lastDriverId: String?,
         rejestracja: String,
         przebieg: Int
     ) {
@@ -216,7 +215,7 @@ class ChooseVehicleActivity : AppCompatActivity() {
                     if (response.isSuccessful && body?.status == "success" && !body.sessionId.isNullOrBlank()) {
                         SessionManager.saveSessionId(this@ChooseVehicleActivity, body.sessionId)
                         SessionManager.saveVehiclePlate(this@ChooseVehicleActivity, rejestracja)
-                        proceedAfterUpdate(lastDriverId, rejestracja, przebieg)
+                        proceedAfterUpdate(body.requireInventory, rejestracja, przebieg)
                     } else {
                         Toast.makeText(
                             this@ChooseVehicleActivity,
@@ -233,19 +232,14 @@ class ChooseVehicleActivity : AppCompatActivity() {
     }
 
     private fun proceedAfterUpdate(
-        lastDriverId: String?,   // wartość zwrócona z API
+        requireInventory: Boolean?,
         rejestracja: String,
         przebieg: Int
     ) {
-        // 1. Pobierz zalogowane ID kierowcy (String)
-        val currentDriverId = SessionManager.getDriverId(this)
+        val shouldOpenInventory = requireInventory ?: true
+        Log.d("CHOOSE_VEHICLE", "requireInventory (API): $shouldOpenInventory")
 
-        // 2. Dla diagnostyki zapiszcie w logu oba ID:
-        Log.d("CHOOSE_VEHICLE", "ostatni kierowca (API): '$lastDriverId', zalogowany: '$currentDriverId'")
-
-        // 3. Jeśli brak poprzedniego rekordu LUB ID różne → inwentaryzacja,
-        //    w przeciwnym razie od razu Dashboard.
-        val nextActivity = if (lastDriverId.isNullOrBlank() || lastDriverId != currentDriverId) {
+        val nextActivity = if (shouldOpenInventory) {
             InventoryActivity::class.java
         } else {
             DashboardActivity::class.java

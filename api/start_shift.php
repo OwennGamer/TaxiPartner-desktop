@@ -33,6 +33,21 @@ if ($vehicle_plate === '' || $start_odometer === null) {
 }
 
 try {
+    $normalizeId = static function (?string $value): string {
+        return mb_strtoupper(trim((string)$value));
+    };
+
+    // Sprawdzenie ostatniego kierowcy, który jeździł tym pojazdem
+    $stmtLastVehicleDriver = $pdo->prepare(
+        "SELECT driver_id FROM work_sessions WHERE LOWER(vehicle_plate) = LOWER(?) ORDER BY start_time DESC, id DESC LIMIT 1"
+    );
+    $stmtLastVehicleDriver->execute([$vehicle_plate]);
+    $lastVehicleDriver = $stmtLastVehicleDriver->fetchColumn();
+
+    // Inwentaryzacja wymagana, gdy kierowca się zmienia lub brak historii dla pojazdu
+    $requiresInventory = $lastVehicleDriver === false
+        || $normalizeId($lastVehicleDriver) !== $normalizeId($driver_id);
+
     // Sprawdzenie poprzedniego pojazdu
     $stmtPrev = $pdo->prepare("SELECT vehicle_plate FROM work_sessions WHERE driver_id = ? ORDER BY start_time DESC LIMIT 1");
     $stmtPrev->execute([$driver_id]);
@@ -56,7 +71,7 @@ try {
                 $mail->Port = 587;
 
                 $mail->setFrom('aplikacja.partnertaxi@gmail.com', 'Partner Taxi System');
-                $mail->addAddress('biuro@taxi-partner.com.pl');
+                $mail->addAddress('bok@taxi-partner.com.pl');
 
                 $mail->isHTML(true);
                 $mail->Subject = "TEST!!! Zmiana samochodu przez kierowcę $driver_id !!!TEST";
@@ -78,7 +93,11 @@ try {
     $stmt->execute([$driver_id, $vehicle_plate, $start_odometer]);
     $id = $pdo->lastInsertId();
 
-    echo json_encode(['status' => 'success', 'session_id' => (int)$id]);
+    echo json_encode([
+        'status' => 'success',
+        'session_id' => (int)$id,
+        'require_inventory' => $requiresInventory,
+    ]);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Błąd bazy danych']);
