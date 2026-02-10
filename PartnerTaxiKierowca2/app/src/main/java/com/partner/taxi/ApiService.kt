@@ -99,6 +99,22 @@ interface ApiService {
         @Part("via_km") viaKm: RequestBody
     ): Call<AddRideResponse>
 
+
+    @GET("get_last_ride.php")
+    fun getLastRide(
+        @Query("driver_id") driverId: String
+    ): Call<LastRideResponse>
+
+    @FormUrlEncoded
+    @POST("update_last_ride.php")
+    fun updateLastRide(
+        @Field("driver_id") driverId: String,
+        @Field("amount") amount: String,
+        @Field("type") type: String,
+        @Field("source") source: String,
+        @Field("via_km") viaKm: Int
+    ): Call<GenericResponse>
+
     @GET("getRideHistory.php")
     suspend fun getRideHistory(
         @Query("driver_id") driverId: String

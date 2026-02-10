@@ -42,6 +42,7 @@ class AddRideActivity : AppCompatActivity() {
 
     private var receiptPhotoPath: String? = null
     private var pendingReceiptPromptRes: Int? = null
+    private var isEditMode: Boolean = false
 
     private val requestCameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -90,6 +91,11 @@ class AddRideActivity : AppCompatActivity() {
 
 
 
+    companion object {
+        const val EXTRA_EDIT_LAST_RIDE = "extra_edit_last_ride"
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!ensureTokenOrRedirect()) return
@@ -128,14 +134,15 @@ class AddRideActivity : AppCompatActivity() {
         paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerPaymentType.adapter = paymentAdapter
 
+
         // 🔵 Kliknięcie przycisku "Dodaj kurs"
         buttonAddRide.setOnClickListener {
             val payment = spinnerPaymentType.selectedItem?.toString() ?: ""
-            if (payment == "Karta" && receiptPhotoPath == null) {
+            if (!isEditMode && payment == "Karta" && receiptPhotoPath == null) {
                 requestReceiptPhoto(true)
 
             } else {
-                addRide()
+                saveRide()
             }
         }
 
@@ -152,6 +159,10 @@ class AddRideActivity : AppCompatActivity() {
 
         // 🔵 Obsługa zmiany źródła lub rodzaju płatności
         setupDynamicFields()
+
+        if (intent.getBooleanExtra(EXTRA_EDIT_LAST_RIDE, false)) {
+            loadLastRideForEdit()
+        }
     }
 
     private fun setupDynamicFields() {
@@ -271,7 +282,7 @@ class AddRideActivity : AppCompatActivity() {
         return spinnerPaymentType.selectedItem?.toString() == "Karta"
     }
 
-    private fun addRide() {
+    private fun saveRide() {
         val driverId = SessionManager.getDriverId(this)
         if (driverId.isNullOrEmpty()) {
             Toast.makeText(this, "Brak ID kierowcy", Toast.LENGTH_SHORT).show()
@@ -333,28 +344,107 @@ class AddRideActivity : AppCompatActivity() {
         }
 
 
-        val call = ApiClient.apiService.addRide(
-            receiptPart,
-            driverIdBody,
-            amountBody,
-            typeBody,
-            sourceBody,
-            viaKmBody
-        )
+        if (isEditMode) {
+            val call = ApiClient.apiService.updateLastRide(
+                driverId = driverId,
+                amount = amountText,
+                type = paymentType,
+                source = source,
+                viaKm = viaKm
+            )
 
-        call.enqueue(object : Callback<AddRideResponse> {
-            override fun onResponse(call: Call<AddRideResponse>, response: Response<AddRideResponse>) {
-                if (response.isSuccessful && response.body()?.status == "success") {
-                    Toast.makeText(this@AddRideActivity, response.body()?.message ?: "Dodano kurs", Toast.LENGTH_SHORT).show()
-                    finish()
-                } else {
-                    Toast.makeText(this@AddRideActivity, "Błąd: ${response.body()?.message ?: "Nieznany błąd"}", Toast.LENGTH_LONG).show()
+            call.enqueue(object : Callback<GenericResponse> {
+                override fun onResponse(call: Call<GenericResponse>, response: Response<GenericResponse>) {
+                    if (response.isSuccessful && response.body()?.status == "success") {
+                        Toast.makeText(this@AddRideActivity, response.body()?.message ?: "Zaktualizowano kurs", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this@AddRideActivity, "Błąd: ${response.body()?.message ?: "Nieznany błąd"}", Toast.LENGTH_LONG).show()
+                    }
                 }
+
+                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    this@AddRideActivity.showConnectionIssueToast(t)
+                }
+            })
+        } else {
+            val call = ApiClient.apiService.addRide(
+                receiptPart,
+                driverIdBody,
+                amountBody,
+                typeBody,
+                sourceBody,
+                viaKmBody
+            )
+
+            call.enqueue(object : Callback<AddRideResponse> {
+                override fun onResponse(call: Call<AddRideResponse>, response: Response<AddRideResponse>) {
+                    if (response.isSuccessful && response.body()?.status == "success") {
+                        Toast.makeText(this@AddRideActivity, response.body()?.message ?: "Dodano kurs", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this@AddRideActivity, "Błąd: ${response.body()?.message ?: "Nieznany błąd"}", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<AddRideResponse>, t: Throwable) {
+                    this@AddRideActivity.showConnectionIssueToast(t)
+                }
+            })
+        }
+    }
+
+    private fun loadLastRideForEdit() {
+        val driverId = SessionManager.getDriverId(this)
+        if (driverId.isNullOrEmpty()) {
+            Toast.makeText(this, "Brak ID kierowcy", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        ApiClient.apiService.getLastRide(driverId).enqueue(object : Callback<LastRideResponse> {
+            override fun onResponse(call: Call<LastRideResponse>, response: Response<LastRideResponse>) {
+                if (!response.isSuccessful || response.body()?.status != "success" || response.body()?.data == null) {
+                    Toast.makeText(this@AddRideActivity, response.body()?.message ?: "Nie znaleziono kursu do edycji", Toast.LENGTH_LONG).show()
+                    return
+                }
+
+                val ride = response.body()!!.data!!
+                isEditMode = true
+                buttonAddRide.text = "Zapisz zmiany kursu"
+                buttonAddReceiptPhoto.visibility = View.GONE
+                buttonRetakePhoto.visibility = View.GONE
+                receiptPreview.visibility = View.GONE
+                receiptPhotoPath = null
+
+                setSpinnerSelectionByValue(spinnerSource, ride.source)
+                setSpinnerSelectionByValue(spinnerPaymentType, ride.type)
+
+                if (ride.via_km == 1 && ride.source == "Dyspozytornia" && ride.type == "Voucher") {
+                    radioKm.isChecked = true
+                    editTextKm.setText("")
+                    editTextAmount.setText(ride.amount)
+                } else {
+                    radioAmount.isChecked = true
+                    editTextAmount.setText(ride.amount)
+                    editTextKm.setText("")
+                }
+
+                Toast.makeText(this@AddRideActivity, "Załadowano ostatni kurs do edycji", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onFailure(call: Call<AddRideResponse>, t: Throwable) {
+            override fun onFailure(call: Call<LastRideResponse>, t: Throwable) {
                 this@AddRideActivity.showConnectionIssueToast(t)
             }
         })
+    }
+
+    private fun setSpinnerSelectionByValue(spinner: Spinner, value: String) {
+        val adapter = spinner.adapter ?: return
+        for (i in 0 until adapter.count) {
+            if (adapter.getItem(i).toString() == value) {
+                spinner.setSelection(i)
+                return
+            }
+        }
     }
 }

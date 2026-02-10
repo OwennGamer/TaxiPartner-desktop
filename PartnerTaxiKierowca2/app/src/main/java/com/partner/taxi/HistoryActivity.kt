@@ -1,5 +1,6 @@
 package com.partner.taxi
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -28,6 +29,11 @@ class HistoryActivity : AppCompatActivity() {
         rvHistory = findViewById(R.id.rvHistory)
         rvHistory.layoutManager = LinearLayoutManager(this)
 
+    }
+
+
+    override fun onResume() {
+        super.onResume()
         loadHistory()
     }
 
@@ -45,7 +51,12 @@ class HistoryActivity : AppCompatActivity() {
                 if (response.status == "success") {
                     // Ustawiamy adapter na wszystkie zwrócone kursy
                     Log.d("HistoryActivity", "Mamy ${response.data.size} przejazdów")
-                    rvHistory.adapter = HistoryAdapter(response.data)
+                    rvHistory.adapter = HistoryAdapter(response.data) {
+                        val intent = Intent(this@HistoryActivity, AddRideActivity::class.java).apply {
+                            putExtra(AddRideActivity.EXTRA_EDIT_LAST_RIDE, true)
+                        }
+                        startActivity(intent)
+                    }
                 } else {
                     Toast.makeText(
                         this@HistoryActivity,

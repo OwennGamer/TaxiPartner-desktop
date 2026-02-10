@@ -102,6 +102,7 @@
             android:visibility="gone"
             android:layout_marginBottom="16dp"/>
 
+
         <!-- Przycisk: Dodaj kurs -->
         <Button
             android:id="@+id/buttonAddRide"
