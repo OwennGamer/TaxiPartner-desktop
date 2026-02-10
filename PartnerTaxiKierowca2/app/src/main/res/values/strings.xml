@@ -20,7 +20,7 @@
     <string-array name="source_array">
         <item>Postój</item>
         <item>Dyspozytornia</item>
-        <item>Bolt</item>
+        <item>Hotel[20]</item>
     </string-array>
 
     <string-array name="payment_array">

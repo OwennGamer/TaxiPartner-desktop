@@ -75,18 +75,19 @@ try {
             $after_partner = $amount - ($amount * ($partnerCommission / 100));
             $final_amount = $after_partner * ($percentTurnover / 100);
         }
-    } elseif ($source === "Bolt") {
+    } elseif ($source === "Hotel[20]" || $source === "Bolt") {
+        $hotel_base_amount = $amount - 20;
         if ($type === "Karta") {
-            // 7. Bolt - Karta
-            $after_bolt = $amount - ($amount * ($boltCommission / 100));
+            // 7. Hotel[20] - Karta
+            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
             $final_amount = $after_bolt * ($percentTurnover / 100);
         } elseif ($type === "Gotówka") {
-            // 8. Bolt - Gotówka
-            $after_bolt = $amount - ($amount * ($boltCommission / 100));
-            $final_amount = -( ($amount * ($boltCommission / 100)) + ($after_bolt * (1 - ($percentTurnover / 100))) );
+            // 8. Hotel[20] - Gotówka
+            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
+            $final_amount = -( ($hotel_base_amount * ($boltCommission / 100)) + ($after_bolt * (1 - ($percentTurnover / 100))) );
         } elseif ($type === "Voucher") {
-            // 9. Bolt - Voucher
-            $after_bolt = $amount - ($amount * ($boltCommission / 100));
+            // 9. Hotel[20] - Voucher
+            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
             $final_amount = $after_bolt * ($percentTurnover / 100);
         }
     }
