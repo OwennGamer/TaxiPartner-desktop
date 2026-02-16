@@ -35,6 +35,16 @@ public class InventoryDetailController {
 
     @FXML private Label lblKamizelkiQty;
 
+    @FXML private CheckBox cbKartaPaliwowaE100;
+    @FXML private CheckBox cbMagnesyPartner;
+    @FXML private CheckBox cbNumeryBoczne;
+    @FXML private CheckBox cbWizytowki;
+    @FXML private CheckBox cbTerminalPlatniczy;
+    @FXML private CheckBox cbLadowarkaTerminala;
+    @FXML private CheckBox cbLadowarka;
+    @FXML private CheckBox cbKabelUsb;
+    @FXML private CheckBox cbUchwytTelefon;
+    @FXML private CheckBox cbLampaTaxi;
     @FXML private CheckBox cbLicencja;
     @FXML private CheckBox cbLegalizacja;
     @FXML private CheckBox cbDowod;
@@ -67,6 +77,16 @@ public class InventoryDetailController {
 
         lblKamizelkiQty.setText(String.valueOf(rec.getKamizelkiQty()));
 
+        cbKartaPaliwowaE100.setSelected(rec.isKartaPaliwowaE100());
+        cbMagnesyPartner.setSelected(rec.isMagnesyPartner());
+        cbNumeryBoczne.setSelected(rec.isNumeryBoczne());
+        cbWizytowki.setSelected(rec.isWizytowki());
+        cbTerminalPlatniczy.setSelected(rec.isTerminalPlatniczy());
+        cbLadowarkaTerminala.setSelected(rec.isLadowarkaTerminala());
+        cbLadowarka.setSelected(rec.isLadowarka());
+        cbKabelUsb.setSelected(rec.isKabelUsb());
+        cbUchwytTelefon.setSelected(rec.isUchwytTelefon());
+        cbLampaTaxi.setSelected(rec.isLampaTaxi());
         cbLicencja.setSelected(rec.isLicencja());
         cbLegalizacja.setSelected(rec.isLegalizacja());
         cbDowod.setSelected(rec.isDowod());

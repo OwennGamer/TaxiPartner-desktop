@@ -17,6 +17,16 @@ public class InventoryDetailRecord {
     private final StringProperty photoDirt2;
     private final StringProperty photoDirt3;
     private final StringProperty photoDirt4;
+    private final BooleanProperty kartaPaliwowaE100;
+    private final BooleanProperty magnesyPartner;
+    private final BooleanProperty numeryBoczne;
+    private final BooleanProperty wizytowki;
+    private final BooleanProperty terminalPlatniczy;
+    private final BooleanProperty ladowarkaTerminala;
+    private final BooleanProperty ladowarka;
+    private final BooleanProperty kabelUsb;
+    private final BooleanProperty uchwytTelefon;
+    private final BooleanProperty lampaTaxi;
     private final BooleanProperty licencja;
     private final BooleanProperty legalizacja;
     private final BooleanProperty dowod;
@@ -35,6 +45,11 @@ public class InventoryDetailRecord {
                                  Integer kamizelkiQty,
                                  String photoDirt1, String photoDirt2,
                                  String photoDirt3, String photoDirt4,
+                                 boolean kartaPaliwowaE100, boolean magnesyPartner,
+                                 boolean numeryBoczne, boolean wizytowki,
+                                 boolean terminalPlatniczy, boolean ladowarkaTerminala,
+                                 boolean ladowarka, boolean kabelUsb,
+                                 boolean uchwytTelefon, boolean lampaTaxi,
                                  boolean licencja, boolean legalizacja,
                                  boolean dowod, boolean ubezpieczenie,
                                  boolean kartaLotniskowa, boolean gasnica,
@@ -54,6 +69,16 @@ public class InventoryDetailRecord {
         this.photoDirt2 = new SimpleStringProperty(photoDirt2);
         this.photoDirt3 = new SimpleStringProperty(photoDirt3);
         this.photoDirt4 = new SimpleStringProperty(photoDirt4);
+        this.kartaPaliwowaE100 = new SimpleBooleanProperty(kartaPaliwowaE100);
+        this.magnesyPartner = new SimpleBooleanProperty(magnesyPartner);
+        this.numeryBoczne = new SimpleBooleanProperty(numeryBoczne);
+        this.wizytowki = new SimpleBooleanProperty(wizytowki);
+        this.terminalPlatniczy = new SimpleBooleanProperty(terminalPlatniczy);
+        this.ladowarkaTerminala = new SimpleBooleanProperty(ladowarkaTerminala);
+        this.ladowarka = new SimpleBooleanProperty(ladowarka);
+        this.kabelUsb = new SimpleBooleanProperty(kabelUsb);
+        this.uchwytTelefon = new SimpleBooleanProperty(uchwytTelefon);
+        this.lampaTaxi = new SimpleBooleanProperty(lampaTaxi);
         this.licencja = new SimpleBooleanProperty(licencja);
         this.legalizacja = new SimpleBooleanProperty(legalizacja);
         this.dowod = new SimpleBooleanProperty(dowod);
@@ -108,6 +133,36 @@ public class InventoryDetailRecord {
 
     public String getPhotoDirt4() { return photoDirt4.get(); }
     public StringProperty photoDirt4Property() { return photoDirt4; }
+
+    public boolean isKartaPaliwowaE100() { return kartaPaliwowaE100.get(); }
+    public BooleanProperty kartaPaliwowaE100Property() { return kartaPaliwowaE100; }
+
+    public boolean isMagnesyPartner() { return magnesyPartner.get(); }
+    public BooleanProperty magnesyPartnerProperty() { return magnesyPartner; }
+
+    public boolean isNumeryBoczne() { return numeryBoczne.get(); }
+    public BooleanProperty numeryBoczneProperty() { return numeryBoczne; }
+
+    public boolean isWizytowki() { return wizytowki.get(); }
+    public BooleanProperty wizytowkiProperty() { return wizytowki; }
+
+    public boolean isTerminalPlatniczy() { return terminalPlatniczy.get(); }
+    public BooleanProperty terminalPlatniczyProperty() { return terminalPlatniczy; }
+
+    public boolean isLadowarkaTerminala() { return ladowarkaTerminala.get(); }
+    public BooleanProperty ladowarkaTerminalaProperty() { return ladowarkaTerminala; }
+
+    public boolean isLadowarka() { return ladowarka.get(); }
+    public BooleanProperty ladowarkaProperty() { return ladowarka; }
+
+    public boolean isKabelUsb() { return kabelUsb.get(); }
+    public BooleanProperty kabelUsbProperty() { return kabelUsb; }
+
+    public boolean isUchwytTelefon() { return uchwytTelefon.get(); }
+    public BooleanProperty uchwytTelefonProperty() { return uchwytTelefon; }
+
+    public boolean isLampaTaxi() { return lampaTaxi.get(); }
+    public BooleanProperty lampaTaxiProperty() { return lampaTaxi; }
 
     public boolean isLicencja() { return licencja.get(); }
     public BooleanProperty licencjaProperty() { return licencja; }

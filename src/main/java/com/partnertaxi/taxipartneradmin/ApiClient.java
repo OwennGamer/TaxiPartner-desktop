@@ -397,6 +397,10 @@ public class ApiClient {
                         String receiptPhotoUrl = (receiptPhoto != null && !receiptPhoto.isEmpty())
                                 ? BASE_URL + receiptPhoto
                                 : null;
+                        List<String> receiptPhotoUrls = parsePhotoArray(o.optJSONArray("receipt_photos"));
+                        if (receiptPhotoUrls.isEmpty() && receiptPhotoUrl != null) {
+                            receiptPhotoUrls = List.of(receiptPhotoUrl);
+                        }
                         boolean photoAvailable = o.optBoolean("photo_available", false);
                         String localizedDate = formatHistoryDate(o.optString("date", ""));
 
@@ -407,6 +411,7 @@ public class ApiClient {
                                 o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
                                 o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00",
                                 receiptPhotoUrl,
+                                receiptPhotoUrls,
                                 photoAvailable
                         ));
                     }
@@ -542,6 +547,16 @@ public class ApiClient {
                             o.optString("photo_dirt2", null),
                             o.optString("photo_dirt3", null),
                             o.optString("photo_dirt4", null),
+                            o.optInt("karta_paliwowa_e100", 0) == 1,
+                            o.optInt("magnesy_partner", 0) == 1,
+                            o.optInt("numery_boczne", 0) == 1,
+                            o.optInt("wizytowki", 0) == 1,
+                            o.optInt("terminal_platniczy", 0) == 1,
+                            o.optInt("ladowarka_terminala", 0) == 1,
+                            o.optInt("ladowarka", 0) == 1,
+                            o.optInt("kabel_usb", 0) == 1,
+                            o.optInt("uchwyt_telefon", 0) == 1,
+                            o.optInt("lampa_taxi", 0) == 1,
                             o.getInt("licencja") == 1,
                             o.getInt("legalizacja") == 1,
                             o.getInt("dowod") == 1,

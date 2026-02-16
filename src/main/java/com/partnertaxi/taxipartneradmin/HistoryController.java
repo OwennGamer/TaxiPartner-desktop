@@ -24,6 +24,7 @@ import java.util.Objects;
 import com.partnertaxi.taxipartneradmin.TableUtils;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 public class HistoryController {
@@ -93,8 +94,11 @@ public class HistoryController {
             {
                 btn.setOnAction(e -> {
                     HistoryEntry entry = getTableView().getItems().get(getIndex());
-                    if (entry.getReceiptPhotoUrl() != null) {
-                        openImageDialog(entry.getReceiptPhotoUrl());
+                    List<String> urls = entry.getReceiptPhotoUrls();
+                    if (urls != null && !urls.isEmpty()) {
+                        openImageDialog(urls, 0);
+                    } else if (entry.getReceiptPhotoUrl() != null) {
+                        openImageDialog(List.of(entry.getReceiptPhotoUrl()), 0);
                     }
                 });
             }
@@ -127,8 +131,13 @@ public class HistoryController {
         stage.close();
     }
 
-    private void openImageDialog(String imageUrl) {
-        ImageView imageView = new ImageView(new Image(imageUrl, true));
+    private void openImageDialog(List<String> imageUrls, int startIndex) {
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            return;
+        }
+
+        int safeIndex = Math.max(0, Math.min(startIndex, imageUrls.size() - 1));
+        ImageView imageView = new ImageView(new Image(imageUrls.get(safeIndex), true));
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(800);
 
@@ -145,7 +154,31 @@ public class HistoryController {
         Button rotateRight = new Button("Obróć w prawo");
         rotateRight.setOnAction(e -> rotationAngle.set((rotationAngle.get() + 90) % 360));
 
-        HBox controls = new HBox(10, rotateLeft, rotateRight);
+        Button prev = new Button("Poprzednie");
+        Button next = new Button("Następne");
+
+        final int[] currentIndex = {safeIndex};
+        Runnable updateImage = () -> {
+            imageView.setImage(new Image(imageUrls.get(currentIndex[0]), true));
+            prev.setDisable(currentIndex[0] == 0);
+            next.setDisable(currentIndex[0] >= imageUrls.size() - 1);
+            rotationAngle.set(0);
+        };
+
+        prev.setOnAction(e -> {
+            if (currentIndex[0] > 0) {
+                currentIndex[0]--;
+                updateImage.run();
+            }
+        });
+        next.setOnAction(e -> {
+            if (currentIndex[0] < imageUrls.size() - 1) {
+                currentIndex[0]++;
+                updateImage.run();
+            }
+        });
+
+        HBox controls = new HBox(10, prev, next, rotateLeft, rotateRight);
         controls.setAlignment(Pos.CENTER);
         controls.setStyle("-fx-padding: 10; -fx-background-color: #222; -fx-border-color: #444; -fx-border-width: 1 0 0 0;");
 
@@ -160,6 +193,7 @@ public class HistoryController {
                 HelloApplication.class.getResource("style.css")).toExternalForm());
         stage.setScene(scene);
         stage.setMaximized(true);
+        updateImage.run();
         stage.show();
     }
 }
