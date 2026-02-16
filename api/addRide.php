@@ -103,39 +103,71 @@ try {
         $newSaldo = round($currentSaldo + $final_amount, 2);
     }
 
-    // Obsługa zdjęcia paragonu (opcjonalnie)
-    $receiptPath = null;
-    if (!empty($_FILES['receipt']) && $_FILES['receipt']['error'] !== UPLOAD_ERR_NO_FILE) {
-        if ($_FILES['receipt']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = __DIR__ . '/uploads/receipts/';
-            if (!is_dir($uploadDir)) {
-                if (!mkdir($uploadDir, 0777, true)) {
-                    $mkdirError = error_get_last();
-                    file_put_contents("debug_log.txt", "\xE2\x9D\x8C Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu $uploadDir: " . ($mkdirError['message'] ?? 'unknown') . "\n", FILE_APPEND);
-                    throw new Exception('Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu na paragony');
+    // Obsługa zdjęć paragonu (opcjonalnie, pojedynczo i wielokrotnie)
+    $receiptPaths = [];
+    $uploadDir = __DIR__ . '/uploads/receipts/';
+
+    $storeReceiptUpload = static function (array $file) use (&$receiptPaths, $uploadDir) {
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0777, true)) {
+                $mkdirError = error_get_last();
+                file_put_contents("debug_log.txt", "\xE2\x9D\x8C Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu $uploadDir: " . ($mkdirError['message'] ?? 'unknown') . "\n", FILE_APPEND);
+                throw new Exception('Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu na paragony');
                 }
             }
-            if (!is_writable($uploadDir)) {
-                file_put_contents("debug_log.txt", "\xE2\x9D\x8C Katalog $uploadDir nie jest zapisywalny\n", FILE_APPEND);
-                throw new Exception('Katalog na paragony nie jest zapisywalny');
             }
-            $extension = pathinfo($_FILES['receipt']['name'], PATHINFO_EXTENSION) ?: 'jpg';
-            $filename = uniqid('receipt_') . '.' . $extension;
-            $destination = $uploadDir . $filename;
-            if (move_uploaded_file($_FILES['receipt']['tmp_name'], $destination)) {
-                $receiptPath = 'uploads/receipts/' . $filename;
-            } else {
-                $moveError = error_get_last();
-                file_put_contents("debug_log.txt", "\xE2\x9D\x8C move_uploaded_file error: " . print_r($moveError, true) . "\n", FILE_APPEND);
-                $message = 'Nie uda\xC5\x82o si\xC4\x99 przes\xC5\x82a\xC4\x87 paragonu';
-                if (!empty($moveError['message'])) {
-                    $message .= ': ' . $moveError['message'];
-                }
-                throw new Exception($message);
+        if (!is_writable($uploadDir)) {
+            file_put_contents("debug_log.txt", "\xE2\x9D\x8C Katalog $uploadDir nie jest zapisywalny\n", FILE_APPEND);
+            throw new Exception('Katalog na paragony nie jest zapisywalny');
+        }
+
+        $extension = pathinfo($file['name'] ?? '', PATHINFO_EXTENSION) ?: 'jpg';
+        $filename = uniqid('receipt_') . '.' . $extension;
+        $destination = $uploadDir . $filename;
+
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            $receiptPaths[] = 'uploads/receipts/' . $filename;
+            return;
+        }
+
+        $moveError = error_get_last();
+        file_put_contents("debug_log.txt", "\xE2\x9D\x8C move_uploaded_file error: " . print_r($moveError, true) . "\n", FILE_APPEND);
+        $message = 'Nie uda\xC5\x82o si\xC4\x99 przes\xC5\x82a\xC4\x87 paragonu';
+        if (!empty($moveError['message'])) {
+            $message .= ': ' . $moveError['message'];
+        }
+        throw new Exception($message);
+    };
+
+    if (isset($_FILES['receipts']) && is_array($_FILES['receipts']['name'] ?? null)) {
+        $count = count($_FILES['receipts']['name']);
+        for ($i = 0; $i < $count; $i++) {
+            $err = $_FILES['receipts']['error'][$i] ?? UPLOAD_ERR_NO_FILE;
+            if ($err === UPLOAD_ERR_NO_FILE) {
+                continue;
             }
-        } else {
+            if ($err !== UPLOAD_ERR_OK) {
+                throw new Exception('B\xC5\x82\xC4\x85d przesy\xC5\x82ania paragonu');
+            }
+        $storeReceiptUpload([
+                'name' => $_FILES['receipts']['name'][$i] ?? '',
+                'tmp_name' => $_FILES['receipts']['tmp_name'][$i] ?? '',
+            ]);
+        }
+    }
+
+    if (!empty($_FILES['receipt']) && ($_FILES['receipt']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+        if (($_FILES['receipt']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
             throw new Exception('B\xC5\x82\xC4\x85d przesy\xC5\x82ania paragonu');
         }
+        $storeReceiptUpload($_FILES['receipt']);
+    }
+
+    $receiptFieldValue = null;
+    if (count($receiptPaths) === 1) {
+        $receiptFieldValue = $receiptPaths[0];
+    } elseif (count($receiptPaths) > 1) {
+        $receiptFieldValue = json_encode($receiptPaths, JSON_UNESCAPED_SLASHES);
     }
 
     // Sprawdzenie minimalnego odstępu czasowego od ostatniego kursu
@@ -170,7 +202,7 @@ try {
 
     // Zapisz kurs
         $stmt = $pdo->prepare("INSERT INTO kursy (driver_id, amount, saldo_wplyw, saldo_po, type, source, via_km, receipt_photo, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km, $receiptPath, $nowDateTime]);
+    $stmt->execute([$driver_id, $amount, $final_amount, $newSaldo, $type, $source, $via_km, $receiptFieldValue, $nowDateTime]);
 
     if (strtolower($type) === 'voucher') {
         $rideMonth = (new DateTime())->format('Y-m');

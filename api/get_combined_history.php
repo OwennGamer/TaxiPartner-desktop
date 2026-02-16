@@ -30,16 +30,29 @@ try {
     $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($courses as $row) {
-        $path = $row['receipt_photo'];
-        $exists = $path && file_exists(__DIR__ . '/' . $path);
+        $raw = $row['receipt_photo'] ?? null;
+        $paths = [];
+        if (is_string($raw) && $raw !== '') {
+            $decoded = json_decode($raw, true);
+            if (is_array($decoded)) {
+                foreach ($decoded as $path) {
+                    if (is_string($path) && $path !== '' && file_exists(__DIR__ . '/' . $path)) {
+                        $paths[] = $path;
+                    }
+                }
+            } elseif (file_exists(__DIR__ . '/' . $raw)) {
+                $paths[] = $raw;
+            }
+        }
         $result[] = [
             "date" => $row['date'],
             "type" => $row['type'],
             "description" => $row['description'],
             "change" => $row['change_value'],
             "saldo_po" => $row['saldo_po'],
-            "receipt_photo" => $exists ? $path : null,
-            "photo_available" => $exists
+            "receipt_photo" => $paths[0] ?? null,
+            "receipt_photos" => $paths,
+            "photo_available" => !empty($paths)
         ];
     }
 

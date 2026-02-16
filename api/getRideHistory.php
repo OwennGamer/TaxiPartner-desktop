@@ -25,10 +25,23 @@ $stmt->execute([$driver_id]);
 $rides = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($rides as &$ride) {
-    $path = $ride['receipt_photo'];
-    $exists = $path && file_exists(__DIR__ . '/' . $path);
-    $ride['photo_available'] = $exists;
-    $ride['receipt_photo'] = $exists ? $path : null;
+    $raw = $ride['receipt_photo'] ?? null;
+    $paths = [];
+    if (is_string($raw) && $raw !== '') {
+        $decoded = json_decode($raw, true);
+        if (is_array($decoded)) {
+            foreach ($decoded as $path) {
+                if (is_string($path) && $path !== '' && file_exists(__DIR__ . '/' . $path)) {
+                    $paths[] = $path;
+                }
+            }
+        } elseif (file_exists(__DIR__ . '/' . $raw)) {
+            $paths[] = $raw;
+        }
+    }
+    $ride['receipt_photos'] = $paths;
+    $ride['photo_available'] = !empty($paths);
+    $ride['receipt_photo'] = $paths[0] ?? null;
 }
 unset($ride);
 
