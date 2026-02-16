@@ -75,6 +75,17 @@ interface ApiService {
 
         @Part("kamizelki_qty") kamizelkiQty: RequestBody,
 
+        @Part("karta_paliwowa_e100") kartaPaliwowaE100: RequestBody,
+        @Part("magnesy_partner") magnesyPartner: RequestBody,
+        @Part("numery_boczne") numeryBoczne: RequestBody,
+        @Part("wizytowki") wizytowki: RequestBody,
+        @Part("terminal_platniczy") terminalPlatniczy: RequestBody,
+        @Part("ladowarka_terminala") ladowarkaTerminala: RequestBody,
+        @Part("ladowarka") ladowarka: RequestBody,
+        @Part("kabel_usb") kabelUsb: RequestBody,
+        @Part("uchwyt_telefon") uchwytTelefon: RequestBody,
+        @Part("lampa_taxi") lampaTaxi: RequestBody,
+
         @Part("licencja") licencja: RequestBody,
         @Part("legalizacja") legalizacja: RequestBody,
         @Part("dowod") dowod: RequestBody,
@@ -91,7 +102,7 @@ interface ApiService {
     @Multipart
     @POST("addRide.php")
     fun addRide(
-        @Part receipt: MultipartBody.Part?,
+        @Part receipts: List<MultipartBody.Part>,
         @Part("driver_id") driverId: RequestBody,
         @Part("amount") amount: RequestBody,
         @Part("type") type: RequestBody,
@@ -211,6 +222,16 @@ interface ApiService {
         @Part("vehicle_plate") vehiclePlate: RequestBody,
         @Part photo: MultipartBody.Part?,
     ): Call<GenericResponse>
+
+    @GET("get_drivers.php")
+    suspend fun getDrivers(): DriversResponse
+
+    @GET("get_driver_stats.php")
+    suspend fun getDriverStats(
+        @Query("driver_id") driverId: String,
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String
+    ): Response<DriverStatsResponse>
 
     @POST("update_saldo.php")
     suspend fun updateSaldo(

@@ -2,7 +2,9 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="24dp"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,6 +85,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/add_receipt_photo" />
+
+        <TextView
+            android:id="@+id/textReceiptPhotosCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Brak zdjęć" />
 
         <!-- Podgląd zdjęcia paragonu -->
         <ImageView

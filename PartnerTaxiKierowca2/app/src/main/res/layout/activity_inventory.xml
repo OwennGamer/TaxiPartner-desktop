@@ -5,7 +5,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:orientation="vertical"
@@ -162,6 +164,56 @@
                 android:text="Wyposażenie pojazdu:"
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxKartaPaliwowaE100"
+                android:text="Karta paliwowa E100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxMagnesyPartner"
+                android:text="Magnesy Partner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxNumeryBoczne"
+                android:text="Numery boczne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxWizytowki"
+                android:text="Wizytówki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxTerminalPlatniczy"
+                android:text="Terminal płatniczy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxLadowarkaTerminala"
+                android:text="Ładowarka do terminala"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxLadowarka"
+                android:text="Ładowarka"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxKabelUsb"
+                android:text="Kabel USB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxUchwytTelefon"
+                android:text="Uchwyt na telefon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:id="@+id/checkboxLampaTaxi"
+                android:text="Lampa TAXI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <CheckBox

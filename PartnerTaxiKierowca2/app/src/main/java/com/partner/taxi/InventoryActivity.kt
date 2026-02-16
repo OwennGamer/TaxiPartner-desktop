@@ -66,6 +66,16 @@ class InventoryActivity : AppCompatActivity() {
     private lateinit var imgRightPreview: ImageView
 
     private lateinit var checkboxLicencja: CheckBox
+    private lateinit var checkboxKartaPaliwowaE100: CheckBox
+    private lateinit var checkboxMagnesyPartner: CheckBox
+    private lateinit var checkboxNumeryBoczne: CheckBox
+    private lateinit var checkboxWizytowki: CheckBox
+    private lateinit var checkboxTerminalPlatniczy: CheckBox
+    private lateinit var checkboxLadowarkaTerminala: CheckBox
+    private lateinit var checkboxLadowarka: CheckBox
+    private lateinit var checkboxKabelUsb: CheckBox
+    private lateinit var checkboxUchwytTelefon: CheckBox
+    private lateinit var checkboxLampaTaxi: CheckBox
     private lateinit var checkboxLegalizacja: CheckBox
     private lateinit var checkboxDowod: CheckBox
     private lateinit var checkboxUbezpieczenie: CheckBox
@@ -122,6 +132,16 @@ class InventoryActivity : AppCompatActivity() {
         imgRightPreview  = findViewById(R.id.imgRightPreview)
 
         checkboxLicencja        = findViewById(R.id.checkboxLicencja)
+        checkboxKartaPaliwowaE100 = findViewById(R.id.checkboxKartaPaliwowaE100)
+        checkboxMagnesyPartner = findViewById(R.id.checkboxMagnesyPartner)
+        checkboxNumeryBoczne = findViewById(R.id.checkboxNumeryBoczne)
+        checkboxWizytowki = findViewById(R.id.checkboxWizytowki)
+        checkboxTerminalPlatniczy = findViewById(R.id.checkboxTerminalPlatniczy)
+        checkboxLadowarkaTerminala = findViewById(R.id.checkboxLadowarkaTerminala)
+        checkboxLadowarka = findViewById(R.id.checkboxLadowarka)
+        checkboxKabelUsb = findViewById(R.id.checkboxKabelUsb)
+        checkboxUchwytTelefon = findViewById(R.id.checkboxUchwytTelefon)
+        checkboxLampaTaxi = findViewById(R.id.checkboxLampaTaxi)
         checkboxLegalizacja     = findViewById(R.id.checkboxLegalizacja)
         checkboxDowod           = findViewById(R.id.checkboxDowod)
         checkboxUbezpieczenie   = findViewById(R.id.checkboxUbezpieczenie)
@@ -363,6 +383,16 @@ class InventoryActivity : AppCompatActivity() {
                 edittextVestCount.text.toString() else "0"
         )
         val licPart = strPart(if (checkboxLicencja.isChecked) "1" else "0")
+        val e100Part = strPart(if (checkboxKartaPaliwowaE100.isChecked) "1" else "0")
+        val magPart = strPart(if (checkboxMagnesyPartner.isChecked) "1" else "0")
+        val numPart = strPart(if (checkboxNumeryBoczne.isChecked) "1" else "0")
+        val wizPart = strPart(if (checkboxWizytowki.isChecked) "1" else "0")
+        val terPart = strPart(if (checkboxTerminalPlatniczy.isChecked) "1" else "0")
+        val terLadPart = strPart(if (checkboxLadowarkaTerminala.isChecked) "1" else "0")
+        val ladPart = strPart(if (checkboxLadowarka.isChecked) "1" else "0")
+        val usbPart = strPart(if (checkboxKabelUsb.isChecked) "1" else "0")
+        val uchPart = strPart(if (checkboxUchwytTelefon.isChecked) "1" else "0")
+        val lampPart = strPart(if (checkboxLampaTaxi.isChecked) "1" else "0")
         val legPart = strPart(if (checkboxLegalizacja.isChecked) "1" else "0")
         val dowPart = strPart(if (checkboxDowod.isChecked) "1" else "0")
         val ubePart = strPart(if (checkboxUbezpieczenie.isChecked) "1" else "0")
@@ -406,6 +436,9 @@ class InventoryActivity : AppCompatActivity() {
             pf, pb, pl, pr,
             pd1, pd2, pd3, pd4,
             vestPart,
+            e100Part, magPart, numPart, wizPart,
+            terPart, terLadPart, ladPart, usbPart,
+            uchPart, lampPart,
             licPart, legPart, dowPart, ubePart,
             karPart, gasPart, lewPart, troPart,
             kamPart, uwPart

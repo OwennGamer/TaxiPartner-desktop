@@ -36,11 +36,13 @@ class AddRideActivity : AppCompatActivity() {
     private lateinit var radioKm: RadioButton
     private lateinit var editTextKm: EditText
     private lateinit var receiptPreview: ImageView
+    private lateinit var textReceiptPhotosCount: TextView
     private lateinit var buttonAddRide: Button
     private lateinit var buttonAddReceiptPhoto: Button
     private lateinit var buttonRetakePhoto: Button
 
-    private var receiptPhotoPath: String? = null
+    private val receiptPhotoPaths = mutableListOf<String>()
+    private var pendingPhotoPath: String? = null
     private var pendingReceiptPromptRes: Int? = null
     private var isEditMode: Boolean = false
 
@@ -66,7 +68,7 @@ class AddRideActivity : AppCompatActivity() {
     private val takePictureLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
             if (success) {
-                receiptPhotoPath?.let { path ->
+                pendingPhotoPath?.let { path ->
                     var bitmap = BitmapFactory.decodeFile(path)
                     val maxDim = 1280
                     val ratio = min(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
@@ -80,12 +82,15 @@ class AddRideActivity : AppCompatActivity() {
                     }
                     receiptPreview.setImageBitmap(bitmap)
                     receiptPreview.visibility = View.VISIBLE
-                    buttonAddReceiptPhoto.visibility = View.GONE
+                    receiptPhotoPaths.add(path)
+                    pendingPhotoPath = null
+                    updateReceiptPhotosUi()
                 }
                 showReceiptConfirmationDialog()
             } else {
-                receiptPhotoPath = null
-                buttonAddReceiptPhoto.visibility = View.VISIBLE
+                pendingPhotoPath?.let { File(it).delete() }
+                pendingPhotoPath = null
+                updateReceiptPhotosUi()
             }
         }
 
@@ -109,6 +114,7 @@ class AddRideActivity : AppCompatActivity() {
         radioKm = findViewById(R.id.radioKm)
         editTextKm = findViewById(R.id.editTextKm)
         receiptPreview = findViewById(R.id.receiptPreview)
+        textReceiptPhotosCount = findViewById(R.id.textReceiptPhotosCount)
         buttonRetakePhoto = findViewById(R.id.buttonRetakePhoto)
         buttonAddRide = findViewById(R.id.buttonAddRide)
         buttonAddReceiptPhoto = findViewById(R.id.buttonAddReceiptPhoto)
@@ -138,7 +144,7 @@ class AddRideActivity : AppCompatActivity() {
         // 🔵 Kliknięcie przycisku "Dodaj kurs"
         buttonAddRide.setOnClickListener {
             val payment = spinnerPaymentType.selectedItem?.toString() ?: ""
-            if (!isEditMode && payment == "Karta" && receiptPhotoPath == null) {
+            if (!isEditMode && payment == "Karta" && receiptPhotoPaths.isEmpty()) {
                 requestReceiptPhoto(true)
 
             } else {
@@ -148,15 +154,15 @@ class AddRideActivity : AppCompatActivity() {
 
         // 🔵 Ponowne wykonanie zdjęcia
         buttonRetakePhoto.setOnClickListener {
-            receiptPhotoPath = null
-            receiptPreview.setImageDrawable(null)
-            receiptPreview.visibility = View.GONE
-            buttonRetakePhoto.visibility = View.GONE
-            buttonAddReceiptPhoto.visibility = View.VISIBLE
+            if (receiptPhotoPaths.isNotEmpty()) {
+                val removed = receiptPhotoPaths.removeLast()
+                File(removed).delete()
+            }
+            updateReceiptPhotosUi()
             requestReceiptPhoto(isCardPayment())
         }
 
-
+        updateReceiptPhotosUi()
         // 🔵 Obsługa zmiany źródła lub rodzaju płatności
         setupDynamicFields()
 
@@ -210,7 +216,7 @@ class AddRideActivity : AppCompatActivity() {
     private fun launchCamera() {
         val file = File.createTempFile("receipt_", ".jpg", getExternalFilesDir(null))
         val uri: Uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
-        receiptPhotoPath = file.absolutePath
+        pendingPhotoPath = file.absolutePath
         takePictureLauncher.launch(uri)
     }
 
@@ -218,7 +224,7 @@ class AddRideActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_receipt_confirmation, null)
         dialogView.findViewById<ImageView>(R.id.dialogReceiptImage).apply {
             adjustViewBounds = true
-            val bitmap = receiptPhotoPath?.let { BitmapFactory.decodeFile(it) }
+            val bitmap = receiptPhotoPaths.lastOrNull()?.let { BitmapFactory.decodeFile(it) }
             setImageBitmap(bitmap)
         }
 
@@ -228,17 +234,16 @@ class AddRideActivity : AppCompatActivity() {
 
         dialogView.findViewById<Button>(R.id.buttonOk).setOnClickListener {
             dialog.dismiss()
-            showRememberReceiptDialog()
-            buttonRetakePhoto.visibility = View.VISIBLE
+            if (!isVoucherPayment()) {
+                showRememberReceiptDialog()
+            }
+            updateReceiptPhotosUi()
         }
 
         dialogView.findViewById<Button>(R.id.buttonRetry).setOnClickListener {
             dialog.dismiss()
-            receiptPhotoPath = null
-            receiptPreview.setImageDrawable(null)
-            receiptPreview.visibility = View.GONE
-            buttonRetakePhoto.visibility = View.GONE
-            buttonAddReceiptPhoto.visibility = View.VISIBLE
+            receiptPhotoPaths.removeLastOrNull()?.let { File(it).delete() }
+            updateReceiptPhotosUi()
             requestReceiptPhoto(isCardPayment())
         }
 
@@ -280,6 +285,27 @@ class AddRideActivity : AppCompatActivity() {
 
     private fun isCardPayment(): Boolean {
         return spinnerPaymentType.selectedItem?.toString() == "Karta"
+    }
+
+    private fun isVoucherPayment(): Boolean {
+        return spinnerPaymentType.selectedItem?.toString() == "Voucher"
+    }
+
+    private fun updateReceiptPhotosUi() {
+        val count = receiptPhotoPaths.size
+        textReceiptPhotosCount.text = if (count == 0) {
+            "Brak zdjęć"
+        } else {
+            "Dodano zdjęcia: $count"
+        }
+        receiptPhotoPaths.lastOrNull()?.let {
+            receiptPreview.setImageBitmap(BitmapFactory.decodeFile(it))
+            receiptPreview.visibility = View.VISIBLE
+        } ?: run {
+            receiptPreview.setImageDrawable(null)
+            receiptPreview.visibility = View.GONE
+        }
+        buttonRetakePhoto.visibility = if (count > 0) View.VISIBLE else View.GONE
     }
 
     private fun saveRide() {
@@ -334,12 +360,12 @@ class AddRideActivity : AppCompatActivity() {
         val sourceBody = source.toRequestBody("text/plain".toMediaTypeOrNull())
         val viaKmBody = viaKm.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
-        var receiptPart: MultipartBody.Part? = null
-        receiptPhotoPath?.let { path ->
+        val receiptParts = mutableListOf<MultipartBody.Part>()
+        receiptPhotoPaths.forEach { path ->
             val file = File(path)
             if (file.exists()) {
                 val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                receiptPart = MultipartBody.Part.createFormData("receipt", file.name, requestFile)
+                receiptParts.add(MultipartBody.Part.createFormData("receipts[]", file.name, requestFile))
             }
         }
 
@@ -369,7 +395,7 @@ class AddRideActivity : AppCompatActivity() {
             })
         } else {
             val call = ApiClient.apiService.addRide(
-                receiptPart,
+                receiptParts,
                 driverIdBody,
                 amountBody,
                 typeBody,
@@ -414,7 +440,8 @@ class AddRideActivity : AppCompatActivity() {
                 buttonAddReceiptPhoto.visibility = View.GONE
                 buttonRetakePhoto.visibility = View.GONE
                 receiptPreview.visibility = View.GONE
-                receiptPhotoPath = null
+                receiptPhotoPaths.clear()
+                updateReceiptPhotosUi()
 
                 setSpinnerSelectionByValue(spinnerSource, ride.source)
                 setSpinnerSelectionByValue(spinnerPaymentType, ride.type)
