@@ -6,11 +6,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 public class DriverWorkController {
 
@@ -19,6 +17,7 @@ public class DriverWorkController {
     @FXML private TableColumn<DriverWorkEntry, String>  startTimeColumn;
     @FXML private TableColumn<DriverWorkEntry, String>  endTimeColumn;
     @FXML private TableColumn<DriverWorkEntry, Float>  hoursColumn;
+    @FXML private TableColumn<DriverWorkEntry, String> vehiclePlateColumn;
     @FXML private TableColumn<DriverWorkEntry, Integer> kilometersColumn;
 
     private static final String PREF_KEY_COLUMNS_ORDER = "driverWorkTable.columnsOrder";
@@ -36,30 +35,34 @@ public class DriverWorkController {
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         hoursColumn.setCellValueFactory(new PropertyValueFactory<>("hours"));
+        vehiclePlateColumn.setCellValueFactory(new PropertyValueFactory<>("vehiclePlate"));
         kilometersColumn.setCellValueFactory(new PropertyValueFactory<>("kilometers"));
 
-        NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
-        nf.setGroupingUsed(false);
-        nf.setMinimumFractionDigits(2);
-        nf.setMaximumFractionDigits(2);
 
         hoursColumn.setCellFactory(col -> new TableCell<>() {
             @Override
             protected void updateItem(Float val, boolean empty) {
                 super.updateItem(val, empty);
-                setText((empty || val == null) ? null : nf.format(val));
-            }
-        });
-        kilometersColumn.setCellFactory(col -> new TableCell<>() {
-            @Override
-            protected void updateItem(Integer val, boolean empty) {
-                super.updateItem(val, empty);
-                setText((empty || val == null) ? null : nf.format(val));
+                setText((empty || val == null) ? null : formatHoursAndMinutes(val));
             }
         });
 
         TableUtils.enableCopyOnCtrlC(workTable);
         TableUtils.enableColumnsOrderPersistence(workTable, DriverWorkController.class, PREF_KEY_COLUMNS_ORDER);
+    }
+
+    private String formatHoursAndMinutes(float hours) {
+        long totalMinutes = Math.round(hours * 60);
+        long fullHours = totalMinutes / 60;
+        long minutes = totalMinutes % 60;
+
+        if (minutes == 0) {
+            return fullHours + "h";
+        }
+        if (fullHours == 0) {
+            return minutes + " min";
+        }
+        return fullHours + "h " + minutes + " min";
     }
 
     private void loadWork() {

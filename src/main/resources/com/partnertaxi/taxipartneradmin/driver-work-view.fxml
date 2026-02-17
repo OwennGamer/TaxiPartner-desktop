@@ -18,7 +18,8 @@
                 <TableColumn fx:id="dateColumn" id="dateColumn" text="Data" prefWidth="140"/>
                 <TableColumn fx:id="startTimeColumn" id="startTimeColumn" text="Godzina rozpoczęcia pracy" prefWidth="180"/>
                 <TableColumn fx:id="endTimeColumn" id="endTimeColumn" text="Godzina zakończenia pracy" prefWidth="180"/>
-                <TableColumn fx:id="hoursColumn" id="hoursColumn" text="Godziny" prefWidth="100"/>
+                <TableColumn fx:id="hoursColumn" id="hoursColumn" text="Czas pracy" prefWidth="120"/>
+                <TableColumn fx:id="vehiclePlateColumn" id="vehiclePlateColumn" text="Pojazd (rejestracja)" prefWidth="170"/>
                 <TableColumn fx:id="kilometersColumn" id="kilometersColumn" text="Kilometry" prefWidth="100"/>
             </columns>
         </TableView>

@@ -836,6 +836,7 @@ public class ApiClient {
                         }
                         int startOdometer = o.optInt("start_odometer", 0);
                         Integer endOdometer = o.isNull("end_odometer") ? null : o.optInt("end_odometer", 0);
+                        String vehiclePlate = o.optString("vehicle_plate", "");
 
                         float hours = 0f;
                         int kilometers = 0;
@@ -853,7 +854,7 @@ public class ApiClient {
                         } catch (Exception ignore) {}
 
                         String date = startTime != null && startTime.length() >= 10 ? startTime.substring(0, 10) : "";
-                        list.add(new DriverWorkEntry(date, hours, kilometers, startTime, endTime));
+                        list.add(new DriverWorkEntry(date, hours, kilometers, startTime, endTime, vehiclePlate));
                     }
                 }
             }
