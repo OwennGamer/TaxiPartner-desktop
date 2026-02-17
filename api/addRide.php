@@ -113,9 +113,10 @@ try {
                 $mkdirError = error_get_last();
                 file_put_contents("debug_log.txt", "\xE2\x9D\x8C Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu $uploadDir: " . ($mkdirError['message'] ?? 'unknown') . "\n", FILE_APPEND);
                 throw new Exception('Nie mo\xC5\xBCna utworzy\xC4\x87 katalogu na paragony');
-                }
+                
+            
             }
-            }
+	}
         if (!is_writable($uploadDir)) {
             file_put_contents("debug_log.txt", "\xE2\x9D\x8C Katalog $uploadDir nie jest zapisywalny\n", FILE_APPEND);
             throw new Exception('Katalog na paragony nie jest zapisywalny');

@@ -9,11 +9,17 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import android.util.TypedValue
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +27,7 @@ import java.io.File
 
 object UpdateManager {
     private const val MIME_APK = "application/vnd.android.package-archive"
+    private const val DOWNLOAD_PROGRESS_INTERVAL_MS = 750L
 
     fun checkForUpdates(
         activity: AppCompatActivity,
@@ -160,7 +167,8 @@ object UpdateManager {
             activity.getString(R.string.update_download_started),
             Toast.LENGTH_SHORT
         ).show()
-
+        val closeAllowed = data.mandatory != true
+        showDownloadProgressDialog(activity, downloadManager, downloadId, closeAllowed)
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 val finishedId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
@@ -185,6 +193,115 @@ object UpdateManager {
             @Suppress("DEPRECATION")
             activity.registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         }
+    }
+
+
+    private fun showDownloadProgressDialog(
+        activity: AppCompatActivity,
+        downloadManager: DownloadManager,
+        downloadId: Long,
+        closeAllowed: Boolean
+    ) {
+        val container = LinearLayout(activity).apply {
+            orientation = LinearLayout.VERTICAL
+            val pad = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                20f,
+                activity.resources.displayMetrics
+            ).toInt()
+            setPadding(pad, pad, pad, pad)
+        }
+
+        val statusText = TextView(activity).apply {
+            text = activity.getString(R.string.update_download_preparing)
+        }
+
+        val progressBar = ProgressBar(
+            activity,
+            null,
+            android.R.attr.progressBarStyleHorizontal
+        ).apply {
+            max = 100
+            isIndeterminate = true
+        }
+
+        val progressText = TextView(activity).apply {
+            text = activity.getString(R.string.update_download_progress_percent, 0)
+            setPadding(0, 16, 0, 0)
+        }
+
+        container.addView(statusText)
+        container.addView(progressBar)
+        container.addView(progressText)
+
+        val dialogBuilder = AlertDialog.Builder(activity)
+            .setTitle(R.string.update_download_title)
+            .setView(container)
+
+        if (closeAllowed) {
+            dialogBuilder.setNegativeButton(R.string.update_action_background, null)
+        }
+
+        val dialog = dialogBuilder.create().apply {
+            setCancelable(closeAllowed)
+            setCanceledOnTouchOutside(closeAllowed)
+            show()
+        }
+
+        val handler = Handler(Looper.getMainLooper())
+        val updater = object : Runnable {
+            override fun run() {
+                if (activity.isFinishing || activity.isDestroyed) {
+                    if (dialog.isShowing) dialog.dismiss()
+                    return
+                }
+
+                val query = DownloadManager.Query().setFilterById(downloadId)
+                downloadManager.query(query)?.use { cursor ->
+                    if (!cursor.moveToFirst()) {
+                        if (dialog.isShowing) dialog.dismiss()
+                        return
+                    }
+
+                    val status = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS))
+                    val downloaded = cursor.getLong(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR))
+                    val total = cursor.getLong(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_TOTAL_SIZE_BYTES))
+
+                    if (total > 0) {
+                        val percent = ((downloaded * 100) / total).toInt().coerceIn(0, 100)
+                        progressBar.isIndeterminate = false
+                        progressBar.progress = percent
+                        progressText.text = activity.getString(R.string.update_download_progress_percent, percent)
+                        statusText.text = activity.getString(
+                            R.string.update_download_progress_details,
+                            readableBytes(downloaded),
+                            readableBytes(total)
+                        )
+                    } else {
+                        progressBar.isIndeterminate = true
+                        statusText.text = activity.getString(R.string.update_download_preparing)
+                    }
+
+                    if (status == DownloadManager.STATUS_SUCCESSFUL || status == DownloadManager.STATUS_FAILED) {
+                        if (dialog.isShowing) dialog.dismiss()
+                        return
+                    }
+                }
+
+                handler.postDelayed(this, DOWNLOAD_PROGRESS_INTERVAL_MS)
+            }
+        }
+
+        handler.post(updater)
+        dialog.setOnDismissListener { handler.removeCallbacks(updater) }
+    }
+
+    private fun readableBytes(bytes: Long): String {
+        if (bytes <= 0) {
+            return "0 MB"
+        }
+        val valueMb = bytes / (1024f * 1024f)
+        return String.format("%.1f MB", valueMb)
     }
 
     private fun installApk(

@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                         .show()
                 }
             }
-
+        initLoginUI()
         permissionLauncher.launch(getRequiredPermissions())
     }
 
@@ -62,10 +62,15 @@ class LoginActivity : AppCompatActivity() {
         val savedDeviceId = SessionManager.getDeviceId(this)
         val sessionId = SessionManager.getSessionId(this)
         val vehiclePlate = SessionManager.getVehiclePlate(this)
+        val role = SessionManager.getRole(this).lowercase()
+        val loginMode = SessionManager.getLoginMode(this)
         if (savedToken.isNotEmpty() && savedDeviceId == deviceId && isTokenValid(savedToken, deviceId)) {
             ApiClient.jwtToken = savedToken
             ApiClient.deviceId = deviceId
-            if (!sessionId.isNullOrEmpty()) {
+
+            if (role == "administrator" && loginMode == SessionManager.LOGIN_MODE_ADMIN) {
+                startActivity(Intent(this, DashboardActivity::class.java))
+            } else if (!sessionId.isNullOrEmpty()) {
                 val intent = Intent(this, DashboardActivity::class.java)
                 intent.putExtra("rejestracja", vehiclePlate)
                 startActivity(intent)
@@ -73,9 +78,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, ChooseVehicleActivity::class.java))
             }
             finish()
-            return
         }
-        initLoginUI()
     }
 
     private fun initLoginUI() {
@@ -107,67 +110,21 @@ class LoginActivity : AppCompatActivity() {
                         && loginResponse?.status == "success"
                         && loginResponse.token != null
                     ) {
-                        // 1) Zapis JWT + deviceId do ApiClient i SessionManager
+
                         ApiClient.jwtToken = loginResponse.token
                         ApiClient.deviceId = deviceId
 
                         SessionManager.saveToken(this@LoginActivity, loginResponse.token)
                         SessionManager.saveDeviceId(this@LoginActivity, deviceId)
+                        SessionManager.clearSessionId(this@LoginActivity)
+                        SessionManager.clearVehiclePlate(this@LoginActivity)
                         loginResponse.driver_id?.let { SessionManager.saveDriverId(this@LoginActivity, it) }
-                        loginResponse.rola?.let { SessionManager.saveRole(this@LoginActivity, it) }
-
-                        // 2) Funkcja pomocnicza do wysyłki tokenu na serwer + logi pod tagiem TaxiFirebaseService
-                        val pushFcmToken: (String) -> Unit = { tok ->
-                            Log.i("TaxiFirebaseService", "Login flow: pushing FCM token ${tok.take(12)}…")
-                            api.updateFcmToken(tok).enqueue(object : Callback<GenericResponse> {
-                                override fun onResponse(
-                                    call: Call<GenericResponse>,
-                                    resp: Response<GenericResponse>
-                                ) {
-                                    Log.i(
-                                        "TaxiFirebaseService",
-                                        "API code=${resp.code()} body=${resp.body() ?: resp.errorBody()?.string()}"
-                                    )
-                                }
-
-                                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
-                                    Log.e("TaxiFirebaseService", "API failure while pushing token: ${t.message}", t)
-                                }
-                            })
+                        val role = loginResponse.rola?.lowercase().orEmpty()
+                        if (role.isNotEmpty()) {
+                            SessionManager.saveRole(this@LoginActivity, role)
                         }
 
-                        // 3) Jeśli TaxiFirebaseService wcześniej zapisał pending token (bo brakowało JWT) – wyślij go teraz
-                        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
-                        val pendingToken = prefs.getString("pending_fcm_token", null)
-                        if (pendingToken != null) {
-                            Log.i("TaxiFirebaseService", "Login flow: found pending_fcm_token -> sending now")
-                            pushFcmToken(pendingToken)
-                            prefs.edit().remove("pending_fcm_token").apply()
-                        }
-
-                        // 4) Wymuś odświeżenie tokenu FCM, aby wywołać onNewToken() już z zapisanym JWT
-                        FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener {
-                            FirebaseMessaging.getInstance().token
-                                .addOnSuccessListener { t ->
-                                    Log.i(
-                                        "TaxiFirebaseService",
-                                        "Login flow: forced getToken() -> ${t.take(12)}…"
-                                    )
-                                    pushFcmToken(t)
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.e(
-                                        "TaxiFirebaseService",
-                                        "Login flow: getToken() failed: ${e.message}",
-                                        e
-                                    )
-                                }
-                        }
-
-                        // 5) Przejście dalej (nie czekamy na sieć)
-                        Toast.makeText(this@LoginActivity, "Zalogowano", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@LoginActivity, ChooseVehicleActivity::class.java))
-                        finish()
+                        afterLoginSuccess(role)
                     } else {
                         Toast.makeText(this@LoginActivity, "Błąd logowania", Toast.LENGTH_SHORT).show()
                     }
@@ -179,6 +136,81 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun afterLoginSuccess(role: String) {
+        val pushFcmToken: (String) -> Unit = { tok ->
+            Log.i("TaxiFirebaseService", "Login flow: pushing FCM token ${tok.take(12)}…")
+            api.updateFcmToken(tok).enqueue(object : Callback<GenericResponse> {
+                override fun onResponse(
+                    call: Call<GenericResponse>,
+                    resp: Response<GenericResponse>
+                ) {
+                    Log.i(
+                        "TaxiFirebaseService",
+                        "API code=${resp.code()} body=${resp.body() ?: resp.errorBody()?.string()}"
+                    )
+                }
+
+                override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                    Log.e("TaxiFirebaseService", "API failure while pushing token: ${t.message}", t)
+                }
+            })
+        }
+
+        val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val pendingToken = prefs.getString("pending_fcm_token", null)
+        if (pendingToken != null) {
+            Log.i("TaxiFirebaseService", "Login flow: found pending_fcm_token -> sending now")
+            pushFcmToken(pendingToken)
+            prefs.edit().remove("pending_fcm_token").apply()
+        }
+
+        FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener {
+            FirebaseMessaging.getInstance().token
+                .addOnSuccessListener { t ->
+                    Log.i("TaxiFirebaseService", "Login flow: forced getToken() -> ${t.take(12)}…")
+                    pushFcmToken(t)
+                }
+                .addOnFailureListener { e ->
+                    Log.e("TaxiFirebaseService", "Login flow: getToken() failed: ${e.message}", e)
+                }
+        }
+
+        if (role == "administrator") {
+            showAdminModeChooser()
+            return
+        }
+
+        SessionManager.saveLoginMode(this, SessionManager.LOGIN_MODE_DRIVER)
+        navigateAfterModeSelection(SessionManager.LOGIN_MODE_DRIVER)
+    }
+
+    private fun showAdminModeChooser() {
+        val modes = arrayOf("Tryb kierowca", "Tryb administrator")
+        AlertDialog.Builder(this)
+            .setTitle("Wybierz tryb logowania")
+            .setCancelable(false)
+            .setItems(modes) { _, which ->
+                val mode = if (which == 1) {
+                    SessionManager.LOGIN_MODE_ADMIN
+                } else {
+                    SessionManager.LOGIN_MODE_DRIVER
+                }
+                SessionManager.saveLoginMode(this, mode)
+                navigateAfterModeSelection(mode)
+            }
+            .show()
+    }
+
+    private fun navigateAfterModeSelection(mode: String) {
+        Toast.makeText(this@LoginActivity, "Zalogowano", Toast.LENGTH_SHORT).show()
+        if (mode == SessionManager.LOGIN_MODE_ADMIN) {
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+        } else {
+            startActivity(Intent(this@LoginActivity, ChooseVehicleActivity::class.java))
+        }
+        finish()
     }
 
     private fun getRequiredPermissions(): Array<String> {
