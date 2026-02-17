@@ -49,13 +49,13 @@ try {
         "SELECT DATE_FORMAT(start_time,'%Y-%m-%d %H:%i:%s') AS start_time,\n" .
         "       DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s') AS end_time,\n" .
         "       start_odometer,\n" .
-        "       end_odometer\n" .
+        "       end_odometer,\n" .
+        "       vehicle_plate,\n" .
+        "       CASE WHEN end_time IS NULL THEN 1 ELSE 0 END AS is_active\n" .
         "  FROM work_sessions\n" .
         " WHERE driver_id = ?\n" .
         "   AND DATE(start_time) BETWEEN ? AND ?\n" .
-        "   AND end_time IS NOT NULL\n" .
-        "   AND end_odometer IS NOT NULL\n" .
-        " ORDER BY start_time"
+        " ORDER BY start_time DESC"
     );
     $stmt->execute([$driverId, $startDate, $endDate]);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);

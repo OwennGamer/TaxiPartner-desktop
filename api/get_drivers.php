@@ -19,17 +19,34 @@ if (!in_array($role, ['admin', 'administrator', 'flotowiec'], true)) {
 }
 
 try {
-    // Pobieramy wszystkich kierowców + vehiclePlate + sumę kosztów paliwa
+    // Pobieramy wszystkich kierowców + aktualny/ostatni pojazd + sumę kosztów paliwa
     $stmt = $pdo->prepare("
         SELECT
           k.*,
-          k.last_vehicle_plate AS vehiclePlate,
+          COALESCE(active_ws.vehicle_plate, latest_ws.vehicle_plate, k.last_vehicle_plate) AS vehiclePlate,
           COALESCE((
             SELECT SUM(cost)
               FROM refuels
              WHERE driver_id = k.id
           ), 0) AS fuelCostSum
         FROM kierowcy k
+	LEFT JOIN work_sessions active_ws
+               ON active_ws.id = (
+                    SELECT ws1.id
+                      FROM work_sessions ws1
+                     WHERE ws1.driver_id = k.id
+                       AND ws1.end_time IS NULL
+                     ORDER BY ws1.start_time DESC, ws1.id DESC
+                     LIMIT 1
+               )
+        LEFT JOIN work_sessions latest_ws
+               ON latest_ws.id = (
+                    SELECT ws2.id
+                      FROM work_sessions ws2
+                     WHERE ws2.driver_id = k.id
+                     ORDER BY ws2.start_time DESC, ws2.id DESC
+                     LIMIT 1
+               )
     ");
     $stmt->execute();
     $drivers = $stmt->fetchAll(PDO::FETCH_ASSOC);
