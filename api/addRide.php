@@ -22,6 +22,8 @@ $via_km = isset($_POST['via_km']) ? (int)$_POST['via_km'] : 0;
 
 try {
     $pdo->beginTransaction();
+    $authenticatedUser = getAuthenticatedJwt();
+    $isAdminUser = strtolower((string)($authenticatedUser->role ?? '')) === 'admin';
 
     // Pobranie danych kierowcy z blokadą – zapobiega równoczesnym dodaniom dla tego samego kierowcy
     $stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ? FOR UPDATE");
@@ -43,7 +45,6 @@ try {
     $percentTurnover = isset($terms['percentTurnover']) ? (float)$terms['percentTurnover'] : 0;
     $cardCommission = isset($terms['cardCommission']) ? (float)$terms['cardCommission'] : 0;
     $partnerCommission = isset($terms['partnerCommission']) ? (float)$terms['partnerCommission'] : 0;
-    $boltCommission = isset($terms['boltCommission']) ? (float)$terms['boltCommission'] : 0;
 
     $final_amount = 0;
 
@@ -75,20 +76,18 @@ try {
             $after_partner = $amount - ($amount * ($partnerCommission / 100));
             $final_amount = $after_partner * ($percentTurnover / 100);
         }
-    } elseif ($source === "Hotel[20]" || $source === "Bolt") {
+    } elseif ($source === "Hotel[20]") {
         $hotel_base_amount = $amount - 20;
         if ($type === "Karta") {
             // 7. Hotel[20] - Karta
-            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
-            $final_amount = $after_bolt * ($percentTurnover / 100);
+            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
+            $final_amount = $after_card * ($percentTurnover / 100);
         } elseif ($type === "Gotówka") {
             // 8. Hotel[20] - Gotówka
-            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
-            $final_amount = -( ($hotel_base_amount * ($boltCommission / 100)) + ($after_bolt * (1 - ($percentTurnover / 100))) );
+            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
         } elseif ($type === "Voucher") {
             // 9. Hotel[20] - Voucher
-            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
-            $final_amount = $after_bolt * ($percentTurnover / 100);
+            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
         }
     }
 
@@ -178,7 +177,7 @@ try {
     $lastRideStmt->execute([$driver_id]);
     $lastRideDate = $lastRideStmt->fetchColumn();
 
-    if ($lastRideDate) {
+    if (!$isAdminUser && $lastRideDate) {
         $lastRideTime = new DateTimeImmutable($lastRideDate);
         $secondsSinceLastRide = $now->getTimestamp() - $lastRideTime->getTimestamp();
         if ($secondsSinceLastRide < 300) {
