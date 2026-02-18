@@ -23,7 +23,8 @@ $via_km = isset($_POST['via_km']) ? (int)$_POST['via_km'] : 0;
 try {
     $pdo->beginTransaction();
     $authenticatedUser = getAuthenticatedJwt();
-    $isAdminUser = strtolower((string)($authenticatedUser->role ?? '')) === 'admin';
+    $userRole = strtolower((string)($authenticatedUser->role ?? ''));
+    $isAdminUser = in_array($userRole, ['admin', 'administrator'], true);
 
     // Pobranie danych kierowcy z blokadą – zapobiega równoczesnym dodaniom dla tego samego kierowcy
     $stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ? FOR UPDATE");
