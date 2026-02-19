@@ -45,16 +45,25 @@ function calculate_final_amount(float $amount, string $type, string $source, arr
             $after_partner = $amount - ($amount * ($partnerCommission / 100));
             $final_amount = $after_partner * ($percentTurnover / 100);
         }
-    } elseif ($source === "Hotel[20]" || $source === "Bolt") {
+    } elseif ($source === "Hotel[20]") {
         $hotel_base_amount = $amount - 20;
         if ($type === "Karta") {
-            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
+            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
+        } elseif ($type === "Gotówka") {
+            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
+        } elseif ($type === "Voucher") {
+            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
+        }
+    } elseif ($source === "Bolt") {
+        $bolt_base_amount = $amount - 20;
+        if ($type === "Karta") {
+            $after_bolt = $bolt_base_amount - ($bolt_base_amount * ($boltCommission / 100));
             $final_amount = $after_bolt * ($percentTurnover / 100);
         } elseif ($type === "Gotówka") {
-            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
-            $final_amount = -(($hotel_base_amount * ($boltCommission / 100)) + ($after_bolt * (1 - ($percentTurnover / 100))));
+            $after_bolt = $bolt_base_amount - ($bolt_base_amount * ($boltCommission / 100));
+            $final_amount = -(($bolt_base_amount * ($boltCommission / 100)) + ($after_bolt * (1 - ($percentTurnover / 100))));
         } elseif ($type === "Voucher") {
-            $after_bolt = $hotel_base_amount - ($hotel_base_amount * ($boltCommission / 100));
+            $after_bolt = $bolt_base_amount - ($bolt_base_amount * ($boltCommission / 100));
             $final_amount = $after_bolt * ($percentTurnover / 100);
         }
     }

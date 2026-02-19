@@ -33,8 +33,16 @@ if ($vehicle_plate === '' || $start_odometer === null) {
 }
 
 try {
+    $pdo->beginTransaction();
+
     $normalizeId = static function (?string $value): string {
-        return mb_strtoupper(trim((string)$value));
+        $normalizedValue = trim((string)$value);
+
+        if (function_exists('mb_strtoupper')) {
+            return mb_strtoupper($normalizedValue, 'UTF-8');
+        }
+
+        return strtoupper($normalizedValue);
     };
 
     // Sprawdzenie ostatniego kierowcy, który jeździł tym pojazdem
@@ -47,6 +55,33 @@ try {
     // Inwentaryzacja wymagana, gdy kierowca się zmienia lub brak historii dla pojazdu
     $requiresInventory = $lastVehicleDriver === false
         || $normalizeId($lastVehicleDriver) !== $normalizeId($driver_id);
+
+    // Automatyczne zamknięcie otwartej sesji poprzedniego kierowcy na tym samym pojeździe
+    $stmtOpenVehicleSession = $pdo->prepare(
+        "SELECT id, driver_id FROM work_sessions
+         WHERE LOWER(vehicle_plate) = LOWER(?)
+           AND end_time IS NULL
+         ORDER BY start_time DESC, id DESC
+         LIMIT 1"
+    );
+    $stmtOpenVehicleSession->execute([$vehicle_plate]);
+    $openVehicleSession = $stmtOpenVehicleSession->fetch(PDO::FETCH_ASSOC);
+
+    $autoClosedSessionId = null;
+    if (
+        $openVehicleSession
+        && $normalizeId($openVehicleSession['driver_id']) !== $normalizeId($driver_id)
+    ) {
+        $stmtAutoCloseSession = $pdo->prepare(
+            "UPDATE work_sessions
+             SET end_time = NOW(), end_odometer = ?
+             WHERE id = ?"
+        );
+        $stmtAutoCloseSession->execute([
+            $start_odometer,
+            (int)$openVehicleSession['id'],
+        ]);
+        $autoClosedSessionId =
 
     // Sprawdzenie poprzedniego pojazdu
     $stmtPrev = $pdo->prepare("SELECT vehicle_plate FROM work_sessions WHERE driver_id = ? ORDER BY start_time DESC LIMIT 1");
@@ -92,13 +127,19 @@ try {
     );
     $stmt->execute([$driver_id, $vehicle_plate, $start_odometer]);
     $id = $pdo->lastInsertId();
+    
+    $pdo->commit();
 
     echo json_encode([
         'status' => 'success',
         'session_id' => (int)$id,
         'require_inventory' => $requiresInventory,
+        'auto_closed_session_id' => $autoClosedSessionId,
     ]);
 } catch (PDOException $e) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Błąd bazy danych']);
 }
