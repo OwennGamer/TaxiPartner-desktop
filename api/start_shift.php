@@ -81,7 +81,23 @@ try {
             $start_odometer,
             (int)$openVehicleSession['id'],
         ]);
-        $autoClosedSessionId =
+        $autoClosedSessionId = (int)$openVehicleSession['id'];
+    }
+
+    $stmtDriver = $pdo->prepare("SELECT imie, nazwisko FROM kierowcy WHERE id = ? LIMIT 1");
+    $stmtDriver->execute([$driver_id]);
+    $driverData = $stmtDriver->fetch(PDO::FETCH_ASSOC) ?: [];
+
+    $driverName = trim(sprintf(
+        '%s %s',
+        (string)($driverData['imie'] ?? ''),
+        (string)($driverData['nazwisko'] ?? '')
+    ));
+
+    if ($driverName === '') {
+        $driverName = 'Nieznany kierowca';
+    }
+    
 
     // Sprawdzenie poprzedniego pojazdu
     $stmtPrev = $pdo->prepare("SELECT vehicle_plate FROM work_sessions WHERE driver_id = ? ORDER BY start_time DESC LIMIT 1");
@@ -109,8 +125,8 @@ try {
                 $mail->addAddress('bok@taxi-partner.com.pl');
 
                 $mail->isHTML(true);
-                $mail->Subject = "TEST!!! Zmiana samochodu przez kierowcę $driver_id !!!TEST";
-                $mail->Body = "Kierowca <b>$driver_id</b> zmienił samochód z <b>$prevVehicle</b> na <b>$vehicle_plate</b>.";
+                $mail->Subject = "Zmiana samochodu przez kierowcę $driver_id ($driverName)";
+                $mail->Body = "Kierowca <b>$driver_id ($driverName)</b> zmienił samochód z <b>$prevVehicle</b> na <b>$vehicle_plate</b>.";
 
                 $mail->send();
             } catch (Exception $e) {
