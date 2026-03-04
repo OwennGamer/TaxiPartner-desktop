@@ -90,6 +90,19 @@ try {
             // 9. Hotel[20] - Voucher
             $final_amount = $hotel_base_amount * ($percentTurnover / 100);
         }
+     } elseif ($source === "Hotel[10]") {
+        $hotel_base_amount = $amount - 10;
+        if ($type === "Karta") {
+            // 10. Hotel[10] - Karta
+            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
+            $final_amount = $after_card * ($percentTurnover / 100);
+        } elseif ($type === "Gotówka") {
+            // 11. Hotel[10] - Gotówka
+            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
+        } elseif ($type === "Voucher") {
+            // 12. Hotel[10] - Voucher
+            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
+        }
     }
 
     // Zaokrąglij do dwóch miejsc
