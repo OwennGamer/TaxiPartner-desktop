@@ -19,7 +19,9 @@
             <columns>
                 <TableColumn fx:id="dateTimeColumn" id="dateTimeColumn" text="Data i godzina" prefWidth="160"/>
                 <TableColumn fx:id="typeColumn" id="typeColumn" text="Typ" prefWidth="120"/>
-                <TableColumn fx:id="descriptionColumn" id="descriptionColumn" text="Opis" prefWidth="300"/>
+                <TableColumn fx:id="sourceColumn" id="sourceColumn" text="Źródło" prefWidth="180"/>
+                <TableColumn fx:id="paymentMethodColumn" id="paymentMethodColumn" text="Metoda płatności" prefWidth="160"/>
+                <TableColumn fx:id="rideAmountColumn" id="rideAmountColumn" text="Kwota za kurs" prefWidth="120"/>
                 <TableColumn fx:id="changeValueColumn" id="changeValueColumn" text="Wartość zmiany" prefWidth="120"/>
                 <TableColumn fx:id="saldoAfterColumn" id="saldoAfterColumn" text="Saldo po" prefWidth="100"/>
                 <TableColumn fx:id="photoColumn" id="photoColumn" text="Zdjęcie" prefWidth="100"/>

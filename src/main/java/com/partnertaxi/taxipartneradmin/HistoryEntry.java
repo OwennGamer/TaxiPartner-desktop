@@ -7,18 +7,22 @@ import java.util.List;
 public class HistoryEntry {
     private final StringProperty dateTime;
     private final StringProperty type;
-    private final StringProperty description;
+    private final StringProperty source;
+    private final StringProperty paymentMethod;
+    private final StringProperty rideAmount;
     private final StringProperty changeValue;
     private final StringProperty saldoAfter;
     private final StringProperty receiptPhotoUrl;
     private final ObjectProperty<List<String>> receiptPhotoUrls;
     private final BooleanProperty photoAvailable;
 
-    public HistoryEntry(String dateTime, String type, String description, String changeValue,
+    public HistoryEntry(String dateTime, String type, String source, String paymentMethod, String rideAmount, String changeValue,
                         String saldoAfter, String receiptPhotoUrl, List<String> receiptPhotoUrls, boolean photoAvailable) {
         this.dateTime = new SimpleStringProperty(dateTime);
         this.type = new SimpleStringProperty(type);
-        this.description = new SimpleStringProperty(description);
+        this.source = new SimpleStringProperty(source);
+        this.paymentMethod = new SimpleStringProperty(paymentMethod);
+        this.rideAmount = new SimpleStringProperty(rideAmount);
         this.changeValue = new SimpleStringProperty(changeValue);
         this.saldoAfter = new SimpleStringProperty(saldoAfter);
         this.receiptPhotoUrl = new SimpleStringProperty(receiptPhotoUrl);
@@ -34,9 +38,16 @@ public class HistoryEntry {
         return type;
     }
 
-    public StringProperty descriptionProperty() {
-        return description;
+    public StringProperty sourceProperty() {
+        return source;
     }
+
+    public StringProperty paymentMethodProperty() {
+        return paymentMethod;
+    }
+
+    public StringProperty rideAmountProperty() {
+        return rideAmount;
 
     public StringProperty changeValueProperty() {
         return changeValue;

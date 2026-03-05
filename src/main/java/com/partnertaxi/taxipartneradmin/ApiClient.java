@@ -407,7 +407,9 @@ public class ApiClient {
                         list.add(new HistoryEntry(
                                 localizedDate,
                                 o.optString("type", ""),
-                                o.optString("description", ""),
+                                o.optString("source", ""),
+                                o.optString("payment_method", ""),
+                                o.opt("ride_amount") != JSONObject.NULL ? o.opt("ride_amount").toString() : "",
                                 o.opt("change") != JSONObject.NULL ? o.get("change").toString() : "0.00",
                                 o.opt("saldo_po") != JSONObject.NULL ? o.get("saldo_po").toString() : "0.00",
                                 receiptPhotoUrl,

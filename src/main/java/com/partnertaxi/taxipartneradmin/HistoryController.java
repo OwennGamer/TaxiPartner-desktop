@@ -32,7 +32,9 @@ public class HistoryController {
     @FXML private TableView<HistoryEntry> historyTable;
     @FXML private TableColumn<HistoryEntry, String> dateTimeColumn;
     @FXML private TableColumn<HistoryEntry, String> typeColumn;
-    @FXML private TableColumn<HistoryEntry, String> descriptionColumn;
+    @FXML private TableColumn<HistoryEntry, String> sourceColumn;
+    @FXML private TableColumn<HistoryEntry, String> paymentMethodColumn;
+    @FXML private TableColumn<HistoryEntry, String> rideAmountColumn;
     @FXML private TableColumn<HistoryEntry, String> changeValueColumn;
     @FXML private TableColumn<HistoryEntry, String> saldoAfterColumn;
     @FXML private TableColumn<HistoryEntry, Void> photoColumn;
@@ -51,19 +53,25 @@ public class HistoryController {
         dateTimeColumn   .setCellValueFactory(data -> data.getValue().dateTimeProperty());
         typeColumn       .setCellValueFactory(data -> data.getValue().typeProperty());
 
-        // 2) opis z zamianą kropki na przecinek w częściach liczbowych
-        descriptionColumn.setCellValueFactory(data -> {
-            String raw = data.getValue().descriptionProperty().get();
-            // zamień wszystkie wystąpienia "123.45" na "123,45"
-            String formatted = raw.replaceAll("(\\d+)\\.(\\d+)", "$1,$2");
-            return new SimpleStringProperty(formatted);
-        });
+        sourceColumn.setCellValueFactory(data -> data.getValue().sourceProperty());
+        paymentMethodColumn.setCellValueFactory(data -> data.getValue().paymentMethodProperty());
 
         // 3) przygotuj format liczb z przecinkiem
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.getDefault());
         nf.setGroupingUsed(false);
         nf.setMinimumFractionDigits(2);
         nf.setMaximumFractionDigits(2);
+
+        // 4) kolumna "kwota za kurs"
+        rideAmountColumn.setCellValueFactory(data -> {
+            String raw = data.getValue().rideAmountProperty().get();
+            try {
+                float v = Float.parseFloat(raw);
+                return new SimpleStringProperty(nf.format(v));
+            } catch (Exception e) {
+                return new SimpleStringProperty(raw);
+            }
+        });
 
         // 4) kolumna "zmiana wartości"
         changeValueColumn.setCellValueFactory(data -> {

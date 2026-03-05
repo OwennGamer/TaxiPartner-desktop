@@ -21,7 +21,7 @@ try {
 
     // Kursy
     $stmt = $pdo->prepare("
-        SELECT date, 'Kurs' as type, CONCAT(source, ' ', type, ' ', amount, ' zł') as description, saldo_wplyw AS change_value, saldo_po, receipt_photo
+        SELECT date, 'Kurs' as type, source, type AS payment_method, amount AS ride_amount, saldo_wplyw AS change_value, saldo_po, receipt_photo
         FROM kursy
         WHERE driver_id = ? 
         ORDER BY date DESC
@@ -47,7 +47,9 @@ try {
         $result[] = [
             "date" => $row['date'],
             "type" => $row['type'],
-            "description" => $row['description'],
+            "source" => $row['source'] ?? '',
+            "payment_method" => $row['payment_method'] ?? '',
+            "ride_amount" => $row['ride_amount'] ?? '',
             "change" => $row['change_value'],
             "saldo_po" => $row['saldo_po'],
             "receipt_photo" => $paths[0] ?? null,
@@ -77,7 +79,9 @@ try {
         $result[] = [
             "date" => $row['date'],
             "type" => $typeLabel,
-            "description" => $row['description'],
+            "source" => '',
+            "payment_method" => '',
+            "ride_amount" => '',
             "change" => $row['change_value'],
             "saldo_po" => $row['saldo_po'],
             "receipt_photo" => null,
