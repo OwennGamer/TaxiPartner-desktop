@@ -154,28 +154,52 @@ if ($czyste_wewnatrz === 0 &&
 }
 
 try {
-    $columnExistsStmt = $pdo->prepare("SHOW COLUMNS FROM inwentaryzacje LIKE ?");
-    $columnExists = static function (string $column) use ($columnExistsStmt): bool {
-        $columnExistsStmt->execute([$column]);
-        return (bool)$columnExistsStmt->fetch(PDO::FETCH_ASSOC);
+    $getExistingColumns = static function (string $table) use ($pdo): array {
+        $allowedTables = ['inwentaryzacje', 'pojazdy', 'kierowcy'];
+        if (!in_array($table, $allowedTables, true)) {
+            return [];
+        }
+
+        $stmt = $pdo->query("SHOW COLUMNS FROM `{$table}`");
+        $columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_column($columns, 'Field');
     };
 
-    $hasLegalizacjaColumn = $columnExists('legalizacja');
+    $inventoryColumns = $getExistingColumns('inwentaryzacje');
+    $vehicleColumns = $getExistingColumns('pojazdy');
+    $driverColumns = $getExistingColumns('kierowcy');
+
+    $hasInventoryColumn = static function (string $column) use ($inventoryColumns): bool {
+        return in_array($column, $inventoryColumns, true);
+    };
 
     // Pobranie poprzedniej inwentaryzacji dla porównania
-    $prevStmt = $pdo->prepare("
-        SELECT id, czyste_wewnatrz, karta_paliwowa_e100, magnesy_partner, numery_boczne,
-               wizytowki, terminal_platniczy, ladowarka_terminala, ladowarka, kabel_usb,
-               uchwyt_telefon, lampa_taxi, licencja, dowod, ubezpieczenie,
-               karta_lotniskowa, gasnica, lewarek, trojkat,
-               kamizelki_qty, uwagi, kierowca_id
-          FROM inwentaryzacje
-         WHERE LOWER(rejestracja) = LOWER(:re)
-         ORDER BY data_dodania DESC, id DESC
-         LIMIT 1
-    ");
-    $prevStmt->execute([':re' => $rejestracja]);
-    $prevInventory = $prevStmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    $previousCandidateColumns = [
+        'id', 'czyste_wewnatrz', 'karta_paliwowa_e100', 'magnesy_partner', 'numery_boczne',
+        'wizytowki', 'terminal_platniczy', 'ladowarka_terminala', 'ladowarka', 'kabel_usb',
+        'uchwyt_telefon', 'lampa_taxi', 'licencja', 'dowod', 'ubezpieczenie',
+        'karta_lotniskowa', 'gasnica', 'lewarek', 'trojkat',
+        'kamizelki_qty', 'uwagi', 'kierowca_id'
+    ];
+
+    $previousSelectColumns = array_values(array_filter(
+        $previousCandidateColumns,
+        static fn(string $column): bool => $hasInventoryColumn($column)
+    ));
+
+    $prevInventory = null;
+    if (!empty($previousSelectColumns)) {
+        $prevStmt = $pdo->prepare("
+            SELECT " . implode(', ', $previousSelectColumns) . "
+              FROM inwentaryzacje
+             WHERE LOWER(rejestracja) = LOWER(:re)
+             ORDER BY data_dodania DESC, id DESC
+             LIMIT 1
+        ");
+        $prevStmt->execute([':re' => $rejestracja]);
+        $prevInventory = $prevStmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
 
     $differences = [];
     $differenceRows = [];
@@ -281,14 +305,14 @@ try {
             if ($prevValue === 1 && $currentValue === 0) {
                 $differences[] = $messages['on_to_off'];
                 $differenceRows[] = [
-                    'label' => $messages['label'],
+                    'label' => $messages['label'] ?? $field,
                     'type'  => 'removed',
                     'value' => 'Brak (poprzednio: Tak)'
                 ];
             } elseif ($prevValue === 0 && $currentValue === 1) {
                 $differences[] = $messages['off_to_on'];
                 $differenceRows[] = [
-                    'label' => $messages['label'],
+                    'label' => $messages['label'] ?? $field,
                     'type'  => 'added',
                     'value' => 'Dodano (poprzednio: Nie)'
                 ];
@@ -372,11 +396,23 @@ try {
         ':kam', ':kq', ':uw', ':kid'
     ];
 
-    if ($hasLegalizacjaColumn) {
+    if ($hasInventoryColumn('legalizacja')) {
         array_splice($insertColumns, 23, 0, ['legalizacja']);
         array_splice($placeholders, 23, 0, [':leg']);
         $params[':leg'] = $legalizacja;
     }
+
+    $filteredColumns = [];
+    $filteredPlaceholders = [];
+    foreach ($insertColumns as $idx => $column) {
+        if ($hasInventoryColumn($column)) {
+            $filteredColumns[] = $column;
+            $filteredPlaceholders[] = $placeholders[$idx];
+        }
+    }
+
+    $insertColumns = $filteredColumns;
+    $placeholders = $filteredPlaceholders;
 
     $sql = "INSERT INTO inwentaryzacje (" . implode(', ', $insertColumns) . ") VALUES (" . implode(', ', $placeholders) . ")";
 
@@ -384,18 +420,20 @@ try {
     $stmt->execute($params);
 
     // 2) I od razu aktualizujemy ostatniego kierowcę w tabeli pojazdy
-    $update = $pdo->prepare("
-      UPDATE pojazdy
-        SET ostatni_kierowca_id = :kid
-      WHERE LOWER(rejestracja) = LOWER(:re)
-    ");
-    $update->execute([
-      ':kid' => $kierowca_id,
-      ':re'  => $rejestracja
-    ]);
+    if (in_array('ostatni_kierowca_id', $vehicleColumns, true)) {
+        $update = $pdo->prepare("
+          UPDATE pojazdy
+            SET ostatni_kierowca_id = :kid
+          WHERE LOWER(rejestracja) = LOWER(:re)
+        ");
+        $update->execute([
+          ':kid' => $kierowca_id,
+          ':re'  => $rejestracja
+        ]);
+    }
 
     // 3) Aktualizacja nowej kolumny last_vehicle_plate w tabeli kierowcy
-    if ($kierowca_id !== null) {
+    if ($kierowca_id !== null && in_array('last_vehicle_plate', $driverColumns, true)) {
         $upd2 = $pdo->prepare("
       UPDATE kierowcy
          SET last_vehicle_plate = :re
@@ -488,6 +526,7 @@ try {
         'id'      => $pdo->lastInsertId()
     ]);
 } catch (PDOException $e) {
+    error_log('add_inventory.php PDOException: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['status'=>'error','message'=>'Błąd bazy danych']);
 }
