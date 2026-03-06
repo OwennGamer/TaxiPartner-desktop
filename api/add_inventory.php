@@ -154,6 +154,14 @@ if ($czyste_wewnatrz === 0 &&
 }
 
 try {
+    $columnExistsStmt = $pdo->prepare("SHOW COLUMNS FROM inwentaryzacje LIKE ?");
+    $columnExists = static function (string $column) use ($columnExistsStmt): bool {
+        $columnExistsStmt->execute([$column]);
+        return (bool)$columnExistsStmt->fetch(PDO::FETCH_ASSOC);
+    };
+
+    $hasLegalizacjaColumn = $columnExists('legalizacja');
+
     // Pobranie poprzedniej inwentaryzacji dla porównania
     $prevStmt = $pdo->prepare("
         SELECT id, czyste_wewnatrz, karta_paliwowa_e100, magnesy_partner, numery_boczne,
@@ -308,26 +316,18 @@ try {
     }
 
     // 1) Wstawiamy rekord inwentaryzacji
-    $sql = "INSERT INTO inwentaryzacje
-      (rejestracja, przebieg, czyste_wewnatrz,
-       photo_front, photo_back, photo_left, photo_right,
-       photo_dirt1, photo_dirt2, photo_dirt3, photo_dirt4,
-       karta_paliwowa_e100, magnesy_partner, numery_boczne, wizytowki,
-       terminal_platniczy, ladowarka_terminala, ladowarka, kabel_usb, uchwyt_telefon, lampa_taxi,
-       licencja, legalizacja, dowod, ubezpieczenie,
-       karta_lotniskowa, gasnica, lewarek, trojkat,
-       kamizelka, kamizelki_qty, uwagi, kierowca_id)
-    VALUES
-      (:re, :prz, :cz,
-       :pf, :pb, :pl, :prr,
-       :pd1, :pd2, :pd3, :pd4,
-       :e100, :mag, :num, :wiz, :ter, :lter, :lad, :usb, :uch, :lamp,
-       :lic, :leg, :dow, :ube,
-       :kart, :gas, :lew, :tro,
-       :kam, :kq, :uw, :kid)";
+    $insertColumns = [
+        'rejestracja', 'przebieg', 'czyste_wewnatrz',
+        'photo_front', 'photo_back', 'photo_left', 'photo_right',
+        'photo_dirt1', 'photo_dirt2', 'photo_dirt3', 'photo_dirt4',
+        'karta_paliwowa_e100', 'magnesy_partner', 'numery_boczne', 'wizytowki',
+        'terminal_platniczy', 'ladowarka_terminala', 'ladowarka', 'kabel_usb', 'uchwyt_telefon', 'lampa_taxi',
+        'licencja', 'dowod', 'ubezpieczenie',
+        'karta_lotniskowa', 'gasnica', 'lewarek', 'trojkat',
+        'kamizelka', 'kamizelki_qty', 'uwagi', 'kierowca_id'
+    ];
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
+    $params = [
         ':re'   => $rejestracja,
         ':prz'  => $przebieg,
         ':cz'   => $czyste_wewnatrz,
@@ -339,7 +339,7 @@ try {
         ':pd2'  => $photoDirt2,
         ':pd3'  => $photoDirt3,
         ':pd4'  => $photoDirt4,
-	':e100' => $karta_paliwowa_e100,
+        ':e100' => $karta_paliwowa_e100,
         ':mag'  => $magnesy_partner,
         ':num'  => $numery_boczne,
         ':wiz'  => $wizytowki,
@@ -350,7 +350,6 @@ try {
         ':uch'  => $uchwyt_telefon,
         ':lamp' => $lampa_taxi,
         ':lic'  => $licencja,
-        ':leg'  => $legalizacja,
         ':dow'  => $dowod,
         ':ube'  => $ubezpieczenie,
         ':kart' => $karta_lotniskowa,
@@ -361,7 +360,28 @@ try {
         ':kq'   => $kamizelki_qty,
         ':uw'   => $uwagi,
         ':kid'  => $kierowca_id
-    ]);
+    ];
+
+    $placeholders = [
+        ':re', ':prz', ':cz',
+        ':pf', ':pb', ':pl', ':prr',
+        ':pd1', ':pd2', ':pd3', ':pd4',
+        ':e100', ':mag', ':num', ':wiz', ':ter', ':lter', ':lad', ':usb', ':uch', ':lamp',
+        ':lic', ':dow', ':ube',
+        ':kart', ':gas', ':lew', ':tro',
+        ':kam', ':kq', ':uw', ':kid'
+    ];
+
+    if ($hasLegalizacjaColumn) {
+        array_splice($insertColumns, 23, 0, ['legalizacja']);
+        array_splice($placeholders, 23, 0, [':leg']);
+        $params[':leg'] = $legalizacja;
+    }
+
+    $sql = "INSERT INTO inwentaryzacje (" . implode(', ', $insertColumns) . ") VALUES (" . implode(', ', $placeholders) . ")";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
 
     // 2) I od razu aktualizujemy ostatniego kierowcę w tabeli pojazdy
     $update = $pdo->prepare("
