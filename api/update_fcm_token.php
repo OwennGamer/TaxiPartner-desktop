@@ -12,7 +12,8 @@ if (!$decoded) {
     exit;
 }
 
-if ($decoded->role !== 'kierowca' && $decoded->role !== 'flotowiec') {
+$role = strtolower((string)($decoded->role ?? ''));
+if (!in_array($role, ['kierowca', 'flotowiec', 'admin', 'administrator'], true)) {
     http_response_code(403);
     echo json_encode(["status" => "error", "message" => "Brak uprawnień"]);
     exit;

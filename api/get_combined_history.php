@@ -79,7 +79,7 @@ try {
         $result[] = [
             "date" => $row['date'],
             "type" => $typeLabel,
-            "source" => '',
+            "source" => $row['description'] ?? '',
             "payment_method" => '',
             "ride_amount" => '',
             "change" => $row['change_value'],

@@ -24,15 +24,23 @@ $stmt = $pdo->prepare("
   UNION ALL
   (
     SELECT
-      data        AS date,
-      'zmiana salda' AS source,
-      ''          AS type,
+      data AS date,
+      CASE COALESCE(counter_type, 'saldo')
+        WHEN 'voucher_current' THEN CONCAT('zmiana voucherów (bieżący)', CASE WHEN powod IS NULL OR powod = '' THEN '' ELSE CONCAT(' - ', powod) END)
+        WHEN 'voucher_previous' THEN CONCAT('zmiana voucherów (poprzedni)', CASE WHEN powod IS NULL OR powod = '' THEN '' ELSE CONCAT(' - ', powod) END)
+        ELSE CONCAT('zmiana salda', CASE WHEN powod IS NULL OR powod = '' THEN '' ELSE CONCAT(' - ', powod) END)
+      END AS source,
+      CASE COALESCE(counter_type, 'saldo')
+        WHEN 'voucher_current' THEN 'Voucher (bieżący)'
+        WHEN 'voucher_previous' THEN 'Voucher (poprzedni)'
+        ELSE ''
+      END AS type,
       CAST(zmiana AS CHAR) AS amount,
-      NULL        AS receipt_photo,
-      0           AS is_ride
+      NULL AS receipt_photo,
+      0 AS is_ride
     FROM historia_salda
     WHERE kierowca_id = ?
-      AND COALESCE(counter_type, 'saldo') = 'saldo'
+      AND COALESCE(counter_type, 'saldo') IN ('saldo', 'voucher_current', 'voucher_previous')
   )
   ORDER BY date DESC
 ");

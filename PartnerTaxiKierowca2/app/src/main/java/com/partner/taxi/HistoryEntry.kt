@@ -13,5 +13,8 @@ data class HistoryEntry(
     val paymentType: String,     // teraz poprawnie mapujemy JSON-owe "type"
 
     @SerializedName("amount")
-    val amount: String           // JSON-owe pole "amount"
+    val amount: String,          // JSON-owe pole "amount"
+
+    @SerializedName("is_ride")
+    val isRide: Int = 1
 )

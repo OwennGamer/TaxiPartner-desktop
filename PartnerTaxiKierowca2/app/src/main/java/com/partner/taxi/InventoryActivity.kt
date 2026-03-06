@@ -375,6 +375,7 @@ class InventoryActivity : AppCompatActivity() {
         // przygotowanie RequestBody
         fun strPart(v:String) =
             RequestBody.create("text/plain".toMediaTypeOrNull(), v)
+        val driverIdPart = strPart(SessionManager.getDriverId(this))
         val rePart   = strPart(intent.getStringExtra("rejestracja") ?: "")
         val prPart   = strPart(intent.getIntExtra("przebieg", 0).toString())
         val czPart   = strPart(if (radioCleanYes.isChecked) "1" else "0")
@@ -432,7 +433,7 @@ class InventoryActivity : AppCompatActivity() {
 
         Log.d(TAG,"Enqueue API call")
         ApiClient.apiService.addInventory(
-            rePart, prPart, czPart,
+            driverIdPart, rePart, prPart, czPart,
             pf, pb, pl, pr,
             pd1, pd2, pd3, pd4,
             vestPart,

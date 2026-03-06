@@ -39,10 +39,29 @@ if (!$decoded) {
     exit;
 }
 
-// ID kierowcy z tokena (alfanumeryczne)
-$kierowca_id = $decoded->user_id;
+// ID kierowcy (domyślnie z tokena, dla admina można nadpisać przez POST driver_id)
+$tokenUserId = trim((string)($decoded->user_id ?? ''));
+$tokenRole = strtolower((string)($decoded->role ?? ''));
+$requestedDriverId = trim((string)($_POST['driver_id'] ?? ''));
+
+$kierowca_id = $tokenUserId;
+if (in_array($tokenRole, ['admin', 'administrator'], true) && $requestedDriverId !== '') {
+    $kierowca_id = $requestedDriverId;
+}
+
+if ($kierowca_id !== '') {
+    $driverExistsStmt = $pdo->prepare('SELECT id FROM kierowcy WHERE id = ? LIMIT 1');
+    $driverExistsStmt->execute([$kierowca_id]);
+    if (!$driverExistsStmt->fetchColumn()) {
+        file_put_contents(__DIR__ . "/debug_inventory.txt",
+            "WARN: kierowca_id {$kierowca_id} nie istnieje w tabeli kierowcy\n", FILE_APPEND);
+        $kierowca_id = null;
+    }
+} else {
+    $kierowca_id = null;
+}
 file_put_contents(__DIR__ . "/debug_inventory.txt",
-    "KIEROWCA_ID = {$kierowca_id}\n", FILE_APPEND);
+    "KIEROWCA_ID = " . ($kierowca_id ?? 'NULL') . "\n", FILE_APPEND);
 
 // Required fields
 $rejestracja      = trim($_POST['rejestracja']        ?? '');
@@ -356,7 +375,8 @@ try {
     ]);
 
     // 3) Aktualizacja nowej kolumny last_vehicle_plate w tabeli kierowcy
-    $upd2 = $pdo->prepare("
+    if ($kierowca_id !== null) {
+        $upd2 = $pdo->prepare("
       UPDATE kierowcy
          SET last_vehicle_plate = :re
        WHERE id = :kid
@@ -365,6 +385,7 @@ try {
       ':re'  => $rejestracja,
       ':kid' => $kierowca_id
     ]);
+    }
 
     if (!empty($differences)) {
         if (loadMailer()) {

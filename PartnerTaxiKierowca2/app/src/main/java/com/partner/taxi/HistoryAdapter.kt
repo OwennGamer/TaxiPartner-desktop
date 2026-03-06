@@ -12,7 +12,7 @@ class HistoryAdapter(
     private val onEditLastRideClicked: () -> Unit
 ) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    private val firstRideIndex: Int = items.indexOfFirst { !it.source.equals("zmiana salda", ignoreCase = true) }
+    private val firstRideIndex: Int = items.indexOfFirst { it.isRide == 1 }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvDateTime: TextView = view.findViewById(R.id.tvDateTime)
@@ -30,7 +30,6 @@ class HistoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val entry = items[position]
-        val isSaldoChange = entry.source.equals("zmiana salda", ignoreCase = true)
         holder.tvSource.text = entry.source
         holder.tvPaymentType.text = entry.paymentType
         holder.tvAmount.text = "${entry.amount} zł"

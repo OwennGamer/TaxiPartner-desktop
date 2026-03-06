@@ -59,6 +59,7 @@ interface ApiService {
     @Multipart
     @POST("add_inventory.php")
     fun addInventory(
+        @Part("driver_id") driverId: RequestBody,
         @Part("rejestracja") rejestracja: RequestBody,
         @Part("przebieg") przebieg: RequestBody,
         @Part("czyste_wewnatrz") czysteWewnatrz: RequestBody,
