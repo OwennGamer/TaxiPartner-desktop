@@ -51,9 +51,11 @@ try {
 " .
         "  JOIN kursy k ON k.driver_id = ws.driver_id
 " .
-        "             AND DATE(k.date) = DATE(ws.start_time)
+        "             AND k.date >= ws.start_time
 " .
-        " WHERE DATE(ws.start_time) BETWEEN ? AND ?
+        AND k.date <= COALESCE(ws.end_time, NOW())
+" .
+        " WHERE DATE(k.date) BETWEEN ? AND ?
 " .
         "   AND ws.vehicle_plate IS NOT NULL
 " .
