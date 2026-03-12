@@ -489,7 +489,8 @@ public class ApiClient {
                                 o.optString("firma", null),
                                 o.optString("forma_wlasnosci", null),
                                 o.optString("numer_polisy", null),
-                                o.optString("ostatnia_inwentaryzacja", "")
+                                o.optString("ostatnia_inwentaryzacja", ""),
+                                0f
 
                         ));
                     }
@@ -499,6 +500,37 @@ public class ApiClient {
             e.printStackTrace();
         }
         return list;
+    }
+
+
+    public static java.util.Map<String, Float> getVehicleTurnover(String startDate, String endDate) {
+        java.util.Map<String, Float> turnoverByVehicle = new java.util.HashMap<>();
+        try {
+            String endpoint = String.format(
+                    "get_vehicle_turnover.php?start_date=%s&end_date=%s",
+                    URLEncoder.encode(startDate, "UTF-8"),
+                    URLEncoder.encode(endDate, "UTF-8")
+            );
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.getString("status"))) {
+                    JSONArray arr = resp.getJSONArray("data");
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject o = arr.getJSONObject(i);
+                        String rejestracja = o.optString("rejestracja", "");
+                        if (rejestracja.isBlank()) {
+                            continue;
+                        }
+                        float turnover = (float) o.optDouble("turnover", 0.0);
+                        turnoverByVehicle.put(rejestracja.trim().toUpperCase(Locale.ROOT), turnover);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return turnoverByVehicle;
     }
 
     public static List<InventoryHistoryRecord> getInventoryHistory(String rejestracja) {

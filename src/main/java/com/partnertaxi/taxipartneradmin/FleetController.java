@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
-import javafx.scene.input.MouseEvent;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.CheckBox;
@@ -26,6 +25,10 @@ import com.partnertaxi.taxipartneradmin.TableUtils;
 import com.partnertaxi.taxipartneradmin.EditVehicleController;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.time.LocalDate;
+import java.text.NumberFormat;
 
 public class FleetController {
 
@@ -77,6 +80,12 @@ public class FleetController {
     private Button btnDamages;
     @FXML
     private CheckBox chkShowInactive;
+    @FXML
+    private TableColumn<Vehicle, Float> colObrot;
+    @FXML
+    private DatePicker turnoverStartDate;
+    @FXML
+    private DatePicker turnoverEndDate;
 
     private ObservableList<Vehicle> allVehicles;
     private FilteredList<Vehicle> filteredVehicles;
@@ -102,6 +111,22 @@ public class FleetController {
         colFormaWlasnosci.setCellValueFactory(new PropertyValueFactory<>("formaWlasnosci"));
         colNumerPolisy.setCellValueFactory(new PropertyValueFactory<>("numerPolisy"));
         colOstatniaInwentaryzacja.setCellValueFactory(new PropertyValueFactory<>("ostatniaInwentaryzacja"));
+        colObrot.setCellValueFactory(new PropertyValueFactory<>("obrot"));
+        NumberFormat currencyFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+        currencyFormat.setMinimumFractionDigits(2);
+        currencyFormat.setMaximumFractionDigits(2);
+        currencyFormat.setGroupingUsed(false);
+        colObrot.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Float item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : currencyFormat.format(item));
+            }
+        });
+
+        LocalDate now = LocalDate.now();
+        turnoverStartDate.setValue(now.withDayOfMonth(1));
+        turnoverEndDate.setValue(now);
 
         List<Vehicle> vehicles = ApiClient.getVehicles();
         allVehicles = FXCollections.observableArrayList(vehicles);
@@ -118,7 +143,10 @@ public class FleetController {
                 }
         );
         applyFilter();
+        applyTurnover();
         chkShowInactive.selectedProperty().addListener((obs, o, n) -> applyFilter());
+        turnoverStartDate.valueProperty().addListener((obs, o, n) -> applyTurnover());
+        turnoverEndDate.valueProperty().addListener((obs, o, n) -> applyTurnover());
 
         TableUtils.enableCopyOnCtrlC(vehicleTable);
         TableUtils.enableColumnsOrderPersistence(vehicleTable, FleetController.class, PREF_KEY_COLUMNS_ORDER);
@@ -290,6 +318,7 @@ public class FleetController {
         List<Vehicle> updatedList = ApiClient.getVehicles();
         allVehicles.setAll(updatedList);
         applyFilter();
+        applyTurnover();
     }
 
     private void applyFilter() {
@@ -299,6 +328,31 @@ public class FleetController {
         } else {
             filteredVehicles.setPredicate(Vehicle::isAktywny);
         }
+    }
+
+    private void applyTurnover() {
+        if (allVehicles == null) {
+            return;
+        }
+
+        LocalDate start = turnoverStartDate.getValue();
+        LocalDate end = turnoverEndDate.getValue();
+        if (start == null || end == null) {
+            return;
+        }
+
+        if (start.isAfter(end)) {
+            LocalDate correctedEnd = start;
+            turnoverEndDate.setValue(correctedEnd);
+            end = correctedEnd;
+        }
+
+        Map<String, Float> turnoverByVehicle = ApiClient.getVehicleTurnover(start.toString(), end.toString());
+        for (Vehicle vehicle : allVehicles) {
+            String plateKey = vehicle.getRejestracja() == null ? "" : vehicle.getRejestracja().trim().toUpperCase(Locale.ROOT);
+            vehicle.setObrot(turnoverByVehicle.getOrDefault(plateKey, 0f));
+        }
+        vehicleTable.refresh();
     }
 
     private void setupCheckBoxColumn(TableColumn<Vehicle, Boolean> column,

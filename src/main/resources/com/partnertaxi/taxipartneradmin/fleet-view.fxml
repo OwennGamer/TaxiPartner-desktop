@@ -31,6 +31,11 @@
             <CheckBox fx:id="chkShowInactive"
                       text="Pokaż nieaktywne"
                       onAction="#onToggleShowInactive"/>
+            <Separator orientation="VERTICAL"/>
+            <Label text="Obrót od:"/>
+            <DatePicker fx:id="turnoverStartDate" prefWidth="130"/>
+            <Label text="do:"/>
+            <DatePicker fx:id="turnoverEndDate" prefWidth="130"/>
             <Button text="Odśwież" onAction="#onRefresh"/>
 
         </ToolBar>
@@ -58,6 +63,7 @@
                 <TableColumn fx:id="colFormaWlasnosci" id="colFormaWlasnosci" text="Forma własności" prefWidth="120"/>
                 <TableColumn fx:id="colNumerPolisy" id="colNumerPolisy" text="Numer polisy" prefWidth="120"/>
                 <TableColumn fx:id="colOstatniaInwentaryzacja" id="colOstatniaInwentaryzacja" text="Ostatnia inwentaryzacja" prefWidth="170"/>
+                <TableColumn fx:id="colObrot" id="colObrot" text="Obrót" prefWidth="120"/>
             </columns>
         </TableView>
     </center>

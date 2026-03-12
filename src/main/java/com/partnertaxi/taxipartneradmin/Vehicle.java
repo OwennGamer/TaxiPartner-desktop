@@ -21,12 +21,14 @@ public class Vehicle {
     private final StringProperty formaWlasnosci;
     private final StringProperty numerPolisy;
     private final StringProperty ostatniaInwentaryzacja;
+    private final FloatProperty obrot;
 
     public Vehicle(int id, String rejestracja, String marka, String model,
                    int przebieg, String ubezpieczenieDo, String przegladDo, boolean aktywny,
                    boolean inpost, boolean taxi, boolean taksometr, String legalizacjaTaksometruDo,
                    boolean gaz, String homologacjaLpgDo, String firma,
-                   String formaWlasnosci, String numerPolisy, String ostatniaInwentaryzacja) {
+                   String formaWlasnosci, String numerPolisy, String ostatniaInwentaryzacja,
+                   float obrot) {
         this.id = new SimpleIntegerProperty(id);
         this.rejestracja = new SimpleStringProperty(rejestracja);
         this.marka = new SimpleStringProperty(marka);
@@ -45,6 +47,7 @@ public class Vehicle {
         this.formaWlasnosci = new SimpleStringProperty(formaWlasnosci);
         this.numerPolisy = new SimpleStringProperty(numerPolisy);
         this.ostatniaInwentaryzacja = new SimpleStringProperty(ostatniaInwentaryzacja);
+        this.obrot = new SimpleFloatProperty(obrot);
     }
 
     public int getId() {
@@ -188,5 +191,17 @@ public class Vehicle {
 
     public StringProperty ostatniaInwentaryzacjaProperty() {
         return ostatniaInwentaryzacja;
+    }
+
+    public float getObrot() {
+        return obrot.get();
+    }
+
+    public FloatProperty obrotProperty() {
+        return obrot;
+    }
+
+    public void setObrot(float obrot) {
+        this.obrot.set(obrot);
     }
 }
