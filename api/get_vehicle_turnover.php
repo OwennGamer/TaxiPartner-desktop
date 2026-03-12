@@ -53,7 +53,7 @@ try {
 " .
         "             AND k.date >= ws.start_time
 " .
-        AND k.date <= COALESCE(ws.end_time, NOW())
+        "             AND k.date <= COALESCE(ws.end_time, NOW())
 " .
         " WHERE DATE(k.date) BETWEEN ? AND ?
 " .
