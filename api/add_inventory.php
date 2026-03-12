@@ -125,8 +125,8 @@ function qtyLabel($value): string {
     return $value === null || $value === '' ? 'brak danych' : (string)$value;
 }
 
-function escapeHtml(string $value): string {
-    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+function escapeHtml($value): string {
+    return htmlspecialchars((string)($value ?? ''), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
 // Zdjęcia pojazdu
@@ -529,4 +529,8 @@ try {
     error_log('add_inventory.php PDOException: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['status'=>'error','message'=>'Błąd bazy danych']);
+} catch (Throwable $e) {
+    error_log('add_inventory.php Throwable: ' . $e->getMessage());
+    http_response_code(500);
+    echo json_encode(['status'=>'error','message'=>'Błąd serwera podczas zapisu inwentaryzacji']);
 }
