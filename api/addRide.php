@@ -25,6 +25,36 @@ try {
     $authenticatedUser = getAuthenticatedJwt();
     $userRole = strtolower((string)($authenticatedUser->role ?? ''));
     $isAdminUser = in_array($userRole, ['admin', 'administrator'], true);
+    $authenticatedDriverId = trim((string)($authenticatedUser->user_id ?? ''));
+
+    if (!$isAdminUser && $authenticatedDriverId !== '' && strcasecmp($authenticatedDriverId, $driver_id) !== 0) {
+        $pdo->rollBack();
+        http_response_code(403);
+        echo json_encode([
+            "status" => "error",
+            "message" => "Brak uprawnień do dodania kursu dla innego kierowcy"
+        ]);
+        exit;
+    }
+
+    if (!$isAdminUser) {
+        $activeSessionStmt = $pdo->prepare(
+            "SELECT id FROM work_sessions WHERE driver_id = ? AND end_time IS NULL ORDER BY start_time DESC LIMIT 1"
+        );
+        $activeSessionStmt->execute([$driver_id]);
+        $activeSessionId = $activeSessionStmt->fetchColumn();
+
+        if (!$activeSessionId) {
+            $pdo->rollBack();
+            http_response_code(409);
+            echo json_encode([
+                "status" => "error",
+                "message" => "Brak aktywnej zmiany. Najpierw rozpocznij pracę (wybierz pojazd).",
+                "code" => "NO_ACTIVE_SHIFT"
+            ]);
+            exit;
+        }
+    }
 
     // Pobranie danych kierowcy z blokadą – zapobiega równoczesnym dodaniom dla tego samego kierowcy
     $stmt = $pdo->prepare("SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month FROM kierowcy WHERE id = ? FOR UPDATE");
