@@ -26,7 +26,7 @@ if (!in_array($role, ['admin', 'administrator', 'flotowiec'], true)) {
 
 $startDate = $_GET['start_date'] ?? '';
 $endDate = $_GET['end_date'] ?? '';
-$plate = trim($_GET['vehicle_plate'] ?? '');
+$plate = trim($_GET['vehicle_plate'] ?? ($_GET['rejestracja'] ?? ''));
 
 if (!$startDate || !$endDate || $plate === '') {
     http_response_code(400);
