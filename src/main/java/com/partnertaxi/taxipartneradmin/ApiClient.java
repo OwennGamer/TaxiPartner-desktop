@@ -624,44 +624,146 @@ public class ApiClient {
             return new VehicleTurnoverDetailsResult(sum, count, records);
         }
         try {
-            JSONObject resp = new JSONObject(json);
+            String trimmed = json.trim();
+            if (trimmed.startsWith("[")) {
+                JSONArray arr = new JSONArray(trimmed);
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject o = arr.optJSONObject(i);
+                    if (o == null) continue;
+                    VehicleTurnoverDetailRecord row = parseTurnoverRow(o);
+                    records.add(row);
+                    sum += row.getAmount();
+                }
+                count = records.size();
+                return new VehicleTurnoverDetailsResult(sum, count, records);
+            }
+
+            JSONObject resp = new JSONObject(trimmed);
             // Część środowisk może nie zwracać pola status, ale zwracać dane.
             if ("error".equalsIgnoreCase(resp.optString("status"))) {
                 return new VehicleTurnoverDetailsResult(sum, count, records);
             }
 
-            JSONArray arr = resp.optJSONArray("data");
+            JSONArray arr = firstNonNullArray(
+                    resp.optJSONArray("data"),
+                    resp.optJSONArray("details"),
+                    resp.optJSONArray("records"),
+                    resp.optJSONArray("rows"),
+                    resp.optJSONArray("result")
+            );
             if (arr != null) {
                 for (int i = 0; i < arr.length(); i++) {
-                    JSONObject o = arr.getJSONObject(i);
-                    VehicleTurnoverDetailRecord row = new VehicleTurnoverDetailRecord(
-                            o.optInt("id", 0),
-                            o.optString("date", ""),
-                            o.optString("driver_id", ""),
-                            o.optString("payment_type", ""),
-                            o.optString("type", ""),
-                            (float) o.optDouble("amount", 0.0),
-                            o.optString("session_start", ""),
-                            o.optString("session_end", "")
-                    );
+                    JSONObject o = arr.optJSONObject(i);
+                    if (o == null) continue;
+                    VehicleTurnoverDetailRecord row = parseTurnoverRow(o);
                     records.add(row);
-                    if (!resp.has("sum")) {
+                    if (!resp.has("sum") && !resp.has("total") && !resp.has("turnover")) {
                         sum += row.getAmount();
                     }
                 }
             }
 
-            if (resp.has("sum")) {
-                sum = (float) resp.optDouble("sum", sum);
+            if (resp.has("sum") || resp.has("total") || resp.has("turnover")) {
+                sum = (float) firstNonNaNDouble(
+                        resp.optDouble("sum", Double.NaN),
+                        resp.optDouble("total", Double.NaN),
+                        resp.optDouble("turnover", Double.NaN),
+                        sum
+                );
             }
-            count = resp.optInt("count", records.size());
-            if (count == 0 && !records.isEmpty()) {
-                count = records.size();
-            }
+            count = firstNonZeroInt(
+                    resp.optInt("count", 0),
+                    resp.optInt("rows_count", 0),
+                    resp.optInt("total_count", 0),
+                    records.size()
+            );
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new VehicleTurnoverDetailsResult(sum, count, records);
+    }
+
+    private static VehicleTurnoverDetailRecord parseTurnoverRow(JSONObject o) {
+        int rideId = firstNonZeroInt(
+                o.optInt("id", 0),
+                o.optInt("ride_id", 0),
+                o.optInt("kurs_id", 0),
+                o.optInt("trip_id", 0),
+                0
+        );
+        String date = firstNonBlankString(
+                o.optString("date", ""),
+                o.optString("ride_date", ""),
+                o.optString("created_at", ""),
+                o.optString("datetime", ""),
+                ""
+        );
+        String driverId = firstNonBlankString(
+                o.optString("driver_id", ""),
+                o.optString("kierowca_id", ""),
+                o.optString("driver", ""),
+                ""
+        );
+        String paymentType = firstNonBlankString(
+                o.optString("payment_type", ""),
+                o.optString("payment", ""),
+                o.optString("platnosc", ""),
+                ""
+        );
+        String type = firstNonBlankString(
+                o.optString("type", ""),
+                o.optString("ride_type", ""),
+                o.optString("course_type", ""),
+                ""
+        );
+        float amount = (float) firstNonNaNDouble(
+                o.optDouble("amount", Double.NaN),
+                o.optDouble("turnover", Double.NaN),
+                o.optDouble("kwota", Double.NaN),
+                o.optDouble("ride_amount", Double.NaN),
+                0.0
+        );
+        String sessionStart = firstNonBlankString(
+                o.optString("session_start", ""),
+                o.optString("start", ""),
+                o.optString("start_time", ""),
+                ""
+        );
+        String sessionEnd = firstNonBlankString(
+                o.optString("session_end", ""),
+                o.optString("end", ""),
+                o.optString("end_time", ""),
+                ""
+        );
+        return new VehicleTurnoverDetailRecord(rideId, date, driverId, paymentType, type, amount, sessionStart, sessionEnd);
+    }
+
+    private static JSONArray firstNonNullArray(JSONArray... arrays) {
+        for (JSONArray arr : arrays) {
+            if (arr != null) return arr;
+        }
+        return null;
+    }
+
+    private static int firstNonZeroInt(int... values) {
+        for (int v : values) {
+            if (v != 0) return v;
+        }
+        return values.length == 0 ? 0 : values[values.length - 1];
+    }
+
+    private static String firstNonBlankString(String... values) {
+        for (String v : values) {
+            if (v != null && !v.isBlank()) return v;
+        }
+        return values.length == 0 ? "" : values[values.length - 1];
+    }
+
+    private static double firstNonNaNDouble(double... values) {
+        for (double v : values) {
+            if (!Double.isNaN(v)) return v;
+        }
+        return values.length == 0 ? 0.0 : values[values.length - 1];
     }
 
     public static List<InventoryHistoryRecord> getInventoryHistory(String rejestracja) {
