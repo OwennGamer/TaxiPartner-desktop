@@ -489,6 +489,8 @@ public class ApiClient {
                                 o.optString("firma", null),
                                 o.optString("forma_wlasnosci", null),
                                 o.optString("numer_polisy", null),
+                                o.optString("wymiana_oleju_data", null),
+                                o.isNull("wymiana_oleju_przebieg") ? null : o.optInt("wymiana_oleju_przebieg"),
                                 o.optString("ostatnia_inwentaryzacja", ""),
                                 0f
 

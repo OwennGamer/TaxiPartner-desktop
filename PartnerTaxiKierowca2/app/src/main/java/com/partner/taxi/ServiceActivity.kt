@@ -19,11 +19,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
+import java.time.LocalDate
 
 class ServiceActivity : AppCompatActivity() {
 
     private lateinit var editDescription: EditText
     private lateinit var editCost: EditText
+    private lateinit var editOilChangeDate: EditText
+    private lateinit var editOilChangeMileage: EditText
     private lateinit var btnSelectPhotos: Button
     private lateinit var tvPhotosCount: TextView
     private lateinit var btnSave: Button
@@ -31,14 +34,15 @@ class ServiceActivity : AppCompatActivity() {
     private val photoFiles = mutableListOf<File>()
     private var currentPhotoFile: File? = null
 
-    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success) {
-            currentPhotoFile?.let {
-                photoFiles.add(it)
-                tvPhotosCount.text = "Wybrano ${photoFiles.size} zdjęć"
+    private val takePicture =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                currentPhotoFile?.let {
+                    photoFiles.add(it)
+                    tvPhotosCount.text = "Wybrano ${photoFiles.size} zdjęć"
+                }
             }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,8 @@ class ServiceActivity : AppCompatActivity() {
 
         editDescription = findViewById(R.id.editDescription)
         editCost = findViewById(R.id.editCost)
+        editOilChangeDate = findViewById(R.id.editOilChangeDate)
+        editOilChangeMileage = findViewById(R.id.editOilChangeMileage)
         btnSelectPhotos = findViewById(R.id.btnSelectPhotos)
         tvPhotosCount = findViewById(R.id.tvPhotosCount)
         btnSave = findViewById(R.id.btnSaveService)
@@ -62,6 +68,8 @@ class ServiceActivity : AppCompatActivity() {
             val opis = editDescription.text.toString().trim()
             val koszt = editCost.text.toString().trim().toFloatOrNull()
             val rejestracja = intent.getStringExtra("rejestracja") ?: ""
+            val oilDateText = editOilChangeDate.text.toString().trim()
+            val oilMileageText = editOilChangeMileage.text.toString().trim()
 
             if (opis.isEmpty()) {
                 Toast.makeText(this, "Podaj opis", Toast.LENGTH_SHORT).show()
@@ -76,14 +84,45 @@ class ServiceActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            uploadService(opis, koszt, rejestracja)
+            if (oilDateText.isNotEmpty()) {
+                val isValidDate = runCatching { LocalDate.parse(oilDateText) }.isSuccess
+                if (!isValidDate) {
+                    Toast.makeText(
+                        this,
+                        "Data wymiany oleju musi mieć format RRRR-MM-DD",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                }
+            }
+
+            if (oilMileageText.isNotEmpty() && oilMileageText.toIntOrNull() == null) {
+                Toast.makeText(
+                    this,
+                    "Przebieg wymiany oleju musi być liczbą całkowitą",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
+            uploadService(opis, koszt, rejestracja, oilDateText, oilMileageText)
         }
     }
 
-    private fun uploadService(opis: String, koszt: Float, rejestracja: String) {
+    private fun uploadService(
+        opis: String,
+        koszt: Float,
+        rejestracja: String,
+        oilDate: String,
+        oilMileage: String
+    ) {
         val opisBody = opis.toRequestBody("text/plain".toMediaTypeOrNull())
         val kosztBody = koszt.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val rejestracjaBody = rejestracja.toRequestBody("text/plain".toMediaTypeOrNull())
+        val oilDateBody =
+            oilDate.takeIf { it.isNotBlank() }?.toRequestBody("text/plain".toMediaTypeOrNull())
+        val oilMileageBody =
+            oilMileage.takeIf { it.isNotBlank() }?.toRequestBody("text/plain".toMediaTypeOrNull())
 
         val compressed = mutableListOf<File>()
         val parts = photoFiles.mapNotNull { file ->
@@ -100,7 +139,14 @@ class ServiceActivity : AppCompatActivity() {
             }
         }
 
-        ApiClient.apiService.addService(opisBody, kosztBody, rejestracjaBody, parts)
+        ApiClient.apiService.addService(
+            opisBody,
+            kosztBody,
+            rejestracjaBody,
+            oilDateBody,
+            oilMileageBody,
+            parts
+        )
             .enqueue(object : Callback<GenericResponse> {
                 override fun onResponse(
                     call: Call<GenericResponse>,
@@ -108,7 +154,8 @@ class ServiceActivity : AppCompatActivity() {
                 ) {
                     compressed.forEach { it.delete() }
                     if (response.isSuccessful && response.body()?.status == "success") {
-                        Toast.makeText(this@ServiceActivity, "Serwis zapisany", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@ServiceActivity, "Serwis zapisany", Toast.LENGTH_SHORT)
+                            .show()
                         finish()
                     } else {
                         val msg = response.body()?.message ?: "Błąd zapisu"

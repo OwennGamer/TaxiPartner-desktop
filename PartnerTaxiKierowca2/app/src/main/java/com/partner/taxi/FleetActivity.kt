@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import java.io.IOException
 import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 class FleetActivity : AppCompatActivity() {
     private lateinit var rvFleet: RecyclerView
@@ -71,24 +73,44 @@ class FleetActivity : AppCompatActivity() {
     private class FleetAdapter(private val items: List<VehicleData>) :
         RecyclerView.Adapter<FleetAdapter.ViewHolder>() {
         class ViewHolder(itemView: android.view.View) : RecyclerView.ViewHolder(itemView) {
-            val tvPlate: android.widget.TextView = itemView.findViewById(android.R.id.text1)
+            val tvPlate: android.widget.TextView = itemView.findViewById(R.id.tvPlate)
         }
 
         override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): ViewHolder {
             val view = android.view.LayoutInflater.from(parent.context)
-                .inflate(android.R.layout.simple_list_item_1, parent, false)
+                inflate(R.layout.item_vehicle_fleet, parent, false)
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val vehicle = items[position]
-            holder.tvPlate.text = vehicle.rejestracja
+            val oilDue = isOilChangeDue(vehicle)
+            holder.tvPlate.text = if (oilDue) {
+                "${vehicle.rejestracja} - wymiana oleju"
+            } else {
+                vehicle.rejestracja
+            }
+            holder.tvPlate.setTextColor(
+                if (oilDue) android.graphics.Color.RED else android.graphics.Color.BLACK
+            )
             holder.itemView.setOnClickListener {
                 val context = holder.itemView.context
                 val intent = Intent(context, VehicleDetailActivity::class.java)
                 intent.putExtra("vehicle", vehicle)
                 context.startActivity(intent)
             }
+        }
+
+        private fun isOilChangeDue(vehicle: VehicleData): Boolean {
+            val daysLeft = vehicle.wymiana_oleju_data?.let {
+                runCatching {
+                    ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(it)).toInt()
+                }.getOrNull()
+            }
+            val kmLeft = vehicle.wymiana_oleju_przebieg?.minus(vehicle.przebieg)
+            val byDate = daysLeft != null && daysLeft <= 7
+            val byKm = kmLeft != null && kmLeft <= 500
+            return byDate || byKm
         }
 
         override fun getItemCount(): Int = items.size

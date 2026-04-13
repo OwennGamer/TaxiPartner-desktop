@@ -73,6 +73,10 @@ public class FleetController {
     @FXML
     private TableColumn<Vehicle, String> colNumerPolisy;
     @FXML
+    private TableColumn<Vehicle, String> colWymianaOlejuData;
+    @FXML
+    private TableColumn<Vehicle, Integer> colWymianaOlejuPrzebieg;
+    @FXML
     private TableColumn<Vehicle, String> colOstatniaInwentaryzacja;
     @FXML
     private Button btnHistory;
@@ -114,6 +118,8 @@ public class FleetController {
         colFirma.setCellValueFactory(new PropertyValueFactory<>("firma"));
         colFormaWlasnosci.setCellValueFactory(new PropertyValueFactory<>("formaWlasnosci"));
         colNumerPolisy.setCellValueFactory(new PropertyValueFactory<>("numerPolisy"));
+        colWymianaOlejuData.setCellValueFactory(new PropertyValueFactory<>("wymianaOlejuData"));
+        colWymianaOlejuPrzebieg.setCellValueFactory(new PropertyValueFactory<>("wymianaOlejuPrzebieg"));
         colOstatniaInwentaryzacja.setCellValueFactory(new PropertyValueFactory<>("ostatniaInwentaryzacja"));
         colObrot.setCellValueFactory(new PropertyValueFactory<>("obrot"));
         NumberFormat currencyFormat = NumberFormat.getNumberInstance(Locale.getDefault());

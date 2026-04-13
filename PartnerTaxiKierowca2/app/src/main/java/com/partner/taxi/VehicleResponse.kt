@@ -23,5 +23,7 @@ data class VehicleData(
     val homologacja_lpg_do: String?,
     val firma: String?,
     val forma_wlasnosci: String?,
-    val numer_polisy: String?
+    val numer_polisy: String?,
+    val wymiana_oleju_data: String?,
+    val wymiana_oleju_przebieg: Int?
 ) : java.io.Serializable

@@ -166,6 +166,8 @@ interface ApiService {
         @Part("opis") opis: RequestBody,
         @Part("koszt") koszt: RequestBody,
         @Part("rejestracja") rejestracja: RequestBody,
+        @Part("wymiana_oleju_data") wymianaOlejuData: RequestBody?,
+        @Part("wymiana_oleju_przebieg") wymianaOlejuPrzebieg: RequestBody?,
         @Part photos: List<MultipartBody.Part>
     ): Call<GenericResponse>
 

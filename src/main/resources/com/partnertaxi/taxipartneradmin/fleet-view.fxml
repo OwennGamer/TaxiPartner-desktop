@@ -65,7 +65,8 @@
                 <TableColumn fx:id="colHomologacjaLpgDo" id="colHomologacjaLpgDo" text="Homologacja LPG do" prefWidth="150"/>
                 <TableColumn fx:id="colFirma" id="colFirma" text="Firma" prefWidth="100"/>
                 <TableColumn fx:id="colFormaWlasnosci" id="colFormaWlasnosci" text="Forma własności" prefWidth="120"/>
-                <TableColumn fx:id="colNumerPolisy" id="colNumerPolisy" text="Numer polisy" prefWidth="120"/>
+                <TableColumn fx:id="colWymianaOlejuData" id="colWymianaOlejuData" text="Wymiana oleju data" prefWidth="140"/>
+                <TableColumn fx:id="colWymianaOlejuPrzebieg" id="colWymianaOlejuPrzebieg" text="Wymiana oleju km" prefWidth="140"/>
                 <TableColumn fx:id="colOstatniaInwentaryzacja" id="colOstatniaInwentaryzacja" text="Ostatnia inwentaryzacja" prefWidth="170"/>
                 <TableColumn fx:id="colObrot" id="colObrot" text="Obrót" prefWidth="120"/>
             </columns>

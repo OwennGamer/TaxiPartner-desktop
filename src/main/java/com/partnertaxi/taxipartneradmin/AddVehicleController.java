@@ -39,6 +39,8 @@ public class AddVehicleController {
     @FXML private TextField firmaOtherField;
     @FXML private TextField formaWlasnosciField;
     @FXML private TextField numerPolisyField;
+    @FXML private DatePicker oilChangeDatePicker;
+    @FXML private TextField oilChangeMileageField;
 
     @FXML
     private void initialize() {
@@ -129,6 +131,22 @@ public class AddVehicleController {
                 showError("Uzupełnij formę własności i numer polisy.");
                 return;
             }
+            String oilChangeDate = oilChangeDatePicker.getValue() == null
+                    ? ""
+                    : oilChangeDatePicker.getValue().toString();
+            String oilChangeMileageText = oilChangeMileageField.getText().trim();
+            if (!oilChangeMileageText.isEmpty()) {
+                try {
+                    int parsed = Integer.parseInt(oilChangeMileageText);
+                    if (parsed < 0) {
+                        showError("Przebieg wymiany oleju nie może być ujemny.");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    showError("Przebieg wymiany oleju musi być liczbą całkowitą.");
+                    return;
+                }
+            }
 
             String postData = "rejestracja=" + URLEncoder.encode(rejestracja, "UTF-8")
                     + "&marka=" + URLEncoder.encode(marka, "UTF-8")
@@ -145,7 +163,9 @@ public class AddVehicleController {
                     + "&homologacja_lpg_do=" + URLEncoder.encode(homologacja, "UTF-8")
                     + "&firma=" + URLEncoder.encode(firma, "UTF-8")
                     + "&forma_wlasnosci=" + URLEncoder.encode(formaWlasnosci, "UTF-8")
-                    + "&numer_polisy=" + URLEncoder.encode(numerPolisy, "UTF-8");
+                    + "&numer_polisy=" + URLEncoder.encode(numerPolisy, "UTF-8")
+                    + "&wymiana_oleju_data=" + URLEncoder.encode(oilChangeDate, "UTF-8")
+                    + "&wymiana_oleju_przebieg=" + URLEncoder.encode(oilChangeMileageText, "UTF-8");
 
             URL url = new URL("http://164.126.143.20:8444/api/add_vehicle.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

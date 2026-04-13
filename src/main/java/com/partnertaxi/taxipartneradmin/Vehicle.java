@@ -20,6 +20,8 @@ public class Vehicle {
     private final StringProperty firma;
     private final StringProperty formaWlasnosci;
     private final StringProperty numerPolisy;
+    private final StringProperty wymianaOlejuData;
+    private final ObjectProperty<Integer> wymianaOlejuPrzebieg;
     private final StringProperty ostatniaInwentaryzacja;
     private final FloatProperty obrot;
 
@@ -27,7 +29,7 @@ public class Vehicle {
                    int przebieg, String ubezpieczenieDo, String przegladDo, boolean aktywny,
                    boolean inpost, boolean taxi, boolean taksometr, String legalizacjaTaksometruDo,
                    boolean gaz, String homologacjaLpgDo, String firma,
-                   String formaWlasnosci, String numerPolisy, String ostatniaInwentaryzacja,
+                   String formaWlasnosci, String numerPolisy, String wymianaOlejuData, Integer wymianaOlejuPrzebieg, String ostatniaInwentaryzacja,
                    float obrot) {
         this.id = new SimpleIntegerProperty(id);
         this.rejestracja = new SimpleStringProperty(rejestracja);
@@ -46,6 +48,8 @@ public class Vehicle {
         this.firma = new SimpleStringProperty(firma);
         this.formaWlasnosci = new SimpleStringProperty(formaWlasnosci);
         this.numerPolisy = new SimpleStringProperty(numerPolisy);
+        this.wymianaOlejuData = new SimpleStringProperty(wymianaOlejuData);
+        this.wymianaOlejuPrzebieg = new SimpleObjectProperty<>(wymianaOlejuPrzebieg);
         this.ostatniaInwentaryzacja = new SimpleStringProperty(ostatniaInwentaryzacja);
         this.obrot = new SimpleFloatProperty(obrot);
     }
@@ -180,6 +184,21 @@ public class Vehicle {
 
     public String getNumerPolisy() {
         return numerPolisy.get();
+    }
+    public String getWymianaOlejuData() {
+        return wymianaOlejuData.get();
+    }
+
+    public StringProperty wymianaOlejuDataProperty() {
+        return wymianaOlejuData;
+    }
+
+    public Integer getWymianaOlejuPrzebieg() {
+        return wymianaOlejuPrzebieg.get();
+    }
+
+    public ObjectProperty<Integer> wymianaOlejuPrzebiegProperty() {
+        return wymianaOlejuPrzebieg;
     }
 
     public StringProperty numerPolisyProperty() {

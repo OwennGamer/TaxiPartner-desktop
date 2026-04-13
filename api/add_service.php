@@ -28,6 +28,9 @@ if (!$decoded) {
 $rejestracja = trim($_POST['rejestracja'] ?? '');
 $opis = trim($_POST['opis'] ?? '');
 $koszt = isset($_POST['koszt']) ? floatval($_POST['koszt']) : null;
+$wymianaOlejData = trim($_POST['wymiana_oleju_data'] ?? '');
+$wymianaOlejPrzebiegRaw = trim($_POST['wymiana_oleju_przebieg'] ?? '');
+$wymianaOlejPrzebieg = $wymianaOlejPrzebiegRaw !== '' ? intval($wymianaOlejPrzebiegRaw) : null;
 
 if ($rejestracja === '' || $opis === '' || $koszt === null) {
     http_response_code(400);
@@ -58,6 +61,8 @@ foreach ($files as $file) {
 }
 
 try {
+    $pdo->beginTransaction();
+
     $stmt = $pdo->prepare("INSERT INTO serwisy (rejestracja, opis, koszt, zdjecia) VALUES (:re, :op, :ko, :zdj)");
     $stmt->execute([
         ':re' => $rejestracja,
@@ -65,8 +70,29 @@ try {
         ':ko' => $koszt,
         ':zdj' => json_encode($paths)
     ]);
+
+   if ($wymianaOlejData !== '' || $wymianaOlejPrzebiegRaw !== '') {
+        $stmtOil = $pdo->prepare("
+            UPDATE pojazdy
+            SET wymiana_oleju_data = :data,
+                wymiana_oleju_przebieg = :przebieg,
+                oil_reminder_sent_at = NULL,
+                oil_reminder_sent_type = NULL
+            WHERE LOWER(rejestracja) = LOWER(:rejestracja)
+        ");
+        $stmtOil->execute([
+            ':data' => $wymianaOlejData !== '' ? $wymianaOlejData : null,
+            ':przebieg' => $wymianaOlejPrzebieg,
+            ':rejestracja' => $rejestracja
+        ]);
+    }
+
+    $pdo->commit(); 
     echo json_encode(['status' => 'success', 'id' => $pdo->lastInsertId()]);
 } catch (PDOException $e) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => 'Błąd bazy danych']);
 }

@@ -35,6 +35,33 @@
             android:inputType="numberDecimal"
             android:hint="np. 100.00"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Nowa data wymiany oleju (opcjonalnie):"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/editOilChangeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="RRRR-MM-DD"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Nowy przebieg wymiany oleju (opcjonalnie):"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/editOilChangeMileage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="np. 220000"
+            android:inputType="number"/>
+
         <Button
             android:id="@+id/btnSelectPhotos"
             android:layout_width="match_parent"

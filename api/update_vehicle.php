@@ -33,15 +33,17 @@ $homologacja = $_POST['homologacja_lpg_do'] !== '' ? $_POST['homologacja_lpg_do'
 $firma = $_POST['firma'] !== '' ? $_POST['firma'] : null;
 $forma_wlasnosci = $_POST['forma_wlasnosci'] !== '' ? $_POST['forma_wlasnosci'] : null;
 $numer_polisy = $_POST['numer_polisy'] !== '' ? $_POST['numer_polisy'] : null;
+$wymiana_oleju_data = isset($_POST['wymiana_oleju_data']) && $_POST['wymiana_oleju_data'] !== '' ? $_POST['wymiana_oleju_data'] : null;
+$wymiana_oleju_przebieg = isset($_POST['wymiana_oleju_przebieg']) && $_POST['wymiana_oleju_przebieg'] !== '' ? intval($_POST['wymiana_oleju_przebieg']) : null;
 
 try {
     $stmt = $pdo->prepare(
-        "UPDATE pojazdy SET rejestracja=?, marka=?, model=?, przebieg=?, ubezpieczenie_do=?, przeglad_do=?, aktywny=?, inpost=?, taxi=?, taksometr=?, legalizacja_taksometru_do=?, gaz=?, homologacja_lpg_do=?, firma=?, forma_wlasnosci=?, numer_polisy=? WHERE id=?"
+        "UPDATE pojazdy SET rejestracja=?, marka=?, model=?, przebieg=?, ubezpieczenie_do=?, przeglad_do=?, aktywny=?, inpost=?, taxi=?, taksometr=?, legalizacja_taksometru_do=?, gaz=?, homologacja_lpg_do=?, firma=?, forma_wlasnosci=?, numer_polisy=?, wymiana_oleju_data=?, wymiana_oleju_przebieg=?, oil_reminder_sent_at=NULL, oil_reminder_sent_type=NULL WHERE id=?"
     );
     $stmt->execute([
         $rejestracja, $marka, $model, $przebieg, $ubezpieczenie, $przeglad,
         $aktywny, $inpost, $taxi, $taksometr, $legalizacja, $gaz, $homologacja,
-        $firma, $forma_wlasnosci, $numer_polisy, $id
+        $firma, $forma_wlasnosci, $numer_polisy, $wymiana_oleju_data, $wymiana_oleju_przebieg, $id
     ]);
     echo json_encode(['status' => 'success']);
 } catch (PDOException $e) {

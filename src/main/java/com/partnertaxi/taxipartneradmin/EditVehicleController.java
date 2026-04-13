@@ -33,6 +33,8 @@ public class EditVehicleController {
     @FXML private TextField firmaOtherField;
     @FXML private TextField formaWlasnosciField;
     @FXML private TextField numerPolisyField;
+    @FXML private DatePicker oilChangeDatePicker;
+    @FXML private TextField oilChangeMileageField;
 
     private Vehicle vehicle;
 
@@ -95,6 +97,12 @@ public class EditVehicleController {
 
         formaWlasnosciField.setText(v.getFormaWlasnosci());
         numerPolisyField.setText(v.getNumerPolisy());
+        if (v.getWymianaOlejuData() != null && !v.getWymianaOlejuData().isEmpty()) {
+            oilChangeDatePicker.setValue(LocalDate.parse(v.getWymianaOlejuData()));
+        }
+        if (v.getWymianaOlejuPrzebieg() != null) {
+            oilChangeMileageField.setText(String.valueOf(v.getWymianaOlejuPrzebieg()));
+        }
     }
 
     @FXML
@@ -173,6 +181,22 @@ public class EditVehicleController {
                 showError("Uzupełnij formę własności i numer polisy.");
                 return;
             }
+            String oilChangeDate = oilChangeDatePicker.getValue() == null
+                    ? ""
+                    : oilChangeDatePicker.getValue().toString();
+            String oilChangeMileageText = oilChangeMileageField.getText().trim();
+            if (!oilChangeMileageText.isEmpty()) {
+                try {
+                    int parsed = Integer.parseInt(oilChangeMileageText);
+                    if (parsed < 0) {
+                        showError("Przebieg wymiany oleju nie może być ujemny.");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    showError("Przebieg wymiany oleju musi być liczbą całkowitą.");
+                    return;
+                }
+            }
 
             String postData = "id=" + vehicle.getId()
                     + "&rejestracja=" + URLEncoder.encode(rejestracja, "UTF-8")
@@ -190,7 +214,9 @@ public class EditVehicleController {
                     + "&homologacja_lpg_do=" + URLEncoder.encode(homologacja, "UTF-8")
                     + "&firma=" + URLEncoder.encode(firma, "UTF-8")
                     + "&forma_wlasnosci=" + URLEncoder.encode(formaWlasnosci, "UTF-8")
-                    + "&numer_polisy=" + URLEncoder.encode(numerPolisy, "UTF-8");
+                    + "&numer_polisy=" + URLEncoder.encode(numerPolisy, "UTF-8")
+                    + "&wymiana_oleju_data=" + URLEncoder.encode(oilChangeDate, "UTF-8")
+                    + "&wymiana_oleju_przebieg=" + URLEncoder.encode(oilChangeMileageText, "UTF-8");
 
             URL url = new URL("http://164.126.143.20:8444/api/update_vehicle.php");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
