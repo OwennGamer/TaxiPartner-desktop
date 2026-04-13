@@ -65,7 +65,13 @@
             <Label text="Numer polisy:" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
             <TextField fx:id="numerPolisyField" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
 
-            <Button text="Zapisz zmiany" onAction="#handleSave" GridPane.rowIndex="14" GridPane.columnIndex="1"/>
+            <Label text="Wymiana oleju (data):" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="oilChangeDatePicker" GridPane.rowIndex="14" GridPane.columnIndex="1"/>
+
+            <Label text="Wymiana oleju (km):" GridPane.rowIndex="15" GridPane.columnIndex="0"/>
+            <TextField fx:id="oilChangeMileageField" GridPane.rowIndex="15" GridPane.columnIndex="1"/>
+
+            <Button text="Zapisz zmiany" onAction="#handleSave" GridPane.rowIndex="16" GridPane.columnIndex="1"/>
         </GridPane>
     </center>
 
