@@ -503,6 +503,54 @@ public class ApiClient {
     }
 
 
+
+    public static class VehicleTurnoverDetailRecord {
+        private final int rideId;
+        private final String date;
+        private final String driverId;
+        private final String paymentType;
+        private final String type;
+        private final float amount;
+        private final String sessionStart;
+        private final String sessionEnd;
+
+        public VehicleTurnoverDetailRecord(int rideId, String date, String driverId, String paymentType, String type, float amount, String sessionStart, String sessionEnd) {
+            this.rideId = rideId;
+            this.date = date;
+            this.driverId = driverId;
+            this.paymentType = paymentType;
+            this.type = type;
+            this.amount = amount;
+            this.sessionStart = sessionStart;
+            this.sessionEnd = sessionEnd;
+        }
+
+        public int getRideId() { return rideId; }
+        public String getDate() { return date; }
+        public String getDriverId() { return driverId; }
+        public String getPaymentType() { return paymentType; }
+        public String getType() { return type; }
+        public float getAmount() { return amount; }
+        public String getSessionStart() { return sessionStart; }
+        public String getSessionEnd() { return sessionEnd; }
+    }
+
+    public static class VehicleTurnoverDetailsResult {
+        private final float sum;
+        private final int count;
+        private final List<VehicleTurnoverDetailRecord> records;
+
+        public VehicleTurnoverDetailsResult(float sum, int count, List<VehicleTurnoverDetailRecord> records) {
+            this.sum = sum;
+            this.count = count;
+            this.records = records;
+        }
+
+        public float getSum() { return sum; }
+        public int getCount() { return count; }
+        public List<VehicleTurnoverDetailRecord> getRecords() { return records; }
+    }
+
     public static java.util.Map<String, Float> getVehicleTurnover(String startDate, String endDate) {
         java.util.Map<String, Float> turnoverByVehicle = new java.util.HashMap<>();
         try {
@@ -531,6 +579,48 @@ public class ApiClient {
             e.printStackTrace();
         }
         return turnoverByVehicle;
+    }
+
+
+    public static VehicleTurnoverDetailsResult getVehicleTurnoverDetails(String startDate, String endDate, String vehiclePlate) {
+        List<VehicleTurnoverDetailRecord> records = new ArrayList<>();
+        float sum = 0f;
+        int count = 0;
+        try {
+            String endpoint = String.format(
+                    "get_vehicle_turnover_details.php?start_date=%s&end_date=%s&vehicle_plate=%s",
+                    URLEncoder.encode(startDate, "UTF-8"),
+                    URLEncoder.encode(endDate, "UTF-8"),
+                    URLEncoder.encode(vehiclePlate, "UTF-8")
+            );
+            String json = sendGetRequest(endpoint);
+            if (json != null) {
+                JSONObject resp = new JSONObject(json);
+                if ("success".equals(resp.optString("status"))) {
+                    sum = (float) resp.optDouble("sum", 0.0);
+                    count = resp.optInt("count", 0);
+                    JSONArray arr = resp.optJSONArray("data");
+                    if (arr != null) {
+                        for (int i = 0; i < arr.length(); i++) {
+                            JSONObject o = arr.getJSONObject(i);
+                            records.add(new VehicleTurnoverDetailRecord(
+                                    o.optInt("id", 0),
+                                    o.optString("date", ""),
+                                    o.optString("driver_id", ""),
+                                    o.optString("payment_type", ""),
+                                    o.optString("type", ""),
+                                    (float) o.optDouble("amount", 0.0),
+                                    o.optString("session_start", ""),
+                                    o.optString("session_end", "")
+                            ));
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new VehicleTurnoverDetailsResult(sum, count, records);
     }
 
     public static List<InventoryHistoryRecord> getInventoryHistory(String rejestracja) {

@@ -29,6 +29,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.time.LocalDate;
 import java.text.NumberFormat;
+import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
 
 public class FleetController {
 
@@ -78,6 +80,8 @@ public class FleetController {
     private Button btnService;
     @FXML
     private Button btnDamages;
+    @FXML
+    private Button btnTurnoverDetails;
     @FXML
     private CheckBox chkShowInactive;
     @FXML
@@ -140,6 +144,7 @@ public class FleetController {
                     btnHistory.setDisable(disable);
                     btnService.setDisable(disable);
                     btnDamages.setDisable(disable);
+                    btnTurnoverDetails.setDisable(disable);
                 }
         );
         applyFilter();
@@ -259,6 +264,83 @@ public class FleetController {
         }
     }
 
+
+    @FXML
+    public void onShowTurnoverDetails(ActionEvent event) {
+        Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.WARNING, "Wybierz pojazd z listy.").showAndWait();
+            return;
+        }
+
+        LocalDate start = turnoverStartDate.getValue();
+        LocalDate end = turnoverEndDate.getValue();
+        if (start == null || end == null) {
+            new Alert(Alert.AlertType.WARNING, "Ustaw zakres dat obrotu.").showAndWait();
+            return;
+        }
+
+        ApiClient.VehicleTurnoverDetailsResult result = ApiClient.getVehicleTurnoverDetails(
+                start.toString(),
+                end.toString(),
+                selected.getRejestracja()
+        );
+
+        NumberFormat currencyFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+        currencyFormat.setMinimumFractionDigits(2);
+        currencyFormat.setMaximumFractionDigits(2);
+        currencyFormat.setGroupingUsed(false);
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Szczegóły obrotu pojazdu");
+        dialog.setHeaderText("Pojazd: " + selected.getRejestracja() +
+                " | okres: " + start + " - " + end +
+                " | kursy: " + result.getCount() +
+                " | suma: " + currencyFormat.format(result.getSum()));
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        TableView<ApiClient.VehicleTurnoverDetailRecord> detailsTable = new TableView<>();
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, Integer> colRideId = new TableColumn<>("ID kursu");
+        colRideId.setCellValueFactory(new PropertyValueFactory<>("rideId"));
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, String> colDate = new TableColumn<>("Data");
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, String> colDriver = new TableColumn<>("Kierowca");
+        colDriver.setCellValueFactory(new PropertyValueFactory<>("driverId"));
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, String> colPaymentType = new TableColumn<>("Płatność");
+        colPaymentType.setCellValueFactory(new PropertyValueFactory<>("paymentType"));
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, String> colType = new TableColumn<>("Typ");
+        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, Float> colAmount = new TableColumn<>("Kwota");
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colAmount.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Float item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : currencyFormat.format(item));
+            }
+        });
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, String> colSessionStart = new TableColumn<>("Start zmiany");
+        colSessionStart.setCellValueFactory(new PropertyValueFactory<>("sessionStart"));
+
+        TableColumn<ApiClient.VehicleTurnoverDetailRecord, String> colSessionEnd = new TableColumn<>("Koniec zmiany");
+        colSessionEnd.setCellValueFactory(new PropertyValueFactory<>("sessionEnd"));
+
+        detailsTable.getColumns().addAll(colRideId, colDate, colDriver, colPaymentType, colType, colAmount, colSessionStart, colSessionEnd);
+        detailsTable.setItems(FXCollections.observableArrayList(result.getRecords()));
+
+        Label info = new Label("Wiersze pokazują kursy wliczone do sumy obrotu dla wybranego pojazdu.");
+        VBox box = new VBox(10, info, detailsTable);
+        box.setPadding(new Insets(10));
+        dialog.getDialogPane().setContent(box);
+        dialog.getDialogPane().setPrefSize(1100, 650);
+        dialog.showAndWait();
+    }
     @FXML
     public void onEditVehicle(ActionEvent event) {
         Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
