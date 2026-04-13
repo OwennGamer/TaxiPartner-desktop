@@ -28,6 +28,10 @@
                     text="SZKODY"
                     onAction="#onShowDamages"
                     disable="true"/>
+            <Button fx:id="btnTurnoverDetails"
+                    text="SZCZEGÓŁY OBROTU"
+                    onAction="#onShowTurnoverDetails"
+                    disable="true"/>
             <CheckBox fx:id="chkShowInactive"
                       text="Pokaż nieaktywne"
                       onAction="#onToggleShowInactive"/>

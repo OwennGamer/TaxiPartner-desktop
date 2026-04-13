@@ -583,39 +583,80 @@ public class ApiClient {
 
 
     public static VehicleTurnoverDetailsResult getVehicleTurnoverDetails(String startDate, String endDate, String vehiclePlate) {
+        VehicleTurnoverDetailsResult fallback = new VehicleTurnoverDetailsResult(0f, 0, new ArrayList<>());
+        try {
+            // Kompatybilność z różnymi wersjami backendu:
+            // - nowsza: vehicle_plate
+            // - starsza: rejestracja
+            String[] endpoints = new String[]{
+                    String.format(
+                            "get_vehicle_turnover_details.php?start_date=%s&end_date=%s&vehicle_plate=%s",
+                            URLEncoder.encode(startDate, "UTF-8"),
+                            URLEncoder.encode(endDate, "UTF-8"),
+                            URLEncoder.encode(vehiclePlate, "UTF-8")
+                    ),
+                    String.format(
+                            "get_vehicle_turnover_details.php?start_date=%s&end_date=%s&rejestracja=%s",
+                            URLEncoder.encode(startDate, "UTF-8"),
+                            URLEncoder.encode(endDate, "UTF-8"),
+                            URLEncoder.encode(vehiclePlate, "UTF-8")
+                    )
+            };
+
+            for (String endpoint : endpoints) {
+                VehicleTurnoverDetailsResult parsed = parseVehicleTurnoverDetails(sendGetRequest(endpoint));
+                if (parsed.getCount() > 0 || !parsed.getRecords().isEmpty()) {
+                    return parsed;
+                }
+                fallback = parsed;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fallback;
+    }
+
+    private static VehicleTurnoverDetailsResult parseVehicleTurnoverDetails(String json) {
         List<VehicleTurnoverDetailRecord> records = new ArrayList<>();
         float sum = 0f;
         int count = 0;
+        if (json == null || json.isBlank()) {
+            return new VehicleTurnoverDetailsResult(sum, count, records);
+        }
         try {
-            String endpoint = String.format(
-                    "get_vehicle_turnover_details.php?start_date=%s&end_date=%s&vehicle_plate=%s",
-                    URLEncoder.encode(startDate, "UTF-8"),
-                    URLEncoder.encode(endDate, "UTF-8"),
-                    URLEncoder.encode(vehiclePlate, "UTF-8")
-            );
-            String json = sendGetRequest(endpoint);
-            if (json != null) {
-                JSONObject resp = new JSONObject(json);
-                if ("success".equals(resp.optString("status"))) {
-                    sum = (float) resp.optDouble("sum", 0.0);
-                    count = resp.optInt("count", 0);
-                    JSONArray arr = resp.optJSONArray("data");
-                    if (arr != null) {
-                        for (int i = 0; i < arr.length(); i++) {
-                            JSONObject o = arr.getJSONObject(i);
-                            records.add(new VehicleTurnoverDetailRecord(
-                                    o.optInt("id", 0),
-                                    o.optString("date", ""),
-                                    o.optString("driver_id", ""),
-                                    o.optString("payment_type", ""),
-                                    o.optString("type", ""),
-                                    (float) o.optDouble("amount", 0.0),
-                                    o.optString("session_start", ""),
-                                    o.optString("session_end", "")
-                            ));
-                        }
+            JSONObject resp = new JSONObject(json);
+            // Część środowisk może nie zwracać pola status, ale zwracać dane.
+            if ("error".equalsIgnoreCase(resp.optString("status"))) {
+                return new VehicleTurnoverDetailsResult(sum, count, records);
+            }
+
+            JSONArray arr = resp.optJSONArray("data");
+            if (arr != null) {
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject o = arr.getJSONObject(i);
+                    VehicleTurnoverDetailRecord row = new VehicleTurnoverDetailRecord(
+                            o.optInt("id", 0),
+                            o.optString("date", ""),
+                            o.optString("driver_id", ""),
+                            o.optString("payment_type", ""),
+                            o.optString("type", ""),
+                            (float) o.optDouble("amount", 0.0),
+                            o.optString("session_start", ""),
+                            o.optString("session_end", "")
+                    );
+                    records.add(row);
+                    if (!resp.has("sum")) {
+                        sum += row.getAmount();
                     }
                 }
+            }
+
+            if (resp.has("sum")) {
+                sum = (float) resp.optDouble("sum", sum);
+            }
+            count = resp.optInt("count", records.size());
+            if (count == 0 && !records.isEmpty()) {
+                count = records.size();
             }
         } catch (Exception e) {
             e.printStackTrace();
