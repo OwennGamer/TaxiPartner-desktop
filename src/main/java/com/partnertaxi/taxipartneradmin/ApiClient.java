@@ -635,7 +635,7 @@ public class ApiClient {
                     VehicleTurnoverDetailRecord row = parseTurnoverRow(o);
                     records.add(row);
                 }
-                records = deduplicateTurnoverRows(records);
+                records = deduplicateTurnoverRowsByRideId(records);
                 sum = sumTurnoverRows(records);
                 count = records.size();
                 return new VehicleTurnoverDetailsResult(sum, count, records);
@@ -664,8 +664,8 @@ public class ApiClient {
                 }
             }
 
-            records = deduplicateTurnoverRows(records);
-            sum = sumTurnoverRows(records);
+            records = deduplicateTurnoverRowsByRideId(records);
+            sum = parseTurnoverSum(resp, records);
             count = records.size();
         } catch (Exception e) {
             e.printStackTrace();
@@ -673,30 +673,24 @@ public class ApiClient {
         return new VehicleTurnoverDetailsResult(sum, count, records);
     }
 
-    private static List<VehicleTurnoverDetailRecord> deduplicateTurnoverRows(List<VehicleTurnoverDetailRecord> rows) {
+    private static List<VehicleTurnoverDetailRecord> deduplicateTurnoverRowsByRideId(List<VehicleTurnoverDetailRecord> rows) {
         java.util.Map<String, VehicleTurnoverDetailRecord> unique = new java.util.LinkedHashMap<>();
+        int index = 0;
         for (VehicleTurnoverDetailRecord row : rows) {
             if (row == null) continue;
-            unique.putIfAbsent(turnoverRowKey(row), row);
+            String key = turnoverRowKey(row, index++);
+            unique.putIfAbsent(key, row);
         }
         return new ArrayList<>(unique.values());
     }
 
-    private static String turnoverRowKey(VehicleTurnoverDetailRecord row) {
+    private static String turnoverRowKey(VehicleTurnoverDetailRecord row, int fallbackIndex) {
         if (row.getRideId() > 0) {
             return "ride:" + row.getRideId();
         }
-        return String.join("|",
-                sanitizeKeyPart(row.getDate()),
-                sanitizeKeyPart(row.getDriverId()),
-                sanitizeKeyPart(row.getPaymentType()),
-                sanitizeKeyPart(row.getType()),
-                Float.toString(row.getAmount())
-        );
-    }
-
-    private static String sanitizeKeyPart(String value) {
-        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
+        // Jeżeli backend nie zwraca ID kursu, nie deduplikujemy "po treści" –
+        // wiele różnych kursów może mieć identyczne pola.
+        return "idx:" + fallbackIndex;
     }
 
     private static float sumTurnoverRows(List<VehicleTurnoverDetailRecord> rows) {
@@ -707,6 +701,34 @@ public class ApiClient {
             }
         }
         return total;
+    }
+
+    private static float parseTurnoverSum(JSONObject response, List<VehicleTurnoverDetailRecord> rows) {
+        if (response != null) {
+            double topLevel = firstNonNaNDouble(
+                    response.optDouble("sum", Double.NaN),
+                    response.optDouble("turnover_sum", Double.NaN),
+                    response.optDouble("total_turnover", Double.NaN),
+                    Double.NaN
+            );
+            if (!Double.isNaN(topLevel)) {
+                return (float) topLevel;
+            }
+
+            JSONObject dataObject = response.optJSONObject("data");
+            if (dataObject != null) {
+                double nested = firstNonNaNDouble(
+                        dataObject.optDouble("sum", Double.NaN),
+                        dataObject.optDouble("turnover_sum", Double.NaN),
+                        dataObject.optDouble("total_turnover", Double.NaN),
+                        Double.NaN
+                );
+                if (!Double.isNaN(nested)) {
+                    return (float) nested;
+                }
+            }
+        }
+        return sumTurnoverRows(rows);
     }
 
     private static VehicleTurnoverDetailRecord parseTurnoverRow(JSONObject o) {
