@@ -8,7 +8,10 @@ require_once __DIR__ . '/fcm_v1.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-const OIL_ALERT_EMAIL = 'serwis@taxi-partner.com.pl';
+const OIL_ALERT_EMAIL = [
+    'serwis@taxi-partner.com.pl',
+    'pawel.turek330@gmail.com'
+];
 
 function pickReminderType(?int $daysLeft, ?int $kmLeft): ?string
 {
@@ -41,6 +44,7 @@ function sendOilEmail(array $vehicle, string $triggerType): void
     $marka = $vehicle['marka'] ?? '';
     $model = $vehicle['model'] ?? '';
     $triggerText = $triggerType === 'date' ? 'za 7 dni' : 'za 500km';
+
     $subject = 'ZBLIŻA SIĘ TERMIN WYMIANY OLEJU "' . $plate . '"';
     $body = 'Pojazd marki "' . $marka . '" "' . $model . '" o numerze rejestracyjnym "' . $plate
         . '" wymaga wymiany oleju ' . $triggerText . '.';
@@ -54,11 +58,18 @@ function sendOilEmail(array $vehicle, string $triggerType): void
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = getenv('SMTP_PORT') ?: 587;
     $mail->CharSet = 'UTF-8';
+
     $mail->setFrom($mail->Username, 'Taxi Partner');
-    $mail->addAddress(OIL_ALERT_EMAIL);
+
+    // ✅ POPRAWKA: wiele maili
+    foreach (OIL_ALERT_EMAIL as $email) {
+        $mail->addAddress(trim($email));
+    }
+
     $mail->isHTML(false);
     $mail->Subject = $subject;
     $mail->Body = $body;
+
     $mail->send();
 }
 
@@ -68,6 +79,7 @@ function sendOilPush(PDO $pdo, array $vehicle, string $triggerType): int
     $marka = $vehicle['marka'] ?? '';
     $model = $vehicle['model'] ?? '';
     $triggerText = $triggerType === 'date' ? 'za 7 dni' : 'za 500km';
+
     $title = 'ZBLIŻA SIĘ TERMIN WYMIANY OLEJU "' . $plate . '"';
     $body = 'Pojazd marki "' . $marka . '" "' . $model . '" o numerze rejestracyjnym "' . $plate
         . '" wymaga wymiany oleju ' . $triggerText . '.';
@@ -79,8 +91,10 @@ function sendOilPush(PDO $pdo, array $vehicle, string $triggerType): int
           AND fcm_token IS NOT NULL
           AND fcm_token <> ''
     ");
+
     $tokens = $stmt->fetchAll(PDO::FETCH_COLUMN);
     $sent = 0;
+
     foreach ($tokens as $token) {
         try {
             $resp = sendFcmV1((string)$token, $title, $body, [
@@ -95,17 +109,20 @@ function sendOilPush(PDO $pdo, array $vehicle, string $triggerType): int
             error_log('FCM oil reminder error: ' . $e->getMessage());
         }
     }
+
     return $sent;
 }
 
 try {
     $today = new DateTimeImmutable('today');
+
     $stmt = $pdo->query("
         SELECT id, rejestracja, marka, model, przebieg, wymiana_oleju_data, wymiana_oleju_przebieg,
                oil_reminder_sent_at, oil_reminder_sent_type
         FROM pojazdy
         WHERE wymiana_oleju_data IS NOT NULL OR wymiana_oleju_przebieg IS NOT NULL
     ");
+
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $updateSent = $pdo->prepare("
@@ -114,6 +131,7 @@ try {
             oil_reminder_sent_type = :type
         WHERE id = :id
     ");
+
     $clearSent = $pdo->prepare("
         UPDATE pojazdy
         SET oil_reminder_sent_at = NULL,
@@ -122,6 +140,7 @@ try {
     ");
 
     foreach ($vehicles as $vehicle) {
+
         $daysLeft = null;
         if (!empty($vehicle['wymiana_oleju_data'])) {
             $dueDate = DateTimeImmutable::createFromFormat('Y-m-d', (string)$vehicle['wymiana_oleju_data']);
@@ -136,6 +155,7 @@ try {
         }
 
         $triggerType = pickReminderType($daysLeft, $kmLeft);
+
         if ($triggerType === null) {
             if (!empty($vehicle['oil_reminder_sent_at'])) {
                 $clearSent->execute([':id' => (int)$vehicle['id']]);
@@ -154,6 +174,7 @@ try {
         }
 
         sendOilPush($pdo, $vehicle, $triggerType);
+
         $updateSent->execute([
             ':id' => (int)$vehicle['id'],
             ':type' => $triggerType
@@ -161,6 +182,7 @@ try {
     }
 
     echo json_encode(['status' => 'success', 'checked' => count($vehicles)], JSON_UNESCAPED_UNICODE);
+
 } catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()], JSON_UNESCAPED_UNICODE);

@@ -634,8 +634,9 @@ public class ApiClient {
                     if (o == null) continue;
                     VehicleTurnoverDetailRecord row = parseTurnoverRow(o);
                     records.add(row);
-                    sum += row.getAmount();
                 }
+                records = deduplicateTurnoverRows(records);
+                sum = sumTurnoverRows(records);
                 count = records.size();
                 return new VehicleTurnoverDetailsResult(sum, count, records);
             }
@@ -659,30 +660,53 @@ public class ApiClient {
                     if (o == null) continue;
                     VehicleTurnoverDetailRecord row = parseTurnoverRow(o);
                     records.add(row);
-                    if (!resp.has("sum") && !resp.has("total") && !resp.has("turnover")) {
-                        sum += row.getAmount();
-                    }
+
                 }
             }
 
-            if (resp.has("sum") || resp.has("total") || resp.has("turnover")) {
-                sum = (float) firstNonNaNDouble(
-                        resp.optDouble("sum", Double.NaN),
-                        resp.optDouble("total", Double.NaN),
-                        resp.optDouble("turnover", Double.NaN),
-                        sum
-                );
-            }
-            count = firstNonZeroInt(
-                    resp.optInt("count", 0),
-                    resp.optInt("rows_count", 0),
-                    resp.optInt("total_count", 0),
-                    records.size()
-            );
+            records = deduplicateTurnoverRows(records);
+            sum = sumTurnoverRows(records);
+            count = records.size();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new VehicleTurnoverDetailsResult(sum, count, records);
+    }
+
+    private static List<VehicleTurnoverDetailRecord> deduplicateTurnoverRows(List<VehicleTurnoverDetailRecord> rows) {
+        java.util.Map<String, VehicleTurnoverDetailRecord> unique = new java.util.LinkedHashMap<>();
+        for (VehicleTurnoverDetailRecord row : rows) {
+            if (row == null) continue;
+            unique.putIfAbsent(turnoverRowKey(row), row);
+        }
+        return new ArrayList<>(unique.values());
+    }
+
+    private static String turnoverRowKey(VehicleTurnoverDetailRecord row) {
+        if (row.getRideId() > 0) {
+            return "ride:" + row.getRideId();
+        }
+        return String.join("|",
+                sanitizeKeyPart(row.getDate()),
+                sanitizeKeyPart(row.getDriverId()),
+                sanitizeKeyPart(row.getPaymentType()),
+                sanitizeKeyPart(row.getType()),
+                Float.toString(row.getAmount())
+        );
+    }
+
+    private static String sanitizeKeyPart(String value) {
+        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
+    }
+
+    private static float sumTurnoverRows(List<VehicleTurnoverDetailRecord> rows) {
+        float total = 0f;
+        for (VehicleTurnoverDetailRecord row : rows) {
+            if (row != null) {
+                total += row.getAmount();
+            }
+        }
+        return total;
     }
 
     private static VehicleTurnoverDetailRecord parseTurnoverRow(JSONObject o) {
