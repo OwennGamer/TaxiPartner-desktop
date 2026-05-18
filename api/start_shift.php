@@ -23,7 +23,7 @@ if (!$decoded) {
 }
 
 $driver_id = $decoded->user_id;
-$vehicle_plate = trim($_POST['vehicle_plate'] ?? '');
+$vehicle_plate = trim((string)($_POST['vehicle_plate'] ?? ''));
 $start_odometer = isset($_POST['start_odometer']) ? intval($_POST['start_odometer']) : null;
 
 if ($vehicle_plate === '' || $start_odometer === null) {
@@ -34,6 +34,19 @@ if ($vehicle_plate === '' || $start_odometer === null) {
 
 try {
     $pdo->beginTransaction();
+
+    $normalizePlate = static function (?string $value): string {
+        $normalizedValue = trim((string)$value);
+        $normalizedValue = preg_replace('/\s+/', '', $normalizedValue) ?? '';
+
+        if (function_exists('mb_strtoupper')) {
+            return mb_strtoupper($normalizedValue, 'UTF-8');
+        }
+
+        return strtoupper($normalizedValue);
+    };
+
+    $normalizedVehiclePlate = $normalizePlate($vehicle_plate);
 
     $normalizeId = static function (?string $value): string {
         $normalizedValue = trim((string)$value);
@@ -47,9 +60,9 @@ try {
 
     // Sprawdzenie ostatniego kierowcy, który jeździł tym pojazdem
     $stmtLastVehicleDriver = $pdo->prepare(
-        "SELECT driver_id FROM work_sessions WHERE LOWER(vehicle_plate) = LOWER(?) ORDER BY start_time DESC, id DESC LIMIT 1"
+        "SELECT driver_id FROM work_sessions WHERE UPPER(REPLACE(TRIM(vehicle_plate),' ' ,'')) = ? ORDER BY COALESCE(end_time, start_time) DESC, id DESC LIMIT 1"
     );
-    $stmtLastVehicleDriver->execute([$vehicle_plate]);
+    $stmtLastVehicleDriver->execute([$normalizedVehiclePlate]);
     $lastVehicleDriver = $stmtLastVehicleDriver->fetchColumn();
 
     // Inwentaryzacja wymagana, gdy kierowca się zmienia lub brak historii dla pojazdu
@@ -59,12 +72,12 @@ try {
     // Automatyczne zamknięcie otwartej sesji poprzedniego kierowcy na tym samym pojeździe
     $stmtOpenVehicleSession = $pdo->prepare(
         "SELECT id, driver_id FROM work_sessions
-         WHERE LOWER(vehicle_plate) = LOWER(?)
+         WHERE UPPER(REPLACE(TRIM(vehicle_plate),' ' ,'')) = ?
            AND end_time IS NULL
          ORDER BY start_time DESC, id DESC
          LIMIT 1"
     );
-    $stmtOpenVehicleSession->execute([$vehicle_plate]);
+    $stmtOpenVehicleSession->execute([$normalizedVehiclePlate]);
     $openVehicleSession = $stmtOpenVehicleSession->fetch(PDO::FETCH_ASSOC);
 
     $autoClosedSessionId = null;
@@ -105,7 +118,7 @@ try {
     $prevVehicle = $stmtPrev->fetchColumn();
 
     // Jeśli zmieniono pojazd — wyślij e-mail
-    if ($prevVehicle && $prevVehicle !== $vehicle_plate) {
+    if ($prevVehicle && $normalizePlate($prevVehicle) !== $normalizedVehiclePlate) {
         $mailerAvailable = loadMailer();
         if ($mailerAvailable) {
             try {
