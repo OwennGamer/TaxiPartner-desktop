@@ -30,6 +30,7 @@ class HistoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val entry = items[position]
+        holder.tvDateTime.text = entry.dateTime
         holder.tvSource.text = entry.source
         holder.tvPaymentType.text = entry.paymentType
         holder.tvAmount.text = "${entry.amount} zł"
