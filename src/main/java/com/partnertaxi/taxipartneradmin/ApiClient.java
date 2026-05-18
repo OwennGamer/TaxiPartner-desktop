@@ -704,6 +704,13 @@ public class ApiClient {
     }
 
     private static float parseTurnoverSum(JSONObject response, List<VehicleTurnoverDetailRecord> rows) {
+        // Priorytet: suma z faktycznie zwróconych rekordów kursów.
+        // Część środowisk backendu zwraca pola sumaryczne dla innego kontekstu
+        // (np. szerszego zakresu), co zawyża wynik względem listy szczegółów.
+        if (rows != null && !rows.isEmpty()) {
+            return sumTurnoverRows(rows);
+        }
+
         if (response != null) {
             double topLevel = firstNonNaNDouble(
                     response.optDouble("sum", Double.NaN),
@@ -728,7 +735,7 @@ public class ApiClient {
                 }
             }
         }
-        return sumTurnoverRows(rows);
+        return 0f;
     }
 
     private static VehicleTurnoverDetailRecord parseTurnoverRow(JSONObject o) {
