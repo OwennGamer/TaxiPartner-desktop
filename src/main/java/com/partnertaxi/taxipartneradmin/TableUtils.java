@@ -24,11 +24,16 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
 import javafx.geometry.Orientation;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -219,7 +224,76 @@ public class TableUtils {
     public static <T> void enableExcelFilterAndExport(TableView<T> table, String exportPrefix) {
         Platform.runLater(() -> {
             TableFilter.forTableView(table).lazy(true).apply();
+            ensureColumnFilterBar(table);
             ensureExportButton(table, exportPrefix);
+        });
+    }
+
+    private static <T> void ensureColumnFilterBar(TableView<T> table) {
+        if (table.getProperties().containsKey("columnFilterBarInstalled")) {
+            return;
+        }
+        table.getProperties().put("columnFilterBarInstalled", Boolean.TRUE);
+
+        ObservableList<T> sourceItems = table.getItems();
+        FilteredList<T> filteredItems = new FilteredList<>(sourceItems, row -> true);
+        SortedList<T> sortedItems = new SortedList<>(filteredItems);
+        sortedItems.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortedItems);
+
+        List<TableColumn<T, ?>> columns = table.getVisibleLeafColumns();
+        List<TextField> filters = new ArrayList<>();
+        HBox filterBar = new HBox(6);
+        filterBar.setStyle("-fx-padding: 0 0 8 0;");
+
+        for (TableColumn<T, ?> column : columns) {
+            TextField filterField = new TextField();
+            filterField.setPromptText("Filtr: " + column.getText());
+            filterField.setPrefWidth(Math.max(120, column.getWidth()));
+            HBox.setHgrow(filterField, Priority.ALWAYS);
+            filters.add(filterField);
+            filterBar.getChildren().add(filterField);
+            filterField.textProperty().addListener((obs, oldValue, newValue) ->
+                    applyColumnFilters(filteredItems, columns, filters));
+        }
+
+        if (table.getParent() instanceof BorderPane bp) {
+            Node top = bp.getTop();
+            if (top == null) {
+                bp.setTop(filterBar);
+            } else {
+                bp.setTop(new VBox(filterBar, top));
+            }
+        } else if (table.getParent() instanceof VBox vb) {
+            int tableIndex = vb.getChildren().indexOf(table);
+            if (tableIndex >= 0) {
+                vb.getChildren().add(tableIndex, filterBar);
+            } else {
+                vb.getChildren().add(0, filterBar);
+            }
+        }
+    }
+
+    private static <T> void applyColumnFilters(
+            FilteredList<T> filteredItems,
+            List<TableColumn<T, ?>> columns,
+            List<TextField> filters
+    ) {
+        filteredItems.setPredicate(item -> {
+            for (int i = 0; i < columns.size(); i++) {
+                String filterValue = filters.get(i).getText();
+                if (filterValue == null || filterValue.isBlank()) {
+                    continue;
+                }
+                ObservableValue<?> cellValue = columns.get(i).getCellObservableValue(item);
+                String cellText = cellValue == null || cellValue.getValue() == null
+                        ? ""
+                        : String.valueOf(cellValue.getValue());
+                if (!cellText.toLowerCase(Locale.ROOT).contains(filterValue.toLowerCase(Locale.ROOT))) {
+                    return false;
+                }
+            }
+            return true;
         });
     }
 
