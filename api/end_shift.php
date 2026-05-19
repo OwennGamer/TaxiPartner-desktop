@@ -19,7 +19,8 @@ if (!$decoded) {
 }
 
 $driver_id = $decoded->user_id;
-$end_odometer = isset($_POST['end_odometer']) ? intval($_POST['end_odometer']) : null;
+$endOdometerRaw = $_POST['end_odometer'] ?? null;
+$end_odometer = is_numeric($endOdometerRaw) ? (int)$endOdometerRaw : null;
 
 if ($end_odometer === null) {
     http_response_code(400);

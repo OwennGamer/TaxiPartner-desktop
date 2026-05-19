@@ -35,6 +35,18 @@ if ($vehicle_plate === '' || $start_odometer === null) {
 try {
     $pdo->beginTransaction();
 
+    // Uzupełnij brakujący przebieg dla ostatniej auto-zamkniętej sesji tego pojazdu
+    // (sesja zamknięta czasowo, ale bez wpisanego end_odometer).
+    $stmtFillAutoClosed = $pdo->prepare(
+        "UPDATE work_sessions\n" .
+        "   SET end_odometer = ?\n" .
+        " WHERE UPPER(REPLACE(TRIM(vehicle_plate),' ' ,'')) = ?\n" .
+        "   AND end_time IS NOT NULL\n" .
+        "   AND end_odometer IS NULL\n" .
+        " ORDER BY end_time DESC, id DESC\n" .
+        " LIMIT 1"
+    );
+
     $normalizePlate = static function (?string $value): string {
         $normalizedValue = trim((string)$value);
         $normalizedValue = preg_replace('/\s+/', '', $normalizedValue) ?? '';
@@ -47,6 +59,11 @@ try {
     };
 
     $normalizedVehiclePlate = $normalizePlate($vehicle_plate);
+    
+    $stmtFillAutoClosed->execute([
+        $start_odometer,
+        $normalizedVehiclePlate,
+    ]);
 
     $normalizeId = static function (?string $value): string {
         $normalizedValue = trim((string)$value);
@@ -87,11 +104,11 @@ try {
     ) {
         $stmtAutoCloseSession = $pdo->prepare(
             "UPDATE work_sessions
-             SET end_time = NOW(), end_odometer = ?
+             SET end_time = NOW(), end_odometer = NULL
              WHERE id = ?"
         );
         $stmtAutoCloseSession->execute([
-            $start_odometer,
+            
             (int)$openVehicleSession['id'],
         ]);
         $autoClosedSessionId = (int)$openVehicleSession['id'];
