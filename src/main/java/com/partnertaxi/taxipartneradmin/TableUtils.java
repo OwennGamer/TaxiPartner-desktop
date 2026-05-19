@@ -270,9 +270,10 @@ public class TableUtils {
             for (Object item : table.getItems()) {
                 Row row = sheet.createRow(rowNo++);
                 for (int c = 0; c < table.getColumns().size(); c++) {
-                    Object value = table.getColumns().get(c).getCellObservableValue(item) != null
-                            ? table.getColumns().get(c).getCellObservableValue(item).getValue()
-                            : null;
+                    @SuppressWarnings("unchecked")
+                    TableColumn<Object, ?> column = (TableColumn<Object, ?>) table.getColumns().get(c);
+                    ObservableValue<?> observableValue = column.getCellObservableValue(item);
+                    Object value = observableValue != null ? observableValue.getValue() : null;
                     row.createCell(c).setCellValue(value == null ? "" : value.toString());
                 }
             }
