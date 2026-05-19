@@ -126,6 +126,7 @@ public class HistoryController {
 
         TableUtils.enableCopyOnCtrlC(historyTable);
         TableUtils.enableColumnsOrderPersistence(historyTable, HistoryController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(historyTable, "History");
     }
 
     private void loadHistory() {

@@ -49,6 +49,7 @@ public class DriverWorkController {
 
         TableUtils.enableCopyOnCtrlC(workTable);
         TableUtils.enableColumnsOrderPersistence(workTable, DriverWorkController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(workTable, "DriverWork");
     }
 
     private String formatHoursAndMinutes(float hours) {

@@ -50,6 +50,7 @@ public class VehicleInventoryHistoryController {
 
         TableUtils.enableCopyOnCtrlC(histTable);
         TableUtils.enableColumnsOrderPersistence(histTable, VehicleInventoryHistoryController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(histTable, "VehicleInventoryHistory");
     }
 
     /**

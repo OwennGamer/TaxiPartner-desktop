@@ -103,6 +103,7 @@ public class EmployeesController {
 
 
         TableUtils.enableColumnsOrderPersistence(employeesTable, EmployeesController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(employeesTable, "Employees");
     }
 
     @FXML

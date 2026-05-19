@@ -10,6 +10,9 @@ module com.partnertaxi.taxipartneradmin {
     requires okhttp3;
     requires com.google.gson;
     requires kotlin.stdlib;
+    requires org.controlsfx.controls;
+    requires org.apache.poi.ooxml;
+    requires org.apache.poi.poi;
 
     // Udostępniamy pakiety do obsługi FXML
     opens com.partnertaxi.taxipartneradmin to javafx.fxml;

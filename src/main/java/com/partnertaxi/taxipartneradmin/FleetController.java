@@ -161,6 +161,7 @@ public class FleetController {
 
         TableUtils.enableCopyOnCtrlC(vehicleTable);
         TableUtils.enableColumnsOrderPersistence(vehicleTable, FleetController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(vehicleTable, "Fleet");
     }
 
     @FXML

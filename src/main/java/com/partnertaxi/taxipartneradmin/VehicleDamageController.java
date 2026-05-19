@@ -79,6 +79,7 @@ public class VehicleDamageController {
 
         TableUtils.enableCopyOnCtrlC(damageTable);
         TableUtils.enableColumnsOrderPersistence(damageTable, VehicleDamageController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(damageTable, "VehicleDamage");
 
         if (editDamageButton != null) {
             editDamageButton.disableProperty().bind(Bindings.isNull(damageTable.getSelectionModel().selectedItemProperty()));

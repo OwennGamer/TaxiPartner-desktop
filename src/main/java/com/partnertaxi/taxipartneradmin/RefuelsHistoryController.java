@@ -76,6 +76,7 @@ public class RefuelsHistoryController implements Initializable {
 
         TableUtils.enableCopyOnCtrlC(refuelsTable);
         TableUtils.enableColumnsOrderPersistence(refuelsTable, RefuelsHistoryController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(refuelsTable, "RefuelsHistory");
     }
 
     /** Odświeża listę tankowań */

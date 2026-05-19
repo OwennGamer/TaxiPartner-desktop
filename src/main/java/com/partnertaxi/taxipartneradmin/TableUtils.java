@@ -1,6 +1,23 @@
 package com.partnertaxi.taxipartneradmin;
 
 import javafx.scene.control.TableView;
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.controlsfx.control.table.TableFilter;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javafx.scene.control.TablePosition;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -197,5 +214,75 @@ public class TableUtils {
                 attach.run();
             }
         });
+    }
+    public static <T> void enableExcelFilterAndExport(TableView<T> table, String exportPrefix) {
+        Platform.runLater(() -> {
+            TableFilter.forTableView(table).lazy(true).apply();
+            ensureExportButton(table, exportPrefix);
+        });
+    }
+
+    private static void ensureExportButton(TableView<?> table, String exportPrefix) {
+        if (table.getScene() == null || table.getProperties().containsKey("excelExportInstalled")) {
+            return;
+        }
+        table.getProperties().put("excelExportInstalled", Boolean.TRUE);
+
+        Button exportBtn = new Button("Eksportuj widok do Excel");
+        exportBtn.setTooltip(new Tooltip("Eksportuje aktualnie widoczne wiersze i kolumny (z filtrami)."));
+        exportBtn.setOnAction(event -> exportTableToExcel(table, exportPrefix));
+
+        if (table.getParent() instanceof BorderPane bp) {
+            bp.setBottom(new HBox(exportBtn));
+            return;
+        }
+        if (table.getParent() instanceof javafx.scene.layout.VBox vb) {
+            HBox wrapper = new HBox(exportBtn);
+            wrapper.setStyle("-fx-padding: 8 0 0 0;");
+            vb.getChildren().add(wrapper);
+            return;
+        }
+
+        table.setPlaceholder(new javafx.scene.control.Label("Brak danych. Eksport dostępny po załadowaniu tabeli."));
+    }
+
+    private static void exportTableToExcel(TableView<?> table, String exportPrefix) {
+        Window window = table.getScene() != null ? table.getScene().getWindow() : null;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Zapisz eksport Excel");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel (*.xlsx)", "*.xlsx"));
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+        fileChooser.setInitialFileName(exportPrefix + "_" + timestamp + ".xlsx");
+        var saveFile = fileChooser.showSaveDialog(window);
+        if (saveFile == null) {
+            return;
+        }
+
+        try (XSSFWorkbook workbook = new XSSFWorkbook(); FileOutputStream out = new FileOutputStream(saveFile)) {
+            XSSFSheet sheet = workbook.createSheet("Dane");
+            Row header = sheet.createRow(0);
+            for (int c = 0; c < table.getColumns().size(); c++) {
+                Cell cell = header.createCell(c);
+                cell.setCellValue(table.getColumns().get(c).getText());
+            }
+
+            int rowNo = 1;
+            for (Object item : table.getItems()) {
+                Row row = sheet.createRow(rowNo++);
+                for (int c = 0; c < table.getColumns().size(); c++) {
+                    Object value = table.getColumns().get(c).getCellObservableValue(item) != null
+                            ? table.getColumns().get(c).getCellObservableValue(item).getValue()
+                            : null;
+                    row.createCell(c).setCellValue(value == null ? "" : value.toString());
+                }
+            }
+            for (int c = 0; c < table.getColumns().size(); c++) {
+                sheet.autoSizeColumn(c);
+            }
+            workbook.write(out);
+        } catch (IOException ex) {
+            new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR,
+                    "Nie udało się zapisać pliku Excel: " + ex.getMessage()).showAndWait();
+        }
     }
 }

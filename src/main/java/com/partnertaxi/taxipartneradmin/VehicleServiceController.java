@@ -77,6 +77,7 @@ public class VehicleServiceController {
 
         TableUtils.enableCopyOnCtrlC(serviceTable);
         TableUtils.enableColumnsOrderPersistence(serviceTable, VehicleServiceController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(serviceTable, "VehicleService");
 
         if (editServiceButton != null) {
             editServiceButton.disableProperty().bind(Bindings.isNull(serviceTable.getSelectionModel().selectedItemProperty()));

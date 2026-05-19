@@ -41,6 +41,8 @@ dependencies {
   implementation "com.google.code.gson:gson:2.8.9"
   implementation "mysql:mysql-connector-java:8.0.33"
   implementation "org.json:json:20230227"
+  implementation "org.controlsfx:controlsfx:11.2.1"
+  implementation "org.apache.poi:poi-ooxml:5.2.5"
 }
 
 tasks.withType(JavaCompile).configureEach {

@@ -211,6 +211,7 @@ public class DriversController {
 
         // 10) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
+        TableUtils.enableExcelFilterAndExport(driversTable, "Drivers");
 
 // 11) Row factory to style summary row
         driversTable.setRowFactory(tv -> new TableRow<>() {
