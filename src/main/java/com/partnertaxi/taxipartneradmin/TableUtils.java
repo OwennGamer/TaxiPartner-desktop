@@ -24,6 +24,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
