@@ -1,6 +1,7 @@
 package com.partnertaxi.taxipartneradmin;
 
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -23,15 +24,19 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
 import javafx.geometry.Orientation;
 import java.math.BigInteger;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.prefs.Preferences;
+import javafx.beans.value.ObservableValue;
 
 public class TableUtils {
 
