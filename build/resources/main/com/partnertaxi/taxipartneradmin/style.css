@@ -1,7 +1,83 @@
-/* Application wide styles */
+.root {
+    -fx-font-family: "Segoe UI", "Inter", "Roboto", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: linear-gradient(to bottom, #F7FAFF, #EEF3FA);
+    -fx-text-fill: #1A2433;
+}
+
+.label {
+    -fx-text-fill: #1A2433;
+}
+
+.menu-bar {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DCE5F2;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #1A2433;
+}
+
+.button {
+    -fx-background-color: #1D6FF2;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 10 16;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #175DCC;
+}
+
+.button:pressed {
+    -fx-background-color: #124AA3;
+}
+
+.button.secondary {
+    -fx-background-color: #E9F0FC;
+    -fx-text-fill: #1A2433;
+}
+
+.text-field,
+.password-field,
+.combo-box,
+.date-picker,
+.text-area {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #C7D4E8;
+    -fx-border-width: 1;
+    -fx-padding: 8 10;
+}
+
+.text-area .content {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+}
+
+.table-view {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+    -fx-border-color: #D4DEED;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #EEF3FB;
+    -fx-background-radius: 14 14 0 0;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #DDEBFF;
+}
 
 .placeholder-label {
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.65;
     -fx-padding: 0 0 0 4;
 }
 
@@ -10,11 +86,18 @@
 }
 
 .summary-row {
-    -fx-background-color: lightblue;
-    -fx-border-color: lightblue transparent lightblue lightblue;
+    -fx-background-color: #EAF2FF;
+    -fx-border-color: #D5E4FF transparent #D5E4FF #D5E4FF;
     -fx-border-width: 1 0 1 0;
 }
 
+.card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 16;
+    -fx-border-color: #D6E0EE;
+    -fx-border-radius: 16;
+    -fx-padding: 20;
+}
 .font-24 { -fx-font-size: 24px; }
 .font-20 { -fx-font-size: 20px; }
 .font-18 { -fx-font-size: 18px; }

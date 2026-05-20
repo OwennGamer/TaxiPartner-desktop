@@ -7,21 +7,24 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.partnertaxi.taxipartneradmin.LoginController">
     <children>
-        <VBox alignment="CENTER" spacing="10.0"
-              AnchorPane.topAnchor="20.0"
-              AnchorPane.leftAnchor="20.0"
-              AnchorPane.rightAnchor="20.0">
+        <VBox alignment="CENTER" spacing="14.0" styleClass="card" maxWidth="420.0"
+              AnchorPane.topAnchor="24.0"
+              AnchorPane.leftAnchor="24.0"
+              AnchorPane.rightAnchor="24.0">
             <Label text="Logowanie do panelu Taxi Partner Admin"
                    styleClass="font-16 bold-text" />
 
             <TextField fx:id="usernameField"
-                       promptText="Login" />
+                       promptText="Login"
+                       maxWidth="320.0" />
 
             <PasswordField fx:id="passwordField"
-                           promptText="Hasło" />
+                           promptText="Hasło"
+                           maxWidth="320.0" />
 
             <Button fx:id="loginButton"
                     text="Zaloguj"
+                    maxWidth="320.0"
                     onAction="#handleLoginButton"
                     defaultButton="true" />
         </VBox>
