@@ -1,9 +1,11 @@
 package com.partnertaxi.taxipartneradmin;
 
 import javafx.application.Application;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.InputStream;
 import java.util.Locale;
@@ -47,10 +49,14 @@ public class HelloApplication extends Application {
             e.printStackTrace();
         }
 
-        // Domyślny tytuł okna
-        changeScene("login-view.fxml", "Partner Taxi");
+        // Najpierw ekran powitalny z animacją, potem logowanie
+        changeScene("splash-view.fxml", "Partner Taxi");
         stage.setMaximized(true);
         stage.show();
+
+        PauseTransition splashDelay = new PauseTransition(Duration.seconds(2.6));
+        splashDelay.setOnFinished(event -> changeScene("login-view.fxml", "Partner Taxi"));
+        splashDelay.play();
 
         // Sprawdzenie aktualizacji w osobnym wątku, aby nie blokować wątku UI
         new Thread(Updater::checkForUpdates).start();

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="splashRoot"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.partnertaxi.taxipartneradmin.SplashController"
+           styleClass="splash-root">
+
+    <children>
+        <VBox fx:id="contentBox"
+              alignment="CENTER"
+              spacing="16.0"
+              styleClass="splash-card"
+              maxWidth="560.0"
+              maxHeight="420.0">
+            <padding>
+                <Insets top="34.0" right="40.0" bottom="34.0" left="40.0"/>
+            </padding>
+
+            <ImageView fx:id="logoImage" fitWidth="132.0" preserveRatio="true" smooth="true">
+                <image>
+                    <Image url="@/icons/app-icon.png"/>
+                </image>
+            </ImageView>
+
+            <Label fx:id="welcomeTitle" text="WITAMY W PARTNER TAXI" styleClass="splash-title"/>
+            <Label fx:id="welcomeSubtitle" text="Panel administracyjny" styleClass="splash-subtitle"/>
+        </VBox>
+    </children>
+</StackPane>
