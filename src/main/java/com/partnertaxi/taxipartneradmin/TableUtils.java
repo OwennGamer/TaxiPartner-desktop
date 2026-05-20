@@ -29,7 +29,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
-import javafx.collections.ObservableSet;
 import javafx.geometry.Orientation;
 import java.math.BigInteger;
 import java.text.NumberFormat;
@@ -236,8 +235,8 @@ public class TableUtils {
 
         Platform.runLater(() -> {
             localizeVisibleTableFilterPopups();
-            ObservableSet<Window> windows = Window.getWindows();
-            windows.addListener((javafx.collections.SetChangeListener<Window>) change -> localizeVisibleTableFilterPopups());
+            ObservableList<Window> windows = Window.getWindows();
+            windows.addListener((ListChangeListener<Window>) change -> localizeVisibleTableFilterPopups());
         });
     }
 
@@ -254,8 +253,8 @@ public class TableUtils {
         if (node instanceof Button button) {
             String text = button.getText();
             if ("APPLY".equalsIgnoreCase(text)) button.setText("OK");
-            if ("NONE".equalsIgnoreCase(text)) button.setText("ODZNACZ WSZYTSKO");
-            if ("ALL".equalsIgnoreCase(text)) button.setText("ZAZNACZ WSZYTSKO");
+            if ("NONE".equalsIgnoreCase(text)) button.setText("ODZNACZ WSZYSTKO");
+            if ("ALL".equalsIgnoreCase(text)) button.setText("ZAZNACZ WSZYSTKO");
             if ("RESET ALL".equalsIgnoreCase(text)) button.setText("USUŃ FILTRY");
         }
 
