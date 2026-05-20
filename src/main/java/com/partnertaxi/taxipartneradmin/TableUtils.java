@@ -27,6 +27,9 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.collections.ObservableSet;
 import javafx.geometry.Orientation;
 import java.math.BigInteger;
 import java.text.NumberFormat;
@@ -40,6 +43,7 @@ import javafx.beans.value.ObservableValue;
 
 public class TableUtils {
 
+    private static final String FILTER_LOCALIZATION_INSTALLED_KEY = "filterLocalizationInstalled";
     private static final Comparator<String> NATURAL_ID_COMPARATOR = (left, right) -> {
         if (Objects.equals(left, right)) {
             return 0;
@@ -219,8 +223,54 @@ public class TableUtils {
     public static <T> void enableExcelFilterAndExport(TableView<T> table, String exportPrefix) {
         Platform.runLater(() -> {
             TableFilter.forTableView(table).lazy(true).apply();
+            installPolishTableFilterLocalization(table);
             ensureExportButton(table, exportPrefix);
         });
+    }
+
+    private static void installPolishTableFilterLocalization(TableView<?> table) {
+        if (Boolean.TRUE.equals(table.getProperties().get(FILTER_LOCALIZATION_INSTALLED_KEY))) {
+            return;
+        }
+        table.getProperties().put(FILTER_LOCALIZATION_INSTALLED_KEY, Boolean.TRUE);
+
+        Platform.runLater(() -> {
+            localizeVisibleTableFilterPopups();
+            ObservableSet<Window> windows = Window.getWindows();
+            windows.addListener((javafx.collections.SetChangeListener<Window>) change -> localizeVisibleTableFilterPopups());
+        });
+    }
+
+    private static void localizeVisibleTableFilterPopups() {
+        for (Window window : Window.getWindows()) {
+            if (!window.isShowing() || window.getScene() == null || window.getScene().getRoot() == null) {
+                continue;
+            }
+            localizeNodeTree(window.getScene().getRoot());
+        }
+    }
+
+    private static void localizeNodeTree(Node node) {
+        if (node instanceof Button button) {
+            String text = button.getText();
+            if ("APPLY".equalsIgnoreCase(text)) button.setText("OK");
+            if ("NONE".equalsIgnoreCase(text)) button.setText("ODZNACZ WSZYTSKO");
+            if ("ALL".equalsIgnoreCase(text)) button.setText("ZAZNACZ WSZYTSKO");
+            if ("RESET ALL".equalsIgnoreCase(text)) button.setText("USUŃ FILTRY");
+        }
+
+        if (node instanceof TextField textField) {
+            String prompt = textField.getPromptText();
+            if ("Search...".equalsIgnoreCase(prompt)) {
+                textField.setPromptText("Szukaj...");
+            }
+        }
+
+        if (node instanceof Parent parent) {
+            for (Node child : parent.getChildrenUnmodifiable()) {
+                localizeNodeTree(child);
+            }
+        }
     }
 
     private static void ensureExportButton(TableView<?> table, String exportPrefix) {
