@@ -304,7 +304,8 @@ public class FleetController {
                 " | okres: " + start + " - " + end +
                 " | kursy: " + result.getCount() +
                 " | suma: " + currencyFormat.format(result.getSum()));
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        ButtonType closeButtonType = new ButtonType("Zamknij", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().add(closeButtonType);
 
         TableView<ApiClient.VehicleTurnoverDetailRecord> detailsTable = new TableView<>();
         TableColumn<ApiClient.VehicleTurnoverDetailRecord, Integer> colRideId = new TableColumn<>("ID kursu");
@@ -340,6 +341,7 @@ public class FleetController {
 
         detailsTable.getColumns().addAll(colRideId, colDate, colDriver, colPaymentType, colType, colAmount, colSessionStart, colSessionEnd);
         detailsTable.setItems(FXCollections.observableArrayList(result.getRecords()));
+        TableUtils.enableExcelFilterAndExport(detailsTable, "VehicleTurnoverDetails_" + selected.getRejestracja());
 
         Label info = new Label("Wiersze pokazują kursy wliczone do sumy obrotu dla wybranego pojazdu.");
         VBox box = new VBox(10, info, detailsTable);

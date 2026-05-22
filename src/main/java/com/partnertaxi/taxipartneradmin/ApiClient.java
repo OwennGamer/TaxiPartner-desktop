@@ -364,8 +364,10 @@ public class ApiClient {
                 message = fcmWarning
                         ? "Saldo zmienione, ale powiadomienie push nie zostało wysłane."
                         : "Saldo zaktualizowane.";
-            } else if (fcmWarning && fcmStatus != null && !fcmStatus.isBlank()) {
-                message += "\nFCM: " + fcmStatus;
+            } else if (fcmWarning) {
+                message = "Saldo zaktualizowane. Powiadomienie push nie zostało wysłane.";
+            } else if (message.contains("FCM error") || message.contains("UNREGISTERED")) {
+                message = "Saldo zaktualizowane.";
             }
 
             if (fcmWarning) {

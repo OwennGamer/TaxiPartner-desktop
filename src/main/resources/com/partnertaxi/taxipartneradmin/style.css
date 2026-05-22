@@ -73,7 +73,12 @@
 }
 
 .table-row-cell:filled:selected {
-    -fx-background-color: #DDEBFF;
+    -fx-background-color: #1D4ED8;
+    }
+
+    .table-row-cell:filled:selected .text,
+    .table-cell:selected {
+        -fx-text-fill: #FFFFFF;
 }
 
 .placeholder-label {
@@ -126,4 +131,5 @@
     -fx-font-size: 18px;
     -fx-text-fill: #415A7D;
     -fx-font-weight: 600;
+
 }

@@ -26,7 +26,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 import java.time.temporal.TemporalAdjusters;
-
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 
 public class DriversController {
 
@@ -69,6 +70,8 @@ public class DriversController {
     private LocalDate customStartDate;
     private LocalDate customEndDate;
     private boolean updatingCustomRange;
+    private ListChangeListener<Driver> summaryListener;
+    private boolean updatingSummaryRow;
 
     private enum DateFilterOption {
         PREVIOUS_YEAR,
@@ -212,6 +215,7 @@ public class DriversController {
         // 10) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
         TableUtils.enableExcelFilterAndExport(driversTable, "Drivers");
+        installFilteredSummarySupport();
 
 // 11) Row factory to style summary row
         driversTable.setRowFactory(tv -> new TableRow<>() {
@@ -229,6 +233,53 @@ public class DriversController {
         });
 
         setupDateFilters();
+    }
+
+    private void installFilteredSummarySupport() {
+        Platform.runLater(() -> {
+            if (summaryListener != null) {
+                driversTable.getItems().removeListener(summaryListener);
+            }
+            summaryListener = change -> {
+                if (!updatingSummaryRow) {
+                    refreshSummaryFromVisibleRows();
+                }
+            };
+            driversTable.getItems().addListener(summaryListener);
+            refreshSummaryFromVisibleRows();
+        });
+    }
+
+    private void refreshSummaryFromVisibleRows() {
+        updatingSummaryRow = true;
+        try {
+            var items = driversTable.getItems();
+            if (items == null) return;
+            items.removeIf(Driver::isSummary);
+            float saldo = 0f, turnover = 0f, voucherCurrent = 0f, voucherPrevious = 0f, voucher = 0f, card = 0f, cash = 0f, lot = 0f, fuel = 0f, zlPerKm = 0f, fuelPerTurnover = 0f;
+            int count = 0;
+            for (Driver d : items) {
+                if (d == null || d.isSummary()) continue;
+                saldo += d.getSaldoValue();
+                turnover += d.getTurnover();
+                voucherCurrent += d.getVoucherCurrent();
+                voucherPrevious += d.getVoucherPrevious();
+                voucher += d.getVoucher();
+                card += d.getCard();
+                cash += d.getCash();
+                lot += d.getLot();
+                fuel += d.getFuelCostSum();
+                zlPerKm += d.getZlPerKm();
+                fuelPerTurnover += d.getFuelPerTurnover();
+                count++;
+            }
+            NumberFormat format = createNumberFormat();
+            items.add(new Driver("", "SUMA", format.format(saldo), "", "", 0f, 0f, 0f, 0f, 0f, 0f, 0f, "", "",
+                    fuel, voucherCurrent, voucherPrevious, voucher, card, cash, lot, turnover,
+                    count > 0 ? zlPerKm / count : 0f, count > 0 ? fuelPerTurnover / count : 0f, true));
+        } finally {
+            updatingSummaryRow = false;
+        }
     }
 
 

@@ -30,6 +30,9 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -283,7 +286,21 @@ public class TableUtils {
         exportBtn.setOnAction(event -> exportTableToExcel(table, exportPrefix));
 
         if (table.getParent() instanceof BorderPane bp) {
-            bp.setBottom(new HBox(exportBtn));
+            Node existingBottom = bp.getBottom();
+            if (existingBottom instanceof ToolBar toolBar) {
+                Region spacer = new Region();
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                toolBar.getItems().addAll(spacer, exportBtn);
+            } else if (existingBottom != null) {
+                HBox wrapper = new HBox(10, existingBottom, exportBtn);
+                wrapper.setAlignment(Pos.CENTER_LEFT);
+                wrapper.setStyle("-fx-padding: 8;");
+                bp.setBottom(wrapper);
+            } else {
+                HBox wrapper = new HBox(exportBtn);
+                wrapper.setStyle("-fx-padding: 8;");
+                bp.setBottom(wrapper);
+            }
             return;
         }
         if (table.getParent() instanceof javafx.scene.layout.VBox vb) {
@@ -324,7 +341,18 @@ public class TableUtils {
                     TableColumn<Object, ?> column = (TableColumn<Object, ?>) table.getColumns().get(c);
                     ObservableValue<?> observableValue = column.getCellObservableValue(item);
                     Object value = observableValue != null ? observableValue.getValue() : null;
-                    row.createCell(c).setCellValue(value == null ? "" : value.toString());
+                    Cell cell = row.createCell(c);
+                    if (value instanceof Number number) {
+                        cell.setCellValue(number.doubleValue());
+                    } else {
+                        String textValue = value == null ? "" : value.toString();
+                        String normalized = textValue.replace(" ", "").replace('\u00A0', ' ').trim().replace(',', '.');
+                        if (normalized.matches("-?\\d+(\\.\\d+)?")) {
+                            cell.setCellValue(Double.parseDouble(normalized));
+                        } else {
+                            cell.setCellValue(textValue);
+                        }
+                    }
                 }
             }
             for (int c = 0; c < table.getColumns().size(); c++) {
