@@ -335,13 +335,25 @@ public class ApiClient {
             ApiResult res = sendJsonPost("update_saldo.php", json);
             String message = null;
             String fcmStatus = null;
-            if (res.body != null && !res.body.isEmpty()) {
-                JSONObject respJson = new JSONObject(res.body);
-                message = respJson.optString("message", null);
-                fcmStatus = respJson.optString("fcm_status", null);
+            JSONObject respJson = null;
+            if (res.body != null && !res.body.isBlank()) {
+                try {
+                    respJson = new JSONObject(res.body);
+                    message = respJson.optString("message", null);
+                    fcmStatus = respJson.optString("fcm_status", null);
+                } catch (Exception ignored) {
+                    // Część środowisk zwraca tekst lub HTML mimo poprawnej aktualizacji salda.
+                    // Nie traktujemy tego jako błąd, jeśli kod HTTP wskazuje sukces.
+                }
             }
 
             boolean success = res.code == 200 || res.code == 207;
+            if (success && respJson != null) {
+                String status = respJson.optString("status", "").trim();
+                if (!status.isEmpty() && !"success".equalsIgnoreCase(status)) {
+                    success = false;
+                }
+            }
             boolean fcmWarning = res.code == 207;
 
             if (!success) {

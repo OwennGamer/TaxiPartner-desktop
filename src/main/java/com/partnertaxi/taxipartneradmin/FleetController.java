@@ -26,7 +26,6 @@ import com.partnertaxi.taxipartneradmin.EditVehicleController;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.time.LocalDate;
 import java.text.NumberFormat;
 import javafx.scene.layout.VBox;
@@ -438,10 +437,18 @@ public class FleetController {
             end = correctedEnd;
         }
 
-        Map<String, Float> turnoverByVehicle = ApiClient.getVehicleTurnover(start.toString(), end.toString());
         for (Vehicle vehicle : allVehicles) {
-            String plateKey = vehicle.getRejestracja() == null ? "" : vehicle.getRejestracja().trim().toUpperCase(Locale.ROOT);
-            vehicle.setObrot(turnoverByVehicle.getOrDefault(plateKey, 0f));
+            String plate = vehicle.getRejestracja() == null ? "" : vehicle.getRejestracja().trim();
+            if (plate.isBlank()) {
+                vehicle.setObrot(0f);
+                continue;
+            }
+            ApiClient.VehicleTurnoverDetailsResult details = ApiClient.getVehicleTurnoverDetails(
+                    start.toString(),
+                    end.toString(),
+                    plate
+            );
+            vehicle.setObrot(details.getSum());
         }
         vehicleTable.refresh();
     }

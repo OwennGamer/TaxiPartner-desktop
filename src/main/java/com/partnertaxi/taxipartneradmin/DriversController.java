@@ -237,15 +237,23 @@ public class DriversController {
 
     private void installFilteredSummarySupport() {
         Platform.runLater(() -> {
-            if (summaryListener != null) {
-                driversTable.getItems().removeListener(summaryListener);
-            }
+            driversTable.itemsProperty().addListener((obs, oldItems, newItems) -> {
+                if (summaryListener != null && oldItems != null) {
+                    oldItems.removeListener(summaryListener);
+                }
+                if (summaryListener != null && newItems != null) {
+                    newItems.addListener(summaryListener);
+                }
+                refreshSummaryFromVisibleRows();
+            });
             summaryListener = change -> {
                 if (!updatingSummaryRow) {
                     refreshSummaryFromVisibleRows();
                 }
             };
-            driversTable.getItems().addListener(summaryListener);
+            if (driversTable.getItems() != null) {
+                driversTable.getItems().addListener(summaryListener);
+            }
             refreshSummaryFromVisibleRows();
         });
     }
