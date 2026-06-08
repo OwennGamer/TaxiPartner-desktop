@@ -44,6 +44,7 @@ public class EditDriverController {
     @FXML private Button          cancelButton;
 
     private Driver driver;
+    private boolean saved;
 
     @FXML
     private void initialize() {
@@ -152,6 +153,7 @@ public class EditDriverController {
                     settlementLimit,
                     fixedCosts
             );
+            saved = true;
             closeWindow();
         } catch (Exception ex) {
             showAlert("Błąd", "Nieprawidłowe dane wejściowe:\n" + ex.getMessage());
@@ -168,6 +170,9 @@ public class EditDriverController {
         st.close();
     }
 
+    public boolean wasSaved() {
+        return saved;
+    }
     private void showAlert(String title, String content) {
         Alert a = new Alert(Alert.AlertType.ERROR, content, ButtonType.OK);
         a.setTitle(title);

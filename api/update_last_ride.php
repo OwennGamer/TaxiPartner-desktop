@@ -48,7 +48,8 @@ function calculate_final_amount(float $amount, string $type, string $source, arr
     } elseif ($source === "Hotel[20]") {
         $hotel_base_amount = $amount - 20;
         if ($type === "Karta") {
-            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
+            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
+            $final_amount = $after_card * ($percentTurnover / 100);
         } elseif ($type === "Gotówka") {
             $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
         } elseif ($type === "Voucher") {
@@ -57,7 +58,8 @@ function calculate_final_amount(float $amount, string $type, string $source, arr
     } elseif ($source === "Hotel[10]") {
         $hotel_base_amount = $amount - 10;
         if ($type === "Karta") {
-            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
+            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
+            $final_amount = $after_card * ($percentTurnover / 100);
         } elseif ($type === "Gotówka") {
             $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
         } elseif ($type === "Voucher") {

@@ -2,6 +2,7 @@ package com.partnertaxi.taxipartneradmin;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import javafx.beans.property.SimpleFloatProperty;
 import com.partnertaxi.taxipartneradmin.TableUtils;
@@ -28,6 +29,7 @@ import java.util.Objects;
 import java.time.temporal.TemporalAdjusters;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 public class DriversController {
 
@@ -183,14 +185,7 @@ public class DriversController {
                 return true;
             }
 
-            Driver summary = null;
-            for (int i = 0; i < items.size(); i++) {
-                Driver driver = items.get(i);
-                if (driver != null && driver.isSummary()) {
-                    summary = items.remove(i);
-                    break;
-                }
-            }
+            Driver summary = removeSummaryRow(items);
 
             if (table.getComparator() != null) {
                 FXCollections.sort(items, table.getComparator());
@@ -202,6 +197,8 @@ public class DriversController {
 
             return true;
         });
+        driversTable.getSortOrder().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> keepSummaryRowLastLater());
+        driversTable.comparatorProperty().addListener((obs, oldComparator, newComparator) -> keepSummaryRowLastLater());
 
         // 7) Konfiguracja filtrów dat
 
@@ -249,6 +246,8 @@ public class DriversController {
             summaryListener = change -> {
                 if (!updatingSummaryRow) {
                     refreshSummaryFromVisibleRows();
+                } else {
+                    keepSummaryRowLastLater();
                 }
             };
             if (driversTable.getItems() != null) {
@@ -263,7 +262,7 @@ public class DriversController {
         try {
             var items = driversTable.getItems();
             if (items == null) return;
-            items.removeIf(Driver::isSummary);
+            removeSummaryRow(items);
             float saldo = 0f, turnover = 0f, voucherCurrent = 0f, voucherPrevious = 0f, voucher = 0f, card = 0f, cash = 0f, lot = 0f, fuel = 0f, zlPerKm = 0f, fuelPerTurnover = 0f;
             int count = 0;
             for (Driver d : items) {
@@ -289,6 +288,43 @@ public class DriversController {
             updatingSummaryRow = false;
         }
     }
+
+    private Driver removeSummaryRow(ObservableList<Driver> items) {
+        for (int i = 0; i < items.size(); i++) {
+            Driver driver = items.get(i);
+            if (driver != null && driver.isSummary()) {
+                return items.remove(i);
+            }
+        }
+        return null;
+    }
+
+    private void keepSummaryRowLastLater() {
+        if (updatingSummaryRow) {
+            return;
+        }
+        Platform.runLater(this::keepSummaryRowLast);
+    }
+
+    private void keepSummaryRowLast() {
+        if (updatingSummaryRow) {
+            return;
+        }
+        var items = driversTable.getItems();
+        if (items == null || items.size() < 2) {
+            return;
+        }
+        updatingSummaryRow = true;
+        try {
+            Driver summary = removeSummaryRow(items);
+            if (summary != null) {
+                items.add(summary);
+            }
+        } finally {
+            updatingSummaryRow = false;
+        }
+    }
+
 
 
 
@@ -536,18 +572,15 @@ public class DriversController {
 
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject o = arr.get(i).getAsJsonObject();
-                String id        = o.get("id").getAsString();
-                String fullName  = o.get("imie").getAsString() + " " + o.get("nazwisko").getAsString();
-                String saldo     = o.get("saldo").getAsString();
-                String status    = o.has("status") ? o.get("status").getAsString() : "";
-                String role      = o.has("rola") && !o.get("rola").isJsonNull()
-                        ? o.get("rola").getAsString()
-                        : "";
-                String createdAt = o.has("created_at") ? o.get("created_at").getAsString() : "";
-                String plate     = o.has("vehiclePlate") && !o.get("vehiclePlate").isJsonNull()
-                        ? o.get("vehiclePlate").getAsString() : "";
+                String id        = getString(o, "id");
+                String fullName  = (getString(o, "imie") + " " + getString(o, "nazwisko")).trim();
+                String saldo     = getString(o, "saldo", "0");
+                String status    = getString(o, "status");
+                String role      = getString(o, "rola");
+                String createdAt = getString(o, "created_at");
+                String plate     = getString(o, "vehiclePlate");
 
-                float percentTurnover = o.has("percentTurnover")   ? o.get("percentTurnover").getAsFloat()   : 0f;
+                float percentTurnover = getFloat(o, "percentTurnover");
                 float fuelCostFlag    = 0f;
                 if (o.has("fuelCost") && !o.get("fuelCost").isJsonNull()) {
                     try {
@@ -562,16 +595,13 @@ public class DriversController {
                 }
                 float fuelCostSum     = o.has("fuelCostSum") && !o.get("fuelCostSum").isJsonNull()
                         ? o.get("fuelCostSum").getAsFloat() : 0f;
-                float cardComm        = o.has("cardCommission")    ? o.get("cardCommission").getAsFloat()    : 0f;
-                float partComm        = o.has("partnerCommission") ? o.get("partnerCommission").getAsFloat() : 0f;
-                float boltComm        = o.has("boltCommission")    ? o.get("boltCommission").getAsFloat()    : 0f;
-                float settLimit       = o.has("settlementLimit")   ? o.get("settlementLimit").getAsFloat()   : 0f;
-                float fixedCosts      = o.has("fixedCosts") && !o.get("fixedCosts").isJsonNull()
-                        ? o.get("fixedCosts").getAsFloat() : 0f;
-                float voucherCurrent  = o.has("voucher_current_amount") && !o.get("voucher_current_amount").isJsonNull()
-                        ? o.get("voucher_current_amount").getAsFloat() : 0f;
-                float voucherPrevious = o.has("voucher_previous_amount") && !o.get("voucher_previous_amount").isJsonNull()
-                        ? o.get("voucher_previous_amount").getAsFloat() : 0f;
+                float cardComm        = getFloat(o, "cardCommission");
+                float partComm        = getFloat(o, "partnerCommission");
+                float boltComm        = getFloat(o, "boltCommission");
+                float settLimit       = getFloat(o, "settlementLimit");
+                float fixedCosts      = getFloat(o, "fixedCosts");
+                float voucherCurrent  = getFloat(o, "voucher_current_amount");
+                float voucherPrevious = getFloat(o, "voucher_previous_amount");
 
                 // fetch statistics for current month
                 DriverStats stats = ApiClient.getDriverStats(id, startDate, endDate);
@@ -666,11 +696,41 @@ public class DriversController {
         }
     }
 
+    private String getString(JsonObject object, String field) {
+        return getString(object, field, "");
+    }
+
+    private String getString(JsonObject object, String field, String defaultValue) {
+        JsonElement element = object.get(field);
+        return element == null || element.isJsonNull() ? defaultValue : element.getAsString();
+    }
+
+    private float getFloat(JsonObject object, String field) {
+        JsonElement element = object.get(field);
+        if (element == null || element.isJsonNull()) {
+            return 0f;
+        }
+        try {
+            return element.getAsFloat();
+        } catch (RuntimeException ex) {
+            String text = element.getAsString();
+            if (text == null || text.isBlank()) {
+                return 0f;
+            }
+            try {
+                return Float.parseFloat(text.replace(',', '.'));
+            } catch (NumberFormatException ignored) {
+                return 0f;
+            }
+        }
+    }
+
     @FXML
     public void handleAddDriver(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("add-driver-view.fxml"));
             Parent root = loader.load();
+            AddDriverController ctrl = loader.getController();
             Stage st = new Stage();
             st.setTitle("Dodaj kierowcę");
             Scene scene = new Scene(root);
@@ -678,7 +738,9 @@ public class DriversController {
             st.setScene(scene);
             st.setMaximized(true);
             st.showAndWait();
-            loadDrivers();
+            if (ctrl.wasSaved()) {
+                loadDrivers();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -703,7 +765,9 @@ public class DriversController {
             st.setScene(scene);
             st.setMaximized(true);
             st.showAndWait();
-            loadDrivers();
+            if (ctrl.wasSaved()) {
+                loadDrivers();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

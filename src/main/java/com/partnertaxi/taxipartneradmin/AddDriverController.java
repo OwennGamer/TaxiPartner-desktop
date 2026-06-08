@@ -13,6 +13,8 @@ import java.util.Locale;
 
 public class AddDriverController {
 
+    private boolean saved;
+
     @FXML private TextField       idField;
     @FXML private Label           idFieldPlaceholder;
 
@@ -122,6 +124,7 @@ public class AddDriverController {
                     cardCommission, partnerCommission,
                     boltCommission, settlementLimit, fixedCosts, saldo
             );
+            saved = true;
             closeWindow();
         } catch(Exception ex) {
             showAlert("Błąd", "Nieprawidłowe dane wejściowe:\n" + ex.getMessage());
@@ -136,6 +139,10 @@ public class AddDriverController {
     private void closeWindow() {
         Stage st = (Stage) cancelButton.getScene().getWindow();
         st.close();
+    }
+
+    public boolean wasSaved() {
+        return saved;
     }
 
     private void showAlert(String title, String content) {
