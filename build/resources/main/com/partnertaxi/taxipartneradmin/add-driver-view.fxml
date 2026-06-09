@@ -3,9 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.partnertaxi.taxipartneradmin.AddDriverController"
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partnertaxi.taxipartneradmin.AddDriverController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            vbarPolicy="AS_NEEDED">
+    <content>
+        <VBox
       spacing="10" alignment="CENTER">
 
     <padding>
@@ -131,3 +136,5 @@
         <Button fx:id="cancelButton" text="Anuluj" onAction="#handleCancel"/>
     </HBox>
 </VBox>
+    </content>
+</ScrollPane>
