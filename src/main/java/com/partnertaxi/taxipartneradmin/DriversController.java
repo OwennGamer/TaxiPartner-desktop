@@ -73,6 +73,12 @@ public class DriversController {
     @FXML private HBox                         summaryRow;
     @FXML private Label                        saldoSumLabel;
     @FXML private Label                        fuelSumLabel;
+    @FXML private Label                        fixedCostsSumLabel;
+    @FXML private Label                        percentTurnoverAvgLabel;
+    @FXML private Label                        cardCommissionSumLabel;
+    @FXML private Label                        partnerCommissionSumLabel;
+    @FXML private Label                        boltCommissionSumLabel;
+    @FXML private Label                        settlementLimitSumLabel;
     @FXML private Label                        voucherCurrentSumLabel;
     @FXML private Label                        voucherPreviousSumLabel;
     @FXML private Label                        voucherSumLabel;
@@ -355,11 +361,12 @@ public class DriversController {
             case "vehiclePlateColumn" -> "vehiclePlatePlaceholder";
             case "fuelCostColumn" -> "fuelCostPlaceholder";
             case "fuelCostSumColumn" -> "fuelSumLabel";
-            case "percentTurnoverColumn" -> "percentTurnoverPlaceholder";
-            case "cardCommissionColumn" -> "cardCommissionPlaceholder";
-            case "partnerCommissionColumn" -> "partnerCommissionPlaceholder";
-            case "boltCommissionColumn" -> "boltCommissionPlaceholder";
-            case "settlementLimitColumn" -> "settlementLimitPlaceholder";
+            case "percentTurnoverColumn" -> "percentTurnoverAvgLabel";
+            case "cardCommissionColumn" -> "cardCommissionSumLabel";
+            case "partnerCommissionColumn" -> "partnerCommissionSumLabel";
+            case "boltCommissionColumn" -> "boltCommissionSumLabel";
+            case "settlementLimitColumn" -> "settlementLimitSumLabel";
+            case "fixedCostsColumn" -> "fixedCostsSumLabel";
             case "voucherCurrentColumn" -> "voucherCurrentSumLabel";
             case "voucherPreviousColumn" -> "voucherPreviousSumLabel";
             case "voucherColumn" -> "voucherSumLabel";
@@ -369,6 +376,7 @@ public class DriversController {
             case "turnoverColumn" -> "turnoverSumLabel";
             case "zlPerKmColumn" -> "zlPerKmAvgLabel";
             case "fuelPerTurnoverColumn" -> "fuelPerTurnoverAvgLabel";
+            case "createdAtColumn" -> "createdAtPlaceholder";
             default -> columnId;
         };
     }
@@ -376,6 +384,7 @@ public class DriversController {
     private void updatePinnedSummaryFromVisibleRows() {
         var items = driversTable.getItems();
         float saldo = 0f, turnover = 0f, voucherCurrent = 0f, voucherPrevious = 0f, voucher = 0f, card = 0f, cash = 0f, lot = 0f, fuel = 0f, zlPerKm = 0f, fuelPerTurnover = 0f;
+        float fixedCosts = 0f, percentTurnover = 0f, cardCommission = 0f, partnerCommission = 0f, boltCommission = 0f, settlementLimit = 0f;
         int count = 0;
         if (items != null) {
             for (Driver d : items) {
@@ -389,6 +398,12 @@ public class DriversController {
                 cash += d.getCash();
                 lot += d.getLot();
                 fuel += d.getFuelCostSum();
+                fixedCosts += d.getFixedCosts();
+                percentTurnover += d.getPercentTurnover();
+                cardCommission += d.getCardCommission();
+                partnerCommission += d.getPartnerCommission();
+                boltCommission += d.getBoltCommission();
+                settlementLimit += d.getSettlementLimit();
                 zlPerKm += d.getZlPerKm();
                 fuelPerTurnover += d.getFuelPerTurnover();
                 count++;
@@ -398,6 +413,12 @@ public class DriversController {
         NumberFormat format = createNumberFormat();
         setSummaryLabel(saldoSumLabel, format.format(saldo));
         setSummaryLabel(fuelSumLabel, format.format(fuel));
+        setSummaryLabel(fixedCostsSumLabel, format.format(fixedCosts));
+        setSummaryLabel(percentTurnoverAvgLabel, format.format(count > 0 ? percentTurnover / count : 0f));
+        setSummaryLabel(cardCommissionSumLabel, format.format(cardCommission));
+        setSummaryLabel(partnerCommissionSumLabel, format.format(partnerCommission));
+        setSummaryLabel(boltCommissionSumLabel, format.format(boltCommission));
+        setSummaryLabel(settlementLimitSumLabel, format.format(settlementLimit));
         setSummaryLabel(voucherCurrentSumLabel, format.format(voucherCurrent));
         setSummaryLabel(voucherPreviousSumLabel, format.format(voucherPrevious));
         setSummaryLabel(voucherSumLabel, format.format(voucher));

@@ -17,13 +17,15 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.util.Objects;
 
+import com.partnertaxi.taxipartneradmin.HelloApplication;
+
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DriversViewAlignmentTest extends ApplicationTest {
+class ViewAlignmentTest extends ApplicationTest {
     private TableView<?> driversTable;
     private HBox summaryRow;
     private BorderPane root;
@@ -82,13 +84,15 @@ public class DriversViewAlignmentTest extends ApplicationTest {
             case "vehiclePlateColumn" -> "vehiclePlatePlaceholder";
             case "fuelCostColumn" -> "fuelCostPlaceholder";
             case "fuelCostSumColumn" -> "fuelSumLabel";
-            case "percentTurnoverColumn" -> "percentTurnoverPlaceholder";
-            case "cardCommissionColumn" -> "cardCommissionPlaceholder";
-            case "partnerCommissionColumn" -> "partnerCommissionPlaceholder";
-            case "boltCommissionColumn" -> "boltCommissionPlaceholder";
-            case "settlementLimitColumn" -> "settlementLimitPlaceholder";
+            case "percentTurnoverColumn" -> "percentTurnoverAvgLabel";
+            case "cardCommissionColumn" -> "cardCommissionSumLabel";
+            case "partnerCommissionColumn" -> "partnerCommissionSumLabel";
+            case "boltCommissionColumn" -> "boltCommissionSumLabel";
+            case "settlementLimitColumn" -> "settlementLimitSumLabel";
+            case "fixedCostsColumn" -> "fixedCostsSumLabel";
             case "voucherCurrentColumn" -> "voucherCurrentSumLabel";
             case "voucherPreviousColumn" -> "voucherPreviousSumLabel";
+            case "voucherColumn" -> "voucherSumLabel";
             case "cardColumn" -> "cardSumLabel";
             case "cashColumn" -> "cashSumLabel";
             case "lotColumn" -> "lotSumLabel";
