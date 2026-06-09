@@ -714,7 +714,7 @@ public class DriversController {
                 showError("Błąd serwera", "Odpowiedź API nie zawiera listy kierowców.");
                 return;
             }
-            driversTable.getItems().clear();
+
 
 
             LocalDate effectiveStart = statsStartDate != null ? statsStartDate : LocalDate.of(1970, 1, 1);
@@ -726,83 +726,99 @@ public class DriversController {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String startDate = effectiveStart.format(fmt);
             String endDate = effectiveEnd.plusDays(1).format(fmt);
+            ObservableList<Driver> loadedDrivers = FXCollections.observableArrayList();
 
             for (int i = 0; i < arr.size(); i++) {
-                JsonObject o = arr.get(i).getAsJsonObject();
-                String id = getString(o, "id");
-                String fullName = (getString(o, "imie") + " " + getString(o, "nazwisko")).trim();
-                String saldo = getString(o, "saldo", "0");
-                String status = getString(o, "status");
-                String role = getString(o, "rola");
-                String createdAt = getString(o, "created_at");
-                String plate = getString(o, "vehiclePlate");
-
-                float percentTurnover = getFloat(o, "percentTurnover");
-                float fuelCostFlag = 0f;
-                if (o.has("fuelCost") && !o.get("fuelCost").isJsonNull()) {
-                    try {
-                        fuelCostFlag = o.get("fuelCost").getAsFloat();
-                    } catch (RuntimeException ex) {
-                        String raw = o.get("fuelCost").getAsString();
-                        fuelCostFlag = "kierowca".equalsIgnoreCase(raw.trim()) ? 1f : 0f;
-                    }
-                } else if (o.has("koszt_paliwa") && !o.get("koszt_paliwa").isJsonNull()) {
-                    String raw = o.get("koszt_paliwa").getAsString();
-                    fuelCostFlag = "kierowca".equalsIgnoreCase(raw.trim()) ? 1f : 0f;
-                }
-                float fuelCostSum = o.has("fuelCostSum") && !o.get("fuelCostSum").isJsonNull()
-                        ? o.get("fuelCostSum").getAsFloat() : 0f;
-                float cardComm = getFloat(o, "cardCommission");
-                float partComm = getFloat(o, "partnerCommission");
-                float boltComm = getFloat(o, "boltCommission");
-                float settLimit = getFloat(o, "settlementLimit");
-                float fixedCosts = getFloat(o, "fixedCosts");
-                float voucherCurrent = getFloat(o, "voucher_current_amount");
-                float voucherPrevious = getFloat(o, "voucher_previous_amount");
-
-                // fetch statistics for current month
-                DriverStats stats = ApiClient.getDriverStats(id, startDate, endDate);
-
-                float cardVal = 0f;
-                float cashVal = 0f;
-                float lotVal = 0f;
-                float turnover = 0f;
-                float zlPerKm = 0f;
-                float fuelPerTurnover = 0f;
-                float fuelSum = 0f;
-                float voucherTotal = 0f;
-
-                if (stats != null) {
-                    cardVal = stats.getCard();
-                    cashVal = stats.getCash();
-                    lotVal = stats.getLot();
-                    turnover = stats.getTurnover();
-                    if (stats.getKilometers() > 0) {
-                        zlPerKm = turnover / stats.getKilometers();
-                    }
-                    if (turnover > 0) {
-                        fuelPerTurnover = stats.getFuelSum() / turnover;
-                    }
-                    fuelSum = stats.getFuelSum();
-                    voucherTotal = stats.getVoucher();
+                try {
+                    loadedDrivers.add(parseDriver(arr.get(i).getAsJsonObject(), startDate, endDate));
+                } catch (RuntimeException rowError) {
+                    RemoteLogService.logHandledException("Nieprawidłowe dane kierowcy podczas odświeżania listy (indeks " + i + ")", rowError);
                 }
 
-                driversTable.getItems().add(new Driver(
-                        id, fullName, saldo, status, role,
-                        percentTurnover, fuelCostFlag, cardComm, partComm,
-                        boltComm, settLimit, fixedCosts, createdAt, plate, fuelSum,
-                        voucherCurrent, voucherPrevious, voucherTotal,
-                        cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
-                ));
+
 
             }
 
+            driversTable.getItems().setAll(loadedDrivers);
             refreshSummaryFromVisibleRows();
 
 
         } catch (Exception ex) {
+            RemoteLogService.logHandledException("Nieobsłużony błąd podczas odświeżania kierowców", ex);
             ex.printStackTrace();
-            showError("Błąd połączenia", "Nie można się połączyć z serwerem.");
+            showError("Błąd odświeżania", "Nie udało się odświeżyć listy kierowców. Szczegóły zapisano w logach.");
+
+        }
+    }
+
+    private Driver parseDriver(JsonObject o, String startDate, String endDate) {
+        String id = getString(o, "id");
+        String fullName = (getString(o, "imie") + " " + getString(o, "nazwisko")).trim();
+        String saldo = getString(o, "saldo", "0");
+        String status = getString(o, "status");
+        String role = getString(o, "rola");
+        String createdAt = getString(o, "created_at");
+        String plate = getString(o, "vehiclePlate");
+
+        float percentTurnover = getFloat(o, "percentTurnover");
+        float fuelCostFlag = getFuelCostFlag(o);
+        float cardComm = getFloat(o, "cardCommission");
+        float partComm = getFloat(o, "partnerCommission");
+        float boltComm = getFloat(o, "boltCommission");
+        float settLimit = getFloat(o, "settlementLimit");
+        float fixedCosts = getFloat(o, "fixedCosts");
+        float voucherCurrent = getFloat(o, "voucher_current_amount");
+        float voucherPrevious = getFloat(o, "voucher_previous_amount");
+
+        // fetch statistics for selected range
+        DriverStats stats = ApiClient.getDriverStats(id, startDate, endDate);
+
+        float cardVal = 0f;
+        float cashVal = 0f;
+        float lotVal = 0f;
+        float turnover = 0f;
+        float zlPerKm = 0f;
+        float fuelPerTurnover = 0f;
+        float fuelSum = 0f;
+        float voucherTotal = 0f;
+
+        if (stats != null) {
+            cardVal = stats.getCard();
+            cashVal = stats.getCash();
+            lotVal = stats.getLot();
+            turnover = stats.getTurnover();
+            if (stats.getKilometers() > 0) {
+                zlPerKm = turnover / stats.getKilometers();
+            }
+            if (turnover > 0) {
+                fuelPerTurnover = stats.getFuelSum() / turnover;
+            }
+            fuelSum = stats.getFuelSum();
+            voucherTotal = stats.getVoucher();
+        }
+
+        return new Driver(
+                id, fullName, saldo, status, role,
+                percentTurnover, fuelCostFlag, cardComm, partComm,
+                boltComm, settLimit, fixedCosts, createdAt, plate, fuelSum,
+                voucherCurrent, voucherPrevious, voucherTotal,
+                cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
+        );
+    }
+
+    private float getFuelCostFlag(JsonObject object) {
+        JsonElement element = object.has("fuelCost") && !object.get("fuelCost").isJsonNull()
+                ? object.get("fuelCost")
+                : object.get("koszt_paliwa");
+        if (element == null || element.isJsonNull()) {
+            return 0f;
+        }
+
+        try {
+            return element.getAsFloat();
+        } catch (RuntimeException ignored) {
+            String raw = element.getAsString();
+            return raw != null && "kierowca".equalsIgnoreCase(raw.trim()) ? 1f : 0f;
 
         }
     }
