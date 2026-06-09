@@ -35,6 +35,7 @@ import java.time.temporal.TemporalAdjusters;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.TransformationList;
 
 public class DriversController {
 
@@ -98,6 +99,7 @@ public class DriversController {
     private boolean updatingCustomRange;
     private ListChangeListener<Driver> summaryListener;
     private boolean updatingSummaryRow;
+    private final ObservableList<Driver> driverItems = FXCollections.observableArrayList();
 
     private enum DateFilterOption {
         PREVIOUS_YEAR,
@@ -112,6 +114,7 @@ public class DriversController {
     public void initialize() {
         // allow horizontal scrolling for columns
         driversTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        driversTable.setItems(driverItems);
         // 1) Nadajemy ID kolumnom
         idColumn.setId("idColumn");
         nameColumn.setId("nameColumn");
@@ -739,7 +742,7 @@ public class DriversController {
 
             }
 
-            driversTable.getItems().setAll(loadedDrivers);
+            replaceDriverItems(loadedDrivers);
             refreshSummaryFromVisibleRows();
 
 
@@ -749,6 +752,31 @@ public class DriversController {
             showError("Błąd odświeżania", "Nie udało się odświeżyć listy kierowców. Szczegóły zapisano w logach.");
 
         }
+    }
+
+    private void replaceDriverItems(ObservableList<Driver> loadedDrivers) {
+        ObservableList<Driver> targetItems = getMutableDriverItems();
+        if (targetItems != null) {
+            targetItems.setAll(loadedDrivers);
+            return;
+        }
+
+        driverItems.setAll(loadedDrivers);
+        if (driversTable.getItems() == null) {
+            driversTable.setItems(driverItems);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private ObservableList<Driver> getMutableDriverItems() {
+        ObservableList<Driver> items = driversTable.getItems();
+        while (items instanceof TransformationList<?, ?> transformationList) {
+            items = (ObservableList<Driver>) transformationList.getSource();
+        }
+        if (items == null) {
+            return driverItems;
+        }
+        return items;
     }
 
     private Driver parseDriver(JsonObject o, String startDate, String endDate) {
