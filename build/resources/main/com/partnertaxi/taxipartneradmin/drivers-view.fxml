@@ -72,6 +72,33 @@
                 </columns>
             </TableView>
 
+            <HBox fx:id="summaryRow" id="summaryRow" styleClass="summary-row" minHeight="28" prefHeight="28" maxHeight="28">
+                <Label id="idPlaceholder" />
+                <Label id="namePlaceholder" text="SUMA" />
+                <Label fx:id="saldoSumLabel" id="saldoSumLabel" />
+                <Label id="statusPlaceholder" />
+                <Label id="vehiclePlatePlaceholder" />
+                <Label id="fuelCostPlaceholder" />
+                <Label fx:id="fuelSumLabel" id="fuelSumLabel" />
+                <Label id="percentTurnoverPlaceholder" />
+                <Label id="cardCommissionPlaceholder" />
+                <Label id="partnerCommissionPlaceholder" />
+                <Label id="boltCommissionPlaceholder" />
+                <Label id="settlementLimitPlaceholder" />
+                <Label id="fixedCostsColumn" />
+                <Label fx:id="voucherCurrentSumLabel" id="voucherCurrentSumLabel" />
+                <Label fx:id="voucherPreviousSumLabel" id="voucherPreviousSumLabel" />
+                <Label fx:id="voucherSumLabel" id="voucherSumLabel" />
+                <Label fx:id="cardSumLabel" id="cardSumLabel" />
+                <Label fx:id="cashSumLabel" id="cashSumLabel" />
+                <Label fx:id="lotSumLabel" id="lotSumLabel" />
+                <Label fx:id="turnoverSumLabel" id="turnoverSumLabel" />
+                <Label fx:id="zlPerKmAvgLabel" id="zlPerKmAvgLabel" />
+                <Label fx:id="fuelPerTurnoverAvgLabel" id="fuelPerTurnoverAvgLabel" />
+                <Label id="createdAtPlaceholder" />
+                <Label id="logoutColumn" />
+            </HBox>
+
         </VBox>
     </center>
 

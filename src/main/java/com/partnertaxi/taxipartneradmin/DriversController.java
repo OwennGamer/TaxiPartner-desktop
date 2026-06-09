@@ -17,7 +17,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -67,6 +69,7 @@ public class DriversController {
     @FXML private HBox                         customRangeBox;
     @FXML private DatePicker                   startDatePicker;
     @FXML private DatePicker                   endDatePicker;
+    @FXML private Pane                         summaryRowViewport;
     @FXML private HBox                         summaryRow;
     @FXML private Label                        saldoSumLabel;
     @FXML private Label                        fuelSumLabel;
@@ -290,6 +293,8 @@ public class DriversController {
             return;
         }
 
+        setupSummaryRowViewport();
+
         Map<String, Region> summaryCells = new LinkedHashMap<>();
         for (javafx.scene.Node node : summaryRow.getChildren()) {
             if (node instanceof Region region && node.getId() != null) {
@@ -325,6 +330,20 @@ public class DriversController {
         reorderSummaryCells.run();
         driversTable.getColumns().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> reorderSummaryCells.run());
         TableUtils.bindHorizontalScroll(driversTable, summaryRow);
+    }
+
+    private void setupSummaryRowViewport() {
+        if (summaryRowViewport == null) {
+            return;
+        }
+
+        summaryRow.setManaged(false);
+        summaryRow.setLayoutX(0);
+        summaryRow.setLayoutY(0);
+        Rectangle clip = new Rectangle();
+        clip.widthProperty().bind(summaryRowViewport.widthProperty());
+        clip.heightProperty().bind(summaryRowViewport.heightProperty());
+        summaryRowViewport.setClip(clip);
     }
 
     private String summaryCellIdForColumn(String columnId) {
