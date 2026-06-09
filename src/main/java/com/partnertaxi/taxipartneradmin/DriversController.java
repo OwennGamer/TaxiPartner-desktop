@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -24,7 +25,9 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.time.temporal.TemporalAdjusters;
 import javafx.application.Platform;
@@ -64,6 +67,18 @@ public class DriversController {
     @FXML private HBox                         customRangeBox;
     @FXML private DatePicker                   startDatePicker;
     @FXML private DatePicker                   endDatePicker;
+    @FXML private HBox                         summaryRow;
+    @FXML private Label                        saldoSumLabel;
+    @FXML private Label                        fuelSumLabel;
+    @FXML private Label                        voucherCurrentSumLabel;
+    @FXML private Label                        voucherPreviousSumLabel;
+    @FXML private Label                        voucherSumLabel;
+    @FXML private Label                        cardSumLabel;
+    @FXML private Label                        cashSumLabel;
+    @FXML private Label                        lotSumLabel;
+    @FXML private Label                        turnoverSumLabel;
+    @FXML private Label                        zlPerKmAvgLabel;
+    @FXML private Label                        fuelPerTurnoverAvgLabel;
 
 
     private LocalDate statsStartDate;
@@ -178,27 +193,26 @@ public class DriversController {
         setupFloatColumn(zlPerKmColumn,          nf);
         setupFloatColumn(fuelPerTurnoverColumn,  nf);
 
-        // 6) Sortowanie z podsumowaniem zawsze na dole
+        // 6) Sortowanie dotyczy wyłącznie kierowców. Wiersz SUMA jest przypięty pod tabelą.
         driversTable.setSortPolicy(table -> {
             var items = table.getItems();
             if (items == null || items.isEmpty()) {
+                updatePinnedSummaryFromVisibleRows();
                 return true;
             }
 
-            Driver summary = removeSummaryRow(items);
+            removeSummaryRow(items);
 
             if (table.getComparator() != null) {
                 FXCollections.sort(items, table.getComparator());
             }
 
-            if (summary != null) {
-                items.add(summary);
-            }
+            updatePinnedSummaryFromVisibleRows();
 
             return true;
         });
-        driversTable.getSortOrder().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> keepSummaryRowLastLater());
-        driversTable.comparatorProperty().addListener((obs, oldComparator, newComparator) -> keepSummaryRowLastLater());
+        driversTable.getSortOrder().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> updatePinnedSummaryFromVisibleRows());
+        driversTable.comparatorProperty().addListener((obs, oldComparator, newComparator) -> updatePinnedSummaryFromVisibleRows());
 
         // 7) Konfiguracja filtrów dat
 
@@ -211,10 +225,11 @@ public class DriversController {
 
         // 10) Zapamiętujemy i odtwarzamy kolejność kolumn
         TableUtils.enableColumnsOrderPersistence(driversTable, DriversController.class, PREF_KEY_COLUMNS_ORDER);
+        setupPinnedSummaryRow();
         TableUtils.enableExcelFilterAndExport(driversTable, "Drivers");
         installFilteredSummarySupport();
 
-// 11) Row factory to style summary row
+// 11) Row factory to style legacy summary rows if old data is ever present
         driversTable.setRowFactory(tv -> new TableRow<>() {
             @Override
             protected void updateItem(Driver item, boolean empty) {
@@ -261,10 +276,89 @@ public class DriversController {
         updatingSummaryRow = true;
         try {
             var items = driversTable.getItems();
-            if (items == null) return;
-            removeSummaryRow(items);
-            float saldo = 0f, turnover = 0f, voucherCurrent = 0f, voucherPrevious = 0f, voucher = 0f, card = 0f, cash = 0f, lot = 0f, fuel = 0f, zlPerKm = 0f, fuelPerTurnover = 0f;
-            int count = 0;
+            if (items != null) {
+                removeSummaryRow(items);
+            }
+            updatePinnedSummaryFromVisibleRows();
+        } finally {
+            updatingSummaryRow = false;
+        }
+    }
+
+    private void setupPinnedSummaryRow() {
+        if (summaryRow == null) {
+            return;
+        }
+
+        Map<String, Region> summaryCells = new LinkedHashMap<>();
+        for (javafx.scene.Node node : summaryRow.getChildren()) {
+            if (node instanceof Region region && node.getId() != null) {
+                summaryCells.put(node.getId(), region);
+            }
+        }
+
+        for (TableColumn<Driver, ?> column : driversTable.getColumns()) {
+            Region cell = summaryCells.get(summaryCellIdForColumn(column.getId()));
+            if (cell == null) {
+                continue;
+            }
+            cell.minWidthProperty().bind(column.widthProperty());
+            cell.prefWidthProperty().bind(column.widthProperty());
+            cell.maxWidthProperty().bind(column.widthProperty());
+            cell.visibleProperty().bind(column.visibleProperty());
+            cell.managedProperty().bind(column.visibleProperty());
+        }
+
+        Runnable reorderSummaryCells = () -> {
+            if (summaryRow == null) {
+                return;
+            }
+            var orderedCells = FXCollections.<javafx.scene.Node>observableArrayList();
+            for (TableColumn<Driver, ?> column : driversTable.getColumns()) {
+                Region cell = summaryCells.get(summaryCellIdForColumn(column.getId()));
+                if (cell != null) {
+                    orderedCells.add(cell);
+                }
+            }
+            summaryRow.getChildren().setAll(orderedCells);
+        };
+        reorderSummaryCells.run();
+        driversTable.getColumns().addListener((ListChangeListener<TableColumn<Driver, ?>>) change -> reorderSummaryCells.run());
+        TableUtils.bindHorizontalScroll(driversTable, summaryRow);
+    }
+
+    private String summaryCellIdForColumn(String columnId) {
+        return switch (columnId) {
+            case "idColumn" -> "idPlaceholder";
+            case "nameColumn" -> "namePlaceholder";
+            case "saldoColumn" -> "saldoSumLabel";
+            case "statusColumn" -> "statusPlaceholder";
+            case "vehiclePlateColumn" -> "vehiclePlatePlaceholder";
+            case "fuelCostColumn" -> "fuelCostPlaceholder";
+            case "fuelCostSumColumn" -> "fuelSumLabel";
+            case "percentTurnoverColumn" -> "percentTurnoverPlaceholder";
+            case "cardCommissionColumn" -> "cardCommissionPlaceholder";
+            case "partnerCommissionColumn" -> "partnerCommissionPlaceholder";
+            case "boltCommissionColumn" -> "boltCommissionPlaceholder";
+            case "settlementLimitColumn" -> "settlementLimitPlaceholder";
+            case "voucherCurrentColumn" -> "voucherCurrentSumLabel";
+            case "voucherPreviousColumn" -> "voucherPreviousSumLabel";
+            case "voucherColumn" -> "voucherSumLabel";
+            case "cardColumn" -> "cardSumLabel";
+            case "cashColumn" -> "cashSumLabel";
+            case "lotColumn" -> "lotSumLabel";
+            case "turnoverColumn" -> "turnoverSumLabel";
+            case "zlPerKmColumn" -> "zlPerKmAvgLabel";
+            case "fuelPerTurnoverColumn" -> "fuelPerTurnoverAvgLabel";
+            default -> columnId;
+        };
+    }
+
+    private void updatePinnedSummaryFromVisibleRows() {
+        var items = driversTable.getItems();
+        float saldo = 0f, turnover = 0f, voucherCurrent = 0f, voucherPrevious = 0f, voucher = 0f, card = 0f, cash = 0f, lot = 0f, fuel = 0f, zlPerKm = 0f, fuelPerTurnover = 0f;
+        int count = 0;
+        if (items != null) {
             for (Driver d : items) {
                 if (d == null || d.isSummary()) continue;
                 saldo += d.getSaldoValue();
@@ -280,12 +374,25 @@ public class DriversController {
                 fuelPerTurnover += d.getFuelPerTurnover();
                 count++;
             }
-            NumberFormat format = createNumberFormat();
-            items.add(new Driver("", "SUMA", format.format(saldo), "", "", 0f, 0f, 0f, 0f, 0f, 0f, 0f, "", "",
-                    fuel, voucherCurrent, voucherPrevious, voucher, card, cash, lot, turnover,
-                    count > 0 ? zlPerKm / count : 0f, count > 0 ? fuelPerTurnover / count : 0f, true));
-        } finally {
-            updatingSummaryRow = false;
+        }
+
+        NumberFormat format = createNumberFormat();
+        setSummaryLabel(saldoSumLabel, format.format(saldo));
+        setSummaryLabel(fuelSumLabel, format.format(fuel));
+        setSummaryLabel(voucherCurrentSumLabel, format.format(voucherCurrent));
+        setSummaryLabel(voucherPreviousSumLabel, format.format(voucherPrevious));
+        setSummaryLabel(voucherSumLabel, format.format(voucher));
+        setSummaryLabel(cardSumLabel, format.format(card));
+        setSummaryLabel(cashSumLabel, format.format(cash));
+        setSummaryLabel(lotSumLabel, format.format(lot));
+        setSummaryLabel(turnoverSumLabel, format.format(turnover));
+        setSummaryLabel(zlPerKmAvgLabel, format.format(count > 0 ? zlPerKm / count : 0f));
+        setSummaryLabel(fuelPerTurnoverAvgLabel, format.format(count > 0 ? fuelPerTurnover / count : 0f));
+    }
+
+    private void setSummaryLabel(Label label, String text) {
+        if (label != null) {
+            label.setText(text);
         }
     }
 
@@ -546,19 +653,6 @@ public class DriversController {
             JsonArray arr = json.getAsJsonArray("drivers");
             driversTable.getItems().clear();
 
-            // Totals for summary row
-            float sumSaldo = 0f;
-            float sumTurnover = 0f;
-            float sumVoucherCurrent = 0f;
-            float sumVoucherPrevious = 0f;
-            float sumLot = 0f;
-            float sumCash = 0f;
-            float sumCard = 0f;
-            float sumFuel = 0f;
-            float sumVoucher = 0f;
-            float totalZlPerKm = 0f;
-            float totalFuelPerTurnover = 0f;
-            int driverCount = 0;
 
             LocalDate effectiveStart = statsStartDate != null ? statsStartDate : LocalDate.of(1970, 1, 1);
             LocalDate effectiveEnd = statsEndDate != null ? statsEndDate : LocalDate.now();
@@ -572,16 +666,16 @@ public class DriversController {
 
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject o = arr.get(i).getAsJsonObject();
-                String id        = getString(o, "id");
-                String fullName  = (getString(o, "imie") + " " + getString(o, "nazwisko")).trim();
-                String saldo     = getString(o, "saldo", "0");
-                String status    = getString(o, "status");
-                String role      = getString(o, "rola");
+                String id = getString(o, "id");
+                String fullName = (getString(o, "imie") + " " + getString(o, "nazwisko")).trim();
+                String saldo = getString(o, "saldo", "0");
+                String status = getString(o, "status");
+                String role = getString(o, "rola");
                 String createdAt = getString(o, "created_at");
-                String plate     = getString(o, "vehiclePlate");
+                String plate = getString(o, "vehiclePlate");
 
                 float percentTurnover = getFloat(o, "percentTurnover");
-                float fuelCostFlag    = 0f;
+                float fuelCostFlag = 0f;
                 if (o.has("fuelCost") && !o.get("fuelCost").isJsonNull()) {
                     try {
                         fuelCostFlag = o.get("fuelCost").getAsFloat();
@@ -593,14 +687,14 @@ public class DriversController {
                     String raw = o.get("koszt_paliwa").getAsString();
                     fuelCostFlag = "kierowca".equalsIgnoreCase(raw.trim()) ? 1f : 0f;
                 }
-                float fuelCostSum     = o.has("fuelCostSum") && !o.get("fuelCostSum").isJsonNull()
+                float fuelCostSum = o.has("fuelCostSum") && !o.get("fuelCostSum").isJsonNull()
                         ? o.get("fuelCostSum").getAsFloat() : 0f;
-                float cardComm        = getFloat(o, "cardCommission");
-                float partComm        = getFloat(o, "partnerCommission");
-                float boltComm        = getFloat(o, "boltCommission");
-                float settLimit       = getFloat(o, "settlementLimit");
-                float fixedCosts      = getFloat(o, "fixedCosts");
-                float voucherCurrent  = getFloat(o, "voucher_current_amount");
+                float cardComm = getFloat(o, "cardCommission");
+                float partComm = getFloat(o, "partnerCommission");
+                float boltComm = getFloat(o, "boltCommission");
+                float settLimit = getFloat(o, "settlementLimit");
+                float fixedCosts = getFloat(o, "fixedCosts");
+                float voucherCurrent = getFloat(o, "voucher_current_amount");
                 float voucherPrevious = getFloat(o, "voucher_previous_amount");
 
                 // fetch statistics for current month
@@ -638,56 +732,10 @@ public class DriversController {
                         cardVal, cashVal, lotVal, turnover, zlPerKm, fuelPerTurnover
                 ));
 
-
-                driverCount++;
-                try {
-                    sumSaldo += Float.parseFloat(saldo.replace(',', '.'));
-                } catch (Exception ignore) {}
-                sumTurnover += turnover;
-                sumVoucherCurrent  += voucherCurrent;
-                sumVoucherPrevious += voucherPrevious;
-                sumVoucher        += voucherTotal;
-                sumLot      += lotVal;
-                sumCash     += cashVal;
-                sumCard     += cardVal;
-                sumFuel     += fuelSum;
-                totalZlPerKm += zlPerKm;
-                totalFuelPerTurnover += fuelPerTurnover;
             }
 
-            float avgZlPerKm = driverCount > 0 ? totalZlPerKm / driverCount : 0f;
-            float avgFuelPerTurnover = driverCount > 0 ? totalFuelPerTurnover / driverCount : 0f;
+            refreshSummaryFromVisibleRows();
 
-            NumberFormat format = createNumberFormat();
-
-            Driver summary = new Driver(
-                    "",
-                    "SUMA",
-                    format.format(sumSaldo),
-                    "",
-                    "",
-                    0f,
-                    0f,
-                    0f,
-                    0f,
-                    0f,
-                    0f,
-                    0f,
-                    "",
-                    "",
-                    sumFuel,
-                    sumVoucherCurrent,
-                    sumVoucherPrevious,
-                    sumVoucher,
-                    sumCard,
-                    sumCash,
-                    sumLot,
-                    sumTurnover,
-                    avgZlPerKm,
-                    avgFuelPerTurnover,
-                    true
-            );
-            driversTable.getItems().add(summary);
 
         } catch (Exception ex) {
             ex.printStackTrace();
