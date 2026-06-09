@@ -54,14 +54,33 @@ public class ApiClient {
         return jwtToken;
     }
 
-    private static class ApiResult {
-        final int code;
-        final String body;
+    public static class ApiResponse {
+        protected final int code;
+        protected final String body;
 
-        ApiResult(int code, String body) {
+        ApiResponse(int code, String body) {
             this.code = code;
             this.body = body;
         }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getBody() {
+            return body;
+        }
+
+        public boolean isNetworkError() {
+            return code == -1;
+        }
+    }
+
+    private static class ApiResult extends ApiResponse {
+        ApiResult(int code, String body) {
+            super(code, body);
+        }
+
     }
 
     public static class SaldoUpdateResult {
@@ -150,7 +169,7 @@ public class ApiClient {
         return false;
     }
 
-    public static String sendGetRequest(String endpoint) {
+    public static ApiResponse sendGet(String endpoint) {
         Request.Builder builder = new Request.Builder()
                 .url(BASE_URL + endpoint)
                 .get()
@@ -159,7 +178,11 @@ public class ApiClient {
         if (jwtToken != null) {
             builder.addHeader("Authorization", "Bearer " + jwtToken);
         }
-        return executeRequest(builder.build()).body;
+        return executeRequest(builder.build());
+    }
+
+    public static String sendGetRequest(String endpoint) {
+        return sendGet(endpoint).getBody();
     }
 
     // 🔐 Logowanie administratora

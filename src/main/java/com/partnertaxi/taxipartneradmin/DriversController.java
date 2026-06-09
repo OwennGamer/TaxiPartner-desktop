@@ -684,13 +684,36 @@ public class DriversController {
 
     private void loadDrivers() {
         try {
-            String resp = ApiClient.sendGetRequest("get_drivers.php");
-            JsonObject json = JsonParser.parseString(resp).getAsJsonObject();
-            if (!"success".equals(json.get("status").getAsString())) {
-                showError("Błąd", json.get("message").getAsString());
+            ApiClient.ApiResponse response = ApiClient.sendGet("get_drivers.php");
+            if (response.isNetworkError()) {
+                showError("Błąd połączenia", "Nie można połączyć się z serwerem. Sprawdź połączenie z internetem lub adres API.");
+                return;
+            }
+
+            String resp = response.getBody();
+            if (resp == null || resp.isBlank()) {
+                showError("Błąd serwera", "Serwer zwrócił pustą odpowiedź (HTTP " + response.getCode() + ").");
+                return;
+            }
+
+            JsonObject json;
+            try {
+                json = JsonParser.parseString(resp).getAsJsonObject();
+            } catch (RuntimeException parseError) {
+                RemoteLogService.logHandledException("Nieprawidłowa odpowiedź API podczas odświeżania kierowców", parseError);
+                showError("Błąd serwera", buildUnexpectedResponseMessage(response));
+                return;
+            }
+
+            if (!"success".equals(getString(json, "status"))) {
+                showError("Błąd", getString(json, "message", "Nie udało się pobrać listy kierowców (HTTP " + response.getCode() + ")."));
                 return;
             }
             JsonArray arr = json.getAsJsonArray("drivers");
+            if (arr == null) {
+                showError("Błąd serwera", "Odpowiedź API nie zawiera listy kierowców.");
+                return;
+            }
             driversTable.getItems().clear();
 
 
@@ -792,6 +815,18 @@ public class DriversController {
         JsonElement element = object.get(field);
         return element == null || element.isJsonNull() ? defaultValue : element.getAsString();
     }
+
+    private String buildUnexpectedResponseMessage(ApiClient.ApiResponse response) {
+        String preview = response.getBody() == null ? "" : response.getBody().trim();
+        if (preview.length() > 120) {
+            preview = preview.substring(0, 120) + "...";
+        }
+        if (preview.isBlank()) {
+            return "Serwer zwrócił nieprawidłową odpowiedź (HTTP " + response.getCode() + ").";
+        }
+        return "Serwer zwrócił nieprawidłową odpowiedź (HTTP " + response.getCode() + "): " + preview;
+    }
+
 
     private float getFloat(JsonObject object, String field) {
         JsonElement element = object.get(field);

@@ -81,12 +81,12 @@
                     <Label id="vehiclePlatePlaceholder" />
                     <Label id="fuelCostPlaceholder" />
                     <Label fx:id="fuelSumLabel" id="fuelSumLabel" />
-                    <Label id="percentTurnoverPlaceholder" />
-                    <Label id="cardCommissionPlaceholder" />
-                    <Label id="partnerCommissionPlaceholder" />
-                    <Label id="boltCommissionPlaceholder" />
-                    <Label id="settlementLimitPlaceholder" />
-                    <Label id="fixedCostsColumn" />
+                    <Label fx:id="percentTurnoverAvgLabel" id="percentTurnoverAvgLabel" />
+                    <Label fx:id="cardCommissionSumLabel" id="cardCommissionSumLabel" />
+                    <Label fx:id="partnerCommissionSumLabel" id="partnerCommissionSumLabel" />
+                    <Label fx:id="boltCommissionSumLabel" id="boltCommissionSumLabel" />
+                    <Label fx:id="settlementLimitSumLabel" id="settlementLimitSumLabel" />
+                    <Label fx:id="fixedCostsSumLabel" id="fixedCostsSumLabel" />
                     <Label fx:id="voucherCurrentSumLabel" id="voucherCurrentSumLabel" />
                     <Label fx:id="voucherPreviousSumLabel" id="voucherPreviousSumLabel" />
                     <Label fx:id="voucherSumLabel" id="voucherSumLabel" />
