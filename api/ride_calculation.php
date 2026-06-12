@@ -33,22 +33,26 @@ if (!function_exists('calculate_ride_saldo_impact')) {
                 $finalAmount = $afterPartner * $driverShare;
             }
         } elseif ($source === "Hotel[20]") {
-            $hotelBaseAmount = max(0, $amount - 20);
+            $hotelFee = 20;
+            $hotelBaseAmount = max(0, $amount - $hotelFee);
+            $collectedHotelFee = $amount > 0 ? min($hotelFee, $amount) : 0;
             if ($type === "Karta") {
                 $afterCard = $hotelBaseAmount - ($hotelBaseAmount * ($cardCommission / 100));
                 $finalAmount = $afterCard * $driverShare;
             } elseif ($type === "Gotówka") {
-                $finalAmount = -($hotelBaseAmount * $companyShare);
+                $finalAmount = -(($hotelBaseAmount * $companyShare) + $collectedHotelFee);
             } elseif ($type === "Voucher") {
                 $finalAmount = $hotelBaseAmount * $driverShare;
             }
         } elseif ($source === "Hotel[10]") {
-            $hotelBaseAmount = max(0, $amount - 10);
+            $hotelFee = 10;
+            $hotelBaseAmount = max(0, $amount - $hotelFee);
+            $collectedHotelFee = $amount > 0 ? min($hotelFee, $amount) : 0;
             if ($type === "Karta") {
                 $afterCard = $hotelBaseAmount - ($hotelBaseAmount * ($cardCommission / 100));
                 $finalAmount = $afterCard * $driverShare;
             } elseif ($type === "Gotówka") {
-                $finalAmount = -($hotelBaseAmount * $companyShare);
+                $finalAmount = -(($hotelBaseAmount * $companyShare) + $collectedHotelFee);
             } elseif ($type === "Voucher") {
                 $finalAmount = $hotelBaseAmount * $driverShare;
             }
