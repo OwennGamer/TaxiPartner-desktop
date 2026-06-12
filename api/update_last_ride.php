@@ -4,6 +4,7 @@ header("Content-Type: application/json");
 require_once "db.php";
 require_once "auth.php";
 require_once __DIR__ . "/voucher_utils.php";
+require_once __DIR__ . "/ride_calculation.php";
 
 if (!isset($_POST['driver_id'], $_POST['amount'], $_POST['type'], $_POST['source'])) {
     echo json_encode(["status" => "error", "message" => "Brak danych wejściowych"]);
@@ -17,69 +18,7 @@ $source = $_POST['source'];
 $via_km = isset($_POST['via_km']) ? (int)$_POST['via_km'] : 0;
 
 function calculate_final_amount(float $amount, string $type, string $source, array $terms): float {
-    $percentTurnover = isset($terms['percentTurnover']) ? (float)$terms['percentTurnover'] : 0;
-    $cardCommission = isset($terms['cardCommission']) ? (float)$terms['cardCommission'] : 0;
-    $partnerCommission = isset($terms['partnerCommission']) ? (float)$terms['partnerCommission'] : 0;
-    $boltCommission = isset($terms['boltCommission']) ? (float)$terms['boltCommission'] : 0;
-
-    $final_amount = 0;
-
-    if ($source === "Postój") {
-        if ($type === "Karta") {
-            $after_card = $amount - ($amount * ($cardCommission / 100));
-            $final_amount = $after_card * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            $final_amount = -($amount * (1 - ($percentTurnover / 100)));
-        } elseif ($type === "Voucher") {
-            $after_partner = $amount - ($amount * ($partnerCommission / 100));
-            $final_amount = $after_partner * ($percentTurnover / 100);
-        }
-    } elseif ($source === "Dyspozytornia") {
-        if ($type === "Karta") {
-            $after_commissions = $amount - ($amount * ($cardCommission / 100)) - ($amount * ($partnerCommission / 100));
-            $final_amount = $after_commissions * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            $after_partner = $amount - ($amount * ($partnerCommission / 100));
-            $final_amount = -(($amount * ($partnerCommission / 100)) + ($after_partner * (1 - ($percentTurnover / 100))));
-        } elseif ($type === "Voucher") {
-            $after_partner = $amount - ($amount * ($partnerCommission / 100));
-            $final_amount = $after_partner * ($percentTurnover / 100);
-        }
-    } elseif ($source === "Hotel[20]") {
-        $hotel_base_amount = $amount - 20;
-        if ($type === "Karta") {
-            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
-            $final_amount = $after_card * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
-        } elseif ($type === "Voucher") {
-            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
-        }
-    } elseif ($source === "Hotel[10]") {
-        $hotel_base_amount = $amount - 10;
-        if ($type === "Karta") {
-            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
-            $final_amount = $after_card * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
-        } elseif ($type === "Voucher") {
-            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
-        }
-    } elseif ($source === "Bolt") {
-        $bolt_base_amount = $amount - 20;
-        if ($type === "Karta") {
-            $after_bolt = $bolt_base_amount - ($bolt_base_amount * ($boltCommission / 100));
-            $final_amount = $after_bolt * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            $after_bolt = $bolt_base_amount - ($bolt_base_amount * ($boltCommission / 100));
-            $final_amount = -(($bolt_base_amount * ($boltCommission / 100)) + ($after_bolt * (1 - ($percentTurnover / 100))));
-        } elseif ($type === "Voucher") {
-            $after_bolt = $bolt_base_amount - ($bolt_base_amount * ($boltCommission / 100));
-            $final_amount = $after_bolt * ($percentTurnover / 100);
-        }
-    }
-
-    return round($final_amount, 2);
+    return calculate_ride_saldo_impact($amount, $type, $source, $terms);
 }
 
 try {

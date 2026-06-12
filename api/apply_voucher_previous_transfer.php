@@ -7,8 +7,9 @@ require_once __DIR__ . '/voucher_utils.php';
 
 $logFile = __DIR__ . '/debug_voucher_transfer.log';
 
-$options = getopt('', ['force', 'date::', 'driver-id::']);
+$options = getopt('', ['force', 'date::', 'driver-id::', 'dry-run']);
 $forceRun = array_key_exists('force', $options);
+$dryRun = array_key_exists('dry-run', $options);
 $driverIdFilter = isset($options['driver-id']) && is_string($options['driver-id']) ? trim($options['driver-id']) : null;
 
 $today = new DateTimeImmutable('now');
@@ -33,7 +34,7 @@ require_once __DIR__ . '/db.php';
 $monthKey = $today->format('Y-m');
 $reason = sprintf('Automatyczne przeksięgowanie Voucher (poprzedni) do salda za %s', $monthKey);
 
-$driversSql = "SELECT id, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month
+$driversSql = "SELECT id, saldo, voucher_current_amount, voucher_current_month, voucher_previous_amount, voucher_previous_month
                FROM kierowcy";
 $params = [];
 if ($driverIdFilter !== null && $driverIdFilter !== '') {
@@ -71,7 +72,7 @@ $skipped = 0;
 $errors = 0;
 
 foreach ($drivers as $driver) {
-    $driver = voucher_refresh_buckets($pdo, $driver);
+    $driver = voucher_refresh_buckets($pdo, $driver, $today, $dryRun);
     $driverId = $driver['id'];
 
     if (abs((float)($driver['voucher_previous_amount'] ?? 0)) < 0.01) {
@@ -80,6 +81,27 @@ foreach ($drivers as $driver) {
     }
 
     try {
+	if ($dryRun) {
+            $voucherPreviousAmount = round((float)($driver['voucher_previous_amount'] ?? 0), 2);
+            $currentSaldo = isset($driver['saldo']) ? (float)$driver['saldo'] : 0.0;
+            $newSaldo = round($currentSaldo + $voucherPreviousAmount, 2);
+            $processed++;
+            file_put_contents(
+                $logFile,
+                sprintf(
+                    "[%s] DRY-RUN kierowca=%s voucher_previous=%.2f saldo_po=%.2f powod=%s%s",
+                    $today->format(DateTimeInterface::ATOM),
+                    $driverId,
+                    $voucherPreviousAmount,
+                    $newSaldo,
+                    $reason,
+                    PHP_EOL
+                ),
+                FILE_APPEND
+            );
+            continue;
+        }
+
         $pdo->beginTransaction();
 
         $historyCheckStmt->execute([$driverId, $reason]);
@@ -136,12 +158,13 @@ foreach ($drivers as $driver) {
 file_put_contents(
     $logFile,
     sprintf(
-        "[%s] Podsumowanie: przetworzono=%d, pominieto=%d, bledy=%d, force=%s, driver_filter=%s%s",
+        "[%s] Podsumowanie: przetworzono=%d, pominieto=%d, bledy=%d, force=%s, dry_run=%s, driver_filter=%s%s",
         $today->format(DateTimeInterface::ATOM),
         $processed,
         $skipped,
         $errors,
         $forceRun ? 'true' : 'false',
+	$dryRun ? 'true' : 'false',
         $driverIdFilter !== null && $driverIdFilter !== '' ? $driverIdFilter : '-',
         PHP_EOL
     ),

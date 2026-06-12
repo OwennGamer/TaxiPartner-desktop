@@ -1,14 +1,16 @@
 <?php
 
-function voucher_get_month_keys(): array {
-    $current = new DateTime('first day of this month');
+function voucher_get_month_keys(?DateTimeInterface $referenceDate = null): array {
+    $current = $referenceDate === null
+        ? new DateTimeImmutable('first day of this month')
+        : DateTimeImmutable::createFromInterface($referenceDate)->modify('first day of this month');
     $currentKey = $current->format('Y-m');
     $previousKey = $current->modify('-1 month')->format('Y-m');
     return [$currentKey, $previousKey];
 }
 
-function voucher_refresh_buckets(PDO $pdo, array $driver): array {
-    [$currentMonth, $previousMonth] = voucher_get_month_keys();
+function voucher_refresh_buckets(PDO $pdo, array $driver, ?DateTimeInterface $referenceDate = null, bool $dryRun = false): array {
+    [$currentMonth, $previousMonth] = voucher_get_month_keys($referenceDate);
 
     $currentKey = $driver['voucher_current_month'] ?? null;
     $previousKey = $driver['voucher_previous_month'] ?? null;
@@ -35,7 +37,7 @@ function voucher_refresh_buckets(PDO $pdo, array $driver): array {
         $needsUpdate = true;
     }
 
-    if ($needsUpdate) {
+    if ($needsUpdate && !$dryRun) {
         $stmt = $pdo->prepare("UPDATE kierowcy SET voucher_current_amount = ?, voucher_current_month = ?, voucher_previous_amount = ?, voucher_previous_month = ? WHERE id = ?");
         $stmt->execute([
             round($currentAmount, 2),
@@ -44,6 +46,10 @@ function voucher_refresh_buckets(PDO $pdo, array $driver): array {
             $previousKey,
             $driver['id']
         ]);
+
+    }
+
+    if ($needsUpdate) {
 
         $driver['voucher_current_amount'] = $currentAmount;
         $driver['voucher_current_month'] = $currentKey;

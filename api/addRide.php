@@ -4,6 +4,7 @@ header("Content-Type: application/json");
 require_once "db.php"; // Połączenie z bazą
 require_once "auth.php"; // Autoryzacja
 require_once __DIR__ . "/voucher_utils.php";
+require_once __DIR__ . "/ride_calculation.php";
 
 // 🔵 Start debugowania
 file_put_contents("debug_log.txt", "🔵 Skrypt addRide.php startuje\n", FILE_APPEND);
@@ -73,70 +74,11 @@ try {
     $stmtTerms->execute([$driver_id]);
     $terms = $stmtTerms->fetchAll(PDO::FETCH_KEY_PAIR);
 
-    $percentTurnover = isset($terms['percentTurnover']) ? (float)$terms['percentTurnover'] : 0;
-    $cardCommission = isset($terms['cardCommission']) ? (float)$terms['cardCommission'] : 0;
-    $partnerCommission = isset($terms['partnerCommission']) ? (float)$terms['partnerCommission'] : 0;
-
-    $final_amount = 0;
-
-    // 🔥 Obliczenia według wariantów:
-    if ($source === "Postój") {
-        if ($type === "Karta") {
-            // 1. Postój - Karta
-            $after_card = $amount - ($amount * ($cardCommission / 100));
-            $final_amount = $after_card * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            // 2. Postój - Gotówka
-            $final_amount = -($amount * (1 - ($percentTurnover / 100)));
-        } elseif ($type === "Voucher") {
-            // 3. Postój - Voucher
-            $after_partner = $amount - ($amount * ($partnerCommission / 100));
-            $final_amount = $after_partner * ($percentTurnover / 100);
-        }
-    } elseif ($source === "Dyspozytornia") {
-        if ($type === "Karta") {
-            // 4. Dyspozytornia - Karta
-            $after_commissions = $amount - ($amount * ($cardCommission / 100)) - ($amount * ($partnerCommission / 100));
-            $final_amount = $after_commissions * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            // 5. Dyspozytornia - Gotówka
-            $after_partner = $amount - ($amount * ($partnerCommission / 100));
-            $final_amount = -( ($amount * ($partnerCommission / 100)) + ($after_partner * (1 - ($percentTurnover / 100))) );
-        } elseif ($type === "Voucher") {
-            // 6. Dyspozytornia - Voucher
-            $after_partner = $amount - ($amount * ($partnerCommission / 100));
-            $final_amount = $after_partner * ($percentTurnover / 100);
-        }
-    } elseif ($source === "Hotel[20]") {
-        $hotel_base_amount = $amount - 20;
-        if ($type === "Karta") {
-            // 7. Hotel[20] - Karta
-            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
-            $final_amount = $after_card * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            // 8. Hotel[20] - Gotówka
-            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
-        } elseif ($type === "Voucher") {
-            // 9. Hotel[20] - Voucher
-            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
-        }
-     } elseif ($source === "Hotel[10]") {
-        $hotel_base_amount = $amount - 10;
-        if ($type === "Karta") {
-            // 10. Hotel[10] - Karta
-            $after_card = $hotel_base_amount - ($hotel_base_amount * ($cardCommission / 100));
-            $final_amount = $after_card * ($percentTurnover / 100);
-        } elseif ($type === "Gotówka") {
-            // 11. Hotel[10] - Gotówka
-            $final_amount = -($hotel_base_amount * (1 - ($percentTurnover / 100)));
-        } elseif ($type === "Voucher") {
-            // 12. Hotel[10] - Voucher
-            $final_amount = $hotel_base_amount * ($percentTurnover / 100);
-        }
-    }
-
-    // Zaokrąglij do dwóch miejsc
-    $final_amount = round($final_amount, 2);
+    // Obliczenie wpływu kursu na saldo. Dla źródeł z opłatą hotelową/stałą
+    // podstawą rozliczenia jest maksymalnie 0 zł po odjęciu opłaty, żeby edycja
+    // kursu do 0 zł nie naliczała ujemnej kwoty bazowej.
+    $final_amount = calculate_ride_saldo_impact($amount, $type, $source, $terms);
+         
 
     // Nowe saldo
     $currentSaldo = (float)$driver['saldo'];
